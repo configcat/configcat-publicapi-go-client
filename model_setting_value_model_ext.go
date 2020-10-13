@@ -10,6 +10,7 @@
 package configcatpublicapi
 
 type SettingValueSimpleModel struct {
+	Setting *SettingDataModel `json:"setting,omitempty"`
 	// The targeting rule collection.
 	RolloutRules []RolloutRuleModel `json:"rolloutRules,omitempty"`
 	// The percentage rule collection.
