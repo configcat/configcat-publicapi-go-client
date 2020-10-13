@@ -44,3 +44,12 @@ type SettingValueModelFloat struct {
 	// The value to serve. It must respect the setting type.
 	Value float64 `json:"value,omitempty"`
 }
+
+type SettingValueSimpleModel struct {
+	// The targeting rule collection.
+	RolloutRules []RolloutRuleModel `json:"rolloutRules,omitempty"`
+	// The percentage rule collection.
+	RolloutPercentageItems []RolloutPercentageItemModel `json:"rolloutPercentageItems,omitempty"`
+	// The value to serve. It must respect the setting type.
+	Value *interface{} `json:"value,omitempty"`
+}
