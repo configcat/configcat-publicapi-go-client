@@ -1,6 +1,6 @@
 # {{classname}}
 
-All URIs are relative to *https://localhost*
+All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

@@ -1,6 +1,6 @@
 # {{classname}}
 
-All URIs are relative to *https://localhost*
+All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 > EnvironmentModel CreateEnvironment(ctx, body, productId)
 Create Environment
 
-This endpoint creates a new Environment in a specified Product   identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
+This endpoint creates a new Environment in a specified Product  identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
 
 ### Required Parameters
 
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 > EnvironmentModel GetEnvironment(ctx, environmentId)
 Get Environment
 
-This endpoint returns the metadata of an Environment   identified by the `environmentId`.
+This endpoint returns the metadata of an Environment  identified by the `environmentId`.
 
 ### Required Parameters
 
@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 > []EnvironmentModel GetEnvironments(ctx, productId)
 List Environments
 
-This endpoint returns the list of the Environments that belongs to the given Product identified by the  `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
+This endpoint returns the list of the Environments that belongs to the given Product identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
 
 ### Required Parameters
 

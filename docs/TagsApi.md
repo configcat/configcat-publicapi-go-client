@@ -1,6 +1,6 @@
 # {{classname}}
 
-All URIs are relative to *https://localhost*
+All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 > TagModel CreateTag(ctx, body, productId)
 Create Tag
 
-This endpoint creates a new Tag in a specified Product   identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
+This endpoint creates a new Tag in a specified Product  identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
 
 ### Required Parameters
 
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 > TagModel GetTag(ctx, tagId)
 Get Tag
 
-This endpoint returns the metadata of a Tag   identified by the `tagId`.
+This endpoint returns the metadata of a Tag  identified by the `tagId`.
 
 ### Required Parameters
 
@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 > []TagModel GetTags(ctx, productId)
 List Tags
 
-This endpoint returns the list of the Tags in a   specified Product, identified by the `productId` parameter.
+This endpoint returns the list of the Tags in a  specified Product, identified by the `productId` parameter.
 
 ### Required Parameters
 

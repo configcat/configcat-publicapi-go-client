@@ -1,28 +1,28 @@
 openapi: 3.0.1
 info:
   title: ConfigCat Public Management API
-  description: "**Base API URL**: https://localhost\r\n\r\nIf you prefer the swagger\
-    \ documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).\r\
-    \n\r\nThe purpose of this API is to access the ConfigCat platform programmatically.\
-    \ \r\nYou can **Create**, **Read**, **Update** and **Delete** any entities like\
-    \ **Feature Flags, Configs, Environments** or **Products** within ConfigCat. \r\
-    \n\r\nThe API is based on HTTP REST, uses resource-oriented URLs, status codes\
-    \ and supports JSON \r\nand JSON+HAL format. Do not use this API for accessing\
-    \ and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).\r\
-    \n\r\n\r\n# OpenAPI Specification\r\n\r\nThe complete specification is publicly\
-    \ available here: [swagger.json](v1/swagger.json). \r\nYou can use it to generate\
-    \ client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator)\
-    \ or\r\n[Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact\
-    \ with this API.\r\n\r\n# Authentication\r\nThis API uses the [Basic HTTP Authentication\
-    \ Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication). \r\n\r\n\
-    <!-- ReDoc-Inject: <security-definitions> -->\r\n\r\n# Throttling and rate limits\r\
-    \nAll the rate limited API calls are returning information about the current rate\
-    \ limit period in the following HTTP headers:\r\n\r\n| Header | Description |\r\
-    \n| :- | :- |\r\n| X-Rate-Limit-Remaining | The maximum number of requests remaining\
-    \ in the current rate limit period. |\r\n| X-Rate-Limit-Reset     | The time\t\
-    when the current rate limit period resets.\t\t\t\t\t\t  |\r\n\r\nWhen the rate\
-    \ limit is exceeded by a request, the API returns with a `HTTP 429 - Too many\
-    \ requests` status along with a `Retry-After` HTTP header.\r\n"
+  description: "**Base API URL**: https://test-api.configcat.com\n\nIf you prefer\
+    \ the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).\n\
+    \nThe purpose of this API is to access the ConfigCat platform programmatically.\
+    \ \nYou can **Create**, **Read**, **Update** and **Delete** any entities like\
+    \ **Feature Flags, Configs, Environments** or **Products** within ConfigCat. \n\
+    \nThe API is based on HTTP REST, uses resource-oriented URLs, status codes and\
+    \ supports JSON \nand JSON+HAL format. Do not use this API for accessing and evaluating\
+    \ feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).\n\
+    \n\n# OpenAPI Specification\n\nThe complete specification is publicly available\
+    \ here: [swagger.json](v1/swagger.json). \nYou can use it to generate client libraries\
+    \ in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator)\
+    \ or\n[Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact\
+    \ with this API.\n\n# Authentication\nThis API uses the [Basic HTTP Authentication\
+    \ Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication). \n\n<!--\
+    \ ReDoc-Inject: <security-definitions> -->\n\n# Throttling and rate limits\nAll\
+    \ the rate limited API calls are returning information about the current rate\
+    \ limit period in the following HTTP headers:\n\n| Header | Description |\n| :-\
+    \ | :- |\n| X-Rate-Limit-Remaining | The maximum number of requests remaining\
+    \ in the current rate limit period. |\n| X-Rate-Limit-Reset     | The time\twhen\
+    \ the current rate limit period resets.\t\t\t\t\t\t  |\n\nWhen the rate limit\
+    \ is exceeded by a request, the API returns with a `HTTP 429 - Too many requests`\
+    \ status along with a `Retry-After` HTTP header.\n"
   termsOfService: https://configcat.com/termsofserviceagreement
   contact:
     name: ConfigCat
@@ -30,67 +30,67 @@ info:
     email: support@configcat.com
   version: v1
   x-logo:
-    url: https://localhost/resources/configcat-logo-horiz.svg
+    url: https://test-api.configcat.com/resources/configcat-logo-horiz.svg
 servers:
-- url: https://localhost
+- url: https://test-api.configcat.com
 security:
 - Basic: []
 tags:
 - name: Feature Flag & Setting values using SDK Key
   description: "With these endpoints you can control how your existing Feature Flags\
-    \ and Settings should serve their values. \r\nYou can turn Feature Flags on or\
-    \ off, update Setting values and also add, remove or change the order of Percentage\
-    \ and Targeting Rules.\r\n\r\nThese endpoints are determining the Environment\
-    \ and Config by the <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://app.configcat.com/sdkkey\"\
-    >SDK key</a> passed in\r\nthe `X-CONFIGCAT-SDKKEY` request header. To identify\
-    \ the desired Feature Flag or Setting to change, \r\nyou can use either its `settingId`\
-    \ or `key` attribute. You can get those attributes \r\nfrom the [Feature Flag\
-    \ & Setting](#tag/Feature-Flags-and-Settings) endpoints."
+    \ and Settings should serve their values. \nYou can turn Feature Flags on or off,\
+    \ update Setting values and also add, remove or change the order of Percentage\
+    \ and Targeting Rules.\n\nThese endpoints are determining the Environment and\
+    \ Config by the <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://app.configcat.com/sdkkey\"\
+    >SDK key</a> passed in\nthe `X-CONFIGCAT-SDKKEY` request header. To identify the\
+    \ desired Feature Flag or Setting to change, \nyou can use either its `settingId`\
+    \ or `key` attribute. You can get those attributes \nfrom the [Feature Flag &\
+    \ Setting](#tag/Feature-Flags-and-Settings) endpoints."
 - name: Feature Flag & Setting values
   description: "With these endpoints you can control how your existing Feature Flags\
-    \ and Settings should serve their values. \r\nYou can turn Feature Flags on or\
-    \ off, update Setting values and also add, remove or reorder Percentage and Targeting\
-    \ Rules.\r\n\r\nTo determine which Feature Flag or Setting you want to work with\
-    \ you have to pass its `settingId`. It can be\r\nobtained from the [Feature Flag\
-    \ & Setting](#tag/Feature-Flags-and-Settings) endpoints.\r\n\r\nYou also have\
-    \ to specify in which Environment you want to change the served value configuration\
-    \ by its\r\n`environmentId` which can be obtained from the [List Environments](#operation/get-environments)\
-    \ endpoint."
+    \ and Settings should serve their values. \nYou can turn Feature Flags on or off,\
+    \ update Setting values and also add, remove or reorder Percentage and Targeting\
+    \ Rules.\n\nTo determine which Feature Flag or Setting you want to work with you\
+    \ have to pass its `settingId`. It can be\nobtained from the [Feature Flag & Setting](#tag/Feature-Flags-and-Settings)\
+    \ endpoints.\n\nYou also have to specify in which Environment you want to change\
+    \ the served value configuration by its\n`environmentId` which can be obtained\
+    \ from the [List Environments](#operation/get-environments) endpoint."
 - name: Feature Flags & Settings
   description: "With these endpoints you can manage your Feature Flags or Settings\
-    \ within a Config. \r\nHowever you can't use them for manipulating the values\
-    \ of your Feature Flags and Settings,\r\nto do that please visit the [Feature\
-    \ Flag & Setting values using SDK Key](#tag/Feature-Flag-and-Setting-values-using-SDK-Key)\r\
-    \nand [Feature Flag & Setting values](#tag/Feature-Flag-and-Setting-values) sections\
-    \ of the API.\r\n\r\nFor using these endpoints, first you have to select which\
-    \ Config you want to work with by its `configId` \r\nwhich can be obtained from\
-    \ the [List Configs](#operation/get-configs) endpoint. \r\nThen you can use it\
-    \ to create new Feature Flags or to get information about existing ones.\r\n\r\
-    \nThen you can obtain the `settingId` or `key` of your desired Feature Flag or\
-    \ Setting \r\nto use them for further operations in this API. \r\n\r\n<a href=\"\
-    https://configcat.com/docs/main-concepts/#setting\" target=\"_blank\" rel=\"noopener\
-    \ noreferrer\">Here</a> you can read more about the concept of Settings."
+    \ within a Config. \nHowever you can't use them for manipulating the values of\
+    \ your Feature Flags and Settings,\nto do that please visit the [Feature Flag\
+    \ & Setting values using SDK Key](#tag/Feature-Flag-and-Setting-values-using-SDK-Key)\n\
+    and [Feature Flag & Setting values](#tag/Feature-Flag-and-Setting-values) sections\
+    \ of the API.\n\nFor using these endpoints, first you have to select which Config\
+    \ you want to work with by its `configId` \nwhich can be obtained from the [List\
+    \ Configs](#operation/get-configs) endpoint. \nThen you can use it to create new\
+    \ Feature Flags or to get information about existing ones.\n\nThen you can obtain\
+    \ the `settingId` or `key` of your desired Feature Flag or Setting \nto use them\
+    \ for further operations in this API. \n\n<a href=\"https://configcat.com/docs/main-concepts/#setting\"\
+    \ target=\"_blank\" rel=\"noopener noreferrer\">Here</a> you can read more about\
+    \ the concept of Settings."
 - name: Organizations
-  description: "With these endpoints you can get useful information about your Organizations.\r\
-    \nThis also can be used to manage your [Products](#tag/Products).\r\n\r\n<a href=\"\
-    https://configcat.com/docs/organization/\" target=\"_blank\" rel=\"noopener noreferrer\"\
-    >Here</a> you can read more about the Organizations."
+  description: |-
+    With these endpoints you can get useful information about your Organizations.
+    This also can be used to manage your [Products](#tag/Products).
+
+    <a href="https://configcat.com/docs/organization/" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the Organizations.
 - name: Products
-  description: "With these endpoints you can get useful information about your Products.\r\
-    \nThis also can be used to manage [Environments](#tag/Environments) and [Configs](#tag/Configs)\
-    \ through this API.\r\n\r\n<a href=\"https://configcat.com/docs/main-concepts/#product\"\
-    \ target=\"_blank\" rel=\"noopener noreferrer\">Here</a> you can read more about\
-    \ the concept of Products."
+  description: |-
+    With these endpoints you can get useful information about your Products.
+    This also can be used to manage [Environments](#tag/Environments) and [Configs](#tag/Configs) through this API.
+
+    <a href="https://configcat.com/docs/main-concepts/#product" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Products.
 - name: Configs
-  description: "With these endpoints you can get useful information about your Configs.\r\
-    \nThis also can be used to manage [Feature Flags and Settings](#tag/Feature-Flags-and-Settings)\
-    \ and their \r\n[served values](#tag/Feature-Flag-and-Setting-values) through\
-    \ this API.\r\n\r\n<a href=\"https://configcat.com/docs/main-concepts/#config\"\
-    \ target=\"_blank\" rel=\"noopener noreferrer\">Here</a> you can read more about\
-    \ the concept of Configs."
+  description: "With these endpoints you can get useful information about your Configs.\n\
+    This also can be used to manage [Feature Flags and Settings](#tag/Feature-Flags-and-Settings)\
+    \ and their \n[served values](#tag/Feature-Flag-and-Setting-values) through this\
+    \ API.\n\n<a href=\"https://configcat.com/docs/main-concepts/#config\" target=\"\
+    _blank\" rel=\"noopener noreferrer\">Here</a> you can read more about the concept\
+    \ of Configs."
 - name: Environments
   description: "With these endpoints you can update existing Environments or add new\
-    \ ones into your selected [Product](#tag/Products). \r\n\r\n<a href=\"https://configcat.com/docs/main-concepts/#environment\"\
+    \ ones into your selected [Product](#tag/Products). \n\n<a href=\"https://configcat.com/docs/main-concepts/#environment\"\
     \ target=\"_blank\" rel=\"noopener noreferrer\">Here</a> you can read more about\
     \ the concept of Environments."
 - name: Tags
@@ -106,7 +106,7 @@ paths:
       - Audit logs
       summary: List Audit logs
       description: "This endpoint returns the list of Audit logs for a given Product\
-        \ \r\nand the result can be optionally filtered by Config and/or Environment."
+        \ \nand the result can be optionally filtered by Config and/or Environment."
       operationId: get-auditlogs
       parameters:
       - name: productId
@@ -195,9 +195,9 @@ paths:
       tags:
       - Configs
       summary: List Configs
-      description: "This endpoint returns the list of the Configs that belongs to\
-        \ the given Product identified by the\r\n`productId` parameter, which can\
-        \ be obtained from the [List Products](#operation/get-products) endpoint."
+      description: |-
+        This endpoint returns the list of the Configs that belongs to the given Product identified by the
+        `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
       operationId: get-configs
       parameters:
       - name: productId
@@ -237,9 +237,9 @@ paths:
       tags:
       - Configs
       summary: Create Config
-      description: "This endpoint creates a new Config in a specified Product \r\n\
-        identified by the `productId` parameter, which can be obtained from the [List\
-        \ Products](#operation/get-products) endpoint."
+      description: "This endpoint creates a new Config in a specified Product \nidentified\
+        \ by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products)\
+        \ endpoint."
       operationId: create-config
       parameters:
       - name: productId
@@ -288,8 +288,9 @@ paths:
       tags:
       - Configs
       summary: Get Config
-      description: "This endpoint returns the metadata of a Config\r\nidentified by\
-        \ the `configId`."
+      description: |-
+        This endpoint returns the metadata of a Config
+        identified by the `configId`.
       operationId: get-config
       parameters:
       - name: configId
@@ -402,9 +403,9 @@ paths:
       tags:
       - Environments
       summary: List Environments
-      description: "This endpoint returns the list of the Environments that belongs\
-        \ to the given Product identified by the\r\n`productId` parameter, which can\
-        \ be obtained from the [List Products](#operation/get-products) endpoint."
+      description: |-
+        This endpoint returns the list of the Environments that belongs to the given Product identified by the
+        `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
       operationId: get-environments
       parameters:
       - name: productId
@@ -445,8 +446,8 @@ paths:
       - Environments
       summary: Create Environment
       description: "This endpoint creates a new Environment in a specified Product\
-        \ \r\nidentified by the `productId` parameter, which can be obtained from\
-        \ the [List Products](#operation/get-products) endpoint."
+        \ \nidentified by the `productId` parameter, which can be obtained from the\
+        \ [List Products](#operation/get-products) endpoint."
       operationId: create-environment
       parameters:
       - name: productId
@@ -495,7 +496,7 @@ paths:
       tags:
       - Environments
       summary: Get Environment
-      description: "This endpoint returns the metadata of an Environment \r\nidentified\
+      description: "This endpoint returns the metadata of an Environment \nidentified\
         \ by the `environmentId`."
       operationId: get-environment
       parameters:
@@ -611,17 +612,17 @@ paths:
       tags:
       - Feature Flag & Setting values
       summary: Get value
-      description: "This endpoint returns the value of a Feature Flag or Setting \r\
-        \nin a specified Environment identified by the `environmentId` parameter.\r\
-        \n\r\nThe most important attributes in the response are the `value`, `rolloutRules`\
-        \ and `percentageRules`.\r\nThe `value` represents what the clients will get\
-        \ when the evaluation requests of our SDKs \r\nare not matching to any of\
-        \ the defined Targeting or Percentage Rules, or when there are no additional\
-        \ rules to evaluate.\r\n\r\nThe `rolloutRules` and `percentageRules` attributes\
-        \ are representing the current \r\nTargeting and Percentage Rules configuration\
-        \ of the actual Feature Flag or Setting \r\nin an **ordered** collection,\
-        \ which means the order of the returned rules is matching to the\r\nevaluation\
-        \ order. You can read more about these rules [here](https://configcat.com/docs/advanced/targeting/)."
+      description: "This endpoint returns the value of a Feature Flag or Setting \n\
+        in a specified Environment identified by the `environmentId` parameter.\n\n\
+        The most important attributes in the response are the `value`, `rolloutRules`\
+        \ and `percentageRules`.\nThe `value` represents what the clients will get\
+        \ when the evaluation requests of our SDKs \nare not matching to any of the\
+        \ defined Targeting or Percentage Rules, or when there are no additional rules\
+        \ to evaluate.\n\nThe `rolloutRules` and `percentageRules` attributes are\
+        \ representing the current \nTargeting and Percentage Rules configuration\
+        \ of the actual Feature Flag or Setting \nin an **ordered** collection, which\
+        \ means the order of the returned rules is matching to the\nevaluation order.\
+        \ You can read more about these rules [here](https://configcat.com/docs/advanced/targeting/)."
       operationId: get-setting-value
       parameters:
       - name: environmentId
@@ -667,20 +668,18 @@ paths:
       - Feature Flag & Setting values
       summary: Replace value
       description: "This endpoint replaces the whole value of a Feature Flag or Setting\
-        \ in a specified Environment.\r\n\r\nOnly the `value`, `rolloutRules` and\
-        \ `percentageRules` attributes are modifiable by this endpoint.\r\n\r\n**Important:**\
-        \ As this endpoint is doing a complete replace, it's important to set every\
-        \ other attribute that you don't \r\nwant to change in its original state.\
-        \ Not listing one means that it will reset.\r\n\r\nFor example: We have the\
-        \ following resource.\r\n```\r\n{\r\n\t\"rolloutPercentageItems\": [\r\n\t\
-        \t{\r\n\t\t\t\"percentage\": 30,\r\n\t\t\t\"value\": true\r\n\t\t},\r\n\t\t\
-        {\r\n\t\t\t\"percentage\": 70,\r\n\t\t\t\"value\": false\r\n\t\t}\r\n\t],\r\
-        \n\t\"rolloutRules\": [],\r\n\t\"value\": false\r\n}\r\n```\r\nIf we send\
-        \ a replace request body as below:\r\n```\r\n{\r\n\t\"value\": true\r\n}\r\
-        \n```\r\nThen besides that the default value is set to `true`, all the Percentage\
-        \ Rules are deleted. \r\nSo we get a response like this:\r\n```\r\n{\r\n\t\
-        \"rolloutPercentageItems\": [],\r\n\t\"rolloutRules\": [],\r\n\t\"value\"\
-        : true\r\n}\r\n```"
+        \ in a specified Environment.\n\nOnly the `value`, `rolloutRules` and `percentageRules`\
+        \ attributes are modifiable by this endpoint.\n\n**Important:** As this endpoint\
+        \ is doing a complete replace, it's important to set every other attribute\
+        \ that you don't \nwant to change in its original state. Not listing one means\
+        \ that it will reset.\n\nFor example: We have the following resource.\n```\n\
+        {\n\t\"rolloutPercentageItems\": [\n\t\t{\n\t\t\t\"percentage\": 30,\n\t\t\
+        \t\"value\": true\n\t\t},\n\t\t{\n\t\t\t\"percentage\": 70,\n\t\t\t\"value\"\
+        : false\n\t\t}\n\t],\n\t\"rolloutRules\": [],\n\t\"value\": false\n}\n```\n\
+        If we send a replace request body as below:\n```\n{\n\t\"value\": true\n}\n\
+        ```\nThen besides that the default value is set to `true`, all the Percentage\
+        \ Rules are deleted. \nSo we get a response like this:\n```\n{\n\t\"rolloutPercentageItems\"\
+        : [],\n\t\"rolloutRules\": [],\n\t\"value\": true\n}\n```"
       operationId: replace-setting-value
       parameters:
       - name: environmentId
@@ -791,25 +790,24 @@ paths:
       tags:
       - Feature Flag & Setting values
       summary: Update value
-      description: "This endpoint updates the value of a Feature Flag or Setting \r\
-        \nwith a collection of [JSON Patch](http://jsonpatch.com) operations in a\
-        \ specified Environment.\r\n\r\nOnly the `value`, `rolloutRules` and `percentageRules`\
-        \ attributes are modifiable by this endpoint.\r\n\r\nThe advantage of using\
-        \ JSON Patch is that you can describe individual update operations on a resource\r\
-        \nwithout touching attributes that you don't want to change. It supports collection\
-        \ reordering, so it also \r\ncan be used for reordering the targeting rules\
-        \ of a Feature Flag or Setting.\r\n\r\nFor example: We have the following\
-        \ resource.\r\n```\r\n{\r\n\t\"rolloutPercentageItems\": [\r\n\t\t{\r\n\t\t\
-        \t\"percentage\": 30,\r\n\t\t\t\"value\": true\r\n\t\t},\r\n\t\t{\r\n\t\t\t\
-        \"percentage\": 70,\r\n\t\t\t\"value\": false\r\n\t\t}\r\n\t],\r\n\t\"rolloutRules\"\
-        : [],\r\n\t\"value\": false\r\n}\r\n```\r\nIf we send an update request body\
-        \ as below:\r\n```\r\n[\r\n\t{\r\n\t\t\"op\": \"replace\",\r\n\t\t\"path\"\
-        : \"/value\",\r\n\t\t\"value\": true\r\n\t}\r\n]\r\n```\r\nOnly the default\
-        \ value is going to be set to `true` and all the Percentage Rules are remaining\
-        \ unchanged.\r\nSo we get a response like this:\r\n```\r\n{\r\n\t\"rolloutPercentageItems\"\
-        : [\r\n\t\t{\r\n\t\t\t\"percentage\": 30,\r\n\t\t\t\"value\": true\r\n\t\t\
-        },\r\n\t\t{\r\n\t\t\t\"percentage\": 70,\r\n\t\t\t\"value\": false\r\n\t\t\
-        }\r\n\t],\r\n\t\"rolloutRules\": [],\r\n\t\"value\": true\r\n}\r\n```"
+      description: "This endpoint updates the value of a Feature Flag or Setting \n\
+        with a collection of [JSON Patch](http://jsonpatch.com) operations in a specified\
+        \ Environment.\n\nOnly the `value`, `rolloutRules` and `percentageRules` attributes\
+        \ are modifiable by this endpoint.\n\nThe advantage of using JSON Patch is\
+        \ that you can describe individual update operations on a resource\nwithout\
+        \ touching attributes that you don't want to change. It supports collection\
+        \ reordering, so it also \ncan be used for reordering the targeting rules\
+        \ of a Feature Flag or Setting.\n\nFor example: We have the following resource.\n\
+        ```\n{\n\t\"rolloutPercentageItems\": [\n\t\t{\n\t\t\t\"percentage\": 30,\n\
+        \t\t\t\"value\": true\n\t\t},\n\t\t{\n\t\t\t\"percentage\": 70,\n\t\t\t\"\
+        value\": false\n\t\t}\n\t],\n\t\"rolloutRules\": [],\n\t\"value\": false\n\
+        }\n```\nIf we send an update request body as below:\n```\n[\n\t{\n\t\t\"op\"\
+        : \"replace\",\n\t\t\"path\": \"/value\",\n\t\t\"value\": true\n\t}\n]\n```\n\
+        Only the default value is going to be set to `true` and all the Percentage\
+        \ Rules are remaining unchanged.\nSo we get a response like this:\n```\n{\n\
+        \t\"rolloutPercentageItems\": [\n\t\t{\n\t\t\t\"percentage\": 30,\n\t\t\t\"\
+        value\": true\n\t\t},\n\t\t{\n\t\t\t\"percentage\": 70,\n\t\t\t\"value\":\
+        \ false\n\t\t}\n\t],\n\t\"rolloutRules\": [],\n\t\"value\": true\n}\n```"
       operationId: update-setting-value
       parameters:
       - name: environmentId
@@ -1074,19 +1072,19 @@ paths:
       tags:
       - Feature Flag & Setting values using SDK Key
       summary: Get value
-      description: "This endpoint returns the value of a Feature Flag or Setting \r\
-        \nin a specified Environment identified by the <a target=\"_blank\" rel=\"\
-        noopener noreferrer\" href=\"https://app.configcat.com/sdkkey\">SDK key</a>\
-        \ passed in the `X-CONFIGCAT-SDKKEY` header.\r\n\r\nThe most important attributes\
-        \ in the response are the `value`, `rolloutRules` and `percentageRules`.\r\
-        \nThe `value` represents what the clients will get when the evaluation requests\
-        \ of our SDKs \r\nare not matching to any of the defined Targeting or Percentage\
-        \ Rules, or when there are no additional rules to evaluate.\r\n\r\nThe `rolloutRules`\
-        \ and `percentageRules` attributes are representing the current \r\nTargeting\
+      description: "This endpoint returns the value of a Feature Flag or Setting \n\
+        in a specified Environment identified by the <a target=\"_blank\" rel=\"noopener\
+        \ noreferrer\" href=\"https://app.configcat.com/sdkkey\">SDK key</a> passed\
+        \ in the `X-CONFIGCAT-SDKKEY` header.\n\nThe most important attributes in\
+        \ the response are the `value`, `rolloutRules` and `percentageRules`.\nThe\
+        \ `value` represents what the clients will get when the evaluation requests\
+        \ of our SDKs \nare not matching to any of the defined Targeting or Percentage\
+        \ Rules, or when there are no additional rules to evaluate.\n\nThe `rolloutRules`\
+        \ and `percentageRules` attributes are representing the current \nTargeting\
         \ and Percentage Rules configuration of the actual Feature Flag or Setting\
-        \ \r\nin an **ordered** collection, which means the order of the returned\
-        \ rules is matching to the\r\nevaluation order. You can read more about these\
-        \ rules [here](https://configcat.com/docs/advanced/targeting/)."
+        \ \nin an **ordered** collection, which means the order of the returned rules\
+        \ is matching to the\nevaluation order. You can read more about these rules\
+        \ [here](https://configcat.com/docs/advanced/targeting/)."
       operationId: get-setting-value-by-sdkkey
       parameters:
       - name: settingKeyOrId
@@ -1129,22 +1127,21 @@ paths:
       - Feature Flag & Setting values using SDK Key
       summary: Replace value
       description: "This endpoint replaces the value of a Feature Flag or Setting\
-        \ \r\nin a specified Environment identified by the <a target=\"_blank\" rel=\"\
+        \ \nin a specified Environment identified by the <a target=\"_blank\" rel=\"\
         noopener noreferrer\" href=\"https://app.configcat.com/sdkkey\">SDK key</a>\
-        \ passed in the `X-CONFIGCAT-SDKKEY` header.\r\n\r\nOnly the `value`, `rolloutRules`\
-        \ and `percentageRules` attributes are modifiable by this endpoint.\r\n\r\n\
-        **Important:** As this endpoint is doing a complete replace, it's important\
-        \ to set every other attribute that you don't \r\nwant to change to its original\
-        \ state. Not listing one means that it will reset.\r\n\r\nFor example: We\
-        \ have the following resource.\r\n```\r\n{\r\n\t\"rolloutPercentageItems\"\
-        : [\r\n\t\t{\r\n\t\t\t\"percentage\": 30,\r\n\t\t\t\"value\": true\r\n\t\t\
-        },\r\n\t\t{\r\n\t\t\t\"percentage\": 70,\r\n\t\t\t\"value\": false\r\n\t\t\
-        }\r\n\t],\r\n\t\"rolloutRules\": [],\r\n\t\"value\": false\r\n}\r\n```\r\n\
-        If we send a replace request body as below:\r\n```\r\n{\r\n\t\"value\": true\r\
-        \n}\r\n```\r\nThen besides that the default served value is set to `true`,\
-        \ all the Percentage Rules are deleted. \r\nSo we get a response like this:\r\
-        \n```\r\n{\r\n\t\"rolloutPercentageItems\": [],\r\n\t\"rolloutRules\": [],\r\
-        \n\t\"value\": true\r\n}\r\n```"
+        \ passed in the `X-CONFIGCAT-SDKKEY` header.\n\nOnly the `value`, `rolloutRules`\
+        \ and `percentageRules` attributes are modifiable by this endpoint.\n\n**Important:**\
+        \ As this endpoint is doing a complete replace, it's important to set every\
+        \ other attribute that you don't \nwant to change to its original state. Not\
+        \ listing one means that it will reset.\n\nFor example: We have the following\
+        \ resource.\n```\n{\n\t\"rolloutPercentageItems\": [\n\t\t{\n\t\t\t\"percentage\"\
+        : 30,\n\t\t\t\"value\": true\n\t\t},\n\t\t{\n\t\t\t\"percentage\": 70,\n\t\
+        \t\t\"value\": false\n\t\t}\n\t],\n\t\"rolloutRules\": [],\n\t\"value\": false\n\
+        }\n```\nIf we send a replace request body as below:\n```\n{\n\t\"value\":\
+        \ true\n}\n```\nThen besides that the default served value is set to `true`,\
+        \ all the Percentage Rules are deleted. \nSo we get a response like this:\n\
+        ```\n{\n\t\"rolloutPercentageItems\": [],\n\t\"rolloutRules\": [],\n\t\"value\"\
+        : true\n}\n```"
       operationId: replace-setting-value-by-sdkkey
       parameters:
       - name: settingKeyOrId
@@ -1253,28 +1250,26 @@ paths:
       tags:
       - Feature Flag & Setting values using SDK Key
       summary: Update value
-      description: "This endpoint updates the value of a Feature Flag or Setting \r\
-        \nwith a collection of [JSON Patch](http://jsonpatch.com) operations in a\
-        \ specified Environment\r\nidentified by the <a target=\"_blank\" rel=\"noopener\
-        \ noreferrer\" href=\"https://app.configcat.com/sdkkey\">SDK key</a> passed\
-        \ in the `X-CONFIGCAT-SDKKEY` header.\r\n\r\nOnly the `value`, `rolloutRules`\
-        \ and `percentageRules` attributes are modifiable by this endpoint.\r\n\r\n\
-        The advantage of using JSON Patch is that you can describe individual update\
-        \ operations on a resource\r\nwithout touching attributes that you don't want\
-        \ to change. It supports collection reordering, so it also \r\ncan be used\
-        \ for reordering the targeting rules of a Feature Flag or Setting.\r\n\r\n\
-        For example: We have the following resource.\r\n```\r\n{\r\n\t\"rolloutPercentageItems\"\
-        : [\r\n\t\t{\r\n\t\t\t\"percentage\": 30,\r\n\t\t\t\"value\": true\r\n\t\t\
-        },\r\n\t\t{\r\n\t\t\t\"percentage\": 70,\r\n\t\t\t\"value\": false\r\n\t\t\
-        }\r\n\t],\r\n\t\"rolloutRules\": [],\r\n\t\"value\": false\r\n}\r\n```\r\n\
-        If we send an update request body as below:\r\n```\r\n[\r\n\t{\r\n\t\t\"op\"\
-        : \"replace\",\r\n\t\t\"path\": \"/value\",\r\n\t\t\"value\": true\r\n\t}\r\
-        \n]\r\n```\r\nOnly the default served value is going to be set to `true` and\
-        \ all the Percentage Rules are remaining unchanged.\r\nSo we get a response\
-        \ like this:\r\n```\r\n{\r\n\t\"rolloutPercentageItems\": [\r\n\t\t{\r\n\t\
-        \t\t\"percentage\": 30,\r\n\t\t\t\"value\": true\r\n\t\t},\r\n\t\t{\r\n\t\t\
-        \t\"percentage\": 70,\r\n\t\t\t\"value\": false\r\n\t\t}\r\n\t],\r\n\t\"rolloutRules\"\
-        : [],\r\n\t\"value\": true\r\n}\r\n```"
+      description: "This endpoint updates the value of a Feature Flag or Setting \n\
+        with a collection of [JSON Patch](http://jsonpatch.com) operations in a specified\
+        \ Environment\nidentified by the <a target=\"_blank\" rel=\"noopener noreferrer\"\
+        \ href=\"https://app.configcat.com/sdkkey\">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY`\
+        \ header.\n\nOnly the `value`, `rolloutRules` and `percentageRules` attributes\
+        \ are modifiable by this endpoint.\n\nThe advantage of using JSON Patch is\
+        \ that you can describe individual update operations on a resource\nwithout\
+        \ touching attributes that you don't want to change. It supports collection\
+        \ reordering, so it also \ncan be used for reordering the targeting rules\
+        \ of a Feature Flag or Setting.\n\nFor example: We have the following resource.\n\
+        ```\n{\n\t\"rolloutPercentageItems\": [\n\t\t{\n\t\t\t\"percentage\": 30,\n\
+        \t\t\t\"value\": true\n\t\t},\n\t\t{\n\t\t\t\"percentage\": 70,\n\t\t\t\"\
+        value\": false\n\t\t}\n\t],\n\t\"rolloutRules\": [],\n\t\"value\": false\n\
+        }\n```\nIf we send an update request body as below:\n```\n[\n\t{\n\t\t\"op\"\
+        : \"replace\",\n\t\t\"path\": \"/value\",\n\t\t\"value\": true\n\t}\n]\n```\n\
+        Only the default served value is going to be set to `true` and all the Percentage\
+        \ Rules are remaining unchanged.\nSo we get a response like this:\n```\n{\n\
+        \t\"rolloutPercentageItems\": [\n\t\t{\n\t\t\t\"percentage\": 30,\n\t\t\t\"\
+        value\": true\n\t\t},\n\t\t{\n\t\t\t\"percentage\": 70,\n\t\t\t\"value\":\
+        \ false\n\t\t}\n\t],\n\t\"rolloutRules\": [],\n\t\"value\": true\n}\n```"
       operationId: update-setting-value-by-sdkkey
       parameters:
       - name: settingKeyOrId
@@ -1537,7 +1532,7 @@ paths:
       - Feature Flags & Settings
       summary: List Flags
       description: "This endpoint returns the list of the Feature Flags and Settings\
-        \ defined in a \r\nspecified Config, identified by the `configId` parameter."
+        \ defined in a \nspecified Config, identified by the `configId` parameter."
       operationId: get-settings
       parameters:
       - name: configId
@@ -1577,9 +1572,11 @@ paths:
       tags:
       - Feature Flags & Settings
       summary: Create Flag
-      description: "This endpoint creates a new Feature Flag or Setting in a specified\
-        \ Config\r\nidentified by the `configId` parameter.\r\n\r\n**Important:**\
-        \ The `key` attribute must be unique within the given Config."
+      description: |-
+        This endpoint creates a new Feature Flag or Setting in a specified Config
+        identified by the `configId` parameter.
+
+        **Important:** The `key` attribute must be unique within the given Config.
       operationId: create-setting
       parameters:
       - name: configId
@@ -1629,7 +1626,7 @@ paths:
       - Feature Flags & Settings
       summary: Get Flag
       description: "This endpoint returns the metadata attributes of a Feature Flag\
-        \ or Setting \r\nidentified by the `settingId` parameter."
+        \ or Setting \nidentified by the `settingId` parameter."
       operationId: get-setting
       parameters:
       - name: settingId
@@ -1666,7 +1663,7 @@ paths:
       - Feature Flags & Settings
       summary: Delete Flag
       description: "This endpoint removes a Feature Flag or Setting from a specified\
-        \ Config, \r\nidentified by the `configId` parameter."
+        \ Config, \nidentified by the `configId` parameter."
       operationId: delete-setting
       parameters:
       - name: settingId
@@ -1696,22 +1693,30 @@ paths:
       - Feature Flags & Settings
       summary: Update Flag
       description: "This endpoint updates the metadata of a Feature Flag or Setting\
-        \ \r\nwith a collection of [JSON Patch](http://jsonpatch.com) operations in\
-        \ a specified Config.\r\n\r\nOnly the `name` and `hint` attributes are modifiable\
-        \ by this endpoint.\r\n\r\nThe advantage of using JSON Patch is that you can\
-        \ describe individual update operations on a resource\r\nwithout touching\
-        \ attributes that you don't want to change.\r\n\r\nFor example: We have the\
-        \ following resource.\r\n```\r\n{\r\n\t\"settingId\": 5345,\r\n\t\"key\":\
-        \ \"myAwesomeFeature\",\r\n\t\"name\": \"Tihs is a naem with soem typos.\"\
-        ,\r\n\t\"hint\": \"This Flag controls my awesome feature.\",\r\n\t\"settingType\"\
-        : \"boolean\"\r\n}\r\n```\r\nIf we send an update request body as below:\r\
-        \n```\r\n[\r\n\t{\r\n\t\t\"op\": \"replace\",\r\n\t\t\"path\": \"/name\",\r\
-        \n\t\t\"value\": \"This is the name without typos.\"\r\n\t}\r\n]\r\n```\r\n\
-        Only the name is going to be updated and all the other attributes are remaining\
-        \ unchanged.\r\nSo we get a response like this:\r\n```\r\n{\r\n\t\"settingId\"\
-        : 5345,\r\n\t\"key\": \"myAwesomeFeature\",\r\n\t\"name\": \"This is the name\
-        \ without typos.\",\r\n\t\"hint\": \"This Flag controls my awesome feature.\"\
-        ,\r\n\t\"settingType\": \"boolean\"\r\n}\r\n```"
+        \ \nwith a collection of [JSON Patch](http://jsonpatch.com) operations in\
+        \ a specified Config.\n\nOnly the `name`, `hint` and `tags` attributes are\
+        \ modifiable by this endpoint.\nThe `tags` attribute is a simple collection\
+        \ of the [tag IDs](#operation/get-tags) attached to the given setting.\n\n\
+        The advantage of using JSON Patch is that you can describe individual update\
+        \ operations on a resource\nwithout touching attributes that you don't want\
+        \ to change.\n\nFor example: We have the following resource.\n```\n{\n\t\"\
+        settingId\": 5345,\n\t\"key\": \"myAwesomeFeature\",\n\t\"name\": \"Tihs is\
+        \ a naem with soem typos.\",\n\t\"hint\": \"This Flag controls my awesome\
+        \ feature.\",\n\t\"settingType\": \"boolean\",\n\t\"tags\": [\n\t\t{\n\t\t\
+        \t\"tagId\": 0,\n\t\t\t\"name\": \"sample tag\",\n\t\t\t\"color\": \"whale\"\
+        \n\t\t}\n\t]\n}\n```\nIf we send an update request body as below (it changes\
+        \ the name and adds the already existing tag with the id 2):\n```\n[\n\t{\n\
+        \t\t\"op\": \"replace\",\n\t\t\"path\": \"/name\",\n\t\t\"value\": \"This\
+        \ is the name without typos.\"\n\t},\n\t{\n\t\t\"op\": \"add\",\n\t\t\"path\"\
+        : \"/tags/-\",\n\t\t\"value\": 2\n\t}\n]\n```\nOnly the `name` and `tags`\
+        \ are going to be updated and all the other attributes are remaining unchanged.\n\
+        So we get a response like this:\n```\n{\n\t\"settingId\": 5345,\n\t\"key\"\
+        : \"myAwesomeFeature\",\n\t\"name\": \"This is the name without typos.\",\n\
+        \t\"hint\": \"This Flag controls my awesome feature.\",\n\t\"settingType\"\
+        : \"boolean\",\n\t\"tags\": [\n\t\t{\n\t\t\t\"tagId\": 0,\n\t\t\t\"name\"\
+        : \"sample tag\",\n\t\t\t\"color\": \"whale\"\n\t\t},\n\t\t{\n\t\t\t\"tagId\"\
+        : 2,\n\t\t\t\"name\": \"another tag\",\n\t\t\t\"color\": \"koala\"\n\t\t}\n\
+        \t]\n}\n```"
       operationId: update-setting
       parameters:
       - name: settingId
@@ -2025,8 +2030,8 @@ paths:
       - Products
       summary: Create Product
       description: "This endpoint creates a new Product in a specified Organization\
-        \ \r\nidentified by the `organizationId` parameter, which can be obtained\
-        \ from the [List Organizations](#operation/get-organizations) endpoint."
+        \ \nidentified by the `organizationId` parameter, which can be obtained from\
+        \ the [List Organizations](#operation/get-organizations) endpoint."
       operationId: create-product
       parameters:
       - name: organizationId
@@ -2075,8 +2080,8 @@ paths:
       tags:
       - Products
       summary: Get Product
-      description: "This endpoint returns the metadata of a Product \r\nidentified\
-        \ by the `productId`."
+      description: "This endpoint returns the metadata of a Product \nidentified by\
+        \ the `productId`."
       operationId: get-product
       parameters:
       - name: productId
@@ -2189,8 +2194,8 @@ paths:
       tags:
       - Tags
       summary: List Tags
-      description: "This endpoint returns the list of the Tags in a \r\nspecified\
-        \ Product, identified by the `productId` parameter."
+      description: "This endpoint returns the list of the Tags in a \nspecified Product,\
+        \ identified by the `productId` parameter."
       operationId: get-tags
       parameters:
       - name: productId
@@ -2226,7 +2231,7 @@ paths:
       tags:
       - Tags
       summary: Create Tag
-      description: "This endpoint creates a new Tag in a specified Product \r\nidentified\
+      description: "This endpoint creates a new Tag in a specified Product \nidentified\
         \ by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products)\
         \ endpoint."
       operationId: create-tag
@@ -2277,8 +2282,8 @@ paths:
       tags:
       - Tags
       summary: Get Tag
-      description: "This endpoint returns the metadata of a Tag \r\nidentified by\
-        \ the `tagId`."
+      description: "This endpoint returns the metadata of a Tag \nidentified by the\
+        \ `tagId`."
       operationId: get-tag
       parameters:
       - name: tagId
@@ -3102,10 +3107,11 @@ components:
           nullable: true
         tags:
           type: array
-          description: The tags attached to the setting.
+          description: The IDs of the tags which are attached to the setting.
           nullable: true
           items:
-            $ref: '#/components/schemas/TagModel'
+            type: integer
+            format: int64
       additionalProperties: false
     OrganizationModel-haljson:
       type: object
@@ -3545,7 +3551,7 @@ components:
       description: |-
         To authenticate with the API you have to fill the `Authorization` HTTP request header with your Public API credentials.
 
-        You can create your credentials on the <a target="_blank" href="https://localhost:4200/my-account/public-api-credentials">Public API credentials management page</a>.
+        You can create your credentials on the <a target="_blank" href="https://test-app.configcat.com/my-account/public-api-credentials">Public API credentials management page</a>.
       scheme: basic
 x-tagGroups:
 - name: Feature Flag values

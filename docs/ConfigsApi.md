@@ -1,6 +1,6 @@
 # {{classname}}
 
-All URIs are relative to *https://localhost*
+All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 > ConfigModel CreateConfig(ctx, body, productId)
 Create Config
 
-This endpoint creates a new Config in a specified Product   identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
+This endpoint creates a new Config in a specified Product  identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
 
 ### Required Parameters
 
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 > ConfigModel GetConfig(ctx, configId)
 Get Config
 
-This endpoint returns the metadata of a Config  identified by the `configId`.
+This endpoint returns the metadata of a Config identified by the `configId`.
 
 ### Required Parameters
 
@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 > []ConfigModel GetConfigs(ctx, productId)
 List Configs
 
-This endpoint returns the list of the Configs that belongs to the given Product identified by the  `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
+This endpoint returns the list of the Configs that belongs to the given Product identified by the `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
 
 ### Required Parameters
 

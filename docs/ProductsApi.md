@@ -1,6 +1,6 @@
 # {{classname}}
 
-All URIs are relative to *https://localhost*
+All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 > ProductModel CreateProduct(ctx, body, organizationId)
 Create Product
 
-This endpoint creates a new Product in a specified Organization   identified by the `organizationId` parameter, which can be obtained from the [List Organizations](#operation/get-organizations) endpoint.
+This endpoint creates a new Product in a specified Organization  identified by the `organizationId` parameter, which can be obtained from the [List Organizations](#operation/get-organizations) endpoint.
 
 ### Required Parameters
 
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 > ProductModel GetProduct(ctx, productId)
 Get Product
 
-This endpoint returns the metadata of a Product   identified by the `productId`.
+This endpoint returns the metadata of a Product  identified by the `productId`.
 
 ### Required Parameters
 
