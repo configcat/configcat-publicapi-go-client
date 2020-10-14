@@ -2490,9 +2490,66 @@ components:
         details: details
         actionTarget: actionTarget
         userName: userName
+    OrganizationModel-haljson:
+      type: object
+      properties:
+        organizationId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        _links:
+          $ref: '#/components/schemas/OrganizationModelhaljson__links'
+    OrganizationModel:
+      type: object
+      properties:
+        organizationId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+    ProductModel-haljson:
+      type: object
+      properties:
+        _embedded:
+          $ref: '#/components/schemas/ProductModelhaljson__embedded'
+        productId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        _links:
+          $ref: '#/components/schemas/ProductModelhaljson__links'
+    ProductModel:
+      type: object
+      properties:
+        organization:
+          $ref: '#/components/schemas/OrganizationModel'
+        productId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        organization:
+          organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+        name: name
     ConfigModel-haljson:
       type: object
       properties:
+        _embedded:
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded'
         configId:
           type: string
           format: uuid
@@ -2504,6 +2561,8 @@ components:
     ConfigModel:
       type: object
       properties:
+        product:
+          $ref: '#/components/schemas/ProductModel'
         configId:
           type: string
           format: uuid
@@ -2512,6 +2571,12 @@ components:
           nullable: true
       additionalProperties: false
       example:
+        product:
+          productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          organization:
+            organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+          name: name
         configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         name: name
     CreateConfigRequest:
@@ -2536,6 +2601,8 @@ components:
     EnvironmentModel-haljson:
       type: object
       properties:
+        _embedded:
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded'
         environmentId:
           type: string
           format: uuid
@@ -2547,6 +2614,8 @@ components:
     EnvironmentModel:
       type: object
       properties:
+        product:
+          $ref: '#/components/schemas/ProductModel'
         environmentId:
           type: string
           format: uuid
@@ -2555,6 +2624,12 @@ components:
           nullable: true
       additionalProperties: false
       example:
+        product:
+          productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          organization:
+            organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+          name: name
         environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         name: name
     CreateEnvironmentModel:
@@ -2857,11 +2932,23 @@ components:
         - percentage: 5
           value: {}
         environment:
+          product:
+            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            organization:
+              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+            name: name
           environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name
         lastUpdaterUserEmail: lastUpdaterUserEmail
         readOnly: true
         config:
+          product:
+            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            organization:
+              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+            name: name
           configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name
         integrationLinks:
@@ -2938,6 +3025,8 @@ components:
     TagModel-haljson:
       type: object
       properties:
+        _embedded:
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded'
         tagId:
           type: integer
           format: int64
@@ -2952,6 +3041,8 @@ components:
     TagModel:
       type: object
       properties:
+        product:
+          $ref: '#/components/schemas/ProductModel'
         tagId:
           type: integer
           format: int64
@@ -2963,6 +3054,12 @@ components:
           nullable: true
       additionalProperties: false
       example:
+        product:
+          productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          organization:
+            organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+          name: name
         color: color
         tagId: 6
         name: name
@@ -3072,10 +3169,22 @@ components:
         key: key
         settingId: 0
         tags:
-        - color: color
+        - product:
+            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            organization:
+              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+            name: name
+          color: color
           tagId: 6
           name: name
-        - color: color
+        - product:
+            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            organization:
+              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+            name: name
+          color: color
           tagId: 6
           name: name
     CreateSettingModel:
@@ -3113,61 +3222,6 @@ components:
             type: integer
             format: int64
       additionalProperties: false
-    OrganizationModel-haljson:
-      type: object
-      properties:
-        organizationId:
-          type: string
-          format: uuid
-        name:
-          type: string
-          nullable: true
-        _links:
-          $ref: '#/components/schemas/OrganizationModelhaljson__links'
-    OrganizationModel:
-      type: object
-      properties:
-        organizationId:
-          type: string
-          format: uuid
-        name:
-          type: string
-          nullable: true
-      additionalProperties: false
-      example:
-        organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        name: name
-    ProductModel-haljson:
-      type: object
-      properties:
-        _embedded:
-          $ref: '#/components/schemas/ProductModelhaljson__embedded'
-        productId:
-          type: string
-          format: uuid
-        name:
-          type: string
-          nullable: true
-        _links:
-          $ref: '#/components/schemas/ProductModelhaljson__links'
-    ProductModel:
-      type: object
-      properties:
-        organization:
-          $ref: '#/components/schemas/OrganizationModel'
-        productId:
-          type: string
-          format: uuid
-        name:
-          type: string
-          nullable: true
-      additionalProperties: false
-      example:
-        productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        organization:
-          organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          name: name
-        name: name
     IntegrationLinkDetail:
       type: object
       properties:
@@ -3193,10 +3247,22 @@ components:
             name: name
           name: name
         environment:
+          product:
+            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            organization:
+              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+            name: name
           environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name
         readOnly: true
         config:
+          product:
+            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            organization:
+              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+            name: name
           configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name
         setting:
@@ -3235,10 +3301,22 @@ components:
               name: name
             name: name
           environment:
+            product:
+              productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              organization:
+                organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                name: name
+              name: name
             environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             name: name
           readOnly: true
           config:
+            product:
+              productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              organization:
+                organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                name: name
+              name: name
             configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             name: name
           setting:
@@ -3261,10 +3339,22 @@ components:
               name: name
             name: name
           environment:
+            product:
+              productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              organization:
+                organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                name: name
+              name: name
             environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             name: name
           readOnly: true
           config:
+            product:
+              productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              organization:
+                organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                name: name
+              name: name
             configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             name: name
           setting:
@@ -3368,6 +3458,56 @@ components:
       nullable: true
       allOf:
       - $ref: '#/components/schemas/AuditLogType'
+    OrganizationModelhaljson__links:
+      type: object
+      properties:
+        products:
+          type: string
+    ProductModelhaljson__embedded_organization:
+      type: object
+      properties:
+        organizationId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        _links:
+          $ref: '#/components/schemas/OrganizationModelhaljson__links'
+    ProductModelhaljson__embedded:
+      type: object
+      properties:
+        organization:
+          $ref: '#/components/schemas/ProductModelhaljson__embedded_organization'
+    ProductModelhaljson__links:
+      type: object
+      properties:
+        self:
+          type: string
+        configs:
+          type: string
+        environments:
+          type: string
+        tags:
+          type: string
+    ConfigModelhaljson__embedded_product:
+      type: object
+      properties:
+        _embedded:
+          $ref: '#/components/schemas/ProductModelhaljson__embedded'
+        productId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        _links:
+          $ref: '#/components/schemas/ProductModelhaljson__links'
+    ConfigModelhaljson__embedded:
+      type: object
+      properties:
+        product:
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded_product'
     ConfigModelhaljson__links:
       type: object
       properties:
@@ -3427,6 +3567,8 @@ components:
     SettingValueModelhaljson__embedded_config:
       type: object
       properties:
+        _embedded:
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded'
         configId:
           type: string
           format: uuid
@@ -3438,6 +3580,8 @@ components:
     SettingValueModelhaljson__embedded_environment:
       type: object
       properties:
+        _embedded:
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded'
         environmentId:
           type: string
           format: uuid
@@ -3495,6 +3639,8 @@ components:
     SettingModelhaljson__embedded_tags:
       type: object
       properties:
+        _embedded:
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded'
         tagId:
           type: integer
           format: int64
@@ -3513,38 +3659,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SettingModelhaljson__embedded_tags'
-    OrganizationModelhaljson__links:
-      type: object
-      properties:
-        products:
-          type: string
-    ProductModelhaljson__embedded_organization:
-      type: object
-      properties:
-        organizationId:
-          type: string
-          format: uuid
-        name:
-          type: string
-          nullable: true
-        _links:
-          $ref: '#/components/schemas/OrganizationModelhaljson__links'
-    ProductModelhaljson__embedded:
-      type: object
-      properties:
-        organization:
-          $ref: '#/components/schemas/ProductModelhaljson__embedded_organization'
-    ProductModelhaljson__links:
-      type: object
-      properties:
-        self:
-          type: string
-        configs:
-          type: string
-        environments:
-          type: string
-        tags:
-          type: string
   securitySchemes:
     Basic:
       type: http

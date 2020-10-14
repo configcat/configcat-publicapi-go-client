@@ -3,6 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Embedded** | [***ConfigModelhaljsonEmbedded**](ConfigModelhaljson__embedded.md) |  | [optional] [default to null]
 **ConfigId** | **string** |  | [optional] [default to null]
 **Name** | **string** |  | [optional] [default to null]
 **Links** | [***ConfigModelhaljsonLinks**](ConfigModelhaljson__links.md) |  | [optional] [default to null]
