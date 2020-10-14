@@ -1,6 +1,6 @@
 # {{classname}}
 
-All URIs are relative to *https://api.configcat.com*
+All URIs are relative to *https://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -10,7 +10,7 @@ Method | HTTP request | Description
 > []AuditLogItemModel GetAuditlogs(ctx, productId, optional)
 List Audit logs
 
-This endpoint returns the list of Audit logs for a given Product  and the result can be optionally filtered by Config and/or Environment.
+This endpoint returns the list of Audit logs for a given Product   and the result can be optionally filtered by Config and/or Environment.
 
 ### Required Parameters
 

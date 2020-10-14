@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **ExpirationWarningAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **ConfigId** | **string** |  | [optional] [default to null]
 **ConfigName** | **string** |  | [optional] [default to null]
+**Tags** | [**[]TagModel**](TagModel.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
