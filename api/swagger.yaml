@@ -1,8 +1,8 @@
 openapi: 3.0.1
 info:
   title: ConfigCat Public Management API
-  description: "**Base API URL**: https://test-api.configcat.com\n\nIf you prefer\
-    \ the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).\n\
+  description: "**Base API URL**: https://api.configcat.com\n\nIf you prefer the swagger\
+    \ documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).\n\
     \nThe purpose of this API is to access the ConfigCat platform programmatically.\
     \ \nYou can **Create**, **Read**, **Update** and **Delete** any entities like\
     \ **Feature Flags, Configs, Environments** or **Products** within ConfigCat. \n\
@@ -30,9 +30,9 @@ info:
     email: support@configcat.com
   version: v1
   x-logo:
-    url: https://test-api.configcat.com/resources/configcat-logo-horiz.svg
+    url: https://api.configcat.com/resources/configcat-logo-horiz.svg
 servers:
-- url: https://test-api.configcat.com
+- url: https://api.configcat.com
 security:
 - Basic: []
 tags:
@@ -3665,7 +3665,7 @@ components:
       description: |-
         To authenticate with the API you have to fill the `Authorization` HTTP request header with your Public API credentials.
 
-        You can create your credentials on the <a target="_blank" href="https://test-app.configcat.com/my-account/public-api-credentials">Public API credentials management page</a>.
+        You can create your credentials on the <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">Public API credentials management page</a>.
       scheme: basic
 x-tagGroups:
 - name: Feature Flag values
