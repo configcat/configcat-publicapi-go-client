@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateTag**](TagsApi.md#CreateTag) | **Post** /v1/products/{productId}/tags | Create Tag
 [**DeleteTag**](TagsApi.md#DeleteTag) | **Delete** /v1/tags/{tagId} | Delete Tag
+[**GetSettingsByTag**](TagsApi.md#GetSettingsByTag) | **Get** /v1/tags/{tagId}/settings | List Settings by Tag
 [**GetTag**](TagsApi.md#GetTag) | **Get** /v1/tags/{tagId} | Get Tag
 [**GetTags**](TagsApi.md#GetTags) | **Get** /v1/products/{productId}/tags | List Tags
 [**UpdateTag**](TagsApi.md#UpdateTag) | **Put** /v1/tags/{tagId} | Update Tag
@@ -43,7 +44,7 @@ Name | Type | Description  | Notes
 > DeleteTag(ctx, tagId)
 Delete Tag
 
-This endpoint removes a Tag identified by the `tagId` parameter.
+This endpoint deletes a Tag identified by the `tagId` parameter. To remove a Tag from a Feature Flag or Setting use the [Update Flag](#operation/update-setting) endpoint.
 
 ### Required Parameters
 
@@ -64,6 +65,34 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **GetSettingsByTag**
+> []SettingModel GetSettingsByTag(ctx, tagId)
+List Settings by Tag
+
+This endpoint returns the list of the Settings that  has the specified Tag, identified by the `tagId` parameter.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **tagId** | **int64**| The identifier of the Tag. | 
+
+### Return type
+
+[**[]SettingModel**](SettingModel.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/hal+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

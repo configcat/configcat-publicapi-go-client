@@ -75,15 +75,25 @@ tags:
     This also can be used to manage your [Products](#tag/Products).
 
     <a href="https://configcat.com/docs/organization/" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the Organizations.
+- name: Members
+  description: |-
+    With these endpoints you can manage your Members.
+
+    <a href="https://configcat.com/docs/advanced/team-collaboration" target="_blank" rel="noopener noreferrer">Here</a> you can read more about Team Collaboration.
+- name: Permission Groups
+  description: |-
+    With these endpoints you can manage your Permission Groups.
+
+    <a href="https://configcat.com/docs/advanced/team-collaboration#permissions--groups" target="_blank" rel="noopener noreferrer">Here</a> you can read more about Permissions.
 - name: Products
   description: |-
-    With these endpoints you can get useful information about your Products.
-    This also can be used to manage [Environments](#tag/Environments) and [Configs](#tag/Configs) through this API.
+    With these endpoints you can manage your Products.
+    This also can be used to manage [Environments](#tag/Environments), [Configs](#tag/Configs), [Tags](#tag/Tags) and [Permission Groups](#tag/Permission-Groups) through this API.
 
     <a href="https://configcat.com/docs/main-concepts/#product" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Products.
 - name: Configs
-  description: "With these endpoints you can get useful information about your Configs.\n\
-    This also can be used to manage [Feature Flags and Settings](#tag/Feature-Flags-and-Settings)\
+  description: "With these endpoints you can manage your Configs.\nThis also can be\
+    \ used to manage [Feature Flags and Settings](#tag/Feature-Flags-and-Settings)\
     \ and their \n[served values](#tag/Feature-Flag-and-Setting-values) through this\
     \ API.\n\n<a href=\"https://configcat.com/docs/main-concepts/#config\" target=\"\
     _blank\" rel=\"noopener noreferrer\">Here</a> you can read more about the concept\
@@ -93,8 +103,12 @@ tags:
     \ ones into your selected [Product](#tag/Products). \n\n<a href=\"https://configcat.com/docs/main-concepts/#environment\"\
     \ target=\"_blank\" rel=\"noopener noreferrer\">Here</a> you can read more about\
     \ the concept of Environments."
+- name: SDK Keys
+  description: With these endpoints you can manage your SDK Keys.
 - name: Tags
-  description: With these endpoints you can manage your Tags.
+  description: With these endpoints you can manage Tags. Tags are stored under a Product.
+    You can  and add a Tag to a Feature Flag or Setting using the [Update Flag](#operation/update-setting)
+    endpoint.
 - name: Audit logs
   description: Access audit log entries.
 - name: Me
@@ -104,9 +118,9 @@ paths:
     get:
       tags:
       - Audit logs
-      summary: List Audit logs
-      description: "This endpoint returns the list of Audit logs for a given Product\
-        \ \nand the result can be optionally filtered by Config and/or Environment."
+      summary: List Audit log items for Product
+      description: "This endpoint returns the list of Audit log items for a given\
+        \ Product \nand the result can be optionally filtered by Config and/or Environment."
       operationId: get-auditlogs
       parameters:
       - name: productId
@@ -127,7 +141,6 @@ paths:
         schema:
           type: string
           format: uuid
-          nullable: true
       - name: environmentId
         in: query
         description: The identifier of the Environment.
@@ -137,7 +150,6 @@ paths:
         schema:
           type: string
           format: uuid
-          nullable: true
       - name: auditLogType
         in: query
         description: Filter Audit logs by Audit log type.
@@ -155,7 +167,6 @@ paths:
         schema:
           type: string
           format: date-time
-          nullable: true
       - name: toUtcDateTime
         in: query
         description: Filter Audit logs by ending UTC date.
@@ -165,7 +176,6 @@ paths:
         schema:
           type: string
           format: date-time
-          nullable: true
       responses:
         "200":
           content:
@@ -180,6 +190,144 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AuditLogItemModel'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+  /v1/organizations/{organizationId}/auditlogs:
+    get:
+      tags:
+      - Audit logs
+      summary: List Audit log items for Organization
+      description: "This endpoint returns the list of Audit log items for a given\
+        \ Organization \nand the result can be optionally filtered by Product and/or\
+        \ Config and/or Environment."
+      operationId: get-organization-auditlogs
+      parameters:
+      - name: organizationId
+        in: path
+        description: The identifier of the Organization.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: productId
+        in: query
+        description: The identifier of the Product.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: uuid
+      - name: configId
+        in: query
+        description: The identifier of the Config.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: uuid
+      - name: environmentId
+        in: query
+        description: The identifier of the Environment.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: uuid
+      - name: auditLogType
+        in: query
+        description: Filter Audit logs by Audit log type.
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/auditLogType_1'
+      - name: fromUtcDateTime
+        in: query
+        description: Filter Audit logs by starting UTC date.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      - name: toUtcDateTime
+        in: query
+        description: Filter Audit logs by ending UTC date.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuditLogItemModel'
+                x-content-type: application/json
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuditLogItemModel'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+  /v1/configs/{configId}/deleted-settings:
+    get:
+      tags:
+      - Audit logs
+      summary: List Deleted Settings
+      description: This endpoint returns the list of Feature Flags and Settings that
+        were deleted from the given Config.
+      operationId: get-deleted-settings
+      parameters:
+      - name: configId
+        in: path
+        description: The identifier of the Config.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SettingModel'
+                x-content-type: application/json
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SettingModel-haljson'
         "400":
           description: Bad request.
         "404":
@@ -709,7 +857,6 @@ paths:
         explode: true
         schema:
           type: string
-          nullable: true
       requestBody:
         content:
           application/json:
@@ -837,7 +984,6 @@ paths:
         explode: true
         schema:
           type: string
-          nullable: true
       requestBody:
         content:
           application/json-patch+json:
@@ -1067,6 +1213,63 @@ paths:
         "429":
           description: Too many requests. In case of the request rate exceeds the
             rate limits.
+  /v1/configs/{configId}/environments/{environmentId}/values:
+    get:
+      tags:
+      - Feature Flag & Setting values
+      summary: Get values
+      description: "This endpoint returns the value of a specified Config's Feature\
+        \ Flags or Settings identified by the `configId` parameter\nin a specified\
+        \ Environment identified by the `environmentId` parameter.\n\nThe most important\
+        \ attributes in the response are the `value`, `rolloutRules` and `percentageRules`.\n\
+        The `value` represents what the clients will get when the evaluation requests\
+        \ of our SDKs \nare not matching to any of the defined Targeting or Percentage\
+        \ Rules, or when there are no additional rules to evaluate.\n\nThe `rolloutRules`\
+        \ and `percentageRules` attributes are representing the current \nTargeting\
+        \ and Percentage Rules configuration of the actual Feature Flag or Setting\
+        \ \nin an **ordered** collection, which means the order of the returned rules\
+        \ is matching to the\nevaluation order. You can read more about these rules\
+        \ [here](https://configcat.com/docs/advanced/targeting/)."
+      operationId: get-setting-values
+      parameters:
+      - name: configId
+        in: path
+        description: The identifier of the Config.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: environmentId
+        in: path
+        description: The identifier of the Environment.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: When everything is ok, the setting values returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConfigSettingValuesModel'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/ConfigSettingValuesModel'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
   /v1/settings/{settingKeyOrId}/value:
     get:
       tags:
@@ -1098,7 +1301,7 @@ paths:
       - name: X-CONFIGCAT-SDKKEY
         in: header
         description: The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)
-        required: true
+        required: false
         style: simple
         explode: false
         schema:
@@ -1161,11 +1364,10 @@ paths:
         explode: true
         schema:
           type: string
-          nullable: true
       - name: X-CONFIGCAT-SDKKEY
         in: header
         description: The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)
-        required: true
+        required: false
         style: simple
         explode: false
         schema:
@@ -1289,11 +1491,10 @@ paths:
         explode: true
         schema:
           type: string
-          nullable: true
       - name: X-CONFIGCAT-SDKKEY
         in: header
         description: The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)
-        required: true
+        required: false
         style: simple
         explode: false
         schema:
@@ -1700,8 +1901,8 @@ paths:
         The advantage of using JSON Patch is that you can describe individual update\
         \ operations on a resource\nwithout touching attributes that you don't want\
         \ to change.\n\nFor example: We have the following resource.\n```\n{\n\t\"\
-        settingId\": 5345,\n\t\"key\": \"myAwesomeFeature\",\n\t\"name\": \"Tihs is\
-        \ a naem with soem typos.\",\n\t\"hint\": \"This Flag controls my awesome\
+        settingId\": 5345,\n\t\"key\": \"myGrandFeature\",\n\t\"name\": \"Tihs is\
+        \ a naem with soem typos.\",\n\t\"hint\": \"This flag controls my grandioso\
         \ feature.\",\n\t\"settingType\": \"boolean\",\n\t\"tags\": [\n\t\t{\n\t\t\
         \t\"tagId\": 0,\n\t\t\t\"name\": \"sample tag\",\n\t\t\t\"color\": \"whale\"\
         \n\t\t}\n\t]\n}\n```\nIf we send an update request body as below (it changes\
@@ -1711,8 +1912,8 @@ paths:
         : \"/tags/-\",\n\t\t\"value\": 2\n\t}\n]\n```\nOnly the `name` and `tags`\
         \ are going to be updated and all the other attributes are remaining unchanged.\n\
         So we get a response like this:\n```\n{\n\t\"settingId\": 5345,\n\t\"key\"\
-        : \"myAwesomeFeature\",\n\t\"name\": \"This is the name without typos.\",\n\
-        \t\"hint\": \"This Flag controls my awesome feature.\",\n\t\"settingType\"\
+        : \"myGrandFeature\",\n\t\"name\": \"This is the name without typos.\",\n\t\
+        \"hint\": \"This flag controls my grandioso feature.\",\n\t\"settingType\"\
         : \"boolean\",\n\t\"tags\": [\n\t\t{\n\t\t\t\"tagId\": 0,\n\t\t\t\"name\"\
         : \"sample tag\",\n\t\t\t\"color\": \"whale\"\n\t\t},\n\t\t{\n\t\t\t\"tagId\"\
         : 2,\n\t\t\t\"name\": \"another tag\",\n\t\t\t\"color\": \"koala\"\n\t\t}\n\
@@ -1968,6 +2169,211 @@ paths:
         "429":
           description: Too many requests. In case of the request rate exceeds the
             rate limits.
+  /v1/organizations/{organizationId}/members:
+    get:
+      tags:
+      - Members
+      summary: List Organization Members
+      description: "This endpoint returns the list of Members that belongs \nto the\
+        \ given Organization, identified by the `organizationId` parameter."
+      operationId: get-organization-members
+      parameters:
+      - name: organizationId
+        in: path
+        description: The identifier of the Organization.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserModel'
+                x-content-type: application/json
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserModel'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+  /v1/products/{productId}/members:
+    get:
+      tags:
+      - Members
+      summary: List Product Members
+      description: "This endpoint returns the list of Members that belongs \nto the\
+        \ given Product, identified by the `productId` parameter."
+      operationId: get-product-members
+      parameters:
+      - name: productId
+        in: path
+        description: The identifier of the Product.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MemberModel'
+                x-content-type: application/json
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MemberModel'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+  /v1/organizations/{organizationId}/members/{userId}:
+    delete:
+      tags:
+      - Members
+      summary: Delete Member from Organization
+      description: "This endpoint removes a Member identified by the `userId` from\
+        \ the \ngiven Organization identified by the `organizationId` parameter."
+      operationId: delete-organization-member
+      parameters:
+      - name: organizationId
+        in: path
+        description: The identifier of the Organization.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: userId
+        in: path
+        description: The identifier of the Member.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: When the delete was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+  /v1/products/{productId}/members/{userId}:
+    delete:
+      tags:
+      - Members
+      summary: Delete Member from Product
+      description: "This endpoint removes a Member identified by the `userId` from\
+        \ the \ngiven Product identified by the `productId` parameter."
+      operationId: delete-product-member
+      parameters:
+      - name: productId
+        in: path
+        description: The identifier of the Product.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: userId
+        in: path
+        description: The identifier of the Member.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: When the delete was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+  /v1/products/{productId}/members/invite:
+    post:
+      tags:
+      - Members
+      summary: Invite Member
+      description: This endpoint invites a Member into the given Product identified
+        by the `productId` parameter.
+      operationId: invite-member
+      parameters:
+      - name: productId
+        in: path
+        description: The identifier of the Product.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InviteMembersRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/InviteMembersRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/InviteMembersRequest'
+        required: true
+      responses:
+        "200":
+          description: When the invite was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
   /v1/organizations:
     get:
       tags:
@@ -1990,6 +2396,215 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/OrganizationModel-haljson'
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+  /v1/products/{productId}/permissions:
+    get:
+      tags:
+      - Permission Groups
+      summary: List Permission Groups
+      description: |-
+        This endpoint returns the list of the Permission Groups that belongs to the given Product identified by the
+        `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
+      operationId: get-permission-groups
+      parameters:
+      - name: productId
+        in: path
+        description: The identifier of the Product.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PermissionGroupModel'
+                x-content-type: application/json
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PermissionGroupModel'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+    post:
+      tags:
+      - Permission Groups
+      summary: Create Permission Group
+      description: "This endpoint creates a new Permission Group in a specified Product\
+        \ \nidentified by the `productId` parameter, which can be obtained from the\
+        \ [List Products](#operation/get-products) endpoint."
+      operationId: create-permission-group
+      parameters:
+      - name: productId
+        in: path
+        description: The identifier of the Product.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePermissionGroupRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreatePermissionGroupRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreatePermissionGroupRequest'
+        required: true
+      responses:
+        "201":
+          description: When the creation was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionGroupModel'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PermissionGroupModel'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+  /v1/permissions/{permissionGroupId}:
+    get:
+      tags:
+      - Permission Groups
+      summary: Get Permission Group
+      description: "This endpoint returns the metadata of a Permission Group \nidentified\
+        \ by the `permissionGroupId`."
+      operationId: get-permission-group
+      parameters:
+      - name: permissionGroupId
+        in: path
+        description: The identifier of the Permission Group.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: When everything is ok, the permission group data returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionGroupModel'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PermissionGroupModel'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+    put:
+      tags:
+      - Permission Groups
+      summary: Update Permission Group
+      description: This endpoint updates a Permission Group identified by the `permissionGroupId`
+        parameter.
+      operationId: update-permission-group
+      parameters:
+      - name: permissionGroupId
+        in: path
+        description: The identifier of the Permission Group.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePermissionGroupRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePermissionGroupRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdatePermissionGroupRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PermissionGroupModel'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PermissionGroupModel'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+    delete:
+      tags:
+      - Permission Groups
+      summary: Delete Permission Group
+      description: This endpoint removes a Permission Group identified by the `permissionGroupId`
+        parameter.
+      operationId: delete-permission-group
+      parameters:
+      - name: permissionGroupId
+        in: path
+        description: The identifier of the Permission Group.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "204":
+          description: When the delete was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
         "401":
           description: Unauthorized. In case of the Public Management API credentials
             are invalid.
@@ -2189,6 +2804,52 @@ paths:
         "429":
           description: Too many requests. In case of the request rate exceeds the
             rate limits.
+  /v1/configs/{configId}/environments/{environmentId}:
+    get:
+      tags:
+      - SDK Keys
+      summary: Get SDK Key
+      description: This endpoint returns the SDK Key for your Config in a specified
+        Environment.
+      operationId: get-sdk-keys
+      parameters:
+      - name: configId
+        in: path
+        description: The identifier of the Config.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: environmentId
+        in: path
+        description: The identifier of the Environment.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SdkKeysModel'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SdkKeysModel'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
   /v1/products/{productId}/tags:
     get:
       tags:
@@ -2366,7 +3027,9 @@ paths:
       tags:
       - Tags
       summary: Delete Tag
-      description: This endpoint removes a Tag identified by the `tagId` parameter.
+      description: This endpoint deletes a Tag identified by the `tagId` parameter.
+        To remove a Tag from a Feature Flag or Setting use the [Update Flag](#operation/update-setting)
+        endpoint.
       operationId: delete-tag
       parameters:
       - name: tagId
@@ -2391,64 +3054,69 @@ paths:
         "429":
           description: Too many requests. In case of the request rate exceeds the
             rate limits.
+  /v1/tags/{tagId}/settings:
+    get:
+      tags:
+      - Tags
+      summary: List Settings by Tag
+      description: "This endpoint returns the list of the Settings that \nhas the\
+        \ specified Tag, identified by the `tagId` parameter."
+      operationId: get-settings-by-tag
+      parameters:
+      - name: tagId
+        in: path
+        description: The identifier of the Tag.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: When everything is ok, the settings data returned.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SettingModel'
+                x-content-type: application/json
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SettingModel-haljson'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
 components:
   schemas:
-    AuditLogType:
+    AccessType:
       type: string
       enum:
-      - productCreated
-      - productChanged
-      - productOwnershipTransferred
-      - productDeleted
-      - teamMemberInvited
-      - teamMemberInvitationRevoked
-      - teamMemberJoined
-      - teamMemberPermissionGroupChanged
-      - teamMemberRemoved
-      - teamMemberLeft
-      - teamMemberInvitationChanged
-      - teamMemberInvitationResent
-      - teamMemberInvitationRejected
-      - configCreated
-      - configChanged
-      - configDeleted
-      - environmentCreated
-      - environmentChanged
-      - environmentDeleted
-      - settingCreated
-      - settingChanged
-      - settingDeleted
-      - settingValueChanged
-      - webHookCreated
-      - webHookChanged
-      - webHookDeleted
-      - subscriptionChanged
-      - memberGroupCreated
-      - memberGroupChanged
-      - memberGroupDeleted
-      - apiKeyAdded
-      - apiKeyRemoved
-      - integrationAdded
-      - integrationChanged
-      - integrationRemoved
-      - apiKeyConnected
-      - integrationLinkAdded
-      - integrationLinkRemoved
-      - organizationAdded
-      - organizationRemoved
-      - organizationChanged
-      - organizationSubscriptionTypeChanged
-      - organizationAdminAdded
-      - organizationAdminChanged
-      - organizationAdminRemoved
-      - organizationAdminLeft
-      - tagAdded
-      - tagChanged
-      - tagRemoved
-      - settingTagAdded
-      - settingTagRemoved
-      - publicApiAccessTokenAdded
-      - publicApiAccessTokenRemoved
+      - readOnly
+      - full
+      - custom
+    AddOrUpdateIntegrationLinkModel:
+      type: object
+      properties:
+        description:
+          maxLength: 1000
+          type: string
+          nullable: true
+        url:
+          maxLength: 1000
+          type: string
+          nullable: true
+      additionalProperties: false
     AuditLogItemModel:
       type: object
       properties:
@@ -2490,17 +3158,851 @@ components:
         details: details
         actionTarget: actionTarget
         userName: userName
-    OrganizationModel-haljson:
+    AuditLogType:
+      type: string
+      enum:
+      - productCreated
+      - productChanged
+      - productOwnershipTransferred
+      - productDeleted
+      - teamMemberInvited
+      - teamMemberInvitationRevoked
+      - teamMemberJoined
+      - teamMemberPermissionGroupChanged
+      - teamMemberRemoved
+      - teamMemberLeft
+      - teamMemberInvitationChanged
+      - teamMemberInvitationResent
+      - teamMemberInvitationRejected
+      - configCreated
+      - configChanged
+      - configDeleted
+      - environmentCreated
+      - environmentChanged
+      - environmentDeleted
+      - settingCreated
+      - settingChanged
+      - settingDeleted
+      - settingValueChanged
+      - webHookCreated
+      - webHookChanged
+      - webHookDeleted
+      - subscriptionChanged
+      - permissionGroupCreated
+      - permissionGroupChanged
+      - permissionGroupDeleted
+      - permissionGroupDefault
+      - apiKeyAdded
+      - apiKeyRemoved
+      - integrationAdded
+      - integrationChanged
+      - integrationRemoved
+      - apiKeyConnected
+      - integrationLinkAdded
+      - integrationLinkRemoved
+      - organizationAdded
+      - organizationRemoved
+      - organizationChanged
+      - organizationSubscriptionTypeChanged
+      - organizationAdminAdded
+      - organizationAdminChanged
+      - organizationAdminRemoved
+      - organizationAdminLeft
+      - organizationAdminDisabled2FA
+      - tagAdded
+      - tagChanged
+      - tagRemoved
+      - settingTagAdded
+      - settingTagRemoved
+      - publicApiAccessTokenAdded
+      - publicApiAccessTokenRemoved
+      - domainAdded
+      - domainVerified
+      - domainRemoved
+      - domainSamlConfigured
+      - domainSamlDeleted
+      - autoProvisioningConfigurationChanged
+      - organizationMemberJoined
+      - organizationMemberProductJoinRequested
+      - organizationMemberProductJoinRequestRejected
+      - organizationMemberProductJoinRequestApproved
+    ConfigModel:
       type: object
       properties:
-        organizationId:
+        product:
+          $ref: '#/components/schemas/ProductModel'
+        configId:
           type: string
           format: uuid
         name:
           type: string
           nullable: true
+        description:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        product:
+          productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          organization:
+            organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+          name: name
+          description: description
+        configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        description: description
+    ConfigModel-haljson:
+      type: object
+      properties:
+        _embedded:
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded'
+        configId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
         _links:
-          $ref: '#/components/schemas/OrganizationModelhaljson__links'
+          $ref: '#/components/schemas/ConfigModelhaljson__links'
+    ConfigSettingValueModel:
+      type: object
+      properties:
+        setting:
+          $ref: '#/components/schemas/SettingDataModel'
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+        lastUpdaterUserEmail:
+          type: string
+          nullable: true
+        lastUpdaterUserFullName:
+          type: string
+          nullable: true
+        integrationLinks:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/IntegrationLinkModel'
+        settingTags:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SettingTagModel'
+        rolloutRules:
+          type: array
+          description: The targeting rule collection.
+          nullable: true
+          items:
+            $ref: '#/components/schemas/RolloutRuleModel'
+        rolloutPercentageItems:
+          type: array
+          description: The percentage rule collection.
+          nullable: true
+          items:
+            $ref: '#/components/schemas/RolloutPercentageItemModel'
+        value:
+          description: The value to serve. It must respect the setting type.
+          nullable: true
+      additionalProperties: false
+      example:
+        rolloutRules:
+        - comparator: isOneOf
+          comparisonValue: comparisonValue
+          value: ""
+          comparisonAttribute: comparisonAttribute
+        - comparator: isOneOf
+          comparisonValue: comparisonValue
+          value: ""
+          comparisonAttribute: comparisonAttribute
+        rolloutPercentageItems:
+        - percentage: 5
+          value: ""
+        - percentage: 5
+          value: ""
+        lastUpdaterUserEmail: lastUpdaterUserEmail
+        integrationLinks:
+        - integrationLinkType: trello
+          description: description
+          key: key
+          url: url
+        - integrationLinkType: trello
+          description: description
+          key: key
+          url: url
+        value: ""
+        settingTags:
+        - color: color
+          tagId: 1
+          name: name
+          settingTagId: 6
+        - color: color
+          tagId: 1
+          name: name
+          settingTagId: 6
+        setting:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          ownerFullName: ownerFullName
+          creatorEmail: creatorEmail
+          hint: hint
+          name: name
+          creatorFullName: creatorFullName
+          isWatching: true
+          expirationWarningAt: 2000-01-23T04:56:07.000+00:00
+          settingType: boolean
+          key: key
+          settingId: 0
+          ownerEmail: ownerEmail
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+        lastUpdaterUserFullName: lastUpdaterUserFullName
+    ConfigSettingValuesModel:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/ConfigModel'
+        environment:
+          $ref: '#/components/schemas/EnvironmentModel'
+        readOnly:
+          type: boolean
+        settingValues:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/ConfigSettingValueModel'
+      additionalProperties: false
+      example:
+        environment:
+          product:
+            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            organization:
+              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+            name: name
+            description: description
+          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          color: color
+          name: name
+          description: description
+        readOnly: true
+        settingValues:
+        - rolloutRules:
+          - comparator: isOneOf
+            comparisonValue: comparisonValue
+            value: ""
+            comparisonAttribute: comparisonAttribute
+          - comparator: isOneOf
+            comparisonValue: comparisonValue
+            value: ""
+            comparisonAttribute: comparisonAttribute
+          rolloutPercentageItems:
+          - percentage: 5
+            value: ""
+          - percentage: 5
+            value: ""
+          lastUpdaterUserEmail: lastUpdaterUserEmail
+          integrationLinks:
+          - integrationLinkType: trello
+            description: description
+            key: key
+            url: url
+          - integrationLinkType: trello
+            description: description
+            key: key
+            url: url
+          value: ""
+          settingTags:
+          - color: color
+            tagId: 1
+            name: name
+            settingTagId: 6
+          - color: color
+            tagId: 1
+            name: name
+            settingTagId: 6
+          setting:
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            ownerFullName: ownerFullName
+            creatorEmail: creatorEmail
+            hint: hint
+            name: name
+            creatorFullName: creatorFullName
+            isWatching: true
+            expirationWarningAt: 2000-01-23T04:56:07.000+00:00
+            settingType: boolean
+            key: key
+            settingId: 0
+            ownerEmail: ownerEmail
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          lastUpdaterUserFullName: lastUpdaterUserFullName
+        - rolloutRules:
+          - comparator: isOneOf
+            comparisonValue: comparisonValue
+            value: ""
+            comparisonAttribute: comparisonAttribute
+          - comparator: isOneOf
+            comparisonValue: comparisonValue
+            value: ""
+            comparisonAttribute: comparisonAttribute
+          rolloutPercentageItems:
+          - percentage: 5
+            value: ""
+          - percentage: 5
+            value: ""
+          lastUpdaterUserEmail: lastUpdaterUserEmail
+          integrationLinks:
+          - integrationLinkType: trello
+            description: description
+            key: key
+            url: url
+          - integrationLinkType: trello
+            description: description
+            key: key
+            url: url
+          value: ""
+          settingTags:
+          - color: color
+            tagId: 1
+            name: name
+            settingTagId: 6
+          - color: color
+            tagId: 1
+            name: name
+            settingTagId: 6
+          setting:
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            ownerFullName: ownerFullName
+            creatorEmail: creatorEmail
+            hint: hint
+            name: name
+            creatorFullName: creatorFullName
+            isWatching: true
+            expirationWarningAt: 2000-01-23T04:56:07.000+00:00
+            settingType: boolean
+            key: key
+            settingId: 0
+            ownerEmail: ownerEmail
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          lastUpdaterUserFullName: lastUpdaterUserFullName
+        config:
+          product:
+            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            organization:
+              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+            name: name
+            description: description
+          configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          description: description
+    CreateConfigRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+        description:
+          maxLength: 1000
+          minLength: 0
+          type: string
+          nullable: true
+      additionalProperties: false
+    CreateEnvironmentModel:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+        color:
+          maxLength: 255
+          minLength: 0
+          type: string
+          nullable: true
+        description:
+          maxLength: 1000
+          minLength: 0
+          type: string
+          nullable: true
+      additionalProperties: false
+    CreatePermissionGroupRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+        canManageMembers:
+          type: boolean
+        canCreateOrUpdateConfig:
+          type: boolean
+        canDeleteConfig:
+          type: boolean
+        canCreateOrUpdateEnvironment:
+          type: boolean
+        canDeleteEnvironment:
+          type: boolean
+        canCreateOrUpdateSetting:
+          type: boolean
+        canTagSetting:
+          type: boolean
+        canDeleteSetting:
+          type: boolean
+        canCreateOrUpdateTag:
+          type: boolean
+        canDeleteTag:
+          type: boolean
+        canManageWebhook:
+          type: boolean
+        canUseExportImport:
+          type: boolean
+        canManageProductPreferences:
+          type: boolean
+        canManageIntegrations:
+          type: boolean
+        canViewSdkKey:
+          type: boolean
+        canRotateSdkKey:
+          type: boolean
+        canViewProductStatistics:
+          type: boolean
+        canViewProductAuditLog:
+          type: boolean
+        accessType:
+          $ref: '#/components/schemas/AccessType'
+        newEnvironmentAccessType:
+          $ref: '#/components/schemas/EnvironmentAccessType'
+        environmentAccesses:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/EnvironmentAccessModel'
+      additionalProperties: false
+    CreateProductRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 1000
+          minLength: 0
+          type: string
+        description:
+          maxLength: 1000
+          minLength: 0
+          type: string
+          nullable: true
+      additionalProperties: false
+    CreateSettingModel:
+      required:
+      - key
+      - name
+      - settingType
+      type: object
+      properties:
+        key:
+          maxLength: 255
+          minLength: 0
+          pattern: ^[a-zA-Z]+[a-zA-Z0-9_]*
+          type: string
+          description: The key of the setting.
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+          description: The name of the setting, shown on the Dashboard UI.
+        settingType:
+          $ref: '#/components/schemas/SettingType'
+        hint:
+          maxLength: 1000
+          minLength: 0
+          type: string
+          description: A short description for the setting, shown on the Dashboard
+            UI.
+          nullable: true
+        tags:
+          type: array
+          description: The IDs of the tags which are attached to the setting.
+          nullable: true
+          items:
+            type: integer
+            format: int64
+      additionalProperties: false
+    CreateTagModel:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+        color:
+          maxLength: 255
+          minLength: 0
+          type: string
+          nullable: true
+      additionalProperties: false
+    DeleteIntegrationLinkModel:
+      type: object
+      properties:
+        hasRemainingIntegrationLink:
+          type: boolean
+      additionalProperties: false
+      example:
+        hasRemainingIntegrationLink: true
+    EnvironmentAccessModel:
+      type: object
+      properties:
+        environmentId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        color:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        environmentAccessType:
+          $ref: '#/components/schemas/EnvironmentAccessType'
+      additionalProperties: false
+      example:
+        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        color: color
+        environmentAccessType: null
+        name: name
+        description: description
+    EnvironmentAccessType:
+      type: string
+      enum:
+      - full
+      - readOnly
+      - none
+    EnvironmentModel:
+      type: object
+      properties:
+        product:
+          $ref: '#/components/schemas/ProductModel'
+        environmentId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        color:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        product:
+          productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          organization:
+            organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+          name: name
+          description: description
+        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        color: color
+        name: name
+        description: description
+    EnvironmentModel-haljson:
+      type: object
+      properties:
+        _embedded:
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded'
+        environmentId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        color:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        _links:
+          $ref: '#/components/schemas/EnvironmentModelhaljson__links'
+    IntegrationLinkDetail:
+      type: object
+      properties:
+        product:
+          $ref: '#/components/schemas/ProductModel'
+        config:
+          $ref: '#/components/schemas/ConfigModel'
+        environment:
+          $ref: '#/components/schemas/EnvironmentModel'
+        setting:
+          $ref: '#/components/schemas/SettingDataModel'
+        readOnly:
+          type: boolean
+        status:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        product:
+          productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          organization:
+            organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+          name: name
+          description: description
+        environment:
+          product:
+            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            organization:
+              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+            name: name
+            description: description
+          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          color: color
+          name: name
+          description: description
+        readOnly: true
+        config:
+          product:
+            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            organization:
+              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+            name: name
+            description: description
+          configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          description: description
+        setting:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          ownerFullName: ownerFullName
+          creatorEmail: creatorEmail
+          hint: hint
+          name: name
+          creatorFullName: creatorFullName
+          isWatching: true
+          expirationWarningAt: 2000-01-23T04:56:07.000+00:00
+          settingType: boolean
+          key: key
+          settingId: 0
+          ownerEmail: ownerEmail
+        status: status
+    IntegrationLinkDetailsModel:
+      type: object
+      properties:
+        details:
+          type: array
+          nullable: true
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/IntegrationLinkDetail'
+        allIntegrationLinkCount:
+          type: integer
+          format: int32
+      additionalProperties: false
+      example:
+        allIntegrationLinkCount: 0
+        details:
+        - product:
+            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            organization:
+              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+            name: name
+            description: description
+          environment:
+            product:
+              productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              organization:
+                organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                name: name
+              name: name
+              description: description
+            environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            color: color
+            name: name
+            description: description
+          readOnly: true
+          config:
+            product:
+              productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              organization:
+                organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                name: name
+              name: name
+              description: description
+            configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            description: description
+          setting:
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            ownerFullName: ownerFullName
+            creatorEmail: creatorEmail
+            hint: hint
+            name: name
+            creatorFullName: creatorFullName
+            isWatching: true
+            expirationWarningAt: 2000-01-23T04:56:07.000+00:00
+            settingType: boolean
+            key: key
+            settingId: 0
+            ownerEmail: ownerEmail
+          status: status
+        - product:
+            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            organization:
+              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+            name: name
+            description: description
+          environment:
+            product:
+              productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              organization:
+                organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                name: name
+              name: name
+              description: description
+            environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            color: color
+            name: name
+            description: description
+          readOnly: true
+          config:
+            product:
+              productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              organization:
+                organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                name: name
+              name: name
+              description: description
+            configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+            description: description
+          setting:
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            ownerFullName: ownerFullName
+            creatorEmail: creatorEmail
+            hint: hint
+            name: name
+            creatorFullName: creatorFullName
+            isWatching: true
+            expirationWarningAt: 2000-01-23T04:56:07.000+00:00
+            settingType: boolean
+            key: key
+            settingId: 0
+            ownerEmail: ownerEmail
+          status: status
+    IntegrationLinkModel:
+      type: object
+      properties:
+        key:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        integrationLinkType:
+          $ref: '#/components/schemas/IntegrationLinkType'
+        url:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        integrationLinkType: trello
+        description: description
+        key: key
+        url: url
+    IntegrationLinkType:
+      type: string
+      enum:
+      - trello
+      - jira
+    InviteMembersRequest:
+      required:
+      - emails
+      - permissionGroupId
+      type: object
+      properties:
+        emails:
+          type: array
+          items:
+            type: string
+        permissionGroupId:
+          type: integer
+          format: int64
+      additionalProperties: false
+    MemberModel:
+      type: object
+      properties:
+        userId:
+          type: string
+          nullable: true
+        productId:
+          type: string
+          format: uuid
+        permissionGroupId:
+          type: integer
+          format: int64
+        fullName:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        permissionGroupId: 0
+        productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        fullName: fullName
+        userId: userId
+        email: email
+    MeModel:
+      type: object
+      properties:
+        email:
+          type: string
+          nullable: true
+          readOnly: true
+        fullName:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+      example:
+        fullName: fullName
+        email: email
+    Operation:
+      type: object
+      properties:
+        value:
+          nullable: true
+        path:
+          type: string
+          nullable: true
+        op:
+          type: string
+          nullable: true
+        from:
+          type: string
+          nullable: true
+      additionalProperties: false
     OrganizationModel:
       type: object
       properties:
@@ -2514,19 +4016,115 @@ components:
       example:
         organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         name: name
-    ProductModel-haljson:
+    OrganizationModel-haljson:
       type: object
       properties:
-        _embedded:
-          $ref: '#/components/schemas/ProductModelhaljson__embedded'
-        productId:
+        organizationId:
           type: string
           format: uuid
         name:
           type: string
           nullable: true
         _links:
-          $ref: '#/components/schemas/ProductModelhaljson__links'
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded_product__embedded_organization__links'
+    PermissionGroupModel:
+      type: object
+      properties:
+        permissionGroupId:
+          type: integer
+          format: int64
+        name:
+          type: string
+          nullable: true
+        canManageMembers:
+          type: boolean
+        canCreateOrUpdateConfig:
+          type: boolean
+          readOnly: true
+        canDeleteConfig:
+          type: boolean
+          readOnly: true
+        canCreateOrUpdateEnvironment:
+          type: boolean
+          readOnly: true
+        canDeleteEnvironment:
+          type: boolean
+          readOnly: true
+        canCreateOrUpdateSetting:
+          type: boolean
+          readOnly: true
+        canTagSetting:
+          type: boolean
+          readOnly: true
+        canDeleteSetting:
+          type: boolean
+          readOnly: true
+        canCreateOrUpdateTag:
+          type: boolean
+          readOnly: true
+        canDeleteTag:
+          type: boolean
+          readOnly: true
+        canManageWebhook:
+          type: boolean
+          readOnly: true
+        canUseExportImport:
+          type: boolean
+          readOnly: true
+        canManageProductPreferences:
+          type: boolean
+          readOnly: true
+        canManageIntegrations:
+          type: boolean
+          readOnly: true
+        canViewSdkKey:
+          type: boolean
+          readOnly: true
+        canRotateSdkKey:
+          type: boolean
+          readOnly: true
+        accessType:
+          $ref: '#/components/schemas/AccessType'
+        newEnvironmentAccessType:
+          $ref: '#/components/schemas/EnvironmentAccessType'
+        environmentAccesses:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/EnvironmentAccessModel'
+      additionalProperties: false
+      example:
+        permissionGroupId: 0
+        canDeleteConfig: true
+        canDeleteTag: true
+        environmentAccesses:
+        - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          color: color
+          environmentAccessType: null
+          name: name
+          description: description
+        - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          color: color
+          environmentAccessType: null
+          name: name
+          description: description
+        canDeleteEnvironment: true
+        canCreateOrUpdateConfig: true
+        canManageProductPreferences: true
+        canManageIntegrations: true
+        accessType: readOnly
+        canTagSetting: true
+        canManageMembers: true
+        canManageWebhook: true
+        canUseExportImport: true
+        canViewSdkKey: true
+        canCreateOrUpdateEnvironment: true
+        canDeleteSetting: true
+        name: name
+        canRotateSdkKey: true
+        canCreateOrUpdateTag: true
+        newEnvironmentAccessType: full
+        canCreateOrUpdateSetting: true
     ProductModel:
       type: object
       properties:
@@ -2538,6 +4136,9 @@ components:
         name:
           type: string
           nullable: true
+        description:
+          type: string
+          nullable: true
       additionalProperties: false
       example:
         productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -2545,119 +4146,102 @@ components:
           organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name
         name: name
-    ConfigModel-haljson:
+        description: description
+    ProductModel-haljson:
       type: object
       properties:
         _embedded:
-          $ref: '#/components/schemas/ConfigModelhaljson__embedded'
-        configId:
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded_product__embedded'
+        productId:
           type: string
           format: uuid
         name:
+          type: string
+          nullable: true
+        description:
           type: string
           nullable: true
         _links:
-          $ref: '#/components/schemas/ConfigModelhaljson__links'
-    ConfigModel:
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded_product__links'
+    RolloutPercentageItemModel:
+      required:
+      - percentage
       type: object
       properties:
-        product:
-          $ref: '#/components/schemas/ProductModel'
-        configId:
-          type: string
-          format: uuid
-        name:
-          type: string
+        percentage:
+          type: integer
+          description: The percentage value for the rule.
+          format: int64
+        value:
+          description: The value to serve when the user falls in the percentage rule.
+            It must respect the setting type.
           nullable: true
       additionalProperties: false
       example:
-        product:
-          productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          organization:
-            organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            name: name
-          name: name
-        configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        name: name
-    CreateConfigRequest:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          maxLength: 255
-          minLength: 0
-          type: string
-      additionalProperties: false
-    UpdateConfigRequest:
-      type: object
-      properties:
-        name:
-          maxLength: 255
-          minLength: 0
-          type: string
-          nullable: true
-      additionalProperties: false
-    EnvironmentModel-haljson:
-      type: object
-      properties:
-        _embedded:
-          $ref: '#/components/schemas/ConfigModelhaljson__embedded'
-        environmentId:
-          type: string
-          format: uuid
-        name:
-          type: string
-          nullable: true
-        _links:
-          $ref: '#/components/schemas/EnvironmentModelhaljson__links'
-    EnvironmentModel:
-      type: object
-      properties:
-        product:
-          $ref: '#/components/schemas/ProductModel'
-        environmentId:
-          type: string
-          format: uuid
-        name:
-          type: string
-          nullable: true
-      additionalProperties: false
-      example:
-        product:
-          productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          organization:
-            organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            name: name
-          name: name
-        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        name: name
-    CreateEnvironmentModel:
-      required:
-      - name
-      type: object
-      properties:
-        name:
-          maxLength: 255
-          minLength: 0
-          type: string
-      additionalProperties: false
-    UpdateEnvironmentModel:
-      type: object
-      properties:
-        name:
-          maxLength: 255
-          minLength: 0
-          type: string
-          nullable: true
-      additionalProperties: false
-    SettingType:
+        percentage: 5
+        value: ""
+    RolloutRuleComparator:
       type: string
       enum:
-      - boolean
-      - string
-      - int
-      - double
+      - isOneOf
+      - isNotOneOf
+      - contains
+      - doesNotContain
+      - semVerIsOneOf
+      - semVerIsNotOneOf
+      - semVerLess
+      - semVerLessOrEquals
+      - semVerGreater
+      - semVerGreaterOrEquals
+      - numberEquals
+      - numberDoesNotEqual
+      - numberLess
+      - numberLessOrEquals
+      - numberGreater
+      - numberGreaterOrEquals
+      - sensitiveIsOneOf
+      - sensitiveIsNotOneOf
+    RolloutRuleModel:
+      required:
+      - comparisonAttribute
+      - comparisonValue
+      type: object
+      properties:
+        comparisonAttribute:
+          maxLength: 1000
+          minLength: 0
+          type: string
+          description: The user attribute to compare.
+        comparator:
+          $ref: '#/components/schemas/RolloutRuleComparator'
+        comparisonValue:
+          maxLength: 65535
+          minLength: 0
+          type: string
+          description: The value to compare against.
+        value:
+          description: The value to serve when the comparison matches. It must respect
+            the setting type.
+          nullable: true
+      additionalProperties: false
+      example:
+        comparator: isOneOf
+        comparisonValue: comparisonValue
+        value: ""
+        comparisonAttribute: comparisonAttribute
+    SdkKeysModel:
+      type: object
+      properties:
+        primary:
+          type: string
+          nullable: true
+        secondary:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        secondary: secondary
+        primary: primary
     SettingDataModel:
       type: object
       properties:
@@ -2702,6 +4286,8 @@ components:
           type: string
           format: date-time
           nullable: true
+        isWatching:
+          type: boolean
       additionalProperties: false
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -2710,405 +4296,12 @@ components:
         hint: hint
         name: name
         creatorFullName: creatorFullName
+        isWatching: true
         expirationWarningAt: 2000-01-23T04:56:07.000+00:00
         settingType: boolean
         key: key
         settingId: 0
         ownerEmail: ownerEmail
-    IntegrationLinkType:
-      type: string
-      enum:
-      - trello
-      - jira
-    IntegrationLinkModel:
-      type: object
-      properties:
-        key:
-          type: string
-          nullable: true
-        description:
-          type: string
-          nullable: true
-        integrationLinkType:
-          $ref: '#/components/schemas/IntegrationLinkType'
-        url:
-          type: string
-          nullable: true
-      additionalProperties: false
-      example:
-        integrationLinkType: trello
-        description: description
-        key: key
-        url: url
-    SettingTagModel:
-      type: object
-      properties:
-        settingTagId:
-          type: integer
-          format: int64
-        tagId:
-          type: integer
-          format: int64
-        name:
-          type: string
-          nullable: true
-        color:
-          type: string
-          nullable: true
-      additionalProperties: false
-      example:
-        color: color
-        tagId: 1
-        name: name
-        settingTagId: 6
-    RolloutRuleComparator:
-      type: string
-      enum:
-      - isOneOf
-      - isNotOneOf
-      - contains
-      - doesNotContain
-      - semVerIsOneOf
-      - semVerIsNotOneOf
-      - semVerLess
-      - semVerLessOrEquals
-      - semVerGreater
-      - semVerGreaterOrEquals
-      - numberEquals
-      - numberDoesNotEqual
-      - numberLess
-      - numberLessOrEquals
-      - numberGreater
-      - numberGreaterOrEquals
-      - sensitiveIsOneOf
-      - sensitiveIsNotOneOf
-    RolloutRuleModel:
-      required:
-      - comparisonAttribute
-      - comparisonValue
-      - value
-      type: object
-      properties:
-        comparisonAttribute:
-          maxLength: 1000
-          minLength: 0
-          type: string
-          description: The user attribute to compare.
-        comparator:
-          $ref: '#/components/schemas/RolloutRuleComparator'
-        comparisonValue:
-          maxLength: 65535
-          minLength: 0
-          type: string
-          description: The value to compare against.
-        value:
-          type: object
-          additionalProperties: false
-          description: The value to serve when the comparison matches. It must respect
-            the setting type.
-      additionalProperties: false
-      example:
-        comparator: isOneOf
-        comparisonValue: comparisonValue
-        value: {}
-        comparisonAttribute: comparisonAttribute
-    RolloutPercentageItemModel:
-      required:
-      - percentage
-      - value
-      type: object
-      properties:
-        percentage:
-          type: integer
-          description: The percentage value for the rule.
-          format: int64
-        value:
-          type: object
-          additionalProperties: false
-          description: The value to serve when the user falls in the percentage rule.
-            It must respect the setting type.
-      additionalProperties: false
-      example:
-        percentage: 5
-        value: {}
-    SettingValueModel-haljson:
-      type: object
-      properties:
-        readOnly:
-          type: boolean
-        updatedAt:
-          type: string
-          format: date-time
-          nullable: true
-        lastUpdaterUserEmail:
-          type: string
-          nullable: true
-        lastUpdaterUserFullName:
-          type: string
-          nullable: true
-        _embedded:
-          $ref: '#/components/schemas/SettingValueModelhaljson__embedded'
-        rolloutRules:
-          type: array
-          description: The targeting rule collection.
-          nullable: true
-          items:
-            $ref: '#/components/schemas/RolloutRuleModel'
-        rolloutPercentageItems:
-          type: array
-          description: The percentage rule collection.
-          nullable: true
-          items:
-            $ref: '#/components/schemas/RolloutPercentageItemModel'
-        value:
-          type: object
-          additionalProperties: false
-          description: The value to serve. It must respect the setting type.
-          nullable: true
-        _links:
-          $ref: '#/components/schemas/EnvironmentModelhaljson__links'
-    SettingValueModel:
-      type: object
-      properties:
-        config:
-          $ref: '#/components/schemas/ConfigModel'
-        environment:
-          $ref: '#/components/schemas/EnvironmentModel'
-        readOnly:
-          type: boolean
-        setting:
-          $ref: '#/components/schemas/SettingDataModel'
-        updatedAt:
-          type: string
-          format: date-time
-          nullable: true
-        lastUpdaterUserEmail:
-          type: string
-          nullable: true
-        lastUpdaterUserFullName:
-          type: string
-          nullable: true
-        integrationLinks:
-          type: array
-          nullable: true
-          items:
-            $ref: '#/components/schemas/IntegrationLinkModel'
-        settingTags:
-          type: array
-          nullable: true
-          items:
-            $ref: '#/components/schemas/SettingTagModel'
-        rolloutRules:
-          type: array
-          description: The targeting rule collection.
-          nullable: true
-          items:
-            $ref: '#/components/schemas/RolloutRuleModel'
-        rolloutPercentageItems:
-          type: array
-          description: The percentage rule collection.
-          nullable: true
-          items:
-            $ref: '#/components/schemas/RolloutPercentageItemModel'
-        value:
-          type: object
-          additionalProperties: false
-          description: The value to serve. It must respect the setting type.
-          nullable: true
-      additionalProperties: false
-      example:
-        rolloutRules:
-        - comparator: isOneOf
-          comparisonValue: comparisonValue
-          value: {}
-          comparisonAttribute: comparisonAttribute
-        - comparator: isOneOf
-          comparisonValue: comparisonValue
-          value: {}
-          comparisonAttribute: comparisonAttribute
-        rolloutPercentageItems:
-        - percentage: 5
-          value: {}
-        - percentage: 5
-          value: {}
-        environment:
-          product:
-            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            organization:
-              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              name: name
-            name: name
-          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          name: name
-        lastUpdaterUserEmail: lastUpdaterUserEmail
-        readOnly: true
-        config:
-          product:
-            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            organization:
-              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              name: name
-            name: name
-          configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          name: name
-        integrationLinks:
-        - integrationLinkType: trello
-          description: description
-          key: key
-          url: url
-        - integrationLinkType: trello
-          description: description
-          key: key
-          url: url
-        value: {}
-        settingTags:
-        - color: color
-          tagId: 1
-          name: name
-          settingTagId: 6
-        - color: color
-          tagId: 1
-          name: name
-          settingTagId: 6
-        setting:
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          ownerFullName: ownerFullName
-          creatorEmail: creatorEmail
-          hint: hint
-          name: name
-          creatorFullName: creatorFullName
-          expirationWarningAt: 2000-01-23T04:56:07.000+00:00
-          settingType: boolean
-          key: key
-          settingId: 0
-          ownerEmail: ownerEmail
-        updatedAt: 2000-01-23T04:56:07.000+00:00
-        lastUpdaterUserFullName: lastUpdaterUserFullName
-    UpdateSettingValueModel:
-      type: object
-      properties:
-        rolloutRules:
-          type: array
-          description: The targeting rule collection.
-          nullable: true
-          items:
-            $ref: '#/components/schemas/RolloutRuleModel'
-        rolloutPercentageItems:
-          type: array
-          description: The percentage rule collection.
-          nullable: true
-          items:
-            $ref: '#/components/schemas/RolloutPercentageItemModel'
-        value:
-          type: object
-          additionalProperties: false
-          description: The value to serve. It must respect the setting type.
-          nullable: true
-      additionalProperties: false
-    Operation:
-      type: object
-      properties:
-        value:
-          type: object
-          additionalProperties: false
-          nullable: true
-        path:
-          type: string
-          nullable: true
-        op:
-          type: string
-          nullable: true
-        from:
-          type: string
-          nullable: true
-      additionalProperties: false
-    TagModel-haljson:
-      type: object
-      properties:
-        _embedded:
-          $ref: '#/components/schemas/ConfigModelhaljson__embedded'
-        tagId:
-          type: integer
-          format: int64
-        name:
-          type: string
-          nullable: true
-        color:
-          type: string
-          nullable: true
-        _links:
-          $ref: '#/components/schemas/EnvironmentModelhaljson__links'
-    TagModel:
-      type: object
-      properties:
-        product:
-          $ref: '#/components/schemas/ProductModel'
-        tagId:
-          type: integer
-          format: int64
-        name:
-          type: string
-          nullable: true
-        color:
-          type: string
-          nullable: true
-      additionalProperties: false
-      example:
-        product:
-          productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          organization:
-            organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            name: name
-          name: name
-        color: color
-        tagId: 6
-        name: name
-    SettingModel-haljson:
-      type: object
-      properties:
-        settingId:
-          type: integer
-          format: int32
-          readOnly: true
-        key:
-          type: string
-          nullable: true
-          readOnly: true
-        name:
-          type: string
-          nullable: true
-          readOnly: true
-        hint:
-          type: string
-          nullable: true
-          readOnly: true
-        settingType:
-          $ref: '#/components/schemas/SettingType'
-        ownerUserEmail:
-          type: string
-          nullable: true
-          readOnly: true
-        ownerUserFullName:
-          type: string
-          nullable: true
-          readOnly: true
-        expirationWarningAt:
-          type: string
-          format: date-time
-          nullable: true
-          readOnly: true
-        configId:
-          type: string
-          format: uuid
-          readOnly: true
-        configName:
-          type: string
-          nullable: true
-          readOnly: true
-        _embedded:
-          $ref: '#/components/schemas/SettingModelhaljson__embedded'
-        _links:
-          $ref: '#/components/schemas/EnvironmentModelhaljson__links'
     SettingModel:
       type: object
       properties:
@@ -3175,6 +4368,7 @@ components:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
             name: name
+            description: description
           color: color
           tagId: 6
           name: name
@@ -3184,58 +4378,251 @@ components:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
             name: name
+            description: description
           color: color
           tagId: 6
           name: name
-    CreateSettingModel:
-      required:
-      - key
-      - name
-      - settingType
+    SettingModel-haljson:
       type: object
       properties:
+        settingId:
+          type: integer
+          format: int32
+          readOnly: true
         key:
-          maxLength: 255
-          minLength: 0
-          pattern: ^[a-zA-Z]+[a-zA-Z0-9_]*
           type: string
-          description: The key of the setting.
+          nullable: true
+          readOnly: true
         name:
-          maxLength: 255
-          minLength: 0
           type: string
-          description: The name of the setting, shown on the Dashboard UI.
+          nullable: true
+          readOnly: true
+        hint:
+          type: string
+          nullable: true
+          readOnly: true
         settingType:
           $ref: '#/components/schemas/SettingType'
-        hint:
-          maxLength: 1000
-          minLength: 0
+        ownerUserEmail:
           type: string
-          description: A short description for the setting, shown on the Dashboard
-            UI.
           nullable: true
-        tags:
-          type: array
-          description: The IDs of the tags which are attached to the setting.
+          readOnly: true
+        ownerUserFullName:
+          type: string
           nullable: true
-          items:
-            type: integer
-            format: int64
-      additionalProperties: false
-    IntegrationLinkDetail:
+          readOnly: true
+        expirationWarningAt:
+          type: string
+          format: date-time
+          nullable: true
+          readOnly: true
+        configId:
+          type: string
+          format: uuid
+          readOnly: true
+        configName:
+          type: string
+          nullable: true
+          readOnly: true
+        _embedded:
+          $ref: '#/components/schemas/SettingModelhaljson__embedded'
+        _links:
+          $ref: '#/components/schemas/EnvironmentModelhaljson__links'
+    SettingTagModel:
       type: object
       properties:
-        product:
-          $ref: '#/components/schemas/ProductModel'
+        settingTagId:
+          type: integer
+          format: int64
+        tagId:
+          type: integer
+          format: int64
+        name:
+          type: string
+          nullable: true
+        color:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        color: color
+        tagId: 1
+        name: name
+        settingTagId: 6
+    SettingType:
+      type: string
+      enum:
+      - boolean
+      - string
+      - int
+      - double
+    SettingValueModel:
+      type: object
+      properties:
         config:
           $ref: '#/components/schemas/ConfigModel'
         environment:
           $ref: '#/components/schemas/EnvironmentModel'
-        setting:
-          $ref: '#/components/schemas/SettingDataModel'
         readOnly:
           type: boolean
-        status:
+        setting:
+          $ref: '#/components/schemas/SettingDataModel'
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+        lastUpdaterUserEmail:
+          type: string
+          nullable: true
+        lastUpdaterUserFullName:
+          type: string
+          nullable: true
+        integrationLinks:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/IntegrationLinkModel'
+        settingTags:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/SettingTagModel'
+        rolloutRules:
+          type: array
+          description: The targeting rule collection.
+          nullable: true
+          items:
+            $ref: '#/components/schemas/RolloutRuleModel'
+        rolloutPercentageItems:
+          type: array
+          description: The percentage rule collection.
+          nullable: true
+          items:
+            $ref: '#/components/schemas/RolloutPercentageItemModel'
+        value:
+          description: The value to serve. It must respect the setting type.
+          nullable: true
+      additionalProperties: false
+      example:
+        rolloutRules:
+        - comparator: isOneOf
+          comparisonValue: comparisonValue
+          value: ""
+          comparisonAttribute: comparisonAttribute
+        - comparator: isOneOf
+          comparisonValue: comparisonValue
+          value: ""
+          comparisonAttribute: comparisonAttribute
+        rolloutPercentageItems:
+        - percentage: 5
+          value: ""
+        - percentage: 5
+          value: ""
+        environment:
+          product:
+            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            organization:
+              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+            name: name
+            description: description
+          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          color: color
+          name: name
+          description: description
+        lastUpdaterUserEmail: lastUpdaterUserEmail
+        readOnly: true
+        config:
+          product:
+            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            organization:
+              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+            name: name
+            description: description
+          configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          description: description
+        integrationLinks:
+        - integrationLinkType: trello
+          description: description
+          key: key
+          url: url
+        - integrationLinkType: trello
+          description: description
+          key: key
+          url: url
+        value: ""
+        settingTags:
+        - color: color
+          tagId: 1
+          name: name
+          settingTagId: 6
+        - color: color
+          tagId: 1
+          name: name
+          settingTagId: 6
+        setting:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          ownerFullName: ownerFullName
+          creatorEmail: creatorEmail
+          hint: hint
+          name: name
+          creatorFullName: creatorFullName
+          isWatching: true
+          expirationWarningAt: 2000-01-23T04:56:07.000+00:00
+          settingType: boolean
+          key: key
+          settingId: 0
+          ownerEmail: ownerEmail
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+        lastUpdaterUserFullName: lastUpdaterUserFullName
+    SettingValueModel-haljson:
+      type: object
+      properties:
+        readOnly:
+          type: boolean
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+        lastUpdaterUserEmail:
+          type: string
+          nullable: true
+        lastUpdaterUserFullName:
+          type: string
+          nullable: true
+        _embedded:
+          $ref: '#/components/schemas/SettingValueModelhaljson__embedded'
+        rolloutRules:
+          type: array
+          description: The targeting rule collection.
+          nullable: true
+          items:
+            $ref: '#/components/schemas/RolloutRuleModel'
+        rolloutPercentageItems:
+          type: array
+          description: The percentage rule collection.
+          nullable: true
+          items:
+            $ref: '#/components/schemas/RolloutPercentageItemModel'
+        value:
+          description: The value to serve. It must respect the setting type.
+          nullable: true
+        _links:
+          $ref: '#/components/schemas/EnvironmentModelhaljson__links'
+    TagModel:
+      type: object
+      properties:
+        product:
+          $ref: '#/components/schemas/ProductModel'
+        tagId:
+          type: integer
+          format: int64
+        name:
+          type: string
+          nullable: true
+        color:
           type: string
           nullable: true
       additionalProperties: false
@@ -3246,174 +4633,130 @@ components:
             organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             name: name
           name: name
-        environment:
-          product:
-            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            organization:
-              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              name: name
-            name: name
-          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          name: name
-        readOnly: true
-        config:
-          product:
-            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            organization:
-              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              name: name
-            name: name
-          configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          name: name
-        setting:
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          ownerFullName: ownerFullName
-          creatorEmail: creatorEmail
-          hint: hint
-          name: name
-          creatorFullName: creatorFullName
-          expirationWarningAt: 2000-01-23T04:56:07.000+00:00
-          settingType: boolean
-          key: key
-          settingId: 0
-          ownerEmail: ownerEmail
-        status: status
-    IntegrationLinkDetailsModel:
+          description: description
+        color: color
+        tagId: 6
+        name: name
+    TagModel-haljson:
       type: object
       properties:
-        details:
-          type: array
-          nullable: true
-          readOnly: true
-          items:
-            $ref: '#/components/schemas/IntegrationLinkDetail'
-        allIntegrationLinkCount:
+        _embedded:
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded'
+        tagId:
           type: integer
-          format: int32
-      additionalProperties: false
-      example:
-        allIntegrationLinkCount: 0
-        details:
-        - product:
-            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            organization:
-              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              name: name
-            name: name
-          environment:
-            product:
-              productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              organization:
-                organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                name: name
-              name: name
-            environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            name: name
-          readOnly: true
-          config:
-            product:
-              productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              organization:
-                organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                name: name
-              name: name
-            configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            name: name
-          setting:
-            createdAt: 2000-01-23T04:56:07.000+00:00
-            ownerFullName: ownerFullName
-            creatorEmail: creatorEmail
-            hint: hint
-            name: name
-            creatorFullName: creatorFullName
-            expirationWarningAt: 2000-01-23T04:56:07.000+00:00
-            settingType: boolean
-            key: key
-            settingId: 0
-            ownerEmail: ownerEmail
-          status: status
-        - product:
-            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            organization:
-              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              name: name
-            name: name
-          environment:
-            product:
-              productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              organization:
-                organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                name: name
-              name: name
-            environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            name: name
-          readOnly: true
-          config:
-            product:
-              productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              organization:
-                organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                name: name
-              name: name
-            configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            name: name
-          setting:
-            createdAt: 2000-01-23T04:56:07.000+00:00
-            ownerFullName: ownerFullName
-            creatorEmail: creatorEmail
-            hint: hint
-            name: name
-            creatorFullName: creatorFullName
-            expirationWarningAt: 2000-01-23T04:56:07.000+00:00
-            settingType: boolean
-            key: key
-            settingId: 0
-            ownerEmail: ownerEmail
-          status: status
-    AddOrUpdateIntegrationLinkModel:
-      type: object
-      properties:
-        description:
-          maxLength: 1000
+          format: int64
+        name:
           type: string
           nullable: true
-        url:
-          maxLength: 1000
+        color:
           type: string
           nullable: true
-      additionalProperties: false
-    DeleteIntegrationLinkModel:
-      type: object
-      properties:
-        hasRemainingIntegrationLink:
-          type: boolean
-      additionalProperties: false
-      example:
-        hasRemainingIntegrationLink: true
-    MeModel:
-      type: object
-      properties:
-        email:
-          type: string
-          nullable: true
-          readOnly: true
-        fullName:
-          type: string
-          nullable: true
-          readOnly: true
-      additionalProperties: false
-      example:
-        fullName: fullName
-        email: email
-    CreateProductRequest:
-      required:
-      - name
+        _links:
+          $ref: '#/components/schemas/EnvironmentModelhaljson__links'
+    UpdateConfigRequest:
       type: object
       properties:
         name:
+          maxLength: 255
+          minLength: 0
+          type: string
+          nullable: true
+        description:
           maxLength: 1000
           minLength: 0
           type: string
+          nullable: true
+      additionalProperties: false
+    UpdateEnvironmentModel:
+      type: object
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+          nullable: true
+        color:
+          maxLength: 255
+          minLength: 0
+          type: string
+          nullable: true
+        description:
+          maxLength: 1000
+          minLength: 0
+          type: string
+          nullable: true
+      additionalProperties: false
+    UpdatePermissionGroupRequest:
+      type: object
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+          nullable: true
+        canManageMembers:
+          type: boolean
+          nullable: true
+        canCreateOrUpdateConfig:
+          type: boolean
+          nullable: true
+        canDeleteConfig:
+          type: boolean
+          nullable: true
+        canCreateOrUpdateEnvironment:
+          type: boolean
+          nullable: true
+        canDeleteEnvironment:
+          type: boolean
+          nullable: true
+        canCreateOrUpdateSetting:
+          type: boolean
+          nullable: true
+        canTagSetting:
+          type: boolean
+          nullable: true
+        canDeleteSetting:
+          type: boolean
+          nullable: true
+        canCreateOrUpdateTag:
+          type: boolean
+          nullable: true
+        canDeleteTag:
+          type: boolean
+          nullable: true
+        canManageWebhook:
+          type: boolean
+          nullable: true
+        canUseExportImport:
+          type: boolean
+          nullable: true
+        canManageProductPreferences:
+          type: boolean
+          nullable: true
+        canManageIntegrations:
+          type: boolean
+          nullable: true
+        canViewSdkKey:
+          type: boolean
+          nullable: true
+        canRotateSdkKey:
+          type: boolean
+          nullable: true
+        canViewProductStatistics:
+          type: boolean
+          nullable: true
+        canViewProductAuditLog:
+          type: boolean
+          nullable: true
+        accessType:
+          $ref: '#/components/schemas/AccessType'
+        newEnvironmentAccessType:
+          $ref: '#/components/schemas/EnvironmentAccessType'
+        environmentAccesses:
+          type: array
+          nullable: true
+          items:
+            $ref: '#/components/schemas/EnvironmentAccessModel'
       additionalProperties: false
     UpdateProductRequest:
       type: object
@@ -3423,47 +4766,78 @@ components:
           minLength: 0
           type: string
           nullable: true
+        description:
+          maxLength: 1000
+          minLength: 0
+          type: string
+          nullable: true
       additionalProperties: false
-    CreateTagModel:
-      required:
-      - name
+    UpdateSettingValueModel:
       type: object
       properties:
-        name:
-          maxLength: 255
-          minLength: 0
-          type: string
-        color:
-          maxLength: 255
-          minLength: 0
-          type: string
+        rolloutRules:
+          type: array
+          description: The targeting rule collection.
+          nullable: true
+          items:
+            $ref: '#/components/schemas/RolloutRuleModel'
+        rolloutPercentageItems:
+          type: array
+          description: The percentage rule collection.
+          nullable: true
+          items:
+            $ref: '#/components/schemas/RolloutPercentageItemModel'
+        value:
+          description: The value to serve. It must respect the setting type.
           nullable: true
       additionalProperties: false
     UpdateTagModel:
-      required:
-      - name
       type: object
       properties:
         name:
           maxLength: 255
           minLength: 0
           type: string
+          nullable: true
         color:
           maxLength: 255
           minLength: 0
           type: string
           nullable: true
       additionalProperties: false
+    UserModel:
+      type: object
+      properties:
+        userId:
+          type: string
+          nullable: true
+        fullName:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+      additionalProperties: false
+      example:
+        fullName: fullName
+        userId: userId
+        email: email
     auditLogType:
       nullable: true
       allOf:
       - $ref: '#/components/schemas/AuditLogType'
-    OrganizationModelhaljson__links:
+    auditLogType_1:
+      nullable: true
+      allOf:
+      - $ref: '#/components/schemas/AuditLogType'
+    ConfigModelhaljson__embedded_product__embedded_organization__links:
       type: object
       properties:
         products:
           type: string
-    ProductModelhaljson__embedded_organization:
+        members:
+          type: string
+    ConfigModelhaljson__embedded_product__embedded_organization:
       type: object
       properties:
         organizationId:
@@ -3473,13 +4847,13 @@ components:
           type: string
           nullable: true
         _links:
-          $ref: '#/components/schemas/OrganizationModelhaljson__links'
-    ProductModelhaljson__embedded:
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded_product__embedded_organization__links'
+    ConfigModelhaljson__embedded_product__embedded:
       type: object
       properties:
         organization:
-          $ref: '#/components/schemas/ProductModelhaljson__embedded_organization'
-    ProductModelhaljson__links:
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded_product__embedded_organization'
+    ConfigModelhaljson__embedded_product__links:
       type: object
       properties:
         self:
@@ -3490,19 +4864,26 @@ components:
           type: string
         tags:
           type: string
+        permission-groups:
+          type: string
+        members:
+          type: string
     ConfigModelhaljson__embedded_product:
       type: object
       properties:
         _embedded:
-          $ref: '#/components/schemas/ProductModelhaljson__embedded'
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded_product__embedded'
         productId:
           type: string
           format: uuid
         name:
           type: string
           nullable: true
+        description:
+          type: string
+          nullable: true
         _links:
-          $ref: '#/components/schemas/ProductModelhaljson__links'
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded_product__links'
     ConfigModelhaljson__embedded:
       type: object
       properties:
@@ -3520,6 +4901,29 @@ components:
       properties:
         self:
           type: string
+    SettingModelhaljson__embedded_tags:
+      type: object
+      properties:
+        _embedded:
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded'
+        tagId:
+          type: integer
+          format: int64
+        name:
+          type: string
+          nullable: true
+        color:
+          type: string
+          nullable: true
+        _links:
+          $ref: '#/components/schemas/EnvironmentModelhaljson__links'
+    SettingModelhaljson__embedded:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/SettingModelhaljson__embedded_tags'
     SettingValueModelhaljson__embedded_setting:
       type: object
       properties:
@@ -3564,6 +4968,8 @@ components:
           type: string
           format: date-time
           nullable: true
+        isWatching:
+          type: boolean
     SettingValueModelhaljson__embedded_config:
       type: object
       properties:
@@ -3573,6 +4979,9 @@ components:
           type: string
           format: uuid
         name:
+          type: string
+          nullable: true
+        description:
           type: string
           nullable: true
         _links:
@@ -3586,6 +4995,12 @@ components:
           type: string
           format: uuid
         name:
+          type: string
+          nullable: true
+        color:
+          type: string
+          nullable: true
+        description:
           type: string
           nullable: true
         _links:
@@ -3636,29 +5051,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SettingValueModelhaljson__embedded_settingTags'
-    SettingModelhaljson__embedded_tags:
-      type: object
-      properties:
-        _embedded:
-          $ref: '#/components/schemas/ConfigModelhaljson__embedded'
-        tagId:
-          type: integer
-          format: int64
-        name:
-          type: string
-          nullable: true
-        color:
-          type: string
-          nullable: true
-        _links:
-          $ref: '#/components/schemas/EnvironmentModelhaljson__links'
-    SettingModelhaljson__embedded:
-      type: object
-      properties:
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/SettingModelhaljson__embedded_tags'
   securitySchemes:
     Basic:
       type: http
@@ -3678,10 +5070,15 @@ x-tagGroups:
   - Tags
 - name: General
   tags:
-  - Organizations
   - Products
   - Configs
   - Environments
+  - SDK Keys
+- name: Membership
+  tags:
+  - Organizations
+  - Members
+  - Permission Groups
 - name: Diagnostics
   tags:
   - Audit logs

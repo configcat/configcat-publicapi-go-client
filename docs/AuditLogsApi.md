@@ -4,13 +4,15 @@ All URIs are relative to *https://api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetAuditlogs**](AuditLogsApi.md#GetAuditlogs) | **Get** /v1/products/{productId}/auditlogs | List Audit logs
+[**GetAuditlogs**](AuditLogsApi.md#GetAuditlogs) | **Get** /v1/products/{productId}/auditlogs | List Audit log items for Product
+[**GetDeletedSettings**](AuditLogsApi.md#GetDeletedSettings) | **Get** /v1/configs/{configId}/deleted-settings | List Deleted Settings
+[**GetOrganizationAuditlogs**](AuditLogsApi.md#GetOrganizationAuditlogs) | **Get** /v1/organizations/{organizationId}/auditlogs | List Audit log items for Organization
 
 # **GetAuditlogs**
 > []AuditLogItemModel GetAuditlogs(ctx, productId, optional)
-List Audit logs
+List Audit log items for Product
 
-This endpoint returns the list of Audit logs for a given Product  and the result can be optionally filtered by Config and/or Environment.
+This endpoint returns the list of Audit log items for a given Product  and the result can be optionally filtered by Config and/or Environment.
 
 ### Required Parameters
 
@@ -28,6 +30,75 @@ Name | Type | Description  | Notes
  **configId** | [**optional.Interface of string**](.md)| The identifier of the Config. | 
  **environmentId** | [**optional.Interface of string**](.md)| The identifier of the Environment. | 
  **auditLogType** | [**optional.Interface of AuditLogType**](.md)| Filter Audit logs by Audit log type. | 
+ **fromUtcDateTime** | **optional.Time**| Filter Audit logs by starting UTC date. | 
+ **toUtcDateTime** | **optional.Time**| Filter Audit logs by ending UTC date. | 
+
+### Return type
+
+[**[]AuditLogItemModel**](AuditLogItemModel.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/hal+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **GetDeletedSettings**
+> []SettingModel GetDeletedSettings(ctx, configId)
+List Deleted Settings
+
+This endpoint returns the list of Feature Flags and Settings that were deleted from the given Config.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **configId** | [**string**](.md)| The identifier of the Config. | 
+
+### Return type
+
+[**[]SettingModel**](SettingModel.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/hal+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **GetOrganizationAuditlogs**
+> []AuditLogItemModel GetOrganizationAuditlogs(ctx, organizationId, optional)
+List Audit log items for Organization
+
+This endpoint returns the list of Audit log items for a given Organization  and the result can be optionally filtered by Product and/or Config and/or Environment.
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **organizationId** | [**string**](.md)| The identifier of the Organization. | 
+ **optional** | ***AuditLogsApiGetOrganizationAuditlogsOpts** | optional parameters | nil if no parameters
+
+### Optional Parameters
+Optional parameters are passed through a pointer to a AuditLogsApiGetOrganizationAuditlogsOpts struct
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **productId** | [**optional.Interface of string**](.md)| The identifier of the Product. | 
+ **configId** | [**optional.Interface of string**](.md)| The identifier of the Config. | 
+ **environmentId** | [**optional.Interface of string**](.md)| The identifier of the Environment. | 
+ **auditLogType** | [**optional.Interface of AuditLogType1**](.md)| Filter Audit logs by Audit log type. | 
  **fromUtcDateTime** | **optional.Time**| Filter Audit logs by starting UTC date. | 
  **toUtcDateTime** | **optional.Time**| Filter Audit logs by ending UTC date. | 
 

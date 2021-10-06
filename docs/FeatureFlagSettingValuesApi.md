@@ -5,6 +5,7 @@ All URIs are relative to *https://api.configcat.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetSettingValue**](FeatureFlagSettingValuesApi.md#GetSettingValue) | **Get** /v1/environments/{environmentId}/settings/{settingId}/value | Get value
+[**GetSettingValues**](FeatureFlagSettingValuesApi.md#GetSettingValues) | **Get** /v1/configs/{configId}/environments/{environmentId}/values | Get values
 [**ReplaceSettingValue**](FeatureFlagSettingValuesApi.md#ReplaceSettingValue) | **Put** /v1/environments/{environmentId}/settings/{settingId}/value | Replace value
 [**UpdateSettingValue**](FeatureFlagSettingValuesApi.md#UpdateSettingValue) | **Patch** /v1/environments/{environmentId}/settings/{settingId}/value | Update value
 
@@ -25,6 +26,35 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**SettingValueModel**](SettingValueModel.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/hal+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **GetSettingValues**
+> ConfigSettingValuesModel GetSettingValues(ctx, configId, environmentId)
+Get values
+
+This endpoint returns the value of a specified Config's Feature Flags or Settings identified by the `configId` parameter in a specified Environment identified by the `environmentId` parameter.  The most important attributes in the response are the `value`, `rolloutRules` and `percentageRules`. The `value` represents what the clients will get when the evaluation requests of our SDKs  are not matching to any of the defined Targeting or Percentage Rules, or when there are no additional rules to evaluate.  The `rolloutRules` and `percentageRules` attributes are representing the current  Targeting and Percentage Rules configuration of the actual Feature Flag or Setting  in an **ordered** collection, which means the order of the returned rules is matching to the evaluation order. You can read more about these rules [here](https://configcat.com/docs/advanced/targeting/).
+
+### Required Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+  **configId** | [**string**](.md)| The identifier of the Config. | 
+  **environmentId** | [**string**](.md)| The identifier of the Environment. | 
+
+### Return type
+
+[**ConfigSettingValuesModel**](ConfigSettingValuesModel.md)
 
 ### Authorization
 

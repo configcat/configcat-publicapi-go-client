@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Value** | [***interface{}**](interface{}.md) |  | [optional] [default to null]
+**Value** | [***Object**](.md) |  | [optional] [default to null]
 **Path** | **string** |  | [optional] [default to null]
 **Op** | **string** |  | [optional] [default to null]
 **From** | **string** |  | [optional] [default to null]
