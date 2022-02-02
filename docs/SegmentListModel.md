@@ -4,6 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Usage** | **int32** |  | [optional] [default to null]
+**Product** | [***ProductModel**](ProductModel.md) |  | [optional] [default to null]
 **SegmentId** | **string** |  | [optional] [default to null]
 **Name** | **string** |  | [optional] [default to null]
 **Description** | **string** |  | [optional] [default to null]

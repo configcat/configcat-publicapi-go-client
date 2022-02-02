@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 **ComparisonAttribute** | **string** |  | [optional] [default to null]
 **Comparator** | [***RolloutRuleComparator**](RolloutRuleComparator.md) |  | [optional] [default to null]
 **ComparisonValue** | **string** |  | [optional] [default to null]
+**Embedded** | [***ConfigModelhaljsonEmbedded**](ConfigModelhaljson__embedded.md) |  | [optional] [default to null]
 **SegmentId** | **string** |  | [optional] [default to null]
 **Name** | **string** |  | [optional] [default to null]
 **Description** | **string** |  | [optional] [default to null]

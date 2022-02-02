@@ -3074,7 +3074,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/SegmentListModel'
+                  $ref: '#/components/schemas/SegmentListModel-haljson'
         "400":
           description: Bad request.
         "404":
@@ -4748,6 +4748,8 @@ components:
         usage:
           type: integer
           format: int32
+        product:
+          $ref: '#/components/schemas/ProductModel'
         segmentId:
           type: string
           format: uuid
@@ -4778,6 +4780,13 @@ components:
       additionalProperties: false
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
+        product:
+          productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          organization:
+            organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+          name: name
+          description: description
         lastUpdaterEmail: lastUpdaterEmail
         creatorEmail: creatorEmail
         usage: 0
@@ -4787,6 +4796,43 @@ components:
         creatorFullName: creatorFullName
         lastUpdaterFullName: lastUpdaterFullName
         updatedAt: 2000-01-23T04:56:07.000+00:00
+    SegmentListModel-haljson:
+      type: object
+      properties:
+        usage:
+          type: integer
+          format: int32
+        _embedded:
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded'
+        segmentId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        creatorEmail:
+          type: string
+          nullable: true
+        creatorFullName:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        lastUpdaterEmail:
+          type: string
+          nullable: true
+        lastUpdaterFullName:
+          type: string
+          nullable: true
+        updatedAt:
+          type: string
+          format: date-time
+        _links:
+          $ref: '#/components/schemas/EnvironmentModelhaljson__links'
     SegmentModel:
       type: object
       properties:
@@ -4798,6 +4844,8 @@ components:
         comparisonValue:
           type: string
           nullable: true
+        product:
+          $ref: '#/components/schemas/ProductModel'
         segmentId:
           type: string
           format: uuid
@@ -4827,14 +4875,21 @@ components:
           format: date-time
       additionalProperties: false
       example:
+        product:
+          productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          organization:
+            organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+          name: name
+          description: description
+        comparisonValue: comparisonValue
+        creatorEmail: creatorEmail
+        description: description
         comparator: isOneOf
         createdAt: 2000-01-23T04:56:07.000+00:00
         lastUpdaterEmail: lastUpdaterEmail
-        comparisonValue: comparisonValue
-        creatorEmail: creatorEmail
         segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         name: name
-        description: description
         creatorFullName: creatorFullName
         lastUpdaterFullName: lastUpdaterFullName
         comparisonAttribute: comparisonAttribute
@@ -4850,6 +4905,8 @@ components:
         comparisonValue:
           type: string
           nullable: true
+        _embedded:
+          $ref: '#/components/schemas/ConfigModelhaljson__embedded'
         segmentId:
           type: string
           format: uuid
