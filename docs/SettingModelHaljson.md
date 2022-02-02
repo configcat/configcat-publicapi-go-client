@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **SettingType** | [***SettingType**](SettingType.md) |  | [optional] [default to null]
 **OwnerUserEmail** | **string** |  | [optional] [default to null]
 **OwnerUserFullName** | **string** |  | [optional] [default to null]
-**ExpirationWarningAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **ConfigId** | **string** |  | [optional] [default to null]
 **ConfigName** | **string** |  | [optional] [default to null]
 **Embedded** | [***SettingModelhaljsonEmbedded**](SettingModelhaljson__embedded.md) |  | [optional] [default to null]

@@ -1,8 +1,8 @@
 openapi: 3.0.1
 info:
   title: ConfigCat Public Management API
-  description: "**Base API URL**: https://api.configcat.com\n\nIf you prefer the swagger\
-    \ documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).\n\
+  description: "**Base API URL**: https://api.configcat.com\n\nIf you prefer\
+    \ the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).\n\
     \nThe purpose of this API is to access the ConfigCat platform programmatically.\
     \ \nYou can **Create**, **Read**, **Update** and **Delete** any entities like\
     \ **Feature Flags, Configs, Environments** or **Products** within ConfigCat. \n\
@@ -70,11 +70,10 @@ tags:
     \ target=\"_blank\" rel=\"noopener noreferrer\">Here</a> you can read more about\
     \ the concept of Settings."
 - name: Organizations
-  description: |-
-    With these endpoints you can get useful information about your Organizations.
-    This also can be used to manage your [Products](#tag/Products).
-
-    <a href="https://configcat.com/docs/organization/" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the Organizations.
+  description: "With these endpoints you can get useful information about your Organizations.\n\
+    This also can be used to manage your [Products](#tag/Products).\n\n<a href=\"\
+    https://configcat.com/docs/organization/\" target=\"_blank\" rel=\"noopener noreferrer\"\
+    >Here</a> you can read more about the Organizations."
 - name: Members
   description: |-
     With these endpoints you can manage your Members.
@@ -86,11 +85,12 @@ tags:
 
     <a href="https://configcat.com/docs/advanced/team-collaboration#permissions--groups" target="_blank" rel="noopener noreferrer">Here</a> you can read more about Permissions.
 - name: Products
-  description: |-
-    With these endpoints you can manage your Products.
-    This also can be used to manage [Environments](#tag/Environments), [Configs](#tag/Configs), [Tags](#tag/Tags) and [Permission Groups](#tag/Permission-Groups) through this API.
-
-    <a href="https://configcat.com/docs/main-concepts/#product" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Products.
+  description: "With these endpoints you can manage your Products.\nThis also can\
+    \ be used to manage [Environments](#tag/Environments), [Configs](#tag/Configs),\
+    \ [Tags](#tag/Tags) and [Permission Groups](#tag/Permission-Groups) through this\
+    \ API.\n\n<a href=\"https://configcat.com/docs/main-concepts/#product\" target=\"\
+    _blank\" rel=\"noopener noreferrer\">Here</a> you can read more about the concept\
+    \ of Products."
 - name: Configs
   description: "With these endpoints you can manage your Configs.\nThis also can be\
     \ used to manage [Feature Flags and Settings](#tag/Feature-Flags-and-Settings)\
@@ -103,12 +103,16 @@ tags:
     \ ones into your selected [Product](#tag/Products). \n\n<a href=\"https://configcat.com/docs/main-concepts/#environment\"\
     \ target=\"_blank\" rel=\"noopener noreferrer\">Here</a> you can read more about\
     \ the concept of Environments."
+- name: Segments
+  description: |-
+    With these endpoints you can manage your Segments.
+    Segments allow you to group your users based on any of their properties. Define user segments and add them to multiple feature flags.
 - name: SDK Keys
   description: With these endpoints you can manage your SDK Keys.
 - name: Tags
-  description: With these endpoints you can manage Tags. Tags are stored under a Product.
-    You can  and add a Tag to a Feature Flag or Setting using the [Update Flag](#operation/update-setting)
-    endpoint.
+  description: "With these endpoints you can manage Tags. Tags are stored under a\
+    \ Product. You can  and add a Tag to a Feature Flag or Setting using the [Update\
+    \ Flag](#operation/update-setting) endpoint."
 - name: Audit logs
   description: Access audit log entries.
 - name: Me
@@ -178,6 +182,7 @@ paths:
           format: date-time
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -274,6 +279,7 @@ paths:
           format: date-time
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -316,6 +322,7 @@ paths:
           format: uuid
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -343,9 +350,9 @@ paths:
       tags:
       - Configs
       summary: List Configs
-      description: |-
-        This endpoint returns the list of the Configs that belongs to the given Product identified by the
-        `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
+      description: "This endpoint returns the list of the Configs that belongs to\
+        \ the given Product identified by the\n`productId` parameter, which can be\
+        \ obtained from the [List Products](#operation/get-products) endpoint."
       operationId: get-configs
       parameters:
       - name: productId
@@ -359,6 +366,7 @@ paths:
           format: uuid
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -452,7 +460,7 @@ paths:
           format: uuid
       responses:
         "200":
-          description: When everything is ok, the config data returned.
+          description: "When everything is ok, the config data returned."
           content:
             application/json:
               schema:
@@ -500,6 +508,7 @@ paths:
         required: true
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -551,9 +560,9 @@ paths:
       tags:
       - Environments
       summary: List Environments
-      description: |-
-        This endpoint returns the list of the Environments that belongs to the given Product identified by the
-        `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
+      description: "This endpoint returns the list of the Environments that belongs\
+        \ to the given Product identified by the\n`productId` parameter, which can\
+        \ be obtained from the [List Products](#operation/get-products) endpoint."
       operationId: get-environments
       parameters:
       - name: productId
@@ -567,6 +576,7 @@ paths:
           format: uuid
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -659,7 +669,7 @@ paths:
           format: uuid
       responses:
         "200":
-          description: When everything is ok, the environment data returned.
+          description: "When everything is ok, the environment data returned."
           content:
             application/json:
               schema:
@@ -708,6 +718,7 @@ paths:
         required: true
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -793,7 +804,7 @@ paths:
           format: int32
       responses:
         "200":
-          description: When everything is ok, the setting value data returned.
+          description: "When everything is ok, the setting value data returned."
           content:
             application/json:
               schema:
@@ -827,7 +838,12 @@ paths:
         If we send a replace request body as below:\n```\n{\n\t\"value\": true\n}\n\
         ```\nThen besides that the default value is set to `true`, all the Percentage\
         \ Rules are deleted. \nSo we get a response like this:\n```\n{\n\t\"rolloutPercentageItems\"\
-        : [],\n\t\"rolloutRules\": [],\n\t\"value\": true\n}\n```"
+        : [],\n\t\"rolloutRules\": [],\n\t\"value\": true\n}\n```\n\nThe `rolloutRules`\
+        \ property describes two types of rules:\n\n- **Targeting rules**: When you\
+        \ want to add or update a targenting rule, the `comparator`, `comparisonAttribute`,\
+        \ and `comparisonValue` members are required.\n- **Segment rules**: When you\
+        \ want to add add or update a segment rule, the `segmentId` which identifies\
+        \ the desired segment and the `segmentComparator` members are required."
       operationId: replace-setting-value
       parameters:
       - name: environmentId
@@ -916,6 +932,7 @@ paths:
         required: true
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -954,7 +971,13 @@ paths:
         \ Rules are remaining unchanged.\nSo we get a response like this:\n```\n{\n\
         \t\"rolloutPercentageItems\": [\n\t\t{\n\t\t\t\"percentage\": 30,\n\t\t\t\"\
         value\": true\n\t\t},\n\t\t{\n\t\t\t\"percentage\": 70,\n\t\t\t\"value\":\
-        \ false\n\t\t}\n\t],\n\t\"rolloutRules\": [],\n\t\"value\": true\n}\n```"
+        \ false\n\t\t}\n\t],\n\t\"rolloutRules\": [],\n\t\"value\": true\n}\n```\n\
+        \nThe `rolloutRules` property describes two types of rules:\n\n- **Targeting\
+        \ rules**: When you want to add or update a targenting rule, the `comparator`,\
+        \ `comparisonAttribute`, and `comparisonValue` members are required.\n- **Segment\
+        \ rules**: When you want to add add or update a segment rule, the `segmentId`\
+        \ which identifies the desired segment and the `segmentComparator` members\
+        \ are required."
       operationId: update-setting-value
       parameters:
       - name: environmentId
@@ -1030,6 +1053,14 @@ paths:
                     comparator: isOneOf
                     comparisonValue: '@blacklist.com'
                     value: false
+              add segment rules:
+                description: This example adds a segment to the evaluation rules.
+                value:
+                - op: add
+                  path: /rolloutRules/-
+                  value:
+                    segmentComparator: isIn
+                    segmentId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               reorder targeting rules:
                 description: This example swaps the first and the second targeting
                   evaluation rule.
@@ -1081,6 +1112,14 @@ paths:
                     comparator: isOneOf
                     comparisonValue: '@blacklist.com'
                     value: false
+              add segment rules:
+                description: This example adds a segment to the evaluation rules.
+                value:
+                - op: add
+                  path: /rolloutRules/-
+                  value:
+                    segmentComparator: isIn
+                    segmentId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               reorder targeting rules:
                 description: This example swaps the first and the second targeting
                   evaluation rule.
@@ -1132,6 +1171,14 @@ paths:
                     comparator: isOneOf
                     comparisonValue: '@blacklist.com'
                     value: false
+              add segment rules:
+                description: This example adds a segment to the evaluation rules.
+                value:
+                - op: add
+                  path: /rolloutRules/-
+                  value:
+                    segmentComparator: isIn
+                    segmentId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               reorder targeting rules:
                 description: This example swaps the first and the second targeting
                   evaluation rule.
@@ -1183,6 +1230,14 @@ paths:
                     comparator: isOneOf
                     comparisonValue: '@blacklist.com'
                     value: false
+              add segment rules:
+                description: This example adds a segment to the evaluation rules.
+                value:
+                - op: add
+                  path: /rolloutRules/-
+                  value:
+                    segmentComparator: isIn
+                    segmentId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               reorder targeting rules:
                 description: This example swaps the first and the second targeting
                   evaluation rule.
@@ -1252,7 +1307,7 @@ paths:
           format: uuid
       responses:
         "200":
-          description: When everything is ok, the setting values returned.
+          description: "When everything is ok, the setting values returned."
           content:
             application/json:
               schema:
@@ -1308,6 +1363,7 @@ paths:
           type: string
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -1431,6 +1487,7 @@ paths:
         required: true
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -1545,6 +1602,14 @@ paths:
                     comparator: isOneOf
                     comparisonValue: '@blacklist.com'
                     value: false
+              add segment rules:
+                description: This example adds a segment to the evaluation rules.
+                value:
+                - op: add
+                  path: /rolloutRules/-
+                  value:
+                    segmentComparator: isIn
+                    segmentId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               reorder targeting rules:
                 description: This example swaps the first and the second targeting
                   evaluation rule.
@@ -1596,6 +1661,14 @@ paths:
                     comparator: isOneOf
                     comparisonValue: '@blacklist.com'
                     value: false
+              add segment rules:
+                description: This example adds a segment to the evaluation rules.
+                value:
+                - op: add
+                  path: /rolloutRules/-
+                  value:
+                    segmentComparator: isIn
+                    segmentId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               reorder targeting rules:
                 description: This example swaps the first and the second targeting
                   evaluation rule.
@@ -1647,6 +1720,14 @@ paths:
                     comparator: isOneOf
                     comparisonValue: '@blacklist.com'
                     value: false
+              add segment rules:
+                description: This example adds a segment to the evaluation rules.
+                value:
+                - op: add
+                  path: /rolloutRules/-
+                  value:
+                    segmentComparator: isIn
+                    segmentId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               reorder targeting rules:
                 description: This example swaps the first and the second targeting
                   evaluation rule.
@@ -1698,6 +1779,14 @@ paths:
                     comparator: isOneOf
                     comparisonValue: '@blacklist.com'
                     value: false
+              add segment rules:
+                description: This example adds a segment to the evaluation rules.
+                value:
+                - op: add
+                  path: /rolloutRules/-
+                  value:
+                    segmentComparator: isIn
+                    segmentId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               reorder targeting rules:
                 description: This example swaps the first and the second targeting
                   evaluation rule.
@@ -1708,6 +1797,7 @@ paths:
         required: true
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -1747,6 +1837,7 @@ paths:
           format: uuid
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -1841,7 +1932,7 @@ paths:
           format: int32
       responses:
         "200":
-          description: When everything is ok, the setting data returned.
+          description: "When everything is ok, the setting data returned."
           content:
             application/json:
               schema:
@@ -1977,6 +2068,7 @@ paths:
       tags:
       - Integration links
       summary: Get Integration link
+      description: ""
       operationId: get-integration-link-details
       parameters:
       - name: integrationLinkType
@@ -1997,8 +2089,8 @@ paths:
           type: string
       responses:
         "200":
-          description: When everything is ok, the details for the integration link
-            returned.
+          description: "When everything is ok, the details for the integration link\
+            \ returned."
           content:
             application/json:
               schema:
@@ -2021,6 +2113,7 @@ paths:
       tags:
       - Integration links
       summary: Add or update Integration link
+      description: ""
       operationId: add-or-update-integration-link
       parameters:
       - name: environmentId
@@ -2070,7 +2163,7 @@ paths:
               $ref: '#/components/schemas/AddOrUpdateIntegrationLinkModel'
       responses:
         "200":
-          description: When everything is ok, the integration link data returned.
+          description: "When everything is ok, the integration link data returned."
           content:
             application/json:
               schema:
@@ -2092,6 +2185,7 @@ paths:
       tags:
       - Integration links
       summary: Delete Integration link
+      description: ""
       operationId: delete-integration-link
       parameters:
       - name: environmentId
@@ -2148,14 +2242,103 @@ paths:
         "429":
           description: Too many requests. In case of the request rate exceeds the
             rate limits.
+  /v1/jira/Connect:
+    post:
+      tags:
+      - Integration links
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConnectRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ConnectRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ConnectRequest'
+      responses:
+        "200":
+          description: Success
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+  /v1/jira/environments/{environmentId}/settings/{settingId}/integrationLinks/{key}:
+    post:
+      tags:
+      - Integration links
+      operationId: jira-add-or-update-integration-link
+      parameters:
+      - name: environmentId
+        in: path
+        description: The identifier of the Environment.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      - name: settingId
+        in: path
+        description: The id of the Setting.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int32
+      - name: key
+        in: path
+        description: The key of the integration link.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddOrUpdateJiraIntegrationLinkModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/AddOrUpdateJiraIntegrationLinkModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/AddOrUpdateJiraIntegrationLinkModel'
+      responses:
+        "200":
+          description: "When everything is ok, the integration link data returned."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IntegrationLinkModel'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/IntegrationLinkModel'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
   /v1/me:
     get:
       tags:
       - Me
       summary: Get authenticated user details
+      description: ""
       operationId: get-me
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -2189,6 +2372,7 @@ paths:
           format: uuid
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -2231,6 +2415,7 @@ paths:
           format: uuid
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -2384,6 +2569,7 @@ paths:
       operationId: get-organizations
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -2407,9 +2593,9 @@ paths:
       tags:
       - Permission Groups
       summary: List Permission Groups
-      description: |-
-        This endpoint returns the list of the Permission Groups that belongs to the given Product identified by the
-        `productId` parameter, which can be obtained from the [List Products](#operation/get-products) endpoint.
+      description: "This endpoint returns the list of the Permission Groups that belongs\
+        \ to the given Product identified by the\n`productId` parameter, which can\
+        \ be obtained from the [List Products](#operation/get-products) endpoint."
       operationId: get-permission-groups
       parameters:
       - name: productId
@@ -2423,6 +2609,7 @@ paths:
           format: uuid
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -2515,7 +2702,7 @@ paths:
           format: int64
       responses:
         "200":
-          description: When everything is ok, the permission group data returned.
+          description: "When everything is ok, the permission group data returned."
           content:
             application/json:
               schema:
@@ -2564,6 +2751,7 @@ paths:
         required: true
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -2621,6 +2809,7 @@ paths:
       operationId: get-products
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -2710,7 +2899,7 @@ paths:
           format: uuid
       responses:
         "200":
-          description: When everything is ok, the product data returned.
+          description: "When everything is ok, the product data returned."
           content:
             application/json:
               schema:
@@ -2758,6 +2947,7 @@ paths:
         required: true
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -2833,6 +3023,7 @@ paths:
           format: uuid
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -2840,6 +3031,216 @@ paths:
             application/hal+json:
               schema:
                 $ref: '#/components/schemas/SdkKeysModel'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+  /v1/products/{productId}/segments:
+    get:
+      tags:
+      - Segments
+      summary: List Segments
+      description: "This endpoint returns the list of the Segments that belongs to\
+        \ the given Product identified by the\n`productId` parameter, which can be\
+        \ obtained from the [List Products](#operation/get-products) endpoint."
+      operationId: get-segments
+      parameters:
+      - name: productId
+        in: path
+        description: The identifier of the Product.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SegmentListModel'
+                x-content-type: application/json
+            application/hal+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SegmentListModel'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+    post:
+      tags:
+      - Segments
+      summary: Create Segment
+      description: "This endpoint creates a new Segment in a specified Product \n\
+        identified by the `productId` parameter, which can be obtained from the [List\
+        \ Products](#operation/get-products) endpoint."
+      operationId: create-segment
+      parameters:
+      - name: productId
+        in: path
+        description: The identifier of the Product.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSegmentModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/CreateSegmentModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/CreateSegmentModel'
+        required: true
+      responses:
+        "201":
+          description: When the creation was successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentModel'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SegmentModel-haljson'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+  /v1/segments/{segmentId}:
+    get:
+      tags:
+      - Segments
+      summary: Get Segment
+      description: |-
+        This endpoint returns the metadata of a Segment
+        identified by the `segmentId`.
+      operationId: get-segment
+      parameters:
+      - name: segmentId
+        in: path
+        description: The identifier of the Segment.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: "When everything is ok, the config data returned."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentModel'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SegmentModel-haljson'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+    put:
+      tags:
+      - Segments
+      summary: Update Segment
+      description: This endpoint updates a Segment identified by the `segmentId` parameter.
+      operationId: update-segment
+      parameters:
+      - name: segmentId
+        in: path
+        description: The identifier of the Segment.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSegmentModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSegmentModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdateSegmentModel'
+        required: true
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentModel'
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/SegmentModel-haljson'
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "401":
+          description: Unauthorized. In case of the Public Management API credentials
+            are invalid.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+    delete:
+      tags:
+      - Segments
+      summary: Delete Segment
+      description: This endpoint removes a Segment identified by the `segmentId` parameter.
+      operationId: delete-segment
+      parameters:
+      - name: segmentId
+        in: path
+        description: The identifier of the Segment.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "204":
+          description: When the delete was successful.
         "400":
           description: Bad request.
         "404":
@@ -2870,6 +3271,7 @@ paths:
           format: uuid
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -2958,7 +3360,7 @@ paths:
           format: int64
       responses:
         "200":
-          description: When everything is ok, the tag data returned.
+          description: "When everything is ok, the tag data returned."
           content:
             application/json:
               schema:
@@ -3006,6 +3408,7 @@ paths:
         required: true
       responses:
         "200":
+          description: ""
           content:
             application/json:
               schema:
@@ -3027,9 +3430,9 @@ paths:
       tags:
       - Tags
       summary: Delete Tag
-      description: This endpoint deletes a Tag identified by the `tagId` parameter.
-        To remove a Tag from a Feature Flag or Setting use the [Update Flag](#operation/update-setting)
-        endpoint.
+      description: "This endpoint deletes a Tag identified by the `tagId` parameter.\
+        \ To remove a Tag from a Feature Flag or Setting use the [Update Flag](#operation/update-setting)\
+        \ endpoint."
       operationId: delete-tag
       parameters:
       - name: tagId
@@ -3074,7 +3477,7 @@ paths:
           format: int64
       responses:
         "200":
-          description: When everything is ok, the settings data returned.
+          description: "When everything is ok, the settings data returned."
           content:
             application/json:
               schema:
@@ -3114,6 +3517,31 @@ components:
           nullable: true
         url:
           maxLength: 1000
+          type: string
+          nullable: true
+      additionalProperties: false
+    AddOrUpdateJiraIntegrationLinkModel:
+      required:
+      - clientKey
+      - jiraJwtToken
+      type: object
+      properties:
+        jiraJwtToken:
+          maxLength: 15000
+          minLength: 0
+          type: string
+        clientKey:
+          maxLength: 255
+          minLength: 0
+          type: string
+        description:
+          maxLength: 1000
+          minLength: 0
+          type: string
+          nullable: true
+        url:
+          maxLength: 1000
+          minLength: 0
           type: string
           nullable: true
       additionalProperties: false
@@ -3226,6 +3654,12 @@ components:
       - organizationMemberProductJoinRequested
       - organizationMemberProductJoinRequestRejected
       - organizationMemberProductJoinRequestApproved
+      - codeReferencesUploaded
+      - codeReferenceDeleted
+      - codeReferenceStaleBrancheDeleted
+      - segmentCreated
+      - segmentChanged
+      - segmentDeleted
     ConfigModel:
       type: object
       properties:
@@ -3313,10 +3747,14 @@ components:
         rolloutRules:
         - comparator: isOneOf
           comparisonValue: comparisonValue
+          segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          segmentComparator: isIn
           value: ""
           comparisonAttribute: comparisonAttribute
         - comparator: isOneOf
           comparisonValue: comparisonValue
+          segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          segmentComparator: isIn
           value: ""
           comparisonAttribute: comparisonAttribute
         rolloutPercentageItems:
@@ -3352,7 +3790,6 @@ components:
           name: name
           creatorFullName: creatorFullName
           isWatching: true
-          expirationWarningAt: 2000-01-23T04:56:07.000+00:00
           settingType: boolean
           key: key
           settingId: 0
@@ -3392,10 +3829,14 @@ components:
         - rolloutRules:
           - comparator: isOneOf
             comparisonValue: comparisonValue
+            segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            segmentComparator: isIn
             value: ""
             comparisonAttribute: comparisonAttribute
           - comparator: isOneOf
             comparisonValue: comparisonValue
+            segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            segmentComparator: isIn
             value: ""
             comparisonAttribute: comparisonAttribute
           rolloutPercentageItems:
@@ -3431,7 +3872,6 @@ components:
             name: name
             creatorFullName: creatorFullName
             isWatching: true
-            expirationWarningAt: 2000-01-23T04:56:07.000+00:00
             settingType: boolean
             key: key
             settingId: 0
@@ -3441,10 +3881,14 @@ components:
         - rolloutRules:
           - comparator: isOneOf
             comparisonValue: comparisonValue
+            segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            segmentComparator: isIn
             value: ""
             comparisonAttribute: comparisonAttribute
           - comparator: isOneOf
             comparisonValue: comparisonValue
+            segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            segmentComparator: isIn
             value: ""
             comparisonAttribute: comparisonAttribute
           rolloutPercentageItems:
@@ -3480,7 +3924,6 @@ components:
             name: name
             creatorFullName: creatorFullName
             isWatching: true
-            expirationWarningAt: 2000-01-23T04:56:07.000+00:00
             settingType: boolean
             key: key
             settingId: 0
@@ -3498,6 +3941,21 @@ components:
           configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name
           description: description
+    ConnectRequest:
+      required:
+      - clientKey
+      - jiraJwtToken
+      type: object
+      properties:
+        clientKey:
+          maxLength: 255
+          minLength: 0
+          type: string
+        jiraJwtToken:
+          maxLength: 15000
+          minLength: 0
+          type: string
+      additionalProperties: false
     CreateConfigRequest:
       required:
       - name
@@ -3578,6 +4036,10 @@ components:
           type: boolean
         canViewProductAuditLog:
           type: boolean
+        canCreateOrUpdateSegments:
+          type: boolean
+        canDeleteSegments:
+          type: boolean
         accessType:
           $ref: '#/components/schemas/AccessType'
         newEnvironmentAccessType:
@@ -3603,6 +4065,34 @@ components:
           type: string
           nullable: true
       additionalProperties: false
+    CreateSegmentModel:
+      required:
+      - comparator
+      - comparisonAttribute
+      - comparisonValue
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+        description:
+          maxLength: 1000
+          minLength: 0
+          type: string
+          nullable: true
+        comparisonAttribute:
+          maxLength: 1000
+          minLength: 0
+          type: string
+        comparator:
+          $ref: '#/components/schemas/RolloutRuleComparator'
+        comparisonValue:
+          maxLength: 65535
+          minLength: 0
+          type: string
+      additionalProperties: false
     CreateSettingModel:
       required:
       - key
@@ -3613,22 +4103,22 @@ components:
         key:
           maxLength: 255
           minLength: 0
-          pattern: ^[a-zA-Z]+[a-zA-Z0-9_]*
+          pattern: "^[a-zA-Z]+[a-zA-Z0-9_]*"
           type: string
           description: The key of the setting.
         name:
           maxLength: 255
           minLength: 0
           type: string
-          description: The name of the setting, shown on the Dashboard UI.
+          description: "The name of the setting, shown on the Dashboard UI."
         settingType:
           $ref: '#/components/schemas/SettingType'
         hint:
           maxLength: 1000
           minLength: 0
           type: string
-          description: A short description for the setting, shown on the Dashboard
-            UI.
+          description: "A short description for the setting, shown on the Dashboard\
+            \ UI."
           nullable: true
         tags:
           type: array
@@ -3797,7 +4287,6 @@ components:
           name: name
           creatorFullName: creatorFullName
           isWatching: true
-          expirationWarningAt: 2000-01-23T04:56:07.000+00:00
           settingType: boolean
           key: key
           settingId: 0
@@ -3858,7 +4347,6 @@ components:
             name: name
             creatorFullName: creatorFullName
             isWatching: true
-            expirationWarningAt: 2000-01-23T04:56:07.000+00:00
             settingType: boolean
             key: key
             settingId: 0
@@ -3903,7 +4391,6 @@ components:
             name: name
             creatorFullName: creatorFullName
             isWatching: true
-            expirationWarningAt: 2000-01-23T04:56:07.000+00:00
             settingType: boolean
             key: key
             settingId: 0
@@ -4202,9 +4689,6 @@ components:
       - sensitiveIsOneOf
       - sensitiveIsNotOneOf
     RolloutRuleModel:
-      required:
-      - comparisonAttribute
-      - comparisonValue
       type: object
       properties:
         comparisonAttribute:
@@ -4212,6 +4696,7 @@ components:
           minLength: 0
           type: string
           description: The user attribute to compare.
+          nullable: true
         comparator:
           $ref: '#/components/schemas/RolloutRuleComparator'
         comparisonValue:
@@ -4219,14 +4704,24 @@ components:
           minLength: 0
           type: string
           description: The value to compare against.
+          nullable: true
         value:
           description: The value to serve when the comparison matches. It must respect
             the setting type.
+          nullable: true
+        segmentComparator:
+          $ref: '#/components/schemas/SegmentComparator'
+        segmentId:
+          type: string
+          description: The segment to compare against.
+          format: uuid
           nullable: true
       additionalProperties: false
       example:
         comparator: isOneOf
         comparisonValue: comparisonValue
+        segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        segmentComparator: isIn
         value: ""
         comparisonAttribute: comparisonAttribute
     SdkKeysModel:
@@ -4242,6 +4737,148 @@ components:
       example:
         secondary: secondary
         primary: primary
+    SegmentComparator:
+      type: string
+      enum:
+      - isIn
+      - isNotIn
+    SegmentListModel:
+      type: object
+      properties:
+        usage:
+          type: integer
+          format: int32
+        segmentId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        creatorEmail:
+          type: string
+          nullable: true
+        creatorFullName:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        lastUpdaterEmail:
+          type: string
+          nullable: true
+        lastUpdaterFullName:
+          type: string
+          nullable: true
+        updatedAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        lastUpdaterEmail: lastUpdaterEmail
+        creatorEmail: creatorEmail
+        usage: 0
+        segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        description: description
+        creatorFullName: creatorFullName
+        lastUpdaterFullName: lastUpdaterFullName
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+    SegmentModel:
+      type: object
+      properties:
+        comparisonAttribute:
+          type: string
+          nullable: true
+        comparator:
+          $ref: '#/components/schemas/RolloutRuleComparator'
+        comparisonValue:
+          type: string
+          nullable: true
+        segmentId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        creatorEmail:
+          type: string
+          nullable: true
+        creatorFullName:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        lastUpdaterEmail:
+          type: string
+          nullable: true
+        lastUpdaterFullName:
+          type: string
+          nullable: true
+        updatedAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+      example:
+        comparator: isOneOf
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        lastUpdaterEmail: lastUpdaterEmail
+        comparisonValue: comparisonValue
+        creatorEmail: creatorEmail
+        segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        description: description
+        creatorFullName: creatorFullName
+        lastUpdaterFullName: lastUpdaterFullName
+        comparisonAttribute: comparisonAttribute
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+    SegmentModel-haljson:
+      type: object
+      properties:
+        comparisonAttribute:
+          type: string
+          nullable: true
+        comparator:
+          $ref: '#/components/schemas/RolloutRuleComparator'
+        comparisonValue:
+          type: string
+          nullable: true
+        segmentId:
+          type: string
+          format: uuid
+        name:
+          type: string
+          nullable: true
+        description:
+          type: string
+          nullable: true
+        creatorEmail:
+          type: string
+          nullable: true
+        creatorFullName:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        lastUpdaterEmail:
+          type: string
+          nullable: true
+        lastUpdaterFullName:
+          type: string
+          nullable: true
+        updatedAt:
+          type: string
+          format: date-time
+        _links:
+          $ref: '#/components/schemas/EnvironmentModelhaljson__links'
     SettingDataModel:
       type: object
       properties:
@@ -4282,10 +4919,6 @@ components:
         ownerEmail:
           type: string
           nullable: true
-        expirationWarningAt:
-          type: string
-          format: date-time
-          nullable: true
         isWatching:
           type: boolean
       additionalProperties: false
@@ -4297,7 +4930,6 @@ components:
         name: name
         creatorFullName: creatorFullName
         isWatching: true
-        expirationWarningAt: 2000-01-23T04:56:07.000+00:00
         settingType: boolean
         key: key
         settingId: 0
@@ -4331,11 +4963,6 @@ components:
           type: string
           nullable: true
           readOnly: true
-        expirationWarningAt:
-          type: string
-          format: date-time
-          nullable: true
-          readOnly: true
         configId:
           type: string
           format: uuid
@@ -4356,7 +4983,6 @@ components:
         hint: hint
         ownerUserFullName: ownerUserFullName
         name: name
-        expirationWarningAt: 2000-01-23T04:56:07.000+00:00
         settingType: boolean
         ownerUserEmail: ownerUserEmail
         key: key
@@ -4409,11 +5035,6 @@ components:
           readOnly: true
         ownerUserFullName:
           type: string
-          nullable: true
-          readOnly: true
-        expirationWarningAt:
-          type: string
-          format: date-time
           nullable: true
           readOnly: true
         configId:
@@ -4507,10 +5128,14 @@ components:
         rolloutRules:
         - comparator: isOneOf
           comparisonValue: comparisonValue
+          segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          segmentComparator: isIn
           value: ""
           comparisonAttribute: comparisonAttribute
         - comparator: isOneOf
           comparisonValue: comparisonValue
+          segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          segmentComparator: isIn
           value: ""
           comparisonAttribute: comparisonAttribute
         rolloutPercentageItems:
@@ -4570,7 +5195,6 @@ components:
           name: name
           creatorFullName: creatorFullName
           isWatching: true
-          expirationWarningAt: 2000-01-23T04:56:07.000+00:00
           settingType: boolean
           key: key
           settingId: 0
@@ -4748,6 +5372,12 @@ components:
         canViewProductAuditLog:
           type: boolean
           nullable: true
+        canCreateOrUpdateSegments:
+          type: boolean
+          nullable: true
+        canDeleteSegments:
+          type: boolean
+          nullable: true
         accessType:
           $ref: '#/components/schemas/AccessType'
         newEnvironmentAccessType:
@@ -4768,6 +5398,32 @@ components:
           nullable: true
         description:
           maxLength: 1000
+          minLength: 0
+          type: string
+          nullable: true
+      additionalProperties: false
+    UpdateSegmentModel:
+      type: object
+      properties:
+        name:
+          maxLength: 255
+          minLength: 0
+          type: string
+          nullable: true
+        description:
+          maxLength: 1000
+          minLength: 0
+          type: string
+          nullable: true
+        comparisonAttribute:
+          maxLength: 1000
+          minLength: 0
+          type: string
+          nullable: true
+        comparator:
+          $ref: '#/components/schemas/RolloutRuleComparator'
+        comparisonValue:
+          maxLength: 65535
           minLength: 0
           type: string
           nullable: true
@@ -4868,6 +5524,8 @@ components:
           type: string
         members:
           type: string
+        segments:
+          type: string
     ConfigModelhaljson__embedded_product:
       type: object
       properties:
@@ -4964,12 +5622,9 @@ components:
         ownerEmail:
           type: string
           nullable: true
-        expirationWarningAt:
-          type: string
-          format: date-time
-          nullable: true
         isWatching:
           type: boolean
+      additionalProperties: false
     SettingValueModelhaljson__embedded_config:
       type: object
       properties:
@@ -5019,6 +5674,7 @@ components:
         url:
           type: string
           nullable: true
+      additionalProperties: false
     SettingValueModelhaljson__embedded_settingTags:
       type: object
       properties:
@@ -5034,6 +5690,7 @@ components:
         color:
           type: string
           nullable: true
+      additionalProperties: false
     SettingValueModelhaljson__embedded:
       type: object
       properties:
@@ -5057,7 +5714,7 @@ components:
       description: |-
         To authenticate with the API you have to fill the `Authorization` HTTP request header with your Public API credentials.
 
-        You can create your credentials on the <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">Public API credentials management page</a>.
+        You can create your credentials on the <a target="_blank" href="https://test-app.configcat.com/my-account/public-api-credentials">Public API credentials management page</a>.
       scheme: basic
 x-tagGroups:
 - name: Feature Flag values
@@ -5073,6 +5730,7 @@ x-tagGroups:
   - Products
   - Configs
   - Environments
+  - Segments
   - SDK Keys
 - name: Membership
   tags:

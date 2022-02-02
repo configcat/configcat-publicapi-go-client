@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 **CreatorFullName** | **string** |  | [optional] [default to null]
 **OwnerFullName** | **string** |  | [optional] [default to null]
 **OwnerEmail** | **string** |  | [optional] [default to null]
-**ExpirationWarningAt** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
 **IsWatching** | **bool** |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

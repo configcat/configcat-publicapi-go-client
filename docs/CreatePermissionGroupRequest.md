@@ -22,6 +22,8 @@ Name | Type | Description | Notes
 **CanRotateSdkKey** | **bool** |  | [optional] [default to null]
 **CanViewProductStatistics** | **bool** |  | [optional] [default to null]
 **CanViewProductAuditLog** | **bool** |  | [optional] [default to null]
+**CanCreateOrUpdateSegments** | **bool** |  | [optional] [default to null]
+**CanDeleteSegments** | **bool** |  | [optional] [default to null]
 **AccessType** | [***AccessType**](AccessType.md) |  | [optional] [default to null]
 **NewEnvironmentAccessType** | [***EnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] [default to null]
 **EnvironmentAccesses** | [**[]EnvironmentAccessModel**](EnvironmentAccessModel.md) |  | [optional] [default to null]
