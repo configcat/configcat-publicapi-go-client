@@ -3,10 +3,12 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ComparisonAttribute** | **string** | The user attribute to compare. | [default to null]
+**ComparisonAttribute** | **string** | The user attribute to compare. | [optional] [default to null]
 **Comparator** | [***RolloutRuleComparator**](RolloutRuleComparator.md) |  | [optional] [default to null]
-**ComparisonValue** | **string** | The value to compare against. | [default to null]
+**ComparisonValue** | **string** | The value to compare against. | [optional] [default to null]
 **Value** | [***Object**](.md) | The value to serve when the comparison matches. It must respect the setting type. | [optional] [default to null]
+**SegmentComparator** | [***SegmentComparator**](SegmentComparator.md) |  | [optional] [default to null]
+**SegmentId** | **string** | The segment to compare against. | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

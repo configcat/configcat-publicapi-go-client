@@ -9,29 +9,10 @@
  */
 package configcatpublicapi
 
-type UpdatePermissionGroupRequest struct {
-	Name string `json:"name,omitempty"`
-	CanManageMembers bool `json:"canManageMembers,omitempty"`
-	CanCreateOrUpdateConfig bool `json:"canCreateOrUpdateConfig,omitempty"`
-	CanDeleteConfig bool `json:"canDeleteConfig,omitempty"`
-	CanCreateOrUpdateEnvironment bool `json:"canCreateOrUpdateEnvironment,omitempty"`
-	CanDeleteEnvironment bool `json:"canDeleteEnvironment,omitempty"`
-	CanCreateOrUpdateSetting bool `json:"canCreateOrUpdateSetting,omitempty"`
-	CanTagSetting bool `json:"canTagSetting,omitempty"`
-	CanDeleteSetting bool `json:"canDeleteSetting,omitempty"`
-	CanCreateOrUpdateTag bool `json:"canCreateOrUpdateTag,omitempty"`
-	CanDeleteTag bool `json:"canDeleteTag,omitempty"`
-	CanManageWebhook bool `json:"canManageWebhook,omitempty"`
-	CanUseExportImport bool `json:"canUseExportImport,omitempty"`
-	CanManageProductPreferences bool `json:"canManageProductPreferences,omitempty"`
-	CanManageIntegrations bool `json:"canManageIntegrations,omitempty"`
-	CanViewSdkKey bool `json:"canViewSdkKey,omitempty"`
-	CanRotateSdkKey bool `json:"canRotateSdkKey,omitempty"`
-	CanViewProductStatistics bool `json:"canViewProductStatistics,omitempty"`
-	CanViewProductAuditLog bool `json:"canViewProductAuditLog,omitempty"`
-	CanCreateOrUpdateSegments bool `json:"canCreateOrUpdateSegments,omitempty"`
-	CanDeleteSegments bool `json:"canDeleteSegments,omitempty"`
-	AccessType *AccessType `json:"accessType,omitempty"`
-	NewEnvironmentAccessType *EnvironmentAccessType `json:"newEnvironmentAccessType,omitempty"`
-	EnvironmentAccesses []EnvironmentAccessModel `json:"environmentAccesses,omitempty"`
-}
+type SegmentComparator string
+
+// List of SegmentComparator
+const (
+	IS_IN_SegmentComparator SegmentComparator = "isIn"
+	IS_NOT_IN_SegmentComparator SegmentComparator = "isNotIn"
+)
