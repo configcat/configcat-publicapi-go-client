@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AuditLogId** | **int64** |  | [optional] [default to null]
 **AuditLogDateTime** | [**time.Time**](time.Time.md) |  | [optional] [default to null]
+**AuditLogTypeEnum** | [***AuditLogType**](AuditLogType.md) |  | [optional] [default to null]
 **AuditLogType** | **string** |  | [optional] [default to null]
 **UserEmail** | **string** |  | [optional] [default to null]
 **UserName** | **string** |  | [optional] [default to null]

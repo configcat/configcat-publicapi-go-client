@@ -14,16 +14,16 @@ import (
 )
 
 type SettingValueModelHaljson struct {
-	ReadOnly                bool                              `json:"readOnly,omitempty"`
-	UpdatedAt               time.Time                         `json:"updatedAt,omitempty"`
-	LastUpdaterUserEmail    string                            `json:"lastUpdaterUserEmail,omitempty"`
-	LastUpdaterUserFullName string                            `json:"lastUpdaterUserFullName,omitempty"`
-	Embedded                *SettingValueModelhaljsonEmbedded `json:"_embedded,omitempty"`
 	// The targeting rule collection.
 	RolloutRules []RolloutRuleModel `json:"rolloutRules,omitempty"`
 	// The percentage rule collection.
 	RolloutPercentageItems []RolloutPercentageItemModel `json:"rolloutPercentageItems,omitempty"`
 	// The value to serve. It must respect the setting type.
-	Value *interface{}                  `json:"value,omitempty"`
-	Links *EnvironmentModelhaljsonLinks `json:"_links,omitempty"`
+	Value                   *interface{}                      `json:"value,omitempty"`
+	UpdatedAt               time.Time                         `json:"updatedAt,omitempty"`
+	LastUpdaterUserEmail    string                            `json:"lastUpdaterUserEmail,omitempty"`
+	LastUpdaterUserFullName string                            `json:"lastUpdaterUserFullName,omitempty"`
+	Embedded                *SettingValueModelhaljsonEmbedded `json:"_embedded,omitempty"`
+	ReadOnly                bool                              `json:"readOnly,omitempty"`
+	Links                   *EnvironmentModelhaljsonLinks     `json:"_links,omitempty"`
 }

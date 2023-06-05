@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 **CanDeleteSegments** | **bool** |  | [optional] [default to null]
 **AccessType** | [***AccessType**](AccessType.md) |  | [optional] [default to null]
 **NewEnvironmentAccessType** | [***EnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] [default to null]
-**EnvironmentAccesses** | [**[]EnvironmentAccessModel**](EnvironmentAccessModel.md) |  | [optional] [default to null]
+**EnvironmentAccesses** | [**[]CreateOrUpdateEnvironmentAccessModel**](CreateOrUpdateEnvironmentAccessModel.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

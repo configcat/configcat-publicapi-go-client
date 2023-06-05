@@ -21,9 +21,14 @@ Name | Type | Description | Notes
 **CanManageIntegrations** | **bool** |  | [optional] [default to null]
 **CanViewSdkKey** | **bool** |  | [optional] [default to null]
 **CanRotateSdkKey** | **bool** |  | [optional] [default to null]
+**CanCreateOrUpdateSegments** | **bool** |  | [optional] [default to null]
+**CanDeleteSegments** | **bool** |  | [optional] [default to null]
+**CanViewProductAuditLog** | **bool** |  | [optional] [default to null]
+**CanViewProductStatistics** | **bool** |  | [optional] [default to null]
 **AccessType** | [***AccessType**](AccessType.md) |  | [optional] [default to null]
 **NewEnvironmentAccessType** | [***EnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] [default to null]
 **EnvironmentAccesses** | [**[]EnvironmentAccessModel**](EnvironmentAccessModel.md) |  | [optional] [default to null]
+**Product** | [***ProductModel**](ProductModel.md) |  | [optional] [default to null]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
