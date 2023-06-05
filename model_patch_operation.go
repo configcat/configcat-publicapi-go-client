@@ -21,9 +21,9 @@ var _ MappedNullable = &PatchOperation{}
 // PatchOperation struct for PatchOperation
 type PatchOperation struct {
 	Op *OperationType `json:"op,omitempty"`
-	From *JsonPointer `json:"from,omitempty"`
-	Path *JsonPointer `json:"path,omitempty"`
-	Value *JsonNode `json:"value,omitempty"`
+	From string `json:"from,omitempty"`
+	Path string `json:"path,omitempty"`
+	Value *interface{} `json:"value,omitempty"`
 }
 
 // NewPatchOperation instantiates a new PatchOperation object
@@ -41,134 +41,6 @@ func NewPatchOperation() *PatchOperation {
 func NewPatchOperationWithDefaults() *PatchOperation {
 	this := PatchOperation{}
 	return &this
-}
-
-// GetOp returns the Op field value if set, zero value otherwise.
-func (o *PatchOperation) GetOp() OperationType {
-	if o == nil || IsNil(o.Op) {
-		var ret OperationType
-		return ret
-	}
-	return *o.Op
-}
-
-// GetOpOk returns a tuple with the Op field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchOperation) GetOpOk() (*OperationType, bool) {
-	if o == nil || IsNil(o.Op) {
-		return nil, false
-	}
-	return o.Op, true
-}
-
-// HasOp returns a boolean if a field has been set.
-func (o *PatchOperation) HasOp() bool {
-	if o != nil && !IsNil(o.Op) {
-		return true
-	}
-
-	return false
-}
-
-// SetOp gets a reference to the given OperationType and assigns it to the Op field.
-func (o *PatchOperation) SetOp(v OperationType) {
-	o.Op = &v
-}
-
-// GetFrom returns the From field value if set, zero value otherwise.
-func (o *PatchOperation) GetFrom() JsonPointer {
-	if o == nil || IsNil(o.From) {
-		var ret JsonPointer
-		return ret
-	}
-	return *o.From
-}
-
-// GetFromOk returns a tuple with the From field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchOperation) GetFromOk() (*JsonPointer, bool) {
-	if o == nil || IsNil(o.From) {
-		return nil, false
-	}
-	return o.From, true
-}
-
-// HasFrom returns a boolean if a field has been set.
-func (o *PatchOperation) HasFrom() bool {
-	if o != nil && !IsNil(o.From) {
-		return true
-	}
-
-	return false
-}
-
-// SetFrom gets a reference to the given JsonPointer and assigns it to the From field.
-func (o *PatchOperation) SetFrom(v JsonPointer) {
-	o.From = &v
-}
-
-// GetPath returns the Path field value if set, zero value otherwise.
-func (o *PatchOperation) GetPath() JsonPointer {
-	if o == nil || IsNil(o.Path) {
-		var ret JsonPointer
-		return ret
-	}
-	return *o.Path
-}
-
-// GetPathOk returns a tuple with the Path field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchOperation) GetPathOk() (*JsonPointer, bool) {
-	if o == nil || IsNil(o.Path) {
-		return nil, false
-	}
-	return o.Path, true
-}
-
-// HasPath returns a boolean if a field has been set.
-func (o *PatchOperation) HasPath() bool {
-	if o != nil && !IsNil(o.Path) {
-		return true
-	}
-
-	return false
-}
-
-// SetPath gets a reference to the given JsonPointer and assigns it to the Path field.
-func (o *PatchOperation) SetPath(v JsonPointer) {
-	o.Path = &v
-}
-
-// GetValue returns the Value field value if set, zero value otherwise.
-func (o *PatchOperation) GetValue() JsonNode {
-	if o == nil || IsNil(o.Value) {
-		var ret JsonNode
-		return ret
-	}
-	return *o.Value
-}
-
-// GetValueOk returns a tuple with the Value field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PatchOperation) GetValueOk() (*JsonNode, bool) {
-	if o == nil || IsNil(o.Value) {
-		return nil, false
-	}
-	return o.Value, true
-}
-
-// HasValue returns a boolean if a field has been set.
-func (o *PatchOperation) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
-		return true
-	}
-
-	return false
-}
-
-// SetValue gets a reference to the given JsonNode and assigns it to the Value field.
-func (o *PatchOperation) SetValue(v JsonNode) {
-	o.Value = &v
 }
 
 func (o PatchOperation) MarshalJSON() ([]byte, error) {

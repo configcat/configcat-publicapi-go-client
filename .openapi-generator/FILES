@@ -70,11 +70,7 @@ docs/IntegrationLinkModel.md
 docs/IntegrationLinkType.md
 docs/IntegrationLinksApi.md
 docs/InviteMembersRequest.md
-docs/JsonNode.md
-docs/JsonNodeOptions.md
 docs/JsonPatch.md
-docs/JsonPointer.md
-docs/JsonPointerKind.md
 docs/MeApi.md
 docs/MeModel.md
 docs/MemberModel.md
