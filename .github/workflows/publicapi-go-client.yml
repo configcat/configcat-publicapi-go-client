@@ -21,6 +21,10 @@ jobs:
       uses: actions/setup-go@v2
       with:
         go-version: ${{ matrix.go }}
+    - name: Get dependencies
+      run: |
+        go get -v -t -d ./...
+        go mod vendor
 
     - name: Build
       run: go build -v ./...
