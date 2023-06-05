@@ -21,7 +21,7 @@ This endpoint creates a new Feature Flag or Setting in a specified Config identi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**CreateSettingModel**](CreateSettingModel.md)|  | 
+  **body** | [**CreateSettingInitialValues**](CreateSettingInitialValues.md)|  | 
   **configId** | [**string**](.md)| The identifier of the Config. | 
 
 ### Return type
@@ -134,7 +134,7 @@ This endpoint updates the metadata of a Feature Flag or Setting  with a collecti
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**[]Operation**](Operation.md)|  | 
+  **body** | [**JsonPatch**](JsonPatch.md)|  | 
   **settingId** | **int32**| The identifier of the Setting. | 
 
 ### Return type
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json-patch+json, application/json, text/json, application/_*+json
+ - **Content-Type**: application/json, text/json, application/_*+json
  - **Accept**: application/json, application/hal+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

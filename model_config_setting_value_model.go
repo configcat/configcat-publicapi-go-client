@@ -14,16 +14,16 @@ import (
 )
 
 type ConfigSettingValueModel struct {
+	// The targeting rule collection.
+	RolloutRules []RolloutRuleModel `json:"rolloutRules,omitempty"`
+	// The percentage rule collection.
+	RolloutPercentageItems []RolloutPercentageItemModel `json:"rolloutPercentageItems,omitempty"`
+	// The value to serve. It must respect the setting type.
+	Value                   *interface{}           `json:"value,omitempty"`
 	Setting                 *SettingDataModel      `json:"setting,omitempty"`
 	UpdatedAt               time.Time              `json:"updatedAt,omitempty"`
 	LastUpdaterUserEmail    string                 `json:"lastUpdaterUserEmail,omitempty"`
 	LastUpdaterUserFullName string                 `json:"lastUpdaterUserFullName,omitempty"`
 	IntegrationLinks        []IntegrationLinkModel `json:"integrationLinks,omitempty"`
 	SettingTags             []SettingTagModel      `json:"settingTags,omitempty"`
-	// The targeting rule collection.
-	RolloutRules []RolloutRuleModel `json:"rolloutRules,omitempty"`
-	// The percentage rule collection.
-	RolloutPercentageItems []RolloutPercentageItemModel `json:"rolloutPercentageItems,omitempty"`
-	// The value to serve. It must respect the setting type.
-	Value *interface{} `json:"value,omitempty"`
 }

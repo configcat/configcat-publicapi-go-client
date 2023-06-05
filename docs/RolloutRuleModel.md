@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **ComparisonAttribute** | **string** | The user attribute to compare. | [optional] [default to null]
 **Comparator** | [***RolloutRuleComparator**](RolloutRuleComparator.md) |  | [optional] [default to null]
 **ComparisonValue** | **string** | The value to compare against. | [optional] [default to null]
-**Value** | [***Object**](.md) | The value to serve when the comparison matches. It must respect the setting type. | [optional] [default to null]
+**Value** | [***interface{}**](.md) | The value to serve when the comparison matches. It must respect the setting type. | [optional] [default to null]
 **SegmentComparator** | [***SegmentComparator**](SegmentComparator.md) |  | [optional] [default to null]
 **SegmentId** | **string** | The segment to compare against. | [optional] [default to null]
 
