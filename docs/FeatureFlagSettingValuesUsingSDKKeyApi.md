@@ -1,4 +1,4 @@
-# {{classname}}
+# \FeatureFlagSettingValuesUsingSDKKeyApi
 
 All URIs are relative to *https://api.configcat.com*
 
@@ -8,26 +8,61 @@ Method | HTTP request | Description
 [**ReplaceSettingValueBySdkkey**](FeatureFlagSettingValuesUsingSDKKeyApi.md#ReplaceSettingValueBySdkkey) | **Put** /v1/settings/{settingKeyOrId}/value | Replace value
 [**UpdateSettingValueBySdkkey**](FeatureFlagSettingValuesUsingSDKKeyApi.md#UpdateSettingValueBySdkkey) | **Patch** /v1/settings/{settingKeyOrId}/value | Update value
 
-# **GetSettingValueBySdkkey**
-> SettingValueModel GetSettingValueBySdkkey(ctx, settingKeyOrId, optional)
+
+
+## GetSettingValueBySdkkey
+
+> SettingValueModel GetSettingValueBySdkkey(ctx, settingKeyOrId).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
+
 Get value
 
-This endpoint returns the value of a Feature Flag or Setting  in a specified Environment identified by the <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://app.configcat.com/sdkkey\">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.  The most important attributes in the response are the `value`, `rolloutRules` and `percentageRules`. The `value` represents what the clients will get when the evaluation requests of our SDKs  are not matching to any of the defined Targeting or Percentage Rules, or when there are no additional rules to evaluate.  The `rolloutRules` and `percentageRules` attributes are representing the current  Targeting and Percentage Rules configuration of the actual Feature Flag or Setting  in an **ordered** collection, which means the order of the returned rules is matching to the evaluation order. You can read more about these rules [here](https://configcat.com/docs/advanced/targeting/).
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    settingKeyOrId := "settingKeyOrId_example" // string | The key or id of the Setting.
+    xCONFIGCATSDKKEY := "xCONFIGCATSDKKEY_example" // string | The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyApi.GetSettingValueBySdkkey(context.Background(), settingKeyOrId).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesUsingSDKKeyApi.GetSettingValueBySdkkey``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetSettingValueBySdkkey`: SettingValueModel
+    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesUsingSDKKeyApi.GetSettingValueBySdkkey`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **settingKeyOrId** | **string**| The key or id of the Setting. | 
- **optional** | ***FeatureFlagSettingValuesUsingSDKKeyApiGetSettingValueBySdkkeyOpts** | optional parameters | nil if no parameters
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settingKeyOrId** | **string** | The key or id of the Setting. | 
 
-### Optional Parameters
-Optional parameters are passed through a pointer to a FeatureFlagSettingValuesUsingSDKKeyApiGetSettingValueBySdkkeyOpts struct
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSettingValueBySdkkeyRequest struct via the builder pattern
+
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **xCONFIGCATSDKKEY** | **optional.String**| The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) | 
+ **xCONFIGCATSDKKEY** | **string** | The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) | 
 
 ### Return type
 
@@ -39,34 +74,71 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/hal+json
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/hal+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **ReplaceSettingValueBySdkkey**
-> SettingValueModel ReplaceSettingValueBySdkkey(ctx, body, settingKeyOrId, optional)
+
+## ReplaceSettingValueBySdkkey
+
+> SettingValueModel ReplaceSettingValueBySdkkey(ctx, settingKeyOrId).UpdateSettingValueModel(updateSettingValueModel).Reason(reason).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
+
 Replace value
 
-This endpoint replaces the value of a Feature Flag or Setting  in a specified Environment identified by the <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://app.configcat.com/sdkkey\">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.  Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.  **Important:** As this endpoint is doing a complete replace, it's important to set every other attribute that you don't  want to change to its original state. Not listing one means that it will reset.  For example: We have the following resource. ``` {  \"rolloutPercentageItems\": [   {    \"percentage\": 30,    \"value\": true   },   {    \"percentage\": 70,    \"value\": false   }  ],  \"rolloutRules\": [],  \"value\": false } ``` If we send a replace request body as below: ``` {  \"value\": true } ``` Then besides that the default served value is set to `true`, all the Percentage Rules are deleted.  So we get a response like this: ``` {  \"rolloutPercentageItems\": [],  \"rolloutRules\": [],  \"value\": true } ```
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    settingKeyOrId := "settingKeyOrId_example" // string | The key or id of the Setting.
+    updateSettingValueModel := *openapiclient.NewUpdateSettingValueModel() // UpdateSettingValueModel | 
+    reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
+    xCONFIGCATSDKKEY := "xCONFIGCATSDKKEY_example" // string | The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyApi.ReplaceSettingValueBySdkkey(context.Background(), settingKeyOrId).UpdateSettingValueModel(updateSettingValueModel).Reason(reason).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesUsingSDKKeyApi.ReplaceSettingValueBySdkkey``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReplaceSettingValueBySdkkey`: SettingValueModel
+    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesUsingSDKKeyApi.ReplaceSettingValueBySdkkey`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**UpdateSettingValueModel**](UpdateSettingValueModel.md)|  | 
-  **settingKeyOrId** | **string**| The key or id of the Setting. | 
- **optional** | ***FeatureFlagSettingValuesUsingSDKKeyApiReplaceSettingValueBySdkkeyOpts** | optional parameters | nil if no parameters
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settingKeyOrId** | **string** | The key or id of the Setting. | 
 
-### Optional Parameters
-Optional parameters are passed through a pointer to a FeatureFlagSettingValuesUsingSDKKeyApiReplaceSettingValueBySdkkeyOpts struct
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReplaceSettingValueBySdkkeyRequest struct via the builder pattern
+
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
-
- **reason** | **optional.**| The reason note for the Audit Log if the Product&#x27;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
- **xCONFIGCATSDKKEY** | **optional.**| The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) | 
+ **updateSettingValueModel** | [**UpdateSettingValueModel**](UpdateSettingValueModel.md) |  | 
+ **reason** | **string** | The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
+ **xCONFIGCATSDKKEY** | **string** | The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) | 
 
 ### Return type
 
@@ -78,34 +150,71 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: application/json, application/hal+json
+- **Content-Type**: application/json, text/json, application/*+json
+- **Accept**: application/json, application/hal+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **UpdateSettingValueBySdkkey**
-> SettingValueModel UpdateSettingValueBySdkkey(ctx, body, settingKeyOrId, optional)
+
+## UpdateSettingValueBySdkkey
+
+> SettingValueModel UpdateSettingValueBySdkkey(ctx, settingKeyOrId).JsonPatch(jsonPatch).Reason(reason).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
+
 Update value
 
-This endpoint updates the value of a Feature Flag or Setting  with a collection of [JSON Patch](http://jsonpatch.com) operations in a specified Environment identified by the <a target=\"_blank\" rel=\"noopener noreferrer\" href=\"https://app.configcat.com/sdkkey\">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.  Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.  The advantage of using JSON Patch is that you can describe individual update operations on a resource without touching attributes that you don't want to change. It supports collection reordering, so it also  can be used for reordering the targeting rules of a Feature Flag or Setting.  For example: We have the following resource. ``` {  \"rolloutPercentageItems\": [   {    \"percentage\": 30,    \"value\": true   },   {    \"percentage\": 70,    \"value\": false   }  ],  \"rolloutRules\": [],  \"value\": false } ``` If we send an update request body as below: ``` [  {   \"op\": \"replace\",   \"path\": \"/value\",   \"value\": true  } ] ``` Only the default served value is going to be set to `true` and all the Percentage Rules are remaining unchanged. So we get a response like this: ``` {  \"rolloutPercentageItems\": [   {    \"percentage\": 30,    \"value\": true   },   {    \"percentage\": 70,    \"value\": false   }  ],  \"rolloutRules\": [],  \"value\": true } ```
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    settingKeyOrId := "settingKeyOrId_example" // string | The key or id of the Setting.
+    jsonPatch := *openapiclient.NewJsonPatch() // JsonPatch | 
+    reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
+    xCONFIGCATSDKKEY := "xCONFIGCATSDKKEY_example" // string | The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyApi.UpdateSettingValueBySdkkey(context.Background(), settingKeyOrId).JsonPatch(jsonPatch).Reason(reason).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesUsingSDKKeyApi.UpdateSettingValueBySdkkey``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateSettingValueBySdkkey`: SettingValueModel
+    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesUsingSDKKeyApi.UpdateSettingValueBySdkkey`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**JsonPatch**](JsonPatch.md)|  | 
-  **settingKeyOrId** | **string**| The key or id of the Setting. | 
- **optional** | ***FeatureFlagSettingValuesUsingSDKKeyApiUpdateSettingValueBySdkkeyOpts** | optional parameters | nil if no parameters
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settingKeyOrId** | **string** | The key or id of the Setting. | 
 
-### Optional Parameters
-Optional parameters are passed through a pointer to a FeatureFlagSettingValuesUsingSDKKeyApiUpdateSettingValueBySdkkeyOpts struct
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateSettingValueBySdkkeyRequest struct via the builder pattern
+
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
-
- **reason** | **optional.**| The reason note for the Audit Log if the Product&#x27;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
- **xCONFIGCATSDKKEY** | **optional.**| The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) | 
+ **jsonPatch** | [**JsonPatch**](JsonPatch.md) |  | 
+ **reason** | **string** | The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
+ **xCONFIGCATSDKKEY** | **string** | The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) | 
 
 ### Return type
 
@@ -117,8 +226,10 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: application/json, application/hal+json
+- **Content-Type**: application/json, text/json, application/*+json
+- **Accept**: application/json, application/hal+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 

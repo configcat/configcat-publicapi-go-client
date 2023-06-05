@@ -1,11 +1,5 @@
-# configcat-publicapi-go-client
-
-## 1. Generate client
-### Generation on Windows
-docker run --rm -it --env GOPATH=/go -v %CD%:/go/src -w /go/src swaggerapi/swagger-codegen-cli-v3:latest generate -i https://api.configcat.com/docs/v1/swagger.json -l go  -DpackageName=configcatpublicapi
-
-### Generation on Linux
-docker run --rm -v ${PWD}:/local swaggerapi/swagger-codegen-cli-v3:latest generate -i https://api.configcat.com/docs/v1/swagger.json -l go -DpackageName=configcatpublicapi
-
-## 2. Fix *Object references
-Replace all *Object with *interface{} in the generated code and in the documentation
+1. Regenerate public api
+Linux:
+```docker run --rm -v ${PWD}:/local openapitools/openapi-generator-cli:v6.6.0 generate -i https://api.configcat.com/docs/v1/swagger.json -g go -o /local --git-repo-id configcat-publicapi-go-client --git-user-id configcat --additional-properties=packageName=configcatpublicapi,enumClassPrefix=true,structPrefix=true```
+Windows: 
+```docker run --rm -v %CD%:/local openapitools/openapi-generator-cli:v6.6.0 generate -i https://api.configcat.com/docs/v1/swagger.json -g go -o /local --git-repo-id configcat-publicapi-go-client --git-user-id configcat --additional-properties=packageName=configcatpublicapi,enumClassPrefix=true,structPrefix=true```

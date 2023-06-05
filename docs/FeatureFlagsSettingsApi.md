@@ -1,4 +1,4 @@
-# {{classname}}
+# \FeatureFlagsSettingsApi
 
 All URIs are relative to *https://api.configcat.com*
 
@@ -10,19 +10,61 @@ Method | HTTP request | Description
 [**GetSettings**](FeatureFlagsSettingsApi.md#GetSettings) | **Get** /v1/configs/{configId}/settings | List Flags
 [**UpdateSetting**](FeatureFlagsSettingsApi.md#UpdateSetting) | **Patch** /v1/settings/{settingId} | Update Flag
 
-# **CreateSetting**
-> SettingModel CreateSetting(ctx, body, configId)
+
+
+## CreateSetting
+
+> SettingModel CreateSetting(ctx, configId).CreateSettingInitialValues(createSettingInitialValues).Execute()
+
 Create Flag
 
-This endpoint creates a new Feature Flag or Setting in a specified Config identified by the `configId` parameter.  **Important:** The `key` attribute must be unique within the given Config.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
+    createSettingInitialValues := *openapiclient.NewCreateSettingInitialValues("Key_example", "Name_example", openapiclient.SettingType("boolean")) // CreateSettingInitialValues | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FeatureFlagsSettingsApi.CreateSetting(context.Background(), configId).CreateSettingInitialValues(createSettingInitialValues).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsApi.CreateSetting``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateSetting`: SettingModel
+    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsApi.CreateSetting`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**CreateSettingInitialValues**](CreateSettingInitialValues.md)|  | 
-  **configId** | [**string**](.md)| The identifier of the Config. | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**configId** | **string** | The identifier of the Config. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateSettingRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **createSettingInitialValues** | [**CreateSettingInitialValues**](CreateSettingInitialValues.md) |  | 
 
 ### Return type
 
@@ -34,23 +76,63 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: application/json, application/hal+json
+- **Content-Type**: application/json, text/json, application/*+json
+- **Accept**: application/json, application/hal+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **DeleteSetting**
-> DeleteSetting(ctx, settingId)
+
+## DeleteSetting
+
+> DeleteSetting(ctx, settingId).Execute()
+
 Delete Flag
 
-This endpoint removes a Feature Flag or Setting from a specified Config,  identified by the `configId` parameter.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    settingId := int32(56) // int32 | The identifier of the Setting.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.FeatureFlagsSettingsApi.DeleteSetting(context.Background(), settingId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsApi.DeleteSetting``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **settingId** | **int32**| The identifier of the Setting. | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settingId** | **int32** | The identifier of the Setting. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteSettingRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -62,23 +144,65 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: Not defined
+- **Content-Type**: Not defined
+- **Accept**: Not defined
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **GetSetting**
-> SettingModel GetSetting(ctx, settingId)
+
+## GetSetting
+
+> SettingModel GetSetting(ctx, settingId).Execute()
+
 Get Flag
 
-This endpoint returns the metadata attributes of a Feature Flag or Setting  identified by the `settingId` parameter.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    settingId := int32(56) // int32 | The identifier of the Setting.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FeatureFlagsSettingsApi.GetSetting(context.Background(), settingId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsApi.GetSetting``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetSetting`: SettingModel
+    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsApi.GetSetting`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **settingId** | **int32**| The identifier of the Setting. | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settingId** | **int32** | The identifier of the Setting. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSettingRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -90,23 +214,65 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/hal+json
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/hal+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **GetSettings**
-> []SettingModel GetSettings(ctx, configId)
+
+## GetSettings
+
+> []SettingModel GetSettings(ctx, configId).Execute()
+
 List Flags
 
-This endpoint returns the list of the Feature Flags and Settings defined in a  specified Config, identified by the `configId` parameter.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FeatureFlagsSettingsApi.GetSettings(context.Background(), configId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsApi.GetSettings``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetSettings`: []SettingModel
+    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsApi.GetSettings`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **configId** | [**string**](.md)| The identifier of the Config. | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**configId** | **string** | The identifier of the Config. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSettingsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
 
 ### Return type
 
@@ -118,24 +284,67 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/hal+json
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/hal+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **UpdateSetting**
-> SettingModel UpdateSetting(ctx, body, settingId)
+
+## UpdateSetting
+
+> SettingModel UpdateSetting(ctx, settingId).JsonPatch(jsonPatch).Execute()
+
 Update Flag
 
-This endpoint updates the metadata of a Feature Flag or Setting  with a collection of [JSON Patch](http://jsonpatch.com) operations in a specified Config.  Only the `name`, `hint` and `tags` attributes are modifiable by this endpoint. The `tags` attribute is a simple collection of the [tag IDs](#operation/get-tags) attached to the given setting.  The advantage of using JSON Patch is that you can describe individual update operations on a resource without touching attributes that you don't want to change.  For example: We have the following resource. ``` {  \"settingId\": 5345,  \"key\": \"myGrandFeature\",  \"name\": \"Tihs is a naem with soem typos.\",  \"hint\": \"This flag controls my grandioso feature.\",  \"settingType\": \"boolean\",  \"tags\": [   {    \"tagId\": 0,    \"name\": \"sample tag\",    \"color\": \"whale\"   }  ] } ``` If we send an update request body as below (it changes the name and adds the already existing tag with the id 2): ``` [  {   \"op\": \"replace\",   \"path\": \"/name\",   \"value\": \"This is the name without typos.\"  },  {   \"op\": \"add\",   \"path\": \"/tags/-\",   \"value\": 2  } ] ``` Only the `name` and `tags` are going to be updated and all the other attributes are remaining unchanged. So we get a response like this: ``` {  \"settingId\": 5345,  \"key\": \"myGrandFeature\",  \"name\": \"This is the name without typos.\",  \"hint\": \"This flag controls my grandioso feature.\",  \"settingType\": \"boolean\",  \"tags\": [   {    \"tagId\": 0,    \"name\": \"sample tag\",    \"color\": \"whale\"   },   {    \"tagId\": 2,    \"name\": \"another tag\",    \"color\": \"koala\"   }  ] } ```
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    settingId := int32(56) // int32 | The identifier of the Setting.
+    jsonPatch := *openapiclient.NewJsonPatch() // JsonPatch | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FeatureFlagsSettingsApi.UpdateSetting(context.Background(), settingId).JsonPatch(jsonPatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsApi.UpdateSetting``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateSetting`: SettingModel
+    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsApi.UpdateSetting`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**JsonPatch**](JsonPatch.md)|  | 
-  **settingId** | **int32**| The identifier of the Setting. | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settingId** | **int32** | The identifier of the Setting. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateSettingRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **jsonPatch** | [**JsonPatch**](JsonPatch.md) |  | 
 
 ### Return type
 
@@ -147,8 +356,10 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: application/json, application/hal+json
+- **Content-Type**: application/json, text/json, application/*+json
+- **Accept**: application/json, application/hal+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 

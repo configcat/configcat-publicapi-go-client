@@ -22,6 +22,3 @@ _testmain.go
 *.exe
 *.test
 *.prof
-
-# Dependency directories (remove the comment below to include it)
-vendor/

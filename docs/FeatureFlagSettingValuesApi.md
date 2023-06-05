@@ -1,4 +1,4 @@
-# {{classname}}
+# \FeatureFlagSettingValuesApi
 
 All URIs are relative to *https://api.configcat.com*
 
@@ -10,19 +10,62 @@ Method | HTTP request | Description
 [**ReplaceSettingValue**](FeatureFlagSettingValuesApi.md#ReplaceSettingValue) | **Put** /v1/environments/{environmentId}/settings/{settingId}/value | Replace value
 [**UpdateSettingValue**](FeatureFlagSettingValuesApi.md#UpdateSettingValue) | **Patch** /v1/environments/{environmentId}/settings/{settingId}/value | Update value
 
-# **GetSettingValue**
-> SettingValueModel GetSettingValue(ctx, environmentId, settingId)
+
+
+## GetSettingValue
+
+> SettingValueModel GetSettingValue(ctx, environmentId, settingId).Execute()
+
 Get value
 
-This endpoint returns the value of a Feature Flag or Setting  in a specified Environment identified by the `environmentId` parameter.  The most important attributes in the response are the `value`, `rolloutRules` and `percentageRules`. The `value` represents what the clients will get when the evaluation requests of our SDKs  are not matching to any of the defined Targeting or Percentage Rules, or when there are no additional rules to evaluate.  The `rolloutRules` and `percentageRules` attributes are representing the current  Targeting and Percentage Rules configuration of the actual Feature Flag or Setting  in an **ordered** collection, which means the order of the returned rules is matching to the evaluation order. You can read more about these rules [here](https://configcat.com/docs/advanced/targeting/).
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+    settingId := int32(56) // int32 | The id of the Setting.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FeatureFlagSettingValuesApi.GetSettingValue(context.Background(), environmentId, settingId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesApi.GetSettingValue``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetSettingValue`: SettingValueModel
+    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesApi.GetSettingValue`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **environmentId** | [**string**](.md)| The identifier of the Environment. | 
-  **settingId** | **int32**| The id of the Setting. | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**environmentId** | **string** | The identifier of the Environment. | 
+**settingId** | **int32** | The id of the Setting. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSettingValueRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
 
 ### Return type
 
@@ -34,24 +77,68 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/hal+json
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/hal+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **GetSettingValues**
-> ConfigSettingValuesModel GetSettingValues(ctx, configId, environmentId)
+
+## GetSettingValues
+
+> ConfigSettingValuesModel GetSettingValues(ctx, configId, environmentId).Execute()
+
 Get values
 
-This endpoint returns the value of a specified Config's Feature Flags or Settings identified by the `configId` parameter in a specified Environment identified by the `environmentId` parameter.  The most important attributes in the response are the `value`, `rolloutRules` and `percentageRules`. The `value` represents what the clients will get when the evaluation requests of our SDKs  are not matching to any of the defined Targeting or Percentage Rules, or when there are no additional rules to evaluate.  The `rolloutRules` and `percentageRules` attributes are representing the current  Targeting and Percentage Rules configuration of the actual Feature Flag or Setting  in an **ordered** collection, which means the order of the returned rules is matching to the evaluation order. You can read more about these rules [here](https://configcat.com/docs/advanced/targeting/).
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
+    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FeatureFlagSettingValuesApi.GetSettingValues(context.Background(), configId, environmentId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesApi.GetSettingValues``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetSettingValues`: ConfigSettingValuesModel
+    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesApi.GetSettingValues`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **configId** | [**string**](.md)| The identifier of the Config. | 
-  **environmentId** | [**string**](.md)| The identifier of the Environment. | 
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**configId** | **string** | The identifier of the Config. | 
+**environmentId** | **string** | The identifier of the Environment. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSettingValuesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
 
 ### Return type
 
@@ -63,35 +150,72 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json, application/hal+json
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/hal+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **PostSettingValues**
-> ConfigSettingValuesModel PostSettingValues(ctx, body, configId, environmentId, optional)
+
+## PostSettingValues
+
+> ConfigSettingValuesModel PostSettingValues(ctx, configId, environmentId).UpdateSettingValuesWithIdModel(updateSettingValuesWithIdModel).Reason(reason).Execute()
+
 Post values
 
-This endpoint replaces the values of a specified Config's Feature Flags or Settings identified by the `configId` parameter in a specified Environment identified by the `environmentId` parameter.  Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.  **Important:** As this endpoint is doing a complete replace, it's important to set every other attribute that you don't  want to change in its original state. Not listing one means that it will reset.  For example: We have the following resource. ``` {     \"settingValues\": [   {    \"rolloutPercentageItems\": [     {      \"percentage\": 30,      \"value\": true     },     {      \"percentage\": 70,      \"value\": false     }    ],    \"rolloutRules\": [],    \"value\": false,    \"settingId\": 1   }  ] } ``` If we send a replace request body as below: ``` {   \"settingValues\": [   {    \"value\": true,    \"settingId\": 1   }  ] } ``` Then besides that the default value is set to `true`, all the Percentage Rules are deleted.  So we get a response like this: ``` {  \"settingValues\": [   {    \"rolloutPercentageItems\": [],    \"rolloutRules\": [],    \"value\": true,    \"setting\":     {     \"settingId\": 1    }   }  ] } ```  The `rolloutRules` property describes two types of rules:  - **Targeting rules**: When you want to add or update a targenting rule, the `comparator`, `comparisonAttribute`, and `comparisonValue` members are required. - **Segment rules**: When you want to add add or update a segment rule, the `segmentId` which identifies the desired segment and the `segmentComparator` members are required.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
+    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+    updateSettingValuesWithIdModel := *openapiclient.NewUpdateSettingValuesWithIdModel() // UpdateSettingValuesWithIdModel | 
+    reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FeatureFlagSettingValuesApi.PostSettingValues(context.Background(), configId, environmentId).UpdateSettingValuesWithIdModel(updateSettingValuesWithIdModel).Reason(reason).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesApi.PostSettingValues``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PostSettingValues`: ConfigSettingValuesModel
+    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesApi.PostSettingValues`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**UpdateSettingValuesWithIdModel**](UpdateSettingValuesWithIdModel.md)|  | 
-  **configId** | [**string**](.md)| The identifier of the Config. | 
-  **environmentId** | [**string**](.md)| The identifier of the Environment. | 
- **optional** | ***FeatureFlagSettingValuesApiPostSettingValuesOpts** | optional parameters | nil if no parameters
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**configId** | **string** | The identifier of the Config. | 
+**environmentId** | **string** | The identifier of the Environment. | 
 
-### Optional Parameters
-Optional parameters are passed through a pointer to a FeatureFlagSettingValuesApiPostSettingValuesOpts struct
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPostSettingValuesRequest struct via the builder pattern
+
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
-
- **reason** | **optional.**| The reason note for the Audit Log if the Product&#x27;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
+ **updateSettingValuesWithIdModel** | [**UpdateSettingValuesWithIdModel**](UpdateSettingValuesWithIdModel.md) |  | 
+ **reason** | **string** | The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
 
 ### Return type
 
@@ -103,35 +227,72 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: application/json, application/hal+json
+- **Content-Type**: application/json, text/json, application/*+json
+- **Accept**: application/json, application/hal+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **ReplaceSettingValue**
-> SettingValueModel ReplaceSettingValue(ctx, body, environmentId, settingId, optional)
+
+## ReplaceSettingValue
+
+> SettingValueModel ReplaceSettingValue(ctx, environmentId, settingId).UpdateSettingValueModel(updateSettingValueModel).Reason(reason).Execute()
+
 Replace value
 
-This endpoint replaces the whole value of a Feature Flag or Setting in a specified Environment.  Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.  **Important:** As this endpoint is doing a complete replace, it's important to set every other attribute that you don't  want to change in its original state. Not listing one means that it will reset.  For example: We have the following resource. ``` {  \"rolloutPercentageItems\": [   {    \"percentage\": 30,    \"value\": true   },   {    \"percentage\": 70,    \"value\": false   }  ],  \"rolloutRules\": [],  \"value\": false } ``` If we send a replace request body as below: ``` {  \"value\": true } ``` Then besides that the default value is set to `true`, all the Percentage Rules are deleted.  So we get a response like this: ``` {  \"rolloutPercentageItems\": [],  \"rolloutRules\": [],  \"value\": true } ```  The `rolloutRules` property describes two types of rules:  - **Targeting rules**: When you want to add or update a targenting rule, the `comparator`, `comparisonAttribute`, and `comparisonValue` members are required. - **Segment rules**: When you want to add add or update a segment rule, the `segmentId` which identifies the desired segment and the `segmentComparator` members are required.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+    settingId := int32(56) // int32 | The id of the Setting.
+    updateSettingValueModel := *openapiclient.NewUpdateSettingValueModel() // UpdateSettingValueModel | 
+    reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FeatureFlagSettingValuesApi.ReplaceSettingValue(context.Background(), environmentId, settingId).UpdateSettingValueModel(updateSettingValueModel).Reason(reason).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesApi.ReplaceSettingValue``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReplaceSettingValue`: SettingValueModel
+    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesApi.ReplaceSettingValue`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**UpdateSettingValueModel**](UpdateSettingValueModel.md)|  | 
-  **environmentId** | [**string**](.md)| The identifier of the Environment. | 
-  **settingId** | **int32**| The id of the Setting. | 
- **optional** | ***FeatureFlagSettingValuesApiReplaceSettingValueOpts** | optional parameters | nil if no parameters
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**environmentId** | **string** | The identifier of the Environment. | 
+**settingId** | **int32** | The id of the Setting. | 
 
-### Optional Parameters
-Optional parameters are passed through a pointer to a FeatureFlagSettingValuesApiReplaceSettingValueOpts struct
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReplaceSettingValueRequest struct via the builder pattern
+
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
-
- **reason** | **optional.**| The reason note for the Audit Log if the Product&#x27;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
+ **updateSettingValueModel** | [**UpdateSettingValueModel**](UpdateSettingValueModel.md) |  | 
+ **reason** | **string** | The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
 
 ### Return type
 
@@ -143,35 +304,72 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: application/json, application/hal+json
+- **Content-Type**: application/json, text/json, application/*+json
+- **Accept**: application/json, application/hal+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
-# **UpdateSettingValue**
-> SettingValueModel UpdateSettingValue(ctx, body, environmentId, settingId, optional)
+
+## UpdateSettingValue
+
+> SettingValueModel UpdateSettingValue(ctx, environmentId, settingId).JsonPatch(jsonPatch).Reason(reason).Execute()
+
 Update value
 
-This endpoint updates the value of a Feature Flag or Setting  with a collection of [JSON Patch](http://jsonpatch.com) operations in a specified Environment.  Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.  The advantage of using JSON Patch is that you can describe individual update operations on a resource without touching attributes that you don't want to change. It supports collection reordering, so it also  can be used for reordering the targeting rules of a Feature Flag or Setting.  For example: We have the following resource. ``` {  \"rolloutPercentageItems\": [   {    \"percentage\": 30,    \"value\": true   },   {    \"percentage\": 70,    \"value\": false   }  ],  \"rolloutRules\": [],  \"value\": false } ``` If we send an update request body as below: ``` [  {   \"op\": \"replace\",   \"path\": \"/value\",   \"value\": true  } ] ``` Only the default value is going to be set to `true` and all the Percentage Rules are remaining unchanged. So we get a response like this: ``` {  \"rolloutPercentageItems\": [   {    \"percentage\": 30,    \"value\": true   },   {    \"percentage\": 70,    \"value\": false   }  ],  \"rolloutRules\": [],  \"value\": true } ```  The `rolloutRules` property describes two types of rules:  - **Targeting rules**: When you want to add or update a targenting rule, the `comparator`, `comparisonAttribute`, and `comparisonValue` members are required. - **Segment rules**: When you want to add add or update a segment rule, the `segmentId` which identifies the desired segment and the `segmentComparator` members are required.
 
-### Required Parameters
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+    settingId := int32(56) // int32 | The id of the Setting.
+    jsonPatch := *openapiclient.NewJsonPatch() // JsonPatch | 
+    reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FeatureFlagSettingValuesApi.UpdateSettingValue(context.Background(), environmentId, settingId).JsonPatch(jsonPatch).Reason(reason).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesApi.UpdateSettingValue``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateSettingValue`: SettingValueModel
+    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesApi.UpdateSettingValue`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-  **body** | [**JsonPatch**](JsonPatch.md)|  | 
-  **environmentId** | [**string**](.md)| The identifier of the Environment. | 
-  **settingId** | **int32**| The id of the Setting. | 
- **optional** | ***FeatureFlagSettingValuesApiUpdateSettingValueOpts** | optional parameters | nil if no parameters
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**environmentId** | **string** | The identifier of the Environment. | 
+**settingId** | **int32** | The id of the Setting. | 
 
-### Optional Parameters
-Optional parameters are passed through a pointer to a FeatureFlagSettingValuesApiUpdateSettingValueOpts struct
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateSettingValueRequest struct via the builder pattern
+
+
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
-
- **reason** | **optional.**| The reason note for the Audit Log if the Product&#x27;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
+ **jsonPatch** | [**JsonPatch**](JsonPatch.md) |  | 
+ **reason** | **string** | The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
 
 ### Return type
 
@@ -183,8 +381,10 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json, text/json, application/_*+json
- - **Accept**: application/json, application/hal+json
+- **Content-Type**: application/json, text/json, application/*+json
+- **Accept**: application/json, application/hal+json
 
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
