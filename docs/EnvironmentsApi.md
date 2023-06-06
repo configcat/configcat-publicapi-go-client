@@ -1,6 +1,6 @@
 # \EnvironmentsApi
 
-All URIs are relative to *https://api.configcat.com*
+All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 ## DeleteEnvironment
 
-> DeleteEnvironment(ctx, environmentId).Execute()
+> DeleteEnvironment(ctx, environmentId).CleanupAuditLogs(cleanupAuditLogs).Execute()
 
 Delete Environment
 
@@ -106,10 +106,11 @@ import (
 
 func main() {
     environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+    cleanupAuditLogs := true // bool | An optional flag which indicates whether the audit log records related to the environment should be deleted or not. (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.EnvironmentsApi.DeleteEnvironment(context.Background(), environmentId).Execute()
+    r, err := apiClient.EnvironmentsApi.DeleteEnvironment(context.Background(), environmentId).CleanupAuditLogs(cleanupAuditLogs).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsApi.DeleteEnvironment``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -133,6 +134,7 @@ Other parameters are passed through a pointer to a apiDeleteEnvironmentRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **cleanupAuditLogs** | **bool** | An optional flag which indicates whether the audit log records related to the environment should be deleted or not. | 
 
 ### Return type
 

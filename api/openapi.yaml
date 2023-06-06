@@ -4,8 +4,8 @@ info:
     email: support@configcat.com
     name: ConfigCat
     url: https://configcat.com
-  description: "**Base API URL**: https://api.configcat.com\n\nIf you prefer the swagger\
-    \ documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).\n\
+  description: "**Base API URL**: https://test-api.configcat.com\n\nIf you prefer\
+    \ the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).\n\
     \nThe purpose of this API is to access the ConfigCat platform programmatically.\
     \ \nYou can **Create**, **Read**, **Update** and **Delete** any entities like\
     \ **Feature Flags, Configs, Environments** or **Products** within ConfigCat. \n\
@@ -30,9 +30,9 @@ info:
   title: ConfigCat Public Management API
   version: v1
   x-logo:
-    url: https://api.configcat.com/resources/configcat-logo-horiz.svg
+    url: https://test-api.configcat.com/resources/configcat-logo-horiz.svg
 servers:
-- url: https://api.configcat.com
+- url: https://test-api.configcat.com
 security:
 - Basic: []
 tags:
@@ -713,8 +713,10 @@ paths:
       - Environments
   /v1/environments/{environmentId}:
     delete:
-      description: This endpoint removes an Environment identified by the `environmentId`
-        parameter.
+      description: |-
+        This endpoint removes an Environment identified by the `environmentId` parameter.
+        If the `cleanupAuditLogs` flag is set to true, it also deletes the audit log records related to the environment
+        (except for the `Created a new environment` and `Deleted an environment` records).
       operationId: delete-environment
       parameters:
       - description: The identifier of the Environment.
@@ -726,6 +728,15 @@ paths:
           format: uuid
           type: string
         style: simple
+      - description: An optional flag which indicates whether the audit log records
+          related to the environment should be deleted or not.
+        explode: true
+        in: query
+        name: cleanupAuditLogs
+        required: false
+        schema:
+          type: boolean
+        style: form
       responses:
         "204":
           description: When the delete was successful.
@@ -1006,7 +1017,9 @@ paths:
                   path: /rolloutRules/1
                   from: /rolloutRules/0
             schema:
-              $ref: '#/components/schemas/JsonPatch'
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+              type: array
           text/json:
             examples:
               turn on a feature flag:
@@ -1073,7 +1086,9 @@ paths:
                   path: /rolloutRules/1
                   from: /rolloutRules/0
             schema:
-              $ref: '#/components/schemas/JsonPatch'
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+              type: array
           application/*+json:
             examples:
               turn on a feature flag:
@@ -1140,7 +1155,9 @@ paths:
                   path: /rolloutRules/1
                   from: /rolloutRules/0
             schema:
-              $ref: '#/components/schemas/JsonPatch'
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+              type: array
         required: true
       responses:
         "200":
@@ -1613,7 +1630,9 @@ paths:
                   path: /rolloutRules/1
                   from: /rolloutRules/0
             schema:
-              $ref: '#/components/schemas/JsonPatch'
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+              type: array
           text/json:
             examples:
               turn on a feature flag:
@@ -1680,7 +1699,9 @@ paths:
                   path: /rolloutRules/1
                   from: /rolloutRules/0
             schema:
-              $ref: '#/components/schemas/JsonPatch'
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+              type: array
           application/*+json:
             examples:
               turn on a feature flag:
@@ -1747,7 +1768,9 @@ paths:
                   path: /rolloutRules/1
                   from: /rolloutRules/0
             schema:
-              $ref: '#/components/schemas/JsonPatch'
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+              type: array
         required: true
       responses:
         "200":
@@ -2101,13 +2124,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/JsonPatch'
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+              type: array
           text/json:
             schema:
-              $ref: '#/components/schemas/JsonPatch'
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+              type: array
           application/*+json:
             schema:
-              $ref: '#/components/schemas/JsonPatch'
+              items:
+                $ref: '#/components/schemas/JsonPatchOperation'
+              type: array
         required: true
       responses:
         "200":
@@ -5015,122 +5044,31 @@ components:
       - emails
       - permissionGroupId
       type: object
-    JsonNode:
+    JsonPatchOperation:
       additionalProperties: false
       example:
-        parent: null
-        root: null
-        options:
-          propertyNameCaseInsensitive: true
+        op: null
+        path: path
+        from: from
+        value: ""
       properties:
-        options:
-          $ref: '#/components/schemas/JsonNodeOptions'
-        parent:
-          $ref: '#/components/schemas/JsonNode'
-        root:
-          $ref: '#/components/schemas/JsonNode'
-      type: object
-    JsonNodeOptions:
-      additionalProperties: false
-      example:
-        propertyNameCaseInsensitive: true
-      properties:
-        propertyNameCaseInsensitive:
-          type: boolean
-      type: object
-    JsonPatch:
-      additionalProperties: false
-      example:
-        operations:
-        - op: null
-          path:
-            isUriEncoded: true
-            kind: null
-            source: source
-            segments:
-            - source: source
-              value: value
-            - source: source
-              value: value
-          from:
-            isUriEncoded: true
-            kind: null
-            source: source
-            segments:
-            - source: source
-              value: value
-            - source: source
-              value: value
-          value:
-            parent: null
-            root: null
-            options:
-              propertyNameCaseInsensitive: true
-        - op: null
-          path:
-            isUriEncoded: true
-            kind: null
-            source: source
-            segments:
-            - source: source
-              value: value
-            - source: source
-              value: value
-          from:
-            isUriEncoded: true
-            kind: null
-            source: source
-            segments:
-            - source: source
-              value: value
-            - source: source
-              value: value
-          value:
-            parent: null
-            root: null
-            options:
-              propertyNameCaseInsensitive: true
-      properties:
-        operations:
-          items:
-            $ref: '#/components/schemas/PatchOperation'
-          nullable: true
-          type: array
-      type: object
-    JsonPointer:
-      additionalProperties: false
-      example:
-        isUriEncoded: true
-        kind: null
-        source: source
-        segments:
-        - source: source
-          value: value
-        - source: source
-          value: value
-      properties:
-        source:
-          nullable: true
-          readOnly: true
+        op:
+          $ref: '#/components/schemas/OperationType'
+        path:
+          description: The source path.
+          minLength: 1
           type: string
-        segments:
-          items:
-            $ref: '#/components/schemas/PointerSegment'
+        from:
+          description: The target path.
           nullable: true
-          readOnly: true
-          type: array
-        isUriEncoded:
-          readOnly: true
-          type: boolean
-        kind:
-          $ref: '#/components/schemas/JsonPointerKind'
+          type: string
+        value:
+          description: The discrete value.
+          nullable: true
+      required:
+      - op
+      - path
       type: object
-    JsonPointerKind:
-      enum:
-      - unspecified
-      - plain
-      - uriEncoded
-      type: string
     MeModel:
       additionalProperties: false
       example:
@@ -5204,43 +5142,6 @@ components:
           type: string
         _links:
           $ref: '#/components/schemas/ConfigModel_haljson__embedded_product__embedded_organization__links'
-      type: object
-    PatchOperation:
-      additionalProperties: false
-      example:
-        op: null
-        path:
-          isUriEncoded: true
-          kind: null
-          source: source
-          segments:
-          - source: source
-            value: value
-          - source: source
-            value: value
-        from:
-          isUriEncoded: true
-          kind: null
-          source: source
-          segments:
-          - source: source
-            value: value
-          - source: source
-            value: value
-        value:
-          parent: null
-          root: null
-          options:
-            propertyNameCaseInsensitive: true
-      properties:
-        op:
-          $ref: '#/components/schemas/OperationType'
-        from:
-          $ref: '#/components/schemas/JsonPointer'
-        path:
-          $ref: '#/components/schemas/JsonPointer'
-        value:
-          $ref: '#/components/schemas/JsonNode'
       type: object
     PermissionGroupModel:
       additionalProperties: false
@@ -5413,21 +5314,6 @@ components:
           $ref: '#/components/schemas/ConfigModel_haljson__embedded'
         _links:
           $ref: '#/components/schemas/EnvironmentModel_haljson__links'
-      type: object
-    PointerSegment:
-      additionalProperties: false
-      example:
-        source: source
-        value: value
-      properties:
-        source:
-          nullable: true
-          readOnly: true
-          type: string
-        value:
-          nullable: true
-          readOnly: true
-          type: string
       type: object
     ProductModel:
       additionalProperties: false
@@ -6827,7 +6713,7 @@ components:
       description: |-
         To authenticate with the API you have to fill the `Authorization` HTTP request header with your Public API credentials.
 
-        You can create your credentials on the <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">Public API credentials management page</a>.
+        You can create your credentials on the <a target="_blank" href="https://test-app.configcat.com/my-account/public-api-credentials">Public API credentials management page</a>.
       scheme: basic
       type: http
 x-tagGroups:

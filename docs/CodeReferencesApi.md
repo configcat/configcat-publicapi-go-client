@@ -1,6 +1,6 @@
 # \CodeReferencesApi
 
-All URIs are relative to *https://api.configcat.com*
+All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------

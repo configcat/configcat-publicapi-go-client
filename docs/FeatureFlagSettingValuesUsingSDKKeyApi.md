@@ -1,6 +1,6 @@
 # \FeatureFlagSettingValuesUsingSDKKeyApi
 
-All URIs are relative to *https://api.configcat.com*
+All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -160,7 +160,7 @@ Name | Type | Description  | Notes
 
 ## UpdateSettingValueBySdkkey
 
-> SettingValueModel UpdateSettingValueBySdkkey(ctx, settingKeyOrId).JsonPatch(jsonPatch).Reason(reason).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
+> SettingValueModel UpdateSettingValueBySdkkey(ctx, settingKeyOrId).JsonPatchOperation(jsonPatchOperation).Reason(reason).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
 
 Update value
 
@@ -180,13 +180,13 @@ import (
 
 func main() {
     settingKeyOrId := "settingKeyOrId_example" // string | The key or id of the Setting.
-    jsonPatch := *openapiclient.NewJsonPatch() // JsonPatch | 
+    jsonPatchOperation := []openapiclient.JsonPatchOperation{*openapiclient.NewJsonPatchOperation(openapiclient.OperationType("unknown"), "Path_example")} // []JsonPatchOperation | 
     reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
     xCONFIGCATSDKKEY := "xCONFIGCATSDKKEY_example" // string | The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyApi.UpdateSettingValueBySdkkey(context.Background(), settingKeyOrId).JsonPatch(jsonPatch).Reason(reason).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
+    resp, r, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyApi.UpdateSettingValueBySdkkey(context.Background(), settingKeyOrId).JsonPatchOperation(jsonPatchOperation).Reason(reason).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesUsingSDKKeyApi.UpdateSettingValueBySdkkey``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -212,7 +212,7 @@ Other parameters are passed through a pointer to a apiUpdateSettingValueBySdkkey
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **jsonPatch** | [**JsonPatch**](JsonPatch.md) |  | 
+ **jsonPatchOperation** | [**[]JsonPatchOperation**](JsonPatchOperation.md) |  | 
  **reason** | **string** | The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
  **xCONFIGCATSDKKEY** | **string** | The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) | 
 

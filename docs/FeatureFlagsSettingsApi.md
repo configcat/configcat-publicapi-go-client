@@ -1,6 +1,6 @@
 # \FeatureFlagsSettingsApi
 
-All URIs are relative to *https://api.configcat.com*
+All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -294,7 +294,7 @@ Name | Type | Description  | Notes
 
 ## UpdateSetting
 
-> SettingModel UpdateSetting(ctx, settingId).JsonPatch(jsonPatch).Execute()
+> SettingModel UpdateSetting(ctx, settingId).JsonPatchOperation(jsonPatchOperation).Execute()
 
 Update Flag
 
@@ -314,11 +314,11 @@ import (
 
 func main() {
     settingId := int32(56) // int32 | The identifier of the Setting.
-    jsonPatch := *openapiclient.NewJsonPatch() // JsonPatch | 
+    jsonPatchOperation := []openapiclient.JsonPatchOperation{*openapiclient.NewJsonPatchOperation(openapiclient.OperationType("unknown"), "Path_example")} // []JsonPatchOperation | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FeatureFlagsSettingsApi.UpdateSetting(context.Background(), settingId).JsonPatch(jsonPatch).Execute()
+    resp, r, err := apiClient.FeatureFlagsSettingsApi.UpdateSetting(context.Background(), settingId).JsonPatchOperation(jsonPatchOperation).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsApi.UpdateSetting``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -344,7 +344,7 @@ Other parameters are passed through a pointer to a apiUpdateSettingRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **jsonPatch** | [**JsonPatch**](JsonPatch.md) |  | 
+ **jsonPatchOperation** | [**[]JsonPatchOperation**](JsonPatchOperation.md) |  | 
 
 ### Return type
 

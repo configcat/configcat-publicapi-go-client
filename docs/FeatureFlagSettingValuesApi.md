@@ -1,6 +1,6 @@
 # \FeatureFlagSettingValuesApi
 
-All URIs are relative to *https://api.configcat.com*
+All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -314,7 +314,7 @@ Name | Type | Description  | Notes
 
 ## UpdateSettingValue
 
-> SettingValueModel UpdateSettingValue(ctx, environmentId, settingId).JsonPatch(jsonPatch).Reason(reason).Execute()
+> SettingValueModel UpdateSettingValue(ctx, environmentId, settingId).JsonPatchOperation(jsonPatchOperation).Reason(reason).Execute()
 
 Update value
 
@@ -335,12 +335,12 @@ import (
 func main() {
     environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
     settingId := int32(56) // int32 | The id of the Setting.
-    jsonPatch := *openapiclient.NewJsonPatch() // JsonPatch | 
+    jsonPatchOperation := []openapiclient.JsonPatchOperation{*openapiclient.NewJsonPatchOperation(openapiclient.OperationType("unknown"), "Path_example")} // []JsonPatchOperation | 
     reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FeatureFlagSettingValuesApi.UpdateSettingValue(context.Background(), environmentId, settingId).JsonPatch(jsonPatch).Reason(reason).Execute()
+    resp, r, err := apiClient.FeatureFlagSettingValuesApi.UpdateSettingValue(context.Background(), environmentId, settingId).JsonPatchOperation(jsonPatchOperation).Reason(reason).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesApi.UpdateSettingValue``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -368,7 +368,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **jsonPatch** | [**JsonPatch**](JsonPatch.md) |  | 
+ **jsonPatchOperation** | [**[]JsonPatchOperation**](JsonPatchOperation.md) |  | 
  **reason** | **string** | The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
 
 ### Return type
