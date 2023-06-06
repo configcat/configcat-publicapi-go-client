@@ -624,12 +624,12 @@ type FeatureFlagSettingValuesApiUpdateSettingValueRequest struct {
 	ApiService *FeatureFlagSettingValuesApiService
 	environmentId string
 	settingId int32
-	jsonPatch *JsonPatch
+	patchOperations []PatchOperation
 	reason *string
 }
 
-func (r FeatureFlagSettingValuesApiUpdateSettingValueRequest) JsonPatch(jsonPatch JsonPatch) FeatureFlagSettingValuesApiUpdateSettingValueRequest {
-	r.jsonPatch = &jsonPatch
+func (r FeatureFlagSettingValuesApiUpdateSettingValueRequest) PatchOperations(patchOperations []PatchOperation) FeatureFlagSettingValuesApiUpdateSettingValueRequest {
+	r.patchOperations = patchOperations
 	return r
 }
 
@@ -742,8 +742,8 @@ func (a *FeatureFlagSettingValuesApiService) UpdateSettingValueExecute(r Feature
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.jsonPatch == nil {
-		return localVarReturnValue, nil, reportError("jsonPatch is required and must be specified")
+	if r.patchOperations == nil {
+		return localVarReturnValue, nil, reportError("patchOperations is required and must be specified")
 	}
 
 	if r.reason != nil {
@@ -767,7 +767,7 @@ func (a *FeatureFlagSettingValuesApiService) UpdateSettingValueExecute(r Feature
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.jsonPatch
+	localVarPostBody = r.patchOperations
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

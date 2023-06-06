@@ -324,13 +324,13 @@ type FeatureFlagSettingValuesUsingSDKKeyApiUpdateSettingValueBySdkkeyRequest str
 	ctx context.Context
 	ApiService *FeatureFlagSettingValuesUsingSDKKeyApiService
 	settingKeyOrId string
-	jsonPatch *JsonPatch
+	patchOperations []PatchOperation
 	reason *string
 	xCONFIGCATSDKKEY *string
 }
 
-func (r FeatureFlagSettingValuesUsingSDKKeyApiUpdateSettingValueBySdkkeyRequest) JsonPatch(jsonPatch JsonPatch) FeatureFlagSettingValuesUsingSDKKeyApiUpdateSettingValueBySdkkeyRequest {
-	r.jsonPatch = &jsonPatch
+func (r FeatureFlagSettingValuesUsingSDKKeyApiUpdateSettingValueBySdkkeyRequest) PatchOperations(patchOperations []PatchOperation) FeatureFlagSettingValuesUsingSDKKeyApiUpdateSettingValueBySdkkeyRequest {
+	r.patchOperations = patchOperations
 	return r
 }
 
@@ -442,8 +442,8 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyApiService) UpdateSettingValueBySdkk
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.jsonPatch == nil {
-		return localVarReturnValue, nil, reportError("jsonPatch is required and must be specified")
+	if r.patchOperations == nil {
+		return localVarReturnValue, nil, reportError("patchOperations is required and must be specified")
 	}
 
 	if r.reason != nil {
@@ -470,7 +470,7 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyApiService) UpdateSettingValueBySdkk
 		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-CONFIGCAT-SDKKEY", r.xCONFIGCATSDKKEY, "")
 	}
 	// body params
-	localVarPostBody = r.jsonPatch
+	localVarPostBody = r.patchOperations
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -446,11 +446,11 @@ type FeatureFlagsSettingsApiUpdateSettingRequest struct {
 	ctx context.Context
 	ApiService *FeatureFlagsSettingsApiService
 	settingId int32
-	jsonPatch *JsonPatch
+	patchOperations []PatchOperation
 }
 
-func (r FeatureFlagsSettingsApiUpdateSettingRequest) JsonPatch(jsonPatch JsonPatch) FeatureFlagsSettingsApiUpdateSettingRequest {
-	r.jsonPatch = &jsonPatch
+func (r FeatureFlagsSettingsApiUpdateSettingRequest) PatchOperations(patchOperations []PatchOperation) FeatureFlagsSettingsApiUpdateSettingRequest {
+	r.patchOperations = patchOperations
 	return r
 }
 
@@ -559,8 +559,8 @@ func (a *FeatureFlagsSettingsApiService) UpdateSettingExecute(r FeatureFlagsSett
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.jsonPatch == nil {
-		return localVarReturnValue, nil, reportError("jsonPatch is required and must be specified")
+	if r.patchOperations == nil {
+		return localVarReturnValue, nil, reportError("patchOperations is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -581,7 +581,7 @@ func (a *FeatureFlagsSettingsApiService) UpdateSettingExecute(r FeatureFlagsSett
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.jsonPatch
+	localVarPostBody = r.patchOperations
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
