@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EnvironmentId** | Pointer to **string** | The ID of the Environment where the initial value should be set. | [optional] 
+**EnvironmentId** | Pointer to **string** | The ID of the Environment where the initial value must be set. | [optional] 
 **Value** | Pointer to **interface{}** | The initial value in the given Environment. It must respect the setting type. | [optional] 
 
 ## Methods

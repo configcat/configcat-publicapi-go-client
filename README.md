@@ -1,8 +1,8 @@
 # Go API client for configcatpublicapi
 
-**Base API URL**: https://api.configcat.com
+**Base API URL**: https://test-api.configcat.com
 
-If you prefer the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).
+If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).
 
 The purpose of this API is to access the ConfigCat platform programmatically. 
 You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat. 
@@ -13,7 +13,10 @@ and JSON+HAL format. Do not use this API for accessing and evaluating feature fl
 
 # OpenAPI Specification
 
-The complete specification is publicly available here: [swagger.json](v1/swagger.json). 
+The complete specification is publicly available in the following formats: 
+- [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json)
+- [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)
+
 You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or
 [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.
 
@@ -105,15 +108,17 @@ ctx = context.WithValue(context.Background(), configcatpublicapi.ContextOperatio
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api.configcat.com*
+All URIs are relative to *https://test-api.configcat.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AuditLogsApi* | [**GetAuditlogs**](docs/AuditLogsApi.md#getauditlogs) | **Get** /v1/products/{productId}/auditlogs | List Audit log items for Product
 *AuditLogsApi* | [**GetDeletedSettings**](docs/AuditLogsApi.md#getdeletedsettings) | **Get** /v1/configs/{configId}/deleted-settings | List Deleted Settings
 *AuditLogsApi* | [**GetOrganizationAuditlogs**](docs/AuditLogsApi.md#getorganizationauditlogs) | **Get** /v1/organizations/{organizationId}/auditlogs | List Audit log items for Organization
-*CodeReferencesApi* | [**V1CodeReferencesDeleteReportsPost**](docs/CodeReferencesApi.md#v1codereferencesdeletereportspost) | **Post** /v1/code-references/delete-reports | 
-*CodeReferencesApi* | [**V1CodeReferencesPost**](docs/CodeReferencesApi.md#v1codereferencespost) | **Post** /v1/code-references | 
+*CodeReferencesApi* | [**V1CodeReferencesDeleteReportsPost**](docs/CodeReferencesApi.md#v1codereferencesdeletereportspost) | **Post** /v1/code-references/delete-reports | Delete Reference reports
+*CodeReferencesApi* | [**V1CodeReferencesPost**](docs/CodeReferencesApi.md#v1codereferencespost) | **Post** /v1/code-references | Upload References
+*CodeReferencesApi* | [**V1ConfigsConfigIdCodeReferencesGet**](docs/CodeReferencesApi.md#v1configsconfigidcodereferencesget) | **Get** /v1/configs/{configId}/code-references | Get References in Config
+*CodeReferencesApi* | [**V1SettingsSettingIdCodeReferencesGet**](docs/CodeReferencesApi.md#v1settingssettingidcodereferencesget) | **Get** /v1/settings/{settingId}/code-references | Get References for Feature Flag or Setting
 *ConfigsApi* | [**CreateConfig**](docs/ConfigsApi.md#createconfig) | **Post** /v1/products/{productId}/configs | Create Config
 *ConfigsApi* | [**DeleteConfig**](docs/ConfigsApi.md#deleteconfig) | **Delete** /v1/configs/{configId} | Delete Config
 *ConfigsApi* | [**GetConfig**](docs/ConfigsApi.md#getconfig) | **Get** /v1/configs/{configId} | Get Config
@@ -132,6 +137,14 @@ Class | Method | HTTP request | Description
 *FeatureFlagSettingValuesUsingSDKKeyApi* | [**GetSettingValueBySdkkey**](docs/FeatureFlagSettingValuesUsingSDKKeyApi.md#getsettingvaluebysdkkey) | **Get** /v1/settings/{settingKeyOrId}/value | Get value
 *FeatureFlagSettingValuesUsingSDKKeyApi* | [**ReplaceSettingValueBySdkkey**](docs/FeatureFlagSettingValuesUsingSDKKeyApi.md#replacesettingvaluebysdkkey) | **Put** /v1/settings/{settingKeyOrId}/value | Replace value
 *FeatureFlagSettingValuesUsingSDKKeyApi* | [**UpdateSettingValueBySdkkey**](docs/FeatureFlagSettingValuesUsingSDKKeyApi.md#updatesettingvaluebysdkkey) | **Patch** /v1/settings/{settingKeyOrId}/value | Update value
+*FeatureFlagSettingValuesUsingSDKKeyV2Api* | [**GetSettingValueBySdkkeyV2**](docs/FeatureFlagSettingValuesUsingSDKKeyV2Api.md#getsettingvaluebysdkkeyv2) | **Get** /v2/settings/{settingKeyOrId}/value | Get value
+*FeatureFlagSettingValuesUsingSDKKeyV2Api* | [**ReplaceSettingValueBySdkkeyV2**](docs/FeatureFlagSettingValuesUsingSDKKeyV2Api.md#replacesettingvaluebysdkkeyv2) | **Put** /v2/settings/{settingKeyOrId}/value | Replace value
+*FeatureFlagSettingValuesUsingSDKKeyV2Api* | [**UpdateSettingValueBySdkkeyV2**](docs/FeatureFlagSettingValuesUsingSDKKeyV2Api.md#updatesettingvaluebysdkkeyv2) | **Patch** /v2/settings/{settingKeyOrId}/value | Update value
+*FeatureFlagSettingValuesV2Api* | [**GetSettingValueV2**](docs/FeatureFlagSettingValuesV2Api.md#getsettingvaluev2) | **Get** /v2/environments/{environmentId}/settings/{settingId}/value | Get value
+*FeatureFlagSettingValuesV2Api* | [**GetSettingValuesV2**](docs/FeatureFlagSettingValuesV2Api.md#getsettingvaluesv2) | **Get** /v2/configs/{configId}/environments/{environmentId}/values | Get values
+*FeatureFlagSettingValuesV2Api* | [**PostSettingValuesV2**](docs/FeatureFlagSettingValuesV2Api.md#postsettingvaluesv2) | **Post** /v2/configs/{configId}/environments/{environmentId}/values | Post values
+*FeatureFlagSettingValuesV2Api* | [**ReplaceSettingValueV2**](docs/FeatureFlagSettingValuesV2Api.md#replacesettingvaluev2) | **Put** /v2/environments/{environmentId}/settings/{settingId}/value | Replace value
+*FeatureFlagSettingValuesV2Api* | [**UpdateSettingValueV2**](docs/FeatureFlagSettingValuesV2Api.md#updatesettingvaluev2) | **Patch** /v2/environments/{environmentId}/settings/{settingId}/value | Update value
 *FeatureFlagsSettingsApi* | [**CreateSetting**](docs/FeatureFlagsSettingsApi.md#createsetting) | **Post** /v1/configs/{configId}/settings | Create Flag
 *FeatureFlagsSettingsApi* | [**DeleteSetting**](docs/FeatureFlagsSettingsApi.md#deletesetting) | **Delete** /v1/settings/{settingId} | Delete Flag
 *FeatureFlagsSettingsApi* | [**GetSetting**](docs/FeatureFlagsSettingsApi.md#getsetting) | **Get** /v1/settings/{settingId} | Get Flag
@@ -182,7 +195,12 @@ Class | Method | HTTP request | Description
  - [AddUserToGroupRequest](docs/AddUserToGroupRequest.md)
  - [AuditLogItemModel](docs/AuditLogItemModel.md)
  - [AuditLogType](docs/AuditLogType.md)
+ - [CodeReferenceModel](docs/CodeReferenceModel.md)
  - [CodeReferenceRequest](docs/CodeReferenceRequest.md)
+ - [CodeReferencesForSettingModel](docs/CodeReferencesForSettingModel.md)
+ - [ComparisonValueListModel](docs/ComparisonValueListModel.md)
+ - [ComparisonValueModel](docs/ComparisonValueModel.md)
+ - [ConditionModel](docs/ConditionModel.md)
  - [ConfigModel](docs/ConfigModel.md)
  - [ConfigModelHaljson](docs/ConfigModelHaljson.md)
  - [ConfigModelHaljsonEmbedded](docs/ConfigModelHaljsonEmbedded.md)
@@ -192,8 +210,16 @@ Class | Method | HTTP request | Description
  - [ConfigModelHaljsonEmbeddedProductEmbeddedOrganizationLinks](docs/ConfigModelHaljsonEmbeddedProductEmbeddedOrganizationLinks.md)
  - [ConfigModelHaljsonEmbeddedProductLinks](docs/ConfigModelHaljsonEmbeddedProductLinks.md)
  - [ConfigModelHaljsonLinks](docs/ConfigModelHaljsonLinks.md)
+ - [ConfigSettingFormulaModel](docs/ConfigSettingFormulaModel.md)
+ - [ConfigSettingFormulasModel](docs/ConfigSettingFormulasModel.md)
+ - [ConfigSettingFormulasModelHaljson](docs/ConfigSettingFormulasModelHaljson.md)
+ - [ConfigSettingFormulasModelHaljsonEmbedded](docs/ConfigSettingFormulasModelHaljsonEmbedded.md)
+ - [ConfigSettingFormulasModelHaljsonEmbeddedConfig](docs/ConfigSettingFormulasModelHaljsonEmbeddedConfig.md)
+ - [ConfigSettingFormulasModelHaljsonEmbeddedEnvironment](docs/ConfigSettingFormulasModelHaljsonEmbeddedEnvironment.md)
+ - [ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks](docs/ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks.md)
  - [ConfigSettingValueModel](docs/ConfigSettingValueModel.md)
  - [ConfigSettingValuesModel](docs/ConfigSettingValuesModel.md)
+ - [ConfigSettingValuesModelHaljson](docs/ConfigSettingValuesModelHaljson.md)
  - [ConnectRequest](docs/ConnectRequest.md)
  - [CreateConfigRequest](docs/CreateConfigRequest.md)
  - [CreateEnvironmentModel](docs/CreateEnvironmentModel.md)
@@ -209,7 +235,6 @@ Class | Method | HTTP request | Description
  - [EnvironmentAccessType](docs/EnvironmentAccessType.md)
  - [EnvironmentModel](docs/EnvironmentModel.md)
  - [EnvironmentModelHaljson](docs/EnvironmentModelHaljson.md)
- - [EnvironmentModelHaljsonLinks](docs/EnvironmentModelHaljsonLinks.md)
  - [EvaluationVersion](docs/EvaluationVersion.md)
  - [FlagReference](docs/FlagReference.md)
  - [InitialValue](docs/InitialValue.md)
@@ -224,8 +249,11 @@ Class | Method | HTTP request | Description
  - [OperationType](docs/OperationType.md)
  - [OrganizationModel](docs/OrganizationModel.md)
  - [OrganizationModelHaljson](docs/OrganizationModelHaljson.md)
+ - [PercentageOptionModel](docs/PercentageOptionModel.md)
  - [PermissionGroupModel](docs/PermissionGroupModel.md)
  - [PermissionGroupModelHaljson](docs/PermissionGroupModelHaljson.md)
+ - [PrerequisiteComparator](docs/PrerequisiteComparator.md)
+ - [PrerequisiteFlagConditionModel](docs/PrerequisiteFlagConditionModel.md)
  - [ProductModel](docs/ProductModel.md)
  - [ProductModelHaljson](docs/ProductModelHaljson.md)
  - [ReferenceLine](docs/ReferenceLine.md)
@@ -235,11 +263,18 @@ Class | Method | HTTP request | Description
  - [RolloutRuleModel](docs/RolloutRuleModel.md)
  - [SdkKeysModel](docs/SdkKeysModel.md)
  - [SegmentComparator](docs/SegmentComparator.md)
+ - [SegmentConditionModel](docs/SegmentConditionModel.md)
  - [SegmentListModel](docs/SegmentListModel.md)
  - [SegmentListModelHaljson](docs/SegmentListModelHaljson.md)
  - [SegmentModel](docs/SegmentModel.md)
  - [SegmentModelHaljson](docs/SegmentModelHaljson.md)
  - [SettingDataModel](docs/SettingDataModel.md)
+ - [SettingFormulaModel](docs/SettingFormulaModel.md)
+ - [SettingFormulaModelHaljson](docs/SettingFormulaModelHaljson.md)
+ - [SettingFormulaModelHaljsonEmbedded](docs/SettingFormulaModelHaljsonEmbedded.md)
+ - [SettingFormulaModelHaljsonEmbeddedIntegrationLinksInner](docs/SettingFormulaModelHaljsonEmbeddedIntegrationLinksInner.md)
+ - [SettingFormulaModelHaljsonEmbeddedSetting](docs/SettingFormulaModelHaljsonEmbeddedSetting.md)
+ - [SettingFormulaModelHaljsonEmbeddedSettingTagsInner](docs/SettingFormulaModelHaljsonEmbeddedSettingTagsInner.md)
  - [SettingModel](docs/SettingModel.md)
  - [SettingModelHaljson](docs/SettingModelHaljson.md)
  - [SettingModelHaljsonEmbedded](docs/SettingModelHaljsonEmbedded.md)
@@ -248,16 +283,14 @@ Class | Method | HTTP request | Description
  - [SettingType](docs/SettingType.md)
  - [SettingValueModel](docs/SettingValueModel.md)
  - [SettingValueModelHaljson](docs/SettingValueModelHaljson.md)
- - [SettingValueModelHaljsonEmbedded](docs/SettingValueModelHaljsonEmbedded.md)
- - [SettingValueModelHaljsonEmbeddedConfig](docs/SettingValueModelHaljsonEmbeddedConfig.md)
- - [SettingValueModelHaljsonEmbeddedEnvironment](docs/SettingValueModelHaljsonEmbeddedEnvironment.md)
- - [SettingValueModelHaljsonEmbeddedIntegrationLinksInner](docs/SettingValueModelHaljsonEmbeddedIntegrationLinksInner.md)
- - [SettingValueModelHaljsonEmbeddedSetting](docs/SettingValueModelHaljsonEmbeddedSetting.md)
- - [SettingValueModelHaljsonEmbeddedSettingTagsInner](docs/SettingValueModelHaljsonEmbeddedSettingTagsInner.md)
  - [TagModel](docs/TagModel.md)
  - [TagModelHaljson](docs/TagModelHaljson.md)
+ - [TargetingRuleModel](docs/TargetingRuleModel.md)
  - [UpdateConfigRequest](docs/UpdateConfigRequest.md)
  - [UpdateEnvironmentModel](docs/UpdateEnvironmentModel.md)
+ - [UpdateEvaluationFormulaModel](docs/UpdateEvaluationFormulaModel.md)
+ - [UpdateEvaluationFormulaWithIdModel](docs/UpdateEvaluationFormulaWithIdModel.md)
+ - [UpdateEvaluationFormulasModel](docs/UpdateEvaluationFormulasModel.md)
  - [UpdatePermissionGroupRequest](docs/UpdatePermissionGroupRequest.md)
  - [UpdateProductRequest](docs/UpdateProductRequest.md)
  - [UpdateSegmentModel](docs/UpdateSegmentModel.md)
@@ -265,7 +298,10 @@ Class | Method | HTTP request | Description
  - [UpdateSettingValueWithSettingIdModel](docs/UpdateSettingValueWithSettingIdModel.md)
  - [UpdateSettingValuesWithIdModel](docs/UpdateSettingValuesWithIdModel.md)
  - [UpdateTagModel](docs/UpdateTagModel.md)
+ - [UserComparator](docs/UserComparator.md)
+ - [UserConditionModel](docs/UserConditionModel.md)
  - [UserModel](docs/UserModel.md)
+ - [ValueModel](docs/ValueModel.md)
 
 
 ## Documentation For Authorization

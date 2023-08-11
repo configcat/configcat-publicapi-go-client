@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Product** | Pointer to [**ProductModel**](ProductModel.md) |  | [optional] 
-**TagId** | Pointer to **int64** |  | [optional] 
-**Name** | Pointer to **NullableString** |  | [optional] 
-**Color** | Pointer to **NullableString** |  | [optional] 
+**TagId** | Pointer to **int64** | Identifier of the Tag. | [optional] 
+**Name** | Pointer to **NullableString** | Name of the Tag. | [optional] 
+**Color** | Pointer to **NullableString** | The configured color of the Tag. | [optional] 
 
 ## Methods
 

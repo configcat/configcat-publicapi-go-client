@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** |  | 
-**Description** | Pointer to **NullableString** |  | [optional] 
-**ComparisonAttribute** | **string** |  | 
+**Name** | **string** | Name of the Segment. | 
+**Description** | Pointer to **NullableString** | Description of the Segment. | [optional] 
+**ComparisonAttribute** | **string** | The user&#39;s attribute the evaluation process must take into account. | 
 **Comparator** | [**RolloutRuleComparator**](RolloutRuleComparator.md) |  | 
-**ComparisonValue** | **string** |  | 
+**ComparisonValue** | **string** | The value to compare with the given user attribute&#39;s value. | 
 
 ## Methods
 

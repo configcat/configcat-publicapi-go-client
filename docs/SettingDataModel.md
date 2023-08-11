@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SettingId** | Pointer to **int32** |  | [optional] 
-**Key** | Pointer to **NullableString** |  | [optional] 
-**Name** | Pointer to **NullableString** |  | [optional] 
-**Hint** | Pointer to **NullableString** |  | [optional] 
+**SettingId** | Pointer to **int32** | Identifier of the Feature Flag or Setting. | [optional] 
+**Key** | Pointer to **NullableString** | Key of the Feature Flag or Setting. | [optional] 
+**Name** | Pointer to **NullableString** | Name of the Feature Flag or Setting. | [optional] 
+**Hint** | Pointer to **NullableString** | Description of the Feature Flag or Setting. | [optional] 
 **SettingType** | Pointer to [**SettingType**](SettingType.md) |  | [optional] 
-**Order** | Pointer to **int32** |  | [optional] 
-**CreatedAt** | Pointer to **NullableTime** |  | [optional] 
-**CreatorEmail** | Pointer to **NullableString** |  | [optional] 
-**CreatorFullName** | Pointer to **NullableString** |  | [optional] 
+**Order** | Pointer to **int32** | The order of the Feature Flag or Setting represented on the ConfigCat Dashboard. | [optional] 
+**CreatedAt** | Pointer to **NullableTime** | The creation time of the Feature Flag or Setting. | [optional] 
+**CreatorEmail** | Pointer to **NullableString** | The user&#39;s email address who created the Feature Flag or Setting. | [optional] 
+**CreatorFullName** | Pointer to **NullableString** | The user&#39;s name who created the Feature Flag or Setting. | [optional] 
 **IsWatching** | Pointer to **bool** |  | [optional] 
 
 ## Methods

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** |  | 
-**Color** | Pointer to **NullableString** |  | [optional] 
+**Name** | **string** | Name of the Tag. | 
+**Color** | Pointer to **NullableString** | Color of the Tag. | [optional] 
 
 ## Methods
 

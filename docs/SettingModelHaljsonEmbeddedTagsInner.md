@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Embedded** | Pointer to [**ConfigModelHaljsonEmbedded**](ConfigModelHaljsonEmbedded.md) |  | [optional] 
-**TagId** | Pointer to **int64** |  | [optional] 
-**Name** | Pointer to **NullableString** |  | [optional] 
-**Color** | Pointer to **NullableString** |  | [optional] 
-**Links** | Pointer to [**EnvironmentModelHaljsonLinks**](EnvironmentModelHaljsonLinks.md) |  | [optional] 
+**TagId** | Pointer to **int64** | Identifier of the Tag. | [optional] 
+**Name** | Pointer to **NullableString** | Name of the Tag. | [optional] 
+**Color** | Pointer to **NullableString** | The configured color of the Tag. | [optional] 
+**Links** | Pointer to [**ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks**](ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks.md) |  | [optional] 
 
 ## Methods
 
@@ -151,20 +151,20 @@ HasColor returns a boolean if a field has been set.
 UnsetColor ensures that no value is present for Color, not even an explicit nil
 ### GetLinks
 
-`func (o *SettingModelHaljsonEmbeddedTagsInner) GetLinks() EnvironmentModelHaljsonLinks`
+`func (o *SettingModelHaljsonEmbeddedTagsInner) GetLinks() ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks`
 
 GetLinks returns the Links field if non-nil, zero value otherwise.
 
 ### GetLinksOk
 
-`func (o *SettingModelHaljsonEmbeddedTagsInner) GetLinksOk() (*EnvironmentModelHaljsonLinks, bool)`
+`func (o *SettingModelHaljsonEmbeddedTagsInner) GetLinksOk() (*ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks, bool)`
 
 GetLinksOk returns a tuple with the Links field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLinks
 
-`func (o *SettingModelHaljsonEmbeddedTagsInner) SetLinks(v EnvironmentModelHaljsonLinks)`
+`func (o *SettingModelHaljsonEmbeddedTagsInner) SetLinks(v ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks)`
 
 SetLinks sets Links field to given value.
 

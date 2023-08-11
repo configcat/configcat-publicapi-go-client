@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Primary** | Pointer to **NullableString** |  | [optional] 
-**Secondary** | Pointer to **NullableString** |  | [optional] 
+**Primary** | Pointer to **NullableString** | The primary SDK key. | [optional] 
+**Secondary** | Pointer to **NullableString** | The secondary SDK key. | [optional] 
 
 ## Methods
 

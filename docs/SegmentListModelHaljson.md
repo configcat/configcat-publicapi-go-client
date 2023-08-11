@@ -5,17 +5,17 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Embedded** | Pointer to [**ConfigModelHaljsonEmbedded**](ConfigModelHaljsonEmbedded.md) |  | [optional] 
-**SegmentId** | Pointer to **string** |  | [optional] 
-**Name** | Pointer to **NullableString** |  | [optional] 
-**Description** | Pointer to **NullableString** |  | [optional] 
-**CreatorEmail** | Pointer to **NullableString** |  | [optional] 
-**CreatorFullName** | Pointer to **NullableString** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**LastUpdaterEmail** | Pointer to **NullableString** |  | [optional] 
-**LastUpdaterFullName** | Pointer to **NullableString** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
-**Usage** | Pointer to **int32** |  | [optional] 
-**Links** | Pointer to [**EnvironmentModelHaljsonLinks**](EnvironmentModelHaljsonLinks.md) |  | [optional] 
+**SegmentId** | Pointer to **string** | Identifier of the Segment. | [optional] 
+**Name** | Pointer to **NullableString** | Name of the Segment. | [optional] 
+**Description** | Pointer to **NullableString** | Description of the Segment. | [optional] 
+**CreatorEmail** | Pointer to **NullableString** | The email of the user who created the Segment. | [optional] 
+**CreatorFullName** | Pointer to **NullableString** | The name of the user who created the Segment. | [optional] 
+**CreatedAt** | Pointer to **time.Time** | The date and time when the Segment was created. | [optional] 
+**LastUpdaterEmail** | Pointer to **NullableString** | The email of the user who last updated the Segment. | [optional] 
+**LastUpdaterFullName** | Pointer to **NullableString** | The name of the user who last updated the Segment. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | The date and time when the Segment was last updated. | [optional] 
+**Usage** | Pointer to **int32** | Determines how many Feature Flags and Settings are using the Segment. | [optional] 
+**Links** | Pointer to [**ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks**](ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks.md) |  | [optional] 
 
 ## Methods
 
@@ -373,20 +373,20 @@ HasUsage returns a boolean if a field has been set.
 
 ### GetLinks
 
-`func (o *SegmentListModelHaljson) GetLinks() EnvironmentModelHaljsonLinks`
+`func (o *SegmentListModelHaljson) GetLinks() ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks`
 
 GetLinks returns the Links field if non-nil, zero value otherwise.
 
 ### GetLinksOk
 
-`func (o *SegmentListModelHaljson) GetLinksOk() (*EnvironmentModelHaljsonLinks, bool)`
+`func (o *SegmentListModelHaljson) GetLinksOk() (*ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks, bool)`
 
 GetLinksOk returns a tuple with the Links field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLinks
 
-`func (o *SegmentListModelHaljson) SetLinks(v EnvironmentModelHaljsonLinks)`
+`func (o *SegmentListModelHaljson) SetLinks(v ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks)`
 
 SetLinks sets Links field to given value.
 

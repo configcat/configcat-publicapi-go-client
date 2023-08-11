@@ -44,4 +44,32 @@ func Test_configcatpublicapi_CodeReferencesApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test CodeReferencesApiService V1ConfigsConfigIdCodeReferencesGet", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var configId string
+
+		resp, httpRes, err := apiClient.CodeReferencesApi.V1ConfigsConfigIdCodeReferencesGet(context.Background(), configId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test CodeReferencesApiService V1SettingsSettingIdCodeReferencesGet", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var settingId int32
+
+		resp, httpRes, err := apiClient.CodeReferencesApi.V1SettingsSettingIdCodeReferencesGet(context.Background(), settingId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 }

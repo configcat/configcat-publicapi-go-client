@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrganizationId** | Pointer to **string** |  | [optional] 
-**Name** | Pointer to **NullableString** |  | [optional] 
+**OrganizationId** | Pointer to **string** | Identifier of the Organization. | [optional] 
+**Name** | Pointer to **NullableString** | Name of the Organization. | [optional] 
 **Links** | Pointer to [**ConfigModelHaljsonEmbeddedProductEmbeddedOrganizationLinks**](ConfigModelHaljsonEmbeddedProductEmbeddedOrganizationLinks.md) |  | [optional] 
 
 ## Methods

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **LineText** | Pointer to **NullableString** | The content of the reference line. | [optional] 
-**LineNumber** | **int32** | The line number of the reference line. | 
+**LineNumber** | **int32** | The line number. | 
 
 ## Methods
 

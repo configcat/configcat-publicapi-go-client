@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Emails** | **[]string** |  | 
-**PermissionGroupId** | **int64** |  | 
+**Emails** | **[]string** | List of email addresses to invite. | 
+**PermissionGroupId** | **int64** | Identifier of the Permission Group to where the invited users should be added. | 
 
 ## Methods
 

@@ -5,12 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Product** | Pointer to [**ProductModel**](ProductModel.md) |  | [optional] 
-**EnvironmentId** | Pointer to **string** |  | [optional] 
-**Name** | Pointer to **NullableString** |  | [optional] 
-**Color** | Pointer to **NullableString** |  | [optional] 
-**Description** | Pointer to **NullableString** |  | [optional] 
-**Order** | Pointer to **int32** |  | [optional] 
-**ReasonRequired** | Pointer to **bool** |  | [optional] 
+**EnvironmentId** | Pointer to **string** | Identifier of the Environment. | [optional] 
+**Name** | Pointer to **NullableString** | Name of the Environment. | [optional] 
+**Color** | Pointer to **NullableString** | The configured color of the Environment. | [optional] 
+**Description** | Pointer to **NullableString** | Description of the Environment. | [optional] 
+**Order** | Pointer to **int32** | The order of the Environment represented on the ConfigCat Dashboard. | [optional] 
+**ReasonRequired** | Pointer to **bool** | Determines whether a mandatory reason must be given every time when the Feature Flags or Settings in the given Environment are saved. | [optional] 
 
 ## Methods
 

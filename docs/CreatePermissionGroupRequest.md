@@ -4,30 +4,30 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** |  | 
-**CanManageMembers** | Pointer to **bool** |  | [optional] 
-**CanCreateOrUpdateConfig** | Pointer to **bool** |  | [optional] 
-**CanDeleteConfig** | Pointer to **bool** |  | [optional] 
-**CanCreateOrUpdateEnvironment** | Pointer to **bool** |  | [optional] 
-**CanDeleteEnvironment** | Pointer to **bool** |  | [optional] 
-**CanCreateOrUpdateSetting** | Pointer to **bool** |  | [optional] 
-**CanTagSetting** | Pointer to **bool** |  | [optional] 
-**CanDeleteSetting** | Pointer to **bool** |  | [optional] 
-**CanCreateOrUpdateTag** | Pointer to **bool** |  | [optional] 
-**CanDeleteTag** | Pointer to **bool** |  | [optional] 
-**CanManageWebhook** | Pointer to **bool** |  | [optional] 
-**CanUseExportImport** | Pointer to **bool** |  | [optional] 
-**CanManageProductPreferences** | Pointer to **bool** |  | [optional] 
-**CanManageIntegrations** | Pointer to **bool** |  | [optional] 
-**CanViewSdkKey** | Pointer to **bool** |  | [optional] 
-**CanRotateSdkKey** | Pointer to **bool** |  | [optional] 
-**CanViewProductStatistics** | Pointer to **bool** |  | [optional] 
-**CanViewProductAuditLog** | Pointer to **bool** |  | [optional] 
-**CanCreateOrUpdateSegments** | Pointer to **bool** |  | [optional] 
-**CanDeleteSegments** | Pointer to **bool** |  | [optional] 
+**Name** | **string** | Name of the Permission Group. | 
+**CanManageMembers** | Pointer to **bool** | Group members can manage team members. | [optional] 
+**CanCreateOrUpdateConfig** | Pointer to **bool** | Group members can create/update Configs. | [optional] 
+**CanDeleteConfig** | Pointer to **bool** | Group members can delete Configs. | [optional] 
+**CanCreateOrUpdateEnvironment** | Pointer to **bool** | Group members can create/update Environments. | [optional] 
+**CanDeleteEnvironment** | Pointer to **bool** | Group members can delete Environments. | [optional] 
+**CanCreateOrUpdateSetting** | Pointer to **bool** | Group members can create/update Feature Flags and Settings. | [optional] 
+**CanTagSetting** | Pointer to **bool** | Group members can attach/detach Tags to Feature Flags and Settings. | [optional] 
+**CanDeleteSetting** | Pointer to **bool** | Group members can delete Feature Flags and Settings. | [optional] 
+**CanCreateOrUpdateTag** | Pointer to **bool** | Group members can create/update Tags. | [optional] 
+**CanDeleteTag** | Pointer to **bool** | Group members can delete Tags. | [optional] 
+**CanManageWebhook** | Pointer to **bool** | Group members can create/update/delete Webhooks. | [optional] 
+**CanUseExportImport** | Pointer to **bool** | Group members can use the export/import feature. | [optional] 
+**CanManageProductPreferences** | Pointer to **bool** | Group members can update Product preferences. | [optional] 
+**CanManageIntegrations** | Pointer to **bool** | Group members can add and configure integrations. | [optional] 
+**CanViewSdkKey** | Pointer to **bool** | Group members has access to SDK keys. | [optional] 
+**CanRotateSdkKey** | Pointer to **bool** | Group members can rotate SDK keys. | [optional] 
+**CanCreateOrUpdateSegments** | Pointer to **bool** | Group members can create/update Segments. | [optional] 
+**CanDeleteSegments** | Pointer to **bool** | Group members can delete Segments. | [optional] 
+**CanViewProductAuditLog** | Pointer to **bool** | Group members has access to audit logs. | [optional] 
+**CanViewProductStatistics** | Pointer to **bool** | Group members has access to product statistics. | [optional] 
 **AccessType** | Pointer to [**AccessType**](AccessType.md) |  | [optional] 
 **NewEnvironmentAccessType** | Pointer to [**EnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] 
-**EnvironmentAccesses** | Pointer to [**[]CreateOrUpdateEnvironmentAccessModel**](CreateOrUpdateEnvironmentAccessModel.md) |  | [optional] 
+**EnvironmentAccesses** | Pointer to [**[]CreateOrUpdateEnvironmentAccessModel**](CreateOrUpdateEnvironmentAccessModel.md) | List of environment specific permissions. | [optional] 
 
 ## Methods
 
@@ -468,56 +468,6 @@ SetCanRotateSdkKey sets CanRotateSdkKey field to given value.
 
 HasCanRotateSdkKey returns a boolean if a field has been set.
 
-### GetCanViewProductStatistics
-
-`func (o *CreatePermissionGroupRequest) GetCanViewProductStatistics() bool`
-
-GetCanViewProductStatistics returns the CanViewProductStatistics field if non-nil, zero value otherwise.
-
-### GetCanViewProductStatisticsOk
-
-`func (o *CreatePermissionGroupRequest) GetCanViewProductStatisticsOk() (*bool, bool)`
-
-GetCanViewProductStatisticsOk returns a tuple with the CanViewProductStatistics field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCanViewProductStatistics
-
-`func (o *CreatePermissionGroupRequest) SetCanViewProductStatistics(v bool)`
-
-SetCanViewProductStatistics sets CanViewProductStatistics field to given value.
-
-### HasCanViewProductStatistics
-
-`func (o *CreatePermissionGroupRequest) HasCanViewProductStatistics() bool`
-
-HasCanViewProductStatistics returns a boolean if a field has been set.
-
-### GetCanViewProductAuditLog
-
-`func (o *CreatePermissionGroupRequest) GetCanViewProductAuditLog() bool`
-
-GetCanViewProductAuditLog returns the CanViewProductAuditLog field if non-nil, zero value otherwise.
-
-### GetCanViewProductAuditLogOk
-
-`func (o *CreatePermissionGroupRequest) GetCanViewProductAuditLogOk() (*bool, bool)`
-
-GetCanViewProductAuditLogOk returns a tuple with the CanViewProductAuditLog field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCanViewProductAuditLog
-
-`func (o *CreatePermissionGroupRequest) SetCanViewProductAuditLog(v bool)`
-
-SetCanViewProductAuditLog sets CanViewProductAuditLog field to given value.
-
-### HasCanViewProductAuditLog
-
-`func (o *CreatePermissionGroupRequest) HasCanViewProductAuditLog() bool`
-
-HasCanViewProductAuditLog returns a boolean if a field has been set.
-
 ### GetCanCreateOrUpdateSegments
 
 `func (o *CreatePermissionGroupRequest) GetCanCreateOrUpdateSegments() bool`
@@ -567,6 +517,56 @@ SetCanDeleteSegments sets CanDeleteSegments field to given value.
 `func (o *CreatePermissionGroupRequest) HasCanDeleteSegments() bool`
 
 HasCanDeleteSegments returns a boolean if a field has been set.
+
+### GetCanViewProductAuditLog
+
+`func (o *CreatePermissionGroupRequest) GetCanViewProductAuditLog() bool`
+
+GetCanViewProductAuditLog returns the CanViewProductAuditLog field if non-nil, zero value otherwise.
+
+### GetCanViewProductAuditLogOk
+
+`func (o *CreatePermissionGroupRequest) GetCanViewProductAuditLogOk() (*bool, bool)`
+
+GetCanViewProductAuditLogOk returns a tuple with the CanViewProductAuditLog field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanViewProductAuditLog
+
+`func (o *CreatePermissionGroupRequest) SetCanViewProductAuditLog(v bool)`
+
+SetCanViewProductAuditLog sets CanViewProductAuditLog field to given value.
+
+### HasCanViewProductAuditLog
+
+`func (o *CreatePermissionGroupRequest) HasCanViewProductAuditLog() bool`
+
+HasCanViewProductAuditLog returns a boolean if a field has been set.
+
+### GetCanViewProductStatistics
+
+`func (o *CreatePermissionGroupRequest) GetCanViewProductStatistics() bool`
+
+GetCanViewProductStatistics returns the CanViewProductStatistics field if non-nil, zero value otherwise.
+
+### GetCanViewProductStatisticsOk
+
+`func (o *CreatePermissionGroupRequest) GetCanViewProductStatisticsOk() (*bool, bool)`
+
+GetCanViewProductStatisticsOk returns a tuple with the CanViewProductStatistics field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanViewProductStatistics
+
+`func (o *CreatePermissionGroupRequest) SetCanViewProductStatistics(v bool)`
+
+SetCanViewProductStatistics sets CanViewProductStatistics field to given value.
+
+### HasCanViewProductStatistics
+
+`func (o *CreatePermissionGroupRequest) HasCanViewProductStatistics() bool`
+
+HasCanViewProductStatistics returns a boolean if a field has been set.
 
 ### GetAccessType
 

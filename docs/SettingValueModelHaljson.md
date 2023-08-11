@@ -7,12 +7,12 @@ Name | Type | Description | Notes
 **RolloutRules** | Pointer to [**[]RolloutRuleModel**](RolloutRuleModel.md) | The targeting rule collection. | [optional] 
 **RolloutPercentageItems** | Pointer to [**[]RolloutPercentageItemModel**](RolloutPercentageItemModel.md) | The percentage rule collection. | [optional] 
 **Value** | Pointer to **interface{}** | The value to serve. It must respect the setting type. | [optional] 
-**UpdatedAt** | Pointer to **NullableTime** |  | [optional] 
-**LastUpdaterUserEmail** | Pointer to **NullableString** |  | [optional] 
-**LastUpdaterUserFullName** | Pointer to **NullableString** |  | [optional] 
-**Embedded** | Pointer to [**SettingValueModelHaljsonEmbedded**](SettingValueModelHaljsonEmbedded.md) |  | [optional] 
+**UpdatedAt** | Pointer to **NullableTime** | The last updated date and time when the Feature Flag or Setting. | [optional] 
+**LastUpdaterUserEmail** | Pointer to **NullableString** | The email of the user who last updated the Feature Flag or Setting. | [optional] 
+**LastUpdaterUserFullName** | Pointer to **NullableString** | The name of the user who last updated the Feature Flag or Setting. | [optional] 
+**Embedded** | Pointer to [**SettingFormulaModelHaljsonEmbedded**](SettingFormulaModelHaljsonEmbedded.md) |  | [optional] 
 **ReadOnly** | Pointer to **bool** |  | [optional] 
-**Links** | Pointer to [**EnvironmentModelHaljsonLinks**](EnvironmentModelHaljsonLinks.md) |  | [optional] 
+**Links** | Pointer to [**ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks**](ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks.md) |  | [optional] 
 
 ## Methods
 
@@ -245,20 +245,20 @@ HasLastUpdaterUserFullName returns a boolean if a field has been set.
 UnsetLastUpdaterUserFullName ensures that no value is present for LastUpdaterUserFullName, not even an explicit nil
 ### GetEmbedded
 
-`func (o *SettingValueModelHaljson) GetEmbedded() SettingValueModelHaljsonEmbedded`
+`func (o *SettingValueModelHaljson) GetEmbedded() SettingFormulaModelHaljsonEmbedded`
 
 GetEmbedded returns the Embedded field if non-nil, zero value otherwise.
 
 ### GetEmbeddedOk
 
-`func (o *SettingValueModelHaljson) GetEmbeddedOk() (*SettingValueModelHaljsonEmbedded, bool)`
+`func (o *SettingValueModelHaljson) GetEmbeddedOk() (*SettingFormulaModelHaljsonEmbedded, bool)`
 
 GetEmbeddedOk returns a tuple with the Embedded field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEmbedded
 
-`func (o *SettingValueModelHaljson) SetEmbedded(v SettingValueModelHaljsonEmbedded)`
+`func (o *SettingValueModelHaljson) SetEmbedded(v SettingFormulaModelHaljsonEmbedded)`
 
 SetEmbedded sets Embedded field to given value.
 
@@ -295,20 +295,20 @@ HasReadOnly returns a boolean if a field has been set.
 
 ### GetLinks
 
-`func (o *SettingValueModelHaljson) GetLinks() EnvironmentModelHaljsonLinks`
+`func (o *SettingValueModelHaljson) GetLinks() ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks`
 
 GetLinks returns the Links field if non-nil, zero value otherwise.
 
 ### GetLinksOk
 
-`func (o *SettingValueModelHaljson) GetLinksOk() (*EnvironmentModelHaljsonLinks, bool)`
+`func (o *SettingValueModelHaljson) GetLinksOk() (*ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks, bool)`
 
 GetLinksOk returns a tuple with the Links field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLinks
 
-`func (o *SettingValueModelHaljson) SetLinks(v EnvironmentModelHaljsonLinks)`
+`func (o *SettingValueModelHaljson) SetLinks(v ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks)`
 
 SetLinks sets Links field to given value.
 

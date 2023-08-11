@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-**Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The purpose of this API is to access the ConfigCat platform programmatically.  You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.   The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  and JSON+HAL format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).   # OpenAPI Specification  The complete specification is publicly available here: [swagger.json](v1/swagger.json).  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+**Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The purpose of this API is to access the ConfigCat platform programmatically.  You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.   The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  and JSON+HAL format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).   # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -22,19 +22,30 @@ var _ MappedNullable = &SegmentModelHaljson{}
 // SegmentModelHaljson struct for SegmentModelHaljson
 type SegmentModelHaljson struct {
 	Embedded *ConfigModelHaljsonEmbedded `json:"_embedded,omitempty"`
+	// Identifier of the Segment.
 	SegmentId *string `json:"segmentId,omitempty"`
+	// Name of the Segment.
 	Name NullableString `json:"name,omitempty"`
+	// Description of the Segment.
 	Description NullableString `json:"description,omitempty"`
+	// The email of the user who created the Segment.
 	CreatorEmail NullableString `json:"creatorEmail,omitempty"`
+	// The name of the user who created the Segment.
 	CreatorFullName NullableString `json:"creatorFullName,omitempty"`
+	// The date and time when the Segment was created.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	// The email of the user who last updated the Segment.
 	LastUpdaterEmail NullableString `json:"lastUpdaterEmail,omitempty"`
+	// The name of the user who last updated the Segment.
 	LastUpdaterFullName NullableString `json:"lastUpdaterFullName,omitempty"`
+	// The date and time when the Segment was last updated.
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	// The user's attribute the evaluation process must take into account.
 	ComparisonAttribute NullableString `json:"comparisonAttribute,omitempty"`
 	Comparator *RolloutRuleComparator `json:"comparator,omitempty"`
+	// The value to compare with the given user attribute's value.
 	ComparisonValue NullableString `json:"comparisonValue,omitempty"`
-	Links *EnvironmentModelHaljsonLinks `json:"_links,omitempty"`
+	Links *ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks `json:"_links,omitempty"`
 }
 
 // NewSegmentModelHaljson instantiates a new SegmentModelHaljson object
@@ -551,9 +562,9 @@ func (o *SegmentModelHaljson) UnsetComparisonValue() {
 }
 
 // GetLinks returns the Links field value if set, zero value otherwise.
-func (o *SegmentModelHaljson) GetLinks() EnvironmentModelHaljsonLinks {
+func (o *SegmentModelHaljson) GetLinks() ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks {
 	if o == nil || IsNil(o.Links) {
-		var ret EnvironmentModelHaljsonLinks
+		var ret ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks
 		return ret
 	}
 	return *o.Links
@@ -561,7 +572,7 @@ func (o *SegmentModelHaljson) GetLinks() EnvironmentModelHaljsonLinks {
 
 // GetLinksOk returns a tuple with the Links field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SegmentModelHaljson) GetLinksOk() (*EnvironmentModelHaljsonLinks, bool) {
+func (o *SegmentModelHaljson) GetLinksOk() (*ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks, bool) {
 	if o == nil || IsNil(o.Links) {
 		return nil, false
 	}
@@ -577,8 +588,8 @@ func (o *SegmentModelHaljson) HasLinks() bool {
 	return false
 }
 
-// SetLinks gets a reference to the given EnvironmentModelHaljsonLinks and assigns it to the Links field.
-func (o *SegmentModelHaljson) SetLinks(v EnvironmentModelHaljsonLinks) {
+// SetLinks gets a reference to the given ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks and assigns it to the Links field.
+func (o *SegmentModelHaljson) SetLinks(v ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks) {
 	o.Links = &v
 }
 

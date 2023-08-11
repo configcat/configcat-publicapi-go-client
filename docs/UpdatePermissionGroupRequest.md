@@ -4,30 +4,30 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **NullableString** |  | [optional] 
-**CanManageMembers** | Pointer to **NullableBool** |  | [optional] 
-**CanCreateOrUpdateConfig** | Pointer to **NullableBool** |  | [optional] 
-**CanDeleteConfig** | Pointer to **NullableBool** |  | [optional] 
-**CanCreateOrUpdateEnvironment** | Pointer to **NullableBool** |  | [optional] 
-**CanDeleteEnvironment** | Pointer to **NullableBool** |  | [optional] 
-**CanCreateOrUpdateSetting** | Pointer to **NullableBool** |  | [optional] 
-**CanTagSetting** | Pointer to **NullableBool** |  | [optional] 
-**CanDeleteSetting** | Pointer to **NullableBool** |  | [optional] 
-**CanCreateOrUpdateTag** | Pointer to **NullableBool** |  | [optional] 
-**CanDeleteTag** | Pointer to **NullableBool** |  | [optional] 
-**CanManageWebhook** | Pointer to **NullableBool** |  | [optional] 
-**CanUseExportImport** | Pointer to **NullableBool** |  | [optional] 
-**CanManageProductPreferences** | Pointer to **NullableBool** |  | [optional] 
-**CanManageIntegrations** | Pointer to **NullableBool** |  | [optional] 
-**CanViewSdkKey** | Pointer to **NullableBool** |  | [optional] 
-**CanRotateSdkKey** | Pointer to **NullableBool** |  | [optional] 
-**CanViewProductStatistics** | Pointer to **NullableBool** |  | [optional] 
-**CanViewProductAuditLog** | Pointer to **NullableBool** |  | [optional] 
-**CanCreateOrUpdateSegments** | Pointer to **NullableBool** |  | [optional] 
-**CanDeleteSegments** | Pointer to **NullableBool** |  | [optional] 
+**Name** | Pointer to **NullableString** | Name of the Permission Group. | [optional] 
+**CanManageMembers** | Pointer to **NullableBool** | Group members can manage team members. | [optional] 
+**CanCreateOrUpdateConfig** | Pointer to **NullableBool** | Group members can create/update Configs. | [optional] 
+**CanDeleteConfig** | Pointer to **NullableBool** | Group members can delete Configs. | [optional] 
+**CanCreateOrUpdateEnvironment** | Pointer to **NullableBool** | Group members can create/update Environments. | [optional] 
+**CanDeleteEnvironment** | Pointer to **NullableBool** | Group members can delete Environments. | [optional] 
+**CanCreateOrUpdateSetting** | Pointer to **NullableBool** | Group members can create/update Feature Flags and Settings. | [optional] 
+**CanTagSetting** | Pointer to **NullableBool** | Group members can attach/detach Tags to Feature Flags and Settings. | [optional] 
+**CanDeleteSetting** | Pointer to **NullableBool** | Group members can delete Feature Flags and Settings. | [optional] 
+**CanCreateOrUpdateTag** | Pointer to **NullableBool** | Group members can create/update Tags. | [optional] 
+**CanDeleteTag** | Pointer to **NullableBool** | Group members can delete Tags. | [optional] 
+**CanManageWebhook** | Pointer to **NullableBool** | Group members can create/update/delete Webhooks. | [optional] 
+**CanUseExportImport** | Pointer to **NullableBool** | Group members can use the export/import feature. | [optional] 
+**CanManageProductPreferences** | Pointer to **NullableBool** | Group members can update Product preferences. | [optional] 
+**CanManageIntegrations** | Pointer to **NullableBool** | Group members can add and configure integrations. | [optional] 
+**CanViewSdkKey** | Pointer to **NullableBool** | Group members has access to SDK keys. | [optional] 
+**CanRotateSdkKey** | Pointer to **NullableBool** | Group members can rotate SDK keys. | [optional] 
+**CanCreateOrUpdateSegments** | Pointer to **NullableBool** | Group members can create/update Segments. | [optional] 
+**CanDeleteSegments** | Pointer to **NullableBool** | Group members can delete Segments. | [optional] 
+**CanViewProductAuditLog** | Pointer to **NullableBool** | Group members has access to audit logs. | [optional] 
+**CanViewProductStatistics** | Pointer to **NullableBool** | Group members has access to product statistics. | [optional] 
 **AccessType** | Pointer to [**AccessType**](AccessType.md) |  | [optional] 
 **NewEnvironmentAccessType** | Pointer to [**EnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] 
-**EnvironmentAccesses** | Pointer to [**[]CreateOrUpdateEnvironmentAccessModel**](CreateOrUpdateEnvironmentAccessModel.md) |  | [optional] 
+**EnvironmentAccesses** | Pointer to [**[]CreateOrUpdateEnvironmentAccessModel**](CreateOrUpdateEnvironmentAccessModel.md) | List of environment specific permissions. | [optional] 
 
 ## Methods
 
@@ -643,76 +643,6 @@ HasCanRotateSdkKey returns a boolean if a field has been set.
 `func (o *UpdatePermissionGroupRequest) UnsetCanRotateSdkKey()`
 
 UnsetCanRotateSdkKey ensures that no value is present for CanRotateSdkKey, not even an explicit nil
-### GetCanViewProductStatistics
-
-`func (o *UpdatePermissionGroupRequest) GetCanViewProductStatistics() bool`
-
-GetCanViewProductStatistics returns the CanViewProductStatistics field if non-nil, zero value otherwise.
-
-### GetCanViewProductStatisticsOk
-
-`func (o *UpdatePermissionGroupRequest) GetCanViewProductStatisticsOk() (*bool, bool)`
-
-GetCanViewProductStatisticsOk returns a tuple with the CanViewProductStatistics field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCanViewProductStatistics
-
-`func (o *UpdatePermissionGroupRequest) SetCanViewProductStatistics(v bool)`
-
-SetCanViewProductStatistics sets CanViewProductStatistics field to given value.
-
-### HasCanViewProductStatistics
-
-`func (o *UpdatePermissionGroupRequest) HasCanViewProductStatistics() bool`
-
-HasCanViewProductStatistics returns a boolean if a field has been set.
-
-### SetCanViewProductStatisticsNil
-
-`func (o *UpdatePermissionGroupRequest) SetCanViewProductStatisticsNil(b bool)`
-
- SetCanViewProductStatisticsNil sets the value for CanViewProductStatistics to be an explicit nil
-
-### UnsetCanViewProductStatistics
-`func (o *UpdatePermissionGroupRequest) UnsetCanViewProductStatistics()`
-
-UnsetCanViewProductStatistics ensures that no value is present for CanViewProductStatistics, not even an explicit nil
-### GetCanViewProductAuditLog
-
-`func (o *UpdatePermissionGroupRequest) GetCanViewProductAuditLog() bool`
-
-GetCanViewProductAuditLog returns the CanViewProductAuditLog field if non-nil, zero value otherwise.
-
-### GetCanViewProductAuditLogOk
-
-`func (o *UpdatePermissionGroupRequest) GetCanViewProductAuditLogOk() (*bool, bool)`
-
-GetCanViewProductAuditLogOk returns a tuple with the CanViewProductAuditLog field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCanViewProductAuditLog
-
-`func (o *UpdatePermissionGroupRequest) SetCanViewProductAuditLog(v bool)`
-
-SetCanViewProductAuditLog sets CanViewProductAuditLog field to given value.
-
-### HasCanViewProductAuditLog
-
-`func (o *UpdatePermissionGroupRequest) HasCanViewProductAuditLog() bool`
-
-HasCanViewProductAuditLog returns a boolean if a field has been set.
-
-### SetCanViewProductAuditLogNil
-
-`func (o *UpdatePermissionGroupRequest) SetCanViewProductAuditLogNil(b bool)`
-
- SetCanViewProductAuditLogNil sets the value for CanViewProductAuditLog to be an explicit nil
-
-### UnsetCanViewProductAuditLog
-`func (o *UpdatePermissionGroupRequest) UnsetCanViewProductAuditLog()`
-
-UnsetCanViewProductAuditLog ensures that no value is present for CanViewProductAuditLog, not even an explicit nil
 ### GetCanCreateOrUpdateSegments
 
 `func (o *UpdatePermissionGroupRequest) GetCanCreateOrUpdateSegments() bool`
@@ -783,6 +713,76 @@ HasCanDeleteSegments returns a boolean if a field has been set.
 `func (o *UpdatePermissionGroupRequest) UnsetCanDeleteSegments()`
 
 UnsetCanDeleteSegments ensures that no value is present for CanDeleteSegments, not even an explicit nil
+### GetCanViewProductAuditLog
+
+`func (o *UpdatePermissionGroupRequest) GetCanViewProductAuditLog() bool`
+
+GetCanViewProductAuditLog returns the CanViewProductAuditLog field if non-nil, zero value otherwise.
+
+### GetCanViewProductAuditLogOk
+
+`func (o *UpdatePermissionGroupRequest) GetCanViewProductAuditLogOk() (*bool, bool)`
+
+GetCanViewProductAuditLogOk returns a tuple with the CanViewProductAuditLog field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanViewProductAuditLog
+
+`func (o *UpdatePermissionGroupRequest) SetCanViewProductAuditLog(v bool)`
+
+SetCanViewProductAuditLog sets CanViewProductAuditLog field to given value.
+
+### HasCanViewProductAuditLog
+
+`func (o *UpdatePermissionGroupRequest) HasCanViewProductAuditLog() bool`
+
+HasCanViewProductAuditLog returns a boolean if a field has been set.
+
+### SetCanViewProductAuditLogNil
+
+`func (o *UpdatePermissionGroupRequest) SetCanViewProductAuditLogNil(b bool)`
+
+ SetCanViewProductAuditLogNil sets the value for CanViewProductAuditLog to be an explicit nil
+
+### UnsetCanViewProductAuditLog
+`func (o *UpdatePermissionGroupRequest) UnsetCanViewProductAuditLog()`
+
+UnsetCanViewProductAuditLog ensures that no value is present for CanViewProductAuditLog, not even an explicit nil
+### GetCanViewProductStatistics
+
+`func (o *UpdatePermissionGroupRequest) GetCanViewProductStatistics() bool`
+
+GetCanViewProductStatistics returns the CanViewProductStatistics field if non-nil, zero value otherwise.
+
+### GetCanViewProductStatisticsOk
+
+`func (o *UpdatePermissionGroupRequest) GetCanViewProductStatisticsOk() (*bool, bool)`
+
+GetCanViewProductStatisticsOk returns a tuple with the CanViewProductStatistics field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanViewProductStatistics
+
+`func (o *UpdatePermissionGroupRequest) SetCanViewProductStatistics(v bool)`
+
+SetCanViewProductStatistics sets CanViewProductStatistics field to given value.
+
+### HasCanViewProductStatistics
+
+`func (o *UpdatePermissionGroupRequest) HasCanViewProductStatistics() bool`
+
+HasCanViewProductStatistics returns a boolean if a field has been set.
+
+### SetCanViewProductStatisticsNil
+
+`func (o *UpdatePermissionGroupRequest) SetCanViewProductStatisticsNil(b bool)`
+
+ SetCanViewProductStatisticsNil sets the value for CanViewProductStatistics to be an explicit nil
+
+### UnsetCanViewProductStatistics
+`func (o *UpdatePermissionGroupRequest) UnsetCanViewProductStatistics()`
+
+UnsetCanViewProductStatistics ensures that no value is present for CanViewProductStatistics, not even an explicit nil
 ### GetAccessType
 
 `func (o *UpdatePermissionGroupRequest) GetAccessType() AccessType`
