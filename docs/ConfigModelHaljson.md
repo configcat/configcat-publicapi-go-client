@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Embedded** | Pointer to [**ConfigModelHaljsonEmbedded**](ConfigModelHaljsonEmbedded.md) |  | [optional] 
-**ConfigId** | Pointer to **string** |  | [optional] 
-**Name** | Pointer to **NullableString** |  | [optional] 
-**Description** | Pointer to **NullableString** |  | [optional] 
-**Order** | Pointer to **int32** |  | [optional] 
+**ConfigId** | Pointer to **string** | Identifier of the Config. | [optional] 
+**Name** | Pointer to **NullableString** | Name of the Config. | [optional] 
+**Description** | Pointer to **NullableString** | Description of the Config. | [optional] 
+**Order** | Pointer to **int32** | The order of the Config represented on the ConfigCat Dashboard. | [optional] 
 **MigratedConfigId** | Pointer to **NullableString** |  | [optional] 
 **EvaluationVersion** | Pointer to [**EvaluationVersion**](EvaluationVersion.md) |  | [optional] 
 **Links** | Pointer to [**ConfigModelHaljsonLinks**](ConfigModelHaljsonLinks.md) |  | [optional] 

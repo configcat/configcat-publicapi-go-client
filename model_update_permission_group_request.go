@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-**Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The purpose of this API is to access the ConfigCat platform programmatically.  You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.   The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  and JSON+HAL format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).   # OpenAPI Specification  The complete specification is publicly available here: [swagger.json](v1/swagger.json).  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+**Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The purpose of this API is to access the ConfigCat platform programmatically.  You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.   The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  and JSON+HAL format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).   # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -20,29 +20,51 @@ var _ MappedNullable = &UpdatePermissionGroupRequest{}
 
 // UpdatePermissionGroupRequest struct for UpdatePermissionGroupRequest
 type UpdatePermissionGroupRequest struct {
+	// Name of the Permission Group.
 	Name NullableString `json:"name,omitempty"`
+	// Group members can manage team members.
 	CanManageMembers NullableBool `json:"canManageMembers,omitempty"`
+	// Group members can create/update Configs.
 	CanCreateOrUpdateConfig NullableBool `json:"canCreateOrUpdateConfig,omitempty"`
+	// Group members can delete Configs.
 	CanDeleteConfig NullableBool `json:"canDeleteConfig,omitempty"`
+	// Group members can create/update Environments.
 	CanCreateOrUpdateEnvironment NullableBool `json:"canCreateOrUpdateEnvironment,omitempty"`
+	// Group members can delete Environments.
 	CanDeleteEnvironment NullableBool `json:"canDeleteEnvironment,omitempty"`
+	// Group members can create/update Feature Flags and Settings.
 	CanCreateOrUpdateSetting NullableBool `json:"canCreateOrUpdateSetting,omitempty"`
+	// Group members can attach/detach Tags to Feature Flags and Settings.
 	CanTagSetting NullableBool `json:"canTagSetting,omitempty"`
+	// Group members can delete Feature Flags and Settings.
 	CanDeleteSetting NullableBool `json:"canDeleteSetting,omitempty"`
+	// Group members can create/update Tags.
 	CanCreateOrUpdateTag NullableBool `json:"canCreateOrUpdateTag,omitempty"`
+	// Group members can delete Tags.
 	CanDeleteTag NullableBool `json:"canDeleteTag,omitempty"`
+	// Group members can create/update/delete Webhooks.
 	CanManageWebhook NullableBool `json:"canManageWebhook,omitempty"`
+	// Group members can use the export/import feature.
 	CanUseExportImport NullableBool `json:"canUseExportImport,omitempty"`
+	// Group members can update Product preferences.
 	CanManageProductPreferences NullableBool `json:"canManageProductPreferences,omitempty"`
+	// Group members can add and configure integrations.
 	CanManageIntegrations NullableBool `json:"canManageIntegrations,omitempty"`
+	// Group members has access to SDK keys.
 	CanViewSdkKey NullableBool `json:"canViewSdkKey,omitempty"`
+	// Group members can rotate SDK keys.
 	CanRotateSdkKey NullableBool `json:"canRotateSdkKey,omitempty"`
-	CanViewProductStatistics NullableBool `json:"canViewProductStatistics,omitempty"`
-	CanViewProductAuditLog NullableBool `json:"canViewProductAuditLog,omitempty"`
+	// Group members can create/update Segments.
 	CanCreateOrUpdateSegments NullableBool `json:"canCreateOrUpdateSegments,omitempty"`
+	// Group members can delete Segments.
 	CanDeleteSegments NullableBool `json:"canDeleteSegments,omitempty"`
+	// Group members has access to audit logs.
+	CanViewProductAuditLog NullableBool `json:"canViewProductAuditLog,omitempty"`
+	// Group members has access to product statistics.
+	CanViewProductStatistics NullableBool `json:"canViewProductStatistics,omitempty"`
 	AccessType *AccessType `json:"accessType,omitempty"`
 	NewEnvironmentAccessType *EnvironmentAccessType `json:"newEnvironmentAccessType,omitempty"`
+	// List of environment specific permissions.
 	EnvironmentAccesses []CreateOrUpdateEnvironmentAccessModel `json:"environmentAccesses,omitempty"`
 }
 
@@ -777,90 +799,6 @@ func (o *UpdatePermissionGroupRequest) UnsetCanRotateSdkKey() {
 	o.CanRotateSdkKey.Unset()
 }
 
-// GetCanViewProductStatistics returns the CanViewProductStatistics field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UpdatePermissionGroupRequest) GetCanViewProductStatistics() bool {
-	if o == nil || IsNil(o.CanViewProductStatistics.Get()) {
-		var ret bool
-		return ret
-	}
-	return *o.CanViewProductStatistics.Get()
-}
-
-// GetCanViewProductStatisticsOk returns a tuple with the CanViewProductStatistics field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpdatePermissionGroupRequest) GetCanViewProductStatisticsOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.CanViewProductStatistics.Get(), o.CanViewProductStatistics.IsSet()
-}
-
-// HasCanViewProductStatistics returns a boolean if a field has been set.
-func (o *UpdatePermissionGroupRequest) HasCanViewProductStatistics() bool {
-	if o != nil && o.CanViewProductStatistics.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCanViewProductStatistics gets a reference to the given NullableBool and assigns it to the CanViewProductStatistics field.
-func (o *UpdatePermissionGroupRequest) SetCanViewProductStatistics(v bool) {
-	o.CanViewProductStatistics.Set(&v)
-}
-// SetCanViewProductStatisticsNil sets the value for CanViewProductStatistics to be an explicit nil
-func (o *UpdatePermissionGroupRequest) SetCanViewProductStatisticsNil() {
-	o.CanViewProductStatistics.Set(nil)
-}
-
-// UnsetCanViewProductStatistics ensures that no value is present for CanViewProductStatistics, not even an explicit nil
-func (o *UpdatePermissionGroupRequest) UnsetCanViewProductStatistics() {
-	o.CanViewProductStatistics.Unset()
-}
-
-// GetCanViewProductAuditLog returns the CanViewProductAuditLog field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UpdatePermissionGroupRequest) GetCanViewProductAuditLog() bool {
-	if o == nil || IsNil(o.CanViewProductAuditLog.Get()) {
-		var ret bool
-		return ret
-	}
-	return *o.CanViewProductAuditLog.Get()
-}
-
-// GetCanViewProductAuditLogOk returns a tuple with the CanViewProductAuditLog field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpdatePermissionGroupRequest) GetCanViewProductAuditLogOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.CanViewProductAuditLog.Get(), o.CanViewProductAuditLog.IsSet()
-}
-
-// HasCanViewProductAuditLog returns a boolean if a field has been set.
-func (o *UpdatePermissionGroupRequest) HasCanViewProductAuditLog() bool {
-	if o != nil && o.CanViewProductAuditLog.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCanViewProductAuditLog gets a reference to the given NullableBool and assigns it to the CanViewProductAuditLog field.
-func (o *UpdatePermissionGroupRequest) SetCanViewProductAuditLog(v bool) {
-	o.CanViewProductAuditLog.Set(&v)
-}
-// SetCanViewProductAuditLogNil sets the value for CanViewProductAuditLog to be an explicit nil
-func (o *UpdatePermissionGroupRequest) SetCanViewProductAuditLogNil() {
-	o.CanViewProductAuditLog.Set(nil)
-}
-
-// UnsetCanViewProductAuditLog ensures that no value is present for CanViewProductAuditLog, not even an explicit nil
-func (o *UpdatePermissionGroupRequest) UnsetCanViewProductAuditLog() {
-	o.CanViewProductAuditLog.Unset()
-}
-
 // GetCanCreateOrUpdateSegments returns the CanCreateOrUpdateSegments field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdatePermissionGroupRequest) GetCanCreateOrUpdateSegments() bool {
 	if o == nil || IsNil(o.CanCreateOrUpdateSegments.Get()) {
@@ -943,6 +881,90 @@ func (o *UpdatePermissionGroupRequest) SetCanDeleteSegmentsNil() {
 // UnsetCanDeleteSegments ensures that no value is present for CanDeleteSegments, not even an explicit nil
 func (o *UpdatePermissionGroupRequest) UnsetCanDeleteSegments() {
 	o.CanDeleteSegments.Unset()
+}
+
+// GetCanViewProductAuditLog returns the CanViewProductAuditLog field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdatePermissionGroupRequest) GetCanViewProductAuditLog() bool {
+	if o == nil || IsNil(o.CanViewProductAuditLog.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.CanViewProductAuditLog.Get()
+}
+
+// GetCanViewProductAuditLogOk returns a tuple with the CanViewProductAuditLog field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdatePermissionGroupRequest) GetCanViewProductAuditLogOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CanViewProductAuditLog.Get(), o.CanViewProductAuditLog.IsSet()
+}
+
+// HasCanViewProductAuditLog returns a boolean if a field has been set.
+func (o *UpdatePermissionGroupRequest) HasCanViewProductAuditLog() bool {
+	if o != nil && o.CanViewProductAuditLog.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCanViewProductAuditLog gets a reference to the given NullableBool and assigns it to the CanViewProductAuditLog field.
+func (o *UpdatePermissionGroupRequest) SetCanViewProductAuditLog(v bool) {
+	o.CanViewProductAuditLog.Set(&v)
+}
+// SetCanViewProductAuditLogNil sets the value for CanViewProductAuditLog to be an explicit nil
+func (o *UpdatePermissionGroupRequest) SetCanViewProductAuditLogNil() {
+	o.CanViewProductAuditLog.Set(nil)
+}
+
+// UnsetCanViewProductAuditLog ensures that no value is present for CanViewProductAuditLog, not even an explicit nil
+func (o *UpdatePermissionGroupRequest) UnsetCanViewProductAuditLog() {
+	o.CanViewProductAuditLog.Unset()
+}
+
+// GetCanViewProductStatistics returns the CanViewProductStatistics field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdatePermissionGroupRequest) GetCanViewProductStatistics() bool {
+	if o == nil || IsNil(o.CanViewProductStatistics.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.CanViewProductStatistics.Get()
+}
+
+// GetCanViewProductStatisticsOk returns a tuple with the CanViewProductStatistics field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdatePermissionGroupRequest) GetCanViewProductStatisticsOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CanViewProductStatistics.Get(), o.CanViewProductStatistics.IsSet()
+}
+
+// HasCanViewProductStatistics returns a boolean if a field has been set.
+func (o *UpdatePermissionGroupRequest) HasCanViewProductStatistics() bool {
+	if o != nil && o.CanViewProductStatistics.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCanViewProductStatistics gets a reference to the given NullableBool and assigns it to the CanViewProductStatistics field.
+func (o *UpdatePermissionGroupRequest) SetCanViewProductStatistics(v bool) {
+	o.CanViewProductStatistics.Set(&v)
+}
+// SetCanViewProductStatisticsNil sets the value for CanViewProductStatistics to be an explicit nil
+func (o *UpdatePermissionGroupRequest) SetCanViewProductStatisticsNil() {
+	o.CanViewProductStatistics.Set(nil)
+}
+
+// UnsetCanViewProductStatistics ensures that no value is present for CanViewProductStatistics, not even an explicit nil
+func (o *UpdatePermissionGroupRequest) UnsetCanViewProductStatistics() {
+	o.CanViewProductStatistics.Unset()
 }
 
 // GetAccessType returns the AccessType field value if set, zero value otherwise.
@@ -1103,17 +1125,17 @@ func (o UpdatePermissionGroupRequest) ToMap() (map[string]interface{}, error) {
 	if o.CanRotateSdkKey.IsSet() {
 		toSerialize["canRotateSdkKey"] = o.CanRotateSdkKey.Get()
 	}
-	if o.CanViewProductStatistics.IsSet() {
-		toSerialize["canViewProductStatistics"] = o.CanViewProductStatistics.Get()
-	}
-	if o.CanViewProductAuditLog.IsSet() {
-		toSerialize["canViewProductAuditLog"] = o.CanViewProductAuditLog.Get()
-	}
 	if o.CanCreateOrUpdateSegments.IsSet() {
 		toSerialize["canCreateOrUpdateSegments"] = o.CanCreateOrUpdateSegments.Get()
 	}
 	if o.CanDeleteSegments.IsSet() {
 		toSerialize["canDeleteSegments"] = o.CanDeleteSegments.Get()
+	}
+	if o.CanViewProductAuditLog.IsSet() {
+		toSerialize["canViewProductAuditLog"] = o.CanViewProductAuditLog.Get()
+	}
+	if o.CanViewProductStatistics.IsSet() {
+		toSerialize["canViewProductStatistics"] = o.CanViewProductStatistics.Get()
 	}
 	if !IsNil(o.AccessType) {
 		toSerialize["accessType"] = o.AccessType

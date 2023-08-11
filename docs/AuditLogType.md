@@ -129,6 +129,12 @@
 
 * `AUTO_PROVISIONING_CONFIGURATION_CHANGED` (value: `"autoProvisioningConfigurationChanged"`)
 
+* `SAML_IDP_CONFIGURATION_ADDED` (value: `"samlIdpConfigurationAdded"`)
+
+* `SAML_IDP_CONFIGURATION_REMOVED` (value: `"samlIdpConfigurationRemoved"`)
+
+* `SAML_IDP_CONFIGURATION_UPDATED` (value: `"samlIdpConfigurationUpdated"`)
+
 * `ORGANIZATION_MEMBER_JOINED` (value: `"organizationMemberJoined"`)
 
 * `ORGANIZATION_MEMBER_PRODUCT_JOIN_REQUESTED` (value: `"organizationMemberProductJoinRequested"`)

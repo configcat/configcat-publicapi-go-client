@@ -4,14 +4,18 @@ All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**V1CodeReferencesDeleteReportsPost**](CodeReferencesApi.md#V1CodeReferencesDeleteReportsPost) | **Post** /v1/code-references/delete-reports | 
-[**V1CodeReferencesPost**](CodeReferencesApi.md#V1CodeReferencesPost) | **Post** /v1/code-references | 
+[**V1CodeReferencesDeleteReportsPost**](CodeReferencesApi.md#V1CodeReferencesDeleteReportsPost) | **Post** /v1/code-references/delete-reports | Delete Reference reports
+[**V1CodeReferencesPost**](CodeReferencesApi.md#V1CodeReferencesPost) | **Post** /v1/code-references | Upload References
+[**V1ConfigsConfigIdCodeReferencesGet**](CodeReferencesApi.md#V1ConfigsConfigIdCodeReferencesGet) | **Get** /v1/configs/{configId}/code-references | Get References in Config
+[**V1SettingsSettingIdCodeReferencesGet**](CodeReferencesApi.md#V1SettingsSettingIdCodeReferencesGet) | **Get** /v1/settings/{settingId}/code-references | Get References for Feature Flag or Setting
 
 
 
 ## V1CodeReferencesDeleteReportsPost
 
 > V1CodeReferencesDeleteReportsPost(ctx).DeleteRepositoryReportsRequest(deleteRepositoryReportsRequest).Execute()
+
+Delete Reference reports
 
 
 
@@ -75,6 +79,8 @@ Name | Type | Description  | Notes
 
 > V1CodeReferencesPost(ctx).CodeReferenceRequest(codeReferenceRequest).Execute()
 
+Upload References
+
 
 
 ### Example
@@ -127,6 +133,146 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: application/json, text/json, application/*+json
 - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V1ConfigsConfigIdCodeReferencesGet
+
+> []CodeReferencesForSettingModel V1ConfigsConfigIdCodeReferencesGet(ctx, configId).Execute()
+
+Get References in Config
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CodeReferencesApi.V1ConfigsConfigIdCodeReferencesGet(context.Background(), configId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CodeReferencesApi.V1ConfigsConfigIdCodeReferencesGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `V1ConfigsConfigIdCodeReferencesGet`: []CodeReferencesForSettingModel
+    fmt.Fprintf(os.Stdout, "Response from `CodeReferencesApi.V1ConfigsConfigIdCodeReferencesGet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**configId** | **string** | The identifier of the Config. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV1ConfigsConfigIdCodeReferencesGetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**[]CodeReferencesForSettingModel**](CodeReferencesForSettingModel.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/hal+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V1SettingsSettingIdCodeReferencesGet
+
+> []CodeReferenceModel V1SettingsSettingIdCodeReferencesGet(ctx, settingId).Execute()
+
+Get References for Feature Flag or Setting
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    settingId := int32(56) // int32 | The identifier of the Feature Flag or Setting.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.CodeReferencesApi.V1SettingsSettingIdCodeReferencesGet(context.Background(), settingId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CodeReferencesApi.V1SettingsSettingIdCodeReferencesGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `V1SettingsSettingIdCodeReferencesGet`: []CodeReferenceModel
+    fmt.Fprintf(os.Stdout, "Response from `CodeReferencesApi.V1SettingsSettingIdCodeReferencesGet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settingId** | **int32** | The identifier of the Feature Flag or Setting. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV1SettingsSettingIdCodeReferencesGetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**[]CodeReferenceModel**](CodeReferenceModel.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/hal+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

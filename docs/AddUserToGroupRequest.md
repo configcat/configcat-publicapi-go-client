@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PermissionGroupIds** | **[]int64** |  | 
+**PermissionGroupIds** | **[]int64** | List of Permission Group identifiers to where the Member should be added. | 
 
 ## Methods
 

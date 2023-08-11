@@ -4,9 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UserId** | Pointer to **NullableString** |  | [optional] 
-**FullName** | Pointer to **NullableString** |  | [optional] 
-**Email** | Pointer to **NullableString** |  | [optional] 
+**UserId** | Pointer to **NullableString** | Identifier of the Member. | [optional] 
+**FullName** | Pointer to **NullableString** | Name of the Member. | [optional] 
+**Email** | Pointer to **NullableString** | Email of the Member. | [optional] 
+**TwoFactorEnabled** | Pointer to **bool** | Determines whether 2FA is enabled for the Member. | [optional] 
 
 ## Methods
 
@@ -132,6 +133,31 @@ HasEmail returns a boolean if a field has been set.
 `func (o *UserModel) UnsetEmail()`
 
 UnsetEmail ensures that no value is present for Email, not even an explicit nil
+### GetTwoFactorEnabled
+
+`func (o *UserModel) GetTwoFactorEnabled() bool`
+
+GetTwoFactorEnabled returns the TwoFactorEnabled field if non-nil, zero value otherwise.
+
+### GetTwoFactorEnabledOk
+
+`func (o *UserModel) GetTwoFactorEnabledOk() (*bool, bool)`
+
+GetTwoFactorEnabledOk returns a tuple with the TwoFactorEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTwoFactorEnabled
+
+`func (o *UserModel) SetTwoFactorEnabled(v bool)`
+
+SetTwoFactorEnabled sets TwoFactorEnabled field to given value.
+
+### HasTwoFactorEnabled
+
+`func (o *UserModel) HasTwoFactorEnabled() bool`
+
+HasTwoFactorEnabled returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

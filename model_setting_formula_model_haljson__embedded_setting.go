@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-**Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The purpose of this API is to access the ConfigCat platform programmatically.  You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.   The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  and JSON+HAL format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).   # OpenAPI Specification  The complete specification is publicly available here: [swagger.json](v1/swagger.json).  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+**Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The purpose of this API is to access the ConfigCat platform programmatically.  You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.   The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  and JSON+HAL format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).   # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -16,42 +16,50 @@ import (
 	"time"
 )
 
-// checks if the SettingValueModelHaljsonEmbeddedSetting type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &SettingValueModelHaljsonEmbeddedSetting{}
+// checks if the SettingFormulaModelHaljsonEmbeddedSetting type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &SettingFormulaModelHaljsonEmbeddedSetting{}
 
-// SettingValueModelHaljsonEmbeddedSetting struct for SettingValueModelHaljsonEmbeddedSetting
-type SettingValueModelHaljsonEmbeddedSetting struct {
+// SettingFormulaModelHaljsonEmbeddedSetting Metadata of a Feature Flag or Setting.
+type SettingFormulaModelHaljsonEmbeddedSetting struct {
+	// Identifier of the Feature Flag or Setting.
 	SettingId *int32 `json:"settingId,omitempty"`
+	// Key of the Feature Flag or Setting.
 	Key NullableString `json:"key,omitempty"`
+	// Name of the Feature Flag or Setting.
 	Name NullableString `json:"name,omitempty"`
+	// Description of the Feature Flag or Setting.
 	Hint NullableString `json:"hint,omitempty"`
 	SettingType *SettingType `json:"settingType,omitempty"`
+	// The order of the Feature Flag or Setting represented on the ConfigCat Dashboard.
 	Order *int32 `json:"order,omitempty"`
+	// The creation time of the Feature Flag or Setting.
 	CreatedAt NullableTime `json:"createdAt,omitempty"`
+	// The user's email address who created the Feature Flag or Setting.
 	CreatorEmail NullableString `json:"creatorEmail,omitempty"`
+	// The user's name who created the Feature Flag or Setting.
 	CreatorFullName NullableString `json:"creatorFullName,omitempty"`
 	IsWatching *bool `json:"isWatching,omitempty"`
 }
 
-// NewSettingValueModelHaljsonEmbeddedSetting instantiates a new SettingValueModelHaljsonEmbeddedSetting object
+// NewSettingFormulaModelHaljsonEmbeddedSetting instantiates a new SettingFormulaModelHaljsonEmbeddedSetting object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSettingValueModelHaljsonEmbeddedSetting() *SettingValueModelHaljsonEmbeddedSetting {
-	this := SettingValueModelHaljsonEmbeddedSetting{}
+func NewSettingFormulaModelHaljsonEmbeddedSetting() *SettingFormulaModelHaljsonEmbeddedSetting {
+	this := SettingFormulaModelHaljsonEmbeddedSetting{}
 	return &this
 }
 
-// NewSettingValueModelHaljsonEmbeddedSettingWithDefaults instantiates a new SettingValueModelHaljsonEmbeddedSetting object
+// NewSettingFormulaModelHaljsonEmbeddedSettingWithDefaults instantiates a new SettingFormulaModelHaljsonEmbeddedSetting object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSettingValueModelHaljsonEmbeddedSettingWithDefaults() *SettingValueModelHaljsonEmbeddedSetting {
-	this := SettingValueModelHaljsonEmbeddedSetting{}
+func NewSettingFormulaModelHaljsonEmbeddedSettingWithDefaults() *SettingFormulaModelHaljsonEmbeddedSetting {
+	this := SettingFormulaModelHaljsonEmbeddedSetting{}
 	return &this
 }
 
 // GetSettingId returns the SettingId field value if set, zero value otherwise.
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetSettingId() int32 {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetSettingId() int32 {
 	if o == nil || IsNil(o.SettingId) {
 		var ret int32
 		return ret
@@ -61,7 +69,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetSettingId() int32 {
 
 // GetSettingIdOk returns a tuple with the SettingId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetSettingIdOk() (*int32, bool) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetSettingIdOk() (*int32, bool) {
 	if o == nil || IsNil(o.SettingId) {
 		return nil, false
 	}
@@ -69,7 +77,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetSettingIdOk() (*int32, bool
 }
 
 // HasSettingId returns a boolean if a field has been set.
-func (o *SettingValueModelHaljsonEmbeddedSetting) HasSettingId() bool {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) HasSettingId() bool {
 	if o != nil && !IsNil(o.SettingId) {
 		return true
 	}
@@ -78,12 +86,12 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) HasSettingId() bool {
 }
 
 // SetSettingId gets a reference to the given int32 and assigns it to the SettingId field.
-func (o *SettingValueModelHaljsonEmbeddedSetting) SetSettingId(v int32) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) SetSettingId(v int32) {
 	o.SettingId = &v
 }
 
 // GetKey returns the Key field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetKey() string {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetKey() string {
 	if o == nil || IsNil(o.Key.Get()) {
 		var ret string
 		return ret
@@ -94,7 +102,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetKey() string {
 // GetKeyOk returns a tuple with the Key field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetKeyOk() (*string, bool) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -102,7 +110,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetKeyOk() (*string, bool) {
 }
 
 // HasKey returns a boolean if a field has been set.
-func (o *SettingValueModelHaljsonEmbeddedSetting) HasKey() bool {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) HasKey() bool {
 	if o != nil && o.Key.IsSet() {
 		return true
 	}
@@ -111,21 +119,21 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) HasKey() bool {
 }
 
 // SetKey gets a reference to the given NullableString and assigns it to the Key field.
-func (o *SettingValueModelHaljsonEmbeddedSetting) SetKey(v string) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) SetKey(v string) {
 	o.Key.Set(&v)
 }
 // SetKeyNil sets the value for Key to be an explicit nil
-func (o *SettingValueModelHaljsonEmbeddedSetting) SetKeyNil() {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) SetKeyNil() {
 	o.Key.Set(nil)
 }
 
 // UnsetKey ensures that no value is present for Key, not even an explicit nil
-func (o *SettingValueModelHaljsonEmbeddedSetting) UnsetKey() {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) UnsetKey() {
 	o.Key.Unset()
 }
 
 // GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetName() string {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetName() string {
 	if o == nil || IsNil(o.Name.Get()) {
 		var ret string
 		return ret
@@ -136,7 +144,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetName() string {
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetNameOk() (*string, bool) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -144,7 +152,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *SettingValueModelHaljsonEmbeddedSetting) HasName() bool {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) HasName() bool {
 	if o != nil && o.Name.IsSet() {
 		return true
 	}
@@ -153,21 +161,21 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) HasName() bool {
 }
 
 // SetName gets a reference to the given NullableString and assigns it to the Name field.
-func (o *SettingValueModelHaljsonEmbeddedSetting) SetName(v string) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) SetName(v string) {
 	o.Name.Set(&v)
 }
 // SetNameNil sets the value for Name to be an explicit nil
-func (o *SettingValueModelHaljsonEmbeddedSetting) SetNameNil() {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) SetNameNil() {
 	o.Name.Set(nil)
 }
 
 // UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *SettingValueModelHaljsonEmbeddedSetting) UnsetName() {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) UnsetName() {
 	o.Name.Unset()
 }
 
 // GetHint returns the Hint field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetHint() string {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetHint() string {
 	if o == nil || IsNil(o.Hint.Get()) {
 		var ret string
 		return ret
@@ -178,7 +186,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetHint() string {
 // GetHintOk returns a tuple with the Hint field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetHintOk() (*string, bool) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetHintOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -186,7 +194,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetHintOk() (*string, bool) {
 }
 
 // HasHint returns a boolean if a field has been set.
-func (o *SettingValueModelHaljsonEmbeddedSetting) HasHint() bool {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) HasHint() bool {
 	if o != nil && o.Hint.IsSet() {
 		return true
 	}
@@ -195,21 +203,21 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) HasHint() bool {
 }
 
 // SetHint gets a reference to the given NullableString and assigns it to the Hint field.
-func (o *SettingValueModelHaljsonEmbeddedSetting) SetHint(v string) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) SetHint(v string) {
 	o.Hint.Set(&v)
 }
 // SetHintNil sets the value for Hint to be an explicit nil
-func (o *SettingValueModelHaljsonEmbeddedSetting) SetHintNil() {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) SetHintNil() {
 	o.Hint.Set(nil)
 }
 
 // UnsetHint ensures that no value is present for Hint, not even an explicit nil
-func (o *SettingValueModelHaljsonEmbeddedSetting) UnsetHint() {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) UnsetHint() {
 	o.Hint.Unset()
 }
 
 // GetSettingType returns the SettingType field value if set, zero value otherwise.
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetSettingType() SettingType {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetSettingType() SettingType {
 	if o == nil || IsNil(o.SettingType) {
 		var ret SettingType
 		return ret
@@ -219,7 +227,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetSettingType() SettingType {
 
 // GetSettingTypeOk returns a tuple with the SettingType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetSettingTypeOk() (*SettingType, bool) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetSettingTypeOk() (*SettingType, bool) {
 	if o == nil || IsNil(o.SettingType) {
 		return nil, false
 	}
@@ -227,7 +235,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetSettingTypeOk() (*SettingTy
 }
 
 // HasSettingType returns a boolean if a field has been set.
-func (o *SettingValueModelHaljsonEmbeddedSetting) HasSettingType() bool {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) HasSettingType() bool {
 	if o != nil && !IsNil(o.SettingType) {
 		return true
 	}
@@ -236,12 +244,12 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) HasSettingType() bool {
 }
 
 // SetSettingType gets a reference to the given SettingType and assigns it to the SettingType field.
-func (o *SettingValueModelHaljsonEmbeddedSetting) SetSettingType(v SettingType) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) SetSettingType(v SettingType) {
 	o.SettingType = &v
 }
 
 // GetOrder returns the Order field value if set, zero value otherwise.
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetOrder() int32 {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetOrder() int32 {
 	if o == nil || IsNil(o.Order) {
 		var ret int32
 		return ret
@@ -251,7 +259,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetOrder() int32 {
 
 // GetOrderOk returns a tuple with the Order field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetOrderOk() (*int32, bool) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetOrderOk() (*int32, bool) {
 	if o == nil || IsNil(o.Order) {
 		return nil, false
 	}
@@ -259,7 +267,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetOrderOk() (*int32, bool) {
 }
 
 // HasOrder returns a boolean if a field has been set.
-func (o *SettingValueModelHaljsonEmbeddedSetting) HasOrder() bool {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) HasOrder() bool {
 	if o != nil && !IsNil(o.Order) {
 		return true
 	}
@@ -268,12 +276,12 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) HasOrder() bool {
 }
 
 // SetOrder gets a reference to the given int32 and assigns it to the Order field.
-func (o *SettingValueModelHaljsonEmbeddedSetting) SetOrder(v int32) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) SetOrder(v int32) {
 	o.Order = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetCreatedAt() time.Time {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetCreatedAt() time.Time {
 	if o == nil || IsNil(o.CreatedAt.Get()) {
 		var ret time.Time
 		return ret
@@ -284,7 +292,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetCreatedAt() time.Time {
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetCreatedAtOk() (*time.Time, bool) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -292,7 +300,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetCreatedAtOk() (*time.Time, 
 }
 
 // HasCreatedAt returns a boolean if a field has been set.
-func (o *SettingValueModelHaljsonEmbeddedSetting) HasCreatedAt() bool {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) HasCreatedAt() bool {
 	if o != nil && o.CreatedAt.IsSet() {
 		return true
 	}
@@ -301,21 +309,21 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) HasCreatedAt() bool {
 }
 
 // SetCreatedAt gets a reference to the given NullableTime and assigns it to the CreatedAt field.
-func (o *SettingValueModelHaljsonEmbeddedSetting) SetCreatedAt(v time.Time) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) SetCreatedAt(v time.Time) {
 	o.CreatedAt.Set(&v)
 }
 // SetCreatedAtNil sets the value for CreatedAt to be an explicit nil
-func (o *SettingValueModelHaljsonEmbeddedSetting) SetCreatedAtNil() {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) SetCreatedAtNil() {
 	o.CreatedAt.Set(nil)
 }
 
 // UnsetCreatedAt ensures that no value is present for CreatedAt, not even an explicit nil
-func (o *SettingValueModelHaljsonEmbeddedSetting) UnsetCreatedAt() {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) UnsetCreatedAt() {
 	o.CreatedAt.Unset()
 }
 
 // GetCreatorEmail returns the CreatorEmail field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetCreatorEmail() string {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetCreatorEmail() string {
 	if o == nil || IsNil(o.CreatorEmail.Get()) {
 		var ret string
 		return ret
@@ -326,7 +334,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetCreatorEmail() string {
 // GetCreatorEmailOk returns a tuple with the CreatorEmail field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetCreatorEmailOk() (*string, bool) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetCreatorEmailOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -334,7 +342,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetCreatorEmailOk() (*string, 
 }
 
 // HasCreatorEmail returns a boolean if a field has been set.
-func (o *SettingValueModelHaljsonEmbeddedSetting) HasCreatorEmail() bool {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) HasCreatorEmail() bool {
 	if o != nil && o.CreatorEmail.IsSet() {
 		return true
 	}
@@ -343,21 +351,21 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) HasCreatorEmail() bool {
 }
 
 // SetCreatorEmail gets a reference to the given NullableString and assigns it to the CreatorEmail field.
-func (o *SettingValueModelHaljsonEmbeddedSetting) SetCreatorEmail(v string) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) SetCreatorEmail(v string) {
 	o.CreatorEmail.Set(&v)
 }
 // SetCreatorEmailNil sets the value for CreatorEmail to be an explicit nil
-func (o *SettingValueModelHaljsonEmbeddedSetting) SetCreatorEmailNil() {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) SetCreatorEmailNil() {
 	o.CreatorEmail.Set(nil)
 }
 
 // UnsetCreatorEmail ensures that no value is present for CreatorEmail, not even an explicit nil
-func (o *SettingValueModelHaljsonEmbeddedSetting) UnsetCreatorEmail() {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) UnsetCreatorEmail() {
 	o.CreatorEmail.Unset()
 }
 
 // GetCreatorFullName returns the CreatorFullName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetCreatorFullName() string {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetCreatorFullName() string {
 	if o == nil || IsNil(o.CreatorFullName.Get()) {
 		var ret string
 		return ret
@@ -368,7 +376,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetCreatorFullName() string {
 // GetCreatorFullNameOk returns a tuple with the CreatorFullName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetCreatorFullNameOk() (*string, bool) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetCreatorFullNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -376,7 +384,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetCreatorFullNameOk() (*strin
 }
 
 // HasCreatorFullName returns a boolean if a field has been set.
-func (o *SettingValueModelHaljsonEmbeddedSetting) HasCreatorFullName() bool {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) HasCreatorFullName() bool {
 	if o != nil && o.CreatorFullName.IsSet() {
 		return true
 	}
@@ -385,21 +393,21 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) HasCreatorFullName() bool {
 }
 
 // SetCreatorFullName gets a reference to the given NullableString and assigns it to the CreatorFullName field.
-func (o *SettingValueModelHaljsonEmbeddedSetting) SetCreatorFullName(v string) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) SetCreatorFullName(v string) {
 	o.CreatorFullName.Set(&v)
 }
 // SetCreatorFullNameNil sets the value for CreatorFullName to be an explicit nil
-func (o *SettingValueModelHaljsonEmbeddedSetting) SetCreatorFullNameNil() {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) SetCreatorFullNameNil() {
 	o.CreatorFullName.Set(nil)
 }
 
 // UnsetCreatorFullName ensures that no value is present for CreatorFullName, not even an explicit nil
-func (o *SettingValueModelHaljsonEmbeddedSetting) UnsetCreatorFullName() {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) UnsetCreatorFullName() {
 	o.CreatorFullName.Unset()
 }
 
 // GetIsWatching returns the IsWatching field value if set, zero value otherwise.
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetIsWatching() bool {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetIsWatching() bool {
 	if o == nil || IsNil(o.IsWatching) {
 		var ret bool
 		return ret
@@ -409,7 +417,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetIsWatching() bool {
 
 // GetIsWatchingOk returns a tuple with the IsWatching field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SettingValueModelHaljsonEmbeddedSetting) GetIsWatchingOk() (*bool, bool) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) GetIsWatchingOk() (*bool, bool) {
 	if o == nil || IsNil(o.IsWatching) {
 		return nil, false
 	}
@@ -417,7 +425,7 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) GetIsWatchingOk() (*bool, bool
 }
 
 // HasIsWatching returns a boolean if a field has been set.
-func (o *SettingValueModelHaljsonEmbeddedSetting) HasIsWatching() bool {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) HasIsWatching() bool {
 	if o != nil && !IsNil(o.IsWatching) {
 		return true
 	}
@@ -426,11 +434,11 @@ func (o *SettingValueModelHaljsonEmbeddedSetting) HasIsWatching() bool {
 }
 
 // SetIsWatching gets a reference to the given bool and assigns it to the IsWatching field.
-func (o *SettingValueModelHaljsonEmbeddedSetting) SetIsWatching(v bool) {
+func (o *SettingFormulaModelHaljsonEmbeddedSetting) SetIsWatching(v bool) {
 	o.IsWatching = &v
 }
 
-func (o SettingValueModelHaljsonEmbeddedSetting) MarshalJSON() ([]byte, error) {
+func (o SettingFormulaModelHaljsonEmbeddedSetting) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -438,7 +446,7 @@ func (o SettingValueModelHaljsonEmbeddedSetting) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o SettingValueModelHaljsonEmbeddedSetting) ToMap() (map[string]interface{}, error) {
+func (o SettingFormulaModelHaljsonEmbeddedSetting) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.SettingId) {
 		toSerialize["settingId"] = o.SettingId
@@ -473,38 +481,38 @@ func (o SettingValueModelHaljsonEmbeddedSetting) ToMap() (map[string]interface{}
 	return toSerialize, nil
 }
 
-type NullableSettingValueModelHaljsonEmbeddedSetting struct {
-	value *SettingValueModelHaljsonEmbeddedSetting
+type NullableSettingFormulaModelHaljsonEmbeddedSetting struct {
+	value *SettingFormulaModelHaljsonEmbeddedSetting
 	isSet bool
 }
 
-func (v NullableSettingValueModelHaljsonEmbeddedSetting) Get() *SettingValueModelHaljsonEmbeddedSetting {
+func (v NullableSettingFormulaModelHaljsonEmbeddedSetting) Get() *SettingFormulaModelHaljsonEmbeddedSetting {
 	return v.value
 }
 
-func (v *NullableSettingValueModelHaljsonEmbeddedSetting) Set(val *SettingValueModelHaljsonEmbeddedSetting) {
+func (v *NullableSettingFormulaModelHaljsonEmbeddedSetting) Set(val *SettingFormulaModelHaljsonEmbeddedSetting) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSettingValueModelHaljsonEmbeddedSetting) IsSet() bool {
+func (v NullableSettingFormulaModelHaljsonEmbeddedSetting) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSettingValueModelHaljsonEmbeddedSetting) Unset() {
+func (v *NullableSettingFormulaModelHaljsonEmbeddedSetting) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSettingValueModelHaljsonEmbeddedSetting(val *SettingValueModelHaljsonEmbeddedSetting) *NullableSettingValueModelHaljsonEmbeddedSetting {
-	return &NullableSettingValueModelHaljsonEmbeddedSetting{value: val, isSet: true}
+func NewNullableSettingFormulaModelHaljsonEmbeddedSetting(val *SettingFormulaModelHaljsonEmbeddedSetting) *NullableSettingFormulaModelHaljsonEmbeddedSetting {
+	return &NullableSettingFormulaModelHaljsonEmbeddedSetting{value: val, isSet: true}
 }
 
-func (v NullableSettingValueModelHaljsonEmbeddedSetting) MarshalJSON() ([]byte, error) {
+func (v NullableSettingFormulaModelHaljsonEmbeddedSetting) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSettingValueModelHaljsonEmbeddedSetting) UnmarshalJSON(src []byte) error {
+func (v *NullableSettingFormulaModelHaljsonEmbeddedSetting) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

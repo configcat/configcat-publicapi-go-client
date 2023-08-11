@@ -5,18 +5,18 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Product** | Pointer to [**ProductModel**](ProductModel.md) |  | [optional] 
-**SegmentId** | Pointer to **string** |  | [optional] 
-**Name** | Pointer to **NullableString** |  | [optional] 
-**Description** | Pointer to **NullableString** |  | [optional] 
-**CreatorEmail** | Pointer to **NullableString** |  | [optional] 
-**CreatorFullName** | Pointer to **NullableString** |  | [optional] 
-**CreatedAt** | Pointer to **time.Time** |  | [optional] 
-**LastUpdaterEmail** | Pointer to **NullableString** |  | [optional] 
-**LastUpdaterFullName** | Pointer to **NullableString** |  | [optional] 
-**UpdatedAt** | Pointer to **time.Time** |  | [optional] 
-**ComparisonAttribute** | Pointer to **NullableString** |  | [optional] 
+**SegmentId** | Pointer to **string** | Identifier of the Segment. | [optional] 
+**Name** | Pointer to **NullableString** | Name of the Segment. | [optional] 
+**Description** | Pointer to **NullableString** | Description of the Segment. | [optional] 
+**CreatorEmail** | Pointer to **NullableString** | The email of the user who created the Segment. | [optional] 
+**CreatorFullName** | Pointer to **NullableString** | The name of the user who created the Segment. | [optional] 
+**CreatedAt** | Pointer to **time.Time** | The date and time when the Segment was created. | [optional] 
+**LastUpdaterEmail** | Pointer to **NullableString** | The email of the user who last updated the Segment. | [optional] 
+**LastUpdaterFullName** | Pointer to **NullableString** | The name of the user who last updated the Segment. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | The date and time when the Segment was last updated. | [optional] 
+**ComparisonAttribute** | Pointer to **NullableString** | The user&#39;s attribute the evaluation process must take into account. | [optional] 
 **Comparator** | Pointer to [**RolloutRuleComparator**](RolloutRuleComparator.md) |  | [optional] 
-**ComparisonValue** | Pointer to **NullableString** |  | [optional] 
+**ComparisonValue** | Pointer to **NullableString** | The value to compare with the given user attribute&#39;s value. | [optional] 
 
 ## Methods
 

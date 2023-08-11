@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UserId** | Pointer to **NullableString** |  | [optional] 
-**ProductId** | Pointer to **string** |  | [optional] 
-**PermissionGroupId** | Pointer to **int64** |  | [optional] 
-**FullName** | Pointer to **NullableString** |  | [optional] 
-**Email** | Pointer to **NullableString** |  | [optional] 
+**UserId** | Pointer to **NullableString** | Identifier of the Member. | [optional] 
+**ProductId** | Pointer to **string** | Identifier of the Product where the Member has access. | [optional] 
+**PermissionGroupId** | Pointer to **int64** | Identifier of the Member&#39;s Permission Group. | [optional] 
+**FullName** | Pointer to **NullableString** | Name of the Member. | [optional] 
+**Email** | Pointer to **NullableString** | Email of the Member. | [optional] 
 
 ## Methods
 

@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Hint** | Pointer to **NullableString** | A short description for the setting, shown on the Dashboard UI. | [optional] 
 **Tags** | Pointer to **[]int64** | The IDs of the tags which are attached to the setting. | [optional] 
-**Key** | **string** | The key of the setting. | 
-**Name** | **string** | The name of the setting, shown on the Dashboard UI. | 
+**Key** | **string** | The key of the Feature Flag or Setting. | 
+**Name** | **string** | The name of the Feature Flag or Setting. | 
 **SettingType** | [**SettingType**](SettingType.md) |  | 
-**InitialValues** | Pointer to [**[]InitialValue**](InitialValue.md) | Optional, initial values of the feature flag or setting in the given Environments. | [optional] 
+**InitialValues** | Pointer to [**[]InitialValue**](InitialValue.md) | Optional, initial value of the Feature Flag or Setting in the given Environments. | [optional] 
 
 ## Methods
 

@@ -1,264 +1,264 @@
-# SettingValueModelHaljsonEmbeddedConfig
+# ConfigSettingFormulasModelHaljsonEmbeddedConfig
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Embedded** | Pointer to [**ConfigModelHaljsonEmbedded**](ConfigModelHaljsonEmbedded.md) |  | [optional] 
-**ConfigId** | Pointer to **string** |  | [optional] 
-**Name** | Pointer to **NullableString** |  | [optional] 
-**Description** | Pointer to **NullableString** |  | [optional] 
-**Order** | Pointer to **int32** |  | [optional] 
+**ConfigId** | Pointer to **string** | Identifier of the Config. | [optional] 
+**Name** | Pointer to **NullableString** | Name of the Config. | [optional] 
+**Description** | Pointer to **NullableString** | Description of the Config. | [optional] 
+**Order** | Pointer to **int32** | The order of the Config represented on the ConfigCat Dashboard. | [optional] 
 **MigratedConfigId** | Pointer to **NullableString** |  | [optional] 
 **EvaluationVersion** | Pointer to [**EvaluationVersion**](EvaluationVersion.md) |  | [optional] 
 **Links** | Pointer to [**ConfigModelHaljsonLinks**](ConfigModelHaljsonLinks.md) |  | [optional] 
 
 ## Methods
 
-### NewSettingValueModelHaljsonEmbeddedConfig
+### NewConfigSettingFormulasModelHaljsonEmbeddedConfig
 
-`func NewSettingValueModelHaljsonEmbeddedConfig() *SettingValueModelHaljsonEmbeddedConfig`
+`func NewConfigSettingFormulasModelHaljsonEmbeddedConfig() *ConfigSettingFormulasModelHaljsonEmbeddedConfig`
 
-NewSettingValueModelHaljsonEmbeddedConfig instantiates a new SettingValueModelHaljsonEmbeddedConfig object
+NewConfigSettingFormulasModelHaljsonEmbeddedConfig instantiates a new ConfigSettingFormulasModelHaljsonEmbeddedConfig object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewSettingValueModelHaljsonEmbeddedConfigWithDefaults
+### NewConfigSettingFormulasModelHaljsonEmbeddedConfigWithDefaults
 
-`func NewSettingValueModelHaljsonEmbeddedConfigWithDefaults() *SettingValueModelHaljsonEmbeddedConfig`
+`func NewConfigSettingFormulasModelHaljsonEmbeddedConfigWithDefaults() *ConfigSettingFormulasModelHaljsonEmbeddedConfig`
 
-NewSettingValueModelHaljsonEmbeddedConfigWithDefaults instantiates a new SettingValueModelHaljsonEmbeddedConfig object
+NewConfigSettingFormulasModelHaljsonEmbeddedConfigWithDefaults instantiates a new ConfigSettingFormulasModelHaljsonEmbeddedConfig object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetEmbedded
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) GetEmbedded() ConfigModelHaljsonEmbedded`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) GetEmbedded() ConfigModelHaljsonEmbedded`
 
 GetEmbedded returns the Embedded field if non-nil, zero value otherwise.
 
 ### GetEmbeddedOk
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) GetEmbeddedOk() (*ConfigModelHaljsonEmbedded, bool)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) GetEmbeddedOk() (*ConfigModelHaljsonEmbedded, bool)`
 
 GetEmbeddedOk returns a tuple with the Embedded field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEmbedded
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) SetEmbedded(v ConfigModelHaljsonEmbedded)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) SetEmbedded(v ConfigModelHaljsonEmbedded)`
 
 SetEmbedded sets Embedded field to given value.
 
 ### HasEmbedded
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) HasEmbedded() bool`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) HasEmbedded() bool`
 
 HasEmbedded returns a boolean if a field has been set.
 
 ### GetConfigId
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) GetConfigId() string`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) GetConfigId() string`
 
 GetConfigId returns the ConfigId field if non-nil, zero value otherwise.
 
 ### GetConfigIdOk
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) GetConfigIdOk() (*string, bool)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) GetConfigIdOk() (*string, bool)`
 
 GetConfigIdOk returns a tuple with the ConfigId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetConfigId
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) SetConfigId(v string)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) SetConfigId(v string)`
 
 SetConfigId sets ConfigId field to given value.
 
 ### HasConfigId
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) HasConfigId() bool`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) HasConfigId() bool`
 
 HasConfigId returns a boolean if a field has been set.
 
 ### GetName
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) GetName() string`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) GetName() string`
 
 GetName returns the Name field if non-nil, zero value otherwise.
 
 ### GetNameOk
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) GetNameOk() (*string, bool)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) GetNameOk() (*string, bool)`
 
 GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetName
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) SetName(v string)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) SetName(v string)`
 
 SetName sets Name field to given value.
 
 ### HasName
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) HasName() bool`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) HasName() bool`
 
 HasName returns a boolean if a field has been set.
 
 ### SetNameNil
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) SetNameNil(b bool)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) SetNameNil(b bool)`
 
  SetNameNil sets the value for Name to be an explicit nil
 
 ### UnsetName
-`func (o *SettingValueModelHaljsonEmbeddedConfig) UnsetName()`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) UnsetName()`
 
 UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetDescription
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) GetDescription() string`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) GetDescription() string`
 
 GetDescription returns the Description field if non-nil, zero value otherwise.
 
 ### GetDescriptionOk
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) GetDescriptionOk() (*string, bool)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) GetDescriptionOk() (*string, bool)`
 
 GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDescription
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) SetDescription(v string)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) SetDescription(v string)`
 
 SetDescription sets Description field to given value.
 
 ### HasDescription
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) HasDescription() bool`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) HasDescription() bool`
 
 HasDescription returns a boolean if a field has been set.
 
 ### SetDescriptionNil
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) SetDescriptionNil(b bool)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) SetDescriptionNil(b bool)`
 
  SetDescriptionNil sets the value for Description to be an explicit nil
 
 ### UnsetDescription
-`func (o *SettingValueModelHaljsonEmbeddedConfig) UnsetDescription()`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) UnsetDescription()`
 
 UnsetDescription ensures that no value is present for Description, not even an explicit nil
 ### GetOrder
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) GetOrder() int32`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) GetOrder() int32`
 
 GetOrder returns the Order field if non-nil, zero value otherwise.
 
 ### GetOrderOk
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) GetOrderOk() (*int32, bool)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) GetOrderOk() (*int32, bool)`
 
 GetOrderOk returns a tuple with the Order field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOrder
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) SetOrder(v int32)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) SetOrder(v int32)`
 
 SetOrder sets Order field to given value.
 
 ### HasOrder
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) HasOrder() bool`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) HasOrder() bool`
 
 HasOrder returns a boolean if a field has been set.
 
 ### GetMigratedConfigId
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) GetMigratedConfigId() string`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) GetMigratedConfigId() string`
 
 GetMigratedConfigId returns the MigratedConfigId field if non-nil, zero value otherwise.
 
 ### GetMigratedConfigIdOk
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) GetMigratedConfigIdOk() (*string, bool)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) GetMigratedConfigIdOk() (*string, bool)`
 
 GetMigratedConfigIdOk returns a tuple with the MigratedConfigId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMigratedConfigId
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) SetMigratedConfigId(v string)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) SetMigratedConfigId(v string)`
 
 SetMigratedConfigId sets MigratedConfigId field to given value.
 
 ### HasMigratedConfigId
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) HasMigratedConfigId() bool`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) HasMigratedConfigId() bool`
 
 HasMigratedConfigId returns a boolean if a field has been set.
 
 ### SetMigratedConfigIdNil
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) SetMigratedConfigIdNil(b bool)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) SetMigratedConfigIdNil(b bool)`
 
  SetMigratedConfigIdNil sets the value for MigratedConfigId to be an explicit nil
 
 ### UnsetMigratedConfigId
-`func (o *SettingValueModelHaljsonEmbeddedConfig) UnsetMigratedConfigId()`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) UnsetMigratedConfigId()`
 
 UnsetMigratedConfigId ensures that no value is present for MigratedConfigId, not even an explicit nil
 ### GetEvaluationVersion
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) GetEvaluationVersion() EvaluationVersion`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) GetEvaluationVersion() EvaluationVersion`
 
 GetEvaluationVersion returns the EvaluationVersion field if non-nil, zero value otherwise.
 
 ### GetEvaluationVersionOk
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) GetEvaluationVersionOk() (*EvaluationVersion, bool)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) GetEvaluationVersionOk() (*EvaluationVersion, bool)`
 
 GetEvaluationVersionOk returns a tuple with the EvaluationVersion field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEvaluationVersion
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) SetEvaluationVersion(v EvaluationVersion)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) SetEvaluationVersion(v EvaluationVersion)`
 
 SetEvaluationVersion sets EvaluationVersion field to given value.
 
 ### HasEvaluationVersion
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) HasEvaluationVersion() bool`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) HasEvaluationVersion() bool`
 
 HasEvaluationVersion returns a boolean if a field has been set.
 
 ### GetLinks
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) GetLinks() ConfigModelHaljsonLinks`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) GetLinks() ConfigModelHaljsonLinks`
 
 GetLinks returns the Links field if non-nil, zero value otherwise.
 
 ### GetLinksOk
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) GetLinksOk() (*ConfigModelHaljsonLinks, bool)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) GetLinksOk() (*ConfigModelHaljsonLinks, bool)`
 
 GetLinksOk returns a tuple with the Links field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLinks
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) SetLinks(v ConfigModelHaljsonLinks)`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) SetLinks(v ConfigModelHaljsonLinks)`
 
 SetLinks sets Links field to given value.
 
 ### HasLinks
 
-`func (o *SettingValueModelHaljsonEmbeddedConfig) HasLinks() bool`
+`func (o *ConfigSettingFormulasModelHaljsonEmbeddedConfig) HasLinks() bool`
 
 HasLinks returns a boolean if a field has been set.
 

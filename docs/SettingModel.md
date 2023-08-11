@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SettingId** | Pointer to **int32** |  | [optional] 
-**Key** | Pointer to **NullableString** |  | [optional] 
-**Name** | Pointer to **NullableString** |  | [optional] 
-**Hint** | Pointer to **NullableString** |  | [optional] 
-**Order** | Pointer to **int32** |  | [optional] 
+**SettingId** | Pointer to **int32** | Identifier of the Feature Flag or Setting. | [optional] 
+**Key** | Pointer to **NullableString** | Key of the Feature Flag or Setting. | [optional] 
+**Name** | Pointer to **NullableString** | Name of the Feature Flag or Setting. | [optional] 
+**Hint** | Pointer to **NullableString** | Description of the Feature Flag or Setting. | [optional] 
+**Order** | Pointer to **int32** | The order of the Feature Flag or Setting represented on the ConfigCat Dashboard. | [optional] 
 **SettingType** | Pointer to [**SettingType**](SettingType.md) |  | [optional] 
-**ConfigId** | Pointer to **string** |  | [optional] 
-**ConfigName** | Pointer to **NullableString** |  | [optional] 
-**Tags** | Pointer to [**[]TagModel**](TagModel.md) |  | [optional] 
+**ConfigId** | Pointer to **string** | Identifier of the Feature Flag&#39;s Config. | [optional] 
+**ConfigName** | Pointer to **NullableString** | Name of the Feature Flag&#39;s Config. | [optional] 
+**Tags** | Pointer to [**[]TagModel**](TagModel.md) | The tags attached to the Feature Flag or Setting. | [optional] 
 
 ## Methods
 

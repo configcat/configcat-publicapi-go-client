@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SettingId** | Pointer to **int32** |  | [optional] 
-**Key** | Pointer to **NullableString** |  | [optional] 
-**Name** | Pointer to **NullableString** |  | [optional] 
-**Hint** | Pointer to **NullableString** |  | [optional] 
-**Order** | Pointer to **int32** |  | [optional] 
+**SettingId** | Pointer to **int32** | Identifier of the Feature Flag or Setting. | [optional] 
+**Key** | Pointer to **NullableString** | Key of the Feature Flag or Setting. | [optional] 
+**Name** | Pointer to **NullableString** | Name of the Feature Flag or Setting. | [optional] 
+**Hint** | Pointer to **NullableString** | Description of the Feature Flag or Setting. | [optional] 
+**Order** | Pointer to **int32** | The order of the Feature Flag or Setting represented on the ConfigCat Dashboard. | [optional] 
 **SettingType** | Pointer to [**SettingType**](SettingType.md) |  | [optional] 
-**ConfigId** | Pointer to **string** |  | [optional] 
-**ConfigName** | Pointer to **NullableString** |  | [optional] 
+**ConfigId** | Pointer to **string** | Identifier of the Feature Flag&#39;s Config. | [optional] 
+**ConfigName** | Pointer to **NullableString** | Name of the Feature Flag&#39;s Config. | [optional] 
 **Embedded** | Pointer to [**SettingModelHaljsonEmbedded**](SettingModelHaljsonEmbedded.md) |  | [optional] 
-**Links** | Pointer to [**EnvironmentModelHaljsonLinks**](EnvironmentModelHaljsonLinks.md) |  | [optional] 
+**Links** | Pointer to [**ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks**](ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks.md) |  | [optional] 
 
 ## Methods
 
@@ -301,20 +301,20 @@ HasEmbedded returns a boolean if a field has been set.
 
 ### GetLinks
 
-`func (o *SettingModelHaljson) GetLinks() EnvironmentModelHaljsonLinks`
+`func (o *SettingModelHaljson) GetLinks() ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks`
 
 GetLinks returns the Links field if non-nil, zero value otherwise.
 
 ### GetLinksOk
 
-`func (o *SettingModelHaljson) GetLinksOk() (*EnvironmentModelHaljsonLinks, bool)`
+`func (o *SettingModelHaljson) GetLinksOk() (*ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks, bool)`
 
 GetLinksOk returns a tuple with the Links field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLinks
 
-`func (o *SettingModelHaljson) SetLinks(v EnvironmentModelHaljsonLinks)`
+`func (o *SettingModelHaljson) SetLinks(v ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks)`
 
 SetLinks sets Links field to given value.
 

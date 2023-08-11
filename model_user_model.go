@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-**Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The purpose of this API is to access the ConfigCat platform programmatically.  You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.   The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  and JSON+HAL format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).   # OpenAPI Specification  The complete specification is publicly available here: [swagger.json](v1/swagger.json).  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+**Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The purpose of this API is to access the ConfigCat platform programmatically.  You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.   The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  and JSON+HAL format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).   # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -20,9 +20,14 @@ var _ MappedNullable = &UserModel{}
 
 // UserModel struct for UserModel
 type UserModel struct {
+	// Identifier of the Member.
 	UserId NullableString `json:"userId,omitempty"`
+	// Name of the Member.
 	FullName NullableString `json:"fullName,omitempty"`
+	// Email of the Member.
 	Email NullableString `json:"email,omitempty"`
+	// Determines whether 2FA is enabled for the Member.
+	TwoFactorEnabled *bool `json:"twoFactorEnabled,omitempty"`
 }
 
 // NewUserModel instantiates a new UserModel object
@@ -168,6 +173,38 @@ func (o *UserModel) UnsetEmail() {
 	o.Email.Unset()
 }
 
+// GetTwoFactorEnabled returns the TwoFactorEnabled field value if set, zero value otherwise.
+func (o *UserModel) GetTwoFactorEnabled() bool {
+	if o == nil || IsNil(o.TwoFactorEnabled) {
+		var ret bool
+		return ret
+	}
+	return *o.TwoFactorEnabled
+}
+
+// GetTwoFactorEnabledOk returns a tuple with the TwoFactorEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserModel) GetTwoFactorEnabledOk() (*bool, bool) {
+	if o == nil || IsNil(o.TwoFactorEnabled) {
+		return nil, false
+	}
+	return o.TwoFactorEnabled, true
+}
+
+// HasTwoFactorEnabled returns a boolean if a field has been set.
+func (o *UserModel) HasTwoFactorEnabled() bool {
+	if o != nil && !IsNil(o.TwoFactorEnabled) {
+		return true
+	}
+
+	return false
+}
+
+// SetTwoFactorEnabled gets a reference to the given bool and assigns it to the TwoFactorEnabled field.
+func (o *UserModel) SetTwoFactorEnabled(v bool) {
+	o.TwoFactorEnabled = &v
+}
+
 func (o UserModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -186,6 +223,9 @@ func (o UserModel) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Email.IsSet() {
 		toSerialize["email"] = o.Email.Get()
+	}
+	if !IsNil(o.TwoFactorEnabled) {
+		toSerialize["twoFactorEnabled"] = o.TwoFactorEnabled
 	}
 	return toSerialize, nil
 }
