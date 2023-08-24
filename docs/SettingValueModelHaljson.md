@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **LastUpdaterUserEmail** | Pointer to **NullableString** | The email of the user who last updated the Feature Flag or Setting. | [optional] 
 **LastUpdaterUserFullName** | Pointer to **NullableString** | The name of the user who last updated the Feature Flag or Setting. | [optional] 
 **Embedded** | Pointer to [**SettingFormulaModelHaljsonEmbedded**](SettingFormulaModelHaljsonEmbedded.md) |  | [optional] 
+**FeatureFlagLimitations** | Pointer to [**FeatureFlagLimitations**](FeatureFlagLimitations.md) |  | [optional] 
 **ReadOnly** | Pointer to **bool** |  | [optional] 
 **Links** | Pointer to [**ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks**](ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks.md) |  | [optional] 
 
@@ -267,6 +268,31 @@ SetEmbedded sets Embedded field to given value.
 `func (o *SettingValueModelHaljson) HasEmbedded() bool`
 
 HasEmbedded returns a boolean if a field has been set.
+
+### GetFeatureFlagLimitations
+
+`func (o *SettingValueModelHaljson) GetFeatureFlagLimitations() FeatureFlagLimitations`
+
+GetFeatureFlagLimitations returns the FeatureFlagLimitations field if non-nil, zero value otherwise.
+
+### GetFeatureFlagLimitationsOk
+
+`func (o *SettingValueModelHaljson) GetFeatureFlagLimitationsOk() (*FeatureFlagLimitations, bool)`
+
+GetFeatureFlagLimitationsOk returns a tuple with the FeatureFlagLimitations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFeatureFlagLimitations
+
+`func (o *SettingValueModelHaljson) SetFeatureFlagLimitations(v FeatureFlagLimitations)`
+
+SetFeatureFlagLimitations sets FeatureFlagLimitations field to given value.
+
+### HasFeatureFlagLimitations
+
+`func (o *SettingValueModelHaljson) HasFeatureFlagLimitations() bool`
+
+HasFeatureFlagLimitations returns a boolean if a field has been set.
 
 ### GetReadOnly
 

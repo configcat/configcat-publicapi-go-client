@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **LastUpdaterUserFullName** | Pointer to **NullableString** | The name of the user who last updated the Feature Flag or Setting. | [optional] 
 **Embedded** | Pointer to [**SettingFormulaModelHaljsonEmbedded**](SettingFormulaModelHaljsonEmbedded.md) |  | [optional] 
 **ReadOnly** | Pointer to **bool** |  | [optional] 
+**FeatureFlagLimitations** | Pointer to [**FeatureFlagLimitations**](FeatureFlagLimitations.md) |  | [optional] 
 **Links** | Pointer to [**ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks**](ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks.md) |  | [optional] 
 
 ## Methods
@@ -308,6 +309,31 @@ SetReadOnly sets ReadOnly field to given value.
 `func (o *SettingFormulaModelHaljson) HasReadOnly() bool`
 
 HasReadOnly returns a boolean if a field has been set.
+
+### GetFeatureFlagLimitations
+
+`func (o *SettingFormulaModelHaljson) GetFeatureFlagLimitations() FeatureFlagLimitations`
+
+GetFeatureFlagLimitations returns the FeatureFlagLimitations field if non-nil, zero value otherwise.
+
+### GetFeatureFlagLimitationsOk
+
+`func (o *SettingFormulaModelHaljson) GetFeatureFlagLimitationsOk() (*FeatureFlagLimitations, bool)`
+
+GetFeatureFlagLimitationsOk returns a tuple with the FeatureFlagLimitations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFeatureFlagLimitations
+
+`func (o *SettingFormulaModelHaljson) SetFeatureFlagLimitations(v FeatureFlagLimitations)`
+
+SetFeatureFlagLimitations sets FeatureFlagLimitations field to given value.
+
+### HasFeatureFlagLimitations
+
+`func (o *SettingFormulaModelHaljson) HasFeatureFlagLimitations() bool`
+
+HasFeatureFlagLimitations returns a boolean if a field has been set.
 
 ### GetLinks
 

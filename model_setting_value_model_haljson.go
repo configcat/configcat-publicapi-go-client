@@ -34,6 +34,7 @@ type SettingValueModelHaljson struct {
 	// The name of the user who last updated the Feature Flag or Setting.
 	LastUpdaterUserFullName NullableString `json:"lastUpdaterUserFullName,omitempty"`
 	Embedded *SettingFormulaModelHaljsonEmbedded `json:"_embedded,omitempty"`
+	FeatureFlagLimitations *FeatureFlagLimitations `json:"featureFlagLimitations,omitempty"`
 	ReadOnly *bool `json:"readOnly,omitempty"`
 	Links *ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks `json:"_links,omitempty"`
 }
@@ -312,6 +313,38 @@ func (o *SettingValueModelHaljson) SetEmbedded(v SettingFormulaModelHaljsonEmbed
 	o.Embedded = &v
 }
 
+// GetFeatureFlagLimitations returns the FeatureFlagLimitations field value if set, zero value otherwise.
+func (o *SettingValueModelHaljson) GetFeatureFlagLimitations() FeatureFlagLimitations {
+	if o == nil || IsNil(o.FeatureFlagLimitations) {
+		var ret FeatureFlagLimitations
+		return ret
+	}
+	return *o.FeatureFlagLimitations
+}
+
+// GetFeatureFlagLimitationsOk returns a tuple with the FeatureFlagLimitations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SettingValueModelHaljson) GetFeatureFlagLimitationsOk() (*FeatureFlagLimitations, bool) {
+	if o == nil || IsNil(o.FeatureFlagLimitations) {
+		return nil, false
+	}
+	return o.FeatureFlagLimitations, true
+}
+
+// HasFeatureFlagLimitations returns a boolean if a field has been set.
+func (o *SettingValueModelHaljson) HasFeatureFlagLimitations() bool {
+	if o != nil && !IsNil(o.FeatureFlagLimitations) {
+		return true
+	}
+
+	return false
+}
+
+// SetFeatureFlagLimitations gets a reference to the given FeatureFlagLimitations and assigns it to the FeatureFlagLimitations field.
+func (o *SettingValueModelHaljson) SetFeatureFlagLimitations(v FeatureFlagLimitations) {
+	o.FeatureFlagLimitations = &v
+}
+
 // GetReadOnly returns the ReadOnly field value if set, zero value otherwise.
 func (o *SettingValueModelHaljson) GetReadOnly() bool {
 	if o == nil || IsNil(o.ReadOnly) {
@@ -406,6 +439,9 @@ func (o SettingValueModelHaljson) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Embedded) {
 		toSerialize["_embedded"] = o.Embedded
+	}
+	if !IsNil(o.FeatureFlagLimitations) {
+		toSerialize["featureFlagLimitations"] = o.FeatureFlagLimitations
 	}
 	if !IsNil(o.ReadOnly) {
 		toSerialize["readOnly"] = o.ReadOnly

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **SettingTags** | Pointer to [**[]SettingTagModel**](SettingTagModel.md) | The tags attached to the Feature Flag or Setting. | [optional] 
 **Config** | Pointer to [**ConfigModel**](ConfigModel.md) |  | [optional] 
 **Environment** | Pointer to [**EnvironmentModel**](EnvironmentModel.md) |  | [optional] 
+**FeatureFlagLimitations** | Pointer to [**FeatureFlagLimitations**](FeatureFlagLimitations.md) |  | [optional] 
 **ReadOnly** | Pointer to **bool** |  | [optional] 
 
 ## Methods
@@ -390,6 +391,31 @@ SetEnvironment sets Environment field to given value.
 `func (o *SettingValueModel) HasEnvironment() bool`
 
 HasEnvironment returns a boolean if a field has been set.
+
+### GetFeatureFlagLimitations
+
+`func (o *SettingValueModel) GetFeatureFlagLimitations() FeatureFlagLimitations`
+
+GetFeatureFlagLimitations returns the FeatureFlagLimitations field if non-nil, zero value otherwise.
+
+### GetFeatureFlagLimitationsOk
+
+`func (o *SettingValueModel) GetFeatureFlagLimitationsOk() (*FeatureFlagLimitations, bool)`
+
+GetFeatureFlagLimitationsOk returns a tuple with the FeatureFlagLimitations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFeatureFlagLimitations
+
+`func (o *SettingValueModel) SetFeatureFlagLimitations(v FeatureFlagLimitations)`
+
+SetFeatureFlagLimitations sets FeatureFlagLimitations field to given value.
+
+### HasFeatureFlagLimitations
+
+`func (o *SettingValueModel) HasFeatureFlagLimitations() bool`
+
+HasFeatureFlagLimitations returns a boolean if a field has been set.
 
 ### GetReadOnly
 

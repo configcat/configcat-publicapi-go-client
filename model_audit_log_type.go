@@ -51,7 +51,6 @@ const (
 	AUDITLOGTYPE_WEB_HOOK_CREATED AuditLogType = "webHookCreated"
 	AUDITLOGTYPE_WEB_HOOK_CHANGED AuditLogType = "webHookChanged"
 	AUDITLOGTYPE_WEB_HOOK_DELETED AuditLogType = "webHookDeleted"
-	AUDITLOGTYPE_SUBSCRIPTION_CHANGED AuditLogType = "subscriptionChanged"
 	AUDITLOGTYPE_PERMISSION_GROUP_CREATED AuditLogType = "permissionGroupCreated"
 	AUDITLOGTYPE_PERMISSION_GROUP_CHANGED AuditLogType = "permissionGroupChanged"
 	AUDITLOGTYPE_PERMISSION_GROUP_DELETED AuditLogType = "permissionGroupDeleted"
@@ -133,7 +132,6 @@ var AllowedAuditLogTypeEnumValues = []AuditLogType{
 	"webHookCreated",
 	"webHookChanged",
 	"webHookDeleted",
-	"subscriptionChanged",
 	"permissionGroupCreated",
 	"permissionGroupChanged",
 	"permissionGroupDeleted",

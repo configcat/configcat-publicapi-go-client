@@ -5166,7 +5166,6 @@ components:
       - webHookCreated
       - webHookChanged
       - webHookDeleted
-      - subscriptionChanged
       - permissionGroupCreated
       - permissionGroupChanged
       - permissionGroupDeleted
@@ -5937,6 +5936,14 @@ components:
           description: description
           order: 0
           reasonRequired: true
+        featureFlagLimitations:
+          maxComparisonValueListItemLength: 2
+          maxComparisonValueListLength: 3
+          maxPercentageOptionCount: 2
+          maxConditionPerTargetingRuleCount: 7
+          maxComparisonValueLength: 9
+          maxStringFlagValueLength: 4
+          maxTargetingRuleCount: 7
         settingFormulas:
         - lastVersionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           targetingRules:
@@ -6300,6 +6307,8 @@ components:
             $ref: '#/components/schemas/ConfigSettingFormulaModel'
           nullable: true
           type: array
+        featureFlagLimitations:
+          $ref: '#/components/schemas/FeatureFlagLimitations'
       type: object
     ConfigSettingFormulasModel-haljson:
       properties:
@@ -6313,6 +6322,8 @@ components:
             $ref: '#/components/schemas/ConfigSettingFormulaModel'
           nullable: true
           type: array
+        featureFlagLimitations:
+          $ref: '#/components/schemas/FeatureFlagLimitations'
         _links:
           $ref: '#/components/schemas/ConfigSettingFormulasModel_haljson__embedded_environment__links'
       type: object
@@ -6434,6 +6445,14 @@ components:
           description: description
           order: 0
           reasonRequired: true
+        featureFlagLimitations:
+          maxComparisonValueListItemLength: 2
+          maxComparisonValueListLength: 3
+          maxPercentageOptionCount: 2
+          maxConditionPerTargetingRuleCount: 7
+          maxComparisonValueLength: 9
+          maxStringFlagValueLength: 4
+          maxTargetingRuleCount: 7
         readOnly: true
         settingValues:
         - rolloutRules:
@@ -6566,6 +6585,8 @@ components:
             $ref: '#/components/schemas/ConfigSettingValueModel'
           nullable: true
           type: array
+        featureFlagLimitations:
+          $ref: '#/components/schemas/FeatureFlagLimitations'
       type: object
     ConfigSettingValuesModel-haljson:
       properties:
@@ -6578,6 +6599,8 @@ components:
             $ref: '#/components/schemas/ConfigSettingValueModel'
           nullable: true
           type: array
+        featureFlagLimitations:
+          $ref: '#/components/schemas/FeatureFlagLimitations'
         _links:
           $ref: '#/components/schemas/ConfigSettingFormulasModel_haljson__embedded_environment__links'
       type: object
@@ -7068,6 +7091,58 @@ components:
       - v1
       - v2
       type: string
+    FeatureFlagLimitations:
+      additionalProperties: false
+      description: Subscription limitations regarding Feature flag or Setting values
+        and targeting.
+      example:
+        maxComparisonValueListItemLength: 2
+        maxComparisonValueListLength: 3
+        maxPercentageOptionCount: 2
+        maxConditionPerTargetingRuleCount: 7
+        maxComparisonValueLength: 9
+        maxStringFlagValueLength: 4
+        maxTargetingRuleCount: 7
+      properties:
+        maxPercentageOptionCount:
+          description: Maximum number of percentage options a Feature Flag or Setting
+            can have within a targeting rule.
+          format: int32
+          readOnly: true
+          type: integer
+        maxTargetingRuleCount:
+          description: Maximum number of targeting rules a Feature Flag or Setting
+            can have.
+          format: int32
+          readOnly: true
+          type: integer
+        maxComparisonValueLength:
+          description: Maximum length of a text comparison value.
+          format: int32
+          readOnly: true
+          type: integer
+        maxComparisonValueListLength:
+          description: Maximum item count of a list comparison value.
+          format: int32
+          readOnly: true
+          type: integer
+        maxComparisonValueListItemLength:
+          description: Maximum length of a list comparison value's item.
+          format: int32
+          readOnly: true
+          type: integer
+        maxStringFlagValueLength:
+          description: Maximum length of a text Setting's value.
+          format: int32
+          readOnly: true
+          type: integer
+        maxConditionPerTargetingRuleCount:
+          description: Maximum number of `AND` conditions a Feature Flag or Setting
+            can have within a targeting rule.
+          format: int32
+          readOnly: true
+          type: integer
+      type: object
     FlagReference:
       additionalProperties: false
       example:
@@ -8464,6 +8539,14 @@ components:
           description: description
           order: 0
           reasonRequired: true
+        featureFlagLimitations:
+          maxComparisonValueListItemLength: 2
+          maxComparisonValueListLength: 3
+          maxPercentageOptionCount: 2
+          maxConditionPerTargetingRuleCount: 7
+          maxComparisonValueLength: 9
+          maxStringFlagValueLength: 4
+          maxTargetingRuleCount: 7
         integrationLinks:
         - integrationLinkType: null
           description: description
@@ -8551,6 +8634,8 @@ components:
           $ref: '#/components/schemas/EnvironmentModel'
         readOnly:
           type: boolean
+        featureFlagLimitations:
+          $ref: '#/components/schemas/FeatureFlagLimitations'
       type: object
     SettingFormulaModel-haljson:
       properties:
@@ -8588,6 +8673,8 @@ components:
           $ref: '#/components/schemas/SettingFormulaModel_haljson__embedded'
         readOnly:
           type: boolean
+        featureFlagLimitations:
+          $ref: '#/components/schemas/FeatureFlagLimitations'
         _links:
           $ref: '#/components/schemas/ConfigSettingFormulasModel_haljson__embedded_environment__links'
       type: object
@@ -8755,6 +8842,19 @@ components:
           value: ""
         - percentage: 0
           value: ""
+        lastUpdaterUserEmail: lastUpdaterUserEmail
+        readOnly: true
+        setting:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          creatorEmail: creatorEmail
+          hint: hint
+          name: name
+          creatorFullName: creatorFullName
+          isWatching: true
+          settingType: null
+          key: key
+          settingId: 6
+          order: 1
         environment:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -8771,8 +8871,14 @@ components:
           description: description
           order: 0
           reasonRequired: true
-        lastUpdaterUserEmail: lastUpdaterUserEmail
-        readOnly: true
+        featureFlagLimitations:
+          maxComparisonValueListItemLength: 2
+          maxComparisonValueListLength: 3
+          maxPercentageOptionCount: 2
+          maxConditionPerTargetingRuleCount: 7
+          maxComparisonValueLength: 9
+          maxStringFlagValueLength: 4
+          maxTargetingRuleCount: 7
         value: ""
         integrationLinks:
         - integrationLinkType: null
@@ -8808,17 +8914,6 @@ components:
           tagId: 5
           name: name
           settingTagId: 5
-        setting:
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          creatorEmail: creatorEmail
-          hint: hint
-          name: name
-          creatorFullName: creatorFullName
-          isWatching: true
-          settingType: null
-          key: key
-          settingId: 6
-          order: 1
         updatedAt: 2000-01-23T04:56:07.000+00:00
         lastUpdaterUserFullName: lastUpdaterUserFullName
       properties:
@@ -8869,6 +8964,8 @@ components:
           $ref: '#/components/schemas/ConfigModel'
         environment:
           $ref: '#/components/schemas/EnvironmentModel'
+        featureFlagLimitations:
+          $ref: '#/components/schemas/FeatureFlagLimitations'
         readOnly:
           type: boolean
       type: object
@@ -8905,6 +9002,8 @@ components:
           type: string
         _embedded:
           $ref: '#/components/schemas/SettingFormulaModel_haljson__embedded'
+        featureFlagLimitations:
+          $ref: '#/components/schemas/FeatureFlagLimitations'
         readOnly:
           type: boolean
         _links:
@@ -10012,8 +10111,8 @@ components:
       description: The comparison operator the evaluation process must use when it
         compares the given user attribute's value with the comparison value.
       enum:
-      - contains
-      - doesNotContain
+      - containsAnyOf
+      - doesNotContainAnyOf
       - semVerIsOneOf
       - semVerIsNotOneOf
       - semVerLess
@@ -10032,10 +10131,10 @@ components:
       - dateTimeAfter
       - sensitiveTextEquals
       - sensitiveTextDoesNotEqual
-      - sensitiveTextStartsWith
-      - sensitiveTextNotStartsWith
-      - sensitiveTextEndsWith
-      - sensitiveTextNotEndsWith
+      - sensitiveTextStartsWithAnyOf
+      - sensitiveTextNotStartsWithAnyOf
+      - sensitiveTextEndsWithAnyOf
+      - sensitiveTextNotEndsWithAnyOf
       - arrayContains
       - arrayDoesNotContain
       type: string
@@ -10108,8 +10207,6 @@ components:
           type: boolean
         stringValue:
           description: The served value in case of a text Setting.
-          maxLength: 100000
-          minLength: 0
           nullable: true
           type: string
         intValue:

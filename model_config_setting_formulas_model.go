@@ -25,6 +25,7 @@ type ConfigSettingFormulasModel struct {
 	ReadOnly *bool `json:"readOnly,omitempty"`
 	// Evaluation descriptors of each updated Feature Flag and Setting.
 	SettingFormulas []ConfigSettingFormulaModel `json:"settingFormulas,omitempty"`
+	FeatureFlagLimitations *FeatureFlagLimitations `json:"featureFlagLimitations,omitempty"`
 }
 
 // NewConfigSettingFormulasModel instantiates a new ConfigSettingFormulasModel object
@@ -173,6 +174,38 @@ func (o *ConfigSettingFormulasModel) SetSettingFormulas(v []ConfigSettingFormula
 	o.SettingFormulas = v
 }
 
+// GetFeatureFlagLimitations returns the FeatureFlagLimitations field value if set, zero value otherwise.
+func (o *ConfigSettingFormulasModel) GetFeatureFlagLimitations() FeatureFlagLimitations {
+	if o == nil || IsNil(o.FeatureFlagLimitations) {
+		var ret FeatureFlagLimitations
+		return ret
+	}
+	return *o.FeatureFlagLimitations
+}
+
+// GetFeatureFlagLimitationsOk returns a tuple with the FeatureFlagLimitations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigSettingFormulasModel) GetFeatureFlagLimitationsOk() (*FeatureFlagLimitations, bool) {
+	if o == nil || IsNil(o.FeatureFlagLimitations) {
+		return nil, false
+	}
+	return o.FeatureFlagLimitations, true
+}
+
+// HasFeatureFlagLimitations returns a boolean if a field has been set.
+func (o *ConfigSettingFormulasModel) HasFeatureFlagLimitations() bool {
+	if o != nil && !IsNil(o.FeatureFlagLimitations) {
+		return true
+	}
+
+	return false
+}
+
+// SetFeatureFlagLimitations gets a reference to the given FeatureFlagLimitations and assigns it to the FeatureFlagLimitations field.
+func (o *ConfigSettingFormulasModel) SetFeatureFlagLimitations(v FeatureFlagLimitations) {
+	o.FeatureFlagLimitations = &v
+}
+
 func (o ConfigSettingFormulasModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -194,6 +227,9 @@ func (o ConfigSettingFormulasModel) ToMap() (map[string]interface{}, error) {
 	}
 	if o.SettingFormulas != nil {
 		toSerialize["settingFormulas"] = o.SettingFormulas
+	}
+	if !IsNil(o.FeatureFlagLimitations) {
+		toSerialize["featureFlagLimitations"] = o.FeatureFlagLimitations
 	}
 	return toSerialize, nil
 }

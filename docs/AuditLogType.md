@@ -63,8 +63,6 @@
 
 * `WEB_HOOK_DELETED` (value: `"webHookDeleted"`)
 
-* `SUBSCRIPTION_CHANGED` (value: `"subscriptionChanged"`)
-
 * `PERMISSION_GROUP_CREATED` (value: `"permissionGroupCreated"`)
 
 * `PERMISSION_GROUP_CHANGED` (value: `"permissionGroupChanged"`)

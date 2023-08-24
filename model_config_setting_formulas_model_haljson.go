@@ -24,6 +24,7 @@ type ConfigSettingFormulasModelHaljson struct {
 	ReadOnly *bool `json:"readOnly,omitempty"`
 	// Evaluation descriptors of each updated Feature Flag and Setting.
 	SettingFormulas []ConfigSettingFormulaModel `json:"settingFormulas,omitempty"`
+	FeatureFlagLimitations *FeatureFlagLimitations `json:"featureFlagLimitations,omitempty"`
 	Links *ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks `json:"_links,omitempty"`
 }
 
@@ -141,6 +142,38 @@ func (o *ConfigSettingFormulasModelHaljson) SetSettingFormulas(v []ConfigSetting
 	o.SettingFormulas = v
 }
 
+// GetFeatureFlagLimitations returns the FeatureFlagLimitations field value if set, zero value otherwise.
+func (o *ConfigSettingFormulasModelHaljson) GetFeatureFlagLimitations() FeatureFlagLimitations {
+	if o == nil || IsNil(o.FeatureFlagLimitations) {
+		var ret FeatureFlagLimitations
+		return ret
+	}
+	return *o.FeatureFlagLimitations
+}
+
+// GetFeatureFlagLimitationsOk returns a tuple with the FeatureFlagLimitations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConfigSettingFormulasModelHaljson) GetFeatureFlagLimitationsOk() (*FeatureFlagLimitations, bool) {
+	if o == nil || IsNil(o.FeatureFlagLimitations) {
+		return nil, false
+	}
+	return o.FeatureFlagLimitations, true
+}
+
+// HasFeatureFlagLimitations returns a boolean if a field has been set.
+func (o *ConfigSettingFormulasModelHaljson) HasFeatureFlagLimitations() bool {
+	if o != nil && !IsNil(o.FeatureFlagLimitations) {
+		return true
+	}
+
+	return false
+}
+
+// SetFeatureFlagLimitations gets a reference to the given FeatureFlagLimitations and assigns it to the FeatureFlagLimitations field.
+func (o *ConfigSettingFormulasModelHaljson) SetFeatureFlagLimitations(v FeatureFlagLimitations) {
+	o.FeatureFlagLimitations = &v
+}
+
 // GetLinks returns the Links field value if set, zero value otherwise.
 func (o *ConfigSettingFormulasModelHaljson) GetLinks() ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks {
 	if o == nil || IsNil(o.Links) {
@@ -191,6 +224,9 @@ func (o ConfigSettingFormulasModelHaljson) ToMap() (map[string]interface{}, erro
 	}
 	if o.SettingFormulas != nil {
 		toSerialize["settingFormulas"] = o.SettingFormulas
+	}
+	if !IsNil(o.FeatureFlagLimitations) {
+		toSerialize["featureFlagLimitations"] = o.FeatureFlagLimitations
 	}
 	if !IsNil(o.Links) {
 		toSerialize["_links"] = o.Links

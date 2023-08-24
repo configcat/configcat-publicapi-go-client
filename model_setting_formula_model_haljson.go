@@ -35,6 +35,7 @@ type SettingFormulaModelHaljson struct {
 	LastUpdaterUserFullName NullableString `json:"lastUpdaterUserFullName,omitempty"`
 	Embedded *SettingFormulaModelHaljsonEmbedded `json:"_embedded,omitempty"`
 	ReadOnly *bool `json:"readOnly,omitempty"`
+	FeatureFlagLimitations *FeatureFlagLimitations `json:"featureFlagLimitations,omitempty"`
 	Links *ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks `json:"_links,omitempty"`
 }
 
@@ -384,6 +385,38 @@ func (o *SettingFormulaModelHaljson) SetReadOnly(v bool) {
 	o.ReadOnly = &v
 }
 
+// GetFeatureFlagLimitations returns the FeatureFlagLimitations field value if set, zero value otherwise.
+func (o *SettingFormulaModelHaljson) GetFeatureFlagLimitations() FeatureFlagLimitations {
+	if o == nil || IsNil(o.FeatureFlagLimitations) {
+		var ret FeatureFlagLimitations
+		return ret
+	}
+	return *o.FeatureFlagLimitations
+}
+
+// GetFeatureFlagLimitationsOk returns a tuple with the FeatureFlagLimitations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SettingFormulaModelHaljson) GetFeatureFlagLimitationsOk() (*FeatureFlagLimitations, bool) {
+	if o == nil || IsNil(o.FeatureFlagLimitations) {
+		return nil, false
+	}
+	return o.FeatureFlagLimitations, true
+}
+
+// HasFeatureFlagLimitations returns a boolean if a field has been set.
+func (o *SettingFormulaModelHaljson) HasFeatureFlagLimitations() bool {
+	if o != nil && !IsNil(o.FeatureFlagLimitations) {
+		return true
+	}
+
+	return false
+}
+
+// SetFeatureFlagLimitations gets a reference to the given FeatureFlagLimitations and assigns it to the FeatureFlagLimitations field.
+func (o *SettingFormulaModelHaljson) SetFeatureFlagLimitations(v FeatureFlagLimitations) {
+	o.FeatureFlagLimitations = &v
+}
+
 // GetLinks returns the Links field value if set, zero value otherwise.
 func (o *SettingFormulaModelHaljson) GetLinks() ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks {
 	if o == nil || IsNil(o.Links) {
@@ -452,6 +485,9 @@ func (o SettingFormulaModelHaljson) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ReadOnly) {
 		toSerialize["readOnly"] = o.ReadOnly
+	}
+	if !IsNil(o.FeatureFlagLimitations) {
+		toSerialize["featureFlagLimitations"] = o.FeatureFlagLimitations
 	}
 	if !IsNil(o.Links) {
 		toSerialize["_links"] = o.Links

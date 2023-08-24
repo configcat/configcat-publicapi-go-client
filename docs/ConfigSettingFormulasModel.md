@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Environment** | Pointer to [**EnvironmentModel**](EnvironmentModel.md) |  | [optional] 
 **ReadOnly** | Pointer to **bool** |  | [optional] 
 **SettingFormulas** | Pointer to [**[]ConfigSettingFormulaModel**](ConfigSettingFormulaModel.md) | Evaluation descriptors of each updated Feature Flag and Setting. | [optional] 
+**FeatureFlagLimitations** | Pointer to [**FeatureFlagLimitations**](FeatureFlagLimitations.md) |  | [optional] 
 
 ## Methods
 
@@ -138,6 +139,31 @@ HasSettingFormulas returns a boolean if a field has been set.
 `func (o *ConfigSettingFormulasModel) UnsetSettingFormulas()`
 
 UnsetSettingFormulas ensures that no value is present for SettingFormulas, not even an explicit nil
+### GetFeatureFlagLimitations
+
+`func (o *ConfigSettingFormulasModel) GetFeatureFlagLimitations() FeatureFlagLimitations`
+
+GetFeatureFlagLimitations returns the FeatureFlagLimitations field if non-nil, zero value otherwise.
+
+### GetFeatureFlagLimitationsOk
+
+`func (o *ConfigSettingFormulasModel) GetFeatureFlagLimitationsOk() (*FeatureFlagLimitations, bool)`
+
+GetFeatureFlagLimitationsOk returns a tuple with the FeatureFlagLimitations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFeatureFlagLimitations
+
+`func (o *ConfigSettingFormulasModel) SetFeatureFlagLimitations(v FeatureFlagLimitations)`
+
+SetFeatureFlagLimitations sets FeatureFlagLimitations field to given value.
+
+### HasFeatureFlagLimitations
+
+`func (o *ConfigSettingFormulasModel) HasFeatureFlagLimitations() bool`
+
+HasFeatureFlagLimitations returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
