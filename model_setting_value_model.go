@@ -40,6 +40,7 @@ type SettingValueModel struct {
 	SettingTags []SettingTagModel `json:"settingTags,omitempty"`
 	Config *ConfigModel `json:"config,omitempty"`
 	Environment *EnvironmentModel `json:"environment,omitempty"`
+	FeatureFlagLimitations *FeatureFlagLimitations `json:"featureFlagLimitations,omitempty"`
 	ReadOnly *bool `json:"readOnly,omitempty"`
 }
 
@@ -447,6 +448,38 @@ func (o *SettingValueModel) SetEnvironment(v EnvironmentModel) {
 	o.Environment = &v
 }
 
+// GetFeatureFlagLimitations returns the FeatureFlagLimitations field value if set, zero value otherwise.
+func (o *SettingValueModel) GetFeatureFlagLimitations() FeatureFlagLimitations {
+	if o == nil || IsNil(o.FeatureFlagLimitations) {
+		var ret FeatureFlagLimitations
+		return ret
+	}
+	return *o.FeatureFlagLimitations
+}
+
+// GetFeatureFlagLimitationsOk returns a tuple with the FeatureFlagLimitations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SettingValueModel) GetFeatureFlagLimitationsOk() (*FeatureFlagLimitations, bool) {
+	if o == nil || IsNil(o.FeatureFlagLimitations) {
+		return nil, false
+	}
+	return o.FeatureFlagLimitations, true
+}
+
+// HasFeatureFlagLimitations returns a boolean if a field has been set.
+func (o *SettingValueModel) HasFeatureFlagLimitations() bool {
+	if o != nil && !IsNil(o.FeatureFlagLimitations) {
+		return true
+	}
+
+	return false
+}
+
+// SetFeatureFlagLimitations gets a reference to the given FeatureFlagLimitations and assigns it to the FeatureFlagLimitations field.
+func (o *SettingValueModel) SetFeatureFlagLimitations(v FeatureFlagLimitations) {
+	o.FeatureFlagLimitations = &v
+}
+
 // GetReadOnly returns the ReadOnly field value if set, zero value otherwise.
 func (o *SettingValueModel) GetReadOnly() bool {
 	if o == nil || IsNil(o.ReadOnly) {
@@ -521,6 +554,9 @@ func (o SettingValueModel) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Environment) {
 		toSerialize["environment"] = o.Environment
+	}
+	if !IsNil(o.FeatureFlagLimitations) {
+		toSerialize["featureFlagLimitations"] = o.FeatureFlagLimitations
 	}
 	if !IsNil(o.ReadOnly) {
 		toSerialize["readOnly"] = o.ReadOnly

@@ -236,6 +236,7 @@ Class | Method | HTTP request | Description
  - [EnvironmentModel](docs/EnvironmentModel.md)
  - [EnvironmentModelHaljson](docs/EnvironmentModelHaljson.md)
  - [EvaluationVersion](docs/EvaluationVersion.md)
+ - [FeatureFlagLimitations](docs/FeatureFlagLimitations.md)
  - [FlagReference](docs/FlagReference.md)
  - [InitialValue](docs/InitialValue.md)
  - [IntegrationLinkDetail](docs/IntegrationLinkDetail.md)

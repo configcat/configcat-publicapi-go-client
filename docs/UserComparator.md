@@ -3,9 +3,9 @@
 ## Enum
 
 
-* `CONTAINS` (value: `"contains"`)
+* `CONTAINS_ANY_OF` (value: `"containsAnyOf"`)
 
-* `DOES_NOT_CONTAIN` (value: `"doesNotContain"`)
+* `DOES_NOT_CONTAIN_ANY_OF` (value: `"doesNotContainAnyOf"`)
 
 * `SEM_VER_IS_ONE_OF` (value: `"semVerIsOneOf"`)
 
@@ -43,13 +43,13 @@
 
 * `SENSITIVE_TEXT_DOES_NOT_EQUAL` (value: `"sensitiveTextDoesNotEqual"`)
 
-* `SENSITIVE_TEXT_STARTS_WITH` (value: `"sensitiveTextStartsWith"`)
+* `SENSITIVE_TEXT_STARTS_WITH_ANY_OF` (value: `"sensitiveTextStartsWithAnyOf"`)
 
-* `SENSITIVE_TEXT_NOT_STARTS_WITH` (value: `"sensitiveTextNotStartsWith"`)
+* `SENSITIVE_TEXT_NOT_STARTS_WITH_ANY_OF` (value: `"sensitiveTextNotStartsWithAnyOf"`)
 
-* `SENSITIVE_TEXT_ENDS_WITH` (value: `"sensitiveTextEndsWith"`)
+* `SENSITIVE_TEXT_ENDS_WITH_ANY_OF` (value: `"sensitiveTextEndsWithAnyOf"`)
 
-* `SENSITIVE_TEXT_NOT_ENDS_WITH` (value: `"sensitiveTextNotEndsWith"`)
+* `SENSITIVE_TEXT_NOT_ENDS_WITH_ANY_OF` (value: `"sensitiveTextNotEndsWithAnyOf"`)
 
 * `ARRAY_CONTAINS` (value: `"arrayContains"`)
 

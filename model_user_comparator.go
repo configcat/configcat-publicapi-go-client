@@ -21,8 +21,8 @@ type UserComparator string
 
 // List of UserComparator
 const (
-	USERCOMPARATOR_CONTAINS UserComparator = "contains"
-	USERCOMPARATOR_DOES_NOT_CONTAIN UserComparator = "doesNotContain"
+	USERCOMPARATOR_CONTAINS_ANY_OF UserComparator = "containsAnyOf"
+	USERCOMPARATOR_DOES_NOT_CONTAIN_ANY_OF UserComparator = "doesNotContainAnyOf"
 	USERCOMPARATOR_SEM_VER_IS_ONE_OF UserComparator = "semVerIsOneOf"
 	USERCOMPARATOR_SEM_VER_IS_NOT_ONE_OF UserComparator = "semVerIsNotOneOf"
 	USERCOMPARATOR_SEM_VER_LESS UserComparator = "semVerLess"
@@ -41,18 +41,18 @@ const (
 	USERCOMPARATOR_DATE_TIME_AFTER UserComparator = "dateTimeAfter"
 	USERCOMPARATOR_SENSITIVE_TEXT_EQUALS UserComparator = "sensitiveTextEquals"
 	USERCOMPARATOR_SENSITIVE_TEXT_DOES_NOT_EQUAL UserComparator = "sensitiveTextDoesNotEqual"
-	USERCOMPARATOR_SENSITIVE_TEXT_STARTS_WITH UserComparator = "sensitiveTextStartsWith"
-	USERCOMPARATOR_SENSITIVE_TEXT_NOT_STARTS_WITH UserComparator = "sensitiveTextNotStartsWith"
-	USERCOMPARATOR_SENSITIVE_TEXT_ENDS_WITH UserComparator = "sensitiveTextEndsWith"
-	USERCOMPARATOR_SENSITIVE_TEXT_NOT_ENDS_WITH UserComparator = "sensitiveTextNotEndsWith"
+	USERCOMPARATOR_SENSITIVE_TEXT_STARTS_WITH_ANY_OF UserComparator = "sensitiveTextStartsWithAnyOf"
+	USERCOMPARATOR_SENSITIVE_TEXT_NOT_STARTS_WITH_ANY_OF UserComparator = "sensitiveTextNotStartsWithAnyOf"
+	USERCOMPARATOR_SENSITIVE_TEXT_ENDS_WITH_ANY_OF UserComparator = "sensitiveTextEndsWithAnyOf"
+	USERCOMPARATOR_SENSITIVE_TEXT_NOT_ENDS_WITH_ANY_OF UserComparator = "sensitiveTextNotEndsWithAnyOf"
 	USERCOMPARATOR_ARRAY_CONTAINS UserComparator = "arrayContains"
 	USERCOMPARATOR_ARRAY_DOES_NOT_CONTAIN UserComparator = "arrayDoesNotContain"
 )
 
 // All allowed values of UserComparator enum
 var AllowedUserComparatorEnumValues = []UserComparator{
-	"contains",
-	"doesNotContain",
+	"containsAnyOf",
+	"doesNotContainAnyOf",
 	"semVerIsOneOf",
 	"semVerIsNotOneOf",
 	"semVerLess",
@@ -71,10 +71,10 @@ var AllowedUserComparatorEnumValues = []UserComparator{
 	"dateTimeAfter",
 	"sensitiveTextEquals",
 	"sensitiveTextDoesNotEqual",
-	"sensitiveTextStartsWith",
-	"sensitiveTextNotStartsWith",
-	"sensitiveTextEndsWith",
-	"sensitiveTextNotEndsWith",
+	"sensitiveTextStartsWithAnyOf",
+	"sensitiveTextNotStartsWithAnyOf",
+	"sensitiveTextEndsWithAnyOf",
+	"sensitiveTextNotEndsWithAnyOf",
 	"arrayContains",
 	"arrayDoesNotContain",
 }

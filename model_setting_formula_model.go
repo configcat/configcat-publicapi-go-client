@@ -41,6 +41,7 @@ type SettingFormulaModel struct {
 	Config *ConfigModel `json:"config,omitempty"`
 	Environment *EnvironmentModel `json:"environment,omitempty"`
 	ReadOnly *bool `json:"readOnly,omitempty"`
+	FeatureFlagLimitations *FeatureFlagLimitations `json:"featureFlagLimitations,omitempty"`
 }
 
 // NewSettingFormulaModel instantiates a new SettingFormulaModel object
@@ -519,6 +520,38 @@ func (o *SettingFormulaModel) SetReadOnly(v bool) {
 	o.ReadOnly = &v
 }
 
+// GetFeatureFlagLimitations returns the FeatureFlagLimitations field value if set, zero value otherwise.
+func (o *SettingFormulaModel) GetFeatureFlagLimitations() FeatureFlagLimitations {
+	if o == nil || IsNil(o.FeatureFlagLimitations) {
+		var ret FeatureFlagLimitations
+		return ret
+	}
+	return *o.FeatureFlagLimitations
+}
+
+// GetFeatureFlagLimitationsOk returns a tuple with the FeatureFlagLimitations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SettingFormulaModel) GetFeatureFlagLimitationsOk() (*FeatureFlagLimitations, bool) {
+	if o == nil || IsNil(o.FeatureFlagLimitations) {
+		return nil, false
+	}
+	return o.FeatureFlagLimitations, true
+}
+
+// HasFeatureFlagLimitations returns a boolean if a field has been set.
+func (o *SettingFormulaModel) HasFeatureFlagLimitations() bool {
+	if o != nil && !IsNil(o.FeatureFlagLimitations) {
+		return true
+	}
+
+	return false
+}
+
+// SetFeatureFlagLimitations gets a reference to the given FeatureFlagLimitations and assigns it to the FeatureFlagLimitations field.
+func (o *SettingFormulaModel) SetFeatureFlagLimitations(v FeatureFlagLimitations) {
+	o.FeatureFlagLimitations = &v
+}
+
 func (o SettingFormulaModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -567,6 +600,9 @@ func (o SettingFormulaModel) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ReadOnly) {
 		toSerialize["readOnly"] = o.ReadOnly
+	}
+	if !IsNil(o.FeatureFlagLimitations) {
+		toSerialize["featureFlagLimitations"] = o.FeatureFlagLimitations
 	}
 	return toSerialize, nil
 }

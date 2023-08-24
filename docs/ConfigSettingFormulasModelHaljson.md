@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Embedded** | Pointer to [**ConfigSettingFormulasModelHaljsonEmbedded**](ConfigSettingFormulasModelHaljsonEmbedded.md) |  | [optional] 
 **ReadOnly** | Pointer to **bool** |  | [optional] 
 **SettingFormulas** | Pointer to [**[]ConfigSettingFormulaModel**](ConfigSettingFormulaModel.md) | Evaluation descriptors of each updated Feature Flag and Setting. | [optional] 
+**FeatureFlagLimitations** | Pointer to [**FeatureFlagLimitations**](FeatureFlagLimitations.md) |  | [optional] 
 **Links** | Pointer to [**ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks**](ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks.md) |  | [optional] 
 
 ## Methods
@@ -113,6 +114,31 @@ HasSettingFormulas returns a boolean if a field has been set.
 `func (o *ConfigSettingFormulasModelHaljson) UnsetSettingFormulas()`
 
 UnsetSettingFormulas ensures that no value is present for SettingFormulas, not even an explicit nil
+### GetFeatureFlagLimitations
+
+`func (o *ConfigSettingFormulasModelHaljson) GetFeatureFlagLimitations() FeatureFlagLimitations`
+
+GetFeatureFlagLimitations returns the FeatureFlagLimitations field if non-nil, zero value otherwise.
+
+### GetFeatureFlagLimitationsOk
+
+`func (o *ConfigSettingFormulasModelHaljson) GetFeatureFlagLimitationsOk() (*FeatureFlagLimitations, bool)`
+
+GetFeatureFlagLimitationsOk returns a tuple with the FeatureFlagLimitations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFeatureFlagLimitations
+
+`func (o *ConfigSettingFormulasModelHaljson) SetFeatureFlagLimitations(v FeatureFlagLimitations)`
+
+SetFeatureFlagLimitations sets FeatureFlagLimitations field to given value.
+
+### HasFeatureFlagLimitations
+
+`func (o *ConfigSettingFormulasModelHaljson) HasFeatureFlagLimitations() bool`
+
+HasFeatureFlagLimitations returns a boolean if a field has been set.
+
 ### GetLinks
 
 `func (o *ConfigSettingFormulasModelHaljson) GetLinks() ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks`
