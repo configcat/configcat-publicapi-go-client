@@ -20,8 +20,12 @@ var _ MappedNullable = &UpdateProductRequest{}
 
 // UpdateProductRequest struct for UpdateProductRequest
 type UpdateProductRequest struct {
+	// The name of the Product.
 	Name NullableString `json:"name,omitempty"`
+	// The description of the Product.
 	Description NullableString `json:"description,omitempty"`
+	// The order of the Product represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers.
+	Order NullableInt32 `json:"order,omitempty"`
 }
 
 // NewUpdateProductRequest instantiates a new UpdateProductRequest object
@@ -125,6 +129,48 @@ func (o *UpdateProductRequest) UnsetDescription() {
 	o.Description.Unset()
 }
 
+// GetOrder returns the Order field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdateProductRequest) GetOrder() int32 {
+	if o == nil || IsNil(o.Order.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.Order.Get()
+}
+
+// GetOrderOk returns a tuple with the Order field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdateProductRequest) GetOrderOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Order.Get(), o.Order.IsSet()
+}
+
+// HasOrder returns a boolean if a field has been set.
+func (o *UpdateProductRequest) HasOrder() bool {
+	if o != nil && o.Order.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOrder gets a reference to the given NullableInt32 and assigns it to the Order field.
+func (o *UpdateProductRequest) SetOrder(v int32) {
+	o.Order.Set(&v)
+}
+// SetOrderNil sets the value for Order to be an explicit nil
+func (o *UpdateProductRequest) SetOrderNil() {
+	o.Order.Set(nil)
+}
+
+// UnsetOrder ensures that no value is present for Order, not even an explicit nil
+func (o *UpdateProductRequest) UnsetOrder() {
+	o.Order.Unset()
+}
+
 func (o UpdateProductRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -140,6 +186,9 @@ func (o UpdateProductRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
+	}
+	if o.Order.IsSet() {
+		toSerialize["order"] = o.Order.Get()
 	}
 	return toSerialize, nil
 }

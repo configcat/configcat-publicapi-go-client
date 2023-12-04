@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Percentage** | **int32** | The percentage. | 
+**Percentage** | **int32** | A number between 0 and 100 that represents a randomly allocated fraction of the users. | 
 **Value** | [**ValueModel**](ValueModel.md) |  | 
 
 ## Methods

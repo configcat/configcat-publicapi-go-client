@@ -20,7 +20,7 @@ var _ MappedNullable = &UserConditionModel{}
 
 // UserConditionModel Describes a condition that is based on user attributes.
 type UserConditionModel struct {
-	// The user's attribute the evaluation process must take into account.
+	// The User Object attribute that the condition is based on. Can be \"User ID\", \"Email\", \"Country\" or any custom attribute.
 	ComparisonAttribute string `json:"comparisonAttribute"`
 	Comparator UserComparator `json:"comparator"`
 	ComparisonValue ComparisonValueModel `json:"comparisonValue"`

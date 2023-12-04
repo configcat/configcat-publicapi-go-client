@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **LastUpdaterUserFullName** | Pointer to **NullableString** | The name of the user who last updated the Feature Flag or Setting. | [optional] 
 **IntegrationLinks** | Pointer to [**[]IntegrationLinkModel**](IntegrationLinkModel.md) | The integration links attached to the Feature Flag or Setting. | [optional] 
 **SettingTags** | Pointer to [**[]SettingTagModel**](SettingTagModel.md) | The tags attached to the Feature Flag or Setting. | [optional] 
+**SettingIdsWherePrerequisite** | Pointer to **[]int32** | List of Feature Flag and Setting IDs where the actual Feature Flag or Setting is prerequisite. | [optional] 
 **Config** | Pointer to [**ConfigModel**](ConfigModel.md) |  | [optional] 
 **Environment** | Pointer to [**EnvironmentModel**](EnvironmentModel.md) |  | [optional] 
 **ReadOnly** | Pointer to **bool** |  | [optional] 
@@ -358,6 +359,41 @@ HasSettingTags returns a boolean if a field has been set.
 `func (o *SettingFormulaModel) UnsetSettingTags()`
 
 UnsetSettingTags ensures that no value is present for SettingTags, not even an explicit nil
+### GetSettingIdsWherePrerequisite
+
+`func (o *SettingFormulaModel) GetSettingIdsWherePrerequisite() []int32`
+
+GetSettingIdsWherePrerequisite returns the SettingIdsWherePrerequisite field if non-nil, zero value otherwise.
+
+### GetSettingIdsWherePrerequisiteOk
+
+`func (o *SettingFormulaModel) GetSettingIdsWherePrerequisiteOk() (*[]int32, bool)`
+
+GetSettingIdsWherePrerequisiteOk returns a tuple with the SettingIdsWherePrerequisite field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSettingIdsWherePrerequisite
+
+`func (o *SettingFormulaModel) SetSettingIdsWherePrerequisite(v []int32)`
+
+SetSettingIdsWherePrerequisite sets SettingIdsWherePrerequisite field to given value.
+
+### HasSettingIdsWherePrerequisite
+
+`func (o *SettingFormulaModel) HasSettingIdsWherePrerequisite() bool`
+
+HasSettingIdsWherePrerequisite returns a boolean if a field has been set.
+
+### SetSettingIdsWherePrerequisiteNil
+
+`func (o *SettingFormulaModel) SetSettingIdsWherePrerequisiteNil(b bool)`
+
+ SetSettingIdsWherePrerequisiteNil sets the value for SettingIdsWherePrerequisite to be an explicit nil
+
+### UnsetSettingIdsWherePrerequisite
+`func (o *SettingFormulaModel) UnsetSettingIdsWherePrerequisite()`
+
+UnsetSettingIdsWherePrerequisite ensures that no value is present for SettingIdsWherePrerequisite, not even an explicit nil
 ### GetConfig
 
 `func (o *SettingFormulaModel) GetConfig() ConfigModel`

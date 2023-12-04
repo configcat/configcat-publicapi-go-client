@@ -4,8 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** |  | 
-**Description** | Pointer to **NullableString** |  | [optional] 
+**Name** | **string** | The name of the Config. | 
+**Description** | Pointer to **NullableString** | The description of the Config. | [optional] 
+**Order** | Pointer to **NullableInt32** | The order of the Config represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers. | [optional] 
 **EvaluationVersion** | Pointer to [**EvaluationVersion**](EvaluationVersion.md) |  | [optional] 
 
 ## Methods
@@ -82,6 +83,41 @@ HasDescription returns a boolean if a field has been set.
 `func (o *CreateConfigRequest) UnsetDescription()`
 
 UnsetDescription ensures that no value is present for Description, not even an explicit nil
+### GetOrder
+
+`func (o *CreateConfigRequest) GetOrder() int32`
+
+GetOrder returns the Order field if non-nil, zero value otherwise.
+
+### GetOrderOk
+
+`func (o *CreateConfigRequest) GetOrderOk() (*int32, bool)`
+
+GetOrderOk returns a tuple with the Order field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrder
+
+`func (o *CreateConfigRequest) SetOrder(v int32)`
+
+SetOrder sets Order field to given value.
+
+### HasOrder
+
+`func (o *CreateConfigRequest) HasOrder() bool`
+
+HasOrder returns a boolean if a field has been set.
+
+### SetOrderNil
+
+`func (o *CreateConfigRequest) SetOrderNil(b bool)`
+
+ SetOrderNil sets the value for Order to be an explicit nil
+
+### UnsetOrder
+`func (o *CreateConfigRequest) UnsetOrder()`
+
+UnsetOrder ensures that no value is present for Order, not even an explicit nil
 ### GetEvaluationVersion
 
 `func (o *CreateConfigRequest) GetEvaluationVersion() EvaluationVersion`

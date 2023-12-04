@@ -4,8 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** |  | 
-**Description** | Pointer to **NullableString** |  | [optional] 
+**Name** | **string** | The name of the Product. | 
+**Description** | Pointer to **NullableString** | The description of the Product. | [optional] 
+**Order** | Pointer to **NullableInt32** | The order of the Product represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers. | [optional] 
 
 ## Methods
 
@@ -81,6 +82,41 @@ HasDescription returns a boolean if a field has been set.
 `func (o *CreateProductRequest) UnsetDescription()`
 
 UnsetDescription ensures that no value is present for Description, not even an explicit nil
+### GetOrder
+
+`func (o *CreateProductRequest) GetOrder() int32`
+
+GetOrder returns the Order field if non-nil, zero value otherwise.
+
+### GetOrderOk
+
+`func (o *CreateProductRequest) GetOrderOk() (*int32, bool)`
+
+GetOrderOk returns a tuple with the Order field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrder
+
+`func (o *CreateProductRequest) SetOrder(v int32)`
+
+SetOrder sets Order field to given value.
+
+### HasOrder
+
+`func (o *CreateProductRequest) HasOrder() bool`
+
+HasOrder returns a boolean if a field has been set.
+
+### SetOrderNil
+
+`func (o *CreateProductRequest) SetOrderNil(b bool)`
+
+ SetOrderNil sets the value for Order to be an explicit nil
+
+### UnsetOrder
+`func (o *CreateProductRequest) UnsetOrder()`
+
+UnsetOrder ensures that no value is present for Order, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

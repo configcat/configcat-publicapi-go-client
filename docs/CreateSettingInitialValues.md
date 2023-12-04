@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Hint** | Pointer to **NullableString** | A short description for the setting, shown on the Dashboard UI. | [optional] 
 **Tags** | Pointer to **[]int64** | The IDs of the tags which are attached to the setting. | [optional] 
+**Order** | Pointer to **NullableInt32** | The order of the Setting represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers. | [optional] 
 **Key** | **string** | The key of the Feature Flag or Setting. | 
 **Name** | **string** | The name of the Feature Flag or Setting. | 
 **SettingType** | [**SettingType**](SettingType.md) |  | 
@@ -100,6 +101,41 @@ HasTags returns a boolean if a field has been set.
 `func (o *CreateSettingInitialValues) UnsetTags()`
 
 UnsetTags ensures that no value is present for Tags, not even an explicit nil
+### GetOrder
+
+`func (o *CreateSettingInitialValues) GetOrder() int32`
+
+GetOrder returns the Order field if non-nil, zero value otherwise.
+
+### GetOrderOk
+
+`func (o *CreateSettingInitialValues) GetOrderOk() (*int32, bool)`
+
+GetOrderOk returns a tuple with the Order field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrder
+
+`func (o *CreateSettingInitialValues) SetOrder(v int32)`
+
+SetOrder sets Order field to given value.
+
+### HasOrder
+
+`func (o *CreateSettingInitialValues) HasOrder() bool`
+
+HasOrder returns a boolean if a field has been set.
+
+### SetOrderNil
+
+`func (o *CreateSettingInitialValues) SetOrderNil(b bool)`
+
+ SetOrderNil sets the value for Order to be an explicit nil
+
+### UnsetOrder
+`func (o *CreateSettingInitialValues) UnsetOrder()`
+
+UnsetOrder ensures that no value is present for Order, not even an explicit nil
 ### GetKey
 
 `func (o *CreateSettingInitialValues) GetKey() string`

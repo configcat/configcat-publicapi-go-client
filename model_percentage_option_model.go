@@ -20,7 +20,7 @@ var _ MappedNullable = &PercentageOptionModel{}
 
 // PercentageOptionModel struct for PercentageOptionModel
 type PercentageOptionModel struct {
-	// The percentage.
+	// A number between 0 and 100 that represents a randomly allocated fraction of the users.
 	Percentage int32 `json:"percentage"`
 	Value ValueModel `json:"value"`
 }

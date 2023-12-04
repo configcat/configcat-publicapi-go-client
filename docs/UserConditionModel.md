@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ComparisonAttribute** | **string** | The user&#39;s attribute the evaluation process must take into account. | 
+**ComparisonAttribute** | **string** | The User Object attribute that the condition is based on. Can be \&quot;User ID\&quot;, \&quot;Email\&quot;, \&quot;Country\&quot; or any custom attribute. | 
 **Comparator** | [**UserComparator**](UserComparator.md) |  | 
 **ComparisonValue** | [**ComparisonValueModel**](ComparisonValueModel.md) |  | 
 

@@ -3,6 +3,10 @@
 ## Enum
 
 
+* `IS_ONE_OF` (value: `"isOneOf"`)
+
+* `IS_NOT_ONE_OF` (value: `"isNotOneOf"`)
+
 * `CONTAINS_ANY_OF` (value: `"containsAnyOf"`)
 
 * `DOES_NOT_CONTAIN_ANY_OF` (value: `"doesNotContainAnyOf"`)
@@ -51,9 +55,25 @@
 
 * `SENSITIVE_TEXT_NOT_ENDS_WITH_ANY_OF` (value: `"sensitiveTextNotEndsWithAnyOf"`)
 
-* `ARRAY_CONTAINS` (value: `"arrayContains"`)
+* `SENSITIVE_ARRAY_CONTAINS_ANY_OF` (value: `"sensitiveArrayContainsAnyOf"`)
 
-* `ARRAY_DOES_NOT_CONTAIN` (value: `"arrayDoesNotContain"`)
+* `SENSITIVE_ARRAY_DOES_NOT_CONTAIN_ANY_OF` (value: `"sensitiveArrayDoesNotContainAnyOf"`)
+
+* `TEXT_EQUALS` (value: `"textEquals"`)
+
+* `TEXT_DOES_NOT_EQUAL` (value: `"textDoesNotEqual"`)
+
+* `TEXT_STARTS_WITH_ANY_OF` (value: `"textStartsWithAnyOf"`)
+
+* `TEXT_NOT_STARTS_WITH_ANY_OF` (value: `"textNotStartsWithAnyOf"`)
+
+* `TEXT_ENDS_WITH_ANY_OF` (value: `"textEndsWithAnyOf"`)
+
+* `TEXT_NOT_ENDS_WITH_ANY_OF` (value: `"textNotEndsWithAnyOf"`)
+
+* `ARRAY_CONTAINS_ANY_OF` (value: `"arrayContainsAnyOf"`)
+
+* `ARRAY_DOES_NOT_CONTAIN_ANY_OF` (value: `"arrayDoesNotContainAnyOf"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -160,6 +160,7 @@ Class | Method | HTTP request | Description
 *MembersApi* | [**DeleteOrganizationMember**](docs/MembersApi.md#deleteorganizationmember) | **Delete** /v1/organizations/{organizationId}/members/{userId} | Delete Member from Organization
 *MembersApi* | [**DeleteProductMember**](docs/MembersApi.md#deleteproductmember) | **Delete** /v1/products/{productId}/members/{userId} | Delete Member from Product
 *MembersApi* | [**GetOrganizationMembers**](docs/MembersApi.md#getorganizationmembers) | **Get** /v1/organizations/{organizationId}/members | List Organization Members
+*MembersApi* | [**GetOrganizationMembersV2**](docs/MembersApi.md#getorganizationmembersv2) | **Get** /v2/organizations/{organizationId}/members | List Organization Members
 *MembersApi* | [**GetProductMembers**](docs/MembersApi.md#getproductmembers) | **Get** /v1/products/{productId}/members | List Product Members
 *MembersApi* | [**InviteMember**](docs/MembersApi.md#invitemember) | **Post** /v1/products/{productId}/members/invite | Invite Member
 *OrganizationsApi* | [**GetOrganizations**](docs/OrganizationsApi.md#getorganizations) | **Get** /v1/organizations | List Organizations
@@ -248,8 +249,14 @@ Class | Method | HTTP request | Description
  - [MeModel](docs/MeModel.md)
  - [MemberModel](docs/MemberModel.md)
  - [OperationType](docs/OperationType.md)
+ - [OrganizationAdminModel](docs/OrganizationAdminModel.md)
+ - [OrganizationMemberModel](docs/OrganizationMemberModel.md)
+ - [OrganizationMembersModel](docs/OrganizationMembersModel.md)
  - [OrganizationModel](docs/OrganizationModel.md)
  - [OrganizationModelHaljson](docs/OrganizationModelHaljson.md)
+ - [OrganizationPermissionGroupModel](docs/OrganizationPermissionGroupModel.md)
+ - [OrganizationPermissionModel](docs/OrganizationPermissionModel.md)
+ - [OrganizationProductModel](docs/OrganizationProductModel.md)
  - [PercentageOptionModel](docs/PercentageOptionModel.md)
  - [PermissionGroupModel](docs/PermissionGroupModel.md)
  - [PermissionGroupModelHaljson](docs/PermissionGroupModelHaljson.md)

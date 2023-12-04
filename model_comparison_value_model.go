@@ -18,7 +18,7 @@ import (
 // checks if the ComparisonValueModel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ComparisonValueModel{}
 
-// ComparisonValueModel The value to compare with the given user attribute's value.
+// ComparisonValueModel The value that the user object's attribute is compared to.
 type ComparisonValueModel struct {
 	// The string representation of the comparison value.
 	StringValue NullableString `json:"stringValue,omitempty"`

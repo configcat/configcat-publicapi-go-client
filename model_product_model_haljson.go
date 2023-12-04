@@ -27,7 +27,7 @@ type ProductModelHaljson struct {
 	Name NullableString `json:"name,omitempty"`
 	// Description of the Product.
 	Description NullableString `json:"description,omitempty"`
-	// The order of the Product represented on the ConfigCat Dashboard.
+	// The order of the Product represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers.
 	Order *int32 `json:"order,omitempty"`
 	// Determines whether a mandatory reason must be given every time when the Feature Flags or Settings within a Product are saved.
 	ReasonRequired *bool `json:"reasonRequired,omitempty"`

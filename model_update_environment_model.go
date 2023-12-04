@@ -20,9 +20,14 @@ var _ MappedNullable = &UpdateEnvironmentModel{}
 
 // UpdateEnvironmentModel struct for UpdateEnvironmentModel
 type UpdateEnvironmentModel struct {
+	// The name of the Environment.
 	Name NullableString `json:"name,omitempty"`
+	// The color of the Environment. RGB or HTML color codes are allowed.
 	Color NullableString `json:"color,omitempty"`
+	// The description of the Environment.
 	Description NullableString `json:"description,omitempty"`
+	// The order of the Environment represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers.
+	Order NullableInt32 `json:"order,omitempty"`
 }
 
 // NewUpdateEnvironmentModel instantiates a new UpdateEnvironmentModel object
@@ -168,6 +173,48 @@ func (o *UpdateEnvironmentModel) UnsetDescription() {
 	o.Description.Unset()
 }
 
+// GetOrder returns the Order field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdateEnvironmentModel) GetOrder() int32 {
+	if o == nil || IsNil(o.Order.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.Order.Get()
+}
+
+// GetOrderOk returns a tuple with the Order field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdateEnvironmentModel) GetOrderOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Order.Get(), o.Order.IsSet()
+}
+
+// HasOrder returns a boolean if a field has been set.
+func (o *UpdateEnvironmentModel) HasOrder() bool {
+	if o != nil && o.Order.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOrder gets a reference to the given NullableInt32 and assigns it to the Order field.
+func (o *UpdateEnvironmentModel) SetOrder(v int32) {
+	o.Order.Set(&v)
+}
+// SetOrderNil sets the value for Order to be an explicit nil
+func (o *UpdateEnvironmentModel) SetOrderNil() {
+	o.Order.Set(nil)
+}
+
+// UnsetOrder ensures that no value is present for Order, not even an explicit nil
+func (o *UpdateEnvironmentModel) UnsetOrder() {
+	o.Order.Unset()
+}
+
 func (o UpdateEnvironmentModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -186,6 +233,9 @@ func (o UpdateEnvironmentModel) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
+	}
+	if o.Order.IsSet() {
+		toSerialize["order"] = o.Order.Get()
 	}
 	return toSerialize, nil
 }

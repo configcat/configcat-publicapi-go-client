@@ -20,8 +20,12 @@ var _ MappedNullable = &UpdateConfigRequest{}
 
 // UpdateConfigRequest struct for UpdateConfigRequest
 type UpdateConfigRequest struct {
+	// The name of the Config.
 	Name NullableString `json:"name,omitempty"`
+	// The description of the Config.
 	Description NullableString `json:"description,omitempty"`
+	// The order of the Config represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers.
+	Order NullableInt32 `json:"order,omitempty"`
 }
 
 // NewUpdateConfigRequest instantiates a new UpdateConfigRequest object
@@ -125,6 +129,48 @@ func (o *UpdateConfigRequest) UnsetDescription() {
 	o.Description.Unset()
 }
 
+// GetOrder returns the Order field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdateConfigRequest) GetOrder() int32 {
+	if o == nil || IsNil(o.Order.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.Order.Get()
+}
+
+// GetOrderOk returns a tuple with the Order field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdateConfigRequest) GetOrderOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Order.Get(), o.Order.IsSet()
+}
+
+// HasOrder returns a boolean if a field has been set.
+func (o *UpdateConfigRequest) HasOrder() bool {
+	if o != nil && o.Order.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOrder gets a reference to the given NullableInt32 and assigns it to the Order field.
+func (o *UpdateConfigRequest) SetOrder(v int32) {
+	o.Order.Set(&v)
+}
+// SetOrderNil sets the value for Order to be an explicit nil
+func (o *UpdateConfigRequest) SetOrderNil() {
+	o.Order.Set(nil)
+}
+
+// UnsetOrder ensures that no value is present for Order, not even an explicit nil
+func (o *UpdateConfigRequest) UnsetOrder() {
+	o.Order.Unset()
+}
+
 func (o UpdateConfigRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -140,6 +186,9 @@ func (o UpdateConfigRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Description.IsSet() {
 		toSerialize["description"] = o.Description.Get()
+	}
+	if o.Order.IsSet() {
+		toSerialize["order"] = o.Order.Get()
 	}
 	return toSerialize, nil
 }
