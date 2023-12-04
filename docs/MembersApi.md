@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**DeleteOrganizationMember**](MembersApi.md#DeleteOrganizationMember) | **Delete** /v1/organizations/{organizationId}/members/{userId} | Delete Member from Organization
 [**DeleteProductMember**](MembersApi.md#DeleteProductMember) | **Delete** /v1/products/{productId}/members/{userId} | Delete Member from Product
 [**GetOrganizationMembers**](MembersApi.md#GetOrganizationMembers) | **Get** /v1/organizations/{organizationId}/members | List Organization Members
+[**GetOrganizationMembersV2**](MembersApi.md#GetOrganizationMembersV2) | **Get** /v2/organizations/{organizationId}/members | List Organization Members
 [**GetProductMembers**](MembersApi.md#GetProductMembers) | **Get** /v1/products/{productId}/members | List Product Members
 [**InviteMember**](MembersApi.md#InviteMember) | **Post** /v1/products/{productId}/members/invite | Invite Member
 
@@ -283,6 +284,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**[]UserModel**](UserModel.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, application/hal+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetOrganizationMembersV2
+
+> OrganizationMembersModel GetOrganizationMembersV2(ctx, organizationId).Execute()
+
+List Organization Members
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    organizationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Organization.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.MembersApi.GetOrganizationMembersV2(context.Background(), organizationId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MembersApi.GetOrganizationMembersV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetOrganizationMembersV2`: OrganizationMembersModel
+    fmt.Fprintf(os.Stdout, "Response from `MembersApi.GetOrganizationMembersV2`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationId** | **string** | The identifier of the Organization. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetOrganizationMembersV2Request struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**OrganizationMembersModel**](OrganizationMembersModel.md)
 
 ### Authorization
 

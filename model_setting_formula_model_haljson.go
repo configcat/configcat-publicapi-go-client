@@ -34,6 +34,8 @@ type SettingFormulaModelHaljson struct {
 	// The name of the user who last updated the Feature Flag or Setting.
 	LastUpdaterUserFullName NullableString `json:"lastUpdaterUserFullName,omitempty"`
 	Embedded *SettingFormulaModelHaljsonEmbedded `json:"_embedded,omitempty"`
+	// List of Feature Flag and Setting IDs where the actual Feature Flag or Setting is prerequisite.
+	SettingIdsWherePrerequisite []int32 `json:"settingIdsWherePrerequisite,omitempty"`
 	ReadOnly *bool `json:"readOnly,omitempty"`
 	FeatureFlagLimitations *FeatureFlagLimitations `json:"featureFlagLimitations,omitempty"`
 	Links *ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks `json:"_links,omitempty"`
@@ -353,6 +355,39 @@ func (o *SettingFormulaModelHaljson) SetEmbedded(v SettingFormulaModelHaljsonEmb
 	o.Embedded = &v
 }
 
+// GetSettingIdsWherePrerequisite returns the SettingIdsWherePrerequisite field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SettingFormulaModelHaljson) GetSettingIdsWherePrerequisite() []int32 {
+	if o == nil {
+		var ret []int32
+		return ret
+	}
+	return o.SettingIdsWherePrerequisite
+}
+
+// GetSettingIdsWherePrerequisiteOk returns a tuple with the SettingIdsWherePrerequisite field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SettingFormulaModelHaljson) GetSettingIdsWherePrerequisiteOk() ([]int32, bool) {
+	if o == nil || IsNil(o.SettingIdsWherePrerequisite) {
+		return nil, false
+	}
+	return o.SettingIdsWherePrerequisite, true
+}
+
+// HasSettingIdsWherePrerequisite returns a boolean if a field has been set.
+func (o *SettingFormulaModelHaljson) HasSettingIdsWherePrerequisite() bool {
+	if o != nil && IsNil(o.SettingIdsWherePrerequisite) {
+		return true
+	}
+
+	return false
+}
+
+// SetSettingIdsWherePrerequisite gets a reference to the given []int32 and assigns it to the SettingIdsWherePrerequisite field.
+func (o *SettingFormulaModelHaljson) SetSettingIdsWherePrerequisite(v []int32) {
+	o.SettingIdsWherePrerequisite = v
+}
+
 // GetReadOnly returns the ReadOnly field value if set, zero value otherwise.
 func (o *SettingFormulaModelHaljson) GetReadOnly() bool {
 	if o == nil || IsNil(o.ReadOnly) {
@@ -482,6 +517,9 @@ func (o SettingFormulaModelHaljson) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Embedded) {
 		toSerialize["_embedded"] = o.Embedded
+	}
+	if o.SettingIdsWherePrerequisite != nil {
+		toSerialize["settingIdsWherePrerequisite"] = o.SettingIdsWherePrerequisite
 	}
 	if !IsNil(o.ReadOnly) {
 		toSerialize["readOnly"] = o.ReadOnly

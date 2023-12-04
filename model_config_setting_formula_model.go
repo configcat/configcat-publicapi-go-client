@@ -38,6 +38,8 @@ type ConfigSettingFormulaModel struct {
 	IntegrationLinks []IntegrationLinkModel `json:"integrationLinks,omitempty"`
 	// The tags attached to the Feature Flag or Setting.
 	SettingTags []SettingTagModel `json:"settingTags,omitempty"`
+	// List of Feature Flag and Setting IDs where the actual Feature Flag or Setting is prerequisite.
+	SettingIdsWherePrerequisite []int32 `json:"settingIdsWherePrerequisite,omitempty"`
 }
 
 // NewConfigSettingFormulaModel instantiates a new ConfigSettingFormulaModel object
@@ -420,6 +422,39 @@ func (o *ConfigSettingFormulaModel) SetSettingTags(v []SettingTagModel) {
 	o.SettingTags = v
 }
 
+// GetSettingIdsWherePrerequisite returns the SettingIdsWherePrerequisite field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConfigSettingFormulaModel) GetSettingIdsWherePrerequisite() []int32 {
+	if o == nil {
+		var ret []int32
+		return ret
+	}
+	return o.SettingIdsWherePrerequisite
+}
+
+// GetSettingIdsWherePrerequisiteOk returns a tuple with the SettingIdsWherePrerequisite field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConfigSettingFormulaModel) GetSettingIdsWherePrerequisiteOk() ([]int32, bool) {
+	if o == nil || IsNil(o.SettingIdsWherePrerequisite) {
+		return nil, false
+	}
+	return o.SettingIdsWherePrerequisite, true
+}
+
+// HasSettingIdsWherePrerequisite returns a boolean if a field has been set.
+func (o *ConfigSettingFormulaModel) HasSettingIdsWherePrerequisite() bool {
+	if o != nil && IsNil(o.SettingIdsWherePrerequisite) {
+		return true
+	}
+
+	return false
+}
+
+// SetSettingIdsWherePrerequisite gets a reference to the given []int32 and assigns it to the SettingIdsWherePrerequisite field.
+func (o *ConfigSettingFormulaModel) SetSettingIdsWherePrerequisite(v []int32) {
+	o.SettingIdsWherePrerequisite = v
+}
+
 func (o ConfigSettingFormulaModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -459,6 +494,9 @@ func (o ConfigSettingFormulaModel) ToMap() (map[string]interface{}, error) {
 	}
 	if o.SettingTags != nil {
 		toSerialize["settingTags"] = o.SettingTags
+	}
+	if o.SettingIdsWherePrerequisite != nil {
+		toSerialize["settingIdsWherePrerequisite"] = o.SettingIdsWherePrerequisite
 	}
 	return toSerialize, nil
 }

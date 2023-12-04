@@ -16,11 +16,13 @@ import (
 	"fmt"
 )
 
-// UserComparator The comparison operator the evaluation process must use when it compares the given user attribute's value with the comparison value.
+// UserComparator The comparison operator which defines the relation between the comparison attribute and the comparison value.
 type UserComparator string
 
 // List of UserComparator
 const (
+	USERCOMPARATOR_IS_ONE_OF UserComparator = "isOneOf"
+	USERCOMPARATOR_IS_NOT_ONE_OF UserComparator = "isNotOneOf"
 	USERCOMPARATOR_CONTAINS_ANY_OF UserComparator = "containsAnyOf"
 	USERCOMPARATOR_DOES_NOT_CONTAIN_ANY_OF UserComparator = "doesNotContainAnyOf"
 	USERCOMPARATOR_SEM_VER_IS_ONE_OF UserComparator = "semVerIsOneOf"
@@ -45,12 +47,22 @@ const (
 	USERCOMPARATOR_SENSITIVE_TEXT_NOT_STARTS_WITH_ANY_OF UserComparator = "sensitiveTextNotStartsWithAnyOf"
 	USERCOMPARATOR_SENSITIVE_TEXT_ENDS_WITH_ANY_OF UserComparator = "sensitiveTextEndsWithAnyOf"
 	USERCOMPARATOR_SENSITIVE_TEXT_NOT_ENDS_WITH_ANY_OF UserComparator = "sensitiveTextNotEndsWithAnyOf"
-	USERCOMPARATOR_ARRAY_CONTAINS UserComparator = "arrayContains"
-	USERCOMPARATOR_ARRAY_DOES_NOT_CONTAIN UserComparator = "arrayDoesNotContain"
+	USERCOMPARATOR_SENSITIVE_ARRAY_CONTAINS_ANY_OF UserComparator = "sensitiveArrayContainsAnyOf"
+	USERCOMPARATOR_SENSITIVE_ARRAY_DOES_NOT_CONTAIN_ANY_OF UserComparator = "sensitiveArrayDoesNotContainAnyOf"
+	USERCOMPARATOR_TEXT_EQUALS UserComparator = "textEquals"
+	USERCOMPARATOR_TEXT_DOES_NOT_EQUAL UserComparator = "textDoesNotEqual"
+	USERCOMPARATOR_TEXT_STARTS_WITH_ANY_OF UserComparator = "textStartsWithAnyOf"
+	USERCOMPARATOR_TEXT_NOT_STARTS_WITH_ANY_OF UserComparator = "textNotStartsWithAnyOf"
+	USERCOMPARATOR_TEXT_ENDS_WITH_ANY_OF UserComparator = "textEndsWithAnyOf"
+	USERCOMPARATOR_TEXT_NOT_ENDS_WITH_ANY_OF UserComparator = "textNotEndsWithAnyOf"
+	USERCOMPARATOR_ARRAY_CONTAINS_ANY_OF UserComparator = "arrayContainsAnyOf"
+	USERCOMPARATOR_ARRAY_DOES_NOT_CONTAIN_ANY_OF UserComparator = "arrayDoesNotContainAnyOf"
 )
 
 // All allowed values of UserComparator enum
 var AllowedUserComparatorEnumValues = []UserComparator{
+	"isOneOf",
+	"isNotOneOf",
 	"containsAnyOf",
 	"doesNotContainAnyOf",
 	"semVerIsOneOf",
@@ -75,8 +87,16 @@ var AllowedUserComparatorEnumValues = []UserComparator{
 	"sensitiveTextNotStartsWithAnyOf",
 	"sensitiveTextEndsWithAnyOf",
 	"sensitiveTextNotEndsWithAnyOf",
-	"arrayContains",
-	"arrayDoesNotContain",
+	"sensitiveArrayContainsAnyOf",
+	"sensitiveArrayDoesNotContainAnyOf",
+	"textEquals",
+	"textDoesNotEqual",
+	"textStartsWithAnyOf",
+	"textNotStartsWithAnyOf",
+	"textEndsWithAnyOf",
+	"textNotEndsWithAnyOf",
+	"arrayContainsAnyOf",
+	"arrayDoesNotContainAnyOf",
 }
 
 func (v *UserComparator) UnmarshalJSON(src []byte) error {

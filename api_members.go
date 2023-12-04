@@ -351,6 +351,8 @@ The results may vary based on the access level of the user who calls the endpoin
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organizationId The identifier of the Organization.
  @return MembersApiGetOrganizationMembersRequest
+
+Deprecated
 */
 func (a *MembersApiService) GetOrganizationMembers(ctx context.Context, organizationId string) MembersApiGetOrganizationMembersRequest {
 	return MembersApiGetOrganizationMembersRequest{
@@ -362,6 +364,7 @@ func (a *MembersApiService) GetOrganizationMembers(ctx context.Context, organiza
 
 // Execute executes the request
 //  @return []UserModel
+// Deprecated
 func (a *MembersApiService) GetOrganizationMembersExecute(r MembersApiGetOrganizationMembersRequest) ([]UserModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -376,6 +379,115 @@ func (a *MembersApiService) GetOrganizationMembersExecute(r MembersApiGetOrganiz
 	}
 
 	localVarPath := localBasePath + "/v1/organizations/{organizationId}/members"
+	localVarPath = strings.Replace(localVarPath, "{"+"organizationId"+"}", url.PathEscape(parameterValueToString(r.organizationId, "organizationId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "application/hal+json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type MembersApiGetOrganizationMembersV2Request struct {
+	ctx context.Context
+	ApiService *MembersApiService
+	organizationId string
+}
+
+func (r MembersApiGetOrganizationMembersV2Request) Execute() (*OrganizationMembersModel, *http.Response, error) {
+	return r.ApiService.GetOrganizationMembersV2Execute(r)
+}
+
+/*
+GetOrganizationMembersV2 List Organization Members
+
+This endpoint returns the list of Members that belongs 
+to the given Organization, identified by the `organizationId` parameter.
+
+The results may vary based on the access level of the user who calls the endpoint: 
+- When it's called with Organization Admin privileges, the result will contain each member in the Organization.
+- When it's called without Organization Admin privileges, the result will contain each Organization Admin along with members 
+  of those products where the caller has `Team members and permission groups` (`canManageMembers`) permission.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organizationId The identifier of the Organization.
+ @return MembersApiGetOrganizationMembersV2Request
+*/
+func (a *MembersApiService) GetOrganizationMembersV2(ctx context.Context, organizationId string) MembersApiGetOrganizationMembersV2Request {
+	return MembersApiGetOrganizationMembersV2Request{
+		ApiService: a,
+		ctx: ctx,
+		organizationId: organizationId,
+	}
+}
+
+// Execute executes the request
+//  @return OrganizationMembersModel
+func (a *MembersApiService) GetOrganizationMembersV2Execute(r MembersApiGetOrganizationMembersV2Request) (*OrganizationMembersModel, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *OrganizationMembersModel
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersApiService.GetOrganizationMembersV2")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/organizations/{organizationId}/members"
 	localVarPath = strings.Replace(localVarPath, "{"+"organizationId"+"}", url.PathEscape(parameterValueToString(r.organizationId, "organizationId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **LastUpdaterUserEmail** | Pointer to **NullableString** | The email of the user who last updated the Feature Flag or Setting. | [optional] 
 **LastUpdaterUserFullName** | Pointer to **NullableString** | The name of the user who last updated the Feature Flag or Setting. | [optional] 
 **Embedded** | Pointer to [**SettingFormulaModelHaljsonEmbedded**](SettingFormulaModelHaljsonEmbedded.md) |  | [optional] 
+**SettingIdsWherePrerequisite** | Pointer to **[]int32** | List of Feature Flag and Setting IDs where the actual Feature Flag or Setting is prerequisite. | [optional] 
 **ReadOnly** | Pointer to **bool** |  | [optional] 
 **FeatureFlagLimitations** | Pointer to [**FeatureFlagLimitations**](FeatureFlagLimitations.md) |  | [optional] 
 **Links** | Pointer to [**ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks**](ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks.md) |  | [optional] 
@@ -285,6 +286,41 @@ SetEmbedded sets Embedded field to given value.
 
 HasEmbedded returns a boolean if a field has been set.
 
+### GetSettingIdsWherePrerequisite
+
+`func (o *SettingFormulaModelHaljson) GetSettingIdsWherePrerequisite() []int32`
+
+GetSettingIdsWherePrerequisite returns the SettingIdsWherePrerequisite field if non-nil, zero value otherwise.
+
+### GetSettingIdsWherePrerequisiteOk
+
+`func (o *SettingFormulaModelHaljson) GetSettingIdsWherePrerequisiteOk() (*[]int32, bool)`
+
+GetSettingIdsWherePrerequisiteOk returns a tuple with the SettingIdsWherePrerequisite field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSettingIdsWherePrerequisite
+
+`func (o *SettingFormulaModelHaljson) SetSettingIdsWherePrerequisite(v []int32)`
+
+SetSettingIdsWherePrerequisite sets SettingIdsWherePrerequisite field to given value.
+
+### HasSettingIdsWherePrerequisite
+
+`func (o *SettingFormulaModelHaljson) HasSettingIdsWherePrerequisite() bool`
+
+HasSettingIdsWherePrerequisite returns a boolean if a field has been set.
+
+### SetSettingIdsWherePrerequisiteNil
+
+`func (o *SettingFormulaModelHaljson) SetSettingIdsWherePrerequisiteNil(b bool)`
+
+ SetSettingIdsWherePrerequisiteNil sets the value for SettingIdsWherePrerequisite to be an explicit nil
+
+### UnsetSettingIdsWherePrerequisite
+`func (o *SettingFormulaModelHaljson) UnsetSettingIdsWherePrerequisite()`
+
+UnsetSettingIdsWherePrerequisite ensures that no value is present for SettingIdsWherePrerequisite, not even an explicit nil
 ### GetReadOnly
 
 `func (o *SettingFormulaModelHaljson) GetReadOnly() bool`

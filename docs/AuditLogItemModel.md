@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **AuditLogId** | Pointer to **int64** |  | [optional] 
 **AuditLogDateTime** | Pointer to **time.Time** |  | [optional] 
 **AuditLogTypeEnum** | Pointer to [**AuditLogType**](AuditLogType.md) |  | [optional] 
+**ChangeSetId** | Pointer to **NullableString** |  | [optional] 
+**Truncated** | Pointer to **bool** |  | [optional] 
 **AuditLogType** | Pointer to **NullableString** |  | [optional] 
 **UserEmail** | Pointer to **NullableString** |  | [optional] 
 **UserName** | Pointer to **NullableString** |  | [optional] 
@@ -108,6 +110,66 @@ SetAuditLogTypeEnum sets AuditLogTypeEnum field to given value.
 `func (o *AuditLogItemModel) HasAuditLogTypeEnum() bool`
 
 HasAuditLogTypeEnum returns a boolean if a field has been set.
+
+### GetChangeSetId
+
+`func (o *AuditLogItemModel) GetChangeSetId() string`
+
+GetChangeSetId returns the ChangeSetId field if non-nil, zero value otherwise.
+
+### GetChangeSetIdOk
+
+`func (o *AuditLogItemModel) GetChangeSetIdOk() (*string, bool)`
+
+GetChangeSetIdOk returns a tuple with the ChangeSetId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChangeSetId
+
+`func (o *AuditLogItemModel) SetChangeSetId(v string)`
+
+SetChangeSetId sets ChangeSetId field to given value.
+
+### HasChangeSetId
+
+`func (o *AuditLogItemModel) HasChangeSetId() bool`
+
+HasChangeSetId returns a boolean if a field has been set.
+
+### SetChangeSetIdNil
+
+`func (o *AuditLogItemModel) SetChangeSetIdNil(b bool)`
+
+ SetChangeSetIdNil sets the value for ChangeSetId to be an explicit nil
+
+### UnsetChangeSetId
+`func (o *AuditLogItemModel) UnsetChangeSetId()`
+
+UnsetChangeSetId ensures that no value is present for ChangeSetId, not even an explicit nil
+### GetTruncated
+
+`func (o *AuditLogItemModel) GetTruncated() bool`
+
+GetTruncated returns the Truncated field if non-nil, zero value otherwise.
+
+### GetTruncatedOk
+
+`func (o *AuditLogItemModel) GetTruncatedOk() (*bool, bool)`
+
+GetTruncatedOk returns a tuple with the Truncated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTruncated
+
+`func (o *AuditLogItemModel) SetTruncated(v bool)`
+
+SetTruncated sets Truncated field to given value.
+
+### HasTruncated
+
+`func (o *AuditLogItemModel) HasTruncated() bool`
+
+HasTruncated returns a boolean if a field has been set.
 
 ### GetAuditLogType
 

@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// PrerequisiteComparator The comparison operator used during the evaluation process.
+// PrerequisiteComparator Prerequisite flag comparison operator used during the evaluation process.
 type PrerequisiteComparator string
 
 // List of PrerequisiteComparator

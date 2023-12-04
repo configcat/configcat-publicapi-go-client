@@ -24,6 +24,8 @@ type AuditLogItemModel struct {
 	AuditLogId *int64 `json:"auditLogId,omitempty"`
 	AuditLogDateTime *time.Time `json:"auditLogDateTime,omitempty"`
 	AuditLogTypeEnum *AuditLogType `json:"auditLogTypeEnum,omitempty"`
+	ChangeSetId NullableString `json:"changeSetId,omitempty"`
+	Truncated *bool `json:"truncated,omitempty"`
 	AuditLogType NullableString `json:"auditLogType,omitempty"`
 	UserEmail NullableString `json:"userEmail,omitempty"`
 	UserName NullableString `json:"userName,omitempty"`
@@ -144,6 +146,80 @@ func (o *AuditLogItemModel) HasAuditLogTypeEnum() bool {
 // SetAuditLogTypeEnum gets a reference to the given AuditLogType and assigns it to the AuditLogTypeEnum field.
 func (o *AuditLogItemModel) SetAuditLogTypeEnum(v AuditLogType) {
 	o.AuditLogTypeEnum = &v
+}
+
+// GetChangeSetId returns the ChangeSetId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AuditLogItemModel) GetChangeSetId() string {
+	if o == nil || IsNil(o.ChangeSetId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ChangeSetId.Get()
+}
+
+// GetChangeSetIdOk returns a tuple with the ChangeSetId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AuditLogItemModel) GetChangeSetIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ChangeSetId.Get(), o.ChangeSetId.IsSet()
+}
+
+// HasChangeSetId returns a boolean if a field has been set.
+func (o *AuditLogItemModel) HasChangeSetId() bool {
+	if o != nil && o.ChangeSetId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetChangeSetId gets a reference to the given NullableString and assigns it to the ChangeSetId field.
+func (o *AuditLogItemModel) SetChangeSetId(v string) {
+	o.ChangeSetId.Set(&v)
+}
+// SetChangeSetIdNil sets the value for ChangeSetId to be an explicit nil
+func (o *AuditLogItemModel) SetChangeSetIdNil() {
+	o.ChangeSetId.Set(nil)
+}
+
+// UnsetChangeSetId ensures that no value is present for ChangeSetId, not even an explicit nil
+func (o *AuditLogItemModel) UnsetChangeSetId() {
+	o.ChangeSetId.Unset()
+}
+
+// GetTruncated returns the Truncated field value if set, zero value otherwise.
+func (o *AuditLogItemModel) GetTruncated() bool {
+	if o == nil || IsNil(o.Truncated) {
+		var ret bool
+		return ret
+	}
+	return *o.Truncated
+}
+
+// GetTruncatedOk returns a tuple with the Truncated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AuditLogItemModel) GetTruncatedOk() (*bool, bool) {
+	if o == nil || IsNil(o.Truncated) {
+		return nil, false
+	}
+	return o.Truncated, true
+}
+
+// HasTruncated returns a boolean if a field has been set.
+func (o *AuditLogItemModel) HasTruncated() bool {
+	if o != nil && !IsNil(o.Truncated) {
+		return true
+	}
+
+	return false
+}
+
+// SetTruncated gets a reference to the given bool and assigns it to the Truncated field.
+func (o *AuditLogItemModel) SetTruncated(v bool) {
+	o.Truncated = &v
 }
 
 // GetAuditLogType returns the AuditLogType field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -458,6 +534,12 @@ func (o AuditLogItemModel) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.AuditLogTypeEnum) {
 		toSerialize["auditLogTypeEnum"] = o.AuditLogTypeEnum
+	}
+	if o.ChangeSetId.IsSet() {
+		toSerialize["changeSetId"] = o.ChangeSetId.Get()
+	}
+	if !IsNil(o.Truncated) {
+		toSerialize["truncated"] = o.Truncated
 	}
 	if o.AuditLogType.IsSet() {
 		toSerialize["auditLogType"] = o.AuditLogType.Get()

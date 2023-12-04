@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ProductId** | Pointer to **string** | Identifier of the Product. | [optional] 
 **Name** | Pointer to **NullableString** | Name of the Product. | [optional] 
 **Description** | Pointer to **NullableString** | Description of the Product. | [optional] 
-**Order** | Pointer to **int32** | The order of the Product represented on the ConfigCat Dashboard. | [optional] 
+**Order** | Pointer to **int32** | The order of the Product represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers. | [optional] 
 **ReasonRequired** | Pointer to **bool** | Determines whether a mandatory reason must be given every time when the Feature Flags or Settings within a Product are saved. | [optional] 
 
 ## Methods

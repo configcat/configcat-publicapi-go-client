@@ -38,6 +38,8 @@ type SettingFormulaModel struct {
 	IntegrationLinks []IntegrationLinkModel `json:"integrationLinks,omitempty"`
 	// The tags attached to the Feature Flag or Setting.
 	SettingTags []SettingTagModel `json:"settingTags,omitempty"`
+	// List of Feature Flag and Setting IDs where the actual Feature Flag or Setting is prerequisite.
+	SettingIdsWherePrerequisite []int32 `json:"settingIdsWherePrerequisite,omitempty"`
 	Config *ConfigModel `json:"config,omitempty"`
 	Environment *EnvironmentModel `json:"environment,omitempty"`
 	ReadOnly *bool `json:"readOnly,omitempty"`
@@ -424,6 +426,39 @@ func (o *SettingFormulaModel) SetSettingTags(v []SettingTagModel) {
 	o.SettingTags = v
 }
 
+// GetSettingIdsWherePrerequisite returns the SettingIdsWherePrerequisite field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *SettingFormulaModel) GetSettingIdsWherePrerequisite() []int32 {
+	if o == nil {
+		var ret []int32
+		return ret
+	}
+	return o.SettingIdsWherePrerequisite
+}
+
+// GetSettingIdsWherePrerequisiteOk returns a tuple with the SettingIdsWherePrerequisite field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SettingFormulaModel) GetSettingIdsWherePrerequisiteOk() ([]int32, bool) {
+	if o == nil || IsNil(o.SettingIdsWherePrerequisite) {
+		return nil, false
+	}
+	return o.SettingIdsWherePrerequisite, true
+}
+
+// HasSettingIdsWherePrerequisite returns a boolean if a field has been set.
+func (o *SettingFormulaModel) HasSettingIdsWherePrerequisite() bool {
+	if o != nil && IsNil(o.SettingIdsWherePrerequisite) {
+		return true
+	}
+
+	return false
+}
+
+// SetSettingIdsWherePrerequisite gets a reference to the given []int32 and assigns it to the SettingIdsWherePrerequisite field.
+func (o *SettingFormulaModel) SetSettingIdsWherePrerequisite(v []int32) {
+	o.SettingIdsWherePrerequisite = v
+}
+
 // GetConfig returns the Config field value if set, zero value otherwise.
 func (o *SettingFormulaModel) GetConfig() ConfigModel {
 	if o == nil || IsNil(o.Config) {
@@ -591,6 +626,9 @@ func (o SettingFormulaModel) ToMap() (map[string]interface{}, error) {
 	}
 	if o.SettingTags != nil {
 		toSerialize["settingTags"] = o.SettingTags
+	}
+	if o.SettingIdsWherePrerequisite != nil {
+		toSerialize["settingIdsWherePrerequisite"] = o.SettingIdsWherePrerequisite
 	}
 	if !IsNil(o.Config) {
 		toSerialize["config"] = o.Config
