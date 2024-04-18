@@ -45,7 +45,6 @@ type SegmentModel struct {
 	Comparator *RolloutRuleComparator `json:"comparator,omitempty"`
 	// The value to compare with the given user attribute's value.
 	ComparisonValue NullableString `json:"comparisonValue,omitempty"`
-	Links *ConfigSettingFormulasModelLinks `json:"_links,omitempty"`
 }
 
 // NewSegmentModel instantiates a new SegmentModel object
@@ -561,38 +560,6 @@ func (o *SegmentModel) UnsetComparisonValue() {
 	o.ComparisonValue.Unset()
 }
 
-// GetLinks returns the Links field value if set, zero value otherwise.
-func (o *SegmentModel) GetLinks() ConfigSettingFormulasModelLinks {
-	if o == nil || IsNil(o.Links) {
-		var ret ConfigSettingFormulasModelLinks
-		return ret
-	}
-	return *o.Links
-}
-
-// GetLinksOk returns a tuple with the Links field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SegmentModel) GetLinksOk() (*ConfigSettingFormulasModelLinks, bool) {
-	if o == nil || IsNil(o.Links) {
-		return nil, false
-	}
-	return o.Links, true
-}
-
-// HasLinks returns a boolean if a field has been set.
-func (o *SegmentModel) HasLinks() bool {
-	if o != nil && !IsNil(o.Links) {
-		return true
-	}
-
-	return false
-}
-
-// SetLinks gets a reference to the given ConfigSettingFormulasModelLinks and assigns it to the Links field.
-func (o *SegmentModel) SetLinks(v ConfigSettingFormulasModelLinks) {
-	o.Links = &v
-}
-
 func (o SegmentModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -641,9 +608,6 @@ func (o SegmentModel) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ComparisonValue.IsSet() {
 		toSerialize["comparisonValue"] = o.ComparisonValue.Get()
-	}
-	if !IsNil(o.Links) {
-		toSerialize["_links"] = o.Links
 	}
 	return toSerialize, nil
 }

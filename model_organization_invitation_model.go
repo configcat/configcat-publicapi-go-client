@@ -37,7 +37,6 @@ type OrganizationInvitationModel struct {
 	Expired *bool `json:"expired,omitempty"`
 	// Expiration time of the Invitation.
 	Expires *time.Time `json:"expires,omitempty"`
-	Links *OrganizationInvitationModelLinks `json:"_links,omitempty"`
 }
 
 // NewOrganizationInvitationModel instantiates a new OrganizationInvitationModel object
@@ -333,38 +332,6 @@ func (o *OrganizationInvitationModel) SetExpires(v time.Time) {
 	o.Expires = &v
 }
 
-// GetLinks returns the Links field value if set, zero value otherwise.
-func (o *OrganizationInvitationModel) GetLinks() OrganizationInvitationModelLinks {
-	if o == nil || IsNil(o.Links) {
-		var ret OrganizationInvitationModelLinks
-		return ret
-	}
-	return *o.Links
-}
-
-// GetLinksOk returns a tuple with the Links field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OrganizationInvitationModel) GetLinksOk() (*OrganizationInvitationModelLinks, bool) {
-	if o == nil || IsNil(o.Links) {
-		return nil, false
-	}
-	return o.Links, true
-}
-
-// HasLinks returns a boolean if a field has been set.
-func (o *OrganizationInvitationModel) HasLinks() bool {
-	if o != nil && !IsNil(o.Links) {
-		return true
-	}
-
-	return false
-}
-
-// SetLinks gets a reference to the given OrganizationInvitationModelLinks and assigns it to the Links field.
-func (o *OrganizationInvitationModel) SetLinks(v OrganizationInvitationModelLinks) {
-	o.Links = &v
-}
-
 func (o OrganizationInvitationModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -398,9 +365,6 @@ func (o OrganizationInvitationModel) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Expires) {
 		toSerialize["expires"] = o.Expires
-	}
-	if !IsNil(o.Links) {
-		toSerialize["_links"] = o.Links
 	}
 	return toSerialize, nil
 }

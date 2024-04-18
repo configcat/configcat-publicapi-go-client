@@ -37,11 +37,8 @@ docs/ComparisonValueListModel.md
 docs/ComparisonValueModel.md
 docs/ConditionModel.md
 docs/ConfigModel.md
-docs/ConfigModelLinks.md
-docs/ConfigModelLinksSelf.md
 docs/ConfigSettingFormulaModel.md
 docs/ConfigSettingFormulasModel.md
-docs/ConfigSettingFormulasModelLinks.md
 docs/ConfigSettingValueModel.md
 docs/ConfigSettingValuesModel.md
 docs/ConfigsApi.md
@@ -76,7 +73,6 @@ docs/IntegrationLinkModel.md
 docs/IntegrationLinkType.md
 docs/IntegrationLinksApi.md
 docs/InvitationModel.md
-docs/InvitationModelLinks.md
 docs/InviteMembersRequest.md
 docs/JsonPatchOperation.md
 docs/KeyGenerationMode.md
@@ -87,11 +83,9 @@ docs/MembersApi.md
 docs/OperationType.md
 docs/OrganizationAdminModel.md
 docs/OrganizationInvitationModel.md
-docs/OrganizationInvitationModelLinks.md
 docs/OrganizationMemberModel.md
 docs/OrganizationMembersModel.md
 docs/OrganizationModel.md
-docs/OrganizationModelLinks.md
 docs/OrganizationPermissionGroupModel.md
 docs/OrganizationPermissionModel.md
 docs/OrganizationProductModel.md
@@ -103,10 +97,8 @@ docs/PreferencesModel.md
 docs/PrerequisiteComparator.md
 docs/PrerequisiteFlagConditionModel.md
 docs/ProductModel.md
-docs/ProductModelLinks.md
 docs/ProductsApi.md
 docs/ReasonRequiredEnvironmentModel.md
-docs/ReasonRequiredEnvironmentModelLinks.md
 docs/ReferenceLine.md
 docs/ReferenceLines.md
 docs/RolloutPercentageItemModel.md
@@ -122,7 +114,6 @@ docs/SegmentsApi.md
 docs/SettingDataModel.md
 docs/SettingFormulaModel.md
 docs/SettingModel.md
-docs/SettingModelLinks.md
 docs/SettingTagModel.md
 docs/SettingType.md
 docs/SettingValueModel.md
@@ -168,11 +159,8 @@ model_comparison_value_list_model.go
 model_comparison_value_model.go
 model_condition_model.go
 model_config_model.go
-model_config_model__links.go
-model_config_model__links_self.go
 model_config_setting_formula_model.go
 model_config_setting_formulas_model.go
-model_config_setting_formulas_model__links.go
 model_config_setting_value_model.go
 model_config_setting_values_model.go
 model_connect_request.go
@@ -199,7 +187,6 @@ model_integration_link_details_model.go
 model_integration_link_model.go
 model_integration_link_type.go
 model_invitation_model.go
-model_invitation_model__links.go
 model_invite_members_request.go
 model_json_patch_operation.go
 model_key_generation_mode.go
@@ -208,11 +195,9 @@ model_member_model.go
 model_operation_type.go
 model_organization_admin_model.go
 model_organization_invitation_model.go
-model_organization_invitation_model__links.go
 model_organization_member_model.go
 model_organization_members_model.go
 model_organization_model.go
-model_organization_model__links.go
 model_organization_permission_group_model.go
 model_organization_permission_model.go
 model_organization_product_model.go
@@ -222,9 +207,7 @@ model_preferences_model.go
 model_prerequisite_comparator.go
 model_prerequisite_flag_condition_model.go
 model_product_model.go
-model_product_model__links.go
 model_reason_required_environment_model.go
-model_reason_required_environment_model__links.go
 model_reference_line.go
 model_reference_lines.go
 model_rollout_percentage_item_model.go
@@ -238,7 +221,6 @@ model_segment_model.go
 model_setting_data_model.go
 model_setting_formula_model.go
 model_setting_model.go
-model_setting_model__links.go
 model_setting_tag_model.go
 model_setting_type.go
 model_setting_value_model.go
@@ -268,5 +250,4 @@ model_webhook_header_model.go
 model_webhook_model.go
 model_webhook_signing_keys_model.go
 response.go
-test/api_webhooks_test.go
 utils.go

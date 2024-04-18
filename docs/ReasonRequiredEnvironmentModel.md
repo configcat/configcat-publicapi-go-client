@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **EnvironmentId** | Pointer to **string** | Identifier of the Environment. | [optional] 
 **ReasonRequired** | Pointer to **bool** | Indicates that a mandatory note is required in this Environment for saving and publishing. | [optional] 
 **EnvironmentName** | Pointer to **NullableString** | Name of the Environment. | [optional] 
-**Links** | Pointer to [**ReasonRequiredEnvironmentModelLinks**](ReasonRequiredEnvironmentModelLinks.md) |  | [optional] 
 
 ## Methods
 
@@ -113,31 +112,6 @@ HasEnvironmentName returns a boolean if a field has been set.
 `func (o *ReasonRequiredEnvironmentModel) UnsetEnvironmentName()`
 
 UnsetEnvironmentName ensures that no value is present for EnvironmentName, not even an explicit nil
-### GetLinks
-
-`func (o *ReasonRequiredEnvironmentModel) GetLinks() ReasonRequiredEnvironmentModelLinks`
-
-GetLinks returns the Links field if non-nil, zero value otherwise.
-
-### GetLinksOk
-
-`func (o *ReasonRequiredEnvironmentModel) GetLinksOk() (*ReasonRequiredEnvironmentModelLinks, bool)`
-
-GetLinksOk returns a tuple with the Links field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLinks
-
-`func (o *ReasonRequiredEnvironmentModel) SetLinks(v ReasonRequiredEnvironmentModelLinks)`
-
-SetLinks sets Links field to given value.
-
-### HasLinks
-
-`func (o *ReasonRequiredEnvironmentModel) HasLinks() bool`
-
-HasLinks returns a boolean if a field has been set.
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

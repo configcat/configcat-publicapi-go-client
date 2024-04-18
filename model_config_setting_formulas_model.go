@@ -26,7 +26,6 @@ type ConfigSettingFormulasModel struct {
 	// Evaluation descriptors of each updated Feature Flag and Setting.
 	SettingFormulas []ConfigSettingFormulaModel `json:"settingFormulas,omitempty"`
 	FeatureFlagLimitations *FeatureFlagLimitations `json:"featureFlagLimitations,omitempty"`
-	Links *ConfigSettingFormulasModelLinks `json:"_links,omitempty"`
 }
 
 // NewConfigSettingFormulasModel instantiates a new ConfigSettingFormulasModel object
@@ -207,38 +206,6 @@ func (o *ConfigSettingFormulasModel) SetFeatureFlagLimitations(v FeatureFlagLimi
 	o.FeatureFlagLimitations = &v
 }
 
-// GetLinks returns the Links field value if set, zero value otherwise.
-func (o *ConfigSettingFormulasModel) GetLinks() ConfigSettingFormulasModelLinks {
-	if o == nil || IsNil(o.Links) {
-		var ret ConfigSettingFormulasModelLinks
-		return ret
-	}
-	return *o.Links
-}
-
-// GetLinksOk returns a tuple with the Links field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConfigSettingFormulasModel) GetLinksOk() (*ConfigSettingFormulasModelLinks, bool) {
-	if o == nil || IsNil(o.Links) {
-		return nil, false
-	}
-	return o.Links, true
-}
-
-// HasLinks returns a boolean if a field has been set.
-func (o *ConfigSettingFormulasModel) HasLinks() bool {
-	if o != nil && !IsNil(o.Links) {
-		return true
-	}
-
-	return false
-}
-
-// SetLinks gets a reference to the given ConfigSettingFormulasModelLinks and assigns it to the Links field.
-func (o *ConfigSettingFormulasModel) SetLinks(v ConfigSettingFormulasModelLinks) {
-	o.Links = &v
-}
-
 func (o ConfigSettingFormulasModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -263,9 +230,6 @@ func (o ConfigSettingFormulasModel) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.FeatureFlagLimitations) {
 		toSerialize["featureFlagLimitations"] = o.FeatureFlagLimitations
-	}
-	if !IsNil(o.Links) {
-		toSerialize["_links"] = o.Links
 	}
 	return toSerialize, nil
 }

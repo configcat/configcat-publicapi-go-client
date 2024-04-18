@@ -33,7 +33,6 @@ type EnvironmentModel struct {
 	Order *int32 `json:"order,omitempty"`
 	// Determines whether a mandatory reason must be given every time when the Feature Flags or Settings in the given Environment are saved.
 	ReasonRequired *bool `json:"reasonRequired,omitempty"`
-	Links *ConfigSettingFormulasModelLinks `json:"_links,omitempty"`
 }
 
 // NewEnvironmentModel instantiates a new EnvironmentModel object
@@ -307,38 +306,6 @@ func (o *EnvironmentModel) SetReasonRequired(v bool) {
 	o.ReasonRequired = &v
 }
 
-// GetLinks returns the Links field value if set, zero value otherwise.
-func (o *EnvironmentModel) GetLinks() ConfigSettingFormulasModelLinks {
-	if o == nil || IsNil(o.Links) {
-		var ret ConfigSettingFormulasModelLinks
-		return ret
-	}
-	return *o.Links
-}
-
-// GetLinksOk returns a tuple with the Links field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *EnvironmentModel) GetLinksOk() (*ConfigSettingFormulasModelLinks, bool) {
-	if o == nil || IsNil(o.Links) {
-		return nil, false
-	}
-	return o.Links, true
-}
-
-// HasLinks returns a boolean if a field has been set.
-func (o *EnvironmentModel) HasLinks() bool {
-	if o != nil && !IsNil(o.Links) {
-		return true
-	}
-
-	return false
-}
-
-// SetLinks gets a reference to the given ConfigSettingFormulasModelLinks and assigns it to the Links field.
-func (o *EnvironmentModel) SetLinks(v ConfigSettingFormulasModelLinks) {
-	o.Links = &v
-}
-
 func (o EnvironmentModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -369,9 +336,6 @@ func (o EnvironmentModel) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ReasonRequired) {
 		toSerialize["reasonRequired"] = o.ReasonRequired
-	}
-	if !IsNil(o.Links) {
-		toSerialize["_links"] = o.Links
 	}
 	return toSerialize, nil
 }

@@ -5680,11 +5680,6 @@ components:
           commitHash: commitHash
         setting:
           configName: configName
-          _links:
-            self:
-              href: href
-            config:
-              href: href
           configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           hint: hint
           name: name
@@ -5695,36 +5690,8 @@ components:
           tags:
           - product:
               productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                configs:
-                  href: href
-                preferences:
-                  href: href
-                environments:
-                  href: href
-                invitations:
-                  href: href
-                webhooks:
-                  href: href
-                members:
-                  href: href
-                self:
-                  href: href
-                permission-groups:
-                  href: href
-                tags:
-                  href: href
-                segments:
-                  href: href
               organization:
                 organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                _links:
-                  invitations:
-                    href: href
-                  members:
-                    href: href
-                  products:
-                    href: href
                 name: name
               name: name
               description: description
@@ -5732,44 +5699,11 @@ components:
               reasonRequired: true
             color: color
             tagId: 0
-            _links:
-              settings:
-                href: href
-              self:
-                href: href
             name: name
           - product:
               productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                configs:
-                  href: href
-                preferences:
-                  href: href
-                environments:
-                  href: href
-                invitations:
-                  href: href
-                webhooks:
-                  href: href
-                members:
-                  href: href
-                self:
-                  href: href
-                permission-groups:
-                  href: href
-                tags:
-                  href: href
-                segments:
-                  href: href
               organization:
                 organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                _links:
-                  invitations:
-                    href: href
-                  members:
-                    href: href
-                  products:
-                    href: href
                 name: name
               name: name
               description: description
@@ -5777,11 +5711,6 @@ components:
               reasonRequired: true
             color: color
             tagId: 0
-            _links:
-              settings:
-                href: href
-              self:
-                href: href
             name: name
       properties:
         setting:
@@ -5880,46 +5809,13 @@ components:
       example:
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          _links:
-            configs:
-              href: href
-            preferences:
-              href: href
-            environments:
-              href: href
-            invitations:
-              href: href
-            webhooks:
-              href: href
-            members:
-              href: href
-            self:
-              href: href
-            permission-groups:
-              href: href
-            tags:
-              href: href
-            segments:
-              href: href
           organization:
             organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              invitations:
-                href: href
-              members:
-                href: href
-              products:
-                href: href
             name: name
           name: name
           description: description
           order: 0
           reasonRequired: true
-        _links:
-          settings:
-            href: href
-          self:
-            href: href
         configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         name: name
         description: description
@@ -5951,8 +5847,6 @@ components:
           type: string
         evaluationVersion:
           $ref: '#/components/schemas/EvaluationVersion'
-        _links:
-          $ref: '#/components/schemas/ConfigModel__links'
       type: object
     ConfigSettingFormulaModel:
       additionalProperties: false
@@ -6186,36 +6080,8 @@ components:
         environment:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              configs:
-                href: href
-              preferences:
-                href: href
-              environments:
-                href: href
-              invitations:
-                href: href
-              webhooks:
-                href: href
-              members:
-                href: href
-              self:
-                href: href
-              permission-groups:
-                href: href
-              tags:
-                href: href
-              segments:
-                href: href
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                invitations:
-                  href: href
-                members:
-                  href: href
-                products:
-                  href: href
               name: name
             name: name
             description: description
@@ -6223,9 +6089,6 @@ components:
             reasonRequired: true
           environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           color: color
-          _links:
-            self:
-              href: href
           name: name
           description: description
           order: 0
@@ -6577,53 +6440,17 @@ components:
             order: 6
           updatedAt: 2000-01-23T04:56:07.000+00:00
           lastUpdaterUserFullName: lastUpdaterUserFullName
-        _links:
-          self:
-            href: href
         readOnly: true
         config:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              configs:
-                href: href
-              preferences:
-                href: href
-              environments:
-                href: href
-              invitations:
-                href: href
-              webhooks:
-                href: href
-              members:
-                href: href
-              self:
-                href: href
-              permission-groups:
-                href: href
-              tags:
-                href: href
-              segments:
-                href: href
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                invitations:
-                  href: href
-                members:
-                  href: href
-                products:
-                  href: href
               name: name
             name: name
             description: description
             order: 0
             reasonRequired: true
-          _links:
-            settings:
-              href: href
-            self:
-              href: href
           configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name
           description: description
@@ -6645,8 +6472,6 @@ components:
           type: array
         featureFlagLimitations:
           $ref: '#/components/schemas/FeatureFlagLimitations'
-        _links:
-          $ref: '#/components/schemas/ConfigSettingFormulasModel__links'
       type: object
     ConfigSettingValueModel:
       additionalProperties: false
@@ -6753,36 +6578,8 @@ components:
         environment:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              configs:
-                href: href
-              preferences:
-                href: href
-              environments:
-                href: href
-              invitations:
-                href: href
-              webhooks:
-                href: href
-              members:
-                href: href
-              self:
-                href: href
-              permission-groups:
-                href: href
-              tags:
-                href: href
-              segments:
-                href: href
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                invitations:
-                  href: href
-                members:
-                  href: href
-                products:
-                  href: href
               name: name
             name: name
             description: description
@@ -6790,9 +6587,6 @@ components:
             reasonRequired: true
           environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           color: color
-          _links:
-            self:
-              href: href
           name: name
           description: description
           order: 0
@@ -6805,9 +6599,6 @@ components:
           maxComparisonValueLength: 2
           maxStringFlagValueLength: 3
           maxTargetingRuleCount: 5
-        _links:
-          self:
-            href: href
         readOnly: true
         settingValues:
         - rolloutRules:
@@ -6915,46 +6706,13 @@ components:
         config:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              configs:
-                href: href
-              preferences:
-                href: href
-              environments:
-                href: href
-              invitations:
-                href: href
-              webhooks:
-                href: href
-              members:
-                href: href
-              self:
-                href: href
-              permission-groups:
-                href: href
-              tags:
-                href: href
-              segments:
-                href: href
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                invitations:
-                  href: href
-                members:
-                  href: href
-                products:
-                  href: href
               name: name
             name: name
             description: description
             order: 0
             reasonRequired: true
-          _links:
-            settings:
-              href: href
-            self:
-              href: href
           configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name
           description: description
@@ -6975,8 +6733,6 @@ components:
           type: array
         featureFlagLimitations:
           $ref: '#/components/schemas/FeatureFlagLimitations'
-        _links:
-          $ref: '#/components/schemas/ConfigSettingFormulasModel__links'
       type: object
     ConnectRequest:
       additionalProperties: false
@@ -7462,36 +7218,8 @@ components:
       example:
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          _links:
-            configs:
-              href: href
-            preferences:
-              href: href
-            environments:
-              href: href
-            invitations:
-              href: href
-            webhooks:
-              href: href
-            members:
-              href: href
-            self:
-              href: href
-            permission-groups:
-              href: href
-            tags:
-              href: href
-            segments:
-              href: href
           organization:
             organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              invitations:
-                href: href
-              members:
-                href: href
-              products:
-                href: href
             name: name
           name: name
           description: description
@@ -7499,9 +7227,6 @@ components:
           reasonRequired: true
         environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         color: color
-        _links:
-          self:
-            href: href
         name: name
         description: description
         order: 0
@@ -7533,8 +7258,6 @@ components:
           description: Determines whether a mandatory reason must be given every time
             when the Feature Flags or Settings in the given Environment are saved.
           type: boolean
-        _links:
-          $ref: '#/components/schemas/ConfigSettingFormulasModel__links'
       type: object
     EvaluationVersion:
       description: "Determines the evaluation version of a Config.\r\nUsing `v2` enables\
@@ -7665,36 +7388,8 @@ components:
       example:
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          _links:
-            configs:
-              href: href
-            preferences:
-              href: href
-            environments:
-              href: href
-            invitations:
-              href: href
-            webhooks:
-              href: href
-            members:
-              href: href
-            self:
-              href: href
-            permission-groups:
-              href: href
-            tags:
-              href: href
-            segments:
-              href: href
           organization:
             organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              invitations:
-                href: href
-              members:
-                href: href
-              products:
-                href: href
             name: name
           name: name
           description: description
@@ -7703,36 +7398,8 @@ components:
         environment:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              configs:
-                href: href
-              preferences:
-                href: href
-              environments:
-                href: href
-              invitations:
-                href: href
-              webhooks:
-                href: href
-              members:
-                href: href
-              self:
-                href: href
-              permission-groups:
-                href: href
-              tags:
-                href: href
-              segments:
-                href: href
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                invitations:
-                  href: href
-                members:
-                  href: href
-                products:
-                  href: href
               name: name
             name: name
             description: description
@@ -7740,9 +7407,6 @@ components:
             reasonRequired: true
           environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           color: color
-          _links:
-            self:
-              href: href
           name: name
           description: description
           order: 0
@@ -7751,46 +7415,13 @@ components:
         config:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              configs:
-                href: href
-              preferences:
-                href: href
-              environments:
-                href: href
-              invitations:
-                href: href
-              webhooks:
-                href: href
-              members:
-                href: href
-              self:
-                href: href
-              permission-groups:
-                href: href
-              tags:
-                href: href
-              segments:
-                href: href
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                invitations:
-                  href: href
-                members:
-                  href: href
-                products:
-                  href: href
               name: name
             name: name
             description: description
             order: 0
             reasonRequired: true
-          _links:
-            settings:
-              href: href
-            self:
-              href: href
           configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name
           description: description
@@ -7831,36 +7462,8 @@ components:
         details:
         - product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              configs:
-                href: href
-              preferences:
-                href: href
-              environments:
-                href: href
-              invitations:
-                href: href
-              webhooks:
-                href: href
-              members:
-                href: href
-              self:
-                href: href
-              permission-groups:
-                href: href
-              tags:
-                href: href
-              segments:
-                href: href
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                invitations:
-                  href: href
-                members:
-                  href: href
-                products:
-                  href: href
               name: name
             name: name
             description: description
@@ -7869,36 +7472,8 @@ components:
           environment:
             product:
               productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                configs:
-                  href: href
-                preferences:
-                  href: href
-                environments:
-                  href: href
-                invitations:
-                  href: href
-                webhooks:
-                  href: href
-                members:
-                  href: href
-                self:
-                  href: href
-                permission-groups:
-                  href: href
-                tags:
-                  href: href
-                segments:
-                  href: href
               organization:
                 organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                _links:
-                  invitations:
-                    href: href
-                  members:
-                    href: href
-                  products:
-                    href: href
                 name: name
               name: name
               description: description
@@ -7906,9 +7481,6 @@ components:
               reasonRequired: true
             environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             color: color
-            _links:
-              self:
-                href: href
             name: name
             description: description
             order: 0
@@ -7917,46 +7489,13 @@ components:
           config:
             product:
               productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                configs:
-                  href: href
-                preferences:
-                  href: href
-                environments:
-                  href: href
-                invitations:
-                  href: href
-                webhooks:
-                  href: href
-                members:
-                  href: href
-                self:
-                  href: href
-                permission-groups:
-                  href: href
-                tags:
-                  href: href
-                segments:
-                  href: href
               organization:
                 organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                _links:
-                  invitations:
-                    href: href
-                  members:
-                    href: href
-                  products:
-                    href: href
                 name: name
               name: name
               description: description
               order: 0
               reasonRequired: true
-            _links:
-              settings:
-                href: href
-              self:
-                href: href
             configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             name: name
             description: description
@@ -7977,36 +7516,8 @@ components:
           status: status
         - product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              configs:
-                href: href
-              preferences:
-                href: href
-              environments:
-                href: href
-              invitations:
-                href: href
-              webhooks:
-                href: href
-              members:
-                href: href
-              self:
-                href: href
-              permission-groups:
-                href: href
-              tags:
-                href: href
-              segments:
-                href: href
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                invitations:
-                  href: href
-                members:
-                  href: href
-                products:
-                  href: href
               name: name
             name: name
             description: description
@@ -8015,36 +7526,8 @@ components:
           environment:
             product:
               productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                configs:
-                  href: href
-                preferences:
-                  href: href
-                environments:
-                  href: href
-                invitations:
-                  href: href
-                webhooks:
-                  href: href
-                members:
-                  href: href
-                self:
-                  href: href
-                permission-groups:
-                  href: href
-                tags:
-                  href: href
-                segments:
-                  href: href
               organization:
                 organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                _links:
-                  invitations:
-                    href: href
-                  members:
-                    href: href
-                  products:
-                    href: href
                 name: name
               name: name
               description: description
@@ -8052,9 +7535,6 @@ components:
               reasonRequired: true
             environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             color: color
-            _links:
-              self:
-                href: href
             name: name
             description: description
             order: 0
@@ -8063,46 +7543,13 @@ components:
           config:
             product:
               productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                configs:
-                  href: href
-                preferences:
-                  href: href
-                environments:
-                  href: href
-                invitations:
-                  href: href
-                webhooks:
-                  href: href
-                members:
-                  href: href
-                self:
-                  href: href
-                permission-groups:
-                  href: href
-                tags:
-                  href: href
-                segments:
-                  href: href
               organization:
                 organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-                _links:
-                  invitations:
-                    href: href
-                  members:
-                    href: href
-                  products:
-                    href: href
                 name: name
               name: name
               description: description
               order: 0
               reasonRequired: true
-            _links:
-              settings:
-                href: href
-              self:
-                href: href
             configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             name: name
             description: description
@@ -8164,9 +7611,6 @@ components:
         permissionGroupId: 0
         createdAt: 2000-01-23T04:56:07.000+00:00
         expired: true
-        _links:
-          permissionGroup:
-            href: href
         invitationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         email: email
       properties:
@@ -8190,8 +7634,6 @@ components:
         expired:
           description: Determines whether the Invitation is expired.
           type: boolean
-        _links:
-          $ref: '#/components/schemas/InvitationModel__links'
       type: object
     InviteMembersRequest:
       additionalProperties: false
@@ -8337,11 +7779,6 @@ components:
         expires: 2000-01-23T04:56:07.000+00:00
         expired: true
         productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        _links:
-          product:
-            href: href
-          permissionGroup:
-            href: href
         invitationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         email: email
         productName: productName
@@ -8378,8 +7815,6 @@ components:
           description: Expiration time of the Invitation.
           format: date-time
           type: string
-        _links:
-          $ref: '#/components/schemas/OrganizationInvitationModel__links'
       type: object
     OrganizationMemberModel:
       additionalProperties: false
@@ -8506,13 +7941,6 @@ components:
       description: Details of the Organization.
       example:
         organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        _links:
-          invitations:
-            href: href
-          members:
-            href: href
-          products:
-            href: href
         name: name
       properties:
         organizationId:
@@ -8523,8 +7951,6 @@ components:
           description: Name of the Organization.
           nullable: true
           type: string
-        _links:
-          $ref: '#/components/schemas/OrganizationModel__links'
       type: object
     OrganizationPermissionGroupModel:
       additionalProperties: false
@@ -8599,9 +8025,6 @@ components:
       additionalProperties: false
       example:
         canViewProductStatistics: true
-        _links:
-          self:
-            href: href
         canDeleteTag: true
         environmentAccesses:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -8633,36 +8056,8 @@ components:
         permissionGroupId: 0
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          _links:
-            configs:
-              href: href
-            preferences:
-              href: href
-            environments:
-              href: href
-            invitations:
-              href: href
-            webhooks:
-              href: href
-            members:
-              href: href
-            self:
-              href: href
-            permission-groups:
-              href: href
-            tags:
-              href: href
-            segments:
-              href: href
           organization:
             organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              invitations:
-                href: href
-              members:
-                href: href
-              products:
-                href: href
             name: name
           name: name
           description: description
@@ -8758,8 +8153,6 @@ components:
           type: array
         product:
           $ref: '#/components/schemas/ProductModel'
-        _links:
-          $ref: '#/components/schemas/ConfigSettingFormulasModel__links'
       type: object
     PreferencesModel:
       additionalProperties: false
@@ -8769,15 +8162,9 @@ components:
         mandatorySettingHint: true
         reasonRequiredEnvironments:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          _links:
-            environment:
-              href: href
           environmentName: environmentName
           reasonRequired: true
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          _links:
-            environment:
-              href: href
           environmentName: environmentName
           reasonRequired: true
         reasonRequired: true
@@ -8839,36 +8226,8 @@ components:
       description: Details of the Product.
       example:
         productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        _links:
-          configs:
-            href: href
-          preferences:
-            href: href
-          environments:
-            href: href
-          invitations:
-            href: href
-          webhooks:
-            href: href
-          members:
-            href: href
-          self:
-            href: href
-          permission-groups:
-            href: href
-          tags:
-            href: href
-          segments:
-            href: href
         organization:
           organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          _links:
-            invitations:
-              href: href
-            members:
-              href: href
-            products:
-              href: href
           name: name
         name: name
         description: description
@@ -8898,16 +8257,11 @@ components:
           description: Determines whether a mandatory reason must be given every time
             when the Feature Flags or Settings within a Product are saved.
           type: boolean
-        _links:
-          $ref: '#/components/schemas/ProductModel__links'
       type: object
     ReasonRequiredEnvironmentModel:
       additionalProperties: false
       example:
         environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        _links:
-          environment:
-            href: href
         environmentName: environmentName
         reasonRequired: true
       properties:
@@ -8923,8 +8277,6 @@ components:
           description: Name of the Environment.
           nullable: true
           type: string
-        _links:
-          $ref: '#/components/schemas/ReasonRequiredEnvironmentModel__links'
       type: object
     ReferenceLine:
       additionalProperties: false
@@ -9114,45 +8466,14 @@ components:
         createdAt: 2000-01-23T04:56:07.000+00:00
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          _links:
-            configs:
-              href: href
-            preferences:
-              href: href
-            environments:
-              href: href
-            invitations:
-              href: href
-            webhooks:
-              href: href
-            members:
-              href: href
-            self:
-              href: href
-            permission-groups:
-              href: href
-            tags:
-              href: href
-            segments:
-              href: href
           organization:
             organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              invitations:
-                href: href
-              members:
-                href: href
-              products:
-                href: href
             name: name
           name: name
           description: description
           order: 0
           reasonRequired: true
         lastUpdaterEmail: lastUpdaterEmail
-        _links:
-          self:
-            href: href
         creatorEmail: creatorEmail
         segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         usage: 0
@@ -9205,53 +8526,20 @@ components:
             Segment.
           format: int32
           type: integer
-        _links:
-          $ref: '#/components/schemas/ConfigSettingFormulasModel__links'
       type: object
     SegmentModel:
       additionalProperties: false
       example:
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          _links:
-            configs:
-              href: href
-            preferences:
-              href: href
-            environments:
-              href: href
-            invitations:
-              href: href
-            webhooks:
-              href: href
-            members:
-              href: href
-            self:
-              href: href
-            permission-groups:
-              href: href
-            tags:
-              href: href
-            segments:
-              href: href
           organization:
             organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              invitations:
-                href: href
-              members:
-                href: href
-              products:
-                href: href
             name: name
           name: name
           description: description
           order: 0
           reasonRequired: true
         comparisonValue: comparisonValue
-        _links:
-          self:
-            href: href
         creatorEmail: creatorEmail
         description: description
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -9313,8 +8601,6 @@ components:
           description: The value to compare with the given user attribute's value.
           nullable: true
           type: string
-        _links:
-          $ref: '#/components/schemas/ConfigSettingFormulasModel__links'
       type: object
     SettingDataModel:
       additionalProperties: false
@@ -9501,9 +8787,6 @@ components:
             boolValue: true
             doubleValue: 6.027456183070403
         percentageEvaluationAttribute: percentageEvaluationAttribute
-        _links:
-          self:
-            href: href
         defaultValue:
           stringValue: stringValue
           intValue: 0
@@ -9526,36 +8809,8 @@ components:
         environment:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              configs:
-                href: href
-              preferences:
-                href: href
-              environments:
-                href: href
-              invitations:
-                href: href
-              webhooks:
-                href: href
-              members:
-                href: href
-              self:
-                href: href
-              permission-groups:
-                href: href
-              tags:
-                href: href
-              segments:
-                href: href
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                invitations:
-                  href: href
-                members:
-                  href: href
-                products:
-                  href: href
               name: name
             name: name
             description: description
@@ -9563,9 +8818,6 @@ components:
             reasonRequired: true
           environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           color: color
-          _links:
-            self:
-              href: href
           name: name
           description: description
           order: 0
@@ -9593,46 +8845,13 @@ components:
         config:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              configs:
-                href: href
-              preferences:
-                href: href
-              environments:
-                href: href
-              invitations:
-                href: href
-              webhooks:
-                href: href
-              members:
-                href: href
-              self:
-                href: href
-              permission-groups:
-                href: href
-              tags:
-                href: href
-              segments:
-                href: href
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                invitations:
-                  href: href
-                members:
-                  href: href
-                products:
-                  href: href
               name: name
             name: name
             description: description
             order: 0
             reasonRequired: true
-          _links:
-            settings:
-              href: href
-            self:
-              href: href
           configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name
           description: description
@@ -9711,19 +8930,12 @@ components:
           type: boolean
         featureFlagLimitations:
           $ref: '#/components/schemas/FeatureFlagLimitations'
-        _links:
-          $ref: '#/components/schemas/ConfigSettingFormulasModel__links'
       type: object
     SettingModel:
       additionalProperties: false
       description: Metadata of a Feature Flag or Setting.
       example:
         configName: configName
-        _links:
-          self:
-            href: href
-          config:
-            href: href
         configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         hint: hint
         name: name
@@ -9734,36 +8946,8 @@ components:
         tags:
         - product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              configs:
-                href: href
-              preferences:
-                href: href
-              environments:
-                href: href
-              invitations:
-                href: href
-              webhooks:
-                href: href
-              members:
-                href: href
-              self:
-                href: href
-              permission-groups:
-                href: href
-              tags:
-                href: href
-              segments:
-                href: href
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                invitations:
-                  href: href
-                members:
-                  href: href
-                products:
-                  href: href
               name: name
             name: name
             description: description
@@ -9771,44 +8955,11 @@ components:
             reasonRequired: true
           color: color
           tagId: 0
-          _links:
-            settings:
-              href: href
-            self:
-              href: href
           name: name
         - product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              configs:
-                href: href
-              preferences:
-                href: href
-              environments:
-                href: href
-              invitations:
-                href: href
-              webhooks:
-                href: href
-              members:
-                href: href
-              self:
-                href: href
-              permission-groups:
-                href: href
-              tags:
-                href: href
-              segments:
-                href: href
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                invitations:
-                  href: href
-                members:
-                  href: href
-                products:
-                  href: href
               name: name
             name: name
             description: description
@@ -9816,11 +8967,6 @@ components:
             reasonRequired: true
           color: color
           tagId: 0
-          _links:
-            settings:
-              href: href
-            self:
-              href: href
           name: name
       properties:
         settingId:
@@ -9860,8 +9006,6 @@ components:
             $ref: '#/components/schemas/TagModel'
           nullable: true
           type: array
-        _links:
-          $ref: '#/components/schemas/SettingModel__links'
       type: object
     SettingTagModel:
       additionalProperties: false
@@ -9913,9 +9057,6 @@ components:
           value: ""
         - percentage: 0
           value: ""
-        _links:
-          self:
-            href: href
         lastUpdaterUserEmail: lastUpdaterUserEmail
         readOnly: true
         setting:
@@ -9932,36 +9073,8 @@ components:
         environment:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              configs:
-                href: href
-              preferences:
-                href: href
-              environments:
-                href: href
-              invitations:
-                href: href
-              webhooks:
-                href: href
-              members:
-                href: href
-              self:
-                href: href
-              permission-groups:
-                href: href
-              tags:
-                href: href
-              segments:
-                href: href
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                invitations:
-                  href: href
-                members:
-                  href: href
-                products:
-                  href: href
               name: name
             name: name
             description: description
@@ -9969,9 +9082,6 @@ components:
             reasonRequired: true
           environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           color: color
-          _links:
-            self:
-              href: href
           name: name
           description: description
           order: 0
@@ -9997,46 +9107,13 @@ components:
         config:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              configs:
-                href: href
-              preferences:
-                href: href
-              environments:
-                href: href
-              invitations:
-                href: href
-              webhooks:
-                href: href
-              members:
-                href: href
-              self:
-                href: href
-              permission-groups:
-                href: href
-              tags:
-                href: href
-              segments:
-                href: href
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              _links:
-                invitations:
-                  href: href
-                members:
-                  href: href
-                products:
-                  href: href
               name: name
             name: name
             description: description
             order: 0
             reasonRequired: true
-          _links:
-            settings:
-              href: href
-            self:
-              href: href
           configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name
           description: description
@@ -10106,44 +9183,14 @@ components:
           $ref: '#/components/schemas/FeatureFlagLimitations'
         readOnly:
           type: boolean
-        _links:
-          $ref: '#/components/schemas/ConfigSettingFormulasModel__links'
       type: object
     TagModel:
       additionalProperties: false
       example:
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          _links:
-            configs:
-              href: href
-            preferences:
-              href: href
-            environments:
-              href: href
-            invitations:
-              href: href
-            webhooks:
-              href: href
-            members:
-              href: href
-            self:
-              href: href
-            permission-groups:
-              href: href
-            tags:
-              href: href
-            segments:
-              href: href
           organization:
             organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            _links:
-              invitations:
-                href: href
-              members:
-                href: href
-              products:
-                href: href
             name: name
           name: name
           description: description
@@ -10151,11 +9198,6 @@ components:
           reasonRequired: true
         color: color
         tagId: 0
-        _links:
-          settings:
-            href: href
-          self:
-            href: href
         name: name
       properties:
         product:
@@ -10172,8 +9214,6 @@ components:
           description: The configured color of the Tag.
           nullable: true
           type: string
-        _links:
-          $ref: '#/components/schemas/ConfigModel__links'
       type: object
     TargetingRuleModel:
       additionalProperties: false
@@ -11550,141 +10590,6 @@ components:
           description: The second signing key.
           nullable: true
           type: string
-      type: object
-    ConfigModel__links_self:
-      example:
-        href: href
-      properties:
-        href:
-          type: string
-      type: object
-    ConfigModel__links:
-      description: Links to additional related resources.
-      example:
-        settings:
-          href: href
-        self:
-          href: href
-      properties:
-        self:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-        settings:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-      type: object
-    ConfigSettingFormulasModel__links:
-      description: Links to additional related resources.
-      example:
-        self:
-          href: href
-      properties:
-        self:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-      type: object
-    InvitationModel__links:
-      description: Links to additional related resources.
-      example:
-        permissionGroup:
-          href: href
-      properties:
-        permissionGroup:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-      type: object
-    OrganizationInvitationModel__links:
-      description: Links to additional related resources.
-      example:
-        product:
-          href: href
-        permissionGroup:
-          href: href
-      properties:
-        product:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-        permissionGroup:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-      type: object
-    OrganizationModel__links:
-      description: Links to additional related resources.
-      example:
-        invitations:
-          href: href
-        members:
-          href: href
-        products:
-          href: href
-      properties:
-        products:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-        invitations:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-        members:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-      type: object
-    ProductModel__links:
-      description: Links to additional related resources.
-      example:
-        configs:
-          href: href
-        preferences:
-          href: href
-        environments:
-          href: href
-        invitations:
-          href: href
-        webhooks:
-          href: href
-        members:
-          href: href
-        self:
-          href: href
-        permission-groups:
-          href: href
-        tags:
-          href: href
-        segments:
-          href: href
-      properties:
-        self:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-        configs:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-        environments:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-        tags:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-        permission-groups:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-        members:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-        invitations:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-        segments:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-        preferences:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-        webhooks:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-      type: object
-    ReasonRequiredEnvironmentModel__links:
-      description: Links to additional related resources.
-      example:
-        environment:
-          href: href
-      properties:
-        environment:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-      type: object
-    SettingModel__links:
-      description: Links to additional related resources.
-      example:
-        self:
-          href: href
-        config:
-          href: href
-      properties:
-        self:
-          $ref: '#/components/schemas/ConfigModel__links_self'
-        config:
-          $ref: '#/components/schemas/ConfigModel__links_self'
       type: object
   securitySchemes:
     Basic:

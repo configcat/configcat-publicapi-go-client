@@ -31,7 +31,6 @@ type ProductModel struct {
 	Order *int32 `json:"order,omitempty"`
 	// Determines whether a mandatory reason must be given every time when the Feature Flags or Settings within a Product are saved.
 	ReasonRequired *bool `json:"reasonRequired,omitempty"`
-	Links *ProductModelLinks `json:"_links,omitempty"`
 }
 
 // NewProductModel instantiates a new ProductModel object
@@ -263,38 +262,6 @@ func (o *ProductModel) SetReasonRequired(v bool) {
 	o.ReasonRequired = &v
 }
 
-// GetLinks returns the Links field value if set, zero value otherwise.
-func (o *ProductModel) GetLinks() ProductModelLinks {
-	if o == nil || IsNil(o.Links) {
-		var ret ProductModelLinks
-		return ret
-	}
-	return *o.Links
-}
-
-// GetLinksOk returns a tuple with the Links field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProductModel) GetLinksOk() (*ProductModelLinks, bool) {
-	if o == nil || IsNil(o.Links) {
-		return nil, false
-	}
-	return o.Links, true
-}
-
-// HasLinks returns a boolean if a field has been set.
-func (o *ProductModel) HasLinks() bool {
-	if o != nil && !IsNil(o.Links) {
-		return true
-	}
-
-	return false
-}
-
-// SetLinks gets a reference to the given ProductModelLinks and assigns it to the Links field.
-func (o *ProductModel) SetLinks(v ProductModelLinks) {
-	o.Links = &v
-}
-
 func (o ProductModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -322,9 +289,6 @@ func (o ProductModel) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ReasonRequired) {
 		toSerialize["reasonRequired"] = o.ReasonRequired
-	}
-	if !IsNil(o.Links) {
-		toSerialize["_links"] = o.Links
 	}
 	return toSerialize, nil
 }

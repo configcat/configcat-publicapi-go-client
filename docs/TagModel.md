@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **TagId** | Pointer to **int64** | Identifier of the Tag. | [optional] 
 **Name** | Pointer to **NullableString** | Name of the Tag. | [optional] 
 **Color** | Pointer to **NullableString** | The configured color of the Tag. | [optional] 
-**Links** | Pointer to [**ConfigModelLinks**](ConfigModelLinks.md) |  | [optional] 
 
 ## Methods
 
@@ -149,31 +148,6 @@ HasColor returns a boolean if a field has been set.
 `func (o *TagModel) UnsetColor()`
 
 UnsetColor ensures that no value is present for Color, not even an explicit nil
-### GetLinks
-
-`func (o *TagModel) GetLinks() ConfigModelLinks`
-
-GetLinks returns the Links field if non-nil, zero value otherwise.
-
-### GetLinksOk
-
-`func (o *TagModel) GetLinksOk() (*ConfigModelLinks, bool)`
-
-GetLinksOk returns a tuple with the Links field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLinks
-
-`func (o *TagModel) SetLinks(v ConfigModelLinks)`
-
-SetLinks sets Links field to given value.
-
-### HasLinks
-
-`func (o *TagModel) HasLinks() bool`
-
-HasLinks returns a boolean if a field has been set.
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

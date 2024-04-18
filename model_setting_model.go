@@ -37,7 +37,6 @@ type SettingModel struct {
 	ConfigName NullableString `json:"configName,omitempty"`
 	// The tags attached to the Feature Flag or Setting.
 	Tags []TagModel `json:"tags,omitempty"`
-	Links *SettingModelLinks `json:"_links,omitempty"`
 }
 
 // NewSettingModel instantiates a new SettingModel object
@@ -386,38 +385,6 @@ func (o *SettingModel) SetTags(v []TagModel) {
 	o.Tags = v
 }
 
-// GetLinks returns the Links field value if set, zero value otherwise.
-func (o *SettingModel) GetLinks() SettingModelLinks {
-	if o == nil || IsNil(o.Links) {
-		var ret SettingModelLinks
-		return ret
-	}
-	return *o.Links
-}
-
-// GetLinksOk returns a tuple with the Links field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SettingModel) GetLinksOk() (*SettingModelLinks, bool) {
-	if o == nil || IsNil(o.Links) {
-		return nil, false
-	}
-	return o.Links, true
-}
-
-// HasLinks returns a boolean if a field has been set.
-func (o *SettingModel) HasLinks() bool {
-	if o != nil && !IsNil(o.Links) {
-		return true
-	}
-
-	return false
-}
-
-// SetLinks gets a reference to the given SettingModelLinks and assigns it to the Links field.
-func (o *SettingModel) SetLinks(v SettingModelLinks) {
-	o.Links = &v
-}
-
 func (o SettingModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -454,9 +421,6 @@ func (o SettingModel) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags
-	}
-	if !IsNil(o.Links) {
-		toSerialize["_links"] = o.Links
 	}
 	return toSerialize, nil
 }

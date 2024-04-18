@@ -42,7 +42,6 @@ type SettingValueModel struct {
 	Environment *EnvironmentModel `json:"environment,omitempty"`
 	FeatureFlagLimitations *FeatureFlagLimitations `json:"featureFlagLimitations,omitempty"`
 	ReadOnly *bool `json:"readOnly,omitempty"`
-	Links *ConfigSettingFormulasModelLinks `json:"_links,omitempty"`
 }
 
 // NewSettingValueModel instantiates a new SettingValueModel object
@@ -513,38 +512,6 @@ func (o *SettingValueModel) SetReadOnly(v bool) {
 	o.ReadOnly = &v
 }
 
-// GetLinks returns the Links field value if set, zero value otherwise.
-func (o *SettingValueModel) GetLinks() ConfigSettingFormulasModelLinks {
-	if o == nil || IsNil(o.Links) {
-		var ret ConfigSettingFormulasModelLinks
-		return ret
-	}
-	return *o.Links
-}
-
-// GetLinksOk returns a tuple with the Links field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *SettingValueModel) GetLinksOk() (*ConfigSettingFormulasModelLinks, bool) {
-	if o == nil || IsNil(o.Links) {
-		return nil, false
-	}
-	return o.Links, true
-}
-
-// HasLinks returns a boolean if a field has been set.
-func (o *SettingValueModel) HasLinks() bool {
-	if o != nil && !IsNil(o.Links) {
-		return true
-	}
-
-	return false
-}
-
-// SetLinks gets a reference to the given ConfigSettingFormulasModelLinks and assigns it to the Links field.
-func (o *SettingValueModel) SetLinks(v ConfigSettingFormulasModelLinks) {
-	o.Links = &v
-}
-
 func (o SettingValueModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -593,9 +560,6 @@ func (o SettingValueModel) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ReadOnly) {
 		toSerialize["readOnly"] = o.ReadOnly
-	}
-	if !IsNil(o.Links) {
-		toSerialize["_links"] = o.Links
 	}
 	return toSerialize, nil
 }

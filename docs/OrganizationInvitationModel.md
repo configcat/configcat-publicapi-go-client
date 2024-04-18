@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 **CreatedAt** | Pointer to **time.Time** | Creation time of the Invitation. | [optional] 
 **Expired** | Pointer to **bool** | Determines whether the Invitation is expired. | [optional] 
 **Expires** | Pointer to **time.Time** | Expiration time of the Invitation. | [optional] 
-**Links** | Pointer to [**OrganizationInvitationModelLinks**](OrganizationInvitationModelLinks.md) |  | [optional] 
 
 ## Methods
 
@@ -252,31 +251,6 @@ SetExpires sets Expires field to given value.
 `func (o *OrganizationInvitationModel) HasExpires() bool`
 
 HasExpires returns a boolean if a field has been set.
-
-### GetLinks
-
-`func (o *OrganizationInvitationModel) GetLinks() OrganizationInvitationModelLinks`
-
-GetLinks returns the Links field if non-nil, zero value otherwise.
-
-### GetLinksOk
-
-`func (o *OrganizationInvitationModel) GetLinksOk() (*OrganizationInvitationModelLinks, bool)`
-
-GetLinksOk returns a tuple with the Links field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLinks
-
-`func (o *OrganizationInvitationModel) SetLinks(v OrganizationInvitationModelLinks)`
-
-SetLinks sets Links field to given value.
-
-### HasLinks
-
-`func (o *OrganizationInvitationModel) HasLinks() bool`
-
-HasLinks returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

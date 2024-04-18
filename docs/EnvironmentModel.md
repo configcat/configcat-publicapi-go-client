@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **Description** | Pointer to **NullableString** | Description of the Environment. | [optional] 
 **Order** | Pointer to **int32** | The order of the Environment represented on the ConfigCat Dashboard. | [optional] 
 **ReasonRequired** | Pointer to **bool** | Determines whether a mandatory reason must be given every time when the Feature Flags or Settings in the given Environment are saved. | [optional] 
-**Links** | Pointer to [**ConfigSettingFormulasModelLinks**](ConfigSettingFormulasModelLinks.md) |  | [optional] 
 
 ## Methods
 
@@ -236,31 +235,6 @@ SetReasonRequired sets ReasonRequired field to given value.
 `func (o *EnvironmentModel) HasReasonRequired() bool`
 
 HasReasonRequired returns a boolean if a field has been set.
-
-### GetLinks
-
-`func (o *EnvironmentModel) GetLinks() ConfigSettingFormulasModelLinks`
-
-GetLinks returns the Links field if non-nil, zero value otherwise.
-
-### GetLinksOk
-
-`func (o *EnvironmentModel) GetLinksOk() (*ConfigSettingFormulasModelLinks, bool)`
-
-GetLinksOk returns a tuple with the Links field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLinks
-
-`func (o *EnvironmentModel) SetLinks(v ConfigSettingFormulasModelLinks)`
-
-SetLinks sets Links field to given value.
-
-### HasLinks
-
-`func (o *EnvironmentModel) HasLinks() bool`
-
-HasLinks returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
