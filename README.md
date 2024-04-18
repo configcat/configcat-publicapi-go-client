@@ -1,14 +1,14 @@
 # Go API client for configcatpublicapi
 
+The purpose of this API is to access the ConfigCat platform programmatically.
+You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.
+
 **Base API URL**: https://test-api.configcat.com
 
 If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).
 
-The purpose of this API is to access the ConfigCat platform programmatically. 
-You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat. 
-
 The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON 
-and JSON+HAL format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).
+format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).
 
 
 # OpenAPI Specification
@@ -154,13 +154,16 @@ Class | Method | HTTP request | Description
 *IntegrationLinksApi* | [**DeleteIntegrationLink**](docs/IntegrationLinksApi.md#deleteintegrationlink) | **Delete** /v1/environments/{environmentId}/settings/{settingId}/integrationLinks/{integrationLinkType}/{key} | Delete Integration link
 *IntegrationLinksApi* | [**GetIntegrationLinkDetails**](docs/IntegrationLinksApi.md#getintegrationlinkdetails) | **Get** /v1/integrationLink/{integrationLinkType}/{key}/details | Get Integration link
 *IntegrationLinksApi* | [**JiraAddOrUpdateIntegrationLink**](docs/IntegrationLinksApi.md#jiraaddorupdateintegrationlink) | **Post** /v1/jira/environments/{environmentId}/settings/{settingId}/integrationLinks/{key} | 
-*IntegrationLinksApi* | [**V1JiraConnectPost**](docs/IntegrationLinksApi.md#v1jiraconnectpost) | **Post** /v1/jira/Connect | 
+*IntegrationLinksApi* | [**JiraConnect**](docs/IntegrationLinksApi.md#jiraconnect) | **Post** /v1/jira/connect | 
 *MeApi* | [**GetMe**](docs/MeApi.md#getme) | **Get** /v1/me | Get authenticated user details
 *MembersApi* | [**AddMemberToGroup**](docs/MembersApi.md#addmembertogroup) | **Post** /v1/organizations/{organizationId}/members/{userId} | Update Member Permissions
+*MembersApi* | [**DeleteInvitation**](docs/MembersApi.md#deleteinvitation) | **Delete** /v1/invitations/{invitationId} | Delete Invitation
 *MembersApi* | [**DeleteOrganizationMember**](docs/MembersApi.md#deleteorganizationmember) | **Delete** /v1/organizations/{organizationId}/members/{userId} | Delete Member from Organization
 *MembersApi* | [**DeleteProductMember**](docs/MembersApi.md#deleteproductmember) | **Delete** /v1/products/{productId}/members/{userId} | Delete Member from Product
 *MembersApi* | [**GetOrganizationMembers**](docs/MembersApi.md#getorganizationmembers) | **Get** /v1/organizations/{organizationId}/members | List Organization Members
 *MembersApi* | [**GetOrganizationMembersV2**](docs/MembersApi.md#getorganizationmembersv2) | **Get** /v2/organizations/{organizationId}/members | List Organization Members
+*MembersApi* | [**GetPendingInvitations**](docs/MembersApi.md#getpendinginvitations) | **Get** /v1/products/{productId}/invitations | List Pending Invitations in Product
+*MembersApi* | [**GetPendingInvitationsOrg**](docs/MembersApi.md#getpendinginvitationsorg) | **Get** /v1/organizations/{organizationId}/invitations | List Pending Invitations in Organization
 *MembersApi* | [**GetProductMembers**](docs/MembersApi.md#getproductmembers) | **Get** /v1/products/{productId}/members | List Product Members
 *MembersApi* | [**InviteMember**](docs/MembersApi.md#invitemember) | **Post** /v1/products/{productId}/members/invite | Invite Member
 *OrganizationsApi* | [**GetOrganizations**](docs/OrganizationsApi.md#getorganizations) | **Get** /v1/organizations | List Organizations
@@ -172,8 +175,10 @@ Class | Method | HTTP request | Description
 *ProductsApi* | [**CreateProduct**](docs/ProductsApi.md#createproduct) | **Post** /v1/organizations/{organizationId}/products | Create Product
 *ProductsApi* | [**DeleteProduct**](docs/ProductsApi.md#deleteproduct) | **Delete** /v1/products/{productId} | Delete Product
 *ProductsApi* | [**GetProduct**](docs/ProductsApi.md#getproduct) | **Get** /v1/products/{productId} | Get Product
+*ProductsApi* | [**GetProductPreferences**](docs/ProductsApi.md#getproductpreferences) | **Get** /v1/products/{productId}/preferences | Get Product Preferences
 *ProductsApi* | [**GetProducts**](docs/ProductsApi.md#getproducts) | **Get** /v1/products | List Products
 *ProductsApi* | [**UpdateProduct**](docs/ProductsApi.md#updateproduct) | **Put** /v1/products/{productId} | Update Product
+*ProductsApi* | [**UpdateProductPreferences**](docs/ProductsApi.md#updateproductpreferences) | **Post** /v1/products/{productId}/preferences | Update Product Preferences
 *SDKKeysApi* | [**GetSdkKeys**](docs/SDKKeysApi.md#getsdkkeys) | **Get** /v1/configs/{configId}/environments/{environmentId} | Get SDK Key
 *SegmentsApi* | [**CreateSegment**](docs/SegmentsApi.md#createsegment) | **Post** /v1/products/{productId}/segments | Create Segment
 *SegmentsApi* | [**DeleteSegment**](docs/SegmentsApi.md#deletesegment) | **Delete** /v1/segments/{segmentId} | Delete Segment
@@ -186,6 +191,12 @@ Class | Method | HTTP request | Description
 *TagsApi* | [**GetTag**](docs/TagsApi.md#gettag) | **Get** /v1/tags/{tagId} | Get Tag
 *TagsApi* | [**GetTags**](docs/TagsApi.md#gettags) | **Get** /v1/products/{productId}/tags | List Tags
 *TagsApi* | [**UpdateTag**](docs/TagsApi.md#updatetag) | **Put** /v1/tags/{tagId} | Update Tag
+*WebhooksApi* | [**CreateWebhook**](docs/WebhooksApi.md#createwebhook) | **Post** /v1/configs/{configId}/environments/{environmentId}/webhooks | Create Webhook
+*WebhooksApi* | [**DeleteWebhook**](docs/WebhooksApi.md#deletewebhook) | **Delete** /v1/webhooks/{webhookId} | Delete Webhook
+*WebhooksApi* | [**GetWebhook**](docs/WebhooksApi.md#getwebhook) | **Get** /v1/webhooks/{webhookId} | Get Webhook
+*WebhooksApi* | [**GetWebhookSigningKeys**](docs/WebhooksApi.md#getwebhooksigningkeys) | **Get** /v1/webhooks/{webhookId}/keys | Get Webhook Signing Keys
+*WebhooksApi* | [**GetWebhooks**](docs/WebhooksApi.md#getwebhooks) | **Get** /v1/products/{productId}/webhooks | List Webhooks
+*WebhooksApi* | [**UpdateWebhook**](docs/WebhooksApi.md#updatewebhook) | **Patch** /v1/webhooks/{webhookId} | Update Webhook
 
 
 ## Documentation For Models
@@ -193,7 +204,6 @@ Class | Method | HTTP request | Description
  - [AccessType](docs/AccessType.md)
  - [AddOrUpdateIntegrationLinkModel](docs/AddOrUpdateIntegrationLinkModel.md)
  - [AddOrUpdateJiraIntegrationLinkModel](docs/AddOrUpdateJiraIntegrationLinkModel.md)
- - [AddUserToGroupRequest](docs/AddUserToGroupRequest.md)
  - [AuditLogItemModel](docs/AuditLogItemModel.md)
  - [AuditLogType](docs/AuditLogType.md)
  - [CodeReferenceModel](docs/CodeReferenceModel.md)
@@ -203,24 +213,10 @@ Class | Method | HTTP request | Description
  - [ComparisonValueModel](docs/ComparisonValueModel.md)
  - [ConditionModel](docs/ConditionModel.md)
  - [ConfigModel](docs/ConfigModel.md)
- - [ConfigModelHaljson](docs/ConfigModelHaljson.md)
- - [ConfigModelHaljsonEmbedded](docs/ConfigModelHaljsonEmbedded.md)
- - [ConfigModelHaljsonEmbeddedProduct](docs/ConfigModelHaljsonEmbeddedProduct.md)
- - [ConfigModelHaljsonEmbeddedProductEmbedded](docs/ConfigModelHaljsonEmbeddedProductEmbedded.md)
- - [ConfigModelHaljsonEmbeddedProductEmbeddedOrganization](docs/ConfigModelHaljsonEmbeddedProductEmbeddedOrganization.md)
- - [ConfigModelHaljsonEmbeddedProductEmbeddedOrganizationLinks](docs/ConfigModelHaljsonEmbeddedProductEmbeddedOrganizationLinks.md)
- - [ConfigModelHaljsonEmbeddedProductLinks](docs/ConfigModelHaljsonEmbeddedProductLinks.md)
- - [ConfigModelHaljsonLinks](docs/ConfigModelHaljsonLinks.md)
  - [ConfigSettingFormulaModel](docs/ConfigSettingFormulaModel.md)
  - [ConfigSettingFormulasModel](docs/ConfigSettingFormulasModel.md)
- - [ConfigSettingFormulasModelHaljson](docs/ConfigSettingFormulasModelHaljson.md)
- - [ConfigSettingFormulasModelHaljsonEmbedded](docs/ConfigSettingFormulasModelHaljsonEmbedded.md)
- - [ConfigSettingFormulasModelHaljsonEmbeddedConfig](docs/ConfigSettingFormulasModelHaljsonEmbeddedConfig.md)
- - [ConfigSettingFormulasModelHaljsonEmbeddedEnvironment](docs/ConfigSettingFormulasModelHaljsonEmbeddedEnvironment.md)
- - [ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks](docs/ConfigSettingFormulasModelHaljsonEmbeddedEnvironmentLinks.md)
  - [ConfigSettingValueModel](docs/ConfigSettingValueModel.md)
  - [ConfigSettingValuesModel](docs/ConfigSettingValuesModel.md)
- - [ConfigSettingValuesModelHaljson](docs/ConfigSettingValuesModelHaljson.md)
  - [ConnectRequest](docs/ConnectRequest.md)
  - [CreateConfigRequest](docs/CreateConfigRequest.md)
  - [CreateEnvironmentModel](docs/CreateEnvironmentModel.md)
@@ -230,12 +226,12 @@ Class | Method | HTTP request | Description
  - [CreateSegmentModel](docs/CreateSegmentModel.md)
  - [CreateSettingInitialValues](docs/CreateSettingInitialValues.md)
  - [CreateTagModel](docs/CreateTagModel.md)
+ - [CreateWebHookRequest](docs/CreateWebHookRequest.md)
  - [DeleteIntegrationLinkModel](docs/DeleteIntegrationLinkModel.md)
  - [DeleteRepositoryReportsRequest](docs/DeleteRepositoryReportsRequest.md)
  - [EnvironmentAccessModel](docs/EnvironmentAccessModel.md)
  - [EnvironmentAccessType](docs/EnvironmentAccessType.md)
  - [EnvironmentModel](docs/EnvironmentModel.md)
- - [EnvironmentModelHaljson](docs/EnvironmentModelHaljson.md)
  - [EvaluationVersion](docs/EvaluationVersion.md)
  - [FeatureFlagLimitations](docs/FeatureFlagLimitations.md)
  - [FlagReference](docs/FlagReference.md)
@@ -244,26 +240,28 @@ Class | Method | HTTP request | Description
  - [IntegrationLinkDetailsModel](docs/IntegrationLinkDetailsModel.md)
  - [IntegrationLinkModel](docs/IntegrationLinkModel.md)
  - [IntegrationLinkType](docs/IntegrationLinkType.md)
+ - [InvitationModel](docs/InvitationModel.md)
  - [InviteMembersRequest](docs/InviteMembersRequest.md)
  - [JsonPatchOperation](docs/JsonPatchOperation.md)
+ - [KeyGenerationMode](docs/KeyGenerationMode.md)
  - [MeModel](docs/MeModel.md)
  - [MemberModel](docs/MemberModel.md)
  - [OperationType](docs/OperationType.md)
  - [OrganizationAdminModel](docs/OrganizationAdminModel.md)
+ - [OrganizationInvitationModel](docs/OrganizationInvitationModel.md)
  - [OrganizationMemberModel](docs/OrganizationMemberModel.md)
  - [OrganizationMembersModel](docs/OrganizationMembersModel.md)
  - [OrganizationModel](docs/OrganizationModel.md)
- - [OrganizationModelHaljson](docs/OrganizationModelHaljson.md)
  - [OrganizationPermissionGroupModel](docs/OrganizationPermissionGroupModel.md)
  - [OrganizationPermissionModel](docs/OrganizationPermissionModel.md)
  - [OrganizationProductModel](docs/OrganizationProductModel.md)
  - [PercentageOptionModel](docs/PercentageOptionModel.md)
  - [PermissionGroupModel](docs/PermissionGroupModel.md)
- - [PermissionGroupModelHaljson](docs/PermissionGroupModelHaljson.md)
+ - [PreferencesModel](docs/PreferencesModel.md)
  - [PrerequisiteComparator](docs/PrerequisiteComparator.md)
  - [PrerequisiteFlagConditionModel](docs/PrerequisiteFlagConditionModel.md)
  - [ProductModel](docs/ProductModel.md)
- - [ProductModelHaljson](docs/ProductModelHaljson.md)
+ - [ReasonRequiredEnvironmentModel](docs/ReasonRequiredEnvironmentModel.md)
  - [ReferenceLine](docs/ReferenceLine.md)
  - [ReferenceLines](docs/ReferenceLines.md)
  - [RolloutPercentageItemModel](docs/RolloutPercentageItemModel.md)
@@ -273,34 +271,25 @@ Class | Method | HTTP request | Description
  - [SegmentComparator](docs/SegmentComparator.md)
  - [SegmentConditionModel](docs/SegmentConditionModel.md)
  - [SegmentListModel](docs/SegmentListModel.md)
- - [SegmentListModelHaljson](docs/SegmentListModelHaljson.md)
  - [SegmentModel](docs/SegmentModel.md)
- - [SegmentModelHaljson](docs/SegmentModelHaljson.md)
  - [SettingDataModel](docs/SettingDataModel.md)
  - [SettingFormulaModel](docs/SettingFormulaModel.md)
- - [SettingFormulaModelHaljson](docs/SettingFormulaModelHaljson.md)
- - [SettingFormulaModelHaljsonEmbedded](docs/SettingFormulaModelHaljsonEmbedded.md)
- - [SettingFormulaModelHaljsonEmbeddedIntegrationLinksInner](docs/SettingFormulaModelHaljsonEmbeddedIntegrationLinksInner.md)
- - [SettingFormulaModelHaljsonEmbeddedSetting](docs/SettingFormulaModelHaljsonEmbeddedSetting.md)
- - [SettingFormulaModelHaljsonEmbeddedSettingTagsInner](docs/SettingFormulaModelHaljsonEmbeddedSettingTagsInner.md)
  - [SettingModel](docs/SettingModel.md)
- - [SettingModelHaljson](docs/SettingModelHaljson.md)
- - [SettingModelHaljsonEmbedded](docs/SettingModelHaljsonEmbedded.md)
- - [SettingModelHaljsonEmbeddedTagsInner](docs/SettingModelHaljsonEmbeddedTagsInner.md)
  - [SettingTagModel](docs/SettingTagModel.md)
  - [SettingType](docs/SettingType.md)
  - [SettingValueModel](docs/SettingValueModel.md)
- - [SettingValueModelHaljson](docs/SettingValueModelHaljson.md)
  - [TagModel](docs/TagModel.md)
- - [TagModelHaljson](docs/TagModelHaljson.md)
  - [TargetingRuleModel](docs/TargetingRuleModel.md)
  - [UpdateConfigRequest](docs/UpdateConfigRequest.md)
  - [UpdateEnvironmentModel](docs/UpdateEnvironmentModel.md)
  - [UpdateEvaluationFormulaModel](docs/UpdateEvaluationFormulaModel.md)
  - [UpdateEvaluationFormulaWithIdModel](docs/UpdateEvaluationFormulaWithIdModel.md)
  - [UpdateEvaluationFormulasModel](docs/UpdateEvaluationFormulasModel.md)
+ - [UpdateMemberPermissionsRequest](docs/UpdateMemberPermissionsRequest.md)
  - [UpdatePermissionGroupRequest](docs/UpdatePermissionGroupRequest.md)
+ - [UpdatePreferencesRequest](docs/UpdatePreferencesRequest.md)
  - [UpdateProductRequest](docs/UpdateProductRequest.md)
+ - [UpdateReasonRequiredEnvironmentModel](docs/UpdateReasonRequiredEnvironmentModel.md)
  - [UpdateSegmentModel](docs/UpdateSegmentModel.md)
  - [UpdateSettingValueModel](docs/UpdateSettingValueModel.md)
  - [UpdateSettingValueWithSettingIdModel](docs/UpdateSettingValueWithSettingIdModel.md)
@@ -310,6 +299,10 @@ Class | Method | HTTP request | Description
  - [UserConditionModel](docs/UserConditionModel.md)
  - [UserModel](docs/UserModel.md)
  - [ValueModel](docs/ValueModel.md)
+ - [WebHookHttpMethod](docs/WebHookHttpMethod.md)
+ - [WebhookHeaderModel](docs/WebhookHeaderModel.md)
+ - [WebhookModel](docs/WebhookModel.md)
+ - [WebhookSigningKeysModel](docs/WebhookSigningKeysModel.md)
 
 
 ## Documentation For Authorization
