@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Admins** | Pointer to [**[]OrganizationAdminModel**](OrganizationAdminModel.md) | List of Organization Admins. | [optional] 
+**BillingManagers** | Pointer to [**[]OrganizationAdminModel**](OrganizationAdminModel.md) | List of Billing Managers. | [optional] 
 **Members** | Pointer to [**[]OrganizationMemberModel**](OrganizationMemberModel.md) | List of Organization Members. | [optional] 
 
 ## Methods
@@ -61,6 +62,41 @@ HasAdmins returns a boolean if a field has been set.
 `func (o *OrganizationMembersModel) UnsetAdmins()`
 
 UnsetAdmins ensures that no value is present for Admins, not even an explicit nil
+### GetBillingManagers
+
+`func (o *OrganizationMembersModel) GetBillingManagers() []OrganizationAdminModel`
+
+GetBillingManagers returns the BillingManagers field if non-nil, zero value otherwise.
+
+### GetBillingManagersOk
+
+`func (o *OrganizationMembersModel) GetBillingManagersOk() (*[]OrganizationAdminModel, bool)`
+
+GetBillingManagersOk returns a tuple with the BillingManagers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBillingManagers
+
+`func (o *OrganizationMembersModel) SetBillingManagers(v []OrganizationAdminModel)`
+
+SetBillingManagers sets BillingManagers field to given value.
+
+### HasBillingManagers
+
+`func (o *OrganizationMembersModel) HasBillingManagers() bool`
+
+HasBillingManagers returns a boolean if a field has been set.
+
+### SetBillingManagersNil
+
+`func (o *OrganizationMembersModel) SetBillingManagersNil(b bool)`
+
+ SetBillingManagersNil sets the value for BillingManagers to be an explicit nil
+
+### UnsetBillingManagers
+`func (o *OrganizationMembersModel) UnsetBillingManagers()`
+
+UnsetBillingManagers ensures that no value is present for BillingManagers, not even an explicit nil
 ### GetMembers
 
 `func (o *OrganizationMembersModel) GetMembers() []OrganizationMemberModel`

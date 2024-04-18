@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**DeleteIntegrationLink**](IntegrationLinksApi.md#DeleteIntegrationLink) | **Delete** /v1/environments/{environmentId}/settings/{settingId}/integrationLinks/{integrationLinkType}/{key} | Delete Integration link
 [**GetIntegrationLinkDetails**](IntegrationLinksApi.md#GetIntegrationLinkDetails) | **Get** /v1/integrationLink/{integrationLinkType}/{key}/details | Get Integration link
 [**JiraAddOrUpdateIntegrationLink**](IntegrationLinksApi.md#JiraAddOrUpdateIntegrationLink) | **Post** /v1/jira/environments/{environmentId}/settings/{settingId}/integrationLinks/{key} | 
-[**V1JiraConnectPost**](IntegrationLinksApi.md#V1JiraConnectPost) | **Post** /v1/jira/Connect | 
+[**JiraConnect**](IntegrationLinksApi.md#JiraConnect) | **Post** /v1/jira/connect | 
 
 
 
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json, text/json, application/*+json
-- **Accept**: application/json, application/hal+json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -165,7 +165,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/hal+json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -238,7 +238,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/hal+json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -314,16 +314,16 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json, text/json, application/*+json
-- **Accept**: application/json, application/hal+json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## V1JiraConnectPost
+## JiraConnect
 
-> V1JiraConnectPost(ctx).ConnectRequest(connectRequest).Execute()
+> JiraConnect(ctx).ConnectRequest(connectRequest).Execute()
 
 
 
@@ -344,9 +344,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.IntegrationLinksApi.V1JiraConnectPost(context.Background()).ConnectRequest(connectRequest).Execute()
+    r, err := apiClient.IntegrationLinksApi.JiraConnect(context.Background()).ConnectRequest(connectRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IntegrationLinksApi.V1JiraConnectPost``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `IntegrationLinksApi.JiraConnect``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -358,7 +358,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiV1JiraConnectPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiJiraConnectRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

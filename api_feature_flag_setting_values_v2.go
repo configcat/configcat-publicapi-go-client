@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-**Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The purpose of this API is to access the ConfigCat platform programmatically.  You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.   The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  and JSON+HAL format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).   # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).   # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -48,9 +48,9 @@ are not matching to any of the defined Targeting Rules, or when there are no add
 The `targetingRules` represents the current
 Targeting Rule configuration of the actual Feature Flag or Setting
 in an **ordered** collection, which means the order of the returned rules is matching to the
-evaluation order. You can read more about these rules [here](https://configcat.com/docs/advanced/targeting/).
+evaluation order. You can read more about these rules [here](https://configcat.com/docs/targeting/targeting-overview/).
 
-The `percentageEvaluationAttribute` represents the custom [User Object](https://configcat.com/docs/advanced/user-object/) attribute that must be used for [percentage evaluation](https://configcat.com/docs/advanced/targeting/#anatomy-of-the-percentage-based-targeting) of the Feature Flag or Setting.
+The `percentageEvaluationAttribute` represents the custom [User Object](https://configcat.com/docs/targeting/user-object/) attribute that must be used for [percentage evaluation](https://configcat.com/docs/targeting/percentage-options/) of the Feature Flag or Setting.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param environmentId The identifier of the Environment.
@@ -99,7 +99,7 @@ func (a *FeatureFlagSettingValuesV2ApiService) GetSettingValueV2Execute(r Featur
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "application/hal+json"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -167,9 +167,9 @@ are not matching to any of the defined Targeting Rules, or when there are no add
 The `targetingRules` represents the current
 Targeting Rule configuration of the actual Feature Flag or Setting
 in an **ordered** collection, which means the order of the returned rules is matching to the
-evaluation order. You can read more about these rules [here](https://configcat.com/docs/advanced/targeting/).
+evaluation order. You can read more about these rules [here](https://configcat.com/docs/targeting/targeting-overview/).
 
-The `percentageEvaluationAttribute` represents the custom [User Object](https://configcat.com/docs/advanced/user-object/) attribute that must be used for [percentage evaluation](https://configcat.com/docs/advanced/targeting/#anatomy-of-the-percentage-based-targeting) of the Feature Flag or Setting.
+The `percentageEvaluationAttribute` represents the custom [User Object](https://configcat.com/docs/targeting/user-object/) attribute that must be used for [percentage evaluation](https://configcat.com/docs/targeting/percentage-options/) of the Feature Flag or Setting.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param configId The identifier of the Config.
@@ -218,7 +218,7 @@ func (a *FeatureFlagSettingValuesV2ApiService) GetSettingValuesV2Execute(r Featu
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "application/hal+json"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -298,66 +298,66 @@ Only those Feature Flags and Settings are updated which are part of the request,
 It's important to set every other field that you don't want to change in its original state. Not listing a field means that it will reset.
 
 For example: We have the following resource of a Feature Flag.
-```
+```json
 {
-    "settingValues": [
-		{
-			"defaultValue": {
-                "boolValue": false,
-            },
-            "targetingRules": [
-                {
-                    "conditions": [
-                        {
-                            "userCondition": {
-                                "comparisonAttribute": "Email",
-                                "comparator": "sensitiveTextEquals",
-                                "comparisonValue": {
-                                    "stringValue": "test@example.com",
-                                }
-                            },
-                        }
-                    ],
-                    "percentageOptions": [],
-                    "value": {
-                        "boolValue": true,
-                    }
+  "settingValues": [
+    {
+      "defaultValue": {
+        "boolValue": false
+      },
+      "targetingRules": [
+        {
+          "conditions": [
+            {
+              "userCondition": {
+                "comparisonAttribute": "Email",
+                "comparator": "sensitiveTextEquals",
+                "comparisonValue": {
+                  "stringValue": "test@example.com"
                 }
-            ],
-			"settingId": 1
-		}
-	]
+              }
+            }
+          ],
+          "percentageOptions": [],
+          "value": {
+            "boolValue": true
+          }
+        }
+      ],
+      "settingId": 1
+    }
+  ]
 }
 ```
 If we send a batch replace request body as below:
-```
+```json
 { 
-	"settingValues": [
-		{
-			"defaultValue": {
-                "boolValue": false,
-            },
-			"settingId": 1
-		}
-	]
+  "settingValues": [
+    {
+      "defaultValue": {
+        "boolValue": false
+      },
+      "settingId": 1
+    }
+  ]
 }
 ```
 Then besides that the default value is set to `true`, all Targeting Rules of the related Feature Flag are deleted.
 So we get a response like this:
-```
+```json
 {
-	"settingValues": [
-		{
-			"defaultValue": {
-                "boolValue": false,
-            },
-            "targetingRules": [],
-			"setting": 
-			{
-				"settingId": 1
-			}
-		}
-	]
+  "settingValues": [
+    {
+      "defaultValue": {
+        "boolValue": false
+      },
+      "targetingRules": [],
+      "setting": 
+      {
+        "settingId": 1
+      }
+    }
+  ]
 }
 ```
 
@@ -414,7 +414,7 @@ func (a *FeatureFlagSettingValuesV2ApiService) PostSettingValuesV2Execute(r Feat
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "application/hal+json"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -496,48 +496,48 @@ Only the `defaultValue`, `targetingRules`, and `percentageEvaluationAttribute` f
 want to change to its original state. Not listing one means that it will reset.
 
 For example: We have the following resource of a Feature Flag.
-```
+```json
 {
-	"defaultValue": {
-        "boolValue": false,
-    },
-	"targetingRules": [
+  "defaultValue": {
+    "boolValue": false
+  },
+  "targetingRules": [
+    {
+      "conditions": [
         {
-            "conditions": [
-                {
-                    "userCondition": {
-                        "comparisonAttribute": "Email",
-                        "comparator": "sensitiveTextEquals",
-                        "comparisonValue": {
-                            "stringValue": "test@example.com",
-                        }
-                    },
-                }
-            ],
-            "percentageOptions": [],
-            "value": {
-                "boolValue": true,
+          "userCondition": {
+            "comparisonAttribute": "Email",
+            "comparator": "sensitiveTextEquals",
+            "comparisonValue": {
+              "stringValue": "test@example.com"
             }
+          }
         }
-    ],
+      ],
+      "percentageOptions": [],
+      "value": {
+        "boolValue": true
+      }
+    }
+  ]
 }
 ```
 If we send a replace request body as below:
-```
+```json
 {
-	"defaultValue": {
-        "boolValue": true,
-    },
+  "defaultValue": {
+    "boolValue": true
+  }
 }
 ```
 Then besides that the default served value is set to `true`, all the Targeting Rules are deleted.
 So we get a response like this:
-```
+```json
 {
-    "defaultValue": {
-        "boolValue": true,
-    },
-    "targetingRules": [],
+  "defaultValue": {
+    "boolValue": true
+  },
+  "targetingRules": []
 }
 ```
 
@@ -594,7 +594,7 @@ func (a *FeatureFlagSettingValuesV2ApiService) ReplaceSettingValueV2Execute(r Fe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "application/hal+json"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -668,7 +668,7 @@ func (r FeatureFlagSettingValuesV2ApiUpdateSettingValueV2Request) Execute() (*Se
 UpdateSettingValueV2 Update value
 
 This endpoint updates the value of a Feature Flag or Setting
-with a collection of [JSON Patch](http://jsonpatch.com) operations in a specified Environment.
+with a collection of [JSON Patch](https://jsonpatch.com) operations in a specified Environment.
 
 Only the `defaultValue`, `targetingRules`, and `percentageEvaluationAttribute` fields are modifiable by this endpoint.
 
@@ -677,69 +677,69 @@ without touching attributes that you don't want to change. It supports collectio
 can be used for reordering the targeting rules of a Feature Flag or Setting.
 
 For example: We have the following resource of a Feature Flag.
-```
+```json
 {
-	"defaultValue": {
-        "boolValue": false,
-    },
-	"targetingRules": [
+  "defaultValue": {
+    "boolValue": false
+  },
+  "targetingRules": [
+    {
+      "conditions": [
         {
-            "conditions": [
-                {
-                    "userCondition": {
-                        "comparisonAttribute": "Email",
-                        "comparator": "sensitiveTextEquals",
-                        "comparisonValue": {
-                            "stringValue": "test@example.com",
-                        }
-                    },
-                }
-            ],
-            "percentageOptions": [],
-            "value": {
-                "boolValue": true,
+          "userCondition": {
+            "comparisonAttribute": "Email",
+            "comparator": "sensitiveTextEquals",
+            "comparisonValue": {
+              "stringValue": "test@example.com"
             }
+          }
         }
-    ],
+      ],
+      "percentageOptions": [],
+      "value": {
+        "boolValue": true
+      }
+    }
+  ]
 }
 ```
 If we send an update request body as below:
-```
+```json
 [
-	{
-		"op": "replace",
-		"path": "/targetingRules/0/value/boolValue",
-		"value": true
-	}
+  {
+    "op": "replace",
+    "path": "/targetingRules/0/value/boolValue",
+    "value": true
+  }
 ]
 ```
 Only the first Targeting Rule's `value` is going to be set to `false` and all the other fields are remaining unchanged.
 
 So we get a response like this:
-```
+```json
 {
-	"defaultValue": {
-        "boolValue": false,
-    },
-	"targetingRules": [
+  "defaultValue": {
+    "boolValue": false
+  },
+  "targetingRules": [
+    {
+      "conditions": [
         {
-            "conditions": [
-                {
-                    "userCondition": {
-                        "comparisonAttribute": "Email",
-                        "comparator": "sensitiveTextEquals",
-                        "comparisonValue": {
-                            "stringValue": "test@example.com",
-                        }
-                    },
-                }
-            ],
-            "percentageOptions": [],
-            "value": {
-                "boolValue": false,
+          "userCondition": {
+            "comparisonAttribute": "Email",
+            "comparator": "sensitiveTextEquals",
+            "comparisonValue": {
+              "stringValue": "test@example.com"
             }
+          }
         }
-    ],
+      ],
+      "percentageOptions": [],
+      "value": {
+        "boolValue": false
+      }
+    }
+  ]
 }
 ```
 
@@ -796,7 +796,7 @@ func (a *FeatureFlagSettingValuesV2ApiService) UpdateSettingValueV2Execute(r Fea
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "application/hal+json"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

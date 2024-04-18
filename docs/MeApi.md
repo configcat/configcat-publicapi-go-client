@@ -62,7 +62,7 @@ Other parameters are passed through a pointer to a apiGetMeRequest struct via th
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/hal+json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

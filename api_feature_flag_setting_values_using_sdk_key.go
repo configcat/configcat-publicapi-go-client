@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-**Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The purpose of this API is to access the ConfigCat platform programmatically.  You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.   The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  and JSON+HAL format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).   # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).   # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -54,7 +54,7 @@ are not matching to any of the defined Targeting or Percentage Rules, or when th
 The `rolloutRules` and `percentageRules` attributes are representing the current 
 Targeting and Percentage Rules configuration of the actual Feature Flag or Setting 
 in an **ordered** collection, which means the order of the returned rules is matching to the
-evaluation order. You can read more about these rules [here](https://configcat.com/docs/advanced/targeting/).
+evaluation order. You can read more about these rules [here](https://configcat.com/docs/targeting/targeting-overview/).
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param settingKeyOrId The key or id of the Setting.
@@ -100,7 +100,7 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyApiService) GetSettingValueBySdkkeyE
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "application/hal+json"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -189,35 +189,35 @@ Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable
 want to change to its original state. Not listing one means that it will reset.
 
 For example: We have the following resource.
-```
+```json
 {
-	"rolloutPercentageItems": [
-		{
-			"percentage": 30,
-			"value": true
-		},
-		{
-			"percentage": 70,
-			"value": false
-		}
-	],
-	"rolloutRules": [],
-	"value": false
+  "rolloutPercentageItems": [
+    {
+      "percentage": 30,
+      "value": true
+    },
+    {
+      "percentage": 70,
+      "value": false
+    }
+  ],
+  "rolloutRules": [],
+  "value": false
 }
 ```
 If we send a replace request body as below:
-```
+```json
 {
-	"value": true
+  "value": true
 }
 ```
 Then besides that the default served value is set to `true`, all the Percentage Rules are deleted. 
 So we get a response like this:
-```
+```json
 {
-	"rolloutPercentageItems": [],
-	"rolloutRules": [],
-	"value": true
+  "rolloutPercentageItems": [],
+  "rolloutRules": [],
+  "value": true
 }
 ```
 
@@ -271,7 +271,7 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyApiService) ReplaceSettingValueBySdk
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "application/hal+json"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -354,7 +354,7 @@ func (r FeatureFlagSettingValuesUsingSDKKeyApiUpdateSettingValueBySdkkeyRequest)
 UpdateSettingValueBySdkkey Update value
 
 This endpoint updates the value of a Feature Flag or Setting 
-with a collection of [JSON Patch](http://jsonpatch.com) operations in a specified Environment
+with a collection of [JSON Patch](https://jsonpatch.com) operations in a specified Environment
 identified by the <a target="_blank" rel="noopener noreferrer" href="https://app.configcat.com/sdkkey">SDK key</a> passed in the `X-CONFIGCAT-SDKKEY` header.
 
 Only the `value`, `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.
@@ -364,48 +364,48 @@ without touching attributes that you don't want to change. It supports collectio
 can be used for reordering the targeting rules of a Feature Flag or Setting.
 
 For example: We have the following resource.
-```
+```json
 {
-	"rolloutPercentageItems": [
-		{
-			"percentage": 30,
-			"value": true
-		},
-		{
-			"percentage": 70,
-			"value": false
-		}
-	],
-	"rolloutRules": [],
-	"value": false
+  "rolloutPercentageItems": [
+    {
+      "percentage": 30,
+      "value": true
+    },
+    {
+      "percentage": 70,
+      "value": false
+    }
+  ],
+  "rolloutRules": [],
+  "value": false
 }
 ```
 If we send an update request body as below:
-```
+```json
 [
-	{
-		"op": "replace",
-		"path": "/value",
-		"value": true
-	}
+  {
+    "op": "replace",
+    "path": "/value",
+    "value": true
+  }
 ]
 ```
 Only the default served value is going to be set to `true` and all the Percentage Rules are remaining unchanged.
 So we get a response like this:
-```
+```json
 {
-	"rolloutPercentageItems": [
-		{
-			"percentage": 30,
-			"value": true
-		},
-		{
-			"percentage": 70,
-			"value": false
-		}
-	],
-	"rolloutRules": [],
-	"value": true
+  "rolloutPercentageItems": [
+    {
+      "percentage": 30,
+      "value": true
+    },
+    {
+      "percentage": 70,
+      "value": false
+    }
+  ],
+  "rolloutRules": [],
+  "value": true
 }
 ```
 
@@ -459,7 +459,7 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyApiService) UpdateSettingValueBySdkk
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "application/hal+json"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

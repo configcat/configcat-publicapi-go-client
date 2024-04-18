@@ -5,10 +5,13 @@ All URIs are relative to *https://test-api.configcat.com*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddMemberToGroup**](MembersApi.md#AddMemberToGroup) | **Post** /v1/organizations/{organizationId}/members/{userId} | Update Member Permissions
+[**DeleteInvitation**](MembersApi.md#DeleteInvitation) | **Delete** /v1/invitations/{invitationId} | Delete Invitation
 [**DeleteOrganizationMember**](MembersApi.md#DeleteOrganizationMember) | **Delete** /v1/organizations/{organizationId}/members/{userId} | Delete Member from Organization
 [**DeleteProductMember**](MembersApi.md#DeleteProductMember) | **Delete** /v1/products/{productId}/members/{userId} | Delete Member from Product
 [**GetOrganizationMembers**](MembersApi.md#GetOrganizationMembers) | **Get** /v1/organizations/{organizationId}/members | List Organization Members
 [**GetOrganizationMembersV2**](MembersApi.md#GetOrganizationMembersV2) | **Get** /v2/organizations/{organizationId}/members | List Organization Members
+[**GetPendingInvitations**](MembersApi.md#GetPendingInvitations) | **Get** /v1/products/{productId}/invitations | List Pending Invitations in Product
+[**GetPendingInvitationsOrg**](MembersApi.md#GetPendingInvitationsOrg) | **Get** /v1/organizations/{organizationId}/invitations | List Pending Invitations in Organization
 [**GetProductMembers**](MembersApi.md#GetProductMembers) | **Get** /v1/products/{productId}/members | List Product Members
 [**InviteMember**](MembersApi.md#InviteMember) | **Post** /v1/products/{productId}/members/invite | Invite Member
 
@@ -16,7 +19,7 @@ Method | HTTP request | Description
 
 ## AddMemberToGroup
 
-> AddMemberToGroup(ctx, organizationId, userId).AddUserToGroupRequest(addUserToGroupRequest).Execute()
+> AddMemberToGroup(ctx, organizationId, userId).UpdateMemberPermissionsRequest(updateMemberPermissionsRequest).Execute()
 
 Update Member Permissions
 
@@ -37,11 +40,11 @@ import (
 func main() {
     organizationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Organization.
     userId := "userId_example" // string | The identifier of the Member.
-    addUserToGroupRequest := *openapiclient.NewAddUserToGroupRequest([]int64{int64(123)}) // AddUserToGroupRequest | 
+    updateMemberPermissionsRequest := *openapiclient.NewUpdateMemberPermissionsRequest() // UpdateMemberPermissionsRequest | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.MembersApi.AddMemberToGroup(context.Background(), organizationId, userId).AddUserToGroupRequest(addUserToGroupRequest).Execute()
+    r, err := apiClient.MembersApi.AddMemberToGroup(context.Background(), organizationId, userId).UpdateMemberPermissionsRequest(updateMemberPermissionsRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `MembersApi.AddMemberToGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -67,7 +70,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **addUserToGroupRequest** | [**AddUserToGroupRequest**](AddUserToGroupRequest.md) |  | 
+ **updateMemberPermissionsRequest** | [**UpdateMemberPermissionsRequest**](UpdateMemberPermissionsRequest.md) |  | 
 
 ### Return type
 
@@ -80,6 +83,74 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json, text/json, application/*+json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteInvitation
+
+> DeleteInvitation(ctx, invitationId).Execute()
+
+Delete Invitation
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    invitationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Invitation.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.MembersApi.DeleteInvitation(context.Background(), invitationId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MembersApi.DeleteInvitation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**invitationId** | **string** | The identifier of the Invitation. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteInvitationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -292,7 +363,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/hal+json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -362,7 +433,147 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/hal+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetPendingInvitations
+
+> []InvitationModel GetPendingInvitations(ctx, productId).Execute()
+
+List Pending Invitations in Product
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.MembersApi.GetPendingInvitations(context.Background(), productId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MembersApi.GetPendingInvitations``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetPendingInvitations`: []InvitationModel
+    fmt.Fprintf(os.Stdout, "Response from `MembersApi.GetPendingInvitations`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**productId** | **string** | The identifier of the Product. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPendingInvitationsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**[]InvitationModel**](InvitationModel.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetPendingInvitationsOrg
+
+> []OrganizationInvitationModel GetPendingInvitationsOrg(ctx, organizationId).Execute()
+
+List Pending Invitations in Organization
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    organizationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Organization.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.MembersApi.GetPendingInvitationsOrg(context.Background(), organizationId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MembersApi.GetPendingInvitationsOrg``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetPendingInvitationsOrg`: []OrganizationInvitationModel
+    fmt.Fprintf(os.Stdout, "Response from `MembersApi.GetPendingInvitationsOrg`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**organizationId** | **string** | The identifier of the Organization. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPendingInvitationsOrgRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**[]OrganizationInvitationModel**](OrganizationInvitationModel.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -432,7 +643,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/hal+json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **ComparisonAttribute** | Pointer to **NullableString** | The user&#39;s attribute the evaluation process must take into account. | [optional] 
 **Comparator** | Pointer to [**RolloutRuleComparator**](RolloutRuleComparator.md) |  | [optional] 
 **ComparisonValue** | Pointer to **NullableString** | The value to compare with the given user attribute&#39;s value. | [optional] 
+**Links** | Pointer to [**ConfigSettingFormulasModelLinks**](ConfigSettingFormulasModelLinks.md) |  | [optional] 
 
 ## Methods
 
@@ -442,6 +443,31 @@ HasComparisonValue returns a boolean if a field has been set.
 `func (o *SegmentModel) UnsetComparisonValue()`
 
 UnsetComparisonValue ensures that no value is present for ComparisonValue, not even an explicit nil
+### GetLinks
+
+`func (o *SegmentModel) GetLinks() ConfigSettingFormulasModelLinks`
+
+GetLinks returns the Links field if non-nil, zero value otherwise.
+
+### GetLinksOk
+
+`func (o *SegmentModel) GetLinksOk() (*ConfigSettingFormulasModelLinks, bool)`
+
+GetLinksOk returns a tuple with the Links field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLinks
+
+`func (o *SegmentModel) SetLinks(v ConfigSettingFormulasModelLinks)`
+
+SetLinks sets Links field to given value.
+
+### HasLinks
+
+`func (o *SegmentModel) HasLinks() bool`
+
+HasLinks returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

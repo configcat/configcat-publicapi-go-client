@@ -30,6 +30,7 @@ Name | Type | Description | Notes
 **NewEnvironmentAccessType** | Pointer to [**EnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] 
 **EnvironmentAccesses** | Pointer to [**[]EnvironmentAccessModel**](EnvironmentAccessModel.md) | List of environment specific permissions. | [optional] 
 **Product** | Pointer to [**ProductModel**](ProductModel.md) |  | [optional] 
+**Links** | Pointer to [**ConfigSettingFormulasModelLinks**](ConfigSettingFormulasModelLinks.md) |  | [optional] 
 
 ## Methods
 
@@ -719,6 +720,31 @@ SetProduct sets Product field to given value.
 `func (o *PermissionGroupModel) HasProduct() bool`
 
 HasProduct returns a boolean if a field has been set.
+
+### GetLinks
+
+`func (o *PermissionGroupModel) GetLinks() ConfigSettingFormulasModelLinks`
+
+GetLinks returns the Links field if non-nil, zero value otherwise.
+
+### GetLinksOk
+
+`func (o *PermissionGroupModel) GetLinksOk() (*ConfigSettingFormulasModelLinks, bool)`
+
+GetLinksOk returns a tuple with the Links field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLinks
+
+`func (o *PermissionGroupModel) SetLinks(v ConfigSettingFormulasModelLinks)`
+
+SetLinks sets Links field to given value.
+
+### HasLinks
+
+`func (o *PermissionGroupModel) HasLinks() bool`
+
+HasLinks returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

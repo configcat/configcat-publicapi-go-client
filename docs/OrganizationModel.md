@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **OrganizationId** | Pointer to **string** | Identifier of the Organization. | [optional] 
 **Name** | Pointer to **NullableString** | Name of the Organization. | [optional] 
+**Links** | Pointer to [**OrganizationModelLinks**](OrganizationModelLinks.md) |  | [optional] 
 
 ## Methods
 
@@ -86,6 +87,31 @@ HasName returns a boolean if a field has been set.
 `func (o *OrganizationModel) UnsetName()`
 
 UnsetName ensures that no value is present for Name, not even an explicit nil
+### GetLinks
+
+`func (o *OrganizationModel) GetLinks() OrganizationModelLinks`
+
+GetLinks returns the Links field if non-nil, zero value otherwise.
+
+### GetLinksOk
+
+`func (o *OrganizationModel) GetLinksOk() (*OrganizationModelLinks, bool)`
+
+GetLinksOk returns a tuple with the Links field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLinks
+
+`func (o *OrganizationModel) SetLinks(v OrganizationModelLinks)`
+
+SetLinks sets Links field to given value.
+
+### HasLinks
+
+`func (o *OrganizationModel) HasLinks() bool`
+
+HasLinks returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

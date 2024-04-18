@@ -7,8 +7,10 @@ Method | HTTP request | Description
 [**CreateProduct**](ProductsApi.md#CreateProduct) | **Post** /v1/organizations/{organizationId}/products | Create Product
 [**DeleteProduct**](ProductsApi.md#DeleteProduct) | **Delete** /v1/products/{productId} | Delete Product
 [**GetProduct**](ProductsApi.md#GetProduct) | **Get** /v1/products/{productId} | Get Product
+[**GetProductPreferences**](ProductsApi.md#GetProductPreferences) | **Get** /v1/products/{productId}/preferences | Get Product Preferences
 [**GetProducts**](ProductsApi.md#GetProducts) | **Get** /v1/products | List Products
 [**UpdateProduct**](ProductsApi.md#UpdateProduct) | **Put** /v1/products/{productId} | Update Product
+[**UpdateProductPreferences**](ProductsApi.md#UpdateProductPreferences) | **Post** /v1/products/{productId}/preferences | Update Product Preferences
 
 
 
@@ -77,7 +79,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json, text/json, application/*+json
-- **Accept**: application/json, application/hal+json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -215,7 +217,77 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/hal+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetProductPreferences
+
+> PreferencesModel GetProductPreferences(ctx, productId).Execute()
+
+Get Product Preferences
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProductsApi.GetProductPreferences(context.Background(), productId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ProductsApi.GetProductPreferences``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetProductPreferences`: PreferencesModel
+    fmt.Fprintf(os.Stdout, "Response from `ProductsApi.GetProductPreferences`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**productId** | **string** | The identifier of the Product. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetProductPreferencesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**PreferencesModel**](PreferencesModel.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -276,7 +348,7 @@ Other parameters are passed through a pointer to a apiGetProductsRequest struct 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json, application/hal+json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -348,7 +420,79 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json, text/json, application/*+json
-- **Accept**: application/json, application/hal+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateProductPreferences
+
+> PreferencesModel UpdateProductPreferences(ctx, productId).UpdatePreferencesRequest(updatePreferencesRequest).Execute()
+
+Update Product Preferences
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+    updatePreferencesRequest := *openapiclient.NewUpdatePreferencesRequest() // UpdatePreferencesRequest | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.ProductsApi.UpdateProductPreferences(context.Background(), productId).UpdatePreferencesRequest(updatePreferencesRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ProductsApi.UpdateProductPreferences``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateProductPreferences`: PreferencesModel
+    fmt.Fprintf(os.Stdout, "Response from `ProductsApi.UpdateProductPreferences`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**productId** | **string** | The identifier of the Product. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateProductPreferencesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **updatePreferencesRequest** | [**UpdatePreferencesRequest**](UpdatePreferencesRequest.md) |  | 
+
+### Return type
+
+[**PreferencesModel**](PreferencesModel.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, text/json, application/*+json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
