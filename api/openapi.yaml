@@ -10513,13 +10513,13 @@ components:
           description: The HTTP header key.
           maxLength: 255
           minLength: 1
-          pattern: "^[\\x00-\\x7F]*$"
+          pattern: "^[a-zA-Z0-9_\\-]*$"
           type: string
         value:
           description: The HTTP header value.
           maxLength: 1000
           minLength: 1
-          pattern: "^[\\x00-\\x7F]*$"
+          pattern: "^[a-zA-Z0-9\\- _\\\\:;.,\\/\"'?!(){}\\[\\]@<>=+*#$&`|~^%]*$"
           type: string
         isSecure:
           description: Indicates whether the header value is sensitive.
