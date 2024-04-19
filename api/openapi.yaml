@@ -1966,6 +1966,52 @@ paths:
       summary: Update Flag
       tags:
       - Feature Flags & Settings
+    put:
+      description: "This endpoint replaces the whole value of a Feature Flag or Setting\n\
+        identified by the `settingId` parameter.\n\n**Important:** As this endpoint\
+        \ is doing a complete replace, it's important to set every other attribute\
+        \ that you don't \nwant to change in its original state. Not listing one means\
+        \ it will reset."
+      operationId: replace-setting
+      parameters:
+      - description: The identifier of the Setting.
+        explode: false
+        in: path
+        name: settingId
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReplaceSettingModel'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/ReplaceSettingModel'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/ReplaceSettingModel'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingModel'
+          description: When the replace was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Replace Flag
+      tags:
+      - Feature Flags & Settings
   /v1/tags/{tagId}/settings:
     get:
       description: "This endpoint returns the list of the Settings that \nhas the\
@@ -2336,12 +2382,12 @@ paths:
         \ and `percentageRules` attributes are modifiable by this endpoint.\n\n**Important:**\
         \ As this endpoint is doing a complete replace, it's important to set every\
         \ other attribute that you don't \nwant to change to its original state. Not\
-        \ listing one means that it will reset.\n\nFor example: We have the following\
-        \ resource.\n```json\n{\n  \"rolloutPercentageItems\": [\n    {\n      \"\
-        percentage\": 30,\n      \"value\": true\n    },\n    {\n      \"percentage\"\
-        : 70,\n      \"value\": false\n    }\n  ],\n  \"rolloutRules\": [],\n  \"\
-        value\": false\n}\n```\nIf we send a replace request body as below:\n```json\n\
-        {\n  \"value\": true\n}\n```\nThen besides that the default served value is\
+        \ listing one means it will reset.\n\nFor example: We have the following resource.\n\
+        ```json\n{\n  \"rolloutPercentageItems\": [\n    {\n      \"percentage\":\
+        \ 30,\n      \"value\": true\n    },\n    {\n      \"percentage\": 70,\n \
+        \     \"value\": false\n    }\n  ],\n  \"rolloutRules\": [],\n  \"value\"\
+        : false\n}\n```\nIf we send a replace request body as below:\n```json\n{\n\
+        \  \"value\": true\n}\n```\nThen besides that the default served value is\
         \ set to `true`, all the Percentage Rules are deleted. \nSo we get a response\
         \ like this:\n```json\n{\n  \"rolloutPercentageItems\": [],\n  \"rolloutRules\"\
         : [],\n  \"value\": true\n}\n```"
@@ -2785,7 +2831,7 @@ paths:
         \ attributes are modifiable by this endpoint.\n\n**Important:** As this endpoint\
         \ is doing a complete replace, it's important to set every other attribute\
         \ that you don't \nwant to change in its original state. Not listing one means\
-        \ that it will reset.\n\nFor example: We have the following resource.\n```json\n\
+        \ it will reset.\n\nFor example: We have the following resource.\n```json\n\
         {\n  \"rolloutPercentageItems\": [\n    {\n      \"percentage\": 30,\n   \
         \   \"value\": true\n    },\n    {\n      \"percentage\": 70,\n      \"value\"\
         : false\n    }\n  ],\n  \"rolloutRules\": [],\n  \"value\": false\n}\n```\n\
@@ -3329,7 +3375,7 @@ paths:
         Only the `defaultValue`, `targetingRules`, and `percentageEvaluationAttribute` fields are modifiable by this endpoint.
 
         **Important:** As this endpoint is doing a complete replace, it's important to set every other field that you don't
-        want to change to its original state. Not listing one means that it will reset.
+        want to change to its original state. Not listing one means it will reset.
 
         For example: We have the following resource of a Feature Flag.
         ```json
@@ -3942,7 +3988,7 @@ paths:
         Only the `defaultValue`, `targetingRules`, and `percentageEvaluationAttribute` fields are modifiable by this endpoint.
 
         **Important:** As this endpoint is doing a complete replace, it's important to set every other field that you don't
-        want to change to its original state. Not listing one means that it will reset.
+        want to change to its original state. Not listing one means it will reset.
 
         For example: We have the following resource of a Feature Flag.
         ```json
@@ -4183,10 +4229,10 @@ paths:
         \ `rolloutRules` and `percentageRules` attributes are modifiable by this endpoint.\n\
         \n**Important:** As this endpoint is doing a complete replace, it's important\
         \ to set every other attribute that you don't \nwant to change in its original\
-        \ state. Not listing one means that it will reset.\n\nFor example: We have\
-        \ the following resource.\n```json\n{\n  \"settingValues\": [\n    {\n   \
-        \   \"rolloutPercentageItems\": [\n        {\n          \"percentage\": 30,\n\
-        \          \"value\": true\n        },\n        {\n          \"percentage\"\
+        \ state. Not listing one means it will reset.\n\nFor example: We have the\
+        \ following resource.\n```json\n{\n  \"settingValues\": [\n    {\n      \"\
+        rolloutPercentageItems\": [\n        {\n          \"percentage\": 30,\n  \
+        \        \"value\": true\n        },\n        {\n          \"percentage\"\
         : 70,\n          \"value\": false\n        }\n      ],\n      \"rolloutRules\"\
         : [],\n      \"value\": false,\n      \"settingId\": 1\n    }\n  ]\n}\n```\n\
         If we send a replace request body as below:\n```json\n{ \n  \"settingValues\"\
@@ -4623,6 +4669,52 @@ paths:
       summary: Update Webhook
       tags:
       - Webhooks
+    put:
+      description: |-
+        This endpoint replaces the whole value of a Webhook identified by the `webhookId` parameter.
+
+        **Important:** As this endpoint is doing a complete replace, it's important to set every other attribute that you don't
+        want to change in its original state. Not listing one means it will reset.
+      operationId: replace-webhook
+      parameters:
+      - description: The identifier of the Webhook.
+        explode: false
+        in: path
+        name: webhookId
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebHookRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/WebHookRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/WebHookRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookModel'
+          description: When the replace was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Replace Webhook
+      tags:
+      - Webhooks
   /v1/webhooks/{webhookId}/keys:
     get:
       description: "This endpoint returns the signing keys of a Webhook \nidentified\
@@ -4933,13 +5025,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateWebHookRequest'
+              $ref: '#/components/schemas/WebHookRequest'
           text/json:
             schema:
-              $ref: '#/components/schemas/CreateWebHookRequest'
+              $ref: '#/components/schemas/WebHookRequest'
           application/*+json:
             schema:
-              $ref: '#/components/schemas/CreateWebHookRequest'
+              $ref: '#/components/schemas/WebHookRequest'
         required: true
       responses:
         "201":
@@ -7086,45 +7178,6 @@ components:
       required:
       - name
       type: object
-    CreateWebHookRequest:
-      additionalProperties: false
-      example:
-        webHookHeaders:
-        - isSecure: true
-          value: value
-          key: key
-        - isSecure: true
-          value: value
-          key: key
-        httpMethod: null
-        url: url
-        content: content
-      properties:
-        url:
-          description: The URL of the Webhook.
-          maxLength: 1000
-          minLength: 7
-          pattern: "^(https?:\\/\\/(?:www\\.|(?!www)|(?!a-zA-Z))[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]\\\
-            .[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www)|(?!a-zA-Z))[a-zA-Z0-9]\\.[^\\\
-            s]{2,})$"
-          type: string
-        content:
-          description: The HTTP body content.
-          maxLength: 15000
-          minLength: 0
-          nullable: true
-          type: string
-        httpMethod:
-          $ref: '#/components/schemas/WebHookHttpMethod'
-        webHookHeaders:
-          description: List of HTTP headers.
-          items:
-            $ref: '#/components/schemas/WebhookHeaderModel'
-          nullable: true
-          type: array
-      required:
-      - url
-      type: object
     DeleteIntegrationLinkModel:
       additionalProperties: false
       example:
@@ -8347,6 +8400,44 @@ components:
       required:
       - file
       - referenceLine
+      type: object
+    ReplaceSettingModel:
+      additionalProperties: false
+      example:
+        hint: hint
+        name: name
+        tags:
+        - 0
+        - 0
+        order: 6
+      properties:
+        hint:
+          description: "A short description for the setting, shown on the Dashboard\
+            \ UI."
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+        tags:
+          description: The IDs of the tags which are attached to the setting.
+          items:
+            format: int64
+            type: integer
+          nullable: true
+          type: array
+        order:
+          description: "The order of the Setting represented on the ConfigCat Dashboard.\r\
+            \nDetermined from an ascending sequence of integers."
+          format: int32
+          nullable: true
+          type: integer
+        name:
+          description: The name of the Feature Flag or Setting.
+          maxLength: 255
+          minLength: 1
+          type: string
+      required:
+      - name
       type: object
     RolloutPercentageItemModel:
       additionalProperties: false
@@ -10502,6 +10593,77 @@ components:
       - get
       - post
       type: string
+    WebHookRequest:
+      additionalProperties: false
+      example:
+        webHookHeaders:
+        - isSecure: true
+          value: value
+          key: key
+        - isSecure: true
+          value: value
+          key: key
+        httpMethod: null
+        url: url
+        content: content
+      properties:
+        url:
+          description: The URL of the Webhook.
+          maxLength: 1000
+          minLength: 7
+          pattern: "^(https?:\\/\\/(?:www\\.|(?!www)|(?!a-zA-Z))[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]\\\
+            .[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www)|(?!a-zA-Z))[a-zA-Z0-9]\\.[^\\\
+            s]{2,})$"
+          type: string
+        content:
+          description: The HTTP body content.
+          maxLength: 15000
+          minLength: 0
+          nullable: true
+          type: string
+        httpMethod:
+          $ref: '#/components/schemas/WebHookHttpMethod'
+        webHookHeaders:
+          description: List of HTTP headers.
+          items:
+            $ref: '#/components/schemas/WebhookHeaderModel'
+          nullable: true
+          type: array
+      required:
+      - url
+      type: object
+    WebhookConfig:
+      additionalProperties: false
+      description: The Config where the applied changes will invoke the Webhook.
+      example:
+        configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+      properties:
+        name:
+          description: The Config's name.
+          nullable: true
+          type: string
+        configId:
+          description: The Config's identifier.
+          format: uuid
+          type: string
+      type: object
+    WebhookEnvironment:
+      additionalProperties: false
+      description: The Environment where the applied changes will invoke the Webhook.
+      example:
+        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+      properties:
+        name:
+          description: The Environment's name.
+          nullable: true
+          type: string
+        environmentId:
+          description: The Environment's identifier.
+          format: uuid
+          type: string
+      type: object
     WebhookHeaderModel:
       additionalProperties: false
       example:
@@ -10513,13 +10675,13 @@ components:
           description: The HTTP header key.
           maxLength: 255
           minLength: 1
-          pattern: "^[\\x00-\\x7F]*$"
+          pattern: "^[a-zA-Z0-9_\\-]*$"
           type: string
         value:
           description: The HTTP header value.
           maxLength: 1000
           minLength: 1
-          pattern: "^[\\x00-\\x7F]*$"
+          pattern: "^[a-zA-Z0-9\\- _\\\\:;.,\\/\"'?!(){}\\[\\]@<>=+*#$&`|~^%]*$"
           type: string
         isSecure:
           description: Indicates whether the header value is sensitive.
@@ -10538,10 +10700,14 @@ components:
         - isSecure: true
           value: value
           key: key
-        configName: configName
+        environment:
+          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
         webhookId: 0
-        environmentName: environmentName
         httpMethod: null
+        config:
+          configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
         url: url
         content: content
       properties:
@@ -10565,16 +10731,10 @@ components:
             $ref: '#/components/schemas/WebhookHeaderModel'
           nullable: true
           type: array
-        configName:
-          description: The Config's name where the applied changes will invoke the
-            Webhook.
-          nullable: true
-          type: string
-        environmentName:
-          description: The Environment's name where the applied changes will invoke
-            the Webhook.
-          nullable: true
-          type: string
+        config:
+          $ref: '#/components/schemas/WebhookConfig'
+        environment:
+          $ref: '#/components/schemas/WebhookEnvironment'
       type: object
     WebhookSigningKeysModel:
       additionalProperties: false
