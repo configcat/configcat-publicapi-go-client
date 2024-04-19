@@ -149,6 +149,7 @@ Class | Method | HTTP request | Description
 *FeatureFlagsSettingsApi* | [**DeleteSetting**](docs/FeatureFlagsSettingsApi.md#deletesetting) | **Delete** /v1/settings/{settingId} | Delete Flag
 *FeatureFlagsSettingsApi* | [**GetSetting**](docs/FeatureFlagsSettingsApi.md#getsetting) | **Get** /v1/settings/{settingId} | Get Flag
 *FeatureFlagsSettingsApi* | [**GetSettings**](docs/FeatureFlagsSettingsApi.md#getsettings) | **Get** /v1/configs/{configId}/settings | List Flags
+*FeatureFlagsSettingsApi* | [**ReplaceSetting**](docs/FeatureFlagsSettingsApi.md#replacesetting) | **Put** /v1/settings/{settingId} | Replace Flag
 *FeatureFlagsSettingsApi* | [**UpdateSetting**](docs/FeatureFlagsSettingsApi.md#updatesetting) | **Patch** /v1/settings/{settingId} | Update Flag
 *IntegrationLinksApi* | [**AddOrUpdateIntegrationLink**](docs/IntegrationLinksApi.md#addorupdateintegrationlink) | **Post** /v1/environments/{environmentId}/settings/{settingId}/integrationLinks/{integrationLinkType}/{key} | Add or update Integration link
 *IntegrationLinksApi* | [**DeleteIntegrationLink**](docs/IntegrationLinksApi.md#deleteintegrationlink) | **Delete** /v1/environments/{environmentId}/settings/{settingId}/integrationLinks/{integrationLinkType}/{key} | Delete Integration link
@@ -196,6 +197,7 @@ Class | Method | HTTP request | Description
 *WebhooksApi* | [**GetWebhook**](docs/WebhooksApi.md#getwebhook) | **Get** /v1/webhooks/{webhookId} | Get Webhook
 *WebhooksApi* | [**GetWebhookSigningKeys**](docs/WebhooksApi.md#getwebhooksigningkeys) | **Get** /v1/webhooks/{webhookId}/keys | Get Webhook Signing Keys
 *WebhooksApi* | [**GetWebhooks**](docs/WebhooksApi.md#getwebhooks) | **Get** /v1/products/{productId}/webhooks | List Webhooks
+*WebhooksApi* | [**ReplaceWebhook**](docs/WebhooksApi.md#replacewebhook) | **Put** /v1/webhooks/{webhookId} | Replace Webhook
 *WebhooksApi* | [**UpdateWebhook**](docs/WebhooksApi.md#updatewebhook) | **Patch** /v1/webhooks/{webhookId} | Update Webhook
 
 
@@ -226,7 +228,6 @@ Class | Method | HTTP request | Description
  - [CreateSegmentModel](docs/CreateSegmentModel.md)
  - [CreateSettingInitialValues](docs/CreateSettingInitialValues.md)
  - [CreateTagModel](docs/CreateTagModel.md)
- - [CreateWebHookRequest](docs/CreateWebHookRequest.md)
  - [DeleteIntegrationLinkModel](docs/DeleteIntegrationLinkModel.md)
  - [DeleteRepositoryReportsRequest](docs/DeleteRepositoryReportsRequest.md)
  - [EnvironmentAccessModel](docs/EnvironmentAccessModel.md)
@@ -264,6 +265,7 @@ Class | Method | HTTP request | Description
  - [ReasonRequiredEnvironmentModel](docs/ReasonRequiredEnvironmentModel.md)
  - [ReferenceLine](docs/ReferenceLine.md)
  - [ReferenceLines](docs/ReferenceLines.md)
+ - [ReplaceSettingModel](docs/ReplaceSettingModel.md)
  - [RolloutPercentageItemModel](docs/RolloutPercentageItemModel.md)
  - [RolloutRuleComparator](docs/RolloutRuleComparator.md)
  - [RolloutRuleModel](docs/RolloutRuleModel.md)
@@ -300,6 +302,9 @@ Class | Method | HTTP request | Description
  - [UserModel](docs/UserModel.md)
  - [ValueModel](docs/ValueModel.md)
  - [WebHookHttpMethod](docs/WebHookHttpMethod.md)
+ - [WebHookRequest](docs/WebHookRequest.md)
+ - [WebhookConfig](docs/WebhookConfig.md)
+ - [WebhookEnvironment](docs/WebhookEnvironment.md)
  - [WebhookHeaderModel](docs/WebhookHeaderModel.md)
  - [WebhookModel](docs/WebhookModel.md)
  - [WebhookSigningKeysModel](docs/WebhookSigningKeysModel.md)

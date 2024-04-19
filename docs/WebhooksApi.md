@@ -9,13 +9,14 @@ Method | HTTP request | Description
 [**GetWebhook**](WebhooksApi.md#GetWebhook) | **Get** /v1/webhooks/{webhookId} | Get Webhook
 [**GetWebhookSigningKeys**](WebhooksApi.md#GetWebhookSigningKeys) | **Get** /v1/webhooks/{webhookId}/keys | Get Webhook Signing Keys
 [**GetWebhooks**](WebhooksApi.md#GetWebhooks) | **Get** /v1/products/{productId}/webhooks | List Webhooks
+[**ReplaceWebhook**](WebhooksApi.md#ReplaceWebhook) | **Put** /v1/webhooks/{webhookId} | Replace Webhook
 [**UpdateWebhook**](WebhooksApi.md#UpdateWebhook) | **Patch** /v1/webhooks/{webhookId} | Update Webhook
 
 
 
 ## CreateWebhook
 
-> WebhookModel CreateWebhook(ctx, configId, environmentId).CreateWebHookRequest(createWebHookRequest).Execute()
+> WebhookModel CreateWebhook(ctx, configId, environmentId).WebHookRequest(webHookRequest).Execute()
 
 Create Webhook
 
@@ -36,11 +37,11 @@ import (
 func main() {
     configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
     environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
-    createWebHookRequest := *openapiclient.NewCreateWebHookRequest("Url_example") // CreateWebHookRequest | 
+    webHookRequest := *openapiclient.NewWebHookRequest("Url_example") // WebHookRequest | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.WebhooksApi.CreateWebhook(context.Background(), configId, environmentId).CreateWebHookRequest(createWebHookRequest).Execute()
+    resp, r, err := apiClient.WebhooksApi.CreateWebhook(context.Background(), configId, environmentId).WebHookRequest(webHookRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.CreateWebhook``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -68,7 +69,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **createWebHookRequest** | [**CreateWebHookRequest**](CreateWebHookRequest.md) |  | 
+ **webHookRequest** | [**WebHookRequest**](WebHookRequest.md) |  | 
 
 ### Return type
 
@@ -359,6 +360,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReplaceWebhook
+
+> WebhookModel ReplaceWebhook(ctx, webhookId).WebHookRequest(webHookRequest).Execute()
+
+Replace Webhook
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    webhookId := int32(56) // int32 | The identifier of the Webhook.
+    webHookRequest := *openapiclient.NewWebHookRequest("Url_example") // WebHookRequest | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.WebhooksApi.ReplaceWebhook(context.Background(), webhookId).WebHookRequest(webHookRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `WebhooksApi.ReplaceWebhook``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReplaceWebhook`: WebhookModel
+    fmt.Fprintf(os.Stdout, "Response from `WebhooksApi.ReplaceWebhook`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**webhookId** | **int32** | The identifier of the Webhook. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReplaceWebhookRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **webHookRequest** | [**WebHookRequest**](WebHookRequest.md) |  | 
+
+### Return type
+
+[**WebhookModel**](WebhookModel.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, text/json, application/*+json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

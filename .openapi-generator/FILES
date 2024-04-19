@@ -51,7 +51,6 @@ docs/CreateProductRequest.md
 docs/CreateSegmentModel.md
 docs/CreateSettingInitialValues.md
 docs/CreateTagModel.md
-docs/CreateWebHookRequest.md
 docs/DeleteIntegrationLinkModel.md
 docs/DeleteRepositoryReportsRequest.md
 docs/EnvironmentAccessModel.md
@@ -101,6 +100,7 @@ docs/ProductsApi.md
 docs/ReasonRequiredEnvironmentModel.md
 docs/ReferenceLine.md
 docs/ReferenceLines.md
+docs/ReplaceSettingModel.md
 docs/RolloutPercentageItemModel.md
 docs/RolloutRuleComparator.md
 docs/RolloutRuleModel.md
@@ -140,6 +140,9 @@ docs/UserConditionModel.md
 docs/UserModel.md
 docs/ValueModel.md
 docs/WebHookHttpMethod.md
+docs/WebHookRequest.md
+docs/WebhookConfig.md
+docs/WebhookEnvironment.md
 docs/WebhookHeaderModel.md
 docs/WebhookModel.md
 docs/WebhookSigningKeysModel.md
@@ -172,7 +175,6 @@ model_create_product_request.go
 model_create_segment_model.go
 model_create_setting_initial_values.go
 model_create_tag_model.go
-model_create_web_hook_request.go
 model_delete_integration_link_model.go
 model_delete_repository_reports_request.go
 model_environment_access_model.go
@@ -210,6 +212,7 @@ model_product_model.go
 model_reason_required_environment_model.go
 model_reference_line.go
 model_reference_lines.go
+model_replace_setting_model.go
 model_rollout_percentage_item_model.go
 model_rollout_rule_comparator.go
 model_rollout_rule_model.go
@@ -246,6 +249,9 @@ model_user_condition_model.go
 model_user_model.go
 model_value_model.go
 model_web_hook_http_method.go
+model_web_hook_request.go
+model_webhook_config.go
+model_webhook_environment.go
 model_webhook_header_model.go
 model_webhook_model.go
 model_webhook_signing_keys_model.go

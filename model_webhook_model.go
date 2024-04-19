@@ -29,10 +29,8 @@ type WebhookModel struct {
 	Content NullableString `json:"content,omitempty"`
 	// List of HTTP headers that the Webhook must send.
 	WebHookHeaders []WebhookHeaderModel `json:"webHookHeaders,omitempty"`
-	// The Config's name where the applied changes will invoke the Webhook.
-	ConfigName NullableString `json:"configName,omitempty"`
-	// The Environment's name where the applied changes will invoke the Webhook.
-	EnvironmentName NullableString `json:"environmentName,omitempty"`
+	Config *WebhookConfig `json:"config,omitempty"`
+	Environment *WebhookEnvironment `json:"environment,omitempty"`
 }
 
 // NewWebhookModel instantiates a new WebhookModel object
@@ -233,88 +231,68 @@ func (o *WebhookModel) SetWebHookHeaders(v []WebhookHeaderModel) {
 	o.WebHookHeaders = v
 }
 
-// GetConfigName returns the ConfigName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *WebhookModel) GetConfigName() string {
-	if o == nil || IsNil(o.ConfigName.Get()) {
-		var ret string
+// GetConfig returns the Config field value if set, zero value otherwise.
+func (o *WebhookModel) GetConfig() WebhookConfig {
+	if o == nil || IsNil(o.Config) {
+		var ret WebhookConfig
 		return ret
 	}
-	return *o.ConfigName.Get()
+	return *o.Config
 }
 
-// GetConfigNameOk returns a tuple with the ConfigName field value if set, nil otherwise
+// GetConfigOk returns a tuple with the Config field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *WebhookModel) GetConfigNameOk() (*string, bool) {
-	if o == nil {
+func (o *WebhookModel) GetConfigOk() (*WebhookConfig, bool) {
+	if o == nil || IsNil(o.Config) {
 		return nil, false
 	}
-	return o.ConfigName.Get(), o.ConfigName.IsSet()
+	return o.Config, true
 }
 
-// HasConfigName returns a boolean if a field has been set.
-func (o *WebhookModel) HasConfigName() bool {
-	if o != nil && o.ConfigName.IsSet() {
+// HasConfig returns a boolean if a field has been set.
+func (o *WebhookModel) HasConfig() bool {
+	if o != nil && !IsNil(o.Config) {
 		return true
 	}
 
 	return false
 }
 
-// SetConfigName gets a reference to the given NullableString and assigns it to the ConfigName field.
-func (o *WebhookModel) SetConfigName(v string) {
-	o.ConfigName.Set(&v)
-}
-// SetConfigNameNil sets the value for ConfigName to be an explicit nil
-func (o *WebhookModel) SetConfigNameNil() {
-	o.ConfigName.Set(nil)
+// SetConfig gets a reference to the given WebhookConfig and assigns it to the Config field.
+func (o *WebhookModel) SetConfig(v WebhookConfig) {
+	o.Config = &v
 }
 
-// UnsetConfigName ensures that no value is present for ConfigName, not even an explicit nil
-func (o *WebhookModel) UnsetConfigName() {
-	o.ConfigName.Unset()
-}
-
-// GetEnvironmentName returns the EnvironmentName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *WebhookModel) GetEnvironmentName() string {
-	if o == nil || IsNil(o.EnvironmentName.Get()) {
-		var ret string
+// GetEnvironment returns the Environment field value if set, zero value otherwise.
+func (o *WebhookModel) GetEnvironment() WebhookEnvironment {
+	if o == nil || IsNil(o.Environment) {
+		var ret WebhookEnvironment
 		return ret
 	}
-	return *o.EnvironmentName.Get()
+	return *o.Environment
 }
 
-// GetEnvironmentNameOk returns a tuple with the EnvironmentName field value if set, nil otherwise
+// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *WebhookModel) GetEnvironmentNameOk() (*string, bool) {
-	if o == nil {
+func (o *WebhookModel) GetEnvironmentOk() (*WebhookEnvironment, bool) {
+	if o == nil || IsNil(o.Environment) {
 		return nil, false
 	}
-	return o.EnvironmentName.Get(), o.EnvironmentName.IsSet()
+	return o.Environment, true
 }
 
-// HasEnvironmentName returns a boolean if a field has been set.
-func (o *WebhookModel) HasEnvironmentName() bool {
-	if o != nil && o.EnvironmentName.IsSet() {
+// HasEnvironment returns a boolean if a field has been set.
+func (o *WebhookModel) HasEnvironment() bool {
+	if o != nil && !IsNil(o.Environment) {
 		return true
 	}
 
 	return false
 }
 
-// SetEnvironmentName gets a reference to the given NullableString and assigns it to the EnvironmentName field.
-func (o *WebhookModel) SetEnvironmentName(v string) {
-	o.EnvironmentName.Set(&v)
-}
-// SetEnvironmentNameNil sets the value for EnvironmentName to be an explicit nil
-func (o *WebhookModel) SetEnvironmentNameNil() {
-	o.EnvironmentName.Set(nil)
-}
-
-// UnsetEnvironmentName ensures that no value is present for EnvironmentName, not even an explicit nil
-func (o *WebhookModel) UnsetEnvironmentName() {
-	o.EnvironmentName.Unset()
+// SetEnvironment gets a reference to the given WebhookEnvironment and assigns it to the Environment field.
+func (o *WebhookModel) SetEnvironment(v WebhookEnvironment) {
+	o.Environment = &v
 }
 
 func (o WebhookModel) MarshalJSON() ([]byte, error) {
@@ -342,11 +320,11 @@ func (o WebhookModel) ToMap() (map[string]interface{}, error) {
 	if o.WebHookHeaders != nil {
 		toSerialize["webHookHeaders"] = o.WebHookHeaders
 	}
-	if o.ConfigName.IsSet() {
-		toSerialize["configName"] = o.ConfigName.Get()
+	if !IsNil(o.Config) {
+		toSerialize["config"] = o.Config
 	}
-	if o.EnvironmentName.IsSet() {
-		toSerialize["environmentName"] = o.EnvironmentName.Get()
+	if !IsNil(o.Environment) {
+		toSerialize["environment"] = o.Environment
 	}
 	return toSerialize, nil
 }

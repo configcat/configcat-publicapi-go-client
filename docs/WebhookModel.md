@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **HttpMethod** | Pointer to [**WebHookHttpMethod**](WebHookHttpMethod.md) |  | [optional] 
 **Content** | Pointer to **NullableString** | The HTTP body content. | [optional] 
 **WebHookHeaders** | Pointer to [**[]WebhookHeaderModel**](WebhookHeaderModel.md) | List of HTTP headers that the Webhook must send. | [optional] 
-**ConfigName** | Pointer to **NullableString** | The Config&#39;s name where the applied changes will invoke the Webhook. | [optional] 
-**EnvironmentName** | Pointer to **NullableString** | The Environment&#39;s name where the applied changes will invoke the Webhook. | [optional] 
+**Config** | Pointer to [**WebhookConfig**](WebhookConfig.md) |  | [optional] 
+**Environment** | Pointer to [**WebhookEnvironment**](WebhookEnvironment.md) |  | [optional] 
 
 ## Methods
 
@@ -186,76 +186,56 @@ HasWebHookHeaders returns a boolean if a field has been set.
 `func (o *WebhookModel) UnsetWebHookHeaders()`
 
 UnsetWebHookHeaders ensures that no value is present for WebHookHeaders, not even an explicit nil
-### GetConfigName
+### GetConfig
 
-`func (o *WebhookModel) GetConfigName() string`
+`func (o *WebhookModel) GetConfig() WebhookConfig`
 
-GetConfigName returns the ConfigName field if non-nil, zero value otherwise.
+GetConfig returns the Config field if non-nil, zero value otherwise.
 
-### GetConfigNameOk
+### GetConfigOk
 
-`func (o *WebhookModel) GetConfigNameOk() (*string, bool)`
+`func (o *WebhookModel) GetConfigOk() (*WebhookConfig, bool)`
 
-GetConfigNameOk returns a tuple with the ConfigName field if it's non-nil, zero value otherwise
+GetConfigOk returns a tuple with the Config field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetConfigName
+### SetConfig
 
-`func (o *WebhookModel) SetConfigName(v string)`
+`func (o *WebhookModel) SetConfig(v WebhookConfig)`
 
-SetConfigName sets ConfigName field to given value.
+SetConfig sets Config field to given value.
 
-### HasConfigName
+### HasConfig
 
-`func (o *WebhookModel) HasConfigName() bool`
+`func (o *WebhookModel) HasConfig() bool`
 
-HasConfigName returns a boolean if a field has been set.
+HasConfig returns a boolean if a field has been set.
 
-### SetConfigNameNil
+### GetEnvironment
 
-`func (o *WebhookModel) SetConfigNameNil(b bool)`
+`func (o *WebhookModel) GetEnvironment() WebhookEnvironment`
 
- SetConfigNameNil sets the value for ConfigName to be an explicit nil
+GetEnvironment returns the Environment field if non-nil, zero value otherwise.
 
-### UnsetConfigName
-`func (o *WebhookModel) UnsetConfigName()`
+### GetEnvironmentOk
 
-UnsetConfigName ensures that no value is present for ConfigName, not even an explicit nil
-### GetEnvironmentName
+`func (o *WebhookModel) GetEnvironmentOk() (*WebhookEnvironment, bool)`
 
-`func (o *WebhookModel) GetEnvironmentName() string`
-
-GetEnvironmentName returns the EnvironmentName field if non-nil, zero value otherwise.
-
-### GetEnvironmentNameOk
-
-`func (o *WebhookModel) GetEnvironmentNameOk() (*string, bool)`
-
-GetEnvironmentNameOk returns a tuple with the EnvironmentName field if it's non-nil, zero value otherwise
+GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEnvironmentName
+### SetEnvironment
 
-`func (o *WebhookModel) SetEnvironmentName(v string)`
+`func (o *WebhookModel) SetEnvironment(v WebhookEnvironment)`
 
-SetEnvironmentName sets EnvironmentName field to given value.
+SetEnvironment sets Environment field to given value.
 
-### HasEnvironmentName
+### HasEnvironment
 
-`func (o *WebhookModel) HasEnvironmentName() bool`
+`func (o *WebhookModel) HasEnvironment() bool`
 
-HasEnvironmentName returns a boolean if a field has been set.
+HasEnvironment returns a boolean if a field has been set.
 
-### SetEnvironmentNameNil
-
-`func (o *WebhookModel) SetEnvironmentNameNil(b bool)`
-
- SetEnvironmentNameNil sets the value for EnvironmentName to be an explicit nil
-
-### UnsetEnvironmentName
-`func (o *WebhookModel) UnsetEnvironmentName()`
-
-UnsetEnvironmentName ensures that no value is present for EnvironmentName, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

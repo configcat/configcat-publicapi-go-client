@@ -493,7 +493,7 @@ in a specified Environment identified by the <a target="_blank" rel="noopener no
 Only the `defaultValue`, `targetingRules`, and `percentageEvaluationAttribute` fields are modifiable by this endpoint.
 
 **Important:** As this endpoint is doing a complete replace, it's important to set every other field that you don't
-want to change to its original state. Not listing one means that it will reset.
+want to change to its original state. Not listing one means it will reset.
 
 For example: We have the following resource of a Feature Flag.
 ```json

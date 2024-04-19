@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**DeleteSetting**](FeatureFlagsSettingsApi.md#DeleteSetting) | **Delete** /v1/settings/{settingId} | Delete Flag
 [**GetSetting**](FeatureFlagsSettingsApi.md#GetSetting) | **Get** /v1/settings/{settingId} | Get Flag
 [**GetSettings**](FeatureFlagsSettingsApi.md#GetSettings) | **Get** /v1/configs/{configId}/settings | List Flags
+[**ReplaceSetting**](FeatureFlagsSettingsApi.md#ReplaceSetting) | **Put** /v1/settings/{settingId} | Replace Flag
 [**UpdateSetting**](FeatureFlagsSettingsApi.md#UpdateSetting) | **Patch** /v1/settings/{settingId} | Update Flag
 
 
@@ -285,6 +286,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ReplaceSetting
+
+> SettingModel ReplaceSetting(ctx, settingId).ReplaceSettingModel(replaceSettingModel).Execute()
+
+Replace Flag
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+)
+
+func main() {
+    settingId := int32(56) // int32 | The identifier of the Setting.
+    replaceSettingModel := *openapiclient.NewReplaceSettingModel("Name_example") // ReplaceSettingModel | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.FeatureFlagsSettingsApi.ReplaceSetting(context.Background(), settingId).ReplaceSettingModel(replaceSettingModel).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsApi.ReplaceSetting``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ReplaceSetting`: SettingModel
+    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsApi.ReplaceSetting`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settingId** | **int32** | The identifier of the Setting. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiReplaceSettingRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **replaceSettingModel** | [**ReplaceSettingModel**](ReplaceSettingModel.md) |  | 
+
+### Return type
+
+[**SettingModel**](SettingModel.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, text/json, application/*+json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

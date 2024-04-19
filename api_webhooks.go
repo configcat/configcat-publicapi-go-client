@@ -29,11 +29,11 @@ type WebhooksApiCreateWebhookRequest struct {
 	ApiService *WebhooksApiService
 	configId string
 	environmentId string
-	createWebHookRequest *CreateWebHookRequest
+	webHookRequest *WebHookRequest
 }
 
-func (r WebhooksApiCreateWebhookRequest) CreateWebHookRequest(createWebHookRequest CreateWebHookRequest) WebhooksApiCreateWebhookRequest {
-	r.createWebHookRequest = &createWebHookRequest
+func (r WebhooksApiCreateWebhookRequest) WebHookRequest(webHookRequest WebHookRequest) WebhooksApiCreateWebhookRequest {
+	r.webHookRequest = &webHookRequest
 	return r
 }
 
@@ -83,8 +83,8 @@ func (a *WebhooksApiService) CreateWebhookExecute(r WebhooksApiCreateWebhookRequ
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.createWebHookRequest == nil {
-		return localVarReturnValue, nil, reportError("createWebHookRequest is required and must be specified")
+	if r.webHookRequest == nil {
+		return localVarReturnValue, nil, reportError("webHookRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -105,7 +105,7 @@ func (a *WebhooksApiService) CreateWebhookExecute(r WebhooksApiCreateWebhookRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.createWebHookRequest
+	localVarPostBody = r.webHookRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -514,6 +514,123 @@ func (a *WebhooksApiService) GetWebhooksExecute(r WebhooksApiGetWebhooksRequest)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type WebhooksApiReplaceWebhookRequest struct {
+	ctx context.Context
+	ApiService *WebhooksApiService
+	webhookId int32
+	webHookRequest *WebHookRequest
+}
+
+func (r WebhooksApiReplaceWebhookRequest) WebHookRequest(webHookRequest WebHookRequest) WebhooksApiReplaceWebhookRequest {
+	r.webHookRequest = &webHookRequest
+	return r
+}
+
+func (r WebhooksApiReplaceWebhookRequest) Execute() (*WebhookModel, *http.Response, error) {
+	return r.ApiService.ReplaceWebhookExecute(r)
+}
+
+/*
+ReplaceWebhook Replace Webhook
+
+This endpoint replaces the whole value of a Webhook identified by the `webhookId` parameter.
+
+**Important:** As this endpoint is doing a complete replace, it's important to set every other attribute that you don't
+want to change in its original state. Not listing one means it will reset.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param webhookId The identifier of the Webhook.
+ @return WebhooksApiReplaceWebhookRequest
+*/
+func (a *WebhooksApiService) ReplaceWebhook(ctx context.Context, webhookId int32) WebhooksApiReplaceWebhookRequest {
+	return WebhooksApiReplaceWebhookRequest{
+		ApiService: a,
+		ctx: ctx,
+		webhookId: webhookId,
+	}
+}
+
+// Execute executes the request
+//  @return WebhookModel
+func (a *WebhooksApiService) ReplaceWebhookExecute(r WebhooksApiReplaceWebhookRequest) (*WebhookModel, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *WebhookModel
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.ReplaceWebhook")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/webhooks/{webhookId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"webhookId"+"}", url.PathEscape(parameterValueToString(r.webhookId, "webhookId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.webHookRequest == nil {
+		return localVarReturnValue, nil, reportError("webHookRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.webHookRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
