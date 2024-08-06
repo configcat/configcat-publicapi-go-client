@@ -150,7 +150,7 @@ func (o *ComparisonValueModel) GetListValueOk() ([]ComparisonValueListModel, boo
 
 // HasListValue returns a boolean if a field has been set.
 func (o *ComparisonValueModel) HasListValue() bool {
-	if o != nil && !IsNil(o.ListValue) {
+	if o != nil && IsNil(o.ListValue) {
 		return true
 	}
 

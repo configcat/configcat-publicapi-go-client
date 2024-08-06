@@ -162,7 +162,7 @@ func (o *ConfigSettingFormulasModel) GetSettingFormulasOk() ([]ConfigSettingForm
 
 // HasSettingFormulas returns a boolean if a field has been set.
 func (o *ConfigSettingFormulasModel) HasSettingFormulas() bool {
-	if o != nil && !IsNil(o.SettingFormulas) {
+	if o != nil && IsNil(o.SettingFormulas) {
 		return true
 	}
 

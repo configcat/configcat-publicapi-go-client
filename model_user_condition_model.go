@@ -13,8 +13,6 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the UserConditionModel type satisfies the MappedNullable interface at compile time
@@ -27,8 +25,6 @@ type UserConditionModel struct {
 	Comparator UserComparator `json:"comparator"`
 	ComparisonValue ComparisonValueModel `json:"comparisonValue"`
 }
-
-type _UserConditionModel UserConditionModel
 
 // NewUserConditionModel instantiates a new UserConditionModel object
 // This constructor will assign default values to properties that have it defined,
@@ -136,45 +132,6 @@ func (o UserConditionModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["comparator"] = o.Comparator
 	toSerialize["comparisonValue"] = o.ComparisonValue
 	return toSerialize, nil
-}
-
-func (o *UserConditionModel) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"comparisonAttribute",
-		"comparator",
-		"comparisonValue",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varUserConditionModel := _UserConditionModel{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUserConditionModel)
-
-	if err != nil {
-		return err
-	}
-
-	*o = UserConditionModel(varUserConditionModel)
-
-	return err
 }
 
 type NullableUserConditionModel struct {

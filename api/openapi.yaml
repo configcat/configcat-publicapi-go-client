@@ -5541,7 +5541,7 @@ components:
     AuditLogItemModel:
       additionalProperties: false
       example:
-        auditLogTypeEnum: productCreated
+        auditLogTypeEnum: null
         auditLogDateTime: 2000-01-23T04:56:07.000+00:00
         auditLogType: auditLogType
         auditLogId: 0
@@ -5930,10 +5930,10 @@ components:
       additionalProperties: false
       example:
         segmentCondition:
-          comparator: isIn
+          comparator: null
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userCondition:
-          comparator: isOneOf
+          comparator: null
           comparisonValue:
             listValue:
             - hint: hint
@@ -5944,7 +5944,7 @@ components:
             doubleValue: 1.4658129805029452
           comparisonAttribute: comparisonAttribute
         prerequisiteFlagCondition:
-          comparator: equals
+          comparator: null
           prerequisiteComparisonValue:
             stringValue: stringValue
             intValue: 0
@@ -5976,7 +5976,7 @@ components:
         name: name
         description: description
         migratedConfigId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        evaluationVersion: v1
+        evaluationVersion: null
         order: 0
       properties:
         product:
@@ -6024,10 +6024,10 @@ components:
               doubleValue: 6.027456183070403
           conditions:
           - segmentCondition:
-              comparator: isIn
+              comparator: null
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: isOneOf
+              comparator: null
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -6038,7 +6038,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: equals
+              comparator: null
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -6046,10 +6046,10 @@ components:
                 doubleValue: 6.027456183070403
               prerequisiteSettingId: 5
           - segmentCondition:
-              comparator: isIn
+              comparator: null
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: isOneOf
+              comparator: null
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -6060,7 +6060,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: equals
+              comparator: null
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -6087,10 +6087,10 @@ components:
               doubleValue: 6.027456183070403
           conditions:
           - segmentCondition:
-              comparator: isIn
+              comparator: null
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: isOneOf
+              comparator: null
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -6101,7 +6101,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: equals
+              comparator: null
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -6109,10 +6109,10 @@ components:
                 doubleValue: 6.027456183070403
               prerequisiteSettingId: 5
           - segmentCondition:
-              comparator: isIn
+              comparator: null
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: isOneOf
+              comparator: null
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -6123,7 +6123,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: equals
+              comparator: null
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -6146,11 +6146,11 @@ components:
         - 0
         lastUpdaterUserEmail: lastUpdaterUserEmail
         integrationLinks:
-        - integrationLinkType: trello
+        - integrationLinkType: null
           description: description
           key: key
           url: url
-        - integrationLinkType: trello
+        - integrationLinkType: null
           description: description
           key: key
           url: url
@@ -6170,7 +6170,7 @@ components:
           name: name
           creatorFullName: creatorFullName
           isWatching: true
-          settingType: boolean
+          settingType: null
           key: key
           settingId: 0
           order: 6
@@ -6275,10 +6275,10 @@ components:
                 doubleValue: 6.027456183070403
             conditions:
             - segmentCondition:
-                comparator: isIn
+                comparator: null
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: isOneOf
+                comparator: null
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -6289,7 +6289,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: equals
+                comparator: null
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -6297,10 +6297,10 @@ components:
                   doubleValue: 6.027456183070403
                 prerequisiteSettingId: 5
             - segmentCondition:
-                comparator: isIn
+                comparator: null
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: isOneOf
+                comparator: null
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -6311,7 +6311,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: equals
+                comparator: null
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -6338,10 +6338,10 @@ components:
                 doubleValue: 6.027456183070403
             conditions:
             - segmentCondition:
-                comparator: isIn
+                comparator: null
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: isOneOf
+                comparator: null
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -6352,7 +6352,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: equals
+                comparator: null
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -6360,10 +6360,10 @@ components:
                   doubleValue: 6.027456183070403
                 prerequisiteSettingId: 5
             - segmentCondition:
-                comparator: isIn
+                comparator: null
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: isOneOf
+                comparator: null
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -6374,7 +6374,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: equals
+                comparator: null
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -6397,11 +6397,11 @@ components:
           - 0
           lastUpdaterUserEmail: lastUpdaterUserEmail
           integrationLinks:
-          - integrationLinkType: trello
+          - integrationLinkType: null
             description: description
             key: key
             url: url
-          - integrationLinkType: trello
+          - integrationLinkType: null
             description: description
             key: key
             url: url
@@ -6421,7 +6421,7 @@ components:
             name: name
             creatorFullName: creatorFullName
             isWatching: true
-            settingType: boolean
+            settingType: null
             key: key
             settingId: 0
             order: 6
@@ -6444,10 +6444,10 @@ components:
                 doubleValue: 6.027456183070403
             conditions:
             - segmentCondition:
-                comparator: isIn
+                comparator: null
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: isOneOf
+                comparator: null
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -6458,7 +6458,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: equals
+                comparator: null
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -6466,10 +6466,10 @@ components:
                   doubleValue: 6.027456183070403
                 prerequisiteSettingId: 5
             - segmentCondition:
-                comparator: isIn
+                comparator: null
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: isOneOf
+                comparator: null
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -6480,7 +6480,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: equals
+                comparator: null
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -6507,10 +6507,10 @@ components:
                 doubleValue: 6.027456183070403
             conditions:
             - segmentCondition:
-                comparator: isIn
+                comparator: null
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: isOneOf
+                comparator: null
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -6521,7 +6521,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: equals
+                comparator: null
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -6529,10 +6529,10 @@ components:
                   doubleValue: 6.027456183070403
                 prerequisiteSettingId: 5
             - segmentCondition:
-                comparator: isIn
+                comparator: null
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: isOneOf
+                comparator: null
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -6543,7 +6543,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: equals
+                comparator: null
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -6566,11 +6566,11 @@ components:
           - 0
           lastUpdaterUserEmail: lastUpdaterUserEmail
           integrationLinks:
-          - integrationLinkType: trello
+          - integrationLinkType: null
             description: description
             key: key
             url: url
-          - integrationLinkType: trello
+          - integrationLinkType: null
             description: description
             key: key
             url: url
@@ -6590,7 +6590,7 @@ components:
             name: name
             creatorFullName: creatorFullName
             isWatching: true
-            settingType: boolean
+            settingType: null
             key: key
             settingId: 0
             order: 6
@@ -6611,7 +6611,7 @@ components:
           name: name
           description: description
           migratedConfigId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          evaluationVersion: v1
+          evaluationVersion: null
           order: 0
       properties:
         config:
@@ -6633,16 +6633,16 @@ components:
       additionalProperties: false
       example:
         rolloutRules:
-        - comparator: isOneOf
+        - comparator: null
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: isIn
+          segmentComparator: null
           value: ""
           comparisonAttribute: comparisonAttribute
-        - comparator: isOneOf
+        - comparator: null
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: isIn
+          segmentComparator: null
           value: ""
           comparisonAttribute: comparisonAttribute
         rolloutPercentageItems:
@@ -6653,11 +6653,11 @@ components:
         lastUpdaterUserEmail: lastUpdaterUserEmail
         value: ""
         integrationLinks:
-        - integrationLinkType: trello
+        - integrationLinkType: null
           description: description
           key: key
           url: url
-        - integrationLinkType: trello
+        - integrationLinkType: null
           description: description
           key: key
           url: url
@@ -6677,7 +6677,7 @@ components:
           name: name
           creatorFullName: creatorFullName
           isWatching: true
-          settingType: boolean
+          settingType: null
           key: key
           settingId: 0
           order: 6
@@ -6758,16 +6758,16 @@ components:
         readOnly: true
         settingValues:
         - rolloutRules:
-          - comparator: isOneOf
+          - comparator: null
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: isIn
+            segmentComparator: null
             value: ""
             comparisonAttribute: comparisonAttribute
-          - comparator: isOneOf
+          - comparator: null
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: isIn
+            segmentComparator: null
             value: ""
             comparisonAttribute: comparisonAttribute
           rolloutPercentageItems:
@@ -6778,11 +6778,11 @@ components:
           lastUpdaterUserEmail: lastUpdaterUserEmail
           value: ""
           integrationLinks:
-          - integrationLinkType: trello
+          - integrationLinkType: null
             description: description
             key: key
             url: url
-          - integrationLinkType: trello
+          - integrationLinkType: null
             description: description
             key: key
             url: url
@@ -6802,23 +6802,23 @@ components:
             name: name
             creatorFullName: creatorFullName
             isWatching: true
-            settingType: boolean
+            settingType: null
             key: key
             settingId: 0
             order: 6
           updatedAt: 2000-01-23T04:56:07.000+00:00
           lastUpdaterUserFullName: lastUpdaterUserFullName
         - rolloutRules:
-          - comparator: isOneOf
+          - comparator: null
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: isIn
+            segmentComparator: null
             value: ""
             comparisonAttribute: comparisonAttribute
-          - comparator: isOneOf
+          - comparator: null
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: isIn
+            segmentComparator: null
             value: ""
             comparisonAttribute: comparisonAttribute
           rolloutPercentageItems:
@@ -6829,11 +6829,11 @@ components:
           lastUpdaterUserEmail: lastUpdaterUserEmail
           value: ""
           integrationLinks:
-          - integrationLinkType: trello
+          - integrationLinkType: null
             description: description
             key: key
             url: url
-          - integrationLinkType: trello
+          - integrationLinkType: null
             description: description
             key: key
             url: url
@@ -6853,7 +6853,7 @@ components:
             name: name
             creatorFullName: creatorFullName
             isWatching: true
-            settingType: boolean
+            settingType: null
             key: key
             settingId: 0
             order: 6
@@ -6873,7 +6873,7 @@ components:
           name: name
           description: description
           migratedConfigId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          evaluationVersion: v1
+          evaluationVersion: null
           order: 0
       properties:
         config:
@@ -6913,7 +6913,7 @@ components:
       example:
         name: name
         description: description
-        evaluationVersion: v1
+        evaluationVersion: null
         order: 0
       properties:
         name:
@@ -6975,7 +6975,7 @@ components:
     CreateIntegrationModel:
       additionalProperties: false
       example:
-        integrationType: dataDog
+        integrationType: null
         environmentIds:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -7048,7 +7048,7 @@ components:
         canManageProductPreferences: true
         canManageIntegrations: true
         canDeleteSegments: true
-        accessType: readOnly
+        accessType: null
         canTagSetting: true
         canManageMembers: true
         canManageWebhook: true
@@ -7060,7 +7060,7 @@ components:
         canRotateSdkKey: true
         canViewProductAuditLog: true
         canCreateOrUpdateTag: true
-        newEnvironmentAccessType: full
+        newEnvironmentAccessType: null
         canCreateOrUpdateSegments: true
         canCreateOrUpdateSetting: true
       properties:
@@ -7172,7 +7172,7 @@ components:
     CreateSegmentModel:
       additionalProperties: false
       example:
-        comparator: isOneOf
+        comparator: null
         comparisonValue: comparisonValue
         name: name
         description: description
@@ -7217,7 +7217,7 @@ components:
           value: ""
         hint: hint
         name: name
-        settingType: boolean
+        settingType: null
         key: key
         tags:
         - 0
@@ -7583,7 +7583,7 @@ components:
           name: name
           description: description
           migratedConfigId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          evaluationVersion: v1
+          evaluationVersion: null
           order: 0
         setting:
           createdAt: 2000-01-23T04:56:07.000+00:00
@@ -7592,7 +7592,7 @@ components:
           name: name
           creatorFullName: creatorFullName
           isWatching: true
-          settingType: boolean
+          settingType: null
           key: key
           settingId: 0
           order: 6
@@ -7657,7 +7657,7 @@ components:
             name: name
             description: description
             migratedConfigId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            evaluationVersion: v1
+            evaluationVersion: null
             order: 0
           setting:
             createdAt: 2000-01-23T04:56:07.000+00:00
@@ -7666,7 +7666,7 @@ components:
             name: name
             creatorFullName: creatorFullName
             isWatching: true
-            settingType: boolean
+            settingType: null
             key: key
             settingId: 0
             order: 6
@@ -7711,7 +7711,7 @@ components:
             name: name
             description: description
             migratedConfigId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            evaluationVersion: v1
+            evaluationVersion: null
             order: 0
           setting:
             createdAt: 2000-01-23T04:56:07.000+00:00
@@ -7720,7 +7720,7 @@ components:
             name: name
             creatorFullName: creatorFullName
             isWatching: true
-            settingType: boolean
+            settingType: null
             key: key
             settingId: 0
             order: 6
@@ -7739,7 +7739,7 @@ components:
     IntegrationLinkModel:
       additionalProperties: false
       example:
-        integrationLinkType: trello
+        integrationLinkType: null
         description: description
         key: key
         url: url
@@ -7769,7 +7769,7 @@ components:
         integrationEnvironmentIds:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        integrationType: dataDog
+        integrationType: null
         integrationConfigIds:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -7828,7 +7828,7 @@ components:
         - integrationEnvironmentIds:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          integrationType: dataDog
+          integrationType: null
           integrationConfigIds:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -7839,7 +7839,7 @@ components:
         - integrationEnvironmentIds:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          integrationType: dataDog
+          integrationType: null
           integrationConfigIds:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -7910,7 +7910,7 @@ components:
     JsonPatchOperation:
       additionalProperties: false
       example:
-        op: unknown
+        op: null
         path: path
         from: from
         value: ""
@@ -8337,7 +8337,7 @@ components:
         canManageProductPreferences: true
         canManageIntegrations: true
         canDeleteSegments: true
-        accessType: readOnly
+        accessType: null
         canManageMembers: true
         canManageWebhook: true
         canUseExportImport: true
@@ -8364,7 +8364,7 @@ components:
         name: name
         canViewProductAuditLog: true
         canCreateOrUpdateTag: true
-        newEnvironmentAccessType: full
+        newEnvironmentAccessType: null
       properties:
         permissionGroupId:
           description: Identifier of the Permission Group.
@@ -8450,7 +8450,7 @@ components:
     PreferencesModel:
       additionalProperties: false
       example:
-        keyGenerationMode: camelCase
+        keyGenerationMode: null
         showVariationId: true
         mandatorySettingHint: true
         reasonRequiredEnvironments:
@@ -8493,7 +8493,7 @@ components:
       additionalProperties: false
       description: Describes a condition that is based on a prerequisite flag.
       example:
-        comparator: equals
+        comparator: null
         prerequisiteComparisonValue:
           stringValue: stringValue
           intValue: 0
@@ -8722,10 +8722,10 @@ components:
     RolloutRuleModel:
       additionalProperties: false
       example:
-        comparator: isOneOf
+        comparator: null
         comparisonValue: comparisonValue
         segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        segmentComparator: isIn
+        segmentComparator: null
         value: ""
         comparisonAttribute: comparisonAttribute
       properties:
@@ -8778,7 +8778,7 @@ components:
       additionalProperties: false
       description: Describes a condition that is based on a segment.
       example:
-        comparator: isIn
+        comparator: null
         segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         segmentId:
@@ -8874,7 +8874,7 @@ components:
         creatorEmail: creatorEmail
         description: description
         createdAt: 2000-01-23T04:56:07.000+00:00
-        comparator: isOneOf
+        comparator: null
         lastUpdaterEmail: lastUpdaterEmail
         segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         name: name
@@ -8943,7 +8943,7 @@ components:
         name: name
         creatorFullName: creatorFullName
         isWatching: true
-        settingType: boolean
+        settingType: null
         key: key
         settingId: 0
         order: 6
@@ -9006,10 +9006,10 @@ components:
               doubleValue: 6.027456183070403
           conditions:
           - segmentCondition:
-              comparator: isIn
+              comparator: null
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: isOneOf
+              comparator: null
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9020,7 +9020,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: equals
+              comparator: null
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9028,10 +9028,10 @@ components:
                 doubleValue: 6.027456183070403
               prerequisiteSettingId: 5
           - segmentCondition:
-              comparator: isIn
+              comparator: null
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: isOneOf
+              comparator: null
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9042,7 +9042,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: equals
+              comparator: null
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9069,10 +9069,10 @@ components:
               doubleValue: 6.027456183070403
           conditions:
           - segmentCondition:
-              comparator: isIn
+              comparator: null
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: isOneOf
+              comparator: null
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9083,7 +9083,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: equals
+              comparator: null
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9091,10 +9091,10 @@ components:
                 doubleValue: 6.027456183070403
               prerequisiteSettingId: 5
           - segmentCondition:
-              comparator: isIn
+              comparator: null
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: isOneOf
+              comparator: null
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9105,7 +9105,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: equals
+              comparator: null
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9132,7 +9132,7 @@ components:
           name: name
           creatorFullName: creatorFullName
           isWatching: true
-          settingType: boolean
+          settingType: null
           key: key
           settingId: 0
           order: 6
@@ -9165,11 +9165,11 @@ components:
         - 2
         - 2
         integrationLinks:
-        - integrationLinkType: trello
+        - integrationLinkType: null
           description: description
           key: key
           url: url
-        - integrationLinkType: trello
+        - integrationLinkType: null
           description: description
           key: key
           url: url
@@ -9187,7 +9187,7 @@ components:
           name: name
           description: description
           migratedConfigId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          evaluationVersion: v1
+          evaluationVersion: null
           order: 0
         settingTags:
         - color: color
@@ -9270,7 +9270,7 @@ components:
         configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         hint: hint
         name: name
-        settingType: boolean
+        settingType: null
         key: key
         settingId: 0
         order: 6
@@ -9371,16 +9371,16 @@ components:
       additionalProperties: false
       example:
         rolloutRules:
-        - comparator: isOneOf
+        - comparator: null
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: isIn
+          segmentComparator: null
           value: ""
           comparisonAttribute: comparisonAttribute
-        - comparator: isOneOf
+        - comparator: null
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: isIn
+          segmentComparator: null
           value: ""
           comparisonAttribute: comparisonAttribute
         rolloutPercentageItems:
@@ -9397,7 +9397,7 @@ components:
           name: name
           creatorFullName: creatorFullName
           isWatching: true
-          settingType: boolean
+          settingType: null
           key: key
           settingId: 0
           order: 6
@@ -9427,11 +9427,11 @@ components:
           maxTargetingRuleCount: 5
         value: ""
         integrationLinks:
-        - integrationLinkType: trello
+        - integrationLinkType: null
           description: description
           key: key
           url: url
-        - integrationLinkType: trello
+        - integrationLinkType: null
           description: description
           key: key
           url: url
@@ -9449,7 +9449,7 @@ components:
           name: name
           description: description
           migratedConfigId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          evaluationVersion: v1
+          evaluationVersion: null
           order: 0
         settingTags:
         - color: color
@@ -9564,10 +9564,10 @@ components:
             doubleValue: 6.027456183070403
         conditions:
         - segmentCondition:
-            comparator: isIn
+            comparator: null
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           userCondition:
-            comparator: isOneOf
+            comparator: null
             comparisonValue:
               listValue:
               - hint: hint
@@ -9578,7 +9578,7 @@ components:
               doubleValue: 1.4658129805029452
             comparisonAttribute: comparisonAttribute
           prerequisiteFlagCondition:
-            comparator: equals
+            comparator: null
             prerequisiteComparisonValue:
               stringValue: stringValue
               intValue: 0
@@ -9586,10 +9586,10 @@ components:
               doubleValue: 6.027456183070403
             prerequisiteSettingId: 5
         - segmentCondition:
-            comparator: isIn
+            comparator: null
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           userCondition:
-            comparator: isOneOf
+            comparator: null
             comparisonValue:
               listValue:
               - hint: hint
@@ -9600,7 +9600,7 @@ components:
               doubleValue: 1.4658129805029452
             comparisonAttribute: comparisonAttribute
           prerequisiteFlagCondition:
-            comparator: equals
+            comparator: null
             prerequisiteComparisonValue:
               stringValue: stringValue
               intValue: 0
@@ -9709,10 +9709,10 @@ components:
               doubleValue: 6.027456183070403
           conditions:
           - segmentCondition:
-              comparator: isIn
+              comparator: null
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: isOneOf
+              comparator: null
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9723,7 +9723,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: equals
+              comparator: null
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9731,10 +9731,10 @@ components:
                 doubleValue: 6.027456183070403
               prerequisiteSettingId: 5
           - segmentCondition:
-              comparator: isIn
+              comparator: null
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: isOneOf
+              comparator: null
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9745,7 +9745,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: equals
+              comparator: null
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9772,10 +9772,10 @@ components:
               doubleValue: 6.027456183070403
           conditions:
           - segmentCondition:
-              comparator: isIn
+              comparator: null
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: isOneOf
+              comparator: null
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9786,7 +9786,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: equals
+              comparator: null
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9794,10 +9794,10 @@ components:
                 doubleValue: 6.027456183070403
               prerequisiteSettingId: 5
           - segmentCondition:
-              comparator: isIn
+              comparator: null
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: isOneOf
+              comparator: null
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9808,7 +9808,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: equals
+              comparator: null
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9863,10 +9863,10 @@ components:
               doubleValue: 6.027456183070403
           conditions:
           - segmentCondition:
-              comparator: isIn
+              comparator: null
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: isOneOf
+              comparator: null
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9877,7 +9877,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: equals
+              comparator: null
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9885,10 +9885,10 @@ components:
                 doubleValue: 6.027456183070403
               prerequisiteSettingId: 5
           - segmentCondition:
-              comparator: isIn
+              comparator: null
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: isOneOf
+              comparator: null
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9899,7 +9899,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: equals
+              comparator: null
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9926,10 +9926,10 @@ components:
               doubleValue: 6.027456183070403
           conditions:
           - segmentCondition:
-              comparator: isIn
+              comparator: null
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: isOneOf
+              comparator: null
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9940,7 +9940,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: equals
+              comparator: null
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9948,10 +9948,10 @@ components:
                 doubleValue: 6.027456183070403
               prerequisiteSettingId: 5
           - segmentCondition:
-              comparator: isIn
+              comparator: null
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: isOneOf
+              comparator: null
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9962,7 +9962,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: equals
+              comparator: null
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -10023,10 +10023,10 @@ components:
                 doubleValue: 6.027456183070403
             conditions:
             - segmentCondition:
-                comparator: isIn
+                comparator: null
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: isOneOf
+                comparator: null
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -10037,7 +10037,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: equals
+                comparator: null
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -10045,10 +10045,10 @@ components:
                   doubleValue: 6.027456183070403
                 prerequisiteSettingId: 5
             - segmentCondition:
-                comparator: isIn
+                comparator: null
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: isOneOf
+                comparator: null
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -10059,7 +10059,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: equals
+                comparator: null
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -10086,10 +10086,10 @@ components:
                 doubleValue: 6.027456183070403
             conditions:
             - segmentCondition:
-                comparator: isIn
+                comparator: null
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: isOneOf
+                comparator: null
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -10100,7 +10100,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: equals
+                comparator: null
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -10108,10 +10108,10 @@ components:
                   doubleValue: 6.027456183070403
                 prerequisiteSettingId: 5
             - segmentCondition:
-                comparator: isIn
+                comparator: null
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: isOneOf
+                comparator: null
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -10122,7 +10122,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: equals
+                comparator: null
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -10157,10 +10157,10 @@ components:
                 doubleValue: 6.027456183070403
             conditions:
             - segmentCondition:
-                comparator: isIn
+                comparator: null
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: isOneOf
+                comparator: null
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -10171,7 +10171,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: equals
+                comparator: null
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -10179,10 +10179,10 @@ components:
                   doubleValue: 6.027456183070403
                 prerequisiteSettingId: 5
             - segmentCondition:
-                comparator: isIn
+                comparator: null
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: isOneOf
+                comparator: null
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -10193,7 +10193,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: equals
+                comparator: null
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -10220,10 +10220,10 @@ components:
                 doubleValue: 6.027456183070403
             conditions:
             - segmentCondition:
-                comparator: isIn
+                comparator: null
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: isOneOf
+                comparator: null
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -10234,7 +10234,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: equals
+                comparator: null
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -10242,10 +10242,10 @@ components:
                   doubleValue: 6.027456183070403
                 prerequisiteSettingId: 5
             - segmentCondition:
-                comparator: isIn
+                comparator: null
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: isOneOf
+                comparator: null
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -10256,7 +10256,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: equals
+                comparator: null
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -10330,7 +10330,7 @@ components:
         canManageProductPreferences: true
         canManageIntegrations: true
         canDeleteSegments: true
-        accessType: readOnly
+        accessType: null
         canTagSetting: true
         canManageMembers: true
         canManageWebhook: true
@@ -10342,7 +10342,7 @@ components:
         canRotateSdkKey: true
         canViewProductAuditLog: true
         canCreateOrUpdateTag: true
-        newEnvironmentAccessType: full
+        newEnvironmentAccessType: null
         canCreateOrUpdateSegments: true
         canCreateOrUpdateSetting: true
       properties:
@@ -10446,7 +10446,7 @@ components:
     UpdatePreferencesRequest:
       additionalProperties: false
       example:
-        keyGenerationMode: camelCase
+        keyGenerationMode: null
         showVariationId: true
         mandatorySettingHint: true
         reasonRequiredEnvironments:
@@ -10524,7 +10524,7 @@ components:
     UpdateSegmentModel:
       additionalProperties: false
       example:
-        comparator: isOneOf
+        comparator: null
         comparisonValue: comparisonValue
         name: name
         description: description
@@ -10555,16 +10555,16 @@ components:
       additionalProperties: false
       example:
         rolloutRules:
-        - comparator: isOneOf
+        - comparator: null
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: isIn
+          segmentComparator: null
           value: ""
           comparisonAttribute: comparisonAttribute
-        - comparator: isOneOf
+        - comparator: null
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: isIn
+          segmentComparator: null
           value: ""
           comparisonAttribute: comparisonAttribute
         rolloutPercentageItems:
@@ -10594,16 +10594,16 @@ components:
       additionalProperties: false
       example:
         rolloutRules:
-        - comparator: isOneOf
+        - comparator: null
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: isIn
+          segmentComparator: null
           value: ""
           comparisonAttribute: comparisonAttribute
-        - comparator: isOneOf
+        - comparator: null
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: isIn
+          segmentComparator: null
           value: ""
           comparisonAttribute: comparisonAttribute
         rolloutPercentageItems:
@@ -10639,16 +10639,16 @@ components:
       example:
         settingValues:
         - rolloutRules:
-          - comparator: isOneOf
+          - comparator: null
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: isIn
+            segmentComparator: null
             value: ""
             comparisonAttribute: comparisonAttribute
-          - comparator: isOneOf
+          - comparator: null
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: isIn
+            segmentComparator: null
             value: ""
             comparisonAttribute: comparisonAttribute
           rolloutPercentageItems:
@@ -10659,16 +10659,16 @@ components:
           value: ""
           settingId: 0
         - rolloutRules:
-          - comparator: isOneOf
+          - comparator: null
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: isIn
+            segmentComparator: null
             value: ""
             comparisonAttribute: comparisonAttribute
-          - comparator: isOneOf
+          - comparator: null
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: isIn
+            segmentComparator: null
             value: ""
             comparisonAttribute: comparisonAttribute
           rolloutPercentageItems:
@@ -10750,7 +10750,7 @@ components:
       additionalProperties: false
       description: Describes a condition that is based on user attributes.
       example:
-        comparator: isOneOf
+        comparator: null
         comparisonValue:
           listValue:
           - hint: hint
@@ -10843,7 +10843,7 @@ components:
         - isSecure: true
           value: value
           key: key
-        httpMethod: get
+        httpMethod: null
         url: url
         content: content
       properties:
@@ -10944,7 +10944,7 @@ components:
           environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name
         webhookId: 0
-        httpMethod: get
+        httpMethod: null
         config:
           configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name

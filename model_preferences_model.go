@@ -165,7 +165,7 @@ func (o *PreferencesModel) GetReasonRequiredEnvironmentsOk() ([]ReasonRequiredEn
 
 // HasReasonRequiredEnvironments returns a boolean if a field has been set.
 func (o *PreferencesModel) HasReasonRequiredEnvironments() bool {
-	if o != nil && !IsNil(o.ReasonRequiredEnvironments) {
+	if o != nil && IsNil(o.ReasonRequiredEnvironments) {
 		return true
 	}
 

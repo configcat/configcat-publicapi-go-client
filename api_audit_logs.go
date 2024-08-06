@@ -22,12 +22,12 @@ import (
 )
 
 
-// AuditLogsAPIService AuditLogsAPI service
-type AuditLogsAPIService service
+// AuditLogsApiService AuditLogsApi service
+type AuditLogsApiService service
 
-type AuditLogsAPIGetAuditlogsRequest struct {
+type AuditLogsApiGetAuditlogsRequest struct {
 	ctx context.Context
-	ApiService *AuditLogsAPIService
+	ApiService *AuditLogsApiService
 	productId string
 	configId *string
 	environmentId *string
@@ -37,36 +37,36 @@ type AuditLogsAPIGetAuditlogsRequest struct {
 }
 
 // The identifier of the Config.
-func (r AuditLogsAPIGetAuditlogsRequest) ConfigId(configId string) AuditLogsAPIGetAuditlogsRequest {
+func (r AuditLogsApiGetAuditlogsRequest) ConfigId(configId string) AuditLogsApiGetAuditlogsRequest {
 	r.configId = &configId
 	return r
 }
 
 // The identifier of the Environment.
-func (r AuditLogsAPIGetAuditlogsRequest) EnvironmentId(environmentId string) AuditLogsAPIGetAuditlogsRequest {
+func (r AuditLogsApiGetAuditlogsRequest) EnvironmentId(environmentId string) AuditLogsApiGetAuditlogsRequest {
 	r.environmentId = &environmentId
 	return r
 }
 
 // Filter Audit logs by Audit log type.
-func (r AuditLogsAPIGetAuditlogsRequest) AuditLogType(auditLogType AuditLogType) AuditLogsAPIGetAuditlogsRequest {
+func (r AuditLogsApiGetAuditlogsRequest) AuditLogType(auditLogType AuditLogType) AuditLogsApiGetAuditlogsRequest {
 	r.auditLogType = &auditLogType
 	return r
 }
 
 // Filter Audit logs by starting UTC date.
-func (r AuditLogsAPIGetAuditlogsRequest) FromUtcDateTime(fromUtcDateTime time.Time) AuditLogsAPIGetAuditlogsRequest {
+func (r AuditLogsApiGetAuditlogsRequest) FromUtcDateTime(fromUtcDateTime time.Time) AuditLogsApiGetAuditlogsRequest {
 	r.fromUtcDateTime = &fromUtcDateTime
 	return r
 }
 
 // Filter Audit logs by ending UTC date.
-func (r AuditLogsAPIGetAuditlogsRequest) ToUtcDateTime(toUtcDateTime time.Time) AuditLogsAPIGetAuditlogsRequest {
+func (r AuditLogsApiGetAuditlogsRequest) ToUtcDateTime(toUtcDateTime time.Time) AuditLogsApiGetAuditlogsRequest {
 	r.toUtcDateTime = &toUtcDateTime
 	return r
 }
 
-func (r AuditLogsAPIGetAuditlogsRequest) Execute() ([]AuditLogItemModel, *http.Response, error) {
+func (r AuditLogsApiGetAuditlogsRequest) Execute() ([]AuditLogItemModel, *http.Response, error) {
 	return r.ApiService.GetAuditlogsExecute(r)
 }
 
@@ -78,10 +78,10 @@ and the result can be optionally filtered by Config and/or Environment.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return AuditLogsAPIGetAuditlogsRequest
+ @return AuditLogsApiGetAuditlogsRequest
 */
-func (a *AuditLogsAPIService) GetAuditlogs(ctx context.Context, productId string) AuditLogsAPIGetAuditlogsRequest {
-	return AuditLogsAPIGetAuditlogsRequest{
+func (a *AuditLogsApiService) GetAuditlogs(ctx context.Context, productId string) AuditLogsApiGetAuditlogsRequest {
+	return AuditLogsApiGetAuditlogsRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -90,7 +90,7 @@ func (a *AuditLogsAPIService) GetAuditlogs(ctx context.Context, productId string
 
 // Execute executes the request
 //  @return []AuditLogItemModel
-func (a *AuditLogsAPIService) GetAuditlogsExecute(r AuditLogsAPIGetAuditlogsRequest) ([]AuditLogItemModel, *http.Response, error) {
+func (a *AuditLogsApiService) GetAuditlogsExecute(r AuditLogsApiGetAuditlogsRequest) ([]AuditLogItemModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -98,7 +98,7 @@ func (a *AuditLogsAPIService) GetAuditlogsExecute(r AuditLogsAPIGetAuditlogsRequ
 		localVarReturnValue  []AuditLogItemModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditLogsAPIService.GetAuditlogs")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditLogsApiService.GetAuditlogs")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -179,13 +179,13 @@ func (a *AuditLogsAPIService) GetAuditlogsExecute(r AuditLogsAPIGetAuditlogsRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type AuditLogsAPIGetDeletedSettingsRequest struct {
+type AuditLogsApiGetDeletedSettingsRequest struct {
 	ctx context.Context
-	ApiService *AuditLogsAPIService
+	ApiService *AuditLogsApiService
 	configId string
 }
 
-func (r AuditLogsAPIGetDeletedSettingsRequest) Execute() ([]SettingModel, *http.Response, error) {
+func (r AuditLogsApiGetDeletedSettingsRequest) Execute() ([]SettingModel, *http.Response, error) {
 	return r.ApiService.GetDeletedSettingsExecute(r)
 }
 
@@ -196,10 +196,10 @@ This endpoint returns the list of Feature Flags and Settings that were deleted f
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param configId The identifier of the Config.
- @return AuditLogsAPIGetDeletedSettingsRequest
+ @return AuditLogsApiGetDeletedSettingsRequest
 */
-func (a *AuditLogsAPIService) GetDeletedSettings(ctx context.Context, configId string) AuditLogsAPIGetDeletedSettingsRequest {
-	return AuditLogsAPIGetDeletedSettingsRequest{
+func (a *AuditLogsApiService) GetDeletedSettings(ctx context.Context, configId string) AuditLogsApiGetDeletedSettingsRequest {
+	return AuditLogsApiGetDeletedSettingsRequest{
 		ApiService: a,
 		ctx: ctx,
 		configId: configId,
@@ -208,7 +208,7 @@ func (a *AuditLogsAPIService) GetDeletedSettings(ctx context.Context, configId s
 
 // Execute executes the request
 //  @return []SettingModel
-func (a *AuditLogsAPIService) GetDeletedSettingsExecute(r AuditLogsAPIGetDeletedSettingsRequest) ([]SettingModel, *http.Response, error) {
+func (a *AuditLogsApiService) GetDeletedSettingsExecute(r AuditLogsApiGetDeletedSettingsRequest) ([]SettingModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -216,7 +216,7 @@ func (a *AuditLogsAPIService) GetDeletedSettingsExecute(r AuditLogsAPIGetDeleted
 		localVarReturnValue  []SettingModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditLogsAPIService.GetDeletedSettings")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditLogsApiService.GetDeletedSettings")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -282,9 +282,9 @@ func (a *AuditLogsAPIService) GetDeletedSettingsExecute(r AuditLogsAPIGetDeleted
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type AuditLogsAPIGetOrganizationAuditlogsRequest struct {
+type AuditLogsApiGetOrganizationAuditlogsRequest struct {
 	ctx context.Context
-	ApiService *AuditLogsAPIService
+	ApiService *AuditLogsApiService
 	organizationId string
 	productId *string
 	configId *string
@@ -295,42 +295,42 @@ type AuditLogsAPIGetOrganizationAuditlogsRequest struct {
 }
 
 // The identifier of the Product.
-func (r AuditLogsAPIGetOrganizationAuditlogsRequest) ProductId(productId string) AuditLogsAPIGetOrganizationAuditlogsRequest {
+func (r AuditLogsApiGetOrganizationAuditlogsRequest) ProductId(productId string) AuditLogsApiGetOrganizationAuditlogsRequest {
 	r.productId = &productId
 	return r
 }
 
 // The identifier of the Config.
-func (r AuditLogsAPIGetOrganizationAuditlogsRequest) ConfigId(configId string) AuditLogsAPIGetOrganizationAuditlogsRequest {
+func (r AuditLogsApiGetOrganizationAuditlogsRequest) ConfigId(configId string) AuditLogsApiGetOrganizationAuditlogsRequest {
 	r.configId = &configId
 	return r
 }
 
 // The identifier of the Environment.
-func (r AuditLogsAPIGetOrganizationAuditlogsRequest) EnvironmentId(environmentId string) AuditLogsAPIGetOrganizationAuditlogsRequest {
+func (r AuditLogsApiGetOrganizationAuditlogsRequest) EnvironmentId(environmentId string) AuditLogsApiGetOrganizationAuditlogsRequest {
 	r.environmentId = &environmentId
 	return r
 }
 
 // Filter Audit logs by Audit log type.
-func (r AuditLogsAPIGetOrganizationAuditlogsRequest) AuditLogType(auditLogType AuditLogType) AuditLogsAPIGetOrganizationAuditlogsRequest {
+func (r AuditLogsApiGetOrganizationAuditlogsRequest) AuditLogType(auditLogType AuditLogType) AuditLogsApiGetOrganizationAuditlogsRequest {
 	r.auditLogType = &auditLogType
 	return r
 }
 
 // Filter Audit logs by starting UTC date.
-func (r AuditLogsAPIGetOrganizationAuditlogsRequest) FromUtcDateTime(fromUtcDateTime time.Time) AuditLogsAPIGetOrganizationAuditlogsRequest {
+func (r AuditLogsApiGetOrganizationAuditlogsRequest) FromUtcDateTime(fromUtcDateTime time.Time) AuditLogsApiGetOrganizationAuditlogsRequest {
 	r.fromUtcDateTime = &fromUtcDateTime
 	return r
 }
 
 // Filter Audit logs by ending UTC date.
-func (r AuditLogsAPIGetOrganizationAuditlogsRequest) ToUtcDateTime(toUtcDateTime time.Time) AuditLogsAPIGetOrganizationAuditlogsRequest {
+func (r AuditLogsApiGetOrganizationAuditlogsRequest) ToUtcDateTime(toUtcDateTime time.Time) AuditLogsApiGetOrganizationAuditlogsRequest {
 	r.toUtcDateTime = &toUtcDateTime
 	return r
 }
 
-func (r AuditLogsAPIGetOrganizationAuditlogsRequest) Execute() ([]AuditLogItemModel, *http.Response, error) {
+func (r AuditLogsApiGetOrganizationAuditlogsRequest) Execute() ([]AuditLogItemModel, *http.Response, error) {
 	return r.ApiService.GetOrganizationAuditlogsExecute(r)
 }
 
@@ -342,10 +342,10 @@ and the result can be optionally filtered by Product and/or Config and/or Enviro
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organizationId The identifier of the Organization.
- @return AuditLogsAPIGetOrganizationAuditlogsRequest
+ @return AuditLogsApiGetOrganizationAuditlogsRequest
 */
-func (a *AuditLogsAPIService) GetOrganizationAuditlogs(ctx context.Context, organizationId string) AuditLogsAPIGetOrganizationAuditlogsRequest {
-	return AuditLogsAPIGetOrganizationAuditlogsRequest{
+func (a *AuditLogsApiService) GetOrganizationAuditlogs(ctx context.Context, organizationId string) AuditLogsApiGetOrganizationAuditlogsRequest {
+	return AuditLogsApiGetOrganizationAuditlogsRequest{
 		ApiService: a,
 		ctx: ctx,
 		organizationId: organizationId,
@@ -354,7 +354,7 @@ func (a *AuditLogsAPIService) GetOrganizationAuditlogs(ctx context.Context, orga
 
 // Execute executes the request
 //  @return []AuditLogItemModel
-func (a *AuditLogsAPIService) GetOrganizationAuditlogsExecute(r AuditLogsAPIGetOrganizationAuditlogsRequest) ([]AuditLogItemModel, *http.Response, error) {
+func (a *AuditLogsApiService) GetOrganizationAuditlogsExecute(r AuditLogsApiGetOrganizationAuditlogsRequest) ([]AuditLogItemModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -362,7 +362,7 @@ func (a *AuditLogsAPIService) GetOrganizationAuditlogsExecute(r AuditLogsAPIGetO
 		localVarReturnValue  []AuditLogItemModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditLogsAPIService.GetOrganizationAuditlogs")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditLogsApiService.GetOrganizationAuditlogs")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

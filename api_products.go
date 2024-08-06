@@ -21,22 +21,22 @@ import (
 )
 
 
-// ProductsAPIService ProductsAPI service
-type ProductsAPIService service
+// ProductsApiService ProductsApi service
+type ProductsApiService service
 
-type ProductsAPICreateProductRequest struct {
+type ProductsApiCreateProductRequest struct {
 	ctx context.Context
-	ApiService *ProductsAPIService
+	ApiService *ProductsApiService
 	organizationId string
 	createProductRequest *CreateProductRequest
 }
 
-func (r ProductsAPICreateProductRequest) CreateProductRequest(createProductRequest CreateProductRequest) ProductsAPICreateProductRequest {
+func (r ProductsApiCreateProductRequest) CreateProductRequest(createProductRequest CreateProductRequest) ProductsApiCreateProductRequest {
 	r.createProductRequest = &createProductRequest
 	return r
 }
 
-func (r ProductsAPICreateProductRequest) Execute() (*ProductModel, *http.Response, error) {
+func (r ProductsApiCreateProductRequest) Execute() (*ProductModel, *http.Response, error) {
 	return r.ApiService.CreateProductExecute(r)
 }
 
@@ -48,10 +48,10 @@ identified by the `organizationId` parameter, which can be obtained from the [Li
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organizationId The identifier of the Organization.
- @return ProductsAPICreateProductRequest
+ @return ProductsApiCreateProductRequest
 */
-func (a *ProductsAPIService) CreateProduct(ctx context.Context, organizationId string) ProductsAPICreateProductRequest {
-	return ProductsAPICreateProductRequest{
+func (a *ProductsApiService) CreateProduct(ctx context.Context, organizationId string) ProductsApiCreateProductRequest {
+	return ProductsApiCreateProductRequest{
 		ApiService: a,
 		ctx: ctx,
 		organizationId: organizationId,
@@ -60,7 +60,7 @@ func (a *ProductsAPIService) CreateProduct(ctx context.Context, organizationId s
 
 // Execute executes the request
 //  @return ProductModel
-func (a *ProductsAPIService) CreateProductExecute(r ProductsAPICreateProductRequest) (*ProductModel, *http.Response, error) {
+func (a *ProductsApiService) CreateProductExecute(r ProductsApiCreateProductRequest) (*ProductModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -68,7 +68,7 @@ func (a *ProductsAPIService) CreateProductExecute(r ProductsAPICreateProductRequ
 		localVarReturnValue  *ProductModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsAPIService.CreateProduct")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.CreateProduct")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -139,13 +139,13 @@ func (a *ProductsAPIService) CreateProductExecute(r ProductsAPICreateProductRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ProductsAPIDeleteProductRequest struct {
+type ProductsApiDeleteProductRequest struct {
 	ctx context.Context
-	ApiService *ProductsAPIService
+	ApiService *ProductsApiService
 	productId string
 }
 
-func (r ProductsAPIDeleteProductRequest) Execute() (*http.Response, error) {
+func (r ProductsApiDeleteProductRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteProductExecute(r)
 }
 
@@ -156,10 +156,10 @@ This endpoint removes a Product identified by the `productId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return ProductsAPIDeleteProductRequest
+ @return ProductsApiDeleteProductRequest
 */
-func (a *ProductsAPIService) DeleteProduct(ctx context.Context, productId string) ProductsAPIDeleteProductRequest {
-	return ProductsAPIDeleteProductRequest{
+func (a *ProductsApiService) DeleteProduct(ctx context.Context, productId string) ProductsApiDeleteProductRequest {
+	return ProductsApiDeleteProductRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -167,14 +167,14 @@ func (a *ProductsAPIService) DeleteProduct(ctx context.Context, productId string
 }
 
 // Execute executes the request
-func (a *ProductsAPIService) DeleteProductExecute(r ProductsAPIDeleteProductRequest) (*http.Response, error) {
+func (a *ProductsApiService) DeleteProductExecute(r ProductsApiDeleteProductRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsAPIService.DeleteProduct")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.DeleteProduct")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -231,13 +231,13 @@ func (a *ProductsAPIService) DeleteProductExecute(r ProductsAPIDeleteProductRequ
 	return localVarHTTPResponse, nil
 }
 
-type ProductsAPIGetProductRequest struct {
+type ProductsApiGetProductRequest struct {
 	ctx context.Context
-	ApiService *ProductsAPIService
+	ApiService *ProductsApiService
 	productId string
 }
 
-func (r ProductsAPIGetProductRequest) Execute() (*ProductModel, *http.Response, error) {
+func (r ProductsApiGetProductRequest) Execute() (*ProductModel, *http.Response, error) {
 	return r.ApiService.GetProductExecute(r)
 }
 
@@ -249,10 +249,10 @@ identified by the `productId`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return ProductsAPIGetProductRequest
+ @return ProductsApiGetProductRequest
 */
-func (a *ProductsAPIService) GetProduct(ctx context.Context, productId string) ProductsAPIGetProductRequest {
-	return ProductsAPIGetProductRequest{
+func (a *ProductsApiService) GetProduct(ctx context.Context, productId string) ProductsApiGetProductRequest {
+	return ProductsApiGetProductRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -261,7 +261,7 @@ func (a *ProductsAPIService) GetProduct(ctx context.Context, productId string) P
 
 // Execute executes the request
 //  @return ProductModel
-func (a *ProductsAPIService) GetProductExecute(r ProductsAPIGetProductRequest) (*ProductModel, *http.Response, error) {
+func (a *ProductsApiService) GetProductExecute(r ProductsApiGetProductRequest) (*ProductModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -269,7 +269,7 @@ func (a *ProductsAPIService) GetProductExecute(r ProductsAPIGetProductRequest) (
 		localVarReturnValue  *ProductModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsAPIService.GetProduct")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.GetProduct")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -335,13 +335,13 @@ func (a *ProductsAPIService) GetProductExecute(r ProductsAPIGetProductRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ProductsAPIGetProductPreferencesRequest struct {
+type ProductsApiGetProductPreferencesRequest struct {
 	ctx context.Context
-	ApiService *ProductsAPIService
+	ApiService *ProductsApiService
 	productId string
 }
 
-func (r ProductsAPIGetProductPreferencesRequest) Execute() (*PreferencesModel, *http.Response, error) {
+func (r ProductsApiGetProductPreferencesRequest) Execute() (*PreferencesModel, *http.Response, error) {
 	return r.ApiService.GetProductPreferencesExecute(r)
 }
 
@@ -353,10 +353,10 @@ identified by the `productId`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return ProductsAPIGetProductPreferencesRequest
+ @return ProductsApiGetProductPreferencesRequest
 */
-func (a *ProductsAPIService) GetProductPreferences(ctx context.Context, productId string) ProductsAPIGetProductPreferencesRequest {
-	return ProductsAPIGetProductPreferencesRequest{
+func (a *ProductsApiService) GetProductPreferences(ctx context.Context, productId string) ProductsApiGetProductPreferencesRequest {
+	return ProductsApiGetProductPreferencesRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -365,7 +365,7 @@ func (a *ProductsAPIService) GetProductPreferences(ctx context.Context, productI
 
 // Execute executes the request
 //  @return PreferencesModel
-func (a *ProductsAPIService) GetProductPreferencesExecute(r ProductsAPIGetProductPreferencesRequest) (*PreferencesModel, *http.Response, error) {
+func (a *ProductsApiService) GetProductPreferencesExecute(r ProductsApiGetProductPreferencesRequest) (*PreferencesModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -373,7 +373,7 @@ func (a *ProductsAPIService) GetProductPreferencesExecute(r ProductsAPIGetProduc
 		localVarReturnValue  *PreferencesModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsAPIService.GetProductPreferences")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.GetProductPreferences")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -439,12 +439,12 @@ func (a *ProductsAPIService) GetProductPreferencesExecute(r ProductsAPIGetProduc
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ProductsAPIGetProductsRequest struct {
+type ProductsApiGetProductsRequest struct {
 	ctx context.Context
-	ApiService *ProductsAPIService
+	ApiService *ProductsApiService
 }
 
-func (r ProductsAPIGetProductsRequest) Execute() ([]ProductModel, *http.Response, error) {
+func (r ProductsApiGetProductsRequest) Execute() ([]ProductModel, *http.Response, error) {
 	return r.ApiService.GetProductsExecute(r)
 }
 
@@ -454,10 +454,10 @@ GetProducts List Products
 This endpoint returns the list of the Products that belongs to the user.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ProductsAPIGetProductsRequest
+ @return ProductsApiGetProductsRequest
 */
-func (a *ProductsAPIService) GetProducts(ctx context.Context) ProductsAPIGetProductsRequest {
-	return ProductsAPIGetProductsRequest{
+func (a *ProductsApiService) GetProducts(ctx context.Context) ProductsApiGetProductsRequest {
+	return ProductsApiGetProductsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -465,7 +465,7 @@ func (a *ProductsAPIService) GetProducts(ctx context.Context) ProductsAPIGetProd
 
 // Execute executes the request
 //  @return []ProductModel
-func (a *ProductsAPIService) GetProductsExecute(r ProductsAPIGetProductsRequest) ([]ProductModel, *http.Response, error) {
+func (a *ProductsApiService) GetProductsExecute(r ProductsApiGetProductsRequest) ([]ProductModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -473,7 +473,7 @@ func (a *ProductsAPIService) GetProductsExecute(r ProductsAPIGetProductsRequest)
 		localVarReturnValue  []ProductModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsAPIService.GetProducts")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.GetProducts")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -538,19 +538,19 @@ func (a *ProductsAPIService) GetProductsExecute(r ProductsAPIGetProductsRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ProductsAPIUpdateProductRequest struct {
+type ProductsApiUpdateProductRequest struct {
 	ctx context.Context
-	ApiService *ProductsAPIService
+	ApiService *ProductsApiService
 	productId string
 	updateProductRequest *UpdateProductRequest
 }
 
-func (r ProductsAPIUpdateProductRequest) UpdateProductRequest(updateProductRequest UpdateProductRequest) ProductsAPIUpdateProductRequest {
+func (r ProductsApiUpdateProductRequest) UpdateProductRequest(updateProductRequest UpdateProductRequest) ProductsApiUpdateProductRequest {
 	r.updateProductRequest = &updateProductRequest
 	return r
 }
 
-func (r ProductsAPIUpdateProductRequest) Execute() (*ProductModel, *http.Response, error) {
+func (r ProductsApiUpdateProductRequest) Execute() (*ProductModel, *http.Response, error) {
 	return r.ApiService.UpdateProductExecute(r)
 }
 
@@ -561,10 +561,10 @@ This endpoint updates a Product identified by the `productId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return ProductsAPIUpdateProductRequest
+ @return ProductsApiUpdateProductRequest
 */
-func (a *ProductsAPIService) UpdateProduct(ctx context.Context, productId string) ProductsAPIUpdateProductRequest {
-	return ProductsAPIUpdateProductRequest{
+func (a *ProductsApiService) UpdateProduct(ctx context.Context, productId string) ProductsApiUpdateProductRequest {
+	return ProductsApiUpdateProductRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -573,7 +573,7 @@ func (a *ProductsAPIService) UpdateProduct(ctx context.Context, productId string
 
 // Execute executes the request
 //  @return ProductModel
-func (a *ProductsAPIService) UpdateProductExecute(r ProductsAPIUpdateProductRequest) (*ProductModel, *http.Response, error) {
+func (a *ProductsApiService) UpdateProductExecute(r ProductsApiUpdateProductRequest) (*ProductModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -581,7 +581,7 @@ func (a *ProductsAPIService) UpdateProductExecute(r ProductsAPIUpdateProductRequ
 		localVarReturnValue  *ProductModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsAPIService.UpdateProduct")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.UpdateProduct")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -652,19 +652,19 @@ func (a *ProductsAPIService) UpdateProductExecute(r ProductsAPIUpdateProductRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ProductsAPIUpdateProductPreferencesRequest struct {
+type ProductsApiUpdateProductPreferencesRequest struct {
 	ctx context.Context
-	ApiService *ProductsAPIService
+	ApiService *ProductsApiService
 	productId string
 	updatePreferencesRequest *UpdatePreferencesRequest
 }
 
-func (r ProductsAPIUpdateProductPreferencesRequest) UpdatePreferencesRequest(updatePreferencesRequest UpdatePreferencesRequest) ProductsAPIUpdateProductPreferencesRequest {
+func (r ProductsApiUpdateProductPreferencesRequest) UpdatePreferencesRequest(updatePreferencesRequest UpdatePreferencesRequest) ProductsApiUpdateProductPreferencesRequest {
 	r.updatePreferencesRequest = &updatePreferencesRequest
 	return r
 }
 
-func (r ProductsAPIUpdateProductPreferencesRequest) Execute() (*PreferencesModel, *http.Response, error) {
+func (r ProductsApiUpdateProductPreferencesRequest) Execute() (*PreferencesModel, *http.Response, error) {
 	return r.ApiService.UpdateProductPreferencesExecute(r)
 }
 
@@ -675,10 +675,10 @@ This endpoint updates the preferences of a Product identified by the `productId`
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return ProductsAPIUpdateProductPreferencesRequest
+ @return ProductsApiUpdateProductPreferencesRequest
 */
-func (a *ProductsAPIService) UpdateProductPreferences(ctx context.Context, productId string) ProductsAPIUpdateProductPreferencesRequest {
-	return ProductsAPIUpdateProductPreferencesRequest{
+func (a *ProductsApiService) UpdateProductPreferences(ctx context.Context, productId string) ProductsApiUpdateProductPreferencesRequest {
+	return ProductsApiUpdateProductPreferencesRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -687,7 +687,7 @@ func (a *ProductsAPIService) UpdateProductPreferences(ctx context.Context, produ
 
 // Execute executes the request
 //  @return PreferencesModel
-func (a *ProductsAPIService) UpdateProductPreferencesExecute(r ProductsAPIUpdateProductPreferencesRequest) (*PreferencesModel, *http.Response, error) {
+func (a *ProductsApiService) UpdateProductPreferencesExecute(r ProductsApiUpdateProductPreferencesRequest) (*PreferencesModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -695,7 +695,7 @@ func (a *ProductsAPIService) UpdateProductPreferencesExecute(r ProductsAPIUpdate
 		localVarReturnValue  *PreferencesModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsAPIService.UpdateProductPreferences")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsApiService.UpdateProductPreferences")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

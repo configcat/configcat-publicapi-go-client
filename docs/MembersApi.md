@@ -1,19 +1,19 @@
-# \MembersAPI
+# \MembersApi
 
 All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddMemberToGroup**](MembersAPI.md#AddMemberToGroup) | **Post** /v1/organizations/{organizationId}/members/{userId} | Update Member Permissions
-[**DeleteInvitation**](MembersAPI.md#DeleteInvitation) | **Delete** /v1/invitations/{invitationId} | Delete Invitation
-[**DeleteOrganizationMember**](MembersAPI.md#DeleteOrganizationMember) | **Delete** /v1/organizations/{organizationId}/members/{userId} | Delete Member from Organization
-[**DeleteProductMember**](MembersAPI.md#DeleteProductMember) | **Delete** /v1/products/{productId}/members/{userId} | Delete Member from Product
-[**GetOrganizationMembers**](MembersAPI.md#GetOrganizationMembers) | **Get** /v1/organizations/{organizationId}/members | List Organization Members
-[**GetOrganizationMembersV2**](MembersAPI.md#GetOrganizationMembersV2) | **Get** /v2/organizations/{organizationId}/members | List Organization Members
-[**GetPendingInvitations**](MembersAPI.md#GetPendingInvitations) | **Get** /v1/products/{productId}/invitations | List Pending Invitations in Product
-[**GetPendingInvitationsOrg**](MembersAPI.md#GetPendingInvitationsOrg) | **Get** /v1/organizations/{organizationId}/invitations | List Pending Invitations in Organization
-[**GetProductMembers**](MembersAPI.md#GetProductMembers) | **Get** /v1/products/{productId}/members | List Product Members
-[**InviteMember**](MembersAPI.md#InviteMember) | **Post** /v1/products/{productId}/members/invite | Invite Member
+[**AddMemberToGroup**](MembersApi.md#AddMemberToGroup) | **Post** /v1/organizations/{organizationId}/members/{userId} | Update Member Permissions
+[**DeleteInvitation**](MembersApi.md#DeleteInvitation) | **Delete** /v1/invitations/{invitationId} | Delete Invitation
+[**DeleteOrganizationMember**](MembersApi.md#DeleteOrganizationMember) | **Delete** /v1/organizations/{organizationId}/members/{userId} | Delete Member from Organization
+[**DeleteProductMember**](MembersApi.md#DeleteProductMember) | **Delete** /v1/products/{productId}/members/{userId} | Delete Member from Product
+[**GetOrganizationMembers**](MembersApi.md#GetOrganizationMembers) | **Get** /v1/organizations/{organizationId}/members | List Organization Members
+[**GetOrganizationMembersV2**](MembersApi.md#GetOrganizationMembersV2) | **Get** /v2/organizations/{organizationId}/members | List Organization Members
+[**GetPendingInvitations**](MembersApi.md#GetPendingInvitations) | **Get** /v1/products/{productId}/invitations | List Pending Invitations in Product
+[**GetPendingInvitationsOrg**](MembersApi.md#GetPendingInvitationsOrg) | **Get** /v1/organizations/{organizationId}/invitations | List Pending Invitations in Organization
+[**GetProductMembers**](MembersApi.md#GetProductMembers) | **Get** /v1/products/{productId}/members | List Product Members
+[**InviteMember**](MembersApi.md#InviteMember) | **Post** /v1/products/{productId}/members/invite | Invite Member
 
 
 
@@ -31,24 +31,24 @@ Update Member Permissions
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client"
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-	organizationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Organization.
-	userId := "userId_example" // string | The identifier of the Member.
-	updateMemberPermissionsRequest := *openapiclient.NewUpdateMemberPermissionsRequest() // UpdateMemberPermissionsRequest | 
+    organizationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Organization.
+    userId := "userId_example" // string | The identifier of the Member.
+    updateMemberPermissionsRequest := *openapiclient.NewUpdateMemberPermissionsRequest() // UpdateMemberPermissionsRequest | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.MembersAPI.AddMemberToGroup(context.Background(), organizationId, userId).UpdateMemberPermissionsRequest(updateMemberPermissionsRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MembersAPI.AddMemberToGroup``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.MembersApi.AddMemberToGroup(context.Background(), organizationId, userId).UpdateMemberPermissionsRequest(updateMemberPermissionsRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MembersApi.AddMemberToGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
 }
 ```
 
@@ -104,22 +104,22 @@ Delete Invitation
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client"
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-	invitationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Invitation.
+    invitationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Invitation.
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.MembersAPI.DeleteInvitation(context.Background(), invitationId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MembersAPI.DeleteInvitation``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.MembersApi.DeleteInvitation(context.Background(), invitationId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MembersApi.DeleteInvitation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
 }
 ```
 
@@ -172,23 +172,23 @@ Delete Member from Organization
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client"
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-	organizationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Organization.
-	userId := "userId_example" // string | The identifier of the Member.
+    organizationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Organization.
+    userId := "userId_example" // string | The identifier of the Member.
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.MembersAPI.DeleteOrganizationMember(context.Background(), organizationId, userId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MembersAPI.DeleteOrganizationMember``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.MembersApi.DeleteOrganizationMember(context.Background(), organizationId, userId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MembersApi.DeleteOrganizationMember``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
 }
 ```
 
@@ -243,23 +243,23 @@ Delete Member from Product
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client"
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
-	userId := "userId_example" // string | The identifier of the Member.
+    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+    userId := "userId_example" // string | The identifier of the Member.
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.MembersAPI.DeleteProductMember(context.Background(), productId, userId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MembersAPI.DeleteProductMember``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.MembersApi.DeleteProductMember(context.Background(), productId, userId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MembersApi.DeleteProductMember``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
 }
 ```
 
@@ -314,24 +314,24 @@ List Organization Members
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client"
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-	organizationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Organization.
+    organizationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Organization.
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MembersAPI.GetOrganizationMembers(context.Background(), organizationId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MembersAPI.GetOrganizationMembers``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetOrganizationMembers`: []UserModel
-	fmt.Fprintf(os.Stdout, "Response from `MembersAPI.GetOrganizationMembers`: %v\n", resp)
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.MembersApi.GetOrganizationMembers(context.Background(), organizationId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MembersApi.GetOrganizationMembers``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetOrganizationMembers`: []UserModel
+    fmt.Fprintf(os.Stdout, "Response from `MembersApi.GetOrganizationMembers`: %v\n", resp)
 }
 ```
 
@@ -384,24 +384,24 @@ List Organization Members
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client"
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-	organizationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Organization.
+    organizationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Organization.
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MembersAPI.GetOrganizationMembersV2(context.Background(), organizationId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MembersAPI.GetOrganizationMembersV2``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetOrganizationMembersV2`: OrganizationMembersModel
-	fmt.Fprintf(os.Stdout, "Response from `MembersAPI.GetOrganizationMembersV2`: %v\n", resp)
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.MembersApi.GetOrganizationMembersV2(context.Background(), organizationId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MembersApi.GetOrganizationMembersV2``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetOrganizationMembersV2`: OrganizationMembersModel
+    fmt.Fprintf(os.Stdout, "Response from `MembersApi.GetOrganizationMembersV2`: %v\n", resp)
 }
 ```
 
@@ -454,24 +454,24 @@ List Pending Invitations in Product
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client"
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MembersAPI.GetPendingInvitations(context.Background(), productId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MembersAPI.GetPendingInvitations``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetPendingInvitations`: []InvitationModel
-	fmt.Fprintf(os.Stdout, "Response from `MembersAPI.GetPendingInvitations`: %v\n", resp)
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.MembersApi.GetPendingInvitations(context.Background(), productId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MembersApi.GetPendingInvitations``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetPendingInvitations`: []InvitationModel
+    fmt.Fprintf(os.Stdout, "Response from `MembersApi.GetPendingInvitations`: %v\n", resp)
 }
 ```
 
@@ -524,24 +524,24 @@ List Pending Invitations in Organization
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client"
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-	organizationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Organization.
+    organizationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Organization.
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MembersAPI.GetPendingInvitationsOrg(context.Background(), organizationId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MembersAPI.GetPendingInvitationsOrg``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetPendingInvitationsOrg`: []OrganizationInvitationModel
-	fmt.Fprintf(os.Stdout, "Response from `MembersAPI.GetPendingInvitationsOrg`: %v\n", resp)
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.MembersApi.GetPendingInvitationsOrg(context.Background(), organizationId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MembersApi.GetPendingInvitationsOrg``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetPendingInvitationsOrg`: []OrganizationInvitationModel
+    fmt.Fprintf(os.Stdout, "Response from `MembersApi.GetPendingInvitationsOrg`: %v\n", resp)
 }
 ```
 
@@ -594,24 +594,24 @@ List Product Members
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client"
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.MembersAPI.GetProductMembers(context.Background(), productId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MembersAPI.GetProductMembers``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetProductMembers`: []MemberModel
-	fmt.Fprintf(os.Stdout, "Response from `MembersAPI.GetProductMembers`: %v\n", resp)
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.MembersApi.GetProductMembers(context.Background(), productId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MembersApi.GetProductMembers``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetProductMembers`: []MemberModel
+    fmt.Fprintf(os.Stdout, "Response from `MembersApi.GetProductMembers`: %v\n", resp)
 }
 ```
 
@@ -664,23 +664,23 @@ Invite Member
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client"
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
-	inviteMembersRequest := *openapiclient.NewInviteMembersRequest([]string{"Emails_example"}, int64(123)) // InviteMembersRequest | 
+    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+    inviteMembersRequest := *openapiclient.NewInviteMembersRequest([]string{"Emails_example"}, int64(123)) // InviteMembersRequest | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.MembersAPI.InviteMember(context.Background(), productId).InviteMembersRequest(inviteMembersRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `MembersAPI.InviteMember``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.MembersApi.InviteMember(context.Background(), productId).InviteMembersRequest(inviteMembersRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MembersApi.InviteMember``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
 }
 ```
 

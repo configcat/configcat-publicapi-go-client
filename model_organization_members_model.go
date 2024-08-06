@@ -66,7 +66,7 @@ func (o *OrganizationMembersModel) GetAdminsOk() ([]OrganizationAdminModel, bool
 
 // HasAdmins returns a boolean if a field has been set.
 func (o *OrganizationMembersModel) HasAdmins() bool {
-	if o != nil && !IsNil(o.Admins) {
+	if o != nil && IsNil(o.Admins) {
 		return true
 	}
 
@@ -99,7 +99,7 @@ func (o *OrganizationMembersModel) GetBillingManagersOk() ([]OrganizationAdminMo
 
 // HasBillingManagers returns a boolean if a field has been set.
 func (o *OrganizationMembersModel) HasBillingManagers() bool {
-	if o != nil && !IsNil(o.BillingManagers) {
+	if o != nil && IsNil(o.BillingManagers) {
 		return true
 	}
 
@@ -132,7 +132,7 @@ func (o *OrganizationMembersModel) GetMembersOk() ([]OrganizationMemberModel, bo
 
 // HasMembers returns a boolean if a field has been set.
 func (o *OrganizationMembersModel) HasMembers() bool {
-	if o != nil && !IsNil(o.Members) {
+	if o != nil && IsNil(o.Members) {
 		return true
 	}
 

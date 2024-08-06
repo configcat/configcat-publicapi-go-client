@@ -21,22 +21,22 @@ import (
 )
 
 
-// EnvironmentsAPIService EnvironmentsAPI service
-type EnvironmentsAPIService service
+// EnvironmentsApiService EnvironmentsApi service
+type EnvironmentsApiService service
 
-type EnvironmentsAPICreateEnvironmentRequest struct {
+type EnvironmentsApiCreateEnvironmentRequest struct {
 	ctx context.Context
-	ApiService *EnvironmentsAPIService
+	ApiService *EnvironmentsApiService
 	productId string
 	createEnvironmentModel *CreateEnvironmentModel
 }
 
-func (r EnvironmentsAPICreateEnvironmentRequest) CreateEnvironmentModel(createEnvironmentModel CreateEnvironmentModel) EnvironmentsAPICreateEnvironmentRequest {
+func (r EnvironmentsApiCreateEnvironmentRequest) CreateEnvironmentModel(createEnvironmentModel CreateEnvironmentModel) EnvironmentsApiCreateEnvironmentRequest {
 	r.createEnvironmentModel = &createEnvironmentModel
 	return r
 }
 
-func (r EnvironmentsAPICreateEnvironmentRequest) Execute() (*EnvironmentModel, *http.Response, error) {
+func (r EnvironmentsApiCreateEnvironmentRequest) Execute() (*EnvironmentModel, *http.Response, error) {
 	return r.ApiService.CreateEnvironmentExecute(r)
 }
 
@@ -48,10 +48,10 @@ identified by the `productId` parameter, which can be obtained from the [List Pr
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return EnvironmentsAPICreateEnvironmentRequest
+ @return EnvironmentsApiCreateEnvironmentRequest
 */
-func (a *EnvironmentsAPIService) CreateEnvironment(ctx context.Context, productId string) EnvironmentsAPICreateEnvironmentRequest {
-	return EnvironmentsAPICreateEnvironmentRequest{
+func (a *EnvironmentsApiService) CreateEnvironment(ctx context.Context, productId string) EnvironmentsApiCreateEnvironmentRequest {
+	return EnvironmentsApiCreateEnvironmentRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -60,7 +60,7 @@ func (a *EnvironmentsAPIService) CreateEnvironment(ctx context.Context, productI
 
 // Execute executes the request
 //  @return EnvironmentModel
-func (a *EnvironmentsAPIService) CreateEnvironmentExecute(r EnvironmentsAPICreateEnvironmentRequest) (*EnvironmentModel, *http.Response, error) {
+func (a *EnvironmentsApiService) CreateEnvironmentExecute(r EnvironmentsApiCreateEnvironmentRequest) (*EnvironmentModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -68,7 +68,7 @@ func (a *EnvironmentsAPIService) CreateEnvironmentExecute(r EnvironmentsAPICreat
 		localVarReturnValue  *EnvironmentModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsAPIService.CreateEnvironment")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsApiService.CreateEnvironment")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -139,20 +139,20 @@ func (a *EnvironmentsAPIService) CreateEnvironmentExecute(r EnvironmentsAPICreat
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type EnvironmentsAPIDeleteEnvironmentRequest struct {
+type EnvironmentsApiDeleteEnvironmentRequest struct {
 	ctx context.Context
-	ApiService *EnvironmentsAPIService
+	ApiService *EnvironmentsApiService
 	environmentId string
 	cleanupAuditLogs *bool
 }
 
 // An optional flag which indicates whether the audit log records related to the environment should be deleted or not.
-func (r EnvironmentsAPIDeleteEnvironmentRequest) CleanupAuditLogs(cleanupAuditLogs bool) EnvironmentsAPIDeleteEnvironmentRequest {
+func (r EnvironmentsApiDeleteEnvironmentRequest) CleanupAuditLogs(cleanupAuditLogs bool) EnvironmentsApiDeleteEnvironmentRequest {
 	r.cleanupAuditLogs = &cleanupAuditLogs
 	return r
 }
 
-func (r EnvironmentsAPIDeleteEnvironmentRequest) Execute() (*http.Response, error) {
+func (r EnvironmentsApiDeleteEnvironmentRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteEnvironmentExecute(r)
 }
 
@@ -165,10 +165,10 @@ If the `cleanupAuditLogs` flag is set to true, it also deletes the audit log rec
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param environmentId The identifier of the Environment.
- @return EnvironmentsAPIDeleteEnvironmentRequest
+ @return EnvironmentsApiDeleteEnvironmentRequest
 */
-func (a *EnvironmentsAPIService) DeleteEnvironment(ctx context.Context, environmentId string) EnvironmentsAPIDeleteEnvironmentRequest {
-	return EnvironmentsAPIDeleteEnvironmentRequest{
+func (a *EnvironmentsApiService) DeleteEnvironment(ctx context.Context, environmentId string) EnvironmentsApiDeleteEnvironmentRequest {
+	return EnvironmentsApiDeleteEnvironmentRequest{
 		ApiService: a,
 		ctx: ctx,
 		environmentId: environmentId,
@@ -176,14 +176,14 @@ func (a *EnvironmentsAPIService) DeleteEnvironment(ctx context.Context, environm
 }
 
 // Execute executes the request
-func (a *EnvironmentsAPIService) DeleteEnvironmentExecute(r EnvironmentsAPIDeleteEnvironmentRequest) (*http.Response, error) {
+func (a *EnvironmentsApiService) DeleteEnvironmentExecute(r EnvironmentsApiDeleteEnvironmentRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsAPIService.DeleteEnvironment")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsApiService.DeleteEnvironment")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -243,13 +243,13 @@ func (a *EnvironmentsAPIService) DeleteEnvironmentExecute(r EnvironmentsAPIDelet
 	return localVarHTTPResponse, nil
 }
 
-type EnvironmentsAPIGetEnvironmentRequest struct {
+type EnvironmentsApiGetEnvironmentRequest struct {
 	ctx context.Context
-	ApiService *EnvironmentsAPIService
+	ApiService *EnvironmentsApiService
 	environmentId string
 }
 
-func (r EnvironmentsAPIGetEnvironmentRequest) Execute() (*EnvironmentModel, *http.Response, error) {
+func (r EnvironmentsApiGetEnvironmentRequest) Execute() (*EnvironmentModel, *http.Response, error) {
 	return r.ApiService.GetEnvironmentExecute(r)
 }
 
@@ -261,10 +261,10 @@ identified by the `environmentId`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param environmentId The identifier of the Environment.
- @return EnvironmentsAPIGetEnvironmentRequest
+ @return EnvironmentsApiGetEnvironmentRequest
 */
-func (a *EnvironmentsAPIService) GetEnvironment(ctx context.Context, environmentId string) EnvironmentsAPIGetEnvironmentRequest {
-	return EnvironmentsAPIGetEnvironmentRequest{
+func (a *EnvironmentsApiService) GetEnvironment(ctx context.Context, environmentId string) EnvironmentsApiGetEnvironmentRequest {
+	return EnvironmentsApiGetEnvironmentRequest{
 		ApiService: a,
 		ctx: ctx,
 		environmentId: environmentId,
@@ -273,7 +273,7 @@ func (a *EnvironmentsAPIService) GetEnvironment(ctx context.Context, environment
 
 // Execute executes the request
 //  @return EnvironmentModel
-func (a *EnvironmentsAPIService) GetEnvironmentExecute(r EnvironmentsAPIGetEnvironmentRequest) (*EnvironmentModel, *http.Response, error) {
+func (a *EnvironmentsApiService) GetEnvironmentExecute(r EnvironmentsApiGetEnvironmentRequest) (*EnvironmentModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -281,7 +281,7 @@ func (a *EnvironmentsAPIService) GetEnvironmentExecute(r EnvironmentsAPIGetEnvir
 		localVarReturnValue  *EnvironmentModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsAPIService.GetEnvironment")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsApiService.GetEnvironment")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -347,13 +347,13 @@ func (a *EnvironmentsAPIService) GetEnvironmentExecute(r EnvironmentsAPIGetEnvir
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type EnvironmentsAPIGetEnvironmentsRequest struct {
+type EnvironmentsApiGetEnvironmentsRequest struct {
 	ctx context.Context
-	ApiService *EnvironmentsAPIService
+	ApiService *EnvironmentsApiService
 	productId string
 }
 
-func (r EnvironmentsAPIGetEnvironmentsRequest) Execute() ([]EnvironmentModel, *http.Response, error) {
+func (r EnvironmentsApiGetEnvironmentsRequest) Execute() ([]EnvironmentModel, *http.Response, error) {
 	return r.ApiService.GetEnvironmentsExecute(r)
 }
 
@@ -365,10 +365,10 @@ This endpoint returns the list of the Environments that belongs to the given Pro
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return EnvironmentsAPIGetEnvironmentsRequest
+ @return EnvironmentsApiGetEnvironmentsRequest
 */
-func (a *EnvironmentsAPIService) GetEnvironments(ctx context.Context, productId string) EnvironmentsAPIGetEnvironmentsRequest {
-	return EnvironmentsAPIGetEnvironmentsRequest{
+func (a *EnvironmentsApiService) GetEnvironments(ctx context.Context, productId string) EnvironmentsApiGetEnvironmentsRequest {
+	return EnvironmentsApiGetEnvironmentsRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -377,7 +377,7 @@ func (a *EnvironmentsAPIService) GetEnvironments(ctx context.Context, productId 
 
 // Execute executes the request
 //  @return []EnvironmentModel
-func (a *EnvironmentsAPIService) GetEnvironmentsExecute(r EnvironmentsAPIGetEnvironmentsRequest) ([]EnvironmentModel, *http.Response, error) {
+func (a *EnvironmentsApiService) GetEnvironmentsExecute(r EnvironmentsApiGetEnvironmentsRequest) ([]EnvironmentModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -385,7 +385,7 @@ func (a *EnvironmentsAPIService) GetEnvironmentsExecute(r EnvironmentsAPIGetEnvi
 		localVarReturnValue  []EnvironmentModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsAPIService.GetEnvironments")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsApiService.GetEnvironments")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -451,19 +451,19 @@ func (a *EnvironmentsAPIService) GetEnvironmentsExecute(r EnvironmentsAPIGetEnvi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type EnvironmentsAPIUpdateEnvironmentRequest struct {
+type EnvironmentsApiUpdateEnvironmentRequest struct {
 	ctx context.Context
-	ApiService *EnvironmentsAPIService
+	ApiService *EnvironmentsApiService
 	environmentId string
 	updateEnvironmentModel *UpdateEnvironmentModel
 }
 
-func (r EnvironmentsAPIUpdateEnvironmentRequest) UpdateEnvironmentModel(updateEnvironmentModel UpdateEnvironmentModel) EnvironmentsAPIUpdateEnvironmentRequest {
+func (r EnvironmentsApiUpdateEnvironmentRequest) UpdateEnvironmentModel(updateEnvironmentModel UpdateEnvironmentModel) EnvironmentsApiUpdateEnvironmentRequest {
 	r.updateEnvironmentModel = &updateEnvironmentModel
 	return r
 }
 
-func (r EnvironmentsAPIUpdateEnvironmentRequest) Execute() (*EnvironmentModel, *http.Response, error) {
+func (r EnvironmentsApiUpdateEnvironmentRequest) Execute() (*EnvironmentModel, *http.Response, error) {
 	return r.ApiService.UpdateEnvironmentExecute(r)
 }
 
@@ -474,10 +474,10 @@ This endpoint updates an Environment identified by the `environmentId` parameter
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param environmentId The identifier of the Environment.
- @return EnvironmentsAPIUpdateEnvironmentRequest
+ @return EnvironmentsApiUpdateEnvironmentRequest
 */
-func (a *EnvironmentsAPIService) UpdateEnvironment(ctx context.Context, environmentId string) EnvironmentsAPIUpdateEnvironmentRequest {
-	return EnvironmentsAPIUpdateEnvironmentRequest{
+func (a *EnvironmentsApiService) UpdateEnvironment(ctx context.Context, environmentId string) EnvironmentsApiUpdateEnvironmentRequest {
+	return EnvironmentsApiUpdateEnvironmentRequest{
 		ApiService: a,
 		ctx: ctx,
 		environmentId: environmentId,
@@ -486,7 +486,7 @@ func (a *EnvironmentsAPIService) UpdateEnvironment(ctx context.Context, environm
 
 // Execute executes the request
 //  @return EnvironmentModel
-func (a *EnvironmentsAPIService) UpdateEnvironmentExecute(r EnvironmentsAPIUpdateEnvironmentRequest) (*EnvironmentModel, *http.Response, error) {
+func (a *EnvironmentsApiService) UpdateEnvironmentExecute(r EnvironmentsApiUpdateEnvironmentRequest) (*EnvironmentModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -494,7 +494,7 @@ func (a *EnvironmentsAPIService) UpdateEnvironmentExecute(r EnvironmentsAPIUpdat
 		localVarReturnValue  *EnvironmentModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsAPIService.UpdateEnvironment")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsApiService.UpdateEnvironment")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

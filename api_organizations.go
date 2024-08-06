@@ -20,15 +20,15 @@ import (
 )
 
 
-// OrganizationsAPIService OrganizationsAPI service
-type OrganizationsAPIService service
+// OrganizationsApiService OrganizationsApi service
+type OrganizationsApiService service
 
-type OrganizationsAPIGetOrganizationsRequest struct {
+type OrganizationsApiGetOrganizationsRequest struct {
 	ctx context.Context
-	ApiService *OrganizationsAPIService
+	ApiService *OrganizationsApiService
 }
 
-func (r OrganizationsAPIGetOrganizationsRequest) Execute() ([]OrganizationModel, *http.Response, error) {
+func (r OrganizationsApiGetOrganizationsRequest) Execute() ([]OrganizationModel, *http.Response, error) {
 	return r.ApiService.GetOrganizationsExecute(r)
 }
 
@@ -38,10 +38,10 @@ GetOrganizations List Organizations
 This endpoint returns the list of the Organizations that belongs to the user.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return OrganizationsAPIGetOrganizationsRequest
+ @return OrganizationsApiGetOrganizationsRequest
 */
-func (a *OrganizationsAPIService) GetOrganizations(ctx context.Context) OrganizationsAPIGetOrganizationsRequest {
-	return OrganizationsAPIGetOrganizationsRequest{
+func (a *OrganizationsApiService) GetOrganizations(ctx context.Context) OrganizationsApiGetOrganizationsRequest {
+	return OrganizationsApiGetOrganizationsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -49,7 +49,7 @@ func (a *OrganizationsAPIService) GetOrganizations(ctx context.Context) Organiza
 
 // Execute executes the request
 //  @return []OrganizationModel
-func (a *OrganizationsAPIService) GetOrganizationsExecute(r OrganizationsAPIGetOrganizationsRequest) ([]OrganizationModel, *http.Response, error) {
+func (a *OrganizationsApiService) GetOrganizationsExecute(r OrganizationsApiGetOrganizationsRequest) ([]OrganizationModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -57,7 +57,7 @@ func (a *OrganizationsAPIService) GetOrganizationsExecute(r OrganizationsAPIGetO
 		localVarReturnValue  []OrganizationModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsAPIService.GetOrganizations")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrganizationsApiService.GetOrganizations")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

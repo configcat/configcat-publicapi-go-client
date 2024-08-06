@@ -13,8 +13,6 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the UpdateEvaluationFormulaModel type satisfies the MappedNullable interface at compile time
@@ -28,8 +26,6 @@ type UpdateEvaluationFormulaModel struct {
 	// The user attribute used for percentage evaluation. If not set, it defaults to the `Identifier` user object attribute.
 	PercentageEvaluationAttribute NullableString `json:"percentageEvaluationAttribute,omitempty"`
 }
-
-type _UpdateEvaluationFormulaModel UpdateEvaluationFormulaModel
 
 // NewUpdateEvaluationFormulaModel instantiates a new UpdateEvaluationFormulaModel object
 // This constructor will assign default values to properties that have it defined,
@@ -94,7 +90,7 @@ func (o *UpdateEvaluationFormulaModel) GetTargetingRulesOk() ([]TargetingRuleMod
 
 // HasTargetingRules returns a boolean if a field has been set.
 func (o *UpdateEvaluationFormulaModel) HasTargetingRules() bool {
-	if o != nil && !IsNil(o.TargetingRules) {
+	if o != nil && IsNil(o.TargetingRules) {
 		return true
 	}
 
@@ -166,43 +162,6 @@ func (o UpdateEvaluationFormulaModel) ToMap() (map[string]interface{}, error) {
 		toSerialize["percentageEvaluationAttribute"] = o.PercentageEvaluationAttribute.Get()
 	}
 	return toSerialize, nil
-}
-
-func (o *UpdateEvaluationFormulaModel) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"defaultValue",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varUpdateEvaluationFormulaModel := _UpdateEvaluationFormulaModel{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUpdateEvaluationFormulaModel)
-
-	if err != nil {
-		return err
-	}
-
-	*o = UpdateEvaluationFormulaModel(varUpdateEvaluationFormulaModel)
-
-	return err
 }
 
 type NullableUpdateEvaluationFormulaModel struct {

@@ -21,23 +21,23 @@ import (
 )
 
 
-// WebhooksAPIService WebhooksAPI service
-type WebhooksAPIService service
+// WebhooksApiService WebhooksApi service
+type WebhooksApiService service
 
-type WebhooksAPICreateWebhookRequest struct {
+type WebhooksApiCreateWebhookRequest struct {
 	ctx context.Context
-	ApiService *WebhooksAPIService
+	ApiService *WebhooksApiService
 	configId string
 	environmentId string
 	webHookRequest *WebHookRequest
 }
 
-func (r WebhooksAPICreateWebhookRequest) WebHookRequest(webHookRequest WebHookRequest) WebhooksAPICreateWebhookRequest {
+func (r WebhooksApiCreateWebhookRequest) WebHookRequest(webHookRequest WebHookRequest) WebhooksApiCreateWebhookRequest {
 	r.webHookRequest = &webHookRequest
 	return r
 }
 
-func (r WebhooksAPICreateWebhookRequest) Execute() (*WebhookModel, *http.Response, error) {
+func (r WebhooksApiCreateWebhookRequest) Execute() (*WebhookModel, *http.Response, error) {
 	return r.ApiService.CreateWebhookExecute(r)
 }
 
@@ -50,10 +50,10 @@ identified by the `productId` parameter, which can be obtained from the [List Pr
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param configId The identifier of the Config.
  @param environmentId The identifier of the Environment.
- @return WebhooksAPICreateWebhookRequest
+ @return WebhooksApiCreateWebhookRequest
 */
-func (a *WebhooksAPIService) CreateWebhook(ctx context.Context, configId string, environmentId string) WebhooksAPICreateWebhookRequest {
-	return WebhooksAPICreateWebhookRequest{
+func (a *WebhooksApiService) CreateWebhook(ctx context.Context, configId string, environmentId string) WebhooksApiCreateWebhookRequest {
+	return WebhooksApiCreateWebhookRequest{
 		ApiService: a,
 		ctx: ctx,
 		configId: configId,
@@ -63,7 +63,7 @@ func (a *WebhooksAPIService) CreateWebhook(ctx context.Context, configId string,
 
 // Execute executes the request
 //  @return WebhookModel
-func (a *WebhooksAPIService) CreateWebhookExecute(r WebhooksAPICreateWebhookRequest) (*WebhookModel, *http.Response, error) {
+func (a *WebhooksApiService) CreateWebhookExecute(r WebhooksApiCreateWebhookRequest) (*WebhookModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -71,7 +71,7 @@ func (a *WebhooksAPIService) CreateWebhookExecute(r WebhooksAPICreateWebhookRequ
 		localVarReturnValue  *WebhookModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.CreateWebhook")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.CreateWebhook")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -143,13 +143,13 @@ func (a *WebhooksAPIService) CreateWebhookExecute(r WebhooksAPICreateWebhookRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WebhooksAPIDeleteWebhookRequest struct {
+type WebhooksApiDeleteWebhookRequest struct {
 	ctx context.Context
-	ApiService *WebhooksAPIService
+	ApiService *WebhooksApiService
 	webhookId int32
 }
 
-func (r WebhooksAPIDeleteWebhookRequest) Execute() (*http.Response, error) {
+func (r WebhooksApiDeleteWebhookRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteWebhookExecute(r)
 }
 
@@ -160,10 +160,10 @@ This endpoint removes a Webhook identified by the `webhookId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param webhookId The identifier of the Webhook.
- @return WebhooksAPIDeleteWebhookRequest
+ @return WebhooksApiDeleteWebhookRequest
 */
-func (a *WebhooksAPIService) DeleteWebhook(ctx context.Context, webhookId int32) WebhooksAPIDeleteWebhookRequest {
-	return WebhooksAPIDeleteWebhookRequest{
+func (a *WebhooksApiService) DeleteWebhook(ctx context.Context, webhookId int32) WebhooksApiDeleteWebhookRequest {
+	return WebhooksApiDeleteWebhookRequest{
 		ApiService: a,
 		ctx: ctx,
 		webhookId: webhookId,
@@ -171,14 +171,14 @@ func (a *WebhooksAPIService) DeleteWebhook(ctx context.Context, webhookId int32)
 }
 
 // Execute executes the request
-func (a *WebhooksAPIService) DeleteWebhookExecute(r WebhooksAPIDeleteWebhookRequest) (*http.Response, error) {
+func (a *WebhooksApiService) DeleteWebhookExecute(r WebhooksApiDeleteWebhookRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.DeleteWebhook")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.DeleteWebhook")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -235,13 +235,13 @@ func (a *WebhooksAPIService) DeleteWebhookExecute(r WebhooksAPIDeleteWebhookRequ
 	return localVarHTTPResponse, nil
 }
 
-type WebhooksAPIGetWebhookRequest struct {
+type WebhooksApiGetWebhookRequest struct {
 	ctx context.Context
-	ApiService *WebhooksAPIService
+	ApiService *WebhooksApiService
 	webhookId int32
 }
 
-func (r WebhooksAPIGetWebhookRequest) Execute() (*WebhookModel, *http.Response, error) {
+func (r WebhooksApiGetWebhookRequest) Execute() (*WebhookModel, *http.Response, error) {
 	return r.ApiService.GetWebhookExecute(r)
 }
 
@@ -253,10 +253,10 @@ identified by the `webhookId`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param webhookId The identifier of the Webhook.
- @return WebhooksAPIGetWebhookRequest
+ @return WebhooksApiGetWebhookRequest
 */
-func (a *WebhooksAPIService) GetWebhook(ctx context.Context, webhookId int32) WebhooksAPIGetWebhookRequest {
-	return WebhooksAPIGetWebhookRequest{
+func (a *WebhooksApiService) GetWebhook(ctx context.Context, webhookId int32) WebhooksApiGetWebhookRequest {
+	return WebhooksApiGetWebhookRequest{
 		ApiService: a,
 		ctx: ctx,
 		webhookId: webhookId,
@@ -265,7 +265,7 @@ func (a *WebhooksAPIService) GetWebhook(ctx context.Context, webhookId int32) We
 
 // Execute executes the request
 //  @return WebhookModel
-func (a *WebhooksAPIService) GetWebhookExecute(r WebhooksAPIGetWebhookRequest) (*WebhookModel, *http.Response, error) {
+func (a *WebhooksApiService) GetWebhookExecute(r WebhooksApiGetWebhookRequest) (*WebhookModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -273,7 +273,7 @@ func (a *WebhooksAPIService) GetWebhookExecute(r WebhooksAPIGetWebhookRequest) (
 		localVarReturnValue  *WebhookModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.GetWebhook")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.GetWebhook")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -339,13 +339,13 @@ func (a *WebhooksAPIService) GetWebhookExecute(r WebhooksAPIGetWebhookRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WebhooksAPIGetWebhookSigningKeysRequest struct {
+type WebhooksApiGetWebhookSigningKeysRequest struct {
 	ctx context.Context
-	ApiService *WebhooksAPIService
+	ApiService *WebhooksApiService
 	webhookId int32
 }
 
-func (r WebhooksAPIGetWebhookSigningKeysRequest) Execute() (*WebhookSigningKeysModel, *http.Response, error) {
+func (r WebhooksApiGetWebhookSigningKeysRequest) Execute() (*WebhookSigningKeysModel, *http.Response, error) {
 	return r.ApiService.GetWebhookSigningKeysExecute(r)
 }
 
@@ -361,10 +361,10 @@ Signing keys are used for ensuring the Webhook requests you receive are actually
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param webhookId The identifier of the Webhook.
- @return WebhooksAPIGetWebhookSigningKeysRequest
+ @return WebhooksApiGetWebhookSigningKeysRequest
 */
-func (a *WebhooksAPIService) GetWebhookSigningKeys(ctx context.Context, webhookId int32) WebhooksAPIGetWebhookSigningKeysRequest {
-	return WebhooksAPIGetWebhookSigningKeysRequest{
+func (a *WebhooksApiService) GetWebhookSigningKeys(ctx context.Context, webhookId int32) WebhooksApiGetWebhookSigningKeysRequest {
+	return WebhooksApiGetWebhookSigningKeysRequest{
 		ApiService: a,
 		ctx: ctx,
 		webhookId: webhookId,
@@ -373,7 +373,7 @@ func (a *WebhooksAPIService) GetWebhookSigningKeys(ctx context.Context, webhookI
 
 // Execute executes the request
 //  @return WebhookSigningKeysModel
-func (a *WebhooksAPIService) GetWebhookSigningKeysExecute(r WebhooksAPIGetWebhookSigningKeysRequest) (*WebhookSigningKeysModel, *http.Response, error) {
+func (a *WebhooksApiService) GetWebhookSigningKeysExecute(r WebhooksApiGetWebhookSigningKeysRequest) (*WebhookSigningKeysModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -381,7 +381,7 @@ func (a *WebhooksAPIService) GetWebhookSigningKeysExecute(r WebhooksAPIGetWebhoo
 		localVarReturnValue  *WebhookSigningKeysModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.GetWebhookSigningKeys")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.GetWebhookSigningKeys")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -447,13 +447,13 @@ func (a *WebhooksAPIService) GetWebhookSigningKeysExecute(r WebhooksAPIGetWebhoo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WebhooksAPIGetWebhooksRequest struct {
+type WebhooksApiGetWebhooksRequest struct {
 	ctx context.Context
-	ApiService *WebhooksAPIService
+	ApiService *WebhooksApiService
 	productId string
 }
 
-func (r WebhooksAPIGetWebhooksRequest) Execute() ([]WebhookModel, *http.Response, error) {
+func (r WebhooksApiGetWebhooksRequest) Execute() ([]WebhookModel, *http.Response, error) {
 	return r.ApiService.GetWebhooksExecute(r)
 }
 
@@ -465,10 +465,10 @@ This endpoint returns the list of the Webhooks that belongs to the given Product
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return WebhooksAPIGetWebhooksRequest
+ @return WebhooksApiGetWebhooksRequest
 */
-func (a *WebhooksAPIService) GetWebhooks(ctx context.Context, productId string) WebhooksAPIGetWebhooksRequest {
-	return WebhooksAPIGetWebhooksRequest{
+func (a *WebhooksApiService) GetWebhooks(ctx context.Context, productId string) WebhooksApiGetWebhooksRequest {
+	return WebhooksApiGetWebhooksRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -477,7 +477,7 @@ func (a *WebhooksAPIService) GetWebhooks(ctx context.Context, productId string) 
 
 // Execute executes the request
 //  @return []WebhookModel
-func (a *WebhooksAPIService) GetWebhooksExecute(r WebhooksAPIGetWebhooksRequest) ([]WebhookModel, *http.Response, error) {
+func (a *WebhooksApiService) GetWebhooksExecute(r WebhooksApiGetWebhooksRequest) ([]WebhookModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -485,7 +485,7 @@ func (a *WebhooksAPIService) GetWebhooksExecute(r WebhooksAPIGetWebhooksRequest)
 		localVarReturnValue  []WebhookModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.GetWebhooks")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.GetWebhooks")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -551,19 +551,19 @@ func (a *WebhooksAPIService) GetWebhooksExecute(r WebhooksAPIGetWebhooksRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WebhooksAPIReplaceWebhookRequest struct {
+type WebhooksApiReplaceWebhookRequest struct {
 	ctx context.Context
-	ApiService *WebhooksAPIService
+	ApiService *WebhooksApiService
 	webhookId int32
 	webHookRequest *WebHookRequest
 }
 
-func (r WebhooksAPIReplaceWebhookRequest) WebHookRequest(webHookRequest WebHookRequest) WebhooksAPIReplaceWebhookRequest {
+func (r WebhooksApiReplaceWebhookRequest) WebHookRequest(webHookRequest WebHookRequest) WebhooksApiReplaceWebhookRequest {
 	r.webHookRequest = &webHookRequest
 	return r
 }
 
-func (r WebhooksAPIReplaceWebhookRequest) Execute() (*WebhookModel, *http.Response, error) {
+func (r WebhooksApiReplaceWebhookRequest) Execute() (*WebhookModel, *http.Response, error) {
 	return r.ApiService.ReplaceWebhookExecute(r)
 }
 
@@ -577,10 +577,10 @@ want to change in its original state. Not listing one means it will reset.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param webhookId The identifier of the Webhook.
- @return WebhooksAPIReplaceWebhookRequest
+ @return WebhooksApiReplaceWebhookRequest
 */
-func (a *WebhooksAPIService) ReplaceWebhook(ctx context.Context, webhookId int32) WebhooksAPIReplaceWebhookRequest {
-	return WebhooksAPIReplaceWebhookRequest{
+func (a *WebhooksApiService) ReplaceWebhook(ctx context.Context, webhookId int32) WebhooksApiReplaceWebhookRequest {
+	return WebhooksApiReplaceWebhookRequest{
 		ApiService: a,
 		ctx: ctx,
 		webhookId: webhookId,
@@ -589,7 +589,7 @@ func (a *WebhooksAPIService) ReplaceWebhook(ctx context.Context, webhookId int32
 
 // Execute executes the request
 //  @return WebhookModel
-func (a *WebhooksAPIService) ReplaceWebhookExecute(r WebhooksAPIReplaceWebhookRequest) (*WebhookModel, *http.Response, error) {
+func (a *WebhooksApiService) ReplaceWebhookExecute(r WebhooksApiReplaceWebhookRequest) (*WebhookModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -597,7 +597,7 @@ func (a *WebhooksAPIService) ReplaceWebhookExecute(r WebhooksAPIReplaceWebhookRe
 		localVarReturnValue  *WebhookModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.ReplaceWebhook")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.ReplaceWebhook")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -668,19 +668,19 @@ func (a *WebhooksAPIService) ReplaceWebhookExecute(r WebhooksAPIReplaceWebhookRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type WebhooksAPIUpdateWebhookRequest struct {
+type WebhooksApiUpdateWebhookRequest struct {
 	ctx context.Context
-	ApiService *WebhooksAPIService
+	ApiService *WebhooksApiService
 	webhookId int32
 	jsonPatchOperation *[]JsonPatchOperation
 }
 
-func (r WebhooksAPIUpdateWebhookRequest) JsonPatchOperation(jsonPatchOperation []JsonPatchOperation) WebhooksAPIUpdateWebhookRequest {
+func (r WebhooksApiUpdateWebhookRequest) JsonPatchOperation(jsonPatchOperation []JsonPatchOperation) WebhooksApiUpdateWebhookRequest {
 	r.jsonPatchOperation = &jsonPatchOperation
 	return r
 }
 
-func (r WebhooksAPIUpdateWebhookRequest) Execute() (*WebhookModel, *http.Response, error) {
+func (r WebhooksApiUpdateWebhookRequest) Execute() (*WebhookModel, *http.Response, error) {
 	return r.ApiService.UpdateWebhookExecute(r)
 }
 
@@ -739,10 +739,10 @@ So we get a response like this:
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param webhookId The identifier of the Webhook.
- @return WebhooksAPIUpdateWebhookRequest
+ @return WebhooksApiUpdateWebhookRequest
 */
-func (a *WebhooksAPIService) UpdateWebhook(ctx context.Context, webhookId int32) WebhooksAPIUpdateWebhookRequest {
-	return WebhooksAPIUpdateWebhookRequest{
+func (a *WebhooksApiService) UpdateWebhook(ctx context.Context, webhookId int32) WebhooksApiUpdateWebhookRequest {
+	return WebhooksApiUpdateWebhookRequest{
 		ApiService: a,
 		ctx: ctx,
 		webhookId: webhookId,
@@ -751,7 +751,7 @@ func (a *WebhooksAPIService) UpdateWebhook(ctx context.Context, webhookId int32)
 
 // Execute executes the request
 //  @return WebhookModel
-func (a *WebhooksAPIService) UpdateWebhookExecute(r WebhooksAPIUpdateWebhookRequest) (*WebhookModel, *http.Response, error) {
+func (a *WebhooksApiService) UpdateWebhookExecute(r WebhooksApiUpdateWebhookRequest) (*WebhookModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -759,7 +759,7 @@ func (a *WebhooksAPIService) UpdateWebhookExecute(r WebhooksAPIUpdateWebhookRequ
 		localVarReturnValue  *WebhookModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.UpdateWebhook")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksApiService.UpdateWebhook")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

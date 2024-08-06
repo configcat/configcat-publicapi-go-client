@@ -21,17 +21,17 @@ import (
 )
 
 
-// FeatureFlagSettingValuesAPIService FeatureFlagSettingValuesAPI service
-type FeatureFlagSettingValuesAPIService service
+// FeatureFlagSettingValuesApiService FeatureFlagSettingValuesApi service
+type FeatureFlagSettingValuesApiService service
 
-type FeatureFlagSettingValuesAPIGetSettingValueRequest struct {
+type FeatureFlagSettingValuesApiGetSettingValueRequest struct {
 	ctx context.Context
-	ApiService *FeatureFlagSettingValuesAPIService
+	ApiService *FeatureFlagSettingValuesApiService
 	environmentId string
 	settingId int32
 }
 
-func (r FeatureFlagSettingValuesAPIGetSettingValueRequest) Execute() (*SettingValueModel, *http.Response, error) {
+func (r FeatureFlagSettingValuesApiGetSettingValueRequest) Execute() (*SettingValueModel, *http.Response, error) {
 	return r.ApiService.GetSettingValueExecute(r)
 }
 
@@ -53,10 +53,10 @@ evaluation order. You can read more about these rules [here](https://configcat.c
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param environmentId The identifier of the Environment.
  @param settingId The id of the Setting.
- @return FeatureFlagSettingValuesAPIGetSettingValueRequest
+ @return FeatureFlagSettingValuesApiGetSettingValueRequest
 */
-func (a *FeatureFlagSettingValuesAPIService) GetSettingValue(ctx context.Context, environmentId string, settingId int32) FeatureFlagSettingValuesAPIGetSettingValueRequest {
-	return FeatureFlagSettingValuesAPIGetSettingValueRequest{
+func (a *FeatureFlagSettingValuesApiService) GetSettingValue(ctx context.Context, environmentId string, settingId int32) FeatureFlagSettingValuesApiGetSettingValueRequest {
+	return FeatureFlagSettingValuesApiGetSettingValueRequest{
 		ApiService: a,
 		ctx: ctx,
 		environmentId: environmentId,
@@ -66,7 +66,7 @@ func (a *FeatureFlagSettingValuesAPIService) GetSettingValue(ctx context.Context
 
 // Execute executes the request
 //  @return SettingValueModel
-func (a *FeatureFlagSettingValuesAPIService) GetSettingValueExecute(r FeatureFlagSettingValuesAPIGetSettingValueRequest) (*SettingValueModel, *http.Response, error) {
+func (a *FeatureFlagSettingValuesApiService) GetSettingValueExecute(r FeatureFlagSettingValuesApiGetSettingValueRequest) (*SettingValueModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -74,7 +74,7 @@ func (a *FeatureFlagSettingValuesAPIService) GetSettingValueExecute(r FeatureFla
 		localVarReturnValue  *SettingValueModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagSettingValuesAPIService.GetSettingValue")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagSettingValuesApiService.GetSettingValue")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -141,14 +141,14 @@ func (a *FeatureFlagSettingValuesAPIService) GetSettingValueExecute(r FeatureFla
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FeatureFlagSettingValuesAPIGetSettingValuesRequest struct {
+type FeatureFlagSettingValuesApiGetSettingValuesRequest struct {
 	ctx context.Context
-	ApiService *FeatureFlagSettingValuesAPIService
+	ApiService *FeatureFlagSettingValuesApiService
 	configId string
 	environmentId string
 }
 
-func (r FeatureFlagSettingValuesAPIGetSettingValuesRequest) Execute() (*ConfigSettingValuesModel, *http.Response, error) {
+func (r FeatureFlagSettingValuesApiGetSettingValuesRequest) Execute() (*ConfigSettingValuesModel, *http.Response, error) {
 	return r.ApiService.GetSettingValuesExecute(r)
 }
 
@@ -170,10 +170,10 @@ evaluation order. You can read more about these rules [here](https://configcat.c
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param configId The identifier of the Config.
  @param environmentId The identifier of the Environment.
- @return FeatureFlagSettingValuesAPIGetSettingValuesRequest
+ @return FeatureFlagSettingValuesApiGetSettingValuesRequest
 */
-func (a *FeatureFlagSettingValuesAPIService) GetSettingValues(ctx context.Context, configId string, environmentId string) FeatureFlagSettingValuesAPIGetSettingValuesRequest {
-	return FeatureFlagSettingValuesAPIGetSettingValuesRequest{
+func (a *FeatureFlagSettingValuesApiService) GetSettingValues(ctx context.Context, configId string, environmentId string) FeatureFlagSettingValuesApiGetSettingValuesRequest {
+	return FeatureFlagSettingValuesApiGetSettingValuesRequest{
 		ApiService: a,
 		ctx: ctx,
 		configId: configId,
@@ -183,7 +183,7 @@ func (a *FeatureFlagSettingValuesAPIService) GetSettingValues(ctx context.Contex
 
 // Execute executes the request
 //  @return ConfigSettingValuesModel
-func (a *FeatureFlagSettingValuesAPIService) GetSettingValuesExecute(r FeatureFlagSettingValuesAPIGetSettingValuesRequest) (*ConfigSettingValuesModel, *http.Response, error) {
+func (a *FeatureFlagSettingValuesApiService) GetSettingValuesExecute(r FeatureFlagSettingValuesApiGetSettingValuesRequest) (*ConfigSettingValuesModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -191,7 +191,7 @@ func (a *FeatureFlagSettingValuesAPIService) GetSettingValuesExecute(r FeatureFl
 		localVarReturnValue  *ConfigSettingValuesModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagSettingValuesAPIService.GetSettingValues")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagSettingValuesApiService.GetSettingValues")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -258,27 +258,27 @@ func (a *FeatureFlagSettingValuesAPIService) GetSettingValuesExecute(r FeatureFl
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FeatureFlagSettingValuesAPIPostSettingValuesRequest struct {
+type FeatureFlagSettingValuesApiPostSettingValuesRequest struct {
 	ctx context.Context
-	ApiService *FeatureFlagSettingValuesAPIService
+	ApiService *FeatureFlagSettingValuesApiService
 	configId string
 	environmentId string
 	updateSettingValuesWithIdModel *UpdateSettingValuesWithIdModel
 	reason *string
 }
 
-func (r FeatureFlagSettingValuesAPIPostSettingValuesRequest) UpdateSettingValuesWithIdModel(updateSettingValuesWithIdModel UpdateSettingValuesWithIdModel) FeatureFlagSettingValuesAPIPostSettingValuesRequest {
+func (r FeatureFlagSettingValuesApiPostSettingValuesRequest) UpdateSettingValuesWithIdModel(updateSettingValuesWithIdModel UpdateSettingValuesWithIdModel) FeatureFlagSettingValuesApiPostSettingValuesRequest {
 	r.updateSettingValuesWithIdModel = &updateSettingValuesWithIdModel
 	return r
 }
 
 // The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on.
-func (r FeatureFlagSettingValuesAPIPostSettingValuesRequest) Reason(reason string) FeatureFlagSettingValuesAPIPostSettingValuesRequest {
+func (r FeatureFlagSettingValuesApiPostSettingValuesRequest) Reason(reason string) FeatureFlagSettingValuesApiPostSettingValuesRequest {
 	r.reason = &reason
 	return r
 }
 
-func (r FeatureFlagSettingValuesAPIPostSettingValuesRequest) Execute() (*ConfigSettingValuesModel, *http.Response, error) {
+func (r FeatureFlagSettingValuesApiPostSettingValuesRequest) Execute() (*ConfigSettingValuesModel, *http.Response, error) {
 	return r.ApiService.PostSettingValuesExecute(r)
 }
 
@@ -352,10 +352,10 @@ The `rolloutRules` property describes two types of rules:
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param configId The identifier of the Config.
  @param environmentId The identifier of the Environment.
- @return FeatureFlagSettingValuesAPIPostSettingValuesRequest
+ @return FeatureFlagSettingValuesApiPostSettingValuesRequest
 */
-func (a *FeatureFlagSettingValuesAPIService) PostSettingValues(ctx context.Context, configId string, environmentId string) FeatureFlagSettingValuesAPIPostSettingValuesRequest {
-	return FeatureFlagSettingValuesAPIPostSettingValuesRequest{
+func (a *FeatureFlagSettingValuesApiService) PostSettingValues(ctx context.Context, configId string, environmentId string) FeatureFlagSettingValuesApiPostSettingValuesRequest {
+	return FeatureFlagSettingValuesApiPostSettingValuesRequest{
 		ApiService: a,
 		ctx: ctx,
 		configId: configId,
@@ -365,7 +365,7 @@ func (a *FeatureFlagSettingValuesAPIService) PostSettingValues(ctx context.Conte
 
 // Execute executes the request
 //  @return ConfigSettingValuesModel
-func (a *FeatureFlagSettingValuesAPIService) PostSettingValuesExecute(r FeatureFlagSettingValuesAPIPostSettingValuesRequest) (*ConfigSettingValuesModel, *http.Response, error) {
+func (a *FeatureFlagSettingValuesApiService) PostSettingValuesExecute(r FeatureFlagSettingValuesApiPostSettingValuesRequest) (*ConfigSettingValuesModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -373,7 +373,7 @@ func (a *FeatureFlagSettingValuesAPIService) PostSettingValuesExecute(r FeatureF
 		localVarReturnValue  *ConfigSettingValuesModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagSettingValuesAPIService.PostSettingValues")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagSettingValuesApiService.PostSettingValues")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -448,27 +448,27 @@ func (a *FeatureFlagSettingValuesAPIService) PostSettingValuesExecute(r FeatureF
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FeatureFlagSettingValuesAPIReplaceSettingValueRequest struct {
+type FeatureFlagSettingValuesApiReplaceSettingValueRequest struct {
 	ctx context.Context
-	ApiService *FeatureFlagSettingValuesAPIService
+	ApiService *FeatureFlagSettingValuesApiService
 	environmentId string
 	settingId int32
 	updateSettingValueModel *UpdateSettingValueModel
 	reason *string
 }
 
-func (r FeatureFlagSettingValuesAPIReplaceSettingValueRequest) UpdateSettingValueModel(updateSettingValueModel UpdateSettingValueModel) FeatureFlagSettingValuesAPIReplaceSettingValueRequest {
+func (r FeatureFlagSettingValuesApiReplaceSettingValueRequest) UpdateSettingValueModel(updateSettingValueModel UpdateSettingValueModel) FeatureFlagSettingValuesApiReplaceSettingValueRequest {
 	r.updateSettingValueModel = &updateSettingValueModel
 	return r
 }
 
 // The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on.
-func (r FeatureFlagSettingValuesAPIReplaceSettingValueRequest) Reason(reason string) FeatureFlagSettingValuesAPIReplaceSettingValueRequest {
+func (r FeatureFlagSettingValuesApiReplaceSettingValueRequest) Reason(reason string) FeatureFlagSettingValuesApiReplaceSettingValueRequest {
 	r.reason = &reason
 	return r
 }
 
-func (r FeatureFlagSettingValuesAPIReplaceSettingValueRequest) Execute() (*SettingValueModel, *http.Response, error) {
+func (r FeatureFlagSettingValuesApiReplaceSettingValueRequest) Execute() (*SettingValueModel, *http.Response, error) {
 	return r.ApiService.ReplaceSettingValueExecute(r)
 }
 
@@ -523,10 +523,10 @@ The `rolloutRules` property describes two types of rules:
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param environmentId The identifier of the Environment.
  @param settingId The id of the Setting.
- @return FeatureFlagSettingValuesAPIReplaceSettingValueRequest
+ @return FeatureFlagSettingValuesApiReplaceSettingValueRequest
 */
-func (a *FeatureFlagSettingValuesAPIService) ReplaceSettingValue(ctx context.Context, environmentId string, settingId int32) FeatureFlagSettingValuesAPIReplaceSettingValueRequest {
-	return FeatureFlagSettingValuesAPIReplaceSettingValueRequest{
+func (a *FeatureFlagSettingValuesApiService) ReplaceSettingValue(ctx context.Context, environmentId string, settingId int32) FeatureFlagSettingValuesApiReplaceSettingValueRequest {
+	return FeatureFlagSettingValuesApiReplaceSettingValueRequest{
 		ApiService: a,
 		ctx: ctx,
 		environmentId: environmentId,
@@ -536,7 +536,7 @@ func (a *FeatureFlagSettingValuesAPIService) ReplaceSettingValue(ctx context.Con
 
 // Execute executes the request
 //  @return SettingValueModel
-func (a *FeatureFlagSettingValuesAPIService) ReplaceSettingValueExecute(r FeatureFlagSettingValuesAPIReplaceSettingValueRequest) (*SettingValueModel, *http.Response, error) {
+func (a *FeatureFlagSettingValuesApiService) ReplaceSettingValueExecute(r FeatureFlagSettingValuesApiReplaceSettingValueRequest) (*SettingValueModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -544,7 +544,7 @@ func (a *FeatureFlagSettingValuesAPIService) ReplaceSettingValueExecute(r Featur
 		localVarReturnValue  *SettingValueModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagSettingValuesAPIService.ReplaceSettingValue")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagSettingValuesApiService.ReplaceSettingValue")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -619,27 +619,27 @@ func (a *FeatureFlagSettingValuesAPIService) ReplaceSettingValueExecute(r Featur
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FeatureFlagSettingValuesAPIUpdateSettingValueRequest struct {
+type FeatureFlagSettingValuesApiUpdateSettingValueRequest struct {
 	ctx context.Context
-	ApiService *FeatureFlagSettingValuesAPIService
+	ApiService *FeatureFlagSettingValuesApiService
 	environmentId string
 	settingId int32
 	jsonPatchOperation *[]JsonPatchOperation
 	reason *string
 }
 
-func (r FeatureFlagSettingValuesAPIUpdateSettingValueRequest) JsonPatchOperation(jsonPatchOperation []JsonPatchOperation) FeatureFlagSettingValuesAPIUpdateSettingValueRequest {
+func (r FeatureFlagSettingValuesApiUpdateSettingValueRequest) JsonPatchOperation(jsonPatchOperation []JsonPatchOperation) FeatureFlagSettingValuesApiUpdateSettingValueRequest {
 	r.jsonPatchOperation = &jsonPatchOperation
 	return r
 }
 
 // The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on.
-func (r FeatureFlagSettingValuesAPIUpdateSettingValueRequest) Reason(reason string) FeatureFlagSettingValuesAPIUpdateSettingValueRequest {
+func (r FeatureFlagSettingValuesApiUpdateSettingValueRequest) Reason(reason string) FeatureFlagSettingValuesApiUpdateSettingValueRequest {
 	r.reason = &reason
 	return r
 }
 
-func (r FeatureFlagSettingValuesAPIUpdateSettingValueRequest) Execute() (*SettingValueModel, *http.Response, error) {
+func (r FeatureFlagSettingValuesApiUpdateSettingValueRequest) Execute() (*SettingValueModel, *http.Response, error) {
 	return r.ApiService.UpdateSettingValueExecute(r)
 }
 
@@ -709,10 +709,10 @@ The `rolloutRules` property describes two types of rules:
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param environmentId The identifier of the Environment.
  @param settingId The id of the Setting.
- @return FeatureFlagSettingValuesAPIUpdateSettingValueRequest
+ @return FeatureFlagSettingValuesApiUpdateSettingValueRequest
 */
-func (a *FeatureFlagSettingValuesAPIService) UpdateSettingValue(ctx context.Context, environmentId string, settingId int32) FeatureFlagSettingValuesAPIUpdateSettingValueRequest {
-	return FeatureFlagSettingValuesAPIUpdateSettingValueRequest{
+func (a *FeatureFlagSettingValuesApiService) UpdateSettingValue(ctx context.Context, environmentId string, settingId int32) FeatureFlagSettingValuesApiUpdateSettingValueRequest {
+	return FeatureFlagSettingValuesApiUpdateSettingValueRequest{
 		ApiService: a,
 		ctx: ctx,
 		environmentId: environmentId,
@@ -722,7 +722,7 @@ func (a *FeatureFlagSettingValuesAPIService) UpdateSettingValue(ctx context.Cont
 
 // Execute executes the request
 //  @return SettingValueModel
-func (a *FeatureFlagSettingValuesAPIService) UpdateSettingValueExecute(r FeatureFlagSettingValuesAPIUpdateSettingValueRequest) (*SettingValueModel, *http.Response, error) {
+func (a *FeatureFlagSettingValuesApiService) UpdateSettingValueExecute(r FeatureFlagSettingValuesApiUpdateSettingValueRequest) (*SettingValueModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -730,7 +730,7 @@ func (a *FeatureFlagSettingValuesAPIService) UpdateSettingValueExecute(r Feature
 		localVarReturnValue  *SettingValueModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagSettingValuesAPIService.UpdateSettingValue")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagSettingValuesApiService.UpdateSettingValue")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

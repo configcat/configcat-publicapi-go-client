@@ -21,22 +21,22 @@ import (
 )
 
 
-// FeatureFlagsSettingsAPIService FeatureFlagsSettingsAPI service
-type FeatureFlagsSettingsAPIService service
+// FeatureFlagsSettingsApiService FeatureFlagsSettingsApi service
+type FeatureFlagsSettingsApiService service
 
-type FeatureFlagsSettingsAPICreateSettingRequest struct {
+type FeatureFlagsSettingsApiCreateSettingRequest struct {
 	ctx context.Context
-	ApiService *FeatureFlagsSettingsAPIService
+	ApiService *FeatureFlagsSettingsApiService
 	configId string
 	createSettingInitialValues *CreateSettingInitialValues
 }
 
-func (r FeatureFlagsSettingsAPICreateSettingRequest) CreateSettingInitialValues(createSettingInitialValues CreateSettingInitialValues) FeatureFlagsSettingsAPICreateSettingRequest {
+func (r FeatureFlagsSettingsApiCreateSettingRequest) CreateSettingInitialValues(createSettingInitialValues CreateSettingInitialValues) FeatureFlagsSettingsApiCreateSettingRequest {
 	r.createSettingInitialValues = &createSettingInitialValues
 	return r
 }
 
-func (r FeatureFlagsSettingsAPICreateSettingRequest) Execute() (*SettingModel, *http.Response, error) {
+func (r FeatureFlagsSettingsApiCreateSettingRequest) Execute() (*SettingModel, *http.Response, error) {
 	return r.ApiService.CreateSettingExecute(r)
 }
 
@@ -50,10 +50,10 @@ identified by the `configId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param configId The identifier of the Config.
- @return FeatureFlagsSettingsAPICreateSettingRequest
+ @return FeatureFlagsSettingsApiCreateSettingRequest
 */
-func (a *FeatureFlagsSettingsAPIService) CreateSetting(ctx context.Context, configId string) FeatureFlagsSettingsAPICreateSettingRequest {
-	return FeatureFlagsSettingsAPICreateSettingRequest{
+func (a *FeatureFlagsSettingsApiService) CreateSetting(ctx context.Context, configId string) FeatureFlagsSettingsApiCreateSettingRequest {
+	return FeatureFlagsSettingsApiCreateSettingRequest{
 		ApiService: a,
 		ctx: ctx,
 		configId: configId,
@@ -62,7 +62,7 @@ func (a *FeatureFlagsSettingsAPIService) CreateSetting(ctx context.Context, conf
 
 // Execute executes the request
 //  @return SettingModel
-func (a *FeatureFlagsSettingsAPIService) CreateSettingExecute(r FeatureFlagsSettingsAPICreateSettingRequest) (*SettingModel, *http.Response, error) {
+func (a *FeatureFlagsSettingsApiService) CreateSettingExecute(r FeatureFlagsSettingsApiCreateSettingRequest) (*SettingModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -70,7 +70,7 @@ func (a *FeatureFlagsSettingsAPIService) CreateSettingExecute(r FeatureFlagsSett
 		localVarReturnValue  *SettingModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagsSettingsAPIService.CreateSetting")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagsSettingsApiService.CreateSetting")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -141,13 +141,13 @@ func (a *FeatureFlagsSettingsAPIService) CreateSettingExecute(r FeatureFlagsSett
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FeatureFlagsSettingsAPIDeleteSettingRequest struct {
+type FeatureFlagsSettingsApiDeleteSettingRequest struct {
 	ctx context.Context
-	ApiService *FeatureFlagsSettingsAPIService
+	ApiService *FeatureFlagsSettingsApiService
 	settingId int32
 }
 
-func (r FeatureFlagsSettingsAPIDeleteSettingRequest) Execute() (*http.Response, error) {
+func (r FeatureFlagsSettingsApiDeleteSettingRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteSettingExecute(r)
 }
 
@@ -159,10 +159,10 @@ identified by the `configId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param settingId The identifier of the Setting.
- @return FeatureFlagsSettingsAPIDeleteSettingRequest
+ @return FeatureFlagsSettingsApiDeleteSettingRequest
 */
-func (a *FeatureFlagsSettingsAPIService) DeleteSetting(ctx context.Context, settingId int32) FeatureFlagsSettingsAPIDeleteSettingRequest {
-	return FeatureFlagsSettingsAPIDeleteSettingRequest{
+func (a *FeatureFlagsSettingsApiService) DeleteSetting(ctx context.Context, settingId int32) FeatureFlagsSettingsApiDeleteSettingRequest {
+	return FeatureFlagsSettingsApiDeleteSettingRequest{
 		ApiService: a,
 		ctx: ctx,
 		settingId: settingId,
@@ -170,14 +170,14 @@ func (a *FeatureFlagsSettingsAPIService) DeleteSetting(ctx context.Context, sett
 }
 
 // Execute executes the request
-func (a *FeatureFlagsSettingsAPIService) DeleteSettingExecute(r FeatureFlagsSettingsAPIDeleteSettingRequest) (*http.Response, error) {
+func (a *FeatureFlagsSettingsApiService) DeleteSettingExecute(r FeatureFlagsSettingsApiDeleteSettingRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagsSettingsAPIService.DeleteSetting")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagsSettingsApiService.DeleteSetting")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -234,13 +234,13 @@ func (a *FeatureFlagsSettingsAPIService) DeleteSettingExecute(r FeatureFlagsSett
 	return localVarHTTPResponse, nil
 }
 
-type FeatureFlagsSettingsAPIGetSettingRequest struct {
+type FeatureFlagsSettingsApiGetSettingRequest struct {
 	ctx context.Context
-	ApiService *FeatureFlagsSettingsAPIService
+	ApiService *FeatureFlagsSettingsApiService
 	settingId int32
 }
 
-func (r FeatureFlagsSettingsAPIGetSettingRequest) Execute() (*SettingModel, *http.Response, error) {
+func (r FeatureFlagsSettingsApiGetSettingRequest) Execute() (*SettingModel, *http.Response, error) {
 	return r.ApiService.GetSettingExecute(r)
 }
 
@@ -252,10 +252,10 @@ identified by the `settingId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param settingId The identifier of the Setting.
- @return FeatureFlagsSettingsAPIGetSettingRequest
+ @return FeatureFlagsSettingsApiGetSettingRequest
 */
-func (a *FeatureFlagsSettingsAPIService) GetSetting(ctx context.Context, settingId int32) FeatureFlagsSettingsAPIGetSettingRequest {
-	return FeatureFlagsSettingsAPIGetSettingRequest{
+func (a *FeatureFlagsSettingsApiService) GetSetting(ctx context.Context, settingId int32) FeatureFlagsSettingsApiGetSettingRequest {
+	return FeatureFlagsSettingsApiGetSettingRequest{
 		ApiService: a,
 		ctx: ctx,
 		settingId: settingId,
@@ -264,7 +264,7 @@ func (a *FeatureFlagsSettingsAPIService) GetSetting(ctx context.Context, setting
 
 // Execute executes the request
 //  @return SettingModel
-func (a *FeatureFlagsSettingsAPIService) GetSettingExecute(r FeatureFlagsSettingsAPIGetSettingRequest) (*SettingModel, *http.Response, error) {
+func (a *FeatureFlagsSettingsApiService) GetSettingExecute(r FeatureFlagsSettingsApiGetSettingRequest) (*SettingModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -272,7 +272,7 @@ func (a *FeatureFlagsSettingsAPIService) GetSettingExecute(r FeatureFlagsSetting
 		localVarReturnValue  *SettingModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagsSettingsAPIService.GetSetting")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagsSettingsApiService.GetSetting")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -338,13 +338,13 @@ func (a *FeatureFlagsSettingsAPIService) GetSettingExecute(r FeatureFlagsSetting
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FeatureFlagsSettingsAPIGetSettingsRequest struct {
+type FeatureFlagsSettingsApiGetSettingsRequest struct {
 	ctx context.Context
-	ApiService *FeatureFlagsSettingsAPIService
+	ApiService *FeatureFlagsSettingsApiService
 	configId string
 }
 
-func (r FeatureFlagsSettingsAPIGetSettingsRequest) Execute() ([]SettingModel, *http.Response, error) {
+func (r FeatureFlagsSettingsApiGetSettingsRequest) Execute() ([]SettingModel, *http.Response, error) {
 	return r.ApiService.GetSettingsExecute(r)
 }
 
@@ -356,10 +356,10 @@ specified Config, identified by the `configId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param configId The identifier of the Config.
- @return FeatureFlagsSettingsAPIGetSettingsRequest
+ @return FeatureFlagsSettingsApiGetSettingsRequest
 */
-func (a *FeatureFlagsSettingsAPIService) GetSettings(ctx context.Context, configId string) FeatureFlagsSettingsAPIGetSettingsRequest {
-	return FeatureFlagsSettingsAPIGetSettingsRequest{
+func (a *FeatureFlagsSettingsApiService) GetSettings(ctx context.Context, configId string) FeatureFlagsSettingsApiGetSettingsRequest {
+	return FeatureFlagsSettingsApiGetSettingsRequest{
 		ApiService: a,
 		ctx: ctx,
 		configId: configId,
@@ -368,7 +368,7 @@ func (a *FeatureFlagsSettingsAPIService) GetSettings(ctx context.Context, config
 
 // Execute executes the request
 //  @return []SettingModel
-func (a *FeatureFlagsSettingsAPIService) GetSettingsExecute(r FeatureFlagsSettingsAPIGetSettingsRequest) ([]SettingModel, *http.Response, error) {
+func (a *FeatureFlagsSettingsApiService) GetSettingsExecute(r FeatureFlagsSettingsApiGetSettingsRequest) ([]SettingModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -376,7 +376,7 @@ func (a *FeatureFlagsSettingsAPIService) GetSettingsExecute(r FeatureFlagsSettin
 		localVarReturnValue  []SettingModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagsSettingsAPIService.GetSettings")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagsSettingsApiService.GetSettings")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -442,19 +442,19 @@ func (a *FeatureFlagsSettingsAPIService) GetSettingsExecute(r FeatureFlagsSettin
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FeatureFlagsSettingsAPIReplaceSettingRequest struct {
+type FeatureFlagsSettingsApiReplaceSettingRequest struct {
 	ctx context.Context
-	ApiService *FeatureFlagsSettingsAPIService
+	ApiService *FeatureFlagsSettingsApiService
 	settingId int32
 	replaceSettingModel *ReplaceSettingModel
 }
 
-func (r FeatureFlagsSettingsAPIReplaceSettingRequest) ReplaceSettingModel(replaceSettingModel ReplaceSettingModel) FeatureFlagsSettingsAPIReplaceSettingRequest {
+func (r FeatureFlagsSettingsApiReplaceSettingRequest) ReplaceSettingModel(replaceSettingModel ReplaceSettingModel) FeatureFlagsSettingsApiReplaceSettingRequest {
 	r.replaceSettingModel = &replaceSettingModel
 	return r
 }
 
-func (r FeatureFlagsSettingsAPIReplaceSettingRequest) Execute() (*SettingModel, *http.Response, error) {
+func (r FeatureFlagsSettingsApiReplaceSettingRequest) Execute() (*SettingModel, *http.Response, error) {
 	return r.ApiService.ReplaceSettingExecute(r)
 }
 
@@ -469,10 +469,10 @@ want to change in its original state. Not listing one means it will reset.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param settingId The identifier of the Setting.
- @return FeatureFlagsSettingsAPIReplaceSettingRequest
+ @return FeatureFlagsSettingsApiReplaceSettingRequest
 */
-func (a *FeatureFlagsSettingsAPIService) ReplaceSetting(ctx context.Context, settingId int32) FeatureFlagsSettingsAPIReplaceSettingRequest {
-	return FeatureFlagsSettingsAPIReplaceSettingRequest{
+func (a *FeatureFlagsSettingsApiService) ReplaceSetting(ctx context.Context, settingId int32) FeatureFlagsSettingsApiReplaceSettingRequest {
+	return FeatureFlagsSettingsApiReplaceSettingRequest{
 		ApiService: a,
 		ctx: ctx,
 		settingId: settingId,
@@ -481,7 +481,7 @@ func (a *FeatureFlagsSettingsAPIService) ReplaceSetting(ctx context.Context, set
 
 // Execute executes the request
 //  @return SettingModel
-func (a *FeatureFlagsSettingsAPIService) ReplaceSettingExecute(r FeatureFlagsSettingsAPIReplaceSettingRequest) (*SettingModel, *http.Response, error) {
+func (a *FeatureFlagsSettingsApiService) ReplaceSettingExecute(r FeatureFlagsSettingsApiReplaceSettingRequest) (*SettingModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -489,7 +489,7 @@ func (a *FeatureFlagsSettingsAPIService) ReplaceSettingExecute(r FeatureFlagsSet
 		localVarReturnValue  *SettingModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagsSettingsAPIService.ReplaceSetting")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagsSettingsApiService.ReplaceSetting")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -560,19 +560,19 @@ func (a *FeatureFlagsSettingsAPIService) ReplaceSettingExecute(r FeatureFlagsSet
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FeatureFlagsSettingsAPIUpdateSettingRequest struct {
+type FeatureFlagsSettingsApiUpdateSettingRequest struct {
 	ctx context.Context
-	ApiService *FeatureFlagsSettingsAPIService
+	ApiService *FeatureFlagsSettingsApiService
 	settingId int32
 	jsonPatchOperation *[]JsonPatchOperation
 }
 
-func (r FeatureFlagsSettingsAPIUpdateSettingRequest) JsonPatchOperation(jsonPatchOperation []JsonPatchOperation) FeatureFlagsSettingsAPIUpdateSettingRequest {
+func (r FeatureFlagsSettingsApiUpdateSettingRequest) JsonPatchOperation(jsonPatchOperation []JsonPatchOperation) FeatureFlagsSettingsApiUpdateSettingRequest {
 	r.jsonPatchOperation = &jsonPatchOperation
 	return r
 }
 
-func (r FeatureFlagsSettingsAPIUpdateSettingRequest) Execute() (*SettingModel, *http.Response, error) {
+func (r FeatureFlagsSettingsApiUpdateSettingRequest) Execute() (*SettingModel, *http.Response, error) {
 	return r.ApiService.UpdateSettingExecute(r)
 }
 
@@ -646,10 +646,10 @@ So we get a response like this:
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param settingId The identifier of the Setting.
- @return FeatureFlagsSettingsAPIUpdateSettingRequest
+ @return FeatureFlagsSettingsApiUpdateSettingRequest
 */
-func (a *FeatureFlagsSettingsAPIService) UpdateSetting(ctx context.Context, settingId int32) FeatureFlagsSettingsAPIUpdateSettingRequest {
-	return FeatureFlagsSettingsAPIUpdateSettingRequest{
+func (a *FeatureFlagsSettingsApiService) UpdateSetting(ctx context.Context, settingId int32) FeatureFlagsSettingsApiUpdateSettingRequest {
+	return FeatureFlagsSettingsApiUpdateSettingRequest{
 		ApiService: a,
 		ctx: ctx,
 		settingId: settingId,
@@ -658,7 +658,7 @@ func (a *FeatureFlagsSettingsAPIService) UpdateSetting(ctx context.Context, sett
 
 // Execute executes the request
 //  @return SettingModel
-func (a *FeatureFlagsSettingsAPIService) UpdateSettingExecute(r FeatureFlagsSettingsAPIUpdateSettingRequest) (*SettingModel, *http.Response, error) {
+func (a *FeatureFlagsSettingsApiService) UpdateSettingExecute(r FeatureFlagsSettingsApiUpdateSettingRequest) (*SettingModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -666,7 +666,7 @@ func (a *FeatureFlagsSettingsAPIService) UpdateSettingExecute(r FeatureFlagsSett
 		localVarReturnValue  *SettingModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagsSettingsAPIService.UpdateSetting")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagsSettingsApiService.UpdateSetting")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

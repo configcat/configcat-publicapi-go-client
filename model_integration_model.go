@@ -177,7 +177,7 @@ func (o *IntegrationModel) GetParametersOk() (*map[string]string, bool) {
 
 // HasParameters returns a boolean if a field has been set.
 func (o *IntegrationModel) HasParameters() bool {
-	if o != nil && !IsNil(o.Parameters) {
+	if o != nil && IsNil(o.Parameters) {
 		return true
 	}
 
@@ -210,7 +210,7 @@ func (o *IntegrationModel) GetIntegrationEnvironmentIdsOk() ([]string, bool) {
 
 // HasIntegrationEnvironmentIds returns a boolean if a field has been set.
 func (o *IntegrationModel) HasIntegrationEnvironmentIds() bool {
-	if o != nil && !IsNil(o.IntegrationEnvironmentIds) {
+	if o != nil && IsNil(o.IntegrationEnvironmentIds) {
 		return true
 	}
 
@@ -243,7 +243,7 @@ func (o *IntegrationModel) GetIntegrationConfigIdsOk() ([]string, bool) {
 
 // HasIntegrationConfigIds returns a boolean if a field has been set.
 func (o *IntegrationModel) HasIntegrationConfigIds() bool {
-	if o != nil && !IsNil(o.IntegrationConfigIds) {
+	if o != nil && IsNil(o.IntegrationConfigIds) {
 		return true
 	}
 
