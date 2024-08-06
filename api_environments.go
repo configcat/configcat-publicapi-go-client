@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).   # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -21,22 +21,22 @@ import (
 )
 
 
-// EnvironmentsApiService EnvironmentsApi service
-type EnvironmentsApiService service
+// EnvironmentsAPIService EnvironmentsAPI service
+type EnvironmentsAPIService service
 
-type EnvironmentsApiCreateEnvironmentRequest struct {
+type EnvironmentsAPICreateEnvironmentRequest struct {
 	ctx context.Context
-	ApiService *EnvironmentsApiService
+	ApiService *EnvironmentsAPIService
 	productId string
 	createEnvironmentModel *CreateEnvironmentModel
 }
 
-func (r EnvironmentsApiCreateEnvironmentRequest) CreateEnvironmentModel(createEnvironmentModel CreateEnvironmentModel) EnvironmentsApiCreateEnvironmentRequest {
+func (r EnvironmentsAPICreateEnvironmentRequest) CreateEnvironmentModel(createEnvironmentModel CreateEnvironmentModel) EnvironmentsAPICreateEnvironmentRequest {
 	r.createEnvironmentModel = &createEnvironmentModel
 	return r
 }
 
-func (r EnvironmentsApiCreateEnvironmentRequest) Execute() (*EnvironmentModel, *http.Response, error) {
+func (r EnvironmentsAPICreateEnvironmentRequest) Execute() (*EnvironmentModel, *http.Response, error) {
 	return r.ApiService.CreateEnvironmentExecute(r)
 }
 
@@ -48,10 +48,10 @@ identified by the `productId` parameter, which can be obtained from the [List Pr
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return EnvironmentsApiCreateEnvironmentRequest
+ @return EnvironmentsAPICreateEnvironmentRequest
 */
-func (a *EnvironmentsApiService) CreateEnvironment(ctx context.Context, productId string) EnvironmentsApiCreateEnvironmentRequest {
-	return EnvironmentsApiCreateEnvironmentRequest{
+func (a *EnvironmentsAPIService) CreateEnvironment(ctx context.Context, productId string) EnvironmentsAPICreateEnvironmentRequest {
+	return EnvironmentsAPICreateEnvironmentRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -60,7 +60,7 @@ func (a *EnvironmentsApiService) CreateEnvironment(ctx context.Context, productI
 
 // Execute executes the request
 //  @return EnvironmentModel
-func (a *EnvironmentsApiService) CreateEnvironmentExecute(r EnvironmentsApiCreateEnvironmentRequest) (*EnvironmentModel, *http.Response, error) {
+func (a *EnvironmentsAPIService) CreateEnvironmentExecute(r EnvironmentsAPICreateEnvironmentRequest) (*EnvironmentModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -68,7 +68,7 @@ func (a *EnvironmentsApiService) CreateEnvironmentExecute(r EnvironmentsApiCreat
 		localVarReturnValue  *EnvironmentModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsApiService.CreateEnvironment")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsAPIService.CreateEnvironment")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -139,20 +139,20 @@ func (a *EnvironmentsApiService) CreateEnvironmentExecute(r EnvironmentsApiCreat
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type EnvironmentsApiDeleteEnvironmentRequest struct {
+type EnvironmentsAPIDeleteEnvironmentRequest struct {
 	ctx context.Context
-	ApiService *EnvironmentsApiService
+	ApiService *EnvironmentsAPIService
 	environmentId string
 	cleanupAuditLogs *bool
 }
 
 // An optional flag which indicates whether the audit log records related to the environment should be deleted or not.
-func (r EnvironmentsApiDeleteEnvironmentRequest) CleanupAuditLogs(cleanupAuditLogs bool) EnvironmentsApiDeleteEnvironmentRequest {
+func (r EnvironmentsAPIDeleteEnvironmentRequest) CleanupAuditLogs(cleanupAuditLogs bool) EnvironmentsAPIDeleteEnvironmentRequest {
 	r.cleanupAuditLogs = &cleanupAuditLogs
 	return r
 }
 
-func (r EnvironmentsApiDeleteEnvironmentRequest) Execute() (*http.Response, error) {
+func (r EnvironmentsAPIDeleteEnvironmentRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteEnvironmentExecute(r)
 }
 
@@ -165,10 +165,10 @@ If the `cleanupAuditLogs` flag is set to true, it also deletes the audit log rec
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param environmentId The identifier of the Environment.
- @return EnvironmentsApiDeleteEnvironmentRequest
+ @return EnvironmentsAPIDeleteEnvironmentRequest
 */
-func (a *EnvironmentsApiService) DeleteEnvironment(ctx context.Context, environmentId string) EnvironmentsApiDeleteEnvironmentRequest {
-	return EnvironmentsApiDeleteEnvironmentRequest{
+func (a *EnvironmentsAPIService) DeleteEnvironment(ctx context.Context, environmentId string) EnvironmentsAPIDeleteEnvironmentRequest {
+	return EnvironmentsAPIDeleteEnvironmentRequest{
 		ApiService: a,
 		ctx: ctx,
 		environmentId: environmentId,
@@ -176,14 +176,14 @@ func (a *EnvironmentsApiService) DeleteEnvironment(ctx context.Context, environm
 }
 
 // Execute executes the request
-func (a *EnvironmentsApiService) DeleteEnvironmentExecute(r EnvironmentsApiDeleteEnvironmentRequest) (*http.Response, error) {
+func (a *EnvironmentsAPIService) DeleteEnvironmentExecute(r EnvironmentsAPIDeleteEnvironmentRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsApiService.DeleteEnvironment")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsAPIService.DeleteEnvironment")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -243,13 +243,13 @@ func (a *EnvironmentsApiService) DeleteEnvironmentExecute(r EnvironmentsApiDelet
 	return localVarHTTPResponse, nil
 }
 
-type EnvironmentsApiGetEnvironmentRequest struct {
+type EnvironmentsAPIGetEnvironmentRequest struct {
 	ctx context.Context
-	ApiService *EnvironmentsApiService
+	ApiService *EnvironmentsAPIService
 	environmentId string
 }
 
-func (r EnvironmentsApiGetEnvironmentRequest) Execute() (*EnvironmentModel, *http.Response, error) {
+func (r EnvironmentsAPIGetEnvironmentRequest) Execute() (*EnvironmentModel, *http.Response, error) {
 	return r.ApiService.GetEnvironmentExecute(r)
 }
 
@@ -261,10 +261,10 @@ identified by the `environmentId`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param environmentId The identifier of the Environment.
- @return EnvironmentsApiGetEnvironmentRequest
+ @return EnvironmentsAPIGetEnvironmentRequest
 */
-func (a *EnvironmentsApiService) GetEnvironment(ctx context.Context, environmentId string) EnvironmentsApiGetEnvironmentRequest {
-	return EnvironmentsApiGetEnvironmentRequest{
+func (a *EnvironmentsAPIService) GetEnvironment(ctx context.Context, environmentId string) EnvironmentsAPIGetEnvironmentRequest {
+	return EnvironmentsAPIGetEnvironmentRequest{
 		ApiService: a,
 		ctx: ctx,
 		environmentId: environmentId,
@@ -273,7 +273,7 @@ func (a *EnvironmentsApiService) GetEnvironment(ctx context.Context, environment
 
 // Execute executes the request
 //  @return EnvironmentModel
-func (a *EnvironmentsApiService) GetEnvironmentExecute(r EnvironmentsApiGetEnvironmentRequest) (*EnvironmentModel, *http.Response, error) {
+func (a *EnvironmentsAPIService) GetEnvironmentExecute(r EnvironmentsAPIGetEnvironmentRequest) (*EnvironmentModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -281,7 +281,7 @@ func (a *EnvironmentsApiService) GetEnvironmentExecute(r EnvironmentsApiGetEnvir
 		localVarReturnValue  *EnvironmentModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsApiService.GetEnvironment")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsAPIService.GetEnvironment")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -347,13 +347,13 @@ func (a *EnvironmentsApiService) GetEnvironmentExecute(r EnvironmentsApiGetEnvir
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type EnvironmentsApiGetEnvironmentsRequest struct {
+type EnvironmentsAPIGetEnvironmentsRequest struct {
 	ctx context.Context
-	ApiService *EnvironmentsApiService
+	ApiService *EnvironmentsAPIService
 	productId string
 }
 
-func (r EnvironmentsApiGetEnvironmentsRequest) Execute() ([]EnvironmentModel, *http.Response, error) {
+func (r EnvironmentsAPIGetEnvironmentsRequest) Execute() ([]EnvironmentModel, *http.Response, error) {
 	return r.ApiService.GetEnvironmentsExecute(r)
 }
 
@@ -365,10 +365,10 @@ This endpoint returns the list of the Environments that belongs to the given Pro
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return EnvironmentsApiGetEnvironmentsRequest
+ @return EnvironmentsAPIGetEnvironmentsRequest
 */
-func (a *EnvironmentsApiService) GetEnvironments(ctx context.Context, productId string) EnvironmentsApiGetEnvironmentsRequest {
-	return EnvironmentsApiGetEnvironmentsRequest{
+func (a *EnvironmentsAPIService) GetEnvironments(ctx context.Context, productId string) EnvironmentsAPIGetEnvironmentsRequest {
+	return EnvironmentsAPIGetEnvironmentsRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -377,7 +377,7 @@ func (a *EnvironmentsApiService) GetEnvironments(ctx context.Context, productId 
 
 // Execute executes the request
 //  @return []EnvironmentModel
-func (a *EnvironmentsApiService) GetEnvironmentsExecute(r EnvironmentsApiGetEnvironmentsRequest) ([]EnvironmentModel, *http.Response, error) {
+func (a *EnvironmentsAPIService) GetEnvironmentsExecute(r EnvironmentsAPIGetEnvironmentsRequest) ([]EnvironmentModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -385,7 +385,7 @@ func (a *EnvironmentsApiService) GetEnvironmentsExecute(r EnvironmentsApiGetEnvi
 		localVarReturnValue  []EnvironmentModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsApiService.GetEnvironments")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsAPIService.GetEnvironments")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -451,19 +451,19 @@ func (a *EnvironmentsApiService) GetEnvironmentsExecute(r EnvironmentsApiGetEnvi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type EnvironmentsApiUpdateEnvironmentRequest struct {
+type EnvironmentsAPIUpdateEnvironmentRequest struct {
 	ctx context.Context
-	ApiService *EnvironmentsApiService
+	ApiService *EnvironmentsAPIService
 	environmentId string
 	updateEnvironmentModel *UpdateEnvironmentModel
 }
 
-func (r EnvironmentsApiUpdateEnvironmentRequest) UpdateEnvironmentModel(updateEnvironmentModel UpdateEnvironmentModel) EnvironmentsApiUpdateEnvironmentRequest {
+func (r EnvironmentsAPIUpdateEnvironmentRequest) UpdateEnvironmentModel(updateEnvironmentModel UpdateEnvironmentModel) EnvironmentsAPIUpdateEnvironmentRequest {
 	r.updateEnvironmentModel = &updateEnvironmentModel
 	return r
 }
 
-func (r EnvironmentsApiUpdateEnvironmentRequest) Execute() (*EnvironmentModel, *http.Response, error) {
+func (r EnvironmentsAPIUpdateEnvironmentRequest) Execute() (*EnvironmentModel, *http.Response, error) {
 	return r.ApiService.UpdateEnvironmentExecute(r)
 }
 
@@ -474,10 +474,10 @@ This endpoint updates an Environment identified by the `environmentId` parameter
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param environmentId The identifier of the Environment.
- @return EnvironmentsApiUpdateEnvironmentRequest
+ @return EnvironmentsAPIUpdateEnvironmentRequest
 */
-func (a *EnvironmentsApiService) UpdateEnvironment(ctx context.Context, environmentId string) EnvironmentsApiUpdateEnvironmentRequest {
-	return EnvironmentsApiUpdateEnvironmentRequest{
+func (a *EnvironmentsAPIService) UpdateEnvironment(ctx context.Context, environmentId string) EnvironmentsAPIUpdateEnvironmentRequest {
+	return EnvironmentsAPIUpdateEnvironmentRequest{
 		ApiService: a,
 		ctx: ctx,
 		environmentId: environmentId,
@@ -486,7 +486,7 @@ func (a *EnvironmentsApiService) UpdateEnvironment(ctx context.Context, environm
 
 // Execute executes the request
 //  @return EnvironmentModel
-func (a *EnvironmentsApiService) UpdateEnvironmentExecute(r EnvironmentsApiUpdateEnvironmentRequest) (*EnvironmentModel, *http.Response, error) {
+func (a *EnvironmentsAPIService) UpdateEnvironmentExecute(r EnvironmentsAPIUpdateEnvironmentRequest) (*EnvironmentModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -494,7 +494,7 @@ func (a *EnvironmentsApiService) UpdateEnvironmentExecute(r EnvironmentsApiUpdat
 		localVarReturnValue  *EnvironmentModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsApiService.UpdateEnvironment")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "EnvironmentsAPIService.UpdateEnvironment")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

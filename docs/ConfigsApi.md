@@ -1,14 +1,14 @@
-# \ConfigsApi
+# \ConfigsAPI
 
 All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateConfig**](ConfigsApi.md#CreateConfig) | **Post** /v1/products/{productId}/configs | Create Config
-[**DeleteConfig**](ConfigsApi.md#DeleteConfig) | **Delete** /v1/configs/{configId} | Delete Config
-[**GetConfig**](ConfigsApi.md#GetConfig) | **Get** /v1/configs/{configId} | Get Config
-[**GetConfigs**](ConfigsApi.md#GetConfigs) | **Get** /v1/products/{productId}/configs | List Configs
-[**UpdateConfig**](ConfigsApi.md#UpdateConfig) | **Put** /v1/configs/{configId} | Update Config
+[**CreateConfig**](ConfigsAPI.md#CreateConfig) | **Post** /v1/products/{productId}/configs | Create Config
+[**DeleteConfig**](ConfigsAPI.md#DeleteConfig) | **Delete** /v1/configs/{configId} | Delete Config
+[**GetConfig**](ConfigsAPI.md#GetConfig) | **Get** /v1/configs/{configId} | Get Config
+[**GetConfigs**](ConfigsAPI.md#GetConfigs) | **Get** /v1/products/{productId}/configs | List Configs
+[**UpdateConfig**](ConfigsAPI.md#UpdateConfig) | **Put** /v1/configs/{configId} | Update Config
 
 
 
@@ -26,25 +26,25 @@ Create Config
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
-    createConfigRequest := *openapiclient.NewCreateConfigRequest("Name_example") // CreateConfigRequest | 
+	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+	createConfigRequest := *openapiclient.NewCreateConfigRequest("Name_example") // CreateConfigRequest | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ConfigsApi.CreateConfig(context.Background(), productId).CreateConfigRequest(createConfigRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigsApi.CreateConfig``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateConfig`: ConfigModel
-    fmt.Fprintf(os.Stdout, "Response from `ConfigsApi.CreateConfig`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConfigsAPI.CreateConfig(context.Background(), productId).CreateConfigRequest(createConfigRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigsAPI.CreateConfig``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateConfig`: ConfigModel
+	fmt.Fprintf(os.Stdout, "Response from `ConfigsAPI.CreateConfig`: %v\n", resp)
 }
 ```
 
@@ -98,22 +98,22 @@ Delete Config
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
+	configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.ConfigsApi.DeleteConfig(context.Background(), configId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigsApi.DeleteConfig``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.ConfigsAPI.DeleteConfig(context.Background(), configId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigsAPI.DeleteConfig``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -166,24 +166,24 @@ Get Config
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
+	configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ConfigsApi.GetConfig(context.Background(), configId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigsApi.GetConfig``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetConfig`: ConfigModel
-    fmt.Fprintf(os.Stdout, "Response from `ConfigsApi.GetConfig`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConfigsAPI.GetConfig(context.Background(), configId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigsAPI.GetConfig``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetConfig`: ConfigModel
+	fmt.Fprintf(os.Stdout, "Response from `ConfigsAPI.GetConfig`: %v\n", resp)
 }
 ```
 
@@ -236,24 +236,24 @@ List Configs
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ConfigsApi.GetConfigs(context.Background(), productId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigsApi.GetConfigs``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetConfigs`: []ConfigModel
-    fmt.Fprintf(os.Stdout, "Response from `ConfigsApi.GetConfigs`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConfigsAPI.GetConfigs(context.Background(), productId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigsAPI.GetConfigs``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetConfigs`: []ConfigModel
+	fmt.Fprintf(os.Stdout, "Response from `ConfigsAPI.GetConfigs`: %v\n", resp)
 }
 ```
 
@@ -306,25 +306,25 @@ Update Config
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
-    updateConfigRequest := *openapiclient.NewUpdateConfigRequest() // UpdateConfigRequest | 
+	configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
+	updateConfigRequest := *openapiclient.NewUpdateConfigRequest() // UpdateConfigRequest | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.ConfigsApi.UpdateConfig(context.Background(), configId).UpdateConfigRequest(updateConfigRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ConfigsApi.UpdateConfig``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateConfig`: ConfigModel
-    fmt.Fprintf(os.Stdout, "Response from `ConfigsApi.UpdateConfig`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ConfigsAPI.UpdateConfig(context.Background(), configId).UpdateConfigRequest(updateConfigRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ConfigsAPI.UpdateConfig``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateConfig`: ConfigModel
+	fmt.Fprintf(os.Stdout, "Response from `ConfigsAPI.UpdateConfig`: %v\n", resp)
 }
 ```
 

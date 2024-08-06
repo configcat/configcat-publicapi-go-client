@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).   # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -21,23 +21,23 @@ import (
 )
 
 
-// FeatureFlagSettingValuesUsingSDKKeyV2ApiService FeatureFlagSettingValuesUsingSDKKeyV2Api service
-type FeatureFlagSettingValuesUsingSDKKeyV2ApiService service
+// FeatureFlagSettingValuesUsingSDKKeyV2APIService FeatureFlagSettingValuesUsingSDKKeyV2API service
+type FeatureFlagSettingValuesUsingSDKKeyV2APIService service
 
-type FeatureFlagSettingValuesUsingSDKKeyV2ApiGetSettingValueBySdkkeyV2Request struct {
+type FeatureFlagSettingValuesUsingSDKKeyV2APIGetSettingValueBySdkkeyV2Request struct {
 	ctx context.Context
-	ApiService *FeatureFlagSettingValuesUsingSDKKeyV2ApiService
+	ApiService *FeatureFlagSettingValuesUsingSDKKeyV2APIService
 	settingKeyOrId string
 	xCONFIGCATSDKKEY *string
 }
 
 // The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)
-func (r FeatureFlagSettingValuesUsingSDKKeyV2ApiGetSettingValueBySdkkeyV2Request) XCONFIGCATSDKKEY(xCONFIGCATSDKKEY string) FeatureFlagSettingValuesUsingSDKKeyV2ApiGetSettingValueBySdkkeyV2Request {
+func (r FeatureFlagSettingValuesUsingSDKKeyV2APIGetSettingValueBySdkkeyV2Request) XCONFIGCATSDKKEY(xCONFIGCATSDKKEY string) FeatureFlagSettingValuesUsingSDKKeyV2APIGetSettingValueBySdkkeyV2Request {
 	r.xCONFIGCATSDKKEY = &xCONFIGCATSDKKEY
 	return r
 }
 
-func (r FeatureFlagSettingValuesUsingSDKKeyV2ApiGetSettingValueBySdkkeyV2Request) Execute() (*SettingFormulaModel, *http.Response, error) {
+func (r FeatureFlagSettingValuesUsingSDKKeyV2APIGetSettingValueBySdkkeyV2Request) Execute() (*SettingFormulaModel, *http.Response, error) {
 	return r.ApiService.GetSettingValueBySdkkeyV2Execute(r)
 }
 
@@ -60,10 +60,10 @@ The `percentageEvaluationAttribute` represents the custom [User Object](https://
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param settingKeyOrId The key or id of the Setting.
- @return FeatureFlagSettingValuesUsingSDKKeyV2ApiGetSettingValueBySdkkeyV2Request
+ @return FeatureFlagSettingValuesUsingSDKKeyV2APIGetSettingValueBySdkkeyV2Request
 */
-func (a *FeatureFlagSettingValuesUsingSDKKeyV2ApiService) GetSettingValueBySdkkeyV2(ctx context.Context, settingKeyOrId string) FeatureFlagSettingValuesUsingSDKKeyV2ApiGetSettingValueBySdkkeyV2Request {
-	return FeatureFlagSettingValuesUsingSDKKeyV2ApiGetSettingValueBySdkkeyV2Request{
+func (a *FeatureFlagSettingValuesUsingSDKKeyV2APIService) GetSettingValueBySdkkeyV2(ctx context.Context, settingKeyOrId string) FeatureFlagSettingValuesUsingSDKKeyV2APIGetSettingValueBySdkkeyV2Request {
+	return FeatureFlagSettingValuesUsingSDKKeyV2APIGetSettingValueBySdkkeyV2Request{
 		ApiService: a,
 		ctx: ctx,
 		settingKeyOrId: settingKeyOrId,
@@ -72,7 +72,7 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyV2ApiService) GetSettingValueBySdkke
 
 // Execute executes the request
 //  @return SettingFormulaModel
-func (a *FeatureFlagSettingValuesUsingSDKKeyV2ApiService) GetSettingValueBySdkkeyV2Execute(r FeatureFlagSettingValuesUsingSDKKeyV2ApiGetSettingValueBySdkkeyV2Request) (*SettingFormulaModel, *http.Response, error) {
+func (a *FeatureFlagSettingValuesUsingSDKKeyV2APIService) GetSettingValueBySdkkeyV2Execute(r FeatureFlagSettingValuesUsingSDKKeyV2APIGetSettingValueBySdkkeyV2Request) (*SettingFormulaModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -80,7 +80,7 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyV2ApiService) GetSettingValueBySdkke
 		localVarReturnValue  *SettingFormulaModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagSettingValuesUsingSDKKeyV2ApiService.GetSettingValueBySdkkeyV2")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagSettingValuesUsingSDKKeyV2APIService.GetSettingValueBySdkkeyV2")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -149,33 +149,33 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyV2ApiService) GetSettingValueBySdkke
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FeatureFlagSettingValuesUsingSDKKeyV2ApiReplaceSettingValueBySdkkeyV2Request struct {
+type FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request struct {
 	ctx context.Context
-	ApiService *FeatureFlagSettingValuesUsingSDKKeyV2ApiService
+	ApiService *FeatureFlagSettingValuesUsingSDKKeyV2APIService
 	settingKeyOrId string
 	updateEvaluationFormulaModel *UpdateEvaluationFormulaModel
 	reason *string
 	xCONFIGCATSDKKEY *string
 }
 
-func (r FeatureFlagSettingValuesUsingSDKKeyV2ApiReplaceSettingValueBySdkkeyV2Request) UpdateEvaluationFormulaModel(updateEvaluationFormulaModel UpdateEvaluationFormulaModel) FeatureFlagSettingValuesUsingSDKKeyV2ApiReplaceSettingValueBySdkkeyV2Request {
+func (r FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request) UpdateEvaluationFormulaModel(updateEvaluationFormulaModel UpdateEvaluationFormulaModel) FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request {
 	r.updateEvaluationFormulaModel = &updateEvaluationFormulaModel
 	return r
 }
 
 // The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on.
-func (r FeatureFlagSettingValuesUsingSDKKeyV2ApiReplaceSettingValueBySdkkeyV2Request) Reason(reason string) FeatureFlagSettingValuesUsingSDKKeyV2ApiReplaceSettingValueBySdkkeyV2Request {
+func (r FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request) Reason(reason string) FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request {
 	r.reason = &reason
 	return r
 }
 
 // The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)
-func (r FeatureFlagSettingValuesUsingSDKKeyV2ApiReplaceSettingValueBySdkkeyV2Request) XCONFIGCATSDKKEY(xCONFIGCATSDKKEY string) FeatureFlagSettingValuesUsingSDKKeyV2ApiReplaceSettingValueBySdkkeyV2Request {
+func (r FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request) XCONFIGCATSDKKEY(xCONFIGCATSDKKEY string) FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request {
 	r.xCONFIGCATSDKKEY = &xCONFIGCATSDKKEY
 	return r
 }
 
-func (r FeatureFlagSettingValuesUsingSDKKeyV2ApiReplaceSettingValueBySdkkeyV2Request) Execute() (*SettingFormulaModel, *http.Response, error) {
+func (r FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request) Execute() (*SettingFormulaModel, *http.Response, error) {
 	return r.ApiService.ReplaceSettingValueBySdkkeyV2Execute(r)
 }
 
@@ -238,10 +238,10 @@ So we get a response like this:
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param settingKeyOrId The key or id of the Setting.
- @return FeatureFlagSettingValuesUsingSDKKeyV2ApiReplaceSettingValueBySdkkeyV2Request
+ @return FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request
 */
-func (a *FeatureFlagSettingValuesUsingSDKKeyV2ApiService) ReplaceSettingValueBySdkkeyV2(ctx context.Context, settingKeyOrId string) FeatureFlagSettingValuesUsingSDKKeyV2ApiReplaceSettingValueBySdkkeyV2Request {
-	return FeatureFlagSettingValuesUsingSDKKeyV2ApiReplaceSettingValueBySdkkeyV2Request{
+func (a *FeatureFlagSettingValuesUsingSDKKeyV2APIService) ReplaceSettingValueBySdkkeyV2(ctx context.Context, settingKeyOrId string) FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request {
+	return FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request{
 		ApiService: a,
 		ctx: ctx,
 		settingKeyOrId: settingKeyOrId,
@@ -250,7 +250,7 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyV2ApiService) ReplaceSettingValueByS
 
 // Execute executes the request
 //  @return SettingFormulaModel
-func (a *FeatureFlagSettingValuesUsingSDKKeyV2ApiService) ReplaceSettingValueBySdkkeyV2Execute(r FeatureFlagSettingValuesUsingSDKKeyV2ApiReplaceSettingValueBySdkkeyV2Request) (*SettingFormulaModel, *http.Response, error) {
+func (a *FeatureFlagSettingValuesUsingSDKKeyV2APIService) ReplaceSettingValueBySdkkeyV2Execute(r FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request) (*SettingFormulaModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -258,7 +258,7 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyV2ApiService) ReplaceSettingValueByS
 		localVarReturnValue  *SettingFormulaModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagSettingValuesUsingSDKKeyV2ApiService.ReplaceSettingValueBySdkkeyV2")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagSettingValuesUsingSDKKeyV2APIService.ReplaceSettingValueBySdkkeyV2")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -335,33 +335,33 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyV2ApiService) ReplaceSettingValueByS
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FeatureFlagSettingValuesUsingSDKKeyV2ApiUpdateSettingValueBySdkkeyV2Request struct {
+type FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request struct {
 	ctx context.Context
-	ApiService *FeatureFlagSettingValuesUsingSDKKeyV2ApiService
+	ApiService *FeatureFlagSettingValuesUsingSDKKeyV2APIService
 	settingKeyOrId string
 	jsonPatchOperation *[]JsonPatchOperation
 	reason *string
 	xCONFIGCATSDKKEY *string
 }
 
-func (r FeatureFlagSettingValuesUsingSDKKeyV2ApiUpdateSettingValueBySdkkeyV2Request) JsonPatchOperation(jsonPatchOperation []JsonPatchOperation) FeatureFlagSettingValuesUsingSDKKeyV2ApiUpdateSettingValueBySdkkeyV2Request {
+func (r FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request) JsonPatchOperation(jsonPatchOperation []JsonPatchOperation) FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request {
 	r.jsonPatchOperation = &jsonPatchOperation
 	return r
 }
 
 // The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on.
-func (r FeatureFlagSettingValuesUsingSDKKeyV2ApiUpdateSettingValueBySdkkeyV2Request) Reason(reason string) FeatureFlagSettingValuesUsingSDKKeyV2ApiUpdateSettingValueBySdkkeyV2Request {
+func (r FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request) Reason(reason string) FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request {
 	r.reason = &reason
 	return r
 }
 
 // The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)
-func (r FeatureFlagSettingValuesUsingSDKKeyV2ApiUpdateSettingValueBySdkkeyV2Request) XCONFIGCATSDKKEY(xCONFIGCATSDKKEY string) FeatureFlagSettingValuesUsingSDKKeyV2ApiUpdateSettingValueBySdkkeyV2Request {
+func (r FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request) XCONFIGCATSDKKEY(xCONFIGCATSDKKEY string) FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request {
 	r.xCONFIGCATSDKKEY = &xCONFIGCATSDKKEY
 	return r
 }
 
-func (r FeatureFlagSettingValuesUsingSDKKeyV2ApiUpdateSettingValueBySdkkeyV2Request) Execute() (*SettingFormulaModel, *http.Response, error) {
+func (r FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request) Execute() (*SettingFormulaModel, *http.Response, error) {
 	return r.ApiService.UpdateSettingValueBySdkkeyV2Execute(r)
 }
 
@@ -446,10 +446,10 @@ So we get a response like this:
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param settingKeyOrId The key or id of the Setting.
- @return FeatureFlagSettingValuesUsingSDKKeyV2ApiUpdateSettingValueBySdkkeyV2Request
+ @return FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request
 */
-func (a *FeatureFlagSettingValuesUsingSDKKeyV2ApiService) UpdateSettingValueBySdkkeyV2(ctx context.Context, settingKeyOrId string) FeatureFlagSettingValuesUsingSDKKeyV2ApiUpdateSettingValueBySdkkeyV2Request {
-	return FeatureFlagSettingValuesUsingSDKKeyV2ApiUpdateSettingValueBySdkkeyV2Request{
+func (a *FeatureFlagSettingValuesUsingSDKKeyV2APIService) UpdateSettingValueBySdkkeyV2(ctx context.Context, settingKeyOrId string) FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request {
+	return FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request{
 		ApiService: a,
 		ctx: ctx,
 		settingKeyOrId: settingKeyOrId,
@@ -458,7 +458,7 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyV2ApiService) UpdateSettingValueBySd
 
 // Execute executes the request
 //  @return SettingFormulaModel
-func (a *FeatureFlagSettingValuesUsingSDKKeyV2ApiService) UpdateSettingValueBySdkkeyV2Execute(r FeatureFlagSettingValuesUsingSDKKeyV2ApiUpdateSettingValueBySdkkeyV2Request) (*SettingFormulaModel, *http.Response, error) {
+func (a *FeatureFlagSettingValuesUsingSDKKeyV2APIService) UpdateSettingValueBySdkkeyV2Execute(r FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request) (*SettingFormulaModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
@@ -466,7 +466,7 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyV2ApiService) UpdateSettingValueBySd
 		localVarReturnValue  *SettingFormulaModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagSettingValuesUsingSDKKeyV2ApiService.UpdateSettingValueBySdkkeyV2")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagSettingValuesUsingSDKKeyV2APIService.UpdateSettingValueBySdkkeyV2")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

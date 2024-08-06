@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).   # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -21,22 +21,22 @@ import (
 )
 
 
-// TagsApiService TagsApi service
-type TagsApiService service
+// TagsAPIService TagsAPI service
+type TagsAPIService service
 
-type TagsApiCreateTagRequest struct {
+type TagsAPICreateTagRequest struct {
 	ctx context.Context
-	ApiService *TagsApiService
+	ApiService *TagsAPIService
 	productId string
 	createTagModel *CreateTagModel
 }
 
-func (r TagsApiCreateTagRequest) CreateTagModel(createTagModel CreateTagModel) TagsApiCreateTagRequest {
+func (r TagsAPICreateTagRequest) CreateTagModel(createTagModel CreateTagModel) TagsAPICreateTagRequest {
 	r.createTagModel = &createTagModel
 	return r
 }
 
-func (r TagsApiCreateTagRequest) Execute() (*TagModel, *http.Response, error) {
+func (r TagsAPICreateTagRequest) Execute() (*TagModel, *http.Response, error) {
 	return r.ApiService.CreateTagExecute(r)
 }
 
@@ -48,10 +48,10 @@ identified by the `productId` parameter, which can be obtained from the [List Pr
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Organization.
- @return TagsApiCreateTagRequest
+ @return TagsAPICreateTagRequest
 */
-func (a *TagsApiService) CreateTag(ctx context.Context, productId string) TagsApiCreateTagRequest {
-	return TagsApiCreateTagRequest{
+func (a *TagsAPIService) CreateTag(ctx context.Context, productId string) TagsAPICreateTagRequest {
+	return TagsAPICreateTagRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -60,7 +60,7 @@ func (a *TagsApiService) CreateTag(ctx context.Context, productId string) TagsAp
 
 // Execute executes the request
 //  @return TagModel
-func (a *TagsApiService) CreateTagExecute(r TagsApiCreateTagRequest) (*TagModel, *http.Response, error) {
+func (a *TagsAPIService) CreateTagExecute(r TagsAPICreateTagRequest) (*TagModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -68,7 +68,7 @@ func (a *TagsApiService) CreateTagExecute(r TagsApiCreateTagRequest) (*TagModel,
 		localVarReturnValue  *TagModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsApiService.CreateTag")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsAPIService.CreateTag")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -139,13 +139,13 @@ func (a *TagsApiService) CreateTagExecute(r TagsApiCreateTagRequest) (*TagModel,
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type TagsApiDeleteTagRequest struct {
+type TagsAPIDeleteTagRequest struct {
 	ctx context.Context
-	ApiService *TagsApiService
+	ApiService *TagsAPIService
 	tagId int64
 }
 
-func (r TagsApiDeleteTagRequest) Execute() (*http.Response, error) {
+func (r TagsAPIDeleteTagRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteTagExecute(r)
 }
 
@@ -156,10 +156,10 @@ This endpoint deletes a Tag identified by the `tagId` parameter. To remove a Tag
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param tagId The identifier of the Tag.
- @return TagsApiDeleteTagRequest
+ @return TagsAPIDeleteTagRequest
 */
-func (a *TagsApiService) DeleteTag(ctx context.Context, tagId int64) TagsApiDeleteTagRequest {
-	return TagsApiDeleteTagRequest{
+func (a *TagsAPIService) DeleteTag(ctx context.Context, tagId int64) TagsAPIDeleteTagRequest {
+	return TagsAPIDeleteTagRequest{
 		ApiService: a,
 		ctx: ctx,
 		tagId: tagId,
@@ -167,14 +167,14 @@ func (a *TagsApiService) DeleteTag(ctx context.Context, tagId int64) TagsApiDele
 }
 
 // Execute executes the request
-func (a *TagsApiService) DeleteTagExecute(r TagsApiDeleteTagRequest) (*http.Response, error) {
+func (a *TagsAPIService) DeleteTagExecute(r TagsAPIDeleteTagRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsApiService.DeleteTag")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsAPIService.DeleteTag")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -231,13 +231,13 @@ func (a *TagsApiService) DeleteTagExecute(r TagsApiDeleteTagRequest) (*http.Resp
 	return localVarHTTPResponse, nil
 }
 
-type TagsApiGetSettingsByTagRequest struct {
+type TagsAPIGetSettingsByTagRequest struct {
 	ctx context.Context
-	ApiService *TagsApiService
+	ApiService *TagsAPIService
 	tagId int64
 }
 
-func (r TagsApiGetSettingsByTagRequest) Execute() ([]SettingModel, *http.Response, error) {
+func (r TagsAPIGetSettingsByTagRequest) Execute() ([]SettingModel, *http.Response, error) {
 	return r.ApiService.GetSettingsByTagExecute(r)
 }
 
@@ -249,10 +249,10 @@ has the specified Tag, identified by the `tagId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param tagId The identifier of the Tag.
- @return TagsApiGetSettingsByTagRequest
+ @return TagsAPIGetSettingsByTagRequest
 */
-func (a *TagsApiService) GetSettingsByTag(ctx context.Context, tagId int64) TagsApiGetSettingsByTagRequest {
-	return TagsApiGetSettingsByTagRequest{
+func (a *TagsAPIService) GetSettingsByTag(ctx context.Context, tagId int64) TagsAPIGetSettingsByTagRequest {
+	return TagsAPIGetSettingsByTagRequest{
 		ApiService: a,
 		ctx: ctx,
 		tagId: tagId,
@@ -261,7 +261,7 @@ func (a *TagsApiService) GetSettingsByTag(ctx context.Context, tagId int64) Tags
 
 // Execute executes the request
 //  @return []SettingModel
-func (a *TagsApiService) GetSettingsByTagExecute(r TagsApiGetSettingsByTagRequest) ([]SettingModel, *http.Response, error) {
+func (a *TagsAPIService) GetSettingsByTagExecute(r TagsAPIGetSettingsByTagRequest) ([]SettingModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -269,7 +269,7 @@ func (a *TagsApiService) GetSettingsByTagExecute(r TagsApiGetSettingsByTagReques
 		localVarReturnValue  []SettingModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsApiService.GetSettingsByTag")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsAPIService.GetSettingsByTag")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -335,13 +335,13 @@ func (a *TagsApiService) GetSettingsByTagExecute(r TagsApiGetSettingsByTagReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type TagsApiGetTagRequest struct {
+type TagsAPIGetTagRequest struct {
 	ctx context.Context
-	ApiService *TagsApiService
+	ApiService *TagsAPIService
 	tagId int64
 }
 
-func (r TagsApiGetTagRequest) Execute() (*TagModel, *http.Response, error) {
+func (r TagsAPIGetTagRequest) Execute() (*TagModel, *http.Response, error) {
 	return r.ApiService.GetTagExecute(r)
 }
 
@@ -353,10 +353,10 @@ identified by the `tagId`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param tagId The identifier of the Tag.
- @return TagsApiGetTagRequest
+ @return TagsAPIGetTagRequest
 */
-func (a *TagsApiService) GetTag(ctx context.Context, tagId int64) TagsApiGetTagRequest {
-	return TagsApiGetTagRequest{
+func (a *TagsAPIService) GetTag(ctx context.Context, tagId int64) TagsAPIGetTagRequest {
+	return TagsAPIGetTagRequest{
 		ApiService: a,
 		ctx: ctx,
 		tagId: tagId,
@@ -365,7 +365,7 @@ func (a *TagsApiService) GetTag(ctx context.Context, tagId int64) TagsApiGetTagR
 
 // Execute executes the request
 //  @return TagModel
-func (a *TagsApiService) GetTagExecute(r TagsApiGetTagRequest) (*TagModel, *http.Response, error) {
+func (a *TagsAPIService) GetTagExecute(r TagsAPIGetTagRequest) (*TagModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -373,7 +373,7 @@ func (a *TagsApiService) GetTagExecute(r TagsApiGetTagRequest) (*TagModel, *http
 		localVarReturnValue  *TagModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsApiService.GetTag")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsAPIService.GetTag")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -439,13 +439,13 @@ func (a *TagsApiService) GetTagExecute(r TagsApiGetTagRequest) (*TagModel, *http
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type TagsApiGetTagsRequest struct {
+type TagsAPIGetTagsRequest struct {
 	ctx context.Context
-	ApiService *TagsApiService
+	ApiService *TagsAPIService
 	productId string
 }
 
-func (r TagsApiGetTagsRequest) Execute() ([]TagModel, *http.Response, error) {
+func (r TagsAPIGetTagsRequest) Execute() ([]TagModel, *http.Response, error) {
 	return r.ApiService.GetTagsExecute(r)
 }
 
@@ -457,10 +457,10 @@ specified Product, identified by the `productId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return TagsApiGetTagsRequest
+ @return TagsAPIGetTagsRequest
 */
-func (a *TagsApiService) GetTags(ctx context.Context, productId string) TagsApiGetTagsRequest {
-	return TagsApiGetTagsRequest{
+func (a *TagsAPIService) GetTags(ctx context.Context, productId string) TagsAPIGetTagsRequest {
+	return TagsAPIGetTagsRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -469,7 +469,7 @@ func (a *TagsApiService) GetTags(ctx context.Context, productId string) TagsApiG
 
 // Execute executes the request
 //  @return []TagModel
-func (a *TagsApiService) GetTagsExecute(r TagsApiGetTagsRequest) ([]TagModel, *http.Response, error) {
+func (a *TagsAPIService) GetTagsExecute(r TagsAPIGetTagsRequest) ([]TagModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -477,7 +477,7 @@ func (a *TagsApiService) GetTagsExecute(r TagsApiGetTagsRequest) ([]TagModel, *h
 		localVarReturnValue  []TagModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsApiService.GetTags")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsAPIService.GetTags")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -543,19 +543,19 @@ func (a *TagsApiService) GetTagsExecute(r TagsApiGetTagsRequest) ([]TagModel, *h
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type TagsApiUpdateTagRequest struct {
+type TagsAPIUpdateTagRequest struct {
 	ctx context.Context
-	ApiService *TagsApiService
+	ApiService *TagsAPIService
 	tagId int64
 	updateTagModel *UpdateTagModel
 }
 
-func (r TagsApiUpdateTagRequest) UpdateTagModel(updateTagModel UpdateTagModel) TagsApiUpdateTagRequest {
+func (r TagsAPIUpdateTagRequest) UpdateTagModel(updateTagModel UpdateTagModel) TagsAPIUpdateTagRequest {
 	r.updateTagModel = &updateTagModel
 	return r
 }
 
-func (r TagsApiUpdateTagRequest) Execute() (*TagModel, *http.Response, error) {
+func (r TagsAPIUpdateTagRequest) Execute() (*TagModel, *http.Response, error) {
 	return r.ApiService.UpdateTagExecute(r)
 }
 
@@ -566,10 +566,10 @@ This endpoint updates a Tag identified by the `tagId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param tagId The identifier of the Tag.
- @return TagsApiUpdateTagRequest
+ @return TagsAPIUpdateTagRequest
 */
-func (a *TagsApiService) UpdateTag(ctx context.Context, tagId int64) TagsApiUpdateTagRequest {
-	return TagsApiUpdateTagRequest{
+func (a *TagsAPIService) UpdateTag(ctx context.Context, tagId int64) TagsAPIUpdateTagRequest {
+	return TagsAPIUpdateTagRequest{
 		ApiService: a,
 		ctx: ctx,
 		tagId: tagId,
@@ -578,7 +578,7 @@ func (a *TagsApiService) UpdateTag(ctx context.Context, tagId int64) TagsApiUpda
 
 // Execute executes the request
 //  @return TagModel
-func (a *TagsApiService) UpdateTagExecute(r TagsApiUpdateTagRequest) (*TagModel, *http.Response, error) {
+func (a *TagsAPIService) UpdateTagExecute(r TagsAPIUpdateTagRequest) (*TagModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -586,7 +586,7 @@ func (a *TagsApiService) UpdateTagExecute(r TagsApiUpdateTagRequest) (*TagModel,
 		localVarReturnValue  *TagModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsApiService.UpdateTag")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TagsAPIService.UpdateTag")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

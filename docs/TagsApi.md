@@ -1,15 +1,15 @@
-# \TagsApi
+# \TagsAPI
 
 All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateTag**](TagsApi.md#CreateTag) | **Post** /v1/products/{productId}/tags | Create Tag
-[**DeleteTag**](TagsApi.md#DeleteTag) | **Delete** /v1/tags/{tagId} | Delete Tag
-[**GetSettingsByTag**](TagsApi.md#GetSettingsByTag) | **Get** /v1/tags/{tagId}/settings | List Settings by Tag
-[**GetTag**](TagsApi.md#GetTag) | **Get** /v1/tags/{tagId} | Get Tag
-[**GetTags**](TagsApi.md#GetTags) | **Get** /v1/products/{productId}/tags | List Tags
-[**UpdateTag**](TagsApi.md#UpdateTag) | **Put** /v1/tags/{tagId} | Update Tag
+[**CreateTag**](TagsAPI.md#CreateTag) | **Post** /v1/products/{productId}/tags | Create Tag
+[**DeleteTag**](TagsAPI.md#DeleteTag) | **Delete** /v1/tags/{tagId} | Delete Tag
+[**GetSettingsByTag**](TagsAPI.md#GetSettingsByTag) | **Get** /v1/tags/{tagId}/settings | List Settings by Tag
+[**GetTag**](TagsAPI.md#GetTag) | **Get** /v1/tags/{tagId} | Get Tag
+[**GetTags**](TagsAPI.md#GetTags) | **Get** /v1/products/{productId}/tags | List Tags
+[**UpdateTag**](TagsAPI.md#UpdateTag) | **Put** /v1/tags/{tagId} | Update Tag
 
 
 
@@ -27,25 +27,25 @@ Create Tag
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Organization.
-    createTagModel := *openapiclient.NewCreateTagModel("Name_example") // CreateTagModel | 
+	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Organization.
+	createTagModel := *openapiclient.NewCreateTagModel("Name_example") // CreateTagModel | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TagsApi.CreateTag(context.Background(), productId).CreateTagModel(createTagModel).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TagsApi.CreateTag``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateTag`: TagModel
-    fmt.Fprintf(os.Stdout, "Response from `TagsApi.CreateTag`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.TagsAPI.CreateTag(context.Background(), productId).CreateTagModel(createTagModel).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `TagsAPI.CreateTag``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateTag`: TagModel
+	fmt.Fprintf(os.Stdout, "Response from `TagsAPI.CreateTag`: %v\n", resp)
 }
 ```
 
@@ -99,22 +99,22 @@ Delete Tag
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    tagId := int64(789) // int64 | The identifier of the Tag.
+	tagId := int64(789) // int64 | The identifier of the Tag.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.TagsApi.DeleteTag(context.Background(), tagId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TagsApi.DeleteTag``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.TagsAPI.DeleteTag(context.Background(), tagId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `TagsAPI.DeleteTag``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -167,24 +167,24 @@ List Settings by Tag
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    tagId := int64(789) // int64 | The identifier of the Tag.
+	tagId := int64(789) // int64 | The identifier of the Tag.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TagsApi.GetSettingsByTag(context.Background(), tagId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TagsApi.GetSettingsByTag``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetSettingsByTag`: []SettingModel
-    fmt.Fprintf(os.Stdout, "Response from `TagsApi.GetSettingsByTag`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.TagsAPI.GetSettingsByTag(context.Background(), tagId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `TagsAPI.GetSettingsByTag``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSettingsByTag`: []SettingModel
+	fmt.Fprintf(os.Stdout, "Response from `TagsAPI.GetSettingsByTag`: %v\n", resp)
 }
 ```
 
@@ -237,24 +237,24 @@ Get Tag
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    tagId := int64(789) // int64 | The identifier of the Tag.
+	tagId := int64(789) // int64 | The identifier of the Tag.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TagsApi.GetTag(context.Background(), tagId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TagsApi.GetTag``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetTag`: TagModel
-    fmt.Fprintf(os.Stdout, "Response from `TagsApi.GetTag`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.TagsAPI.GetTag(context.Background(), tagId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `TagsAPI.GetTag``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetTag`: TagModel
+	fmt.Fprintf(os.Stdout, "Response from `TagsAPI.GetTag`: %v\n", resp)
 }
 ```
 
@@ -307,24 +307,24 @@ List Tags
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TagsApi.GetTags(context.Background(), productId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TagsApi.GetTags``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetTags`: []TagModel
-    fmt.Fprintf(os.Stdout, "Response from `TagsApi.GetTags`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.TagsAPI.GetTags(context.Background(), productId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `TagsAPI.GetTags``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetTags`: []TagModel
+	fmt.Fprintf(os.Stdout, "Response from `TagsAPI.GetTags`: %v\n", resp)
 }
 ```
 
@@ -377,25 +377,25 @@ Update Tag
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    tagId := int64(789) // int64 | The identifier of the Tag.
-    updateTagModel := *openapiclient.NewUpdateTagModel() // UpdateTagModel | 
+	tagId := int64(789) // int64 | The identifier of the Tag.
+	updateTagModel := *openapiclient.NewUpdateTagModel() // UpdateTagModel | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TagsApi.UpdateTag(context.Background(), tagId).UpdateTagModel(updateTagModel).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TagsApi.UpdateTag``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateTag`: TagModel
-    fmt.Fprintf(os.Stdout, "Response from `TagsApi.UpdateTag`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.TagsAPI.UpdateTag(context.Background(), tagId).UpdateTagModel(updateTagModel).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `TagsAPI.UpdateTag``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateTag`: TagModel
+	fmt.Fprintf(os.Stdout, "Response from `TagsAPI.UpdateTag`: %v\n", resp)
 }
 ```
 

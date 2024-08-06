@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).   # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -78,7 +78,7 @@ func (o *ConfigSettingValueModel) GetRolloutRulesOk() ([]RolloutRuleModel, bool)
 
 // HasRolloutRules returns a boolean if a field has been set.
 func (o *ConfigSettingValueModel) HasRolloutRules() bool {
-	if o != nil && IsNil(o.RolloutRules) {
+	if o != nil && !IsNil(o.RolloutRules) {
 		return true
 	}
 
@@ -111,7 +111,7 @@ func (o *ConfigSettingValueModel) GetRolloutPercentageItemsOk() ([]RolloutPercen
 
 // HasRolloutPercentageItems returns a boolean if a field has been set.
 func (o *ConfigSettingValueModel) HasRolloutPercentageItems() bool {
-	if o != nil && IsNil(o.RolloutPercentageItems) {
+	if o != nil && !IsNil(o.RolloutPercentageItems) {
 		return true
 	}
 
@@ -144,7 +144,7 @@ func (o *ConfigSettingValueModel) GetValueOk() (*interface{}, bool) {
 
 // HasValue returns a boolean if a field has been set.
 func (o *ConfigSettingValueModel) HasValue() bool {
-	if o != nil && IsNil(o.Value) {
+	if o != nil && !IsNil(o.Value) {
 		return true
 	}
 
@@ -335,7 +335,7 @@ func (o *ConfigSettingValueModel) GetIntegrationLinksOk() ([]IntegrationLinkMode
 
 // HasIntegrationLinks returns a boolean if a field has been set.
 func (o *ConfigSettingValueModel) HasIntegrationLinks() bool {
-	if o != nil && IsNil(o.IntegrationLinks) {
+	if o != nil && !IsNil(o.IntegrationLinks) {
 		return true
 	}
 
@@ -368,7 +368,7 @@ func (o *ConfigSettingValueModel) GetSettingTagsOk() ([]SettingTagModel, bool) {
 
 // HasSettingTags returns a boolean if a field has been set.
 func (o *ConfigSettingValueModel) HasSettingTags() bool {
-	if o != nil && IsNil(o.SettingTags) {
+	if o != nil && !IsNil(o.SettingTags) {
 		return true
 	}
 

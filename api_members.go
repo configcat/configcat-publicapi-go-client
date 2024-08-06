@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).   # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -21,23 +21,23 @@ import (
 )
 
 
-// MembersApiService MembersApi service
-type MembersApiService service
+// MembersAPIService MembersAPI service
+type MembersAPIService service
 
-type MembersApiAddMemberToGroupRequest struct {
+type MembersAPIAddMemberToGroupRequest struct {
 	ctx context.Context
-	ApiService *MembersApiService
+	ApiService *MembersAPIService
 	organizationId string
 	userId string
 	updateMemberPermissionsRequest *UpdateMemberPermissionsRequest
 }
 
-func (r MembersApiAddMemberToGroupRequest) UpdateMemberPermissionsRequest(updateMemberPermissionsRequest UpdateMemberPermissionsRequest) MembersApiAddMemberToGroupRequest {
+func (r MembersAPIAddMemberToGroupRequest) UpdateMemberPermissionsRequest(updateMemberPermissionsRequest UpdateMemberPermissionsRequest) MembersAPIAddMemberToGroupRequest {
 	r.updateMemberPermissionsRequest = &updateMemberPermissionsRequest
 	return r
 }
 
-func (r MembersApiAddMemberToGroupRequest) Execute() (*http.Response, error) {
+func (r MembersAPIAddMemberToGroupRequest) Execute() (*http.Response, error) {
 	return r.ApiService.AddMemberToGroupExecute(r)
 }
 
@@ -51,10 +51,10 @@ Only a single Permission Group can be set per Product.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organizationId The identifier of the Organization.
  @param userId The identifier of the Member.
- @return MembersApiAddMemberToGroupRequest
+ @return MembersAPIAddMemberToGroupRequest
 */
-func (a *MembersApiService) AddMemberToGroup(ctx context.Context, organizationId string, userId string) MembersApiAddMemberToGroupRequest {
-	return MembersApiAddMemberToGroupRequest{
+func (a *MembersAPIService) AddMemberToGroup(ctx context.Context, organizationId string, userId string) MembersAPIAddMemberToGroupRequest {
+	return MembersAPIAddMemberToGroupRequest{
 		ApiService: a,
 		ctx: ctx,
 		organizationId: organizationId,
@@ -63,14 +63,14 @@ func (a *MembersApiService) AddMemberToGroup(ctx context.Context, organizationId
 }
 
 // Execute executes the request
-func (a *MembersApiService) AddMemberToGroupExecute(r MembersApiAddMemberToGroupRequest) (*http.Response, error) {
+func (a *MembersAPIService) AddMemberToGroupExecute(r MembersAPIAddMemberToGroupRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersApiService.AddMemberToGroup")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersAPIService.AddMemberToGroup")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -133,13 +133,13 @@ func (a *MembersApiService) AddMemberToGroupExecute(r MembersApiAddMemberToGroup
 	return localVarHTTPResponse, nil
 }
 
-type MembersApiDeleteInvitationRequest struct {
+type MembersAPIDeleteInvitationRequest struct {
 	ctx context.Context
-	ApiService *MembersApiService
+	ApiService *MembersAPIService
 	invitationId string
 }
 
-func (r MembersApiDeleteInvitationRequest) Execute() (*http.Response, error) {
+func (r MembersAPIDeleteInvitationRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteInvitationExecute(r)
 }
 
@@ -150,10 +150,10 @@ This endpoint removes an Invitation identified by the `invitationId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param invitationId The identifier of the Invitation.
- @return MembersApiDeleteInvitationRequest
+ @return MembersAPIDeleteInvitationRequest
 */
-func (a *MembersApiService) DeleteInvitation(ctx context.Context, invitationId string) MembersApiDeleteInvitationRequest {
-	return MembersApiDeleteInvitationRequest{
+func (a *MembersAPIService) DeleteInvitation(ctx context.Context, invitationId string) MembersAPIDeleteInvitationRequest {
+	return MembersAPIDeleteInvitationRequest{
 		ApiService: a,
 		ctx: ctx,
 		invitationId: invitationId,
@@ -161,14 +161,14 @@ func (a *MembersApiService) DeleteInvitation(ctx context.Context, invitationId s
 }
 
 // Execute executes the request
-func (a *MembersApiService) DeleteInvitationExecute(r MembersApiDeleteInvitationRequest) (*http.Response, error) {
+func (a *MembersAPIService) DeleteInvitationExecute(r MembersAPIDeleteInvitationRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersApiService.DeleteInvitation")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersAPIService.DeleteInvitation")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -225,14 +225,14 @@ func (a *MembersApiService) DeleteInvitationExecute(r MembersApiDeleteInvitation
 	return localVarHTTPResponse, nil
 }
 
-type MembersApiDeleteOrganizationMemberRequest struct {
+type MembersAPIDeleteOrganizationMemberRequest struct {
 	ctx context.Context
-	ApiService *MembersApiService
+	ApiService *MembersAPIService
 	organizationId string
 	userId string
 }
 
-func (r MembersApiDeleteOrganizationMemberRequest) Execute() (*http.Response, error) {
+func (r MembersAPIDeleteOrganizationMemberRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteOrganizationMemberExecute(r)
 }
 
@@ -245,10 +245,10 @@ given Organization identified by the `organizationId` parameter.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organizationId The identifier of the Organization.
  @param userId The identifier of the Member.
- @return MembersApiDeleteOrganizationMemberRequest
+ @return MembersAPIDeleteOrganizationMemberRequest
 */
-func (a *MembersApiService) DeleteOrganizationMember(ctx context.Context, organizationId string, userId string) MembersApiDeleteOrganizationMemberRequest {
-	return MembersApiDeleteOrganizationMemberRequest{
+func (a *MembersAPIService) DeleteOrganizationMember(ctx context.Context, organizationId string, userId string) MembersAPIDeleteOrganizationMemberRequest {
+	return MembersAPIDeleteOrganizationMemberRequest{
 		ApiService: a,
 		ctx: ctx,
 		organizationId: organizationId,
@@ -257,14 +257,14 @@ func (a *MembersApiService) DeleteOrganizationMember(ctx context.Context, organi
 }
 
 // Execute executes the request
-func (a *MembersApiService) DeleteOrganizationMemberExecute(r MembersApiDeleteOrganizationMemberRequest) (*http.Response, error) {
+func (a *MembersAPIService) DeleteOrganizationMemberExecute(r MembersAPIDeleteOrganizationMemberRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersApiService.DeleteOrganizationMember")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersAPIService.DeleteOrganizationMember")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -322,14 +322,14 @@ func (a *MembersApiService) DeleteOrganizationMemberExecute(r MembersApiDeleteOr
 	return localVarHTTPResponse, nil
 }
 
-type MembersApiDeleteProductMemberRequest struct {
+type MembersAPIDeleteProductMemberRequest struct {
 	ctx context.Context
-	ApiService *MembersApiService
+	ApiService *MembersAPIService
 	productId string
 	userId string
 }
 
-func (r MembersApiDeleteProductMemberRequest) Execute() (*http.Response, error) {
+func (r MembersAPIDeleteProductMemberRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteProductMemberExecute(r)
 }
 
@@ -342,10 +342,10 @@ given Product identified by the `productId` parameter.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
  @param userId The identifier of the Member.
- @return MembersApiDeleteProductMemberRequest
+ @return MembersAPIDeleteProductMemberRequest
 */
-func (a *MembersApiService) DeleteProductMember(ctx context.Context, productId string, userId string) MembersApiDeleteProductMemberRequest {
-	return MembersApiDeleteProductMemberRequest{
+func (a *MembersAPIService) DeleteProductMember(ctx context.Context, productId string, userId string) MembersAPIDeleteProductMemberRequest {
+	return MembersAPIDeleteProductMemberRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -354,14 +354,14 @@ func (a *MembersApiService) DeleteProductMember(ctx context.Context, productId s
 }
 
 // Execute executes the request
-func (a *MembersApiService) DeleteProductMemberExecute(r MembersApiDeleteProductMemberRequest) (*http.Response, error) {
+func (a *MembersAPIService) DeleteProductMemberExecute(r MembersAPIDeleteProductMemberRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersApiService.DeleteProductMember")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersAPIService.DeleteProductMember")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -419,13 +419,13 @@ func (a *MembersApiService) DeleteProductMemberExecute(r MembersApiDeleteProduct
 	return localVarHTTPResponse, nil
 }
 
-type MembersApiGetOrganizationMembersRequest struct {
+type MembersAPIGetOrganizationMembersRequest struct {
 	ctx context.Context
-	ApiService *MembersApiService
+	ApiService *MembersAPIService
 	organizationId string
 }
 
-func (r MembersApiGetOrganizationMembersRequest) Execute() ([]UserModel, *http.Response, error) {
+func (r MembersAPIGetOrganizationMembersRequest) Execute() ([]UserModel, *http.Response, error) {
 	return r.ApiService.GetOrganizationMembersExecute(r)
 }
 
@@ -442,12 +442,12 @@ The results may vary based on the access level of the user who calls the endpoin
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organizationId The identifier of the Organization.
- @return MembersApiGetOrganizationMembersRequest
+ @return MembersAPIGetOrganizationMembersRequest
 
 Deprecated
 */
-func (a *MembersApiService) GetOrganizationMembers(ctx context.Context, organizationId string) MembersApiGetOrganizationMembersRequest {
-	return MembersApiGetOrganizationMembersRequest{
+func (a *MembersAPIService) GetOrganizationMembers(ctx context.Context, organizationId string) MembersAPIGetOrganizationMembersRequest {
+	return MembersAPIGetOrganizationMembersRequest{
 		ApiService: a,
 		ctx: ctx,
 		organizationId: organizationId,
@@ -457,7 +457,7 @@ func (a *MembersApiService) GetOrganizationMembers(ctx context.Context, organiza
 // Execute executes the request
 //  @return []UserModel
 // Deprecated
-func (a *MembersApiService) GetOrganizationMembersExecute(r MembersApiGetOrganizationMembersRequest) ([]UserModel, *http.Response, error) {
+func (a *MembersAPIService) GetOrganizationMembersExecute(r MembersAPIGetOrganizationMembersRequest) ([]UserModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -465,7 +465,7 @@ func (a *MembersApiService) GetOrganizationMembersExecute(r MembersApiGetOrganiz
 		localVarReturnValue  []UserModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersApiService.GetOrganizationMembers")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersAPIService.GetOrganizationMembers")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -531,13 +531,13 @@ func (a *MembersApiService) GetOrganizationMembersExecute(r MembersApiGetOrganiz
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type MembersApiGetOrganizationMembersV2Request struct {
+type MembersAPIGetOrganizationMembersV2Request struct {
 	ctx context.Context
-	ApiService *MembersApiService
+	ApiService *MembersAPIService
 	organizationId string
 }
 
-func (r MembersApiGetOrganizationMembersV2Request) Execute() (*OrganizationMembersModel, *http.Response, error) {
+func (r MembersAPIGetOrganizationMembersV2Request) Execute() (*OrganizationMembersModel, *http.Response, error) {
 	return r.ApiService.GetOrganizationMembersV2Execute(r)
 }
 
@@ -554,10 +554,10 @@ The results may vary based on the access level of the user who calls the endpoin
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organizationId The identifier of the Organization.
- @return MembersApiGetOrganizationMembersV2Request
+ @return MembersAPIGetOrganizationMembersV2Request
 */
-func (a *MembersApiService) GetOrganizationMembersV2(ctx context.Context, organizationId string) MembersApiGetOrganizationMembersV2Request {
-	return MembersApiGetOrganizationMembersV2Request{
+func (a *MembersAPIService) GetOrganizationMembersV2(ctx context.Context, organizationId string) MembersAPIGetOrganizationMembersV2Request {
+	return MembersAPIGetOrganizationMembersV2Request{
 		ApiService: a,
 		ctx: ctx,
 		organizationId: organizationId,
@@ -566,7 +566,7 @@ func (a *MembersApiService) GetOrganizationMembersV2(ctx context.Context, organi
 
 // Execute executes the request
 //  @return OrganizationMembersModel
-func (a *MembersApiService) GetOrganizationMembersV2Execute(r MembersApiGetOrganizationMembersV2Request) (*OrganizationMembersModel, *http.Response, error) {
+func (a *MembersAPIService) GetOrganizationMembersV2Execute(r MembersAPIGetOrganizationMembersV2Request) (*OrganizationMembersModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -574,7 +574,7 @@ func (a *MembersApiService) GetOrganizationMembersV2Execute(r MembersApiGetOrgan
 		localVarReturnValue  *OrganizationMembersModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersApiService.GetOrganizationMembersV2")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersAPIService.GetOrganizationMembersV2")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -640,13 +640,13 @@ func (a *MembersApiService) GetOrganizationMembersV2Execute(r MembersApiGetOrgan
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type MembersApiGetPendingInvitationsRequest struct {
+type MembersAPIGetPendingInvitationsRequest struct {
 	ctx context.Context
-	ApiService *MembersApiService
+	ApiService *MembersAPIService
 	productId string
 }
 
-func (r MembersApiGetPendingInvitationsRequest) Execute() ([]InvitationModel, *http.Response, error) {
+func (r MembersAPIGetPendingInvitationsRequest) Execute() ([]InvitationModel, *http.Response, error) {
 	return r.ApiService.GetPendingInvitationsExecute(r)
 }
 
@@ -658,10 +658,10 @@ given Product identified by the `productId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return MembersApiGetPendingInvitationsRequest
+ @return MembersAPIGetPendingInvitationsRequest
 */
-func (a *MembersApiService) GetPendingInvitations(ctx context.Context, productId string) MembersApiGetPendingInvitationsRequest {
-	return MembersApiGetPendingInvitationsRequest{
+func (a *MembersAPIService) GetPendingInvitations(ctx context.Context, productId string) MembersAPIGetPendingInvitationsRequest {
+	return MembersAPIGetPendingInvitationsRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -670,7 +670,7 @@ func (a *MembersApiService) GetPendingInvitations(ctx context.Context, productId
 
 // Execute executes the request
 //  @return []InvitationModel
-func (a *MembersApiService) GetPendingInvitationsExecute(r MembersApiGetPendingInvitationsRequest) ([]InvitationModel, *http.Response, error) {
+func (a *MembersAPIService) GetPendingInvitationsExecute(r MembersAPIGetPendingInvitationsRequest) ([]InvitationModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -678,7 +678,7 @@ func (a *MembersApiService) GetPendingInvitationsExecute(r MembersApiGetPendingI
 		localVarReturnValue  []InvitationModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersApiService.GetPendingInvitations")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersAPIService.GetPendingInvitations")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -744,13 +744,13 @@ func (a *MembersApiService) GetPendingInvitationsExecute(r MembersApiGetPendingI
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type MembersApiGetPendingInvitationsOrgRequest struct {
+type MembersAPIGetPendingInvitationsOrgRequest struct {
 	ctx context.Context
-	ApiService *MembersApiService
+	ApiService *MembersAPIService
 	organizationId string
 }
 
-func (r MembersApiGetPendingInvitationsOrgRequest) Execute() ([]OrganizationInvitationModel, *http.Response, error) {
+func (r MembersAPIGetPendingInvitationsOrgRequest) Execute() ([]OrganizationInvitationModel, *http.Response, error) {
 	return r.ApiService.GetPendingInvitationsOrgExecute(r)
 }
 
@@ -762,10 +762,10 @@ given Organization identified by the `organizationId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organizationId The identifier of the Organization.
- @return MembersApiGetPendingInvitationsOrgRequest
+ @return MembersAPIGetPendingInvitationsOrgRequest
 */
-func (a *MembersApiService) GetPendingInvitationsOrg(ctx context.Context, organizationId string) MembersApiGetPendingInvitationsOrgRequest {
-	return MembersApiGetPendingInvitationsOrgRequest{
+func (a *MembersAPIService) GetPendingInvitationsOrg(ctx context.Context, organizationId string) MembersAPIGetPendingInvitationsOrgRequest {
+	return MembersAPIGetPendingInvitationsOrgRequest{
 		ApiService: a,
 		ctx: ctx,
 		organizationId: organizationId,
@@ -774,7 +774,7 @@ func (a *MembersApiService) GetPendingInvitationsOrg(ctx context.Context, organi
 
 // Execute executes the request
 //  @return []OrganizationInvitationModel
-func (a *MembersApiService) GetPendingInvitationsOrgExecute(r MembersApiGetPendingInvitationsOrgRequest) ([]OrganizationInvitationModel, *http.Response, error) {
+func (a *MembersAPIService) GetPendingInvitationsOrgExecute(r MembersAPIGetPendingInvitationsOrgRequest) ([]OrganizationInvitationModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -782,7 +782,7 @@ func (a *MembersApiService) GetPendingInvitationsOrgExecute(r MembersApiGetPendi
 		localVarReturnValue  []OrganizationInvitationModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersApiService.GetPendingInvitationsOrg")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersAPIService.GetPendingInvitationsOrg")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -848,13 +848,13 @@ func (a *MembersApiService) GetPendingInvitationsOrgExecute(r MembersApiGetPendi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type MembersApiGetProductMembersRequest struct {
+type MembersAPIGetProductMembersRequest struct {
 	ctx context.Context
-	ApiService *MembersApiService
+	ApiService *MembersAPIService
 	productId string
 }
 
-func (r MembersApiGetProductMembersRequest) Execute() ([]MemberModel, *http.Response, error) {
+func (r MembersAPIGetProductMembersRequest) Execute() ([]MemberModel, *http.Response, error) {
 	return r.ApiService.GetProductMembersExecute(r)
 }
 
@@ -866,10 +866,10 @@ to the given Product, identified by the `productId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return MembersApiGetProductMembersRequest
+ @return MembersAPIGetProductMembersRequest
 */
-func (a *MembersApiService) GetProductMembers(ctx context.Context, productId string) MembersApiGetProductMembersRequest {
-	return MembersApiGetProductMembersRequest{
+func (a *MembersAPIService) GetProductMembers(ctx context.Context, productId string) MembersAPIGetProductMembersRequest {
+	return MembersAPIGetProductMembersRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -878,7 +878,7 @@ func (a *MembersApiService) GetProductMembers(ctx context.Context, productId str
 
 // Execute executes the request
 //  @return []MemberModel
-func (a *MembersApiService) GetProductMembersExecute(r MembersApiGetProductMembersRequest) ([]MemberModel, *http.Response, error) {
+func (a *MembersAPIService) GetProductMembersExecute(r MembersAPIGetProductMembersRequest) ([]MemberModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -886,7 +886,7 @@ func (a *MembersApiService) GetProductMembersExecute(r MembersApiGetProductMembe
 		localVarReturnValue  []MemberModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersApiService.GetProductMembers")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersAPIService.GetProductMembers")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -952,19 +952,19 @@ func (a *MembersApiService) GetProductMembersExecute(r MembersApiGetProductMembe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type MembersApiInviteMemberRequest struct {
+type MembersAPIInviteMemberRequest struct {
 	ctx context.Context
-	ApiService *MembersApiService
+	ApiService *MembersAPIService
 	productId string
 	inviteMembersRequest *InviteMembersRequest
 }
 
-func (r MembersApiInviteMemberRequest) InviteMembersRequest(inviteMembersRequest InviteMembersRequest) MembersApiInviteMemberRequest {
+func (r MembersAPIInviteMemberRequest) InviteMembersRequest(inviteMembersRequest InviteMembersRequest) MembersAPIInviteMemberRequest {
 	r.inviteMembersRequest = &inviteMembersRequest
 	return r
 }
 
-func (r MembersApiInviteMemberRequest) Execute() (*http.Response, error) {
+func (r MembersAPIInviteMemberRequest) Execute() (*http.Response, error) {
 	return r.ApiService.InviteMemberExecute(r)
 }
 
@@ -975,10 +975,10 @@ This endpoint invites a Member into the given Product identified by the `product
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return MembersApiInviteMemberRequest
+ @return MembersAPIInviteMemberRequest
 */
-func (a *MembersApiService) InviteMember(ctx context.Context, productId string) MembersApiInviteMemberRequest {
-	return MembersApiInviteMemberRequest{
+func (a *MembersAPIService) InviteMember(ctx context.Context, productId string) MembersAPIInviteMemberRequest {
+	return MembersAPIInviteMemberRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -986,14 +986,14 @@ func (a *MembersApiService) InviteMember(ctx context.Context, productId string) 
 }
 
 // Execute executes the request
-func (a *MembersApiService) InviteMemberExecute(r MembersApiInviteMemberRequest) (*http.Response, error) {
+func (a *MembersAPIService) InviteMemberExecute(r MembersAPIInviteMemberRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersApiService.InviteMember")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MembersAPIService.InviteMember")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}

@@ -1,10 +1,10 @@
-# \MeApi
+# \MeAPI
 
 All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetMe**](MeApi.md#GetMe) | **Get** /v1/me | Get authenticated user details
+[**GetMe**](MeAPI.md#GetMe) | **Get** /v1/me | Get authenticated user details
 
 
 
@@ -22,23 +22,23 @@ Get authenticated user details
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.MeApi.GetMe(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `MeApi.GetMe``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetMe`: MeModel
-    fmt.Fprintf(os.Stdout, "Response from `MeApi.GetMe`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.MeAPI.GetMe(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `MeAPI.GetMe``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetMe`: MeModel
+	fmt.Fprintf(os.Stdout, "Response from `MeAPI.GetMe`: %v\n", resp)
 }
 ```
 
