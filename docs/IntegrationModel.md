@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **Name** | Pointer to **NullableString** | Name of the Integration. | [optional] 
 **IntegrationType** | Pointer to [**IntegrationType**](IntegrationType.md) |  | [optional] 
 **Parameters** | Pointer to **map[string]string** | Parameters of the Integration. | [optional] 
-**IntegrationEnvironmentIds** | Pointer to **[]string** | List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected. | [optional] 
-**IntegrationConfigIds** | Pointer to **[]string** | List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected. | [optional] 
+**EnvironmentIds** | Pointer to **[]string** | List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected. | [optional] 
+**ConfigIds** | Pointer to **[]string** | List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected. | [optional] 
 
 ## Methods
 
@@ -150,76 +150,76 @@ HasParameters returns a boolean if a field has been set.
 `func (o *IntegrationModel) UnsetParameters()`
 
 UnsetParameters ensures that no value is present for Parameters, not even an explicit nil
-### GetIntegrationEnvironmentIds
+### GetEnvironmentIds
 
-`func (o *IntegrationModel) GetIntegrationEnvironmentIds() []string`
+`func (o *IntegrationModel) GetEnvironmentIds() []string`
 
-GetIntegrationEnvironmentIds returns the IntegrationEnvironmentIds field if non-nil, zero value otherwise.
+GetEnvironmentIds returns the EnvironmentIds field if non-nil, zero value otherwise.
 
-### GetIntegrationEnvironmentIdsOk
+### GetEnvironmentIdsOk
 
-`func (o *IntegrationModel) GetIntegrationEnvironmentIdsOk() (*[]string, bool)`
+`func (o *IntegrationModel) GetEnvironmentIdsOk() (*[]string, bool)`
 
-GetIntegrationEnvironmentIdsOk returns a tuple with the IntegrationEnvironmentIds field if it's non-nil, zero value otherwise
+GetEnvironmentIdsOk returns a tuple with the EnvironmentIds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIntegrationEnvironmentIds
+### SetEnvironmentIds
 
-`func (o *IntegrationModel) SetIntegrationEnvironmentIds(v []string)`
+`func (o *IntegrationModel) SetEnvironmentIds(v []string)`
 
-SetIntegrationEnvironmentIds sets IntegrationEnvironmentIds field to given value.
+SetEnvironmentIds sets EnvironmentIds field to given value.
 
-### HasIntegrationEnvironmentIds
+### HasEnvironmentIds
 
-`func (o *IntegrationModel) HasIntegrationEnvironmentIds() bool`
+`func (o *IntegrationModel) HasEnvironmentIds() bool`
 
-HasIntegrationEnvironmentIds returns a boolean if a field has been set.
+HasEnvironmentIds returns a boolean if a field has been set.
 
-### SetIntegrationEnvironmentIdsNil
+### SetEnvironmentIdsNil
 
-`func (o *IntegrationModel) SetIntegrationEnvironmentIdsNil(b bool)`
+`func (o *IntegrationModel) SetEnvironmentIdsNil(b bool)`
 
- SetIntegrationEnvironmentIdsNil sets the value for IntegrationEnvironmentIds to be an explicit nil
+ SetEnvironmentIdsNil sets the value for EnvironmentIds to be an explicit nil
 
-### UnsetIntegrationEnvironmentIds
-`func (o *IntegrationModel) UnsetIntegrationEnvironmentIds()`
+### UnsetEnvironmentIds
+`func (o *IntegrationModel) UnsetEnvironmentIds()`
 
-UnsetIntegrationEnvironmentIds ensures that no value is present for IntegrationEnvironmentIds, not even an explicit nil
-### GetIntegrationConfigIds
+UnsetEnvironmentIds ensures that no value is present for EnvironmentIds, not even an explicit nil
+### GetConfigIds
 
-`func (o *IntegrationModel) GetIntegrationConfigIds() []string`
+`func (o *IntegrationModel) GetConfigIds() []string`
 
-GetIntegrationConfigIds returns the IntegrationConfigIds field if non-nil, zero value otherwise.
+GetConfigIds returns the ConfigIds field if non-nil, zero value otherwise.
 
-### GetIntegrationConfigIdsOk
+### GetConfigIdsOk
 
-`func (o *IntegrationModel) GetIntegrationConfigIdsOk() (*[]string, bool)`
+`func (o *IntegrationModel) GetConfigIdsOk() (*[]string, bool)`
 
-GetIntegrationConfigIdsOk returns a tuple with the IntegrationConfigIds field if it's non-nil, zero value otherwise
+GetConfigIdsOk returns a tuple with the ConfigIds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIntegrationConfigIds
+### SetConfigIds
 
-`func (o *IntegrationModel) SetIntegrationConfigIds(v []string)`
+`func (o *IntegrationModel) SetConfigIds(v []string)`
 
-SetIntegrationConfigIds sets IntegrationConfigIds field to given value.
+SetConfigIds sets ConfigIds field to given value.
 
-### HasIntegrationConfigIds
+### HasConfigIds
 
-`func (o *IntegrationModel) HasIntegrationConfigIds() bool`
+`func (o *IntegrationModel) HasConfigIds() bool`
 
-HasIntegrationConfigIds returns a boolean if a field has been set.
+HasConfigIds returns a boolean if a field has been set.
 
-### SetIntegrationConfigIdsNil
+### SetConfigIdsNil
 
-`func (o *IntegrationModel) SetIntegrationConfigIdsNil(b bool)`
+`func (o *IntegrationModel) SetConfigIdsNil(b bool)`
 
- SetIntegrationConfigIdsNil sets the value for IntegrationConfigIds to be an explicit nil
+ SetConfigIdsNil sets the value for ConfigIds to be an explicit nil
 
-### UnsetIntegrationConfigIds
-`func (o *IntegrationModel) UnsetIntegrationConfigIds()`
+### UnsetConfigIds
+`func (o *IntegrationModel) UnsetConfigIds()`
 
-UnsetIntegrationConfigIds ensures that no value is present for IntegrationConfigIds, not even an explicit nil
+UnsetConfigIds ensures that no value is present for ConfigIds, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

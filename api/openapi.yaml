@@ -7766,15 +7766,15 @@ components:
       additionalProperties: false
       description: Details of the Integration.
       example:
-        integrationEnvironmentIds:
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         integrationType: null
-        integrationConfigIds:
+        environmentIds:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         name: name
         integrationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        configIds:
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         parameters:
           key: parameters
       properties:
@@ -7795,7 +7795,7 @@ components:
           description: Parameters of the Integration.
           nullable: true
           type: object
-        integrationEnvironmentIds:
+        environmentIds:
           description: "List of Environment IDs that are connected with this Integration.\
             \ If the list is empty, all of the Environments are connected."
           items:
@@ -7803,7 +7803,7 @@ components:
             type: string
           nullable: true
           type: array
-        integrationConfigIds:
+        configIds:
           description: "List of Config IDs that are connected with this Integration.\
             \ If the list is empty, all of the Configs are connected."
           items:
@@ -7825,26 +7825,26 @@ components:
       additionalProperties: false
       example:
         integrations:
-        - integrationEnvironmentIds:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          integrationType: null
-          integrationConfigIds:
+        - integrationType: null
+          environmentIds:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name
           integrationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          configIds:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           parameters:
             key: parameters
-        - integrationEnvironmentIds:
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          integrationType: null
-          integrationConfigIds:
+        - integrationType: null
+          environmentIds:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name
           integrationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          configIds:
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           parameters:
             key: parameters
       properties:

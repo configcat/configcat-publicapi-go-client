@@ -28,9 +28,9 @@ type IntegrationModel struct {
 	// Parameters of the Integration.
 	Parameters map[string]string `json:"parameters,omitempty"`
 	// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
-	IntegrationEnvironmentIds []string `json:"integrationEnvironmentIds,omitempty"`
+	EnvironmentIds []string `json:"environmentIds,omitempty"`
 	// List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected.
-	IntegrationConfigIds []string `json:"integrationConfigIds,omitempty"`
+	ConfigIds []string `json:"configIds,omitempty"`
 }
 
 // NewIntegrationModel instantiates a new IntegrationModel object
@@ -189,70 +189,70 @@ func (o *IntegrationModel) SetParameters(v map[string]string) {
 	o.Parameters = v
 }
 
-// GetIntegrationEnvironmentIds returns the IntegrationEnvironmentIds field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IntegrationModel) GetIntegrationEnvironmentIds() []string {
+// GetEnvironmentIds returns the EnvironmentIds field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IntegrationModel) GetEnvironmentIds() []string {
 	if o == nil {
 		var ret []string
 		return ret
 	}
-	return o.IntegrationEnvironmentIds
+	return o.EnvironmentIds
 }
 
-// GetIntegrationEnvironmentIdsOk returns a tuple with the IntegrationEnvironmentIds field value if set, nil otherwise
+// GetEnvironmentIdsOk returns a tuple with the EnvironmentIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IntegrationModel) GetIntegrationEnvironmentIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.IntegrationEnvironmentIds) {
+func (o *IntegrationModel) GetEnvironmentIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.EnvironmentIds) {
 		return nil, false
 	}
-	return o.IntegrationEnvironmentIds, true
+	return o.EnvironmentIds, true
 }
 
-// HasIntegrationEnvironmentIds returns a boolean if a field has been set.
-func (o *IntegrationModel) HasIntegrationEnvironmentIds() bool {
-	if o != nil && IsNil(o.IntegrationEnvironmentIds) {
+// HasEnvironmentIds returns a boolean if a field has been set.
+func (o *IntegrationModel) HasEnvironmentIds() bool {
+	if o != nil && IsNil(o.EnvironmentIds) {
 		return true
 	}
 
 	return false
 }
 
-// SetIntegrationEnvironmentIds gets a reference to the given []string and assigns it to the IntegrationEnvironmentIds field.
-func (o *IntegrationModel) SetIntegrationEnvironmentIds(v []string) {
-	o.IntegrationEnvironmentIds = v
+// SetEnvironmentIds gets a reference to the given []string and assigns it to the EnvironmentIds field.
+func (o *IntegrationModel) SetEnvironmentIds(v []string) {
+	o.EnvironmentIds = v
 }
 
-// GetIntegrationConfigIds returns the IntegrationConfigIds field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *IntegrationModel) GetIntegrationConfigIds() []string {
+// GetConfigIds returns the ConfigIds field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *IntegrationModel) GetConfigIds() []string {
 	if o == nil {
 		var ret []string
 		return ret
 	}
-	return o.IntegrationConfigIds
+	return o.ConfigIds
 }
 
-// GetIntegrationConfigIdsOk returns a tuple with the IntegrationConfigIds field value if set, nil otherwise
+// GetConfigIdsOk returns a tuple with the ConfigIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *IntegrationModel) GetIntegrationConfigIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.IntegrationConfigIds) {
+func (o *IntegrationModel) GetConfigIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.ConfigIds) {
 		return nil, false
 	}
-	return o.IntegrationConfigIds, true
+	return o.ConfigIds, true
 }
 
-// HasIntegrationConfigIds returns a boolean if a field has been set.
-func (o *IntegrationModel) HasIntegrationConfigIds() bool {
-	if o != nil && IsNil(o.IntegrationConfigIds) {
+// HasConfigIds returns a boolean if a field has been set.
+func (o *IntegrationModel) HasConfigIds() bool {
+	if o != nil && IsNil(o.ConfigIds) {
 		return true
 	}
 
 	return false
 }
 
-// SetIntegrationConfigIds gets a reference to the given []string and assigns it to the IntegrationConfigIds field.
-func (o *IntegrationModel) SetIntegrationConfigIds(v []string) {
-	o.IntegrationConfigIds = v
+// SetConfigIds gets a reference to the given []string and assigns it to the ConfigIds field.
+func (o *IntegrationModel) SetConfigIds(v []string) {
+	o.ConfigIds = v
 }
 
 func (o IntegrationModel) MarshalJSON() ([]byte, error) {
@@ -277,11 +277,11 @@ func (o IntegrationModel) ToMap() (map[string]interface{}, error) {
 	if o.Parameters != nil {
 		toSerialize["parameters"] = o.Parameters
 	}
-	if o.IntegrationEnvironmentIds != nil {
-		toSerialize["integrationEnvironmentIds"] = o.IntegrationEnvironmentIds
+	if o.EnvironmentIds != nil {
+		toSerialize["environmentIds"] = o.EnvironmentIds
 	}
-	if o.IntegrationConfigIds != nil {
-		toSerialize["integrationConfigIds"] = o.IntegrationConfigIds
+	if o.ConfigIds != nil {
+		toSerialize["configIds"] = o.ConfigIds
 	}
 	return toSerialize, nil
 }
