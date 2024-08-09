@@ -21,17 +21,17 @@ import (
 )
 
 
-// SDKKeysApiService SDKKeysApi service
-type SDKKeysApiService service
+// SDKKeysAPIService SDKKeysAPI service
+type SDKKeysAPIService service
 
-type SDKKeysApiGetSdkKeysRequest struct {
+type SDKKeysAPIGetSdkKeysRequest struct {
 	ctx context.Context
-	ApiService *SDKKeysApiService
+	ApiService *SDKKeysAPIService
 	configId string
 	environmentId string
 }
 
-func (r SDKKeysApiGetSdkKeysRequest) Execute() (*SdkKeysModel, *http.Response, error) {
+func (r SDKKeysAPIGetSdkKeysRequest) Execute() (*SdkKeysModel, *http.Response, error) {
 	return r.ApiService.GetSdkKeysExecute(r)
 }
 
@@ -43,10 +43,10 @@ This endpoint returns the SDK Key for your Config in a specified Environment.
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param configId The identifier of the Config.
  @param environmentId The identifier of the Environment.
- @return SDKKeysApiGetSdkKeysRequest
+ @return SDKKeysAPIGetSdkKeysRequest
 */
-func (a *SDKKeysApiService) GetSdkKeys(ctx context.Context, configId string, environmentId string) SDKKeysApiGetSdkKeysRequest {
-	return SDKKeysApiGetSdkKeysRequest{
+func (a *SDKKeysAPIService) GetSdkKeys(ctx context.Context, configId string, environmentId string) SDKKeysAPIGetSdkKeysRequest {
+	return SDKKeysAPIGetSdkKeysRequest{
 		ApiService: a,
 		ctx: ctx,
 		configId: configId,
@@ -56,7 +56,7 @@ func (a *SDKKeysApiService) GetSdkKeys(ctx context.Context, configId string, env
 
 // Execute executes the request
 //  @return SdkKeysModel
-func (a *SDKKeysApiService) GetSdkKeysExecute(r SDKKeysApiGetSdkKeysRequest) (*SdkKeysModel, *http.Response, error) {
+func (a *SDKKeysAPIService) GetSdkKeysExecute(r SDKKeysAPIGetSdkKeysRequest) (*SdkKeysModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -64,7 +64,7 @@ func (a *SDKKeysApiService) GetSdkKeysExecute(r SDKKeysApiGetSdkKeysRequest) (*S
 		localVarReturnValue  *SdkKeysModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SDKKeysApiService.GetSdkKeys")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SDKKeysAPIService.GetSdkKeys")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

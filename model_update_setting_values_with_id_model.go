@@ -62,7 +62,7 @@ func (o *UpdateSettingValuesWithIdModel) GetSettingValuesOk() ([]UpdateSettingVa
 
 // HasSettingValues returns a boolean if a field has been set.
 func (o *UpdateSettingValuesWithIdModel) HasSettingValues() bool {
-	if o != nil && IsNil(o.SettingValues) {
+	if o != nil && !IsNil(o.SettingValues) {
 		return true
 	}
 

@@ -62,7 +62,7 @@ func (o *IntegrationsModel) GetIntegrationsOk() ([]IntegrationModel, bool) {
 
 // HasIntegrations returns a boolean if a field has been set.
 func (o *IntegrationsModel) HasIntegrations() bool {
-	if o != nil && IsNil(o.Integrations) {
+	if o != nil && !IsNil(o.Integrations) {
 		return true
 	}
 

@@ -219,7 +219,7 @@ func (o *WebhookModel) GetWebHookHeadersOk() ([]WebhookHeaderModel, bool) {
 
 // HasWebHookHeaders returns a boolean if a field has been set.
 func (o *WebhookModel) HasWebHookHeaders() bool {
-	if o != nil && IsNil(o.WebHookHeaders) {
+	if o != nil && !IsNil(o.WebHookHeaders) {
 		return true
 	}
 

@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Product** | Pointer to [**ProductModel**](ProductModel.md) |  | [optional] 
 **IntegrationId** | Pointer to **string** | Identifier of the Integration. | [optional] 
 **Name** | Pointer to **NullableString** | Name of the Integration. | [optional] 
 **IntegrationType** | Pointer to [**IntegrationType**](IntegrationType.md) |  | [optional] 
@@ -29,6 +30,31 @@ will change when the set of required properties is changed
 NewIntegrationModelWithDefaults instantiates a new IntegrationModel object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetProduct
+
+`func (o *IntegrationModel) GetProduct() ProductModel`
+
+GetProduct returns the Product field if non-nil, zero value otherwise.
+
+### GetProductOk
+
+`func (o *IntegrationModel) GetProductOk() (*ProductModel, bool)`
+
+GetProductOk returns a tuple with the Product field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProduct
+
+`func (o *IntegrationModel) SetProduct(v ProductModel)`
+
+SetProduct sets Product field to given value.
+
+### HasProduct
+
+`func (o *IntegrationModel) HasProduct() bool`
+
+HasProduct returns a boolean if a field has been set.
 
 ### GetIntegrationId
 

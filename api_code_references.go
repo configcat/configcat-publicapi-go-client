@@ -21,21 +21,21 @@ import (
 )
 
 
-// CodeReferencesApiService CodeReferencesApi service
-type CodeReferencesApiService service
+// CodeReferencesAPIService CodeReferencesAPI service
+type CodeReferencesAPIService service
 
-type CodeReferencesApiV1CodeReferencesDeleteReportsPostRequest struct {
+type CodeReferencesAPIV1CodeReferencesDeleteReportsPostRequest struct {
 	ctx context.Context
-	ApiService *CodeReferencesApiService
+	ApiService *CodeReferencesAPIService
 	deleteRepositoryReportsRequest *DeleteRepositoryReportsRequest
 }
 
-func (r CodeReferencesApiV1CodeReferencesDeleteReportsPostRequest) DeleteRepositoryReportsRequest(deleteRepositoryReportsRequest DeleteRepositoryReportsRequest) CodeReferencesApiV1CodeReferencesDeleteReportsPostRequest {
+func (r CodeReferencesAPIV1CodeReferencesDeleteReportsPostRequest) DeleteRepositoryReportsRequest(deleteRepositoryReportsRequest DeleteRepositoryReportsRequest) CodeReferencesAPIV1CodeReferencesDeleteReportsPostRequest {
 	r.deleteRepositoryReportsRequest = &deleteRepositoryReportsRequest
 	return r
 }
 
-func (r CodeReferencesApiV1CodeReferencesDeleteReportsPostRequest) Execute() (*http.Response, error) {
+func (r CodeReferencesAPIV1CodeReferencesDeleteReportsPostRequest) Execute() (*http.Response, error) {
 	return r.ApiService.V1CodeReferencesDeleteReportsPostExecute(r)
 }
 
@@ -45,24 +45,24 @@ V1CodeReferencesDeleteReportsPost Delete Reference reports
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return CodeReferencesApiV1CodeReferencesDeleteReportsPostRequest
+ @return CodeReferencesAPIV1CodeReferencesDeleteReportsPostRequest
 */
-func (a *CodeReferencesApiService) V1CodeReferencesDeleteReportsPost(ctx context.Context) CodeReferencesApiV1CodeReferencesDeleteReportsPostRequest {
-	return CodeReferencesApiV1CodeReferencesDeleteReportsPostRequest{
+func (a *CodeReferencesAPIService) V1CodeReferencesDeleteReportsPost(ctx context.Context) CodeReferencesAPIV1CodeReferencesDeleteReportsPostRequest {
+	return CodeReferencesAPIV1CodeReferencesDeleteReportsPostRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-func (a *CodeReferencesApiService) V1CodeReferencesDeleteReportsPostExecute(r CodeReferencesApiV1CodeReferencesDeleteReportsPostRequest) (*http.Response, error) {
+func (a *CodeReferencesAPIService) V1CodeReferencesDeleteReportsPostExecute(r CodeReferencesAPIV1CodeReferencesDeleteReportsPostRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CodeReferencesApiService.V1CodeReferencesDeleteReportsPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CodeReferencesAPIService.V1CodeReferencesDeleteReportsPost")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -123,18 +123,18 @@ func (a *CodeReferencesApiService) V1CodeReferencesDeleteReportsPostExecute(r Co
 	return localVarHTTPResponse, nil
 }
 
-type CodeReferencesApiV1CodeReferencesPostRequest struct {
+type CodeReferencesAPIV1CodeReferencesPostRequest struct {
 	ctx context.Context
-	ApiService *CodeReferencesApiService
+	ApiService *CodeReferencesAPIService
 	codeReferenceRequest *CodeReferenceRequest
 }
 
-func (r CodeReferencesApiV1CodeReferencesPostRequest) CodeReferenceRequest(codeReferenceRequest CodeReferenceRequest) CodeReferencesApiV1CodeReferencesPostRequest {
+func (r CodeReferencesAPIV1CodeReferencesPostRequest) CodeReferenceRequest(codeReferenceRequest CodeReferenceRequest) CodeReferencesAPIV1CodeReferencesPostRequest {
 	r.codeReferenceRequest = &codeReferenceRequest
 	return r
 }
 
-func (r CodeReferencesApiV1CodeReferencesPostRequest) Execute() (*http.Response, error) {
+func (r CodeReferencesAPIV1CodeReferencesPostRequest) Execute() (*http.Response, error) {
 	return r.ApiService.V1CodeReferencesPostExecute(r)
 }
 
@@ -144,24 +144,24 @@ V1CodeReferencesPost Upload References
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return CodeReferencesApiV1CodeReferencesPostRequest
+ @return CodeReferencesAPIV1CodeReferencesPostRequest
 */
-func (a *CodeReferencesApiService) V1CodeReferencesPost(ctx context.Context) CodeReferencesApiV1CodeReferencesPostRequest {
-	return CodeReferencesApiV1CodeReferencesPostRequest{
+func (a *CodeReferencesAPIService) V1CodeReferencesPost(ctx context.Context) CodeReferencesAPIV1CodeReferencesPostRequest {
+	return CodeReferencesAPIV1CodeReferencesPostRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-func (a *CodeReferencesApiService) V1CodeReferencesPostExecute(r CodeReferencesApiV1CodeReferencesPostRequest) (*http.Response, error) {
+func (a *CodeReferencesAPIService) V1CodeReferencesPostExecute(r CodeReferencesAPIV1CodeReferencesPostRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CodeReferencesApiService.V1CodeReferencesPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CodeReferencesAPIService.V1CodeReferencesPost")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -222,13 +222,13 @@ func (a *CodeReferencesApiService) V1CodeReferencesPostExecute(r CodeReferencesA
 	return localVarHTTPResponse, nil
 }
 
-type CodeReferencesApiV1SettingsSettingIdCodeReferencesGetRequest struct {
+type CodeReferencesAPIV1SettingsSettingIdCodeReferencesGetRequest struct {
 	ctx context.Context
-	ApiService *CodeReferencesApiService
+	ApiService *CodeReferencesAPIService
 	settingId int32
 }
 
-func (r CodeReferencesApiV1SettingsSettingIdCodeReferencesGetRequest) Execute() ([]CodeReferenceModel, *http.Response, error) {
+func (r CodeReferencesAPIV1SettingsSettingIdCodeReferencesGetRequest) Execute() ([]CodeReferenceModel, *http.Response, error) {
 	return r.ApiService.V1SettingsSettingIdCodeReferencesGetExecute(r)
 }
 
@@ -239,10 +239,10 @@ V1SettingsSettingIdCodeReferencesGet Get References for Feature Flag or Setting
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param settingId The identifier of the Feature Flag or Setting.
- @return CodeReferencesApiV1SettingsSettingIdCodeReferencesGetRequest
+ @return CodeReferencesAPIV1SettingsSettingIdCodeReferencesGetRequest
 */
-func (a *CodeReferencesApiService) V1SettingsSettingIdCodeReferencesGet(ctx context.Context, settingId int32) CodeReferencesApiV1SettingsSettingIdCodeReferencesGetRequest {
-	return CodeReferencesApiV1SettingsSettingIdCodeReferencesGetRequest{
+func (a *CodeReferencesAPIService) V1SettingsSettingIdCodeReferencesGet(ctx context.Context, settingId int32) CodeReferencesAPIV1SettingsSettingIdCodeReferencesGetRequest {
+	return CodeReferencesAPIV1SettingsSettingIdCodeReferencesGetRequest{
 		ApiService: a,
 		ctx: ctx,
 		settingId: settingId,
@@ -251,7 +251,7 @@ func (a *CodeReferencesApiService) V1SettingsSettingIdCodeReferencesGet(ctx cont
 
 // Execute executes the request
 //  @return []CodeReferenceModel
-func (a *CodeReferencesApiService) V1SettingsSettingIdCodeReferencesGetExecute(r CodeReferencesApiV1SettingsSettingIdCodeReferencesGetRequest) ([]CodeReferenceModel, *http.Response, error) {
+func (a *CodeReferencesAPIService) V1SettingsSettingIdCodeReferencesGetExecute(r CodeReferencesAPIV1SettingsSettingIdCodeReferencesGetRequest) ([]CodeReferenceModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -259,7 +259,7 @@ func (a *CodeReferencesApiService) V1SettingsSettingIdCodeReferencesGetExecute(r
 		localVarReturnValue  []CodeReferenceModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CodeReferencesApiService.V1SettingsSettingIdCodeReferencesGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CodeReferencesAPIService.V1SettingsSettingIdCodeReferencesGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

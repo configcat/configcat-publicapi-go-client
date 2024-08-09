@@ -62,7 +62,7 @@ func (o *UpdateEvaluationFormulasModel) GetUpdateFormulasOk() ([]UpdateEvaluatio
 
 // HasUpdateFormulas returns a boolean if a field has been set.
 func (o *UpdateEvaluationFormulasModel) HasUpdateFormulas() bool {
-	if o != nil && IsNil(o.UpdateFormulas) {
+	if o != nil && !IsNil(o.UpdateFormulas) {
 		return true
 	}
 

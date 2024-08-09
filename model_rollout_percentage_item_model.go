@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the RolloutPercentageItemModel type satisfies the MappedNullable interface at compile time
@@ -25,6 +27,8 @@ type RolloutPercentageItemModel struct {
 	// The value to serve when the user falls in the percentage rule. It must respect the setting type.
 	Value interface{} `json:"value,omitempty"`
 }
+
+type _RolloutPercentageItemModel RolloutPercentageItemModel
 
 // NewRolloutPercentageItemModel instantiates a new RolloutPercentageItemModel object
 // This constructor will assign default values to properties that have it defined,
@@ -89,7 +93,7 @@ func (o *RolloutPercentageItemModel) GetValueOk() (*interface{}, bool) {
 
 // HasValue returns a boolean if a field has been set.
 func (o *RolloutPercentageItemModel) HasValue() bool {
-	if o != nil && IsNil(o.Value) {
+	if o != nil && !IsNil(o.Value) {
 		return true
 	}
 
@@ -116,6 +120,43 @@ func (o RolloutPercentageItemModel) ToMap() (map[string]interface{}, error) {
 		toSerialize["value"] = o.Value
 	}
 	return toSerialize, nil
+}
+
+func (o *RolloutPercentageItemModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"percentage",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRolloutPercentageItemModel := _RolloutPercentageItemModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRolloutPercentageItemModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RolloutPercentageItemModel(varRolloutPercentageItemModel)
+
+	return err
 }
 
 type NullableRolloutPercentageItemModel struct {

@@ -161,7 +161,7 @@ func (o *ConfigSettingValuesModel) GetSettingValuesOk() ([]ConfigSettingValueMod
 
 // HasSettingValues returns a boolean if a field has been set.
 func (o *ConfigSettingValuesModel) HasSettingValues() bool {
-	if o != nil && IsNil(o.SettingValues) {
+	if o != nil && !IsNil(o.SettingValues) {
 		return true
 	}
 

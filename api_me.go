@@ -20,15 +20,15 @@ import (
 )
 
 
-// MeApiService MeApi service
-type MeApiService service
+// MeAPIService MeAPI service
+type MeAPIService service
 
-type MeApiGetMeRequest struct {
+type MeAPIGetMeRequest struct {
 	ctx context.Context
-	ApiService *MeApiService
+	ApiService *MeAPIService
 }
 
-func (r MeApiGetMeRequest) Execute() (*MeModel, *http.Response, error) {
+func (r MeAPIGetMeRequest) Execute() (*MeModel, *http.Response, error) {
 	return r.ApiService.GetMeExecute(r)
 }
 
@@ -38,10 +38,10 @@ GetMe Get authenticated user details
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return MeApiGetMeRequest
+ @return MeAPIGetMeRequest
 */
-func (a *MeApiService) GetMe(ctx context.Context) MeApiGetMeRequest {
-	return MeApiGetMeRequest{
+func (a *MeAPIService) GetMe(ctx context.Context) MeAPIGetMeRequest {
+	return MeAPIGetMeRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -49,7 +49,7 @@ func (a *MeApiService) GetMe(ctx context.Context) MeApiGetMeRequest {
 
 // Execute executes the request
 //  @return MeModel
-func (a *MeApiService) GetMeExecute(r MeApiGetMeRequest) (*MeModel, *http.Response, error) {
+func (a *MeAPIService) GetMeExecute(r MeAPIGetMeRequest) (*MeModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -57,7 +57,7 @@ func (a *MeApiService) GetMeExecute(r MeApiGetMeRequest) (*MeModel, *http.Respon
 		localVarReturnValue  *MeModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MeApiService.GetMe")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MeAPIService.GetMe")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

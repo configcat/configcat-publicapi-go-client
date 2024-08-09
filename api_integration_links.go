@@ -21,12 +21,12 @@ import (
 )
 
 
-// IntegrationLinksApiService IntegrationLinksApi service
-type IntegrationLinksApiService service
+// IntegrationLinksAPIService IntegrationLinksAPI service
+type IntegrationLinksAPIService service
 
-type IntegrationLinksApiAddOrUpdateIntegrationLinkRequest struct {
+type IntegrationLinksAPIAddOrUpdateIntegrationLinkRequest struct {
 	ctx context.Context
-	ApiService *IntegrationLinksApiService
+	ApiService *IntegrationLinksAPIService
 	environmentId string
 	settingId int32
 	integrationLinkType IntegrationLinkType
@@ -34,12 +34,12 @@ type IntegrationLinksApiAddOrUpdateIntegrationLinkRequest struct {
 	addOrUpdateIntegrationLinkModel *AddOrUpdateIntegrationLinkModel
 }
 
-func (r IntegrationLinksApiAddOrUpdateIntegrationLinkRequest) AddOrUpdateIntegrationLinkModel(addOrUpdateIntegrationLinkModel AddOrUpdateIntegrationLinkModel) IntegrationLinksApiAddOrUpdateIntegrationLinkRequest {
+func (r IntegrationLinksAPIAddOrUpdateIntegrationLinkRequest) AddOrUpdateIntegrationLinkModel(addOrUpdateIntegrationLinkModel AddOrUpdateIntegrationLinkModel) IntegrationLinksAPIAddOrUpdateIntegrationLinkRequest {
 	r.addOrUpdateIntegrationLinkModel = &addOrUpdateIntegrationLinkModel
 	return r
 }
 
-func (r IntegrationLinksApiAddOrUpdateIntegrationLinkRequest) Execute() (*IntegrationLinkModel, *http.Response, error) {
+func (r IntegrationLinksAPIAddOrUpdateIntegrationLinkRequest) Execute() (*IntegrationLinkModel, *http.Response, error) {
 	return r.ApiService.AddOrUpdateIntegrationLinkExecute(r)
 }
 
@@ -53,10 +53,10 @@ AddOrUpdateIntegrationLink Add or update Integration link
  @param settingId The id of the Setting.
  @param integrationLinkType The integration link's type.
  @param key The key of the integration link.
- @return IntegrationLinksApiAddOrUpdateIntegrationLinkRequest
+ @return IntegrationLinksAPIAddOrUpdateIntegrationLinkRequest
 */
-func (a *IntegrationLinksApiService) AddOrUpdateIntegrationLink(ctx context.Context, environmentId string, settingId int32, integrationLinkType IntegrationLinkType, key string) IntegrationLinksApiAddOrUpdateIntegrationLinkRequest {
-	return IntegrationLinksApiAddOrUpdateIntegrationLinkRequest{
+func (a *IntegrationLinksAPIService) AddOrUpdateIntegrationLink(ctx context.Context, environmentId string, settingId int32, integrationLinkType IntegrationLinkType, key string) IntegrationLinksAPIAddOrUpdateIntegrationLinkRequest {
+	return IntegrationLinksAPIAddOrUpdateIntegrationLinkRequest{
 		ApiService: a,
 		ctx: ctx,
 		environmentId: environmentId,
@@ -68,7 +68,7 @@ func (a *IntegrationLinksApiService) AddOrUpdateIntegrationLink(ctx context.Cont
 
 // Execute executes the request
 //  @return IntegrationLinkModel
-func (a *IntegrationLinksApiService) AddOrUpdateIntegrationLinkExecute(r IntegrationLinksApiAddOrUpdateIntegrationLinkRequest) (*IntegrationLinkModel, *http.Response, error) {
+func (a *IntegrationLinksAPIService) AddOrUpdateIntegrationLinkExecute(r IntegrationLinksAPIAddOrUpdateIntegrationLinkRequest) (*IntegrationLinkModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -76,7 +76,7 @@ func (a *IntegrationLinksApiService) AddOrUpdateIntegrationLinkExecute(r Integra
 		localVarReturnValue  *IntegrationLinkModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationLinksApiService.AddOrUpdateIntegrationLink")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationLinksAPIService.AddOrUpdateIntegrationLink")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -147,16 +147,16 @@ func (a *IntegrationLinksApiService) AddOrUpdateIntegrationLinkExecute(r Integra
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type IntegrationLinksApiDeleteIntegrationLinkRequest struct {
+type IntegrationLinksAPIDeleteIntegrationLinkRequest struct {
 	ctx context.Context
-	ApiService *IntegrationLinksApiService
+	ApiService *IntegrationLinksAPIService
 	environmentId string
 	settingId int32
 	integrationLinkType IntegrationLinkType
 	key string
 }
 
-func (r IntegrationLinksApiDeleteIntegrationLinkRequest) Execute() (*DeleteIntegrationLinkModel, *http.Response, error) {
+func (r IntegrationLinksAPIDeleteIntegrationLinkRequest) Execute() (*DeleteIntegrationLinkModel, *http.Response, error) {
 	return r.ApiService.DeleteIntegrationLinkExecute(r)
 }
 
@@ -170,10 +170,10 @@ DeleteIntegrationLink Delete Integration link
  @param settingId The id of the Setting.
  @param integrationLinkType The integration's type.
  @param key The key of the integration link.
- @return IntegrationLinksApiDeleteIntegrationLinkRequest
+ @return IntegrationLinksAPIDeleteIntegrationLinkRequest
 */
-func (a *IntegrationLinksApiService) DeleteIntegrationLink(ctx context.Context, environmentId string, settingId int32, integrationLinkType IntegrationLinkType, key string) IntegrationLinksApiDeleteIntegrationLinkRequest {
-	return IntegrationLinksApiDeleteIntegrationLinkRequest{
+func (a *IntegrationLinksAPIService) DeleteIntegrationLink(ctx context.Context, environmentId string, settingId int32, integrationLinkType IntegrationLinkType, key string) IntegrationLinksAPIDeleteIntegrationLinkRequest {
+	return IntegrationLinksAPIDeleteIntegrationLinkRequest{
 		ApiService: a,
 		ctx: ctx,
 		environmentId: environmentId,
@@ -185,7 +185,7 @@ func (a *IntegrationLinksApiService) DeleteIntegrationLink(ctx context.Context, 
 
 // Execute executes the request
 //  @return DeleteIntegrationLinkModel
-func (a *IntegrationLinksApiService) DeleteIntegrationLinkExecute(r IntegrationLinksApiDeleteIntegrationLinkRequest) (*DeleteIntegrationLinkModel, *http.Response, error) {
+func (a *IntegrationLinksAPIService) DeleteIntegrationLinkExecute(r IntegrationLinksAPIDeleteIntegrationLinkRequest) (*DeleteIntegrationLinkModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
@@ -193,7 +193,7 @@ func (a *IntegrationLinksApiService) DeleteIntegrationLinkExecute(r IntegrationL
 		localVarReturnValue  *DeleteIntegrationLinkModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationLinksApiService.DeleteIntegrationLink")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationLinksAPIService.DeleteIntegrationLink")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -262,14 +262,14 @@ func (a *IntegrationLinksApiService) DeleteIntegrationLinkExecute(r IntegrationL
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type IntegrationLinksApiGetIntegrationLinkDetailsRequest struct {
+type IntegrationLinksAPIGetIntegrationLinkDetailsRequest struct {
 	ctx context.Context
-	ApiService *IntegrationLinksApiService
+	ApiService *IntegrationLinksAPIService
 	integrationLinkType IntegrationLinkType
 	key string
 }
 
-func (r IntegrationLinksApiGetIntegrationLinkDetailsRequest) Execute() (*IntegrationLinkDetailsModel, *http.Response, error) {
+func (r IntegrationLinksAPIGetIntegrationLinkDetailsRequest) Execute() (*IntegrationLinkDetailsModel, *http.Response, error) {
 	return r.ApiService.GetIntegrationLinkDetailsExecute(r)
 }
 
@@ -281,10 +281,10 @@ GetIntegrationLinkDetails Get Integration link
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param integrationLinkType The integration link's type.
  @param key The key of the integration link.
- @return IntegrationLinksApiGetIntegrationLinkDetailsRequest
+ @return IntegrationLinksAPIGetIntegrationLinkDetailsRequest
 */
-func (a *IntegrationLinksApiService) GetIntegrationLinkDetails(ctx context.Context, integrationLinkType IntegrationLinkType, key string) IntegrationLinksApiGetIntegrationLinkDetailsRequest {
-	return IntegrationLinksApiGetIntegrationLinkDetailsRequest{
+func (a *IntegrationLinksAPIService) GetIntegrationLinkDetails(ctx context.Context, integrationLinkType IntegrationLinkType, key string) IntegrationLinksAPIGetIntegrationLinkDetailsRequest {
+	return IntegrationLinksAPIGetIntegrationLinkDetailsRequest{
 		ApiService: a,
 		ctx: ctx,
 		integrationLinkType: integrationLinkType,
@@ -294,7 +294,7 @@ func (a *IntegrationLinksApiService) GetIntegrationLinkDetails(ctx context.Conte
 
 // Execute executes the request
 //  @return IntegrationLinkDetailsModel
-func (a *IntegrationLinksApiService) GetIntegrationLinkDetailsExecute(r IntegrationLinksApiGetIntegrationLinkDetailsRequest) (*IntegrationLinkDetailsModel, *http.Response, error) {
+func (a *IntegrationLinksAPIService) GetIntegrationLinkDetailsExecute(r IntegrationLinksAPIGetIntegrationLinkDetailsRequest) (*IntegrationLinkDetailsModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -302,7 +302,7 @@ func (a *IntegrationLinksApiService) GetIntegrationLinkDetailsExecute(r Integrat
 		localVarReturnValue  *IntegrationLinkDetailsModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationLinksApiService.GetIntegrationLinkDetails")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationLinksAPIService.GetIntegrationLinkDetails")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -369,21 +369,21 @@ func (a *IntegrationLinksApiService) GetIntegrationLinkDetailsExecute(r Integrat
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type IntegrationLinksApiJiraAddOrUpdateIntegrationLinkRequest struct {
+type IntegrationLinksAPIJiraAddOrUpdateIntegrationLinkRequest struct {
 	ctx context.Context
-	ApiService *IntegrationLinksApiService
+	ApiService *IntegrationLinksAPIService
 	environmentId string
 	settingId int32
 	key string
 	addOrUpdateJiraIntegrationLinkModel *AddOrUpdateJiraIntegrationLinkModel
 }
 
-func (r IntegrationLinksApiJiraAddOrUpdateIntegrationLinkRequest) AddOrUpdateJiraIntegrationLinkModel(addOrUpdateJiraIntegrationLinkModel AddOrUpdateJiraIntegrationLinkModel) IntegrationLinksApiJiraAddOrUpdateIntegrationLinkRequest {
+func (r IntegrationLinksAPIJiraAddOrUpdateIntegrationLinkRequest) AddOrUpdateJiraIntegrationLinkModel(addOrUpdateJiraIntegrationLinkModel AddOrUpdateJiraIntegrationLinkModel) IntegrationLinksAPIJiraAddOrUpdateIntegrationLinkRequest {
 	r.addOrUpdateJiraIntegrationLinkModel = &addOrUpdateJiraIntegrationLinkModel
 	return r
 }
 
-func (r IntegrationLinksApiJiraAddOrUpdateIntegrationLinkRequest) Execute() (*IntegrationLinkModel, *http.Response, error) {
+func (r IntegrationLinksAPIJiraAddOrUpdateIntegrationLinkRequest) Execute() (*IntegrationLinkModel, *http.Response, error) {
 	return r.ApiService.JiraAddOrUpdateIntegrationLinkExecute(r)
 }
 
@@ -394,10 +394,10 @@ JiraAddOrUpdateIntegrationLink Method for JiraAddOrUpdateIntegrationLink
  @param environmentId The identifier of the Environment.
  @param settingId The id of the Setting.
  @param key The key of the integration link.
- @return IntegrationLinksApiJiraAddOrUpdateIntegrationLinkRequest
+ @return IntegrationLinksAPIJiraAddOrUpdateIntegrationLinkRequest
 */
-func (a *IntegrationLinksApiService) JiraAddOrUpdateIntegrationLink(ctx context.Context, environmentId string, settingId int32, key string) IntegrationLinksApiJiraAddOrUpdateIntegrationLinkRequest {
-	return IntegrationLinksApiJiraAddOrUpdateIntegrationLinkRequest{
+func (a *IntegrationLinksAPIService) JiraAddOrUpdateIntegrationLink(ctx context.Context, environmentId string, settingId int32, key string) IntegrationLinksAPIJiraAddOrUpdateIntegrationLinkRequest {
+	return IntegrationLinksAPIJiraAddOrUpdateIntegrationLinkRequest{
 		ApiService: a,
 		ctx: ctx,
 		environmentId: environmentId,
@@ -408,7 +408,7 @@ func (a *IntegrationLinksApiService) JiraAddOrUpdateIntegrationLink(ctx context.
 
 // Execute executes the request
 //  @return IntegrationLinkModel
-func (a *IntegrationLinksApiService) JiraAddOrUpdateIntegrationLinkExecute(r IntegrationLinksApiJiraAddOrUpdateIntegrationLinkRequest) (*IntegrationLinkModel, *http.Response, error) {
+func (a *IntegrationLinksAPIService) JiraAddOrUpdateIntegrationLinkExecute(r IntegrationLinksAPIJiraAddOrUpdateIntegrationLinkRequest) (*IntegrationLinkModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -416,7 +416,7 @@ func (a *IntegrationLinksApiService) JiraAddOrUpdateIntegrationLinkExecute(r Int
 		localVarReturnValue  *IntegrationLinkModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationLinksApiService.JiraAddOrUpdateIntegrationLink")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationLinksAPIService.JiraAddOrUpdateIntegrationLink")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -486,18 +486,18 @@ func (a *IntegrationLinksApiService) JiraAddOrUpdateIntegrationLinkExecute(r Int
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type IntegrationLinksApiJiraConnectRequest struct {
+type IntegrationLinksAPIJiraConnectRequest struct {
 	ctx context.Context
-	ApiService *IntegrationLinksApiService
+	ApiService *IntegrationLinksAPIService
 	connectRequest *ConnectRequest
 }
 
-func (r IntegrationLinksApiJiraConnectRequest) ConnectRequest(connectRequest ConnectRequest) IntegrationLinksApiJiraConnectRequest {
+func (r IntegrationLinksAPIJiraConnectRequest) ConnectRequest(connectRequest ConnectRequest) IntegrationLinksAPIJiraConnectRequest {
 	r.connectRequest = &connectRequest
 	return r
 }
 
-func (r IntegrationLinksApiJiraConnectRequest) Execute() (*http.Response, error) {
+func (r IntegrationLinksAPIJiraConnectRequest) Execute() (*http.Response, error) {
 	return r.ApiService.JiraConnectExecute(r)
 }
 
@@ -505,24 +505,24 @@ func (r IntegrationLinksApiJiraConnectRequest) Execute() (*http.Response, error)
 JiraConnect Method for JiraConnect
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return IntegrationLinksApiJiraConnectRequest
+ @return IntegrationLinksAPIJiraConnectRequest
 */
-func (a *IntegrationLinksApiService) JiraConnect(ctx context.Context) IntegrationLinksApiJiraConnectRequest {
-	return IntegrationLinksApiJiraConnectRequest{
+func (a *IntegrationLinksAPIService) JiraConnect(ctx context.Context) IntegrationLinksAPIJiraConnectRequest {
+	return IntegrationLinksAPIJiraConnectRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-func (a *IntegrationLinksApiService) JiraConnectExecute(r IntegrationLinksApiJiraConnectRequest) (*http.Response, error) {
+func (a *IntegrationLinksAPIService) JiraConnectExecute(r IntegrationLinksAPIJiraConnectRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationLinksApiService.JiraConnect")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationLinksAPIService.JiraConnect")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
