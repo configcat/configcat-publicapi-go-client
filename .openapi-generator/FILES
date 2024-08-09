@@ -12,6 +12,7 @@ api_feature_flag_setting_values_using_sdk_key_v2.go
 api_feature_flag_setting_values_v2.go
 api_feature_flags_settings.go
 api_integration_links.go
+api_integrations.go
 api_me.go
 api_members.go
 api_organizations.go
@@ -32,7 +33,6 @@ docs/AuditLogsApi.md
 docs/CodeReferenceModel.md
 docs/CodeReferenceRequest.md
 docs/CodeReferencesApi.md
-docs/CodeReferencesForSettingModel.md
 docs/ComparisonValueListModel.md
 docs/ComparisonValueModel.md
 docs/ConditionModel.md
@@ -45,6 +45,7 @@ docs/ConfigsApi.md
 docs/ConnectRequest.md
 docs/CreateConfigRequest.md
 docs/CreateEnvironmentModel.md
+docs/CreateIntegrationModel.md
 docs/CreateOrUpdateEnvironmentAccessModel.md
 docs/CreatePermissionGroupRequest.md
 docs/CreateProductRequest.md
@@ -71,6 +72,10 @@ docs/IntegrationLinkDetailsModel.md
 docs/IntegrationLinkModel.md
 docs/IntegrationLinkType.md
 docs/IntegrationLinksApi.md
+docs/IntegrationModel.md
+docs/IntegrationType.md
+docs/IntegrationsApi.md
+docs/IntegrationsModel.md
 docs/InvitationModel.md
 docs/InviteMembersRequest.md
 docs/JsonPatchOperation.md
@@ -79,6 +84,7 @@ docs/MeApi.md
 docs/MeModel.md
 docs/MemberModel.md
 docs/MembersApi.md
+docs/ModifyIntegrationRequest.md
 docs/OperationType.md
 docs/OrganizationAdminModel.md
 docs/OrganizationInvitationModel.md
@@ -157,7 +163,6 @@ model_audit_log_item_model.go
 model_audit_log_type.go
 model_code_reference_model.go
 model_code_reference_request.go
-model_code_references_for_setting_model.go
 model_comparison_value_list_model.go
 model_comparison_value_model.go
 model_condition_model.go
@@ -169,6 +174,7 @@ model_config_setting_values_model.go
 model_connect_request.go
 model_create_config_request.go
 model_create_environment_model.go
+model_create_integration_model.go
 model_create_or_update_environment_access_model.go
 model_create_permission_group_request.go
 model_create_product_request.go
@@ -188,12 +194,16 @@ model_integration_link_detail.go
 model_integration_link_details_model.go
 model_integration_link_model.go
 model_integration_link_type.go
+model_integration_model.go
+model_integration_type.go
+model_integrations_model.go
 model_invitation_model.go
 model_invite_members_request.go
 model_json_patch_operation.go
 model_key_generation_mode.go
 model_me_model.go
 model_member_model.go
+model_modify_integration_request.go
 model_operation_type.go
 model_organization_admin_model.go
 model_organization_invitation_model.go

@@ -8,8 +8,9 @@ You can **Create**, **Read**, **Update** and **Delete** any entities like **Feat
 If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).
 
 The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON 
-format. Do not use this API for accessing and evaluating feature flag values. Use the [SDKs instead](https://configcat.com/docs/sdk-reference/overview).
+format. 
 
+**Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.
 
 # OpenAPI Specification
 
@@ -117,7 +118,6 @@ Class | Method | HTTP request | Description
 *AuditLogsApi* | [**GetOrganizationAuditlogs**](docs/AuditLogsApi.md#getorganizationauditlogs) | **Get** /v1/organizations/{organizationId}/auditlogs | List Audit log items for Organization
 *CodeReferencesApi* | [**V1CodeReferencesDeleteReportsPost**](docs/CodeReferencesApi.md#v1codereferencesdeletereportspost) | **Post** /v1/code-references/delete-reports | Delete Reference reports
 *CodeReferencesApi* | [**V1CodeReferencesPost**](docs/CodeReferencesApi.md#v1codereferencespost) | **Post** /v1/code-references | Upload References
-*CodeReferencesApi* | [**V1ConfigsConfigIdCodeReferencesGet**](docs/CodeReferencesApi.md#v1configsconfigidcodereferencesget) | **Get** /v1/configs/{configId}/code-references | Get References in Config
 *CodeReferencesApi* | [**V1SettingsSettingIdCodeReferencesGet**](docs/CodeReferencesApi.md#v1settingssettingidcodereferencesget) | **Get** /v1/settings/{settingId}/code-references | Get References for Feature Flag or Setting
 *ConfigsApi* | [**CreateConfig**](docs/ConfigsApi.md#createconfig) | **Post** /v1/products/{productId}/configs | Create Config
 *ConfigsApi* | [**DeleteConfig**](docs/ConfigsApi.md#deleteconfig) | **Delete** /v1/configs/{configId} | Delete Config
@@ -156,6 +156,11 @@ Class | Method | HTTP request | Description
 *IntegrationLinksApi* | [**GetIntegrationLinkDetails**](docs/IntegrationLinksApi.md#getintegrationlinkdetails) | **Get** /v1/integrationLink/{integrationLinkType}/{key}/details | Get Integration link
 *IntegrationLinksApi* | [**JiraAddOrUpdateIntegrationLink**](docs/IntegrationLinksApi.md#jiraaddorupdateintegrationlink) | **Post** /v1/jira/environments/{environmentId}/settings/{settingId}/integrationLinks/{key} | 
 *IntegrationLinksApi* | [**JiraConnect**](docs/IntegrationLinksApi.md#jiraconnect) | **Post** /v1/jira/connect | 
+*IntegrationsApi* | [**CreateIntegration**](docs/IntegrationsApi.md#createintegration) | **Post** /v1/products/{productId}/integrations | Create Integration
+*IntegrationsApi* | [**DeleteIntegration**](docs/IntegrationsApi.md#deleteintegration) | **Delete** /v1/integrations/{integrationId} | Delete Integration
+*IntegrationsApi* | [**GetIntegration**](docs/IntegrationsApi.md#getintegration) | **Get** /v1/integrations/{integrationId} | Get Integration
+*IntegrationsApi* | [**GetIntegrations**](docs/IntegrationsApi.md#getintegrations) | **Get** /v1/products/{productId}/integrations | List Integrations
+*IntegrationsApi* | [**UpdateIntegration**](docs/IntegrationsApi.md#updateintegration) | **Put** /v1/integrations/{integrationId} | Update Integration
 *MeApi* | [**GetMe**](docs/MeApi.md#getme) | **Get** /v1/me | Get authenticated user details
 *MembersApi* | [**AddMemberToGroup**](docs/MembersApi.md#addmembertogroup) | **Post** /v1/organizations/{organizationId}/members/{userId} | Update Member Permissions
 *MembersApi* | [**DeleteInvitation**](docs/MembersApi.md#deleteinvitation) | **Delete** /v1/invitations/{invitationId} | Delete Invitation
@@ -210,7 +215,6 @@ Class | Method | HTTP request | Description
  - [AuditLogType](docs/AuditLogType.md)
  - [CodeReferenceModel](docs/CodeReferenceModel.md)
  - [CodeReferenceRequest](docs/CodeReferenceRequest.md)
- - [CodeReferencesForSettingModel](docs/CodeReferencesForSettingModel.md)
  - [ComparisonValueListModel](docs/ComparisonValueListModel.md)
  - [ComparisonValueModel](docs/ComparisonValueModel.md)
  - [ConditionModel](docs/ConditionModel.md)
@@ -222,6 +226,7 @@ Class | Method | HTTP request | Description
  - [ConnectRequest](docs/ConnectRequest.md)
  - [CreateConfigRequest](docs/CreateConfigRequest.md)
  - [CreateEnvironmentModel](docs/CreateEnvironmentModel.md)
+ - [CreateIntegrationModel](docs/CreateIntegrationModel.md)
  - [CreateOrUpdateEnvironmentAccessModel](docs/CreateOrUpdateEnvironmentAccessModel.md)
  - [CreatePermissionGroupRequest](docs/CreatePermissionGroupRequest.md)
  - [CreateProductRequest](docs/CreateProductRequest.md)
@@ -241,12 +246,16 @@ Class | Method | HTTP request | Description
  - [IntegrationLinkDetailsModel](docs/IntegrationLinkDetailsModel.md)
  - [IntegrationLinkModel](docs/IntegrationLinkModel.md)
  - [IntegrationLinkType](docs/IntegrationLinkType.md)
+ - [IntegrationModel](docs/IntegrationModel.md)
+ - [IntegrationType](docs/IntegrationType.md)
+ - [IntegrationsModel](docs/IntegrationsModel.md)
  - [InvitationModel](docs/InvitationModel.md)
  - [InviteMembersRequest](docs/InviteMembersRequest.md)
  - [JsonPatchOperation](docs/JsonPatchOperation.md)
  - [KeyGenerationMode](docs/KeyGenerationMode.md)
  - [MeModel](docs/MeModel.md)
  - [MemberModel](docs/MemberModel.md)
+ - [ModifyIntegrationRequest](docs/ModifyIntegrationRequest.md)
  - [OperationType](docs/OperationType.md)
  - [OrganizationAdminModel](docs/OrganizationAdminModel.md)
  - [OrganizationInvitationModel](docs/OrganizationInvitationModel.md)

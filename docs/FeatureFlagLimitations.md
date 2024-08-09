@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MaxPercentageOptionCount** | Pointer to **int32** | Maximum number of percentage options a Feature Flag or Setting can have within a targeting rule. | [optional] [readonly] 
-**MaxTargetingRuleCount** | Pointer to **int32** | Maximum number of targeting rules a Feature Flag or Setting can have. | [optional] [readonly] 
-**MaxComparisonValueLength** | Pointer to **int32** | Maximum length of a text comparison value. | [optional] [readonly] 
-**MaxComparisonValueListLength** | Pointer to **int32** | Maximum item count of a list comparison value. | [optional] [readonly] 
-**MaxComparisonValueListItemLength** | Pointer to **int32** | Maximum length of a list comparison value&#39;s item. | [optional] [readonly] 
-**MaxStringFlagValueLength** | Pointer to **int32** | Maximum length of a text Setting&#39;s value. | [optional] [readonly] 
-**MaxConditionPerTargetingRuleCount** | Pointer to **int32** | Maximum number of &#x60;AND&#x60; conditions a Feature Flag or Setting can have within a targeting rule. | [optional] [readonly] 
+**MaxPercentageOptionCount** | Pointer to **int32** | Maximum number of percentage options a Feature Flag or Setting can have within a targeting rule. | [optional] 
+**MaxTargetingRuleCount** | Pointer to **int32** | Maximum number of targeting rules a Feature Flag or Setting can have. | [optional] 
+**MaxComparisonValueLength** | Pointer to **int32** | Maximum length of a text comparison value. | [optional] 
+**MaxComparisonValueListLength** | Pointer to **int32** | Maximum item count of a list comparison value. | [optional] 
+**MaxComparisonValueListItemLength** | Pointer to **int32** | Maximum length of a list comparison value&#39;s item. | [optional] 
+**MaxStringFlagValueLength** | Pointer to **int32** | Maximum length of a text Setting&#39;s value. | [optional] 
+**MaxConditionPerTargetingRuleCount** | Pointer to **int32** | Maximum number of &#x60;AND&#x60; conditions a Feature Flag or Setting can have within a targeting rule. | [optional] 
 
 ## Methods
 
