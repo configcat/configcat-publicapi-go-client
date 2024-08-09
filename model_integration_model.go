@@ -20,6 +20,7 @@ var _ MappedNullable = &IntegrationModel{}
 
 // IntegrationModel Details of the Integration.
 type IntegrationModel struct {
+	Product *ProductModel `json:"product,omitempty"`
 	// Identifier of the Integration.
 	IntegrationId *string `json:"integrationId,omitempty"`
 	// Name of the Integration.
@@ -48,6 +49,38 @@ func NewIntegrationModel() *IntegrationModel {
 func NewIntegrationModelWithDefaults() *IntegrationModel {
 	this := IntegrationModel{}
 	return &this
+}
+
+// GetProduct returns the Product field value if set, zero value otherwise.
+func (o *IntegrationModel) GetProduct() ProductModel {
+	if o == nil || IsNil(o.Product) {
+		var ret ProductModel
+		return ret
+	}
+	return *o.Product
+}
+
+// GetProductOk returns a tuple with the Product field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IntegrationModel) GetProductOk() (*ProductModel, bool) {
+	if o == nil || IsNil(o.Product) {
+		return nil, false
+	}
+	return o.Product, true
+}
+
+// HasProduct returns a boolean if a field has been set.
+func (o *IntegrationModel) HasProduct() bool {
+	if o != nil && !IsNil(o.Product) {
+		return true
+	}
+
+	return false
+}
+
+// SetProduct gets a reference to the given ProductModel and assigns it to the Product field.
+func (o *IntegrationModel) SetProduct(v ProductModel) {
+	o.Product = &v
 }
 
 // GetIntegrationId returns the IntegrationId field value if set, zero value otherwise.
@@ -265,6 +298,9 @@ func (o IntegrationModel) MarshalJSON() ([]byte, error) {
 
 func (o IntegrationModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.Product) {
+		toSerialize["product"] = o.Product
+	}
 	if !IsNil(o.IntegrationId) {
 		toSerialize["integrationId"] = o.IntegrationId
 	}

@@ -7248,7 +7248,6 @@ components:
           description: The key of the Feature Flag or Setting.
           maxLength: 255
           minLength: 1
-          pattern: "^[a-zA-Z]+[a-zA-Z0-9_-]*$"
           type: string
         name:
           description: The name of the Feature Flag or Setting.
@@ -7766,6 +7765,15 @@ components:
       additionalProperties: false
       description: Details of the Integration.
       example:
+        product:
+          productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          organization:
+            organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            name: name
+          name: name
+          description: description
+          order: 0
+          reasonRequired: true
         integrationType: null
         environmentIds:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -7778,6 +7786,8 @@ components:
         parameters:
           key: parameters
       properties:
+        product:
+          $ref: '#/components/schemas/ProductModel'
         integrationId:
           description: Identifier of the Integration.
           format: uuid
@@ -7825,7 +7835,16 @@ components:
       additionalProperties: false
       example:
         integrations:
-        - integrationType: null
+        - product:
+            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            organization:
+              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+            name: name
+            description: description
+            order: 0
+            reasonRequired: true
+          integrationType: null
           environmentIds:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -7836,7 +7855,16 @@ components:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           parameters:
             key: parameters
-        - integrationType: null
+        - product:
+            productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            organization:
+              organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              name: name
+            name: name
+            description: description
+            order: 0
+            reasonRequired: true
+          integrationType: null
           environmentIds:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -10851,9 +10879,6 @@ components:
           description: The URL of the Webhook.
           maxLength: 1000
           minLength: 7
-          pattern: "^(https?:\\/\\/(?:www\\.|(?!www)|(?!a-zA-Z))[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]\\\
-            .[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www)|(?!a-zA-Z))[a-zA-Z0-9]\\.[^\\\
-            s]{2,})$"
           type: string
         content:
           description: The HTTP body content.
@@ -10915,13 +10940,11 @@ components:
           description: The HTTP header key.
           maxLength: 255
           minLength: 1
-          pattern: "^[a-zA-Z0-9_\\-]*$"
           type: string
         value:
           description: The HTTP header value.
           maxLength: 1000
           minLength: 1
-          pattern: "^[a-zA-Z0-9\\- _\\\\:;.,\\/\"'?!(){}\\[\\]@<>=+*#$&`|~^%]*$"
           type: string
         isSecure:
           description: Indicates whether the header value is sensitive.
