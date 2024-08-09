@@ -66,7 +66,7 @@ func (o *UpdateSettingValueModel) GetRolloutRulesOk() ([]RolloutRuleModel, bool)
 
 // HasRolloutRules returns a boolean if a field has been set.
 func (o *UpdateSettingValueModel) HasRolloutRules() bool {
-	if o != nil && !IsNil(o.RolloutRules) {
+	if o != nil && IsNil(o.RolloutRules) {
 		return true
 	}
 
@@ -99,7 +99,7 @@ func (o *UpdateSettingValueModel) GetRolloutPercentageItemsOk() ([]RolloutPercen
 
 // HasRolloutPercentageItems returns a boolean if a field has been set.
 func (o *UpdateSettingValueModel) HasRolloutPercentageItems() bool {
-	if o != nil && !IsNil(o.RolloutPercentageItems) {
+	if o != nil && IsNil(o.RolloutPercentageItems) {
 		return true
 	}
 
@@ -132,7 +132,7 @@ func (o *UpdateSettingValueModel) GetValueOk() (*interface{}, bool) {
 
 // HasValue returns a boolean if a field has been set.
 func (o *UpdateSettingValueModel) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
+	if o != nil && IsNil(o.Value) {
 		return true
 	}
 

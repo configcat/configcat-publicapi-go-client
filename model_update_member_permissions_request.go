@@ -68,7 +68,7 @@ func (o *UpdateMemberPermissionsRequest) GetPermissionGroupIdsOk() ([]int64, boo
 
 // HasPermissionGroupIds returns a boolean if a field has been set.
 func (o *UpdateMemberPermissionsRequest) HasPermissionGroupIds() bool {
-	if o != nil && !IsNil(o.PermissionGroupIds) {
+	if o != nil && IsNil(o.PermissionGroupIds) {
 		return true
 	}
 

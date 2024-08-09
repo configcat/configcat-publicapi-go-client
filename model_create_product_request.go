@@ -13,8 +13,6 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the CreateProductRequest type satisfies the MappedNullable interface at compile time
@@ -29,8 +27,6 @@ type CreateProductRequest struct {
 	// The order of the Product represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers.
 	Order NullableInt32 `json:"order,omitempty"`
 }
-
-type _CreateProductRequest CreateProductRequest
 
 // NewCreateProductRequest instantiates a new CreateProductRequest object
 // This constructor will assign default values to properties that have it defined,
@@ -176,43 +172,6 @@ func (o CreateProductRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["order"] = o.Order.Get()
 	}
 	return toSerialize, nil
-}
-
-func (o *CreateProductRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"name",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varCreateProductRequest := _CreateProductRequest{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateProductRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = CreateProductRequest(varCreateProductRequest)
-
-	return err
 }
 
 type NullableCreateProductRequest struct {

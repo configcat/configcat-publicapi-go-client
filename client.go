@@ -36,8 +36,8 @@ import (
 )
 
 var (
-	JsonCheck       = regexp.MustCompile(`(?i:(?:application|text)/(?:[^;]+\+)?json)`)
-	XmlCheck        = regexp.MustCompile(`(?i:(?:application|text)/(?:[^;]+\+)?xml)`)
+	jsonCheck = regexp.MustCompile(`(?i:(?:application|text)/(?:vnd\.[^;]+\+)?json)`)
+	xmlCheck  = regexp.MustCompile(`(?i:(?:application|text)/xml)`)
 	queryParamSplit = regexp.MustCompile(`(^|&)([^&]+)`)
 	queryDescape    = strings.NewReplacer( "%5B", "[", "%5D", "]" )
 )
@@ -50,45 +50,45 @@ type APIClient struct {
 
 	// API Services
 
-	AuditLogsAPI *AuditLogsAPIService
+	AuditLogsApi *AuditLogsApiService
 
-	CodeReferencesAPI *CodeReferencesAPIService
+	CodeReferencesApi *CodeReferencesApiService
 
-	ConfigsAPI *ConfigsAPIService
+	ConfigsApi *ConfigsApiService
 
-	EnvironmentsAPI *EnvironmentsAPIService
+	EnvironmentsApi *EnvironmentsApiService
 
-	FeatureFlagSettingValuesAPI *FeatureFlagSettingValuesAPIService
+	FeatureFlagSettingValuesApi *FeatureFlagSettingValuesApiService
 
-	FeatureFlagSettingValuesUsingSDKKeyAPI *FeatureFlagSettingValuesUsingSDKKeyAPIService
+	FeatureFlagSettingValuesUsingSDKKeyApi *FeatureFlagSettingValuesUsingSDKKeyApiService
 
-	FeatureFlagSettingValuesUsingSDKKeyV2API *FeatureFlagSettingValuesUsingSDKKeyV2APIService
+	FeatureFlagSettingValuesUsingSDKKeyV2Api *FeatureFlagSettingValuesUsingSDKKeyV2ApiService
 
-	FeatureFlagSettingValuesV2API *FeatureFlagSettingValuesV2APIService
+	FeatureFlagSettingValuesV2Api *FeatureFlagSettingValuesV2ApiService
 
-	FeatureFlagsSettingsAPI *FeatureFlagsSettingsAPIService
+	FeatureFlagsSettingsApi *FeatureFlagsSettingsApiService
 
-	IntegrationLinksAPI *IntegrationLinksAPIService
+	IntegrationLinksApi *IntegrationLinksApiService
 
-	IntegrationsAPI *IntegrationsAPIService
+	IntegrationsApi *IntegrationsApiService
 
-	MeAPI *MeAPIService
+	MeApi *MeApiService
 
-	MembersAPI *MembersAPIService
+	MembersApi *MembersApiService
 
-	OrganizationsAPI *OrganizationsAPIService
+	OrganizationsApi *OrganizationsApiService
 
-	PermissionGroupsAPI *PermissionGroupsAPIService
+	PermissionGroupsApi *PermissionGroupsApiService
 
-	ProductsAPI *ProductsAPIService
+	ProductsApi *ProductsApiService
 
-	SDKKeysAPI *SDKKeysAPIService
+	SDKKeysApi *SDKKeysApiService
 
-	SegmentsAPI *SegmentsAPIService
+	SegmentsApi *SegmentsApiService
 
-	TagsAPI *TagsAPIService
+	TagsApi *TagsApiService
 
-	WebhooksAPI *WebhooksAPIService
+	WebhooksApi *WebhooksApiService
 }
 
 type service struct {
@@ -107,26 +107,26 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
-	c.AuditLogsAPI = (*AuditLogsAPIService)(&c.common)
-	c.CodeReferencesAPI = (*CodeReferencesAPIService)(&c.common)
-	c.ConfigsAPI = (*ConfigsAPIService)(&c.common)
-	c.EnvironmentsAPI = (*EnvironmentsAPIService)(&c.common)
-	c.FeatureFlagSettingValuesAPI = (*FeatureFlagSettingValuesAPIService)(&c.common)
-	c.FeatureFlagSettingValuesUsingSDKKeyAPI = (*FeatureFlagSettingValuesUsingSDKKeyAPIService)(&c.common)
-	c.FeatureFlagSettingValuesUsingSDKKeyV2API = (*FeatureFlagSettingValuesUsingSDKKeyV2APIService)(&c.common)
-	c.FeatureFlagSettingValuesV2API = (*FeatureFlagSettingValuesV2APIService)(&c.common)
-	c.FeatureFlagsSettingsAPI = (*FeatureFlagsSettingsAPIService)(&c.common)
-	c.IntegrationLinksAPI = (*IntegrationLinksAPIService)(&c.common)
-	c.IntegrationsAPI = (*IntegrationsAPIService)(&c.common)
-	c.MeAPI = (*MeAPIService)(&c.common)
-	c.MembersAPI = (*MembersAPIService)(&c.common)
-	c.OrganizationsAPI = (*OrganizationsAPIService)(&c.common)
-	c.PermissionGroupsAPI = (*PermissionGroupsAPIService)(&c.common)
-	c.ProductsAPI = (*ProductsAPIService)(&c.common)
-	c.SDKKeysAPI = (*SDKKeysAPIService)(&c.common)
-	c.SegmentsAPI = (*SegmentsAPIService)(&c.common)
-	c.TagsAPI = (*TagsAPIService)(&c.common)
-	c.WebhooksAPI = (*WebhooksAPIService)(&c.common)
+	c.AuditLogsApi = (*AuditLogsApiService)(&c.common)
+	c.CodeReferencesApi = (*CodeReferencesApiService)(&c.common)
+	c.ConfigsApi = (*ConfigsApiService)(&c.common)
+	c.EnvironmentsApi = (*EnvironmentsApiService)(&c.common)
+	c.FeatureFlagSettingValuesApi = (*FeatureFlagSettingValuesApiService)(&c.common)
+	c.FeatureFlagSettingValuesUsingSDKKeyApi = (*FeatureFlagSettingValuesUsingSDKKeyApiService)(&c.common)
+	c.FeatureFlagSettingValuesUsingSDKKeyV2Api = (*FeatureFlagSettingValuesUsingSDKKeyV2ApiService)(&c.common)
+	c.FeatureFlagSettingValuesV2Api = (*FeatureFlagSettingValuesV2ApiService)(&c.common)
+	c.FeatureFlagsSettingsApi = (*FeatureFlagsSettingsApiService)(&c.common)
+	c.IntegrationLinksApi = (*IntegrationLinksApiService)(&c.common)
+	c.IntegrationsApi = (*IntegrationsApiService)(&c.common)
+	c.MeApi = (*MeApiService)(&c.common)
+	c.MembersApi = (*MembersApiService)(&c.common)
+	c.OrganizationsApi = (*OrganizationsApiService)(&c.common)
+	c.PermissionGroupsApi = (*PermissionGroupsApiService)(&c.common)
+	c.ProductsApi = (*ProductsApiService)(&c.common)
+	c.SDKKeysApi = (*SDKKeysApiService)(&c.common)
+	c.SegmentsApi = (*SegmentsApiService)(&c.common)
+	c.TagsApi = (*TagsApiService)(&c.common)
+	c.WebhooksApi = (*WebhooksApiService)(&c.common)
 
 	return c
 }
@@ -220,7 +220,7 @@ func parameterAddToHeaderOrQuery(headerOrQueryParams interface{}, keyPrefix stri
 					return
 				}
 				if t, ok := obj.(time.Time); ok {
-					parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, t.Format(time.RFC3339Nano), collectionType)
+					parameterAddToHeaderOrQuery(headerOrQueryParams, keyPrefix, t.Format(time.RFC3339), collectionType)
 					return
 				}
 				value = v.Type().String() + " value"
@@ -513,13 +513,13 @@ func (c *APIClient) decode(v interface{}, b []byte, contentType string) (err err
 		_, err = (*f).Seek(0, io.SeekStart)
 		return
 	}
-	if XmlCheck.MatchString(contentType) {
+	if xmlCheck.MatchString(contentType) {
 		if err = xml.Unmarshal(b, v); err != nil {
 			return err
 		}
 		return nil
 	}
-	if JsonCheck.MatchString(contentType) {
+	if jsonCheck.MatchString(contentType) {
 		if actualObj, ok := v.(interface{ GetActualInstance() interface{} }); ok { // oneOf, anyOf schemas
 			if unmarshalObj, ok := actualObj.(interface{ UnmarshalJSON([]byte) error }); ok { // make sure it has UnmarshalJSON defined
 				if err = unmarshalObj.UnmarshalJSON(b); err != nil {
@@ -556,6 +556,18 @@ func addFile(w *multipart.Writer, fieldName, path string) error {
 	return err
 }
 
+// Prevent trying to import "fmt"
+func reportError(format string, a ...interface{}) error {
+	return fmt.Errorf(format, a...)
+}
+
+// A wrapper for strict JSON decoding
+func newStrictDecoder(data []byte) *json.Decoder {
+	dec := json.NewDecoder(bytes.NewBuffer(data))
+	dec.DisallowUnknownFields()
+	return dec
+}
+
 // Set request body from an interface{}
 func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err error) {
 	if bodyBuf == nil {
@@ -572,14 +584,10 @@ func setBody(body interface{}, contentType string) (bodyBuf *bytes.Buffer, err e
 		_, err = bodyBuf.WriteString(s)
 	} else if s, ok := body.(*string); ok {
 		_, err = bodyBuf.WriteString(*s)
-	} else if JsonCheck.MatchString(contentType) {
+	} else if jsonCheck.MatchString(contentType) {
 		err = json.NewEncoder(bodyBuf).Encode(body)
-	} else if XmlCheck.MatchString(contentType) {
-		var bs []byte
-		bs, err = xml.Marshal(body)
-		if err == nil {
-			bodyBuf.Write(bs)
-		}
+	} else if xmlCheck.MatchString(contentType) {
+		err = xml.NewEncoder(bodyBuf).Encode(body)
 	}
 
 	if err != nil {

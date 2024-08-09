@@ -228,7 +228,7 @@ func (o *OrganizationMemberModel) GetPermissionsOk() ([]OrganizationPermissionMo
 
 // HasPermissions returns a boolean if a field has been set.
 func (o *OrganizationMemberModel) HasPermissions() bool {
-	if o != nil && !IsNil(o.Permissions) {
+	if o != nil && IsNil(o.Permissions) {
 		return true
 	}
 

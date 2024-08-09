@@ -144,7 +144,7 @@ func (o *ConfigSettingFormulaModel) GetTargetingRulesOk() ([]TargetingRuleModel,
 
 // HasTargetingRules returns a boolean if a field has been set.
 func (o *ConfigSettingFormulaModel) HasTargetingRules() bool {
-	if o != nil && !IsNil(o.TargetingRules) {
+	if o != nil && IsNil(o.TargetingRules) {
 		return true
 	}
 
@@ -377,7 +377,7 @@ func (o *ConfigSettingFormulaModel) GetIntegrationLinksOk() ([]IntegrationLinkMo
 
 // HasIntegrationLinks returns a boolean if a field has been set.
 func (o *ConfigSettingFormulaModel) HasIntegrationLinks() bool {
-	if o != nil && !IsNil(o.IntegrationLinks) {
+	if o != nil && IsNil(o.IntegrationLinks) {
 		return true
 	}
 
@@ -410,7 +410,7 @@ func (o *ConfigSettingFormulaModel) GetSettingTagsOk() ([]SettingTagModel, bool)
 
 // HasSettingTags returns a boolean if a field has been set.
 func (o *ConfigSettingFormulaModel) HasSettingTags() bool {
-	if o != nil && !IsNil(o.SettingTags) {
+	if o != nil && IsNil(o.SettingTags) {
 		return true
 	}
 
@@ -443,7 +443,7 @@ func (o *ConfigSettingFormulaModel) GetSettingIdsWherePrerequisiteOk() ([]int32,
 
 // HasSettingIdsWherePrerequisite returns a boolean if a field has been set.
 func (o *ConfigSettingFormulaModel) HasSettingIdsWherePrerequisite() bool {
-	if o != nil && !IsNil(o.SettingIdsWherePrerequisite) {
+	if o != nil && IsNil(o.SettingIdsWherePrerequisite) {
 		return true
 	}
 

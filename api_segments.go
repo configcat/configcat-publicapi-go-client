@@ -21,22 +21,22 @@ import (
 )
 
 
-// SegmentsAPIService SegmentsAPI service
-type SegmentsAPIService service
+// SegmentsApiService SegmentsApi service
+type SegmentsApiService service
 
-type SegmentsAPICreateSegmentRequest struct {
+type SegmentsApiCreateSegmentRequest struct {
 	ctx context.Context
-	ApiService *SegmentsAPIService
+	ApiService *SegmentsApiService
 	productId string
 	createSegmentModel *CreateSegmentModel
 }
 
-func (r SegmentsAPICreateSegmentRequest) CreateSegmentModel(createSegmentModel CreateSegmentModel) SegmentsAPICreateSegmentRequest {
+func (r SegmentsApiCreateSegmentRequest) CreateSegmentModel(createSegmentModel CreateSegmentModel) SegmentsApiCreateSegmentRequest {
 	r.createSegmentModel = &createSegmentModel
 	return r
 }
 
-func (r SegmentsAPICreateSegmentRequest) Execute() (*SegmentModel, *http.Response, error) {
+func (r SegmentsApiCreateSegmentRequest) Execute() (*SegmentModel, *http.Response, error) {
 	return r.ApiService.CreateSegmentExecute(r)
 }
 
@@ -48,10 +48,10 @@ identified by the `productId` parameter, which can be obtained from the [List Pr
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return SegmentsAPICreateSegmentRequest
+ @return SegmentsApiCreateSegmentRequest
 */
-func (a *SegmentsAPIService) CreateSegment(ctx context.Context, productId string) SegmentsAPICreateSegmentRequest {
-	return SegmentsAPICreateSegmentRequest{
+func (a *SegmentsApiService) CreateSegment(ctx context.Context, productId string) SegmentsApiCreateSegmentRequest {
+	return SegmentsApiCreateSegmentRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -60,7 +60,7 @@ func (a *SegmentsAPIService) CreateSegment(ctx context.Context, productId string
 
 // Execute executes the request
 //  @return SegmentModel
-func (a *SegmentsAPIService) CreateSegmentExecute(r SegmentsAPICreateSegmentRequest) (*SegmentModel, *http.Response, error) {
+func (a *SegmentsApiService) CreateSegmentExecute(r SegmentsApiCreateSegmentRequest) (*SegmentModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -68,7 +68,7 @@ func (a *SegmentsAPIService) CreateSegmentExecute(r SegmentsAPICreateSegmentRequ
 		localVarReturnValue  *SegmentModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SegmentsAPIService.CreateSegment")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SegmentsApiService.CreateSegment")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -139,13 +139,13 @@ func (a *SegmentsAPIService) CreateSegmentExecute(r SegmentsAPICreateSegmentRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type SegmentsAPIDeleteSegmentRequest struct {
+type SegmentsApiDeleteSegmentRequest struct {
 	ctx context.Context
-	ApiService *SegmentsAPIService
+	ApiService *SegmentsApiService
 	segmentId string
 }
 
-func (r SegmentsAPIDeleteSegmentRequest) Execute() (*http.Response, error) {
+func (r SegmentsApiDeleteSegmentRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteSegmentExecute(r)
 }
 
@@ -156,10 +156,10 @@ This endpoint removes a Segment identified by the `segmentId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param segmentId The identifier of the Segment.
- @return SegmentsAPIDeleteSegmentRequest
+ @return SegmentsApiDeleteSegmentRequest
 */
-func (a *SegmentsAPIService) DeleteSegment(ctx context.Context, segmentId string) SegmentsAPIDeleteSegmentRequest {
-	return SegmentsAPIDeleteSegmentRequest{
+func (a *SegmentsApiService) DeleteSegment(ctx context.Context, segmentId string) SegmentsApiDeleteSegmentRequest {
+	return SegmentsApiDeleteSegmentRequest{
 		ApiService: a,
 		ctx: ctx,
 		segmentId: segmentId,
@@ -167,14 +167,14 @@ func (a *SegmentsAPIService) DeleteSegment(ctx context.Context, segmentId string
 }
 
 // Execute executes the request
-func (a *SegmentsAPIService) DeleteSegmentExecute(r SegmentsAPIDeleteSegmentRequest) (*http.Response, error) {
+func (a *SegmentsApiService) DeleteSegmentExecute(r SegmentsApiDeleteSegmentRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SegmentsAPIService.DeleteSegment")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SegmentsApiService.DeleteSegment")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -231,13 +231,13 @@ func (a *SegmentsAPIService) DeleteSegmentExecute(r SegmentsAPIDeleteSegmentRequ
 	return localVarHTTPResponse, nil
 }
 
-type SegmentsAPIGetSegmentRequest struct {
+type SegmentsApiGetSegmentRequest struct {
 	ctx context.Context
-	ApiService *SegmentsAPIService
+	ApiService *SegmentsApiService
 	segmentId string
 }
 
-func (r SegmentsAPIGetSegmentRequest) Execute() (*SegmentModel, *http.Response, error) {
+func (r SegmentsApiGetSegmentRequest) Execute() (*SegmentModel, *http.Response, error) {
 	return r.ApiService.GetSegmentExecute(r)
 }
 
@@ -249,10 +249,10 @@ identified by the `segmentId`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param segmentId The identifier of the Segment.
- @return SegmentsAPIGetSegmentRequest
+ @return SegmentsApiGetSegmentRequest
 */
-func (a *SegmentsAPIService) GetSegment(ctx context.Context, segmentId string) SegmentsAPIGetSegmentRequest {
-	return SegmentsAPIGetSegmentRequest{
+func (a *SegmentsApiService) GetSegment(ctx context.Context, segmentId string) SegmentsApiGetSegmentRequest {
+	return SegmentsApiGetSegmentRequest{
 		ApiService: a,
 		ctx: ctx,
 		segmentId: segmentId,
@@ -261,7 +261,7 @@ func (a *SegmentsAPIService) GetSegment(ctx context.Context, segmentId string) S
 
 // Execute executes the request
 //  @return SegmentModel
-func (a *SegmentsAPIService) GetSegmentExecute(r SegmentsAPIGetSegmentRequest) (*SegmentModel, *http.Response, error) {
+func (a *SegmentsApiService) GetSegmentExecute(r SegmentsApiGetSegmentRequest) (*SegmentModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -269,7 +269,7 @@ func (a *SegmentsAPIService) GetSegmentExecute(r SegmentsAPIGetSegmentRequest) (
 		localVarReturnValue  *SegmentModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SegmentsAPIService.GetSegment")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SegmentsApiService.GetSegment")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -335,13 +335,13 @@ func (a *SegmentsAPIService) GetSegmentExecute(r SegmentsAPIGetSegmentRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type SegmentsAPIGetSegmentsRequest struct {
+type SegmentsApiGetSegmentsRequest struct {
 	ctx context.Context
-	ApiService *SegmentsAPIService
+	ApiService *SegmentsApiService
 	productId string
 }
 
-func (r SegmentsAPIGetSegmentsRequest) Execute() ([]SegmentListModel, *http.Response, error) {
+func (r SegmentsApiGetSegmentsRequest) Execute() ([]SegmentListModel, *http.Response, error) {
 	return r.ApiService.GetSegmentsExecute(r)
 }
 
@@ -353,10 +353,10 @@ This endpoint returns the list of the Segments that belongs to the given Product
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return SegmentsAPIGetSegmentsRequest
+ @return SegmentsApiGetSegmentsRequest
 */
-func (a *SegmentsAPIService) GetSegments(ctx context.Context, productId string) SegmentsAPIGetSegmentsRequest {
-	return SegmentsAPIGetSegmentsRequest{
+func (a *SegmentsApiService) GetSegments(ctx context.Context, productId string) SegmentsApiGetSegmentsRequest {
+	return SegmentsApiGetSegmentsRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -365,7 +365,7 @@ func (a *SegmentsAPIService) GetSegments(ctx context.Context, productId string) 
 
 // Execute executes the request
 //  @return []SegmentListModel
-func (a *SegmentsAPIService) GetSegmentsExecute(r SegmentsAPIGetSegmentsRequest) ([]SegmentListModel, *http.Response, error) {
+func (a *SegmentsApiService) GetSegmentsExecute(r SegmentsApiGetSegmentsRequest) ([]SegmentListModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -373,7 +373,7 @@ func (a *SegmentsAPIService) GetSegmentsExecute(r SegmentsAPIGetSegmentsRequest)
 		localVarReturnValue  []SegmentListModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SegmentsAPIService.GetSegments")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SegmentsApiService.GetSegments")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -439,19 +439,19 @@ func (a *SegmentsAPIService) GetSegmentsExecute(r SegmentsAPIGetSegmentsRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type SegmentsAPIUpdateSegmentRequest struct {
+type SegmentsApiUpdateSegmentRequest struct {
 	ctx context.Context
-	ApiService *SegmentsAPIService
+	ApiService *SegmentsApiService
 	segmentId string
 	updateSegmentModel *UpdateSegmentModel
 }
 
-func (r SegmentsAPIUpdateSegmentRequest) UpdateSegmentModel(updateSegmentModel UpdateSegmentModel) SegmentsAPIUpdateSegmentRequest {
+func (r SegmentsApiUpdateSegmentRequest) UpdateSegmentModel(updateSegmentModel UpdateSegmentModel) SegmentsApiUpdateSegmentRequest {
 	r.updateSegmentModel = &updateSegmentModel
 	return r
 }
 
-func (r SegmentsAPIUpdateSegmentRequest) Execute() (*SegmentModel, *http.Response, error) {
+func (r SegmentsApiUpdateSegmentRequest) Execute() (*SegmentModel, *http.Response, error) {
 	return r.ApiService.UpdateSegmentExecute(r)
 }
 
@@ -462,10 +462,10 @@ This endpoint updates a Segment identified by the `segmentId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param segmentId The identifier of the Segment.
- @return SegmentsAPIUpdateSegmentRequest
+ @return SegmentsApiUpdateSegmentRequest
 */
-func (a *SegmentsAPIService) UpdateSegment(ctx context.Context, segmentId string) SegmentsAPIUpdateSegmentRequest {
-	return SegmentsAPIUpdateSegmentRequest{
+func (a *SegmentsApiService) UpdateSegment(ctx context.Context, segmentId string) SegmentsApiUpdateSegmentRequest {
+	return SegmentsApiUpdateSegmentRequest{
 		ApiService: a,
 		ctx: ctx,
 		segmentId: segmentId,
@@ -474,7 +474,7 @@ func (a *SegmentsAPIService) UpdateSegment(ctx context.Context, segmentId string
 
 // Execute executes the request
 //  @return SegmentModel
-func (a *SegmentsAPIService) UpdateSegmentExecute(r SegmentsAPIUpdateSegmentRequest) (*SegmentModel, *http.Response, error) {
+func (a *SegmentsApiService) UpdateSegmentExecute(r SegmentsApiUpdateSegmentRequest) (*SegmentModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -482,7 +482,7 @@ func (a *SegmentsAPIService) UpdateSegmentExecute(r SegmentsAPIUpdateSegmentRequ
 		localVarReturnValue  *SegmentModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SegmentsAPIService.UpdateSegment")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SegmentsApiService.UpdateSegment")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

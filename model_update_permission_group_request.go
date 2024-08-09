@@ -1052,7 +1052,7 @@ func (o *UpdatePermissionGroupRequest) GetEnvironmentAccessesOk() ([]CreateOrUpd
 
 // HasEnvironmentAccesses returns a boolean if a field has been set.
 func (o *UpdatePermissionGroupRequest) HasEnvironmentAccesses() bool {
-	if o != nil && !IsNil(o.EnvironmentAccesses) {
+	if o != nil && IsNil(o.EnvironmentAccesses) {
 		return true
 	}
 

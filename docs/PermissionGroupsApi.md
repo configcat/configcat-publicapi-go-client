@@ -1,14 +1,14 @@
-# \PermissionGroupsAPI
+# \PermissionGroupsApi
 
 All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreatePermissionGroup**](PermissionGroupsAPI.md#CreatePermissionGroup) | **Post** /v1/products/{productId}/permissions | Create Permission Group
-[**DeletePermissionGroup**](PermissionGroupsAPI.md#DeletePermissionGroup) | **Delete** /v1/permissions/{permissionGroupId} | Delete Permission Group
-[**GetPermissionGroup**](PermissionGroupsAPI.md#GetPermissionGroup) | **Get** /v1/permissions/{permissionGroupId} | Get Permission Group
-[**GetPermissionGroups**](PermissionGroupsAPI.md#GetPermissionGroups) | **Get** /v1/products/{productId}/permissions | List Permission Groups
-[**UpdatePermissionGroup**](PermissionGroupsAPI.md#UpdatePermissionGroup) | **Put** /v1/permissions/{permissionGroupId} | Update Permission Group
+[**CreatePermissionGroup**](PermissionGroupsApi.md#CreatePermissionGroup) | **Post** /v1/products/{productId}/permissions | Create Permission Group
+[**DeletePermissionGroup**](PermissionGroupsApi.md#DeletePermissionGroup) | **Delete** /v1/permissions/{permissionGroupId} | Delete Permission Group
+[**GetPermissionGroup**](PermissionGroupsApi.md#GetPermissionGroup) | **Get** /v1/permissions/{permissionGroupId} | Get Permission Group
+[**GetPermissionGroups**](PermissionGroupsApi.md#GetPermissionGroups) | **Get** /v1/products/{productId}/permissions | List Permission Groups
+[**UpdatePermissionGroup**](PermissionGroupsApi.md#UpdatePermissionGroup) | **Put** /v1/permissions/{permissionGroupId} | Update Permission Group
 
 
 
@@ -26,25 +26,25 @@ Create Permission Group
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client"
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
-	createPermissionGroupRequest := *openapiclient.NewCreatePermissionGroupRequest("Name_example") // CreatePermissionGroupRequest | 
+    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+    createPermissionGroupRequest := *openapiclient.NewCreatePermissionGroupRequest("Name_example") // CreatePermissionGroupRequest | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PermissionGroupsAPI.CreatePermissionGroup(context.Background(), productId).CreatePermissionGroupRequest(createPermissionGroupRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PermissionGroupsAPI.CreatePermissionGroup``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CreatePermissionGroup`: PermissionGroupModel
-	fmt.Fprintf(os.Stdout, "Response from `PermissionGroupsAPI.CreatePermissionGroup`: %v\n", resp)
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PermissionGroupsApi.CreatePermissionGroup(context.Background(), productId).CreatePermissionGroupRequest(createPermissionGroupRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PermissionGroupsApi.CreatePermissionGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreatePermissionGroup`: PermissionGroupModel
+    fmt.Fprintf(os.Stdout, "Response from `PermissionGroupsApi.CreatePermissionGroup`: %v\n", resp)
 }
 ```
 
@@ -98,22 +98,22 @@ Delete Permission Group
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client"
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-	permissionGroupId := int64(789) // int64 | The identifier of the Permission Group.
+    permissionGroupId := int64(789) // int64 | The identifier of the Permission Group.
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	r, err := apiClient.PermissionGroupsAPI.DeletePermissionGroup(context.Background(), permissionGroupId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PermissionGroupsAPI.DeletePermissionGroup``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    r, err := apiClient.PermissionGroupsApi.DeletePermissionGroup(context.Background(), permissionGroupId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PermissionGroupsApi.DeletePermissionGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
 }
 ```
 
@@ -166,24 +166,24 @@ Get Permission Group
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client"
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-	permissionGroupId := int64(789) // int64 | The identifier of the Permission Group.
+    permissionGroupId := int64(789) // int64 | The identifier of the Permission Group.
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PermissionGroupsAPI.GetPermissionGroup(context.Background(), permissionGroupId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PermissionGroupsAPI.GetPermissionGroup``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetPermissionGroup`: PermissionGroupModel
-	fmt.Fprintf(os.Stdout, "Response from `PermissionGroupsAPI.GetPermissionGroup`: %v\n", resp)
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PermissionGroupsApi.GetPermissionGroup(context.Background(), permissionGroupId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PermissionGroupsApi.GetPermissionGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetPermissionGroup`: PermissionGroupModel
+    fmt.Fprintf(os.Stdout, "Response from `PermissionGroupsApi.GetPermissionGroup`: %v\n", resp)
 }
 ```
 
@@ -236,24 +236,24 @@ List Permission Groups
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client"
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PermissionGroupsAPI.GetPermissionGroups(context.Background(), productId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PermissionGroupsAPI.GetPermissionGroups``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GetPermissionGroups`: []PermissionGroupModel
-	fmt.Fprintf(os.Stdout, "Response from `PermissionGroupsAPI.GetPermissionGroups`: %v\n", resp)
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PermissionGroupsApi.GetPermissionGroups(context.Background(), productId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PermissionGroupsApi.GetPermissionGroups``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetPermissionGroups`: []PermissionGroupModel
+    fmt.Fprintf(os.Stdout, "Response from `PermissionGroupsApi.GetPermissionGroups`: %v\n", resp)
 }
 ```
 
@@ -306,25 +306,25 @@ Update Permission Group
 package main
 
 import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client"
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-	permissionGroupId := int64(789) // int64 | The identifier of the Permission Group.
-	updatePermissionGroupRequest := *openapiclient.NewUpdatePermissionGroupRequest() // UpdatePermissionGroupRequest | 
+    permissionGroupId := int64(789) // int64 | The identifier of the Permission Group.
+    updatePermissionGroupRequest := *openapiclient.NewUpdatePermissionGroupRequest() // UpdatePermissionGroupRequest | 
 
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PermissionGroupsAPI.UpdatePermissionGroup(context.Background(), permissionGroupId).UpdatePermissionGroupRequest(updatePermissionGroupRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PermissionGroupsAPI.UpdatePermissionGroup``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `UpdatePermissionGroup`: PermissionGroupModel
-	fmt.Fprintf(os.Stdout, "Response from `PermissionGroupsAPI.UpdatePermissionGroup`: %v\n", resp)
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.PermissionGroupsApi.UpdatePermissionGroup(context.Background(), permissionGroupId).UpdatePermissionGroupRequest(updatePermissionGroupRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PermissionGroupsApi.UpdatePermissionGroup``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdatePermissionGroup`: PermissionGroupModel
+    fmt.Fprintf(os.Stdout, "Response from `PermissionGroupsApi.UpdatePermissionGroup`: %v\n", resp)
 }
 ```
 
