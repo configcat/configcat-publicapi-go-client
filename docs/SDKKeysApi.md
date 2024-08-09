@@ -1,10 +1,10 @@
-# \SDKKeysApi
+# \SDKKeysAPI
 
 All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetSdkKeys**](SDKKeysApi.md#GetSdkKeys) | **Get** /v1/configs/{configId}/environments/{environmentId} | Get SDK Key
+[**GetSdkKeys**](SDKKeysAPI.md#GetSdkKeys) | **Get** /v1/configs/{configId}/environments/{environmentId} | Get SDK Key
 
 
 
@@ -22,25 +22,25 @@ Get SDK Key
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
-    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+	configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
+	environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SDKKeysApi.GetSdkKeys(context.Background(), configId, environmentId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SDKKeysApi.GetSdkKeys``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetSdkKeys`: SdkKeysModel
-    fmt.Fprintf(os.Stdout, "Response from `SDKKeysApi.GetSdkKeys`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SDKKeysAPI.GetSdkKeys(context.Background(), configId, environmentId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SDKKeysAPI.GetSdkKeys``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSdkKeys`: SdkKeysModel
+	fmt.Fprintf(os.Stdout, "Response from `SDKKeysAPI.GetSdkKeys`: %v\n", resp)
 }
 ```
 

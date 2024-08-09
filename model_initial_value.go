@@ -96,7 +96,7 @@ func (o *InitialValue) GetValueOk() (*interface{}, bool) {
 
 // HasValue returns a boolean if a field has been set.
 func (o *InitialValue) HasValue() bool {
-	if o != nil && IsNil(o.Value) {
+	if o != nil && !IsNil(o.Value) {
 		return true
 	}
 

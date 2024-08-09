@@ -227,7 +227,7 @@ func (o *UpdatePreferencesRequest) GetReasonRequiredEnvironmentsOk() ([]UpdateRe
 
 // HasReasonRequiredEnvironments returns a boolean if a field has been set.
 func (o *UpdatePreferencesRequest) HasReasonRequiredEnvironments() bool {
-	if o != nil && IsNil(o.ReasonRequiredEnvironments) {
+	if o != nil && !IsNil(o.ReasonRequiredEnvironments) {
 		return true
 	}
 

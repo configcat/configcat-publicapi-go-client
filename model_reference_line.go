@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ReferenceLine type satisfies the MappedNullable interface at compile time
@@ -25,6 +27,8 @@ type ReferenceLine struct {
 	// The line number.
 	LineNumber int32 `json:"lineNumber"`
 }
+
+type _ReferenceLine ReferenceLine
 
 // NewReferenceLine instantiates a new ReferenceLine object
 // This constructor will assign default values to properties that have it defined,
@@ -125,6 +129,43 @@ func (o ReferenceLine) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["lineNumber"] = o.LineNumber
 	return toSerialize, nil
+}
+
+func (o *ReferenceLine) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"lineNumber",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varReferenceLine := _ReferenceLine{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varReferenceLine)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReferenceLine(varReferenceLine)
+
+	return err
 }
 
 type NullableReferenceLine struct {

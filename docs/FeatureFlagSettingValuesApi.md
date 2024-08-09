@@ -1,14 +1,14 @@
-# \FeatureFlagSettingValuesApi
+# \FeatureFlagSettingValuesAPI
 
 All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetSettingValue**](FeatureFlagSettingValuesApi.md#GetSettingValue) | **Get** /v1/environments/{environmentId}/settings/{settingId}/value | Get value
-[**GetSettingValues**](FeatureFlagSettingValuesApi.md#GetSettingValues) | **Get** /v1/configs/{configId}/environments/{environmentId}/values | Get values
-[**PostSettingValues**](FeatureFlagSettingValuesApi.md#PostSettingValues) | **Post** /v1/configs/{configId}/environments/{environmentId}/values | Post values
-[**ReplaceSettingValue**](FeatureFlagSettingValuesApi.md#ReplaceSettingValue) | **Put** /v1/environments/{environmentId}/settings/{settingId}/value | Replace value
-[**UpdateSettingValue**](FeatureFlagSettingValuesApi.md#UpdateSettingValue) | **Patch** /v1/environments/{environmentId}/settings/{settingId}/value | Update value
+[**GetSettingValue**](FeatureFlagSettingValuesAPI.md#GetSettingValue) | **Get** /v1/environments/{environmentId}/settings/{settingId}/value | Get value
+[**GetSettingValues**](FeatureFlagSettingValuesAPI.md#GetSettingValues) | **Get** /v1/configs/{configId}/environments/{environmentId}/values | Get values
+[**PostSettingValues**](FeatureFlagSettingValuesAPI.md#PostSettingValues) | **Post** /v1/configs/{configId}/environments/{environmentId}/values | Post values
+[**ReplaceSettingValue**](FeatureFlagSettingValuesAPI.md#ReplaceSettingValue) | **Put** /v1/environments/{environmentId}/settings/{settingId}/value | Replace value
+[**UpdateSettingValue**](FeatureFlagSettingValuesAPI.md#UpdateSettingValue) | **Patch** /v1/environments/{environmentId}/settings/{settingId}/value | Update value
 
 
 
@@ -26,25 +26,25 @@ Get value
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
-    settingId := int32(56) // int32 | The id of the Setting.
+	environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+	settingId := int32(56) // int32 | The id of the Setting.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FeatureFlagSettingValuesApi.GetSettingValue(context.Background(), environmentId, settingId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesApi.GetSettingValue``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetSettingValue`: SettingValueModel
-    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesApi.GetSettingValue`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FeatureFlagSettingValuesAPI.GetSettingValue(context.Background(), environmentId, settingId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesAPI.GetSettingValue``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSettingValue`: SettingValueModel
+	fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesAPI.GetSettingValue`: %v\n", resp)
 }
 ```
 
@@ -99,25 +99,25 @@ Get values
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
-    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+	configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
+	environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FeatureFlagSettingValuesApi.GetSettingValues(context.Background(), configId, environmentId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesApi.GetSettingValues``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetSettingValues`: ConfigSettingValuesModel
-    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesApi.GetSettingValues`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FeatureFlagSettingValuesAPI.GetSettingValues(context.Background(), configId, environmentId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesAPI.GetSettingValues``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSettingValues`: ConfigSettingValuesModel
+	fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesAPI.GetSettingValues`: %v\n", resp)
 }
 ```
 
@@ -172,27 +172,27 @@ Post values
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
-    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
-    updateSettingValuesWithIdModel := *openapiclient.NewUpdateSettingValuesWithIdModel() // UpdateSettingValuesWithIdModel | 
-    reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
+	configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
+	environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+	updateSettingValuesWithIdModel := *openapiclient.NewUpdateSettingValuesWithIdModel() // UpdateSettingValuesWithIdModel | 
+	reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FeatureFlagSettingValuesApi.PostSettingValues(context.Background(), configId, environmentId).UpdateSettingValuesWithIdModel(updateSettingValuesWithIdModel).Reason(reason).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesApi.PostSettingValues``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `PostSettingValues`: ConfigSettingValuesModel
-    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesApi.PostSettingValues`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FeatureFlagSettingValuesAPI.PostSettingValues(context.Background(), configId, environmentId).UpdateSettingValuesWithIdModel(updateSettingValuesWithIdModel).Reason(reason).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesAPI.PostSettingValues``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `PostSettingValues`: ConfigSettingValuesModel
+	fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesAPI.PostSettingValues`: %v\n", resp)
 }
 ```
 
@@ -249,27 +249,27 @@ Replace value
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
-    settingId := int32(56) // int32 | The id of the Setting.
-    updateSettingValueModel := *openapiclient.NewUpdateSettingValueModel() // UpdateSettingValueModel | 
-    reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
+	environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+	settingId := int32(56) // int32 | The id of the Setting.
+	updateSettingValueModel := *openapiclient.NewUpdateSettingValueModel() // UpdateSettingValueModel | 
+	reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FeatureFlagSettingValuesApi.ReplaceSettingValue(context.Background(), environmentId, settingId).UpdateSettingValueModel(updateSettingValueModel).Reason(reason).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesApi.ReplaceSettingValue``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReplaceSettingValue`: SettingValueModel
-    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesApi.ReplaceSettingValue`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FeatureFlagSettingValuesAPI.ReplaceSettingValue(context.Background(), environmentId, settingId).UpdateSettingValueModel(updateSettingValueModel).Reason(reason).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesAPI.ReplaceSettingValue``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReplaceSettingValue`: SettingValueModel
+	fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesAPI.ReplaceSettingValue`: %v\n", resp)
 }
 ```
 
@@ -326,27 +326,27 @@ Update value
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
-    settingId := int32(56) // int32 | The id of the Setting.
-    jsonPatchOperation := []openapiclient.JsonPatchOperation{*openapiclient.NewJsonPatchOperation(openapiclient.OperationType("unknown"), "Path_example")} // []JsonPatchOperation | 
-    reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
+	environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+	settingId := int32(56) // int32 | The id of the Setting.
+	jsonPatchOperation := []openapiclient.JsonPatchOperation{*openapiclient.NewJsonPatchOperation(openapiclient.OperationType("unknown"), "Path_example")} // []JsonPatchOperation | 
+	reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FeatureFlagSettingValuesApi.UpdateSettingValue(context.Background(), environmentId, settingId).JsonPatchOperation(jsonPatchOperation).Reason(reason).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesApi.UpdateSettingValue``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateSettingValue`: SettingValueModel
-    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesApi.UpdateSettingValue`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FeatureFlagSettingValuesAPI.UpdateSettingValue(context.Background(), environmentId, settingId).JsonPatchOperation(jsonPatchOperation).Reason(reason).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesAPI.UpdateSettingValue``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateSettingValue`: SettingValueModel
+	fmt.Fprintf(os.Stdout, "Response from `FeatureFlagSettingValuesAPI.UpdateSettingValue`: %v\n", resp)
 }
 ```
 

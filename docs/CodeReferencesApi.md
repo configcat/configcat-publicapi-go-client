@@ -1,12 +1,12 @@
-# \CodeReferencesApi
+# \CodeReferencesAPI
 
 All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**V1CodeReferencesDeleteReportsPost**](CodeReferencesApi.md#V1CodeReferencesDeleteReportsPost) | **Post** /v1/code-references/delete-reports | Delete Reference reports
-[**V1CodeReferencesPost**](CodeReferencesApi.md#V1CodeReferencesPost) | **Post** /v1/code-references | Upload References
-[**V1SettingsSettingIdCodeReferencesGet**](CodeReferencesApi.md#V1SettingsSettingIdCodeReferencesGet) | **Get** /v1/settings/{settingId}/code-references | Get References for Feature Flag or Setting
+[**V1CodeReferencesDeleteReportsPost**](CodeReferencesAPI.md#V1CodeReferencesDeleteReportsPost) | **Post** /v1/code-references/delete-reports | Delete Reference reports
+[**V1CodeReferencesPost**](CodeReferencesAPI.md#V1CodeReferencesPost) | **Post** /v1/code-references | Upload References
+[**V1SettingsSettingIdCodeReferencesGet**](CodeReferencesAPI.md#V1SettingsSettingIdCodeReferencesGet) | **Get** /v1/settings/{settingId}/code-references | Get References for Feature Flag or Setting
 
 
 
@@ -24,22 +24,22 @@ Delete Reference reports
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    deleteRepositoryReportsRequest := *openapiclient.NewDeleteRepositoryReportsRequest("ConfigId_example", "Repository_example") // DeleteRepositoryReportsRequest | 
+	deleteRepositoryReportsRequest := *openapiclient.NewDeleteRepositoryReportsRequest("ConfigId_example", "Repository_example") // DeleteRepositoryReportsRequest | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.CodeReferencesApi.V1CodeReferencesDeleteReportsPost(context.Background()).DeleteRepositoryReportsRequest(deleteRepositoryReportsRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CodeReferencesApi.V1CodeReferencesDeleteReportsPost``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.CodeReferencesAPI.V1CodeReferencesDeleteReportsPost(context.Background()).DeleteRepositoryReportsRequest(deleteRepositoryReportsRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CodeReferencesAPI.V1CodeReferencesDeleteReportsPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -88,22 +88,22 @@ Upload References
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    codeReferenceRequest := *openapiclient.NewCodeReferenceRequest("ConfigId_example", "Repository_example", "Branch_example") // CodeReferenceRequest | 
+	codeReferenceRequest := *openapiclient.NewCodeReferenceRequest("ConfigId_example", "Repository_example", "Branch_example") // CodeReferenceRequest | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.CodeReferencesApi.V1CodeReferencesPost(context.Background()).CodeReferenceRequest(codeReferenceRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CodeReferencesApi.V1CodeReferencesPost``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.CodeReferencesAPI.V1CodeReferencesPost(context.Background()).CodeReferenceRequest(codeReferenceRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CodeReferencesAPI.V1CodeReferencesPost``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -152,24 +152,24 @@ Get References for Feature Flag or Setting
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client"
 )
 
 func main() {
-    settingId := int32(56) // int32 | The identifier of the Feature Flag or Setting.
+	settingId := int32(56) // int32 | The identifier of the Feature Flag or Setting.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.CodeReferencesApi.V1SettingsSettingIdCodeReferencesGet(context.Background(), settingId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CodeReferencesApi.V1SettingsSettingIdCodeReferencesGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `V1SettingsSettingIdCodeReferencesGet`: []CodeReferenceModel
-    fmt.Fprintf(os.Stdout, "Response from `CodeReferencesApi.V1SettingsSettingIdCodeReferencesGet`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.CodeReferencesAPI.V1SettingsSettingIdCodeReferencesGet(context.Background(), settingId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `CodeReferencesAPI.V1SettingsSettingIdCodeReferencesGet``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `V1SettingsSettingIdCodeReferencesGet`: []CodeReferenceModel
+	fmt.Fprintf(os.Stdout, "Response from `CodeReferencesAPI.V1SettingsSettingIdCodeReferencesGet`: %v\n", resp)
 }
 ```
 

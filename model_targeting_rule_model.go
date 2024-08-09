@@ -65,7 +65,7 @@ func (o *TargetingRuleModel) GetConditionsOk() ([]ConditionModel, bool) {
 
 // HasConditions returns a boolean if a field has been set.
 func (o *TargetingRuleModel) HasConditions() bool {
-	if o != nil && IsNil(o.Conditions) {
+	if o != nil && !IsNil(o.Conditions) {
 		return true
 	}
 
@@ -98,7 +98,7 @@ func (o *TargetingRuleModel) GetPercentageOptionsOk() ([]PercentageOptionModel, 
 
 // HasPercentageOptions returns a boolean if a field has been set.
 func (o *TargetingRuleModel) HasPercentageOptions() bool {
-	if o != nil && IsNil(o.PercentageOptions) {
+	if o != nil && !IsNil(o.PercentageOptions) {
 		return true
 	}
 
