@@ -1,15 +1,15 @@
-# \FeatureFlagsSettingsApi
+# \FeatureFlagsSettingsAPI
 
 All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateSetting**](FeatureFlagsSettingsApi.md#CreateSetting) | **Post** /v1/configs/{configId}/settings | Create Flag
-[**DeleteSetting**](FeatureFlagsSettingsApi.md#DeleteSetting) | **Delete** /v1/settings/{settingId} | Delete Flag
-[**GetSetting**](FeatureFlagsSettingsApi.md#GetSetting) | **Get** /v1/settings/{settingId} | Get Flag
-[**GetSettings**](FeatureFlagsSettingsApi.md#GetSettings) | **Get** /v1/configs/{configId}/settings | List Flags
-[**ReplaceSetting**](FeatureFlagsSettingsApi.md#ReplaceSetting) | **Put** /v1/settings/{settingId} | Replace Flag
-[**UpdateSetting**](FeatureFlagsSettingsApi.md#UpdateSetting) | **Patch** /v1/settings/{settingId} | Update Flag
+[**CreateSetting**](FeatureFlagsSettingsAPI.md#CreateSetting) | **Post** /v1/configs/{configId}/settings | Create Flag
+[**DeleteSetting**](FeatureFlagsSettingsAPI.md#DeleteSetting) | **Delete** /v1/settings/{settingId} | Delete Flag
+[**GetSetting**](FeatureFlagsSettingsAPI.md#GetSetting) | **Get** /v1/settings/{settingId} | Get Flag
+[**GetSettings**](FeatureFlagsSettingsAPI.md#GetSettings) | **Get** /v1/configs/{configId}/settings | List Flags
+[**ReplaceSetting**](FeatureFlagsSettingsAPI.md#ReplaceSetting) | **Put** /v1/settings/{settingId} | Replace Flag
+[**UpdateSetting**](FeatureFlagsSettingsAPI.md#UpdateSetting) | **Patch** /v1/settings/{settingId} | Update Flag
 
 
 
@@ -27,25 +27,25 @@ Create Flag
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
-    createSettingInitialValues := *openapiclient.NewCreateSettingInitialValues("Key_example", "Name_example", openapiclient.SettingType("boolean")) // CreateSettingInitialValues | 
+	configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
+	createSettingInitialValues := *openapiclient.NewCreateSettingInitialValues("Key_example", "Name_example", openapiclient.SettingType("boolean")) // CreateSettingInitialValues | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FeatureFlagsSettingsApi.CreateSetting(context.Background(), configId).CreateSettingInitialValues(createSettingInitialValues).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsApi.CreateSetting``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateSetting`: SettingModel
-    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsApi.CreateSetting`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FeatureFlagsSettingsAPI.CreateSetting(context.Background(), configId).CreateSettingInitialValues(createSettingInitialValues).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsAPI.CreateSetting``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateSetting`: SettingModel
+	fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsAPI.CreateSetting`: %v\n", resp)
 }
 ```
 
@@ -99,22 +99,22 @@ Delete Flag
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    settingId := int32(56) // int32 | The identifier of the Setting.
+	settingId := int32(56) // int32 | The identifier of the Setting.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.FeatureFlagsSettingsApi.DeleteSetting(context.Background(), settingId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsApi.DeleteSetting``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.FeatureFlagsSettingsAPI.DeleteSetting(context.Background(), settingId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsAPI.DeleteSetting``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -167,24 +167,24 @@ Get Flag
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    settingId := int32(56) // int32 | The identifier of the Setting.
+	settingId := int32(56) // int32 | The identifier of the Setting.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FeatureFlagsSettingsApi.GetSetting(context.Background(), settingId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsApi.GetSetting``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetSetting`: SettingModel
-    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsApi.GetSetting`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FeatureFlagsSettingsAPI.GetSetting(context.Background(), settingId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsAPI.GetSetting``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSetting`: SettingModel
+	fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsAPI.GetSetting`: %v\n", resp)
 }
 ```
 
@@ -237,24 +237,24 @@ List Flags
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
+	configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FeatureFlagsSettingsApi.GetSettings(context.Background(), configId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsApi.GetSettings``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetSettings`: []SettingModel
-    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsApi.GetSettings`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FeatureFlagsSettingsAPI.GetSettings(context.Background(), configId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsAPI.GetSettings``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSettings`: []SettingModel
+	fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsAPI.GetSettings`: %v\n", resp)
 }
 ```
 
@@ -307,25 +307,25 @@ Replace Flag
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    settingId := int32(56) // int32 | The identifier of the Setting.
-    replaceSettingModel := *openapiclient.NewReplaceSettingModel("Name_example") // ReplaceSettingModel | 
+	settingId := int32(56) // int32 | The identifier of the Setting.
+	replaceSettingModel := *openapiclient.NewReplaceSettingModel("Name_example") // ReplaceSettingModel | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FeatureFlagsSettingsApi.ReplaceSetting(context.Background(), settingId).ReplaceSettingModel(replaceSettingModel).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsApi.ReplaceSetting``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `ReplaceSetting`: SettingModel
-    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsApi.ReplaceSetting`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FeatureFlagsSettingsAPI.ReplaceSetting(context.Background(), settingId).ReplaceSettingModel(replaceSettingModel).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsAPI.ReplaceSetting``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `ReplaceSetting`: SettingModel
+	fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsAPI.ReplaceSetting`: %v\n", resp)
 }
 ```
 
@@ -379,25 +379,25 @@ Update Flag
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    settingId := int32(56) // int32 | The identifier of the Setting.
-    jsonPatchOperation := []openapiclient.JsonPatchOperation{*openapiclient.NewJsonPatchOperation(openapiclient.OperationType("unknown"), "Path_example")} // []JsonPatchOperation | 
+	settingId := int32(56) // int32 | The identifier of the Setting.
+	jsonPatchOperation := []openapiclient.JsonPatchOperation{*openapiclient.NewJsonPatchOperation(openapiclient.OperationType("unknown"), "Path_example")} // []JsonPatchOperation | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.FeatureFlagsSettingsApi.UpdateSetting(context.Background(), settingId).JsonPatchOperation(jsonPatchOperation).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsApi.UpdateSetting``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateSetting`: SettingModel
-    fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsApi.UpdateSetting`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FeatureFlagsSettingsAPI.UpdateSetting(context.Background(), settingId).JsonPatchOperation(jsonPatchOperation).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsAPI.UpdateSetting``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateSetting`: SettingModel
+	fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsAPI.UpdateSetting`: %v\n", resp)
 }
 ```
 

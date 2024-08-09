@@ -1,10 +1,10 @@
-# \OrganizationsApi
+# \OrganizationsAPI
 
 All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetOrganizations**](OrganizationsApi.md#GetOrganizations) | **Get** /v1/organizations | List Organizations
+[**GetOrganizations**](OrganizationsAPI.md#GetOrganizations) | **Get** /v1/organizations | List Organizations
 
 
 
@@ -22,23 +22,23 @@ List Organizations
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.OrganizationsApi.GetOrganizations(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsApi.GetOrganizations``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetOrganizations`: []OrganizationModel
-    fmt.Fprintf(os.Stdout, "Response from `OrganizationsApi.GetOrganizations`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrganizationsAPI.GetOrganizations(context.Background()).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrganizationsAPI.GetOrganizations``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetOrganizations`: []OrganizationModel
+	fmt.Fprintf(os.Stdout, "Response from `OrganizationsAPI.GetOrganizations`: %v\n", resp)
 }
 ```
 

@@ -1,14 +1,14 @@
-# \IntegrationsApi
+# \IntegrationsAPI
 
 All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateIntegration**](IntegrationsApi.md#CreateIntegration) | **Post** /v1/products/{productId}/integrations | Create Integration
-[**DeleteIntegration**](IntegrationsApi.md#DeleteIntegration) | **Delete** /v1/integrations/{integrationId} | Delete Integration
-[**GetIntegration**](IntegrationsApi.md#GetIntegration) | **Get** /v1/integrations/{integrationId} | Get Integration
-[**GetIntegrations**](IntegrationsApi.md#GetIntegrations) | **Get** /v1/products/{productId}/integrations | List Integrations
-[**UpdateIntegration**](IntegrationsApi.md#UpdateIntegration) | **Put** /v1/integrations/{integrationId} | Update Integration
+[**CreateIntegration**](IntegrationsAPI.md#CreateIntegration) | **Post** /v1/products/{productId}/integrations | Create Integration
+[**DeleteIntegration**](IntegrationsAPI.md#DeleteIntegration) | **Delete** /v1/integrations/{integrationId} | Delete Integration
+[**GetIntegration**](IntegrationsAPI.md#GetIntegration) | **Get** /v1/integrations/{integrationId} | Get Integration
+[**GetIntegrations**](IntegrationsAPI.md#GetIntegrations) | **Get** /v1/products/{productId}/integrations | List Integrations
+[**UpdateIntegration**](IntegrationsAPI.md#UpdateIntegration) | **Put** /v1/integrations/{integrationId} | Update Integration
 
 
 
@@ -26,25 +26,25 @@ Create Integration
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
-    createIntegrationModel := *openapiclient.NewCreateIntegrationModel(openapiclient.IntegrationType("dataDog"), "Name_example", map[string]string{"key": "Inner_example"}, []string{"EnvironmentIds_example"}, []string{"ConfigIds_example"}) // CreateIntegrationModel | 
+	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+	createIntegrationModel := *openapiclient.NewCreateIntegrationModel(openapiclient.IntegrationType("dataDog"), "Name_example", map[string]string{"key": "Inner_example"}, []string{"EnvironmentIds_example"}, []string{"ConfigIds_example"}) // CreateIntegrationModel | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.IntegrationsApi.CreateIntegration(context.Background(), productId).CreateIntegrationModel(createIntegrationModel).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IntegrationsApi.CreateIntegration``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateIntegration`: IntegrationModel
-    fmt.Fprintf(os.Stdout, "Response from `IntegrationsApi.CreateIntegration`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IntegrationsAPI.CreateIntegration(context.Background(), productId).CreateIntegrationModel(createIntegrationModel).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IntegrationsAPI.CreateIntegration``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateIntegration`: IntegrationModel
+	fmt.Fprintf(os.Stdout, "Response from `IntegrationsAPI.CreateIntegration`: %v\n", resp)
 }
 ```
 
@@ -98,22 +98,22 @@ Delete Integration
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    integrationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Integration.
+	integrationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Integration.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.IntegrationsApi.DeleteIntegration(context.Background(), integrationId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IntegrationsApi.DeleteIntegration``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.IntegrationsAPI.DeleteIntegration(context.Background(), integrationId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IntegrationsAPI.DeleteIntegration``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -166,24 +166,24 @@ Get Integration
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    integrationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Integration.
+	integrationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Integration.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.IntegrationsApi.GetIntegration(context.Background(), integrationId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IntegrationsApi.GetIntegration``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetIntegration`: IntegrationModel
-    fmt.Fprintf(os.Stdout, "Response from `IntegrationsApi.GetIntegration`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IntegrationsAPI.GetIntegration(context.Background(), integrationId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IntegrationsAPI.GetIntegration``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetIntegration`: IntegrationModel
+	fmt.Fprintf(os.Stdout, "Response from `IntegrationsAPI.GetIntegration`: %v\n", resp)
 }
 ```
 
@@ -236,24 +236,24 @@ List Integrations
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.IntegrationsApi.GetIntegrations(context.Background(), productId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IntegrationsApi.GetIntegrations``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetIntegrations`: IntegrationsModel
-    fmt.Fprintf(os.Stdout, "Response from `IntegrationsApi.GetIntegrations`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IntegrationsAPI.GetIntegrations(context.Background(), productId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IntegrationsAPI.GetIntegrations``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetIntegrations`: IntegrationsModel
+	fmt.Fprintf(os.Stdout, "Response from `IntegrationsAPI.GetIntegrations`: %v\n", resp)
 }
 ```
 
@@ -306,25 +306,25 @@ Update Integration
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    integrationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Integration.
-    modifyIntegrationRequest := *openapiclient.NewModifyIntegrationRequest("Name_example", map[string]string{"key": "Inner_example"}, []string{"EnvironmentIds_example"}, []string{"ConfigIds_example"}) // ModifyIntegrationRequest | 
+	integrationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Integration.
+	modifyIntegrationRequest := *openapiclient.NewModifyIntegrationRequest("Name_example", map[string]string{"key": "Inner_example"}, []string{"EnvironmentIds_example"}, []string{"ConfigIds_example"}) // ModifyIntegrationRequest | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.IntegrationsApi.UpdateIntegration(context.Background(), integrationId).ModifyIntegrationRequest(modifyIntegrationRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IntegrationsApi.UpdateIntegration``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateIntegration`: IntegrationModel
-    fmt.Fprintf(os.Stdout, "Response from `IntegrationsApi.UpdateIntegration`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IntegrationsAPI.UpdateIntegration(context.Background(), integrationId).ModifyIntegrationRequest(modifyIntegrationRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IntegrationsAPI.UpdateIntegration``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateIntegration`: IntegrationModel
+	fmt.Fprintf(os.Stdout, "Response from `IntegrationsAPI.UpdateIntegration`: %v\n", resp)
 }
 ```
 

@@ -21,22 +21,22 @@ import (
 )
 
 
-// IntegrationsApiService IntegrationsApi service
-type IntegrationsApiService service
+// IntegrationsAPIService IntegrationsAPI service
+type IntegrationsAPIService service
 
-type IntegrationsApiCreateIntegrationRequest struct {
+type IntegrationsAPICreateIntegrationRequest struct {
 	ctx context.Context
-	ApiService *IntegrationsApiService
+	ApiService *IntegrationsAPIService
 	productId string
 	createIntegrationModel *CreateIntegrationModel
 }
 
-func (r IntegrationsApiCreateIntegrationRequest) CreateIntegrationModel(createIntegrationModel CreateIntegrationModel) IntegrationsApiCreateIntegrationRequest {
+func (r IntegrationsAPICreateIntegrationRequest) CreateIntegrationModel(createIntegrationModel CreateIntegrationModel) IntegrationsAPICreateIntegrationRequest {
 	r.createIntegrationModel = &createIntegrationModel
 	return r
 }
 
-func (r IntegrationsApiCreateIntegrationRequest) Execute() (*IntegrationModel, *http.Response, error) {
+func (r IntegrationsAPICreateIntegrationRequest) Execute() (*IntegrationModel, *http.Response, error) {
 	return r.ApiService.CreateIntegrationExecute(r)
 }
 
@@ -68,10 +68,10 @@ The Parameters dictionary differs for each IntegrationType:
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return IntegrationsApiCreateIntegrationRequest
+ @return IntegrationsAPICreateIntegrationRequest
 */
-func (a *IntegrationsApiService) CreateIntegration(ctx context.Context, productId string) IntegrationsApiCreateIntegrationRequest {
-	return IntegrationsApiCreateIntegrationRequest{
+func (a *IntegrationsAPIService) CreateIntegration(ctx context.Context, productId string) IntegrationsAPICreateIntegrationRequest {
+	return IntegrationsAPICreateIntegrationRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -80,7 +80,7 @@ func (a *IntegrationsApiService) CreateIntegration(ctx context.Context, productI
 
 // Execute executes the request
 //  @return IntegrationModel
-func (a *IntegrationsApiService) CreateIntegrationExecute(r IntegrationsApiCreateIntegrationRequest) (*IntegrationModel, *http.Response, error) {
+func (a *IntegrationsAPIService) CreateIntegrationExecute(r IntegrationsAPICreateIntegrationRequest) (*IntegrationModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -88,7 +88,7 @@ func (a *IntegrationsApiService) CreateIntegrationExecute(r IntegrationsApiCreat
 		localVarReturnValue  *IntegrationModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsApiService.CreateIntegration")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.CreateIntegration")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -159,13 +159,13 @@ func (a *IntegrationsApiService) CreateIntegrationExecute(r IntegrationsApiCreat
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type IntegrationsApiDeleteIntegrationRequest struct {
+type IntegrationsAPIDeleteIntegrationRequest struct {
 	ctx context.Context
-	ApiService *IntegrationsApiService
+	ApiService *IntegrationsAPIService
 	integrationId string
 }
 
-func (r IntegrationsApiDeleteIntegrationRequest) Execute() (*http.Response, error) {
+func (r IntegrationsAPIDeleteIntegrationRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteIntegrationExecute(r)
 }
 
@@ -176,10 +176,10 @@ This endpoint removes a Integration identified by the `integrationId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param integrationId The identifier of the Integration.
- @return IntegrationsApiDeleteIntegrationRequest
+ @return IntegrationsAPIDeleteIntegrationRequest
 */
-func (a *IntegrationsApiService) DeleteIntegration(ctx context.Context, integrationId string) IntegrationsApiDeleteIntegrationRequest {
-	return IntegrationsApiDeleteIntegrationRequest{
+func (a *IntegrationsAPIService) DeleteIntegration(ctx context.Context, integrationId string) IntegrationsAPIDeleteIntegrationRequest {
+	return IntegrationsAPIDeleteIntegrationRequest{
 		ApiService: a,
 		ctx: ctx,
 		integrationId: integrationId,
@@ -187,14 +187,14 @@ func (a *IntegrationsApiService) DeleteIntegration(ctx context.Context, integrat
 }
 
 // Execute executes the request
-func (a *IntegrationsApiService) DeleteIntegrationExecute(r IntegrationsApiDeleteIntegrationRequest) (*http.Response, error) {
+func (a *IntegrationsAPIService) DeleteIntegrationExecute(r IntegrationsAPIDeleteIntegrationRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsApiService.DeleteIntegration")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.DeleteIntegration")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -251,13 +251,13 @@ func (a *IntegrationsApiService) DeleteIntegrationExecute(r IntegrationsApiDelet
 	return localVarHTTPResponse, nil
 }
 
-type IntegrationsApiGetIntegrationRequest struct {
+type IntegrationsAPIGetIntegrationRequest struct {
 	ctx context.Context
-	ApiService *IntegrationsApiService
+	ApiService *IntegrationsAPIService
 	integrationId string
 }
 
-func (r IntegrationsApiGetIntegrationRequest) Execute() (*IntegrationModel, *http.Response, error) {
+func (r IntegrationsAPIGetIntegrationRequest) Execute() (*IntegrationModel, *http.Response, error) {
 	return r.ApiService.GetIntegrationExecute(r)
 }
 
@@ -269,10 +269,10 @@ identified by the `integrationId`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param integrationId The identifier of the Integration.
- @return IntegrationsApiGetIntegrationRequest
+ @return IntegrationsAPIGetIntegrationRequest
 */
-func (a *IntegrationsApiService) GetIntegration(ctx context.Context, integrationId string) IntegrationsApiGetIntegrationRequest {
-	return IntegrationsApiGetIntegrationRequest{
+func (a *IntegrationsAPIService) GetIntegration(ctx context.Context, integrationId string) IntegrationsAPIGetIntegrationRequest {
+	return IntegrationsAPIGetIntegrationRequest{
 		ApiService: a,
 		ctx: ctx,
 		integrationId: integrationId,
@@ -281,7 +281,7 @@ func (a *IntegrationsApiService) GetIntegration(ctx context.Context, integration
 
 // Execute executes the request
 //  @return IntegrationModel
-func (a *IntegrationsApiService) GetIntegrationExecute(r IntegrationsApiGetIntegrationRequest) (*IntegrationModel, *http.Response, error) {
+func (a *IntegrationsAPIService) GetIntegrationExecute(r IntegrationsAPIGetIntegrationRequest) (*IntegrationModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -289,7 +289,7 @@ func (a *IntegrationsApiService) GetIntegrationExecute(r IntegrationsApiGetInteg
 		localVarReturnValue  *IntegrationModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsApiService.GetIntegration")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetIntegration")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -355,13 +355,13 @@ func (a *IntegrationsApiService) GetIntegrationExecute(r IntegrationsApiGetInteg
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type IntegrationsApiGetIntegrationsRequest struct {
+type IntegrationsAPIGetIntegrationsRequest struct {
 	ctx context.Context
-	ApiService *IntegrationsApiService
+	ApiService *IntegrationsAPIService
 	productId string
 }
 
-func (r IntegrationsApiGetIntegrationsRequest) Execute() (*IntegrationsModel, *http.Response, error) {
+func (r IntegrationsAPIGetIntegrationsRequest) Execute() (*IntegrationsModel, *http.Response, error) {
 	return r.ApiService.GetIntegrationsExecute(r)
 }
 
@@ -373,10 +373,10 @@ This endpoint returns the list of the Integrations that belongs to the given Pro
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return IntegrationsApiGetIntegrationsRequest
+ @return IntegrationsAPIGetIntegrationsRequest
 */
-func (a *IntegrationsApiService) GetIntegrations(ctx context.Context, productId string) IntegrationsApiGetIntegrationsRequest {
-	return IntegrationsApiGetIntegrationsRequest{
+func (a *IntegrationsAPIService) GetIntegrations(ctx context.Context, productId string) IntegrationsAPIGetIntegrationsRequest {
+	return IntegrationsAPIGetIntegrationsRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -385,7 +385,7 @@ func (a *IntegrationsApiService) GetIntegrations(ctx context.Context, productId 
 
 // Execute executes the request
 //  @return IntegrationsModel
-func (a *IntegrationsApiService) GetIntegrationsExecute(r IntegrationsApiGetIntegrationsRequest) (*IntegrationsModel, *http.Response, error) {
+func (a *IntegrationsAPIService) GetIntegrationsExecute(r IntegrationsAPIGetIntegrationsRequest) (*IntegrationsModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -393,7 +393,7 @@ func (a *IntegrationsApiService) GetIntegrationsExecute(r IntegrationsApiGetInte
 		localVarReturnValue  *IntegrationsModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsApiService.GetIntegrations")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.GetIntegrations")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -459,19 +459,19 @@ func (a *IntegrationsApiService) GetIntegrationsExecute(r IntegrationsApiGetInte
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type IntegrationsApiUpdateIntegrationRequest struct {
+type IntegrationsAPIUpdateIntegrationRequest struct {
 	ctx context.Context
-	ApiService *IntegrationsApiService
+	ApiService *IntegrationsAPIService
 	integrationId string
 	modifyIntegrationRequest *ModifyIntegrationRequest
 }
 
-func (r IntegrationsApiUpdateIntegrationRequest) ModifyIntegrationRequest(modifyIntegrationRequest ModifyIntegrationRequest) IntegrationsApiUpdateIntegrationRequest {
+func (r IntegrationsAPIUpdateIntegrationRequest) ModifyIntegrationRequest(modifyIntegrationRequest ModifyIntegrationRequest) IntegrationsAPIUpdateIntegrationRequest {
 	r.modifyIntegrationRequest = &modifyIntegrationRequest
 	return r
 }
 
-func (r IntegrationsApiUpdateIntegrationRequest) Execute() (*IntegrationModel, *http.Response, error) {
+func (r IntegrationsAPIUpdateIntegrationRequest) Execute() (*IntegrationModel, *http.Response, error) {
 	return r.ApiService.UpdateIntegrationExecute(r)
 }
 
@@ -502,10 +502,10 @@ The Parameters dictionary differs for each IntegrationType:
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param integrationId The identifier of the Integration.
- @return IntegrationsApiUpdateIntegrationRequest
+ @return IntegrationsAPIUpdateIntegrationRequest
 */
-func (a *IntegrationsApiService) UpdateIntegration(ctx context.Context, integrationId string) IntegrationsApiUpdateIntegrationRequest {
-	return IntegrationsApiUpdateIntegrationRequest{
+func (a *IntegrationsAPIService) UpdateIntegration(ctx context.Context, integrationId string) IntegrationsAPIUpdateIntegrationRequest {
+	return IntegrationsAPIUpdateIntegrationRequest{
 		ApiService: a,
 		ctx: ctx,
 		integrationId: integrationId,
@@ -514,7 +514,7 @@ func (a *IntegrationsApiService) UpdateIntegration(ctx context.Context, integrat
 
 // Execute executes the request
 //  @return IntegrationModel
-func (a *IntegrationsApiService) UpdateIntegrationExecute(r IntegrationsApiUpdateIntegrationRequest) (*IntegrationModel, *http.Response, error) {
+func (a *IntegrationsAPIService) UpdateIntegrationExecute(r IntegrationsAPIUpdateIntegrationRequest) (*IntegrationModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -522,7 +522,7 @@ func (a *IntegrationsApiService) UpdateIntegrationExecute(r IntegrationsApiUpdat
 		localVarReturnValue  *IntegrationModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsApiService.UpdateIntegration")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IntegrationsAPIService.UpdateIntegration")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

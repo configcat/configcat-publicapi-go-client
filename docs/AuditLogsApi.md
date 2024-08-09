@@ -1,12 +1,12 @@
-# \AuditLogsApi
+# \AuditLogsAPI
 
 All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetAuditlogs**](AuditLogsApi.md#GetAuditlogs) | **Get** /v1/products/{productId}/auditlogs | List Audit log items for Product
-[**GetDeletedSettings**](AuditLogsApi.md#GetDeletedSettings) | **Get** /v1/configs/{configId}/deleted-settings | List Deleted Settings
-[**GetOrganizationAuditlogs**](AuditLogsApi.md#GetOrganizationAuditlogs) | **Get** /v1/organizations/{organizationId}/auditlogs | List Audit log items for Organization
+[**GetAuditlogs**](AuditLogsAPI.md#GetAuditlogs) | **Get** /v1/products/{productId}/auditlogs | List Audit log items for Product
+[**GetDeletedSettings**](AuditLogsAPI.md#GetDeletedSettings) | **Get** /v1/configs/{configId}/deleted-settings | List Deleted Settings
+[**GetOrganizationAuditlogs**](AuditLogsAPI.md#GetOrganizationAuditlogs) | **Get** /v1/organizations/{organizationId}/auditlogs | List Audit log items for Organization
 
 
 
@@ -24,30 +24,30 @@ List Audit log items for Product
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
+	"context"
+	"fmt"
+	"os"
     "time"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
-    configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config. (optional)
-    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment. (optional)
-    auditLogType := openapiclient.AuditLogType("productCreated") // AuditLogType | Filter Audit logs by Audit log type. (optional)
-    fromUtcDateTime := time.Now() // time.Time | Filter Audit logs by starting UTC date. (optional)
-    toUtcDateTime := time.Now() // time.Time | Filter Audit logs by ending UTC date. (optional)
+	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+	configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config. (optional)
+	environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment. (optional)
+	auditLogType := openapiclient.AuditLogType("productCreated") // AuditLogType | Filter Audit logs by Audit log type. (optional)
+	fromUtcDateTime := time.Now() // time.Time | Filter Audit logs by starting UTC date. (optional)
+	toUtcDateTime := time.Now() // time.Time | Filter Audit logs by ending UTC date. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AuditLogsApi.GetAuditlogs(context.Background(), productId).ConfigId(configId).EnvironmentId(environmentId).AuditLogType(auditLogType).FromUtcDateTime(fromUtcDateTime).ToUtcDateTime(toUtcDateTime).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AuditLogsApi.GetAuditlogs``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetAuditlogs`: []AuditLogItemModel
-    fmt.Fprintf(os.Stdout, "Response from `AuditLogsApi.GetAuditlogs`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AuditLogsAPI.GetAuditlogs(context.Background(), productId).ConfigId(configId).EnvironmentId(environmentId).AuditLogType(auditLogType).FromUtcDateTime(fromUtcDateTime).ToUtcDateTime(toUtcDateTime).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AuditLogsAPI.GetAuditlogs``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetAuditlogs`: []AuditLogItemModel
+	fmt.Fprintf(os.Stdout, "Response from `AuditLogsAPI.GetAuditlogs`: %v\n", resp)
 }
 ```
 
@@ -105,24 +105,24 @@ List Deleted Settings
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
+	configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AuditLogsApi.GetDeletedSettings(context.Background(), configId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AuditLogsApi.GetDeletedSettings``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetDeletedSettings`: []SettingModel
-    fmt.Fprintf(os.Stdout, "Response from `AuditLogsApi.GetDeletedSettings`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AuditLogsAPI.GetDeletedSettings(context.Background(), configId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AuditLogsAPI.GetDeletedSettings``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetDeletedSettings`: []SettingModel
+	fmt.Fprintf(os.Stdout, "Response from `AuditLogsAPI.GetDeletedSettings`: %v\n", resp)
 }
 ```
 
@@ -175,31 +175,31 @@ List Audit log items for Organization
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
+	"context"
+	"fmt"
+	"os"
     "time"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    organizationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Organization.
-    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product. (optional)
-    configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config. (optional)
-    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment. (optional)
-    auditLogType := openapiclient.AuditLogType("productCreated") // AuditLogType | Filter Audit logs by Audit log type. (optional)
-    fromUtcDateTime := time.Now() // time.Time | Filter Audit logs by starting UTC date. (optional)
-    toUtcDateTime := time.Now() // time.Time | Filter Audit logs by ending UTC date. (optional)
+	organizationId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Organization.
+	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product. (optional)
+	configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config. (optional)
+	environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment. (optional)
+	auditLogType := openapiclient.AuditLogType("productCreated") // AuditLogType | Filter Audit logs by Audit log type. (optional)
+	fromUtcDateTime := time.Now() // time.Time | Filter Audit logs by starting UTC date. (optional)
+	toUtcDateTime := time.Now() // time.Time | Filter Audit logs by ending UTC date. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AuditLogsApi.GetOrganizationAuditlogs(context.Background(), organizationId).ProductId(productId).ConfigId(configId).EnvironmentId(environmentId).AuditLogType(auditLogType).FromUtcDateTime(fromUtcDateTime).ToUtcDateTime(toUtcDateTime).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AuditLogsApi.GetOrganizationAuditlogs``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetOrganizationAuditlogs`: []AuditLogItemModel
-    fmt.Fprintf(os.Stdout, "Response from `AuditLogsApi.GetOrganizationAuditlogs`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AuditLogsAPI.GetOrganizationAuditlogs(context.Background(), organizationId).ProductId(productId).ConfigId(configId).EnvironmentId(environmentId).AuditLogType(auditLogType).FromUtcDateTime(fromUtcDateTime).ToUtcDateTime(toUtcDateTime).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AuditLogsAPI.GetOrganizationAuditlogs``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetOrganizationAuditlogs`: []AuditLogItemModel
+	fmt.Fprintf(os.Stdout, "Response from `AuditLogsAPI.GetOrganizationAuditlogs`: %v\n", resp)
 }
 ```
 

@@ -1,14 +1,14 @@
-# \EnvironmentsApi
+# \EnvironmentsAPI
 
 All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateEnvironment**](EnvironmentsApi.md#CreateEnvironment) | **Post** /v1/products/{productId}/environments | Create Environment
-[**DeleteEnvironment**](EnvironmentsApi.md#DeleteEnvironment) | **Delete** /v1/environments/{environmentId} | Delete Environment
-[**GetEnvironment**](EnvironmentsApi.md#GetEnvironment) | **Get** /v1/environments/{environmentId} | Get Environment
-[**GetEnvironments**](EnvironmentsApi.md#GetEnvironments) | **Get** /v1/products/{productId}/environments | List Environments
-[**UpdateEnvironment**](EnvironmentsApi.md#UpdateEnvironment) | **Put** /v1/environments/{environmentId} | Update Environment
+[**CreateEnvironment**](EnvironmentsAPI.md#CreateEnvironment) | **Post** /v1/products/{productId}/environments | Create Environment
+[**DeleteEnvironment**](EnvironmentsAPI.md#DeleteEnvironment) | **Delete** /v1/environments/{environmentId} | Delete Environment
+[**GetEnvironment**](EnvironmentsAPI.md#GetEnvironment) | **Get** /v1/environments/{environmentId} | Get Environment
+[**GetEnvironments**](EnvironmentsAPI.md#GetEnvironments) | **Get** /v1/products/{productId}/environments | List Environments
+[**UpdateEnvironment**](EnvironmentsAPI.md#UpdateEnvironment) | **Put** /v1/environments/{environmentId} | Update Environment
 
 
 
@@ -26,25 +26,25 @@ Create Environment
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
-    createEnvironmentModel := *openapiclient.NewCreateEnvironmentModel("Name_example") // CreateEnvironmentModel | 
+	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+	createEnvironmentModel := *openapiclient.NewCreateEnvironmentModel("Name_example") // CreateEnvironmentModel | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EnvironmentsApi.CreateEnvironment(context.Background(), productId).CreateEnvironmentModel(createEnvironmentModel).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsApi.CreateEnvironment``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateEnvironment`: EnvironmentModel
-    fmt.Fprintf(os.Stdout, "Response from `EnvironmentsApi.CreateEnvironment`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.EnvironmentsAPI.CreateEnvironment(context.Background(), productId).CreateEnvironmentModel(createEnvironmentModel).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsAPI.CreateEnvironment``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateEnvironment`: EnvironmentModel
+	fmt.Fprintf(os.Stdout, "Response from `EnvironmentsAPI.CreateEnvironment`: %v\n", resp)
 }
 ```
 
@@ -98,23 +98,23 @@ Delete Environment
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
-    cleanupAuditLogs := true // bool | An optional flag which indicates whether the audit log records related to the environment should be deleted or not. (optional)
+	environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+	cleanupAuditLogs := true // bool | An optional flag which indicates whether the audit log records related to the environment should be deleted or not. (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.EnvironmentsApi.DeleteEnvironment(context.Background(), environmentId).CleanupAuditLogs(cleanupAuditLogs).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsApi.DeleteEnvironment``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.EnvironmentsAPI.DeleteEnvironment(context.Background(), environmentId).CleanupAuditLogs(cleanupAuditLogs).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsAPI.DeleteEnvironment``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -168,24 +168,24 @@ Get Environment
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+	environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EnvironmentsApi.GetEnvironment(context.Background(), environmentId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsApi.GetEnvironment``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetEnvironment`: EnvironmentModel
-    fmt.Fprintf(os.Stdout, "Response from `EnvironmentsApi.GetEnvironment`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.EnvironmentsAPI.GetEnvironment(context.Background(), environmentId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsAPI.GetEnvironment``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetEnvironment`: EnvironmentModel
+	fmt.Fprintf(os.Stdout, "Response from `EnvironmentsAPI.GetEnvironment`: %v\n", resp)
 }
 ```
 
@@ -238,24 +238,24 @@ List Environments
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EnvironmentsApi.GetEnvironments(context.Background(), productId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsApi.GetEnvironments``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetEnvironments`: []EnvironmentModel
-    fmt.Fprintf(os.Stdout, "Response from `EnvironmentsApi.GetEnvironments`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.EnvironmentsAPI.GetEnvironments(context.Background(), productId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsAPI.GetEnvironments``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetEnvironments`: []EnvironmentModel
+	fmt.Fprintf(os.Stdout, "Response from `EnvironmentsAPI.GetEnvironments`: %v\n", resp)
 }
 ```
 
@@ -308,25 +308,25 @@ Update Environment
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
-    updateEnvironmentModel := *openapiclient.NewUpdateEnvironmentModel() // UpdateEnvironmentModel | 
+	environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+	updateEnvironmentModel := *openapiclient.NewUpdateEnvironmentModel() // UpdateEnvironmentModel | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.EnvironmentsApi.UpdateEnvironment(context.Background(), environmentId).UpdateEnvironmentModel(updateEnvironmentModel).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsApi.UpdateEnvironment``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateEnvironment`: EnvironmentModel
-    fmt.Fprintf(os.Stdout, "Response from `EnvironmentsApi.UpdateEnvironment`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.EnvironmentsAPI.UpdateEnvironment(context.Background(), environmentId).UpdateEnvironmentModel(updateEnvironmentModel).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `EnvironmentsAPI.UpdateEnvironment``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateEnvironment`: EnvironmentModel
+	fmt.Fprintf(os.Stdout, "Response from `EnvironmentsAPI.UpdateEnvironment`: %v\n", resp)
 }
 ```
 

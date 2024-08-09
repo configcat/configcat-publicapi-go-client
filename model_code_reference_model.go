@@ -119,7 +119,7 @@ func (o *CodeReferenceModel) GetReferencesOk() ([]ReferenceLines, bool) {
 
 // HasReferences returns a boolean if a field has been set.
 func (o *CodeReferenceModel) HasReferences() bool {
-	if o != nil && IsNil(o.References) {
+	if o != nil && !IsNil(o.References) {
 		return true
 	}
 

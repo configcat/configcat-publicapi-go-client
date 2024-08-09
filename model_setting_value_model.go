@@ -82,7 +82,7 @@ func (o *SettingValueModel) GetRolloutRulesOk() ([]RolloutRuleModel, bool) {
 
 // HasRolloutRules returns a boolean if a field has been set.
 func (o *SettingValueModel) HasRolloutRules() bool {
-	if o != nil && IsNil(o.RolloutRules) {
+	if o != nil && !IsNil(o.RolloutRules) {
 		return true
 	}
 
@@ -115,7 +115,7 @@ func (o *SettingValueModel) GetRolloutPercentageItemsOk() ([]RolloutPercentageIt
 
 // HasRolloutPercentageItems returns a boolean if a field has been set.
 func (o *SettingValueModel) HasRolloutPercentageItems() bool {
-	if o != nil && IsNil(o.RolloutPercentageItems) {
+	if o != nil && !IsNil(o.RolloutPercentageItems) {
 		return true
 	}
 
@@ -148,7 +148,7 @@ func (o *SettingValueModel) GetValueOk() (*interface{}, bool) {
 
 // HasValue returns a boolean if a field has been set.
 func (o *SettingValueModel) HasValue() bool {
-	if o != nil && IsNil(o.Value) {
+	if o != nil && !IsNil(o.Value) {
 		return true
 	}
 
@@ -339,7 +339,7 @@ func (o *SettingValueModel) GetIntegrationLinksOk() ([]IntegrationLinkModel, boo
 
 // HasIntegrationLinks returns a boolean if a field has been set.
 func (o *SettingValueModel) HasIntegrationLinks() bool {
-	if o != nil && IsNil(o.IntegrationLinks) {
+	if o != nil && !IsNil(o.IntegrationLinks) {
 		return true
 	}
 
@@ -372,7 +372,7 @@ func (o *SettingValueModel) GetSettingTagsOk() ([]SettingTagModel, bool) {
 
 // HasSettingTags returns a boolean if a field has been set.
 func (o *SettingValueModel) HasSettingTags() bool {
-	if o != nil && IsNil(o.SettingTags) {
+	if o != nil && !IsNil(o.SettingTags) {
 		return true
 	}
 

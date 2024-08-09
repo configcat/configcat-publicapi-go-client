@@ -21,22 +21,22 @@ import (
 )
 
 
-// ConfigsApiService ConfigsApi service
-type ConfigsApiService service
+// ConfigsAPIService ConfigsAPI service
+type ConfigsAPIService service
 
-type ConfigsApiCreateConfigRequest struct {
+type ConfigsAPICreateConfigRequest struct {
 	ctx context.Context
-	ApiService *ConfigsApiService
+	ApiService *ConfigsAPIService
 	productId string
 	createConfigRequest *CreateConfigRequest
 }
 
-func (r ConfigsApiCreateConfigRequest) CreateConfigRequest(createConfigRequest CreateConfigRequest) ConfigsApiCreateConfigRequest {
+func (r ConfigsAPICreateConfigRequest) CreateConfigRequest(createConfigRequest CreateConfigRequest) ConfigsAPICreateConfigRequest {
 	r.createConfigRequest = &createConfigRequest
 	return r
 }
 
-func (r ConfigsApiCreateConfigRequest) Execute() (*ConfigModel, *http.Response, error) {
+func (r ConfigsAPICreateConfigRequest) Execute() (*ConfigModel, *http.Response, error) {
 	return r.ApiService.CreateConfigExecute(r)
 }
 
@@ -48,10 +48,10 @@ identified by the `productId` parameter, which can be obtained from the [List Pr
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return ConfigsApiCreateConfigRequest
+ @return ConfigsAPICreateConfigRequest
 */
-func (a *ConfigsApiService) CreateConfig(ctx context.Context, productId string) ConfigsApiCreateConfigRequest {
-	return ConfigsApiCreateConfigRequest{
+func (a *ConfigsAPIService) CreateConfig(ctx context.Context, productId string) ConfigsAPICreateConfigRequest {
+	return ConfigsAPICreateConfigRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -60,7 +60,7 @@ func (a *ConfigsApiService) CreateConfig(ctx context.Context, productId string) 
 
 // Execute executes the request
 //  @return ConfigModel
-func (a *ConfigsApiService) CreateConfigExecute(r ConfigsApiCreateConfigRequest) (*ConfigModel, *http.Response, error) {
+func (a *ConfigsAPIService) CreateConfigExecute(r ConfigsAPICreateConfigRequest) (*ConfigModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -68,7 +68,7 @@ func (a *ConfigsApiService) CreateConfigExecute(r ConfigsApiCreateConfigRequest)
 		localVarReturnValue  *ConfigModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsApiService.CreateConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsAPIService.CreateConfig")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -139,13 +139,13 @@ func (a *ConfigsApiService) CreateConfigExecute(r ConfigsApiCreateConfigRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ConfigsApiDeleteConfigRequest struct {
+type ConfigsAPIDeleteConfigRequest struct {
 	ctx context.Context
-	ApiService *ConfigsApiService
+	ApiService *ConfigsAPIService
 	configId string
 }
 
-func (r ConfigsApiDeleteConfigRequest) Execute() (*http.Response, error) {
+func (r ConfigsAPIDeleteConfigRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeleteConfigExecute(r)
 }
 
@@ -156,10 +156,10 @@ This endpoint removes a Config identified by the `configId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param configId The identifier of the Config.
- @return ConfigsApiDeleteConfigRequest
+ @return ConfigsAPIDeleteConfigRequest
 */
-func (a *ConfigsApiService) DeleteConfig(ctx context.Context, configId string) ConfigsApiDeleteConfigRequest {
-	return ConfigsApiDeleteConfigRequest{
+func (a *ConfigsAPIService) DeleteConfig(ctx context.Context, configId string) ConfigsAPIDeleteConfigRequest {
+	return ConfigsAPIDeleteConfigRequest{
 		ApiService: a,
 		ctx: ctx,
 		configId: configId,
@@ -167,14 +167,14 @@ func (a *ConfigsApiService) DeleteConfig(ctx context.Context, configId string) C
 }
 
 // Execute executes the request
-func (a *ConfigsApiService) DeleteConfigExecute(r ConfigsApiDeleteConfigRequest) (*http.Response, error) {
+func (a *ConfigsAPIService) DeleteConfigExecute(r ConfigsAPIDeleteConfigRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsApiService.DeleteConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsAPIService.DeleteConfig")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -231,13 +231,13 @@ func (a *ConfigsApiService) DeleteConfigExecute(r ConfigsApiDeleteConfigRequest)
 	return localVarHTTPResponse, nil
 }
 
-type ConfigsApiGetConfigRequest struct {
+type ConfigsAPIGetConfigRequest struct {
 	ctx context.Context
-	ApiService *ConfigsApiService
+	ApiService *ConfigsAPIService
 	configId string
 }
 
-func (r ConfigsApiGetConfigRequest) Execute() (*ConfigModel, *http.Response, error) {
+func (r ConfigsAPIGetConfigRequest) Execute() (*ConfigModel, *http.Response, error) {
 	return r.ApiService.GetConfigExecute(r)
 }
 
@@ -249,10 +249,10 @@ identified by the `configId`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param configId The identifier of the Config.
- @return ConfigsApiGetConfigRequest
+ @return ConfigsAPIGetConfigRequest
 */
-func (a *ConfigsApiService) GetConfig(ctx context.Context, configId string) ConfigsApiGetConfigRequest {
-	return ConfigsApiGetConfigRequest{
+func (a *ConfigsAPIService) GetConfig(ctx context.Context, configId string) ConfigsAPIGetConfigRequest {
+	return ConfigsAPIGetConfigRequest{
 		ApiService: a,
 		ctx: ctx,
 		configId: configId,
@@ -261,7 +261,7 @@ func (a *ConfigsApiService) GetConfig(ctx context.Context, configId string) Conf
 
 // Execute executes the request
 //  @return ConfigModel
-func (a *ConfigsApiService) GetConfigExecute(r ConfigsApiGetConfigRequest) (*ConfigModel, *http.Response, error) {
+func (a *ConfigsAPIService) GetConfigExecute(r ConfigsAPIGetConfigRequest) (*ConfigModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -269,7 +269,7 @@ func (a *ConfigsApiService) GetConfigExecute(r ConfigsApiGetConfigRequest) (*Con
 		localVarReturnValue  *ConfigModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsApiService.GetConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsAPIService.GetConfig")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -335,13 +335,13 @@ func (a *ConfigsApiService) GetConfigExecute(r ConfigsApiGetConfigRequest) (*Con
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ConfigsApiGetConfigsRequest struct {
+type ConfigsAPIGetConfigsRequest struct {
 	ctx context.Context
-	ApiService *ConfigsApiService
+	ApiService *ConfigsAPIService
 	productId string
 }
 
-func (r ConfigsApiGetConfigsRequest) Execute() ([]ConfigModel, *http.Response, error) {
+func (r ConfigsAPIGetConfigsRequest) Execute() ([]ConfigModel, *http.Response, error) {
 	return r.ApiService.GetConfigsExecute(r)
 }
 
@@ -353,10 +353,10 @@ This endpoint returns the list of the Configs that belongs to the given Product 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return ConfigsApiGetConfigsRequest
+ @return ConfigsAPIGetConfigsRequest
 */
-func (a *ConfigsApiService) GetConfigs(ctx context.Context, productId string) ConfigsApiGetConfigsRequest {
-	return ConfigsApiGetConfigsRequest{
+func (a *ConfigsAPIService) GetConfigs(ctx context.Context, productId string) ConfigsAPIGetConfigsRequest {
+	return ConfigsAPIGetConfigsRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -365,7 +365,7 @@ func (a *ConfigsApiService) GetConfigs(ctx context.Context, productId string) Co
 
 // Execute executes the request
 //  @return []ConfigModel
-func (a *ConfigsApiService) GetConfigsExecute(r ConfigsApiGetConfigsRequest) ([]ConfigModel, *http.Response, error) {
+func (a *ConfigsAPIService) GetConfigsExecute(r ConfigsAPIGetConfigsRequest) ([]ConfigModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -373,7 +373,7 @@ func (a *ConfigsApiService) GetConfigsExecute(r ConfigsApiGetConfigsRequest) ([]
 		localVarReturnValue  []ConfigModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsApiService.GetConfigs")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsAPIService.GetConfigs")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -439,19 +439,19 @@ func (a *ConfigsApiService) GetConfigsExecute(r ConfigsApiGetConfigsRequest) ([]
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ConfigsApiUpdateConfigRequest struct {
+type ConfigsAPIUpdateConfigRequest struct {
 	ctx context.Context
-	ApiService *ConfigsApiService
+	ApiService *ConfigsAPIService
 	configId string
 	updateConfigRequest *UpdateConfigRequest
 }
 
-func (r ConfigsApiUpdateConfigRequest) UpdateConfigRequest(updateConfigRequest UpdateConfigRequest) ConfigsApiUpdateConfigRequest {
+func (r ConfigsAPIUpdateConfigRequest) UpdateConfigRequest(updateConfigRequest UpdateConfigRequest) ConfigsAPIUpdateConfigRequest {
 	r.updateConfigRequest = &updateConfigRequest
 	return r
 }
 
-func (r ConfigsApiUpdateConfigRequest) Execute() (*ConfigModel, *http.Response, error) {
+func (r ConfigsAPIUpdateConfigRequest) Execute() (*ConfigModel, *http.Response, error) {
 	return r.ApiService.UpdateConfigExecute(r)
 }
 
@@ -462,10 +462,10 @@ This endpoint updates a Config identified by the `configId` parameter.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param configId The identifier of the Config.
- @return ConfigsApiUpdateConfigRequest
+ @return ConfigsAPIUpdateConfigRequest
 */
-func (a *ConfigsApiService) UpdateConfig(ctx context.Context, configId string) ConfigsApiUpdateConfigRequest {
-	return ConfigsApiUpdateConfigRequest{
+func (a *ConfigsAPIService) UpdateConfig(ctx context.Context, configId string) ConfigsAPIUpdateConfigRequest {
+	return ConfigsAPIUpdateConfigRequest{
 		ApiService: a,
 		ctx: ctx,
 		configId: configId,
@@ -474,7 +474,7 @@ func (a *ConfigsApiService) UpdateConfig(ctx context.Context, configId string) C
 
 // Execute executes the request
 //  @return ConfigModel
-func (a *ConfigsApiService) UpdateConfigExecute(r ConfigsApiUpdateConfigRequest) (*ConfigModel, *http.Response, error) {
+func (a *ConfigsAPIService) UpdateConfigExecute(r ConfigsAPIUpdateConfigRequest) (*ConfigModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -482,7 +482,7 @@ func (a *ConfigsApiService) UpdateConfigExecute(r ConfigsApiUpdateConfigRequest)
 		localVarReturnValue  *ConfigModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsApiService.UpdateConfig")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ConfigsAPIService.UpdateConfig")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

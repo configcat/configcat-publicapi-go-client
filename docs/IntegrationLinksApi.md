@@ -1,14 +1,14 @@
-# \IntegrationLinksApi
+# \IntegrationLinksAPI
 
 All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddOrUpdateIntegrationLink**](IntegrationLinksApi.md#AddOrUpdateIntegrationLink) | **Post** /v1/environments/{environmentId}/settings/{settingId}/integrationLinks/{integrationLinkType}/{key} | Add or update Integration link
-[**DeleteIntegrationLink**](IntegrationLinksApi.md#DeleteIntegrationLink) | **Delete** /v1/environments/{environmentId}/settings/{settingId}/integrationLinks/{integrationLinkType}/{key} | Delete Integration link
-[**GetIntegrationLinkDetails**](IntegrationLinksApi.md#GetIntegrationLinkDetails) | **Get** /v1/integrationLink/{integrationLinkType}/{key}/details | Get Integration link
-[**JiraAddOrUpdateIntegrationLink**](IntegrationLinksApi.md#JiraAddOrUpdateIntegrationLink) | **Post** /v1/jira/environments/{environmentId}/settings/{settingId}/integrationLinks/{key} | 
-[**JiraConnect**](IntegrationLinksApi.md#JiraConnect) | **Post** /v1/jira/connect | 
+[**AddOrUpdateIntegrationLink**](IntegrationLinksAPI.md#AddOrUpdateIntegrationLink) | **Post** /v1/environments/{environmentId}/settings/{settingId}/integrationLinks/{integrationLinkType}/{key} | Add or update Integration link
+[**DeleteIntegrationLink**](IntegrationLinksAPI.md#DeleteIntegrationLink) | **Delete** /v1/environments/{environmentId}/settings/{settingId}/integrationLinks/{integrationLinkType}/{key} | Delete Integration link
+[**GetIntegrationLinkDetails**](IntegrationLinksAPI.md#GetIntegrationLinkDetails) | **Get** /v1/integrationLink/{integrationLinkType}/{key}/details | Get Integration link
+[**JiraAddOrUpdateIntegrationLink**](IntegrationLinksAPI.md#JiraAddOrUpdateIntegrationLink) | **Post** /v1/jira/environments/{environmentId}/settings/{settingId}/integrationLinks/{key} | 
+[**JiraConnect**](IntegrationLinksAPI.md#JiraConnect) | **Post** /v1/jira/connect | 
 
 
 
@@ -26,28 +26,28 @@ Add or update Integration link
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
-    settingId := int32(56) // int32 | The id of the Setting.
-    integrationLinkType := openapiclient.IntegrationLinkType("trello") // IntegrationLinkType | The integration link's type.
-    key := "key_example" // string | The key of the integration link.
-    addOrUpdateIntegrationLinkModel := *openapiclient.NewAddOrUpdateIntegrationLinkModel() // AddOrUpdateIntegrationLinkModel |  (optional)
+	environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+	settingId := int32(56) // int32 | The id of the Setting.
+	integrationLinkType := openapiclient.IntegrationLinkType("trello") // IntegrationLinkType | The integration link's type.
+	key := "key_example" // string | The key of the integration link.
+	addOrUpdateIntegrationLinkModel := *openapiclient.NewAddOrUpdateIntegrationLinkModel() // AddOrUpdateIntegrationLinkModel |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.IntegrationLinksApi.AddOrUpdateIntegrationLink(context.Background(), environmentId, settingId, integrationLinkType, key).AddOrUpdateIntegrationLinkModel(addOrUpdateIntegrationLinkModel).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IntegrationLinksApi.AddOrUpdateIntegrationLink``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AddOrUpdateIntegrationLink`: IntegrationLinkModel
-    fmt.Fprintf(os.Stdout, "Response from `IntegrationLinksApi.AddOrUpdateIntegrationLink`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IntegrationLinksAPI.AddOrUpdateIntegrationLink(context.Background(), environmentId, settingId, integrationLinkType, key).AddOrUpdateIntegrationLinkModel(addOrUpdateIntegrationLinkModel).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IntegrationLinksAPI.AddOrUpdateIntegrationLink``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `AddOrUpdateIntegrationLink`: IntegrationLinkModel
+	fmt.Fprintf(os.Stdout, "Response from `IntegrationLinksAPI.AddOrUpdateIntegrationLink`: %v\n", resp)
 }
 ```
 
@@ -107,27 +107,27 @@ Delete Integration link
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
-    settingId := int32(56) // int32 | The id of the Setting.
-    integrationLinkType := openapiclient.IntegrationLinkType("trello") // IntegrationLinkType | The integration's type.
-    key := "key_example" // string | The key of the integration link.
+	environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+	settingId := int32(56) // int32 | The id of the Setting.
+	integrationLinkType := openapiclient.IntegrationLinkType("trello") // IntegrationLinkType | The integration's type.
+	key := "key_example" // string | The key of the integration link.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.IntegrationLinksApi.DeleteIntegrationLink(context.Background(), environmentId, settingId, integrationLinkType, key).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IntegrationLinksApi.DeleteIntegrationLink``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `DeleteIntegrationLink`: DeleteIntegrationLinkModel
-    fmt.Fprintf(os.Stdout, "Response from `IntegrationLinksApi.DeleteIntegrationLink`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IntegrationLinksAPI.DeleteIntegrationLink(context.Background(), environmentId, settingId, integrationLinkType, key).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IntegrationLinksAPI.DeleteIntegrationLink``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteIntegrationLink`: DeleteIntegrationLinkModel
+	fmt.Fprintf(os.Stdout, "Response from `IntegrationLinksAPI.DeleteIntegrationLink`: %v\n", resp)
 }
 ```
 
@@ -186,25 +186,25 @@ Get Integration link
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    integrationLinkType := openapiclient.IntegrationLinkType("trello") // IntegrationLinkType | The integration link's type.
-    key := "key_example" // string | The key of the integration link.
+	integrationLinkType := openapiclient.IntegrationLinkType("trello") // IntegrationLinkType | The integration link's type.
+	key := "key_example" // string | The key of the integration link.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.IntegrationLinksApi.GetIntegrationLinkDetails(context.Background(), integrationLinkType, key).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IntegrationLinksApi.GetIntegrationLinkDetails``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetIntegrationLinkDetails`: IntegrationLinkDetailsModel
-    fmt.Fprintf(os.Stdout, "Response from `IntegrationLinksApi.GetIntegrationLinkDetails`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IntegrationLinksAPI.GetIntegrationLinkDetails(context.Background(), integrationLinkType, key).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IntegrationLinksAPI.GetIntegrationLinkDetails``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetIntegrationLinkDetails`: IntegrationLinkDetailsModel
+	fmt.Fprintf(os.Stdout, "Response from `IntegrationLinksAPI.GetIntegrationLinkDetails`: %v\n", resp)
 }
 ```
 
@@ -257,27 +257,27 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
-    settingId := int32(56) // int32 | The id of the Setting.
-    key := "key_example" // string | The key of the integration link.
-    addOrUpdateJiraIntegrationLinkModel := *openapiclient.NewAddOrUpdateJiraIntegrationLinkModel("JiraJwtToken_example", "ClientKey_example") // AddOrUpdateJiraIntegrationLinkModel |  (optional)
+	environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
+	settingId := int32(56) // int32 | The id of the Setting.
+	key := "key_example" // string | The key of the integration link.
+	addOrUpdateJiraIntegrationLinkModel := *openapiclient.NewAddOrUpdateJiraIntegrationLinkModel("JiraJwtToken_example", "ClientKey_example") // AddOrUpdateJiraIntegrationLinkModel |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.IntegrationLinksApi.JiraAddOrUpdateIntegrationLink(context.Background(), environmentId, settingId, key).AddOrUpdateJiraIntegrationLinkModel(addOrUpdateJiraIntegrationLinkModel).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IntegrationLinksApi.JiraAddOrUpdateIntegrationLink``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `JiraAddOrUpdateIntegrationLink`: IntegrationLinkModel
-    fmt.Fprintf(os.Stdout, "Response from `IntegrationLinksApi.JiraAddOrUpdateIntegrationLink`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.IntegrationLinksAPI.JiraAddOrUpdateIntegrationLink(context.Background(), environmentId, settingId, key).AddOrUpdateJiraIntegrationLinkModel(addOrUpdateJiraIntegrationLinkModel).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IntegrationLinksAPI.JiraAddOrUpdateIntegrationLink``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `JiraAddOrUpdateIntegrationLink`: IntegrationLinkModel
+	fmt.Fprintf(os.Stdout, "Response from `IntegrationLinksAPI.JiraAddOrUpdateIntegrationLink`: %v\n", resp)
 }
 ```
 
@@ -333,22 +333,22 @@ Name | Type | Description  | Notes
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    connectRequest := *openapiclient.NewConnectRequest("ClientKey_example", "JiraJwtToken_example") // ConnectRequest |  (optional)
+	connectRequest := *openapiclient.NewConnectRequest("ClientKey_example", "JiraJwtToken_example") // ConnectRequest |  (optional)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.IntegrationLinksApi.JiraConnect(context.Background()).ConnectRequest(connectRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `IntegrationLinksApi.JiraConnect``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.IntegrationLinksAPI.JiraConnect(context.Background()).ConnectRequest(connectRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `IntegrationLinksAPI.JiraConnect``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 

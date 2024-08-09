@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the JsonPatchOperation type satisfies the MappedNullable interface at compile time
@@ -28,6 +30,8 @@ type JsonPatchOperation struct {
 	// The discrete value.
 	Value interface{} `json:"value,omitempty"`
 }
+
+type _JsonPatchOperation JsonPatchOperation
 
 // NewJsonPatchOperation instantiates a new JsonPatchOperation object
 // This constructor will assign default values to properties that have it defined,
@@ -159,7 +163,7 @@ func (o *JsonPatchOperation) GetValueOk() (*interface{}, bool) {
 
 // HasValue returns a boolean if a field has been set.
 func (o *JsonPatchOperation) HasValue() bool {
-	if o != nil && IsNil(o.Value) {
+	if o != nil && !IsNil(o.Value) {
 		return true
 	}
 
@@ -190,6 +194,44 @@ func (o JsonPatchOperation) ToMap() (map[string]interface{}, error) {
 		toSerialize["value"] = o.Value
 	}
 	return toSerialize, nil
+}
+
+func (o *JsonPatchOperation) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"op",
+		"path",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varJsonPatchOperation := _JsonPatchOperation{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varJsonPatchOperation)
+
+	if err != nil {
+		return err
+	}
+
+	*o = JsonPatchOperation(varJsonPatchOperation)
+
+	return err
 }
 
 type NullableJsonPatchOperation struct {

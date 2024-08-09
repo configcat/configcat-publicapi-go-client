@@ -21,22 +21,22 @@ import (
 )
 
 
-// PermissionGroupsApiService PermissionGroupsApi service
-type PermissionGroupsApiService service
+// PermissionGroupsAPIService PermissionGroupsAPI service
+type PermissionGroupsAPIService service
 
-type PermissionGroupsApiCreatePermissionGroupRequest struct {
+type PermissionGroupsAPICreatePermissionGroupRequest struct {
 	ctx context.Context
-	ApiService *PermissionGroupsApiService
+	ApiService *PermissionGroupsAPIService
 	productId string
 	createPermissionGroupRequest *CreatePermissionGroupRequest
 }
 
-func (r PermissionGroupsApiCreatePermissionGroupRequest) CreatePermissionGroupRequest(createPermissionGroupRequest CreatePermissionGroupRequest) PermissionGroupsApiCreatePermissionGroupRequest {
+func (r PermissionGroupsAPICreatePermissionGroupRequest) CreatePermissionGroupRequest(createPermissionGroupRequest CreatePermissionGroupRequest) PermissionGroupsAPICreatePermissionGroupRequest {
 	r.createPermissionGroupRequest = &createPermissionGroupRequest
 	return r
 }
 
-func (r PermissionGroupsApiCreatePermissionGroupRequest) Execute() (*PermissionGroupModel, *http.Response, error) {
+func (r PermissionGroupsAPICreatePermissionGroupRequest) Execute() (*PermissionGroupModel, *http.Response, error) {
 	return r.ApiService.CreatePermissionGroupExecute(r)
 }
 
@@ -48,10 +48,10 @@ identified by the `productId` parameter, which can be obtained from the [List Pr
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return PermissionGroupsApiCreatePermissionGroupRequest
+ @return PermissionGroupsAPICreatePermissionGroupRequest
 */
-func (a *PermissionGroupsApiService) CreatePermissionGroup(ctx context.Context, productId string) PermissionGroupsApiCreatePermissionGroupRequest {
-	return PermissionGroupsApiCreatePermissionGroupRequest{
+func (a *PermissionGroupsAPIService) CreatePermissionGroup(ctx context.Context, productId string) PermissionGroupsAPICreatePermissionGroupRequest {
+	return PermissionGroupsAPICreatePermissionGroupRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -60,7 +60,7 @@ func (a *PermissionGroupsApiService) CreatePermissionGroup(ctx context.Context, 
 
 // Execute executes the request
 //  @return PermissionGroupModel
-func (a *PermissionGroupsApiService) CreatePermissionGroupExecute(r PermissionGroupsApiCreatePermissionGroupRequest) (*PermissionGroupModel, *http.Response, error) {
+func (a *PermissionGroupsAPIService) CreatePermissionGroupExecute(r PermissionGroupsAPICreatePermissionGroupRequest) (*PermissionGroupModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -68,7 +68,7 @@ func (a *PermissionGroupsApiService) CreatePermissionGroupExecute(r PermissionGr
 		localVarReturnValue  *PermissionGroupModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PermissionGroupsApiService.CreatePermissionGroup")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PermissionGroupsAPIService.CreatePermissionGroup")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -139,13 +139,13 @@ func (a *PermissionGroupsApiService) CreatePermissionGroupExecute(r PermissionGr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type PermissionGroupsApiDeletePermissionGroupRequest struct {
+type PermissionGroupsAPIDeletePermissionGroupRequest struct {
 	ctx context.Context
-	ApiService *PermissionGroupsApiService
+	ApiService *PermissionGroupsAPIService
 	permissionGroupId int64
 }
 
-func (r PermissionGroupsApiDeletePermissionGroupRequest) Execute() (*http.Response, error) {
+func (r PermissionGroupsAPIDeletePermissionGroupRequest) Execute() (*http.Response, error) {
 	return r.ApiService.DeletePermissionGroupExecute(r)
 }
 
@@ -156,10 +156,10 @@ This endpoint removes a Permission Group identified by the `permissionGroupId` p
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param permissionGroupId The identifier of the Permission Group.
- @return PermissionGroupsApiDeletePermissionGroupRequest
+ @return PermissionGroupsAPIDeletePermissionGroupRequest
 */
-func (a *PermissionGroupsApiService) DeletePermissionGroup(ctx context.Context, permissionGroupId int64) PermissionGroupsApiDeletePermissionGroupRequest {
-	return PermissionGroupsApiDeletePermissionGroupRequest{
+func (a *PermissionGroupsAPIService) DeletePermissionGroup(ctx context.Context, permissionGroupId int64) PermissionGroupsAPIDeletePermissionGroupRequest {
+	return PermissionGroupsAPIDeletePermissionGroupRequest{
 		ApiService: a,
 		ctx: ctx,
 		permissionGroupId: permissionGroupId,
@@ -167,14 +167,14 @@ func (a *PermissionGroupsApiService) DeletePermissionGroup(ctx context.Context, 
 }
 
 // Execute executes the request
-func (a *PermissionGroupsApiService) DeletePermissionGroupExecute(r PermissionGroupsApiDeletePermissionGroupRequest) (*http.Response, error) {
+func (a *PermissionGroupsAPIService) DeletePermissionGroupExecute(r PermissionGroupsAPIDeletePermissionGroupRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodDelete
 		localVarPostBody     interface{}
 		formFiles            []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PermissionGroupsApiService.DeletePermissionGroup")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PermissionGroupsAPIService.DeletePermissionGroup")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -231,13 +231,13 @@ func (a *PermissionGroupsApiService) DeletePermissionGroupExecute(r PermissionGr
 	return localVarHTTPResponse, nil
 }
 
-type PermissionGroupsApiGetPermissionGroupRequest struct {
+type PermissionGroupsAPIGetPermissionGroupRequest struct {
 	ctx context.Context
-	ApiService *PermissionGroupsApiService
+	ApiService *PermissionGroupsAPIService
 	permissionGroupId int64
 }
 
-func (r PermissionGroupsApiGetPermissionGroupRequest) Execute() (*PermissionGroupModel, *http.Response, error) {
+func (r PermissionGroupsAPIGetPermissionGroupRequest) Execute() (*PermissionGroupModel, *http.Response, error) {
 	return r.ApiService.GetPermissionGroupExecute(r)
 }
 
@@ -249,10 +249,10 @@ identified by the `permissionGroupId`.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param permissionGroupId The identifier of the Permission Group.
- @return PermissionGroupsApiGetPermissionGroupRequest
+ @return PermissionGroupsAPIGetPermissionGroupRequest
 */
-func (a *PermissionGroupsApiService) GetPermissionGroup(ctx context.Context, permissionGroupId int64) PermissionGroupsApiGetPermissionGroupRequest {
-	return PermissionGroupsApiGetPermissionGroupRequest{
+func (a *PermissionGroupsAPIService) GetPermissionGroup(ctx context.Context, permissionGroupId int64) PermissionGroupsAPIGetPermissionGroupRequest {
+	return PermissionGroupsAPIGetPermissionGroupRequest{
 		ApiService: a,
 		ctx: ctx,
 		permissionGroupId: permissionGroupId,
@@ -261,7 +261,7 @@ func (a *PermissionGroupsApiService) GetPermissionGroup(ctx context.Context, per
 
 // Execute executes the request
 //  @return PermissionGroupModel
-func (a *PermissionGroupsApiService) GetPermissionGroupExecute(r PermissionGroupsApiGetPermissionGroupRequest) (*PermissionGroupModel, *http.Response, error) {
+func (a *PermissionGroupsAPIService) GetPermissionGroupExecute(r PermissionGroupsAPIGetPermissionGroupRequest) (*PermissionGroupModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -269,7 +269,7 @@ func (a *PermissionGroupsApiService) GetPermissionGroupExecute(r PermissionGroup
 		localVarReturnValue  *PermissionGroupModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PermissionGroupsApiService.GetPermissionGroup")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PermissionGroupsAPIService.GetPermissionGroup")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -335,13 +335,13 @@ func (a *PermissionGroupsApiService) GetPermissionGroupExecute(r PermissionGroup
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type PermissionGroupsApiGetPermissionGroupsRequest struct {
+type PermissionGroupsAPIGetPermissionGroupsRequest struct {
 	ctx context.Context
-	ApiService *PermissionGroupsApiService
+	ApiService *PermissionGroupsAPIService
 	productId string
 }
 
-func (r PermissionGroupsApiGetPermissionGroupsRequest) Execute() ([]PermissionGroupModel, *http.Response, error) {
+func (r PermissionGroupsAPIGetPermissionGroupsRequest) Execute() ([]PermissionGroupModel, *http.Response, error) {
 	return r.ApiService.GetPermissionGroupsExecute(r)
 }
 
@@ -353,10 +353,10 @@ This endpoint returns the list of the Permission Groups that belongs to the give
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
- @return PermissionGroupsApiGetPermissionGroupsRequest
+ @return PermissionGroupsAPIGetPermissionGroupsRequest
 */
-func (a *PermissionGroupsApiService) GetPermissionGroups(ctx context.Context, productId string) PermissionGroupsApiGetPermissionGroupsRequest {
-	return PermissionGroupsApiGetPermissionGroupsRequest{
+func (a *PermissionGroupsAPIService) GetPermissionGroups(ctx context.Context, productId string) PermissionGroupsAPIGetPermissionGroupsRequest {
+	return PermissionGroupsAPIGetPermissionGroupsRequest{
 		ApiService: a,
 		ctx: ctx,
 		productId: productId,
@@ -365,7 +365,7 @@ func (a *PermissionGroupsApiService) GetPermissionGroups(ctx context.Context, pr
 
 // Execute executes the request
 //  @return []PermissionGroupModel
-func (a *PermissionGroupsApiService) GetPermissionGroupsExecute(r PermissionGroupsApiGetPermissionGroupsRequest) ([]PermissionGroupModel, *http.Response, error) {
+func (a *PermissionGroupsAPIService) GetPermissionGroupsExecute(r PermissionGroupsAPIGetPermissionGroupsRequest) ([]PermissionGroupModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -373,7 +373,7 @@ func (a *PermissionGroupsApiService) GetPermissionGroupsExecute(r PermissionGrou
 		localVarReturnValue  []PermissionGroupModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PermissionGroupsApiService.GetPermissionGroups")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PermissionGroupsAPIService.GetPermissionGroups")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -439,19 +439,19 @@ func (a *PermissionGroupsApiService) GetPermissionGroupsExecute(r PermissionGrou
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type PermissionGroupsApiUpdatePermissionGroupRequest struct {
+type PermissionGroupsAPIUpdatePermissionGroupRequest struct {
 	ctx context.Context
-	ApiService *PermissionGroupsApiService
+	ApiService *PermissionGroupsAPIService
 	permissionGroupId int64
 	updatePermissionGroupRequest *UpdatePermissionGroupRequest
 }
 
-func (r PermissionGroupsApiUpdatePermissionGroupRequest) UpdatePermissionGroupRequest(updatePermissionGroupRequest UpdatePermissionGroupRequest) PermissionGroupsApiUpdatePermissionGroupRequest {
+func (r PermissionGroupsAPIUpdatePermissionGroupRequest) UpdatePermissionGroupRequest(updatePermissionGroupRequest UpdatePermissionGroupRequest) PermissionGroupsAPIUpdatePermissionGroupRequest {
 	r.updatePermissionGroupRequest = &updatePermissionGroupRequest
 	return r
 }
 
-func (r PermissionGroupsApiUpdatePermissionGroupRequest) Execute() (*PermissionGroupModel, *http.Response, error) {
+func (r PermissionGroupsAPIUpdatePermissionGroupRequest) Execute() (*PermissionGroupModel, *http.Response, error) {
 	return r.ApiService.UpdatePermissionGroupExecute(r)
 }
 
@@ -462,10 +462,10 @@ This endpoint updates a Permission Group identified by the `permissionGroupId` p
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param permissionGroupId The identifier of the Permission Group.
- @return PermissionGroupsApiUpdatePermissionGroupRequest
+ @return PermissionGroupsAPIUpdatePermissionGroupRequest
 */
-func (a *PermissionGroupsApiService) UpdatePermissionGroup(ctx context.Context, permissionGroupId int64) PermissionGroupsApiUpdatePermissionGroupRequest {
-	return PermissionGroupsApiUpdatePermissionGroupRequest{
+func (a *PermissionGroupsAPIService) UpdatePermissionGroup(ctx context.Context, permissionGroupId int64) PermissionGroupsAPIUpdatePermissionGroupRequest {
+	return PermissionGroupsAPIUpdatePermissionGroupRequest{
 		ApiService: a,
 		ctx: ctx,
 		permissionGroupId: permissionGroupId,
@@ -474,7 +474,7 @@ func (a *PermissionGroupsApiService) UpdatePermissionGroup(ctx context.Context, 
 
 // Execute executes the request
 //  @return PermissionGroupModel
-func (a *PermissionGroupsApiService) UpdatePermissionGroupExecute(r PermissionGroupsApiUpdatePermissionGroupRequest) (*PermissionGroupModel, *http.Response, error) {
+func (a *PermissionGroupsAPIService) UpdatePermissionGroupExecute(r PermissionGroupsAPIUpdatePermissionGroupRequest) (*PermissionGroupModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
@@ -482,7 +482,7 @@ func (a *PermissionGroupsApiService) UpdatePermissionGroupExecute(r PermissionGr
 		localVarReturnValue  *PermissionGroupModel
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PermissionGroupsApiService.UpdatePermissionGroup")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PermissionGroupsAPIService.UpdatePermissionGroup")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

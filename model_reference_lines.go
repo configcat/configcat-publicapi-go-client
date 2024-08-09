@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ReferenceLines type satisfies the MappedNullable interface at compile time
@@ -30,6 +32,8 @@ type ReferenceLines struct {
 	PostLines []ReferenceLine `json:"postLines,omitempty"`
 	ReferenceLine ReferenceLine `json:"referenceLine"`
 }
+
+type _ReferenceLines ReferenceLines
 
 // NewReferenceLines instantiates a new ReferenceLines object
 // This constructor will assign default values to properties that have it defined,
@@ -137,7 +141,7 @@ func (o *ReferenceLines) GetPreLinesOk() ([]ReferenceLine, bool) {
 
 // HasPreLines returns a boolean if a field has been set.
 func (o *ReferenceLines) HasPreLines() bool {
-	if o != nil && IsNil(o.PreLines) {
+	if o != nil && !IsNil(o.PreLines) {
 		return true
 	}
 
@@ -170,7 +174,7 @@ func (o *ReferenceLines) GetPostLinesOk() ([]ReferenceLine, bool) {
 
 // HasPostLines returns a boolean if a field has been set.
 func (o *ReferenceLines) HasPostLines() bool {
-	if o != nil && IsNil(o.PostLines) {
+	if o != nil && !IsNil(o.PostLines) {
 		return true
 	}
 
@@ -228,6 +232,44 @@ func (o ReferenceLines) ToMap() (map[string]interface{}, error) {
 	}
 	toSerialize["referenceLine"] = o.ReferenceLine
 	return toSerialize, nil
+}
+
+func (o *ReferenceLines) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"file",
+		"referenceLine",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varReferenceLines := _ReferenceLines{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varReferenceLines)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReferenceLines(varReferenceLines)
+
+	return err
 }
 
 type NullableReferenceLines struct {

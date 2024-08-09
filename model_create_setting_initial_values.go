@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the CreateSettingInitialValues type satisfies the MappedNullable interface at compile time
@@ -34,6 +36,8 @@ type CreateSettingInitialValues struct {
 	// Optional, initial value of the Feature Flag or Setting in the given Environments.
 	InitialValues []InitialValue `json:"initialValues,omitempty"`
 }
+
+type _CreateSettingInitialValues CreateSettingInitialValues
 
 // NewCreateSettingInitialValues instantiates a new CreateSettingInitialValues object
 // This constructor will assign default values to properties that have it defined,
@@ -118,7 +122,7 @@ func (o *CreateSettingInitialValues) GetTagsOk() ([]int64, bool) {
 
 // HasTags returns a boolean if a field has been set.
 func (o *CreateSettingInitialValues) HasTags() bool {
-	if o != nil && IsNil(o.Tags) {
+	if o != nil && !IsNil(o.Tags) {
 		return true
 	}
 
@@ -265,7 +269,7 @@ func (o *CreateSettingInitialValues) GetInitialValuesOk() ([]InitialValue, bool)
 
 // HasInitialValues returns a boolean if a field has been set.
 func (o *CreateSettingInitialValues) HasInitialValues() bool {
-	if o != nil && IsNil(o.InitialValues) {
+	if o != nil && !IsNil(o.InitialValues) {
 		return true
 	}
 
@@ -303,6 +307,45 @@ func (o CreateSettingInitialValues) ToMap() (map[string]interface{}, error) {
 		toSerialize["initialValues"] = o.InitialValues
 	}
 	return toSerialize, nil
+}
+
+func (o *CreateSettingInitialValues) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"key",
+		"name",
+		"settingType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCreateSettingInitialValues := _CreateSettingInitialValues{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCreateSettingInitialValues)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CreateSettingInitialValues(varCreateSettingInitialValues)
+
+	return err
 }
 
 type NullableCreateSettingInitialValues struct {

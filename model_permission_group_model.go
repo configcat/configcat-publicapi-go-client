@@ -887,7 +887,7 @@ func (o *PermissionGroupModel) GetEnvironmentAccessesOk() ([]EnvironmentAccessMo
 
 // HasEnvironmentAccesses returns a boolean if a field has been set.
 func (o *PermissionGroupModel) HasEnvironmentAccesses() bool {
-	if o != nil && IsNil(o.EnvironmentAccesses) {
+	if o != nil && !IsNil(o.EnvironmentAccesses) {
 		return true
 	}
 

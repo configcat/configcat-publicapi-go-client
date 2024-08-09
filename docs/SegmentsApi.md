@@ -1,14 +1,14 @@
-# \SegmentsApi
+# \SegmentsAPI
 
 All URIs are relative to *https://test-api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateSegment**](SegmentsApi.md#CreateSegment) | **Post** /v1/products/{productId}/segments | Create Segment
-[**DeleteSegment**](SegmentsApi.md#DeleteSegment) | **Delete** /v1/segments/{segmentId} | Delete Segment
-[**GetSegment**](SegmentsApi.md#GetSegment) | **Get** /v1/segments/{segmentId} | Get Segment
-[**GetSegments**](SegmentsApi.md#GetSegments) | **Get** /v1/products/{productId}/segments | List Segments
-[**UpdateSegment**](SegmentsApi.md#UpdateSegment) | **Put** /v1/segments/{segmentId} | Update Segment
+[**CreateSegment**](SegmentsAPI.md#CreateSegment) | **Post** /v1/products/{productId}/segments | Create Segment
+[**DeleteSegment**](SegmentsAPI.md#DeleteSegment) | **Delete** /v1/segments/{segmentId} | Delete Segment
+[**GetSegment**](SegmentsAPI.md#GetSegment) | **Get** /v1/segments/{segmentId} | Get Segment
+[**GetSegments**](SegmentsAPI.md#GetSegments) | **Get** /v1/products/{productId}/segments | List Segments
+[**UpdateSegment**](SegmentsAPI.md#UpdateSegment) | **Put** /v1/segments/{segmentId} | Update Segment
 
 
 
@@ -26,25 +26,25 @@ Create Segment
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
-    createSegmentModel := *openapiclient.NewCreateSegmentModel("Name_example", "ComparisonAttribute_example", openapiclient.RolloutRuleComparator("isOneOf"), "ComparisonValue_example") // CreateSegmentModel | 
+	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+	createSegmentModel := *openapiclient.NewCreateSegmentModel("Name_example", "ComparisonAttribute_example", openapiclient.RolloutRuleComparator("isOneOf"), "ComparisonValue_example") // CreateSegmentModel | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SegmentsApi.CreateSegment(context.Background(), productId).CreateSegmentModel(createSegmentModel).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SegmentsApi.CreateSegment``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `CreateSegment`: SegmentModel
-    fmt.Fprintf(os.Stdout, "Response from `SegmentsApi.CreateSegment`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SegmentsAPI.CreateSegment(context.Background(), productId).CreateSegmentModel(createSegmentModel).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SegmentsAPI.CreateSegment``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateSegment`: SegmentModel
+	fmt.Fprintf(os.Stdout, "Response from `SegmentsAPI.CreateSegment`: %v\n", resp)
 }
 ```
 
@@ -98,22 +98,22 @@ Delete Segment
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    segmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Segment.
+	segmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Segment.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    r, err := apiClient.SegmentsApi.DeleteSegment(context.Background(), segmentId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SegmentsApi.DeleteSegment``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.SegmentsAPI.DeleteSegment(context.Background(), segmentId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SegmentsAPI.DeleteSegment``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
 }
 ```
 
@@ -166,24 +166,24 @@ Get Segment
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    segmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Segment.
+	segmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Segment.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SegmentsApi.GetSegment(context.Background(), segmentId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SegmentsApi.GetSegment``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetSegment`: SegmentModel
-    fmt.Fprintf(os.Stdout, "Response from `SegmentsApi.GetSegment`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SegmentsAPI.GetSegment(context.Background(), segmentId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SegmentsAPI.GetSegment``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSegment`: SegmentModel
+	fmt.Fprintf(os.Stdout, "Response from `SegmentsAPI.GetSegment`: %v\n", resp)
 }
 ```
 
@@ -236,24 +236,24 @@ List Segments
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
+	productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SegmentsApi.GetSegments(context.Background(), productId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SegmentsApi.GetSegments``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `GetSegments`: []SegmentListModel
-    fmt.Fprintf(os.Stdout, "Response from `SegmentsApi.GetSegments`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SegmentsAPI.GetSegments(context.Background(), productId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SegmentsAPI.GetSegments``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetSegments`: []SegmentListModel
+	fmt.Fprintf(os.Stdout, "Response from `SegmentsAPI.GetSegments`: %v\n", resp)
 }
 ```
 
@@ -306,25 +306,25 @@ Update Segment
 package main
 
 import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func main() {
-    segmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Segment.
-    updateSegmentModel := *openapiclient.NewUpdateSegmentModel() // UpdateSegmentModel | 
+	segmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Segment.
+	updateSegmentModel := *openapiclient.NewUpdateSegmentModel() // UpdateSegmentModel | 
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SegmentsApi.UpdateSegment(context.Background(), segmentId).UpdateSegmentModel(updateSegmentModel).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SegmentsApi.UpdateSegment``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `UpdateSegment`: SegmentModel
-    fmt.Fprintf(os.Stdout, "Response from `SegmentsApi.UpdateSegment`: %v\n", resp)
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.SegmentsAPI.UpdateSegment(context.Background(), segmentId).UpdateSegmentModel(updateSegmentModel).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `SegmentsAPI.UpdateSegment``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateSegment`: SegmentModel
+	fmt.Fprintf(os.Stdout, "Response from `SegmentsAPI.UpdateSegment`: %v\n", resp)
 }
 ```
 
