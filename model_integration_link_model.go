@@ -22,7 +22,7 @@ var _ MappedNullable = &IntegrationLinkModel{}
 type IntegrationLinkModel struct {
 	Key NullableString `json:"key,omitempty"`
 	Description NullableString `json:"description,omitempty"`
-	IntegrationLinkType *IntegrationLinkType `json:"integrationLinkType,omitempty"`
+	IntegrationLinkType *string `json:"integrationLinkType,omitempty"`
 	Url NullableString `json:"url,omitempty"`
 }
 
@@ -128,9 +128,9 @@ func (o *IntegrationLinkModel) UnsetDescription() {
 }
 
 // GetIntegrationLinkType returns the IntegrationLinkType field value if set, zero value otherwise.
-func (o *IntegrationLinkModel) GetIntegrationLinkType() IntegrationLinkType {
+func (o *IntegrationLinkModel) GetIntegrationLinkType() string {
 	if o == nil || IsNil(o.IntegrationLinkType) {
-		var ret IntegrationLinkType
+		var ret string
 		return ret
 	}
 	return *o.IntegrationLinkType
@@ -138,7 +138,7 @@ func (o *IntegrationLinkModel) GetIntegrationLinkType() IntegrationLinkType {
 
 // GetIntegrationLinkTypeOk returns a tuple with the IntegrationLinkType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IntegrationLinkModel) GetIntegrationLinkTypeOk() (*IntegrationLinkType, bool) {
+func (o *IntegrationLinkModel) GetIntegrationLinkTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.IntegrationLinkType) {
 		return nil, false
 	}
@@ -154,8 +154,8 @@ func (o *IntegrationLinkModel) HasIntegrationLinkType() bool {
 	return false
 }
 
-// SetIntegrationLinkType gets a reference to the given IntegrationLinkType and assigns it to the IntegrationLinkType field.
-func (o *IntegrationLinkModel) SetIntegrationLinkType(v IntegrationLinkType) {
+// SetIntegrationLinkType gets a reference to the given string and assigns it to the IntegrationLinkType field.
+func (o *IntegrationLinkModel) SetIntegrationLinkType(v string) {
 	o.IntegrationLinkType = &v
 }
 

@@ -25,7 +25,8 @@ type IntegrationModel struct {
 	IntegrationId *string `json:"integrationId,omitempty"`
 	// Name of the Integration.
 	Name NullableString `json:"name,omitempty"`
-	IntegrationType *IntegrationType `json:"integrationType,omitempty"`
+	// Type of the Integration.
+	IntegrationType *string `json:"integrationType,omitempty"`
 	// Parameters of the Integration.
 	Parameters map[string]string `json:"parameters,omitempty"`
 	// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
@@ -158,9 +159,9 @@ func (o *IntegrationModel) UnsetName() {
 }
 
 // GetIntegrationType returns the IntegrationType field value if set, zero value otherwise.
-func (o *IntegrationModel) GetIntegrationType() IntegrationType {
+func (o *IntegrationModel) GetIntegrationType() string {
 	if o == nil || IsNil(o.IntegrationType) {
-		var ret IntegrationType
+		var ret string
 		return ret
 	}
 	return *o.IntegrationType
@@ -168,7 +169,7 @@ func (o *IntegrationModel) GetIntegrationType() IntegrationType {
 
 // GetIntegrationTypeOk returns a tuple with the IntegrationType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *IntegrationModel) GetIntegrationTypeOk() (*IntegrationType, bool) {
+func (o *IntegrationModel) GetIntegrationTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.IntegrationType) {
 		return nil, false
 	}
@@ -184,8 +185,8 @@ func (o *IntegrationModel) HasIntegrationType() bool {
 	return false
 }
 
-// SetIntegrationType gets a reference to the given IntegrationType and assigns it to the IntegrationType field.
-func (o *IntegrationModel) SetIntegrationType(v IntegrationType) {
+// SetIntegrationType gets a reference to the given string and assigns it to the IntegrationType field.
+func (o *IntegrationModel) SetIntegrationType(v string) {
 	o.IntegrationType = &v
 }
 

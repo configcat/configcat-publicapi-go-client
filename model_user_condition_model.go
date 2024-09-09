@@ -22,7 +22,8 @@ var _ MappedNullable = &UserConditionModel{}
 type UserConditionModel struct {
 	// The User Object attribute that the condition is based on. Can be \"User ID\", \"Email\", \"Country\" or any custom attribute.
 	ComparisonAttribute string `json:"comparisonAttribute"`
-	Comparator UserComparator `json:"comparator"`
+	// The comparison operator which defines the relation between the comparison attribute and the comparison value.
+	Comparator string `json:"comparator"`
 	ComparisonValue ComparisonValueModel `json:"comparisonValue"`
 }
 
@@ -30,7 +31,7 @@ type UserConditionModel struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserConditionModel(comparisonAttribute string, comparator UserComparator, comparisonValue ComparisonValueModel) *UserConditionModel {
+func NewUserConditionModel(comparisonAttribute string, comparator string, comparisonValue ComparisonValueModel) *UserConditionModel {
 	this := UserConditionModel{}
 	this.ComparisonAttribute = comparisonAttribute
 	this.Comparator = comparator
@@ -71,9 +72,9 @@ func (o *UserConditionModel) SetComparisonAttribute(v string) {
 }
 
 // GetComparator returns the Comparator field value
-func (o *UserConditionModel) GetComparator() UserComparator {
+func (o *UserConditionModel) GetComparator() string {
 	if o == nil {
-		var ret UserComparator
+		var ret string
 		return ret
 	}
 
@@ -82,7 +83,7 @@ func (o *UserConditionModel) GetComparator() UserComparator {
 
 // GetComparatorOk returns a tuple with the Comparator field value
 // and a boolean to check if the value has been set.
-func (o *UserConditionModel) GetComparatorOk() (*UserComparator, bool) {
+func (o *UserConditionModel) GetComparatorOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,7 +91,7 @@ func (o *UserConditionModel) GetComparatorOk() (*UserComparator, bool) {
 }
 
 // SetComparator sets field value
-func (o *UserConditionModel) SetComparator(v UserComparator) {
+func (o *UserConditionModel) SetComparator(v string) {
 	o.Comparator = v
 }
 

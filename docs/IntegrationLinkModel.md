@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Key** | Pointer to **NullableString** |  | [optional] 
 **Description** | Pointer to **NullableString** |  | [optional] 
-**IntegrationLinkType** | Pointer to [**IntegrationLinkType**](IntegrationLinkType.md) |  | [optional] 
+**IntegrationLinkType** | Pointer to **string** |  | [optional] 
 **Url** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
@@ -100,20 +100,20 @@ HasDescription returns a boolean if a field has been set.
 UnsetDescription ensures that no value is present for Description, not even an explicit nil
 ### GetIntegrationLinkType
 
-`func (o *IntegrationLinkModel) GetIntegrationLinkType() IntegrationLinkType`
+`func (o *IntegrationLinkModel) GetIntegrationLinkType() string`
 
 GetIntegrationLinkType returns the IntegrationLinkType field if non-nil, zero value otherwise.
 
 ### GetIntegrationLinkTypeOk
 
-`func (o *IntegrationLinkModel) GetIntegrationLinkTypeOk() (*IntegrationLinkType, bool)`
+`func (o *IntegrationLinkModel) GetIntegrationLinkTypeOk() (*string, bool)`
 
 GetIntegrationLinkTypeOk returns a tuple with the IntegrationLinkType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIntegrationLinkType
 
-`func (o *IntegrationLinkModel) SetIntegrationLinkType(v IntegrationLinkType)`
+`func (o *IntegrationLinkModel) SetIntegrationLinkType(v string)`
 
 SetIntegrationLinkType sets IntegrationLinkType field to given value.
 

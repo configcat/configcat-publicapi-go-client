@@ -26,7 +26,7 @@ type CreateSegmentModel struct {
 	Description NullableString `json:"description,omitempty"`
 	// The user's attribute the evaluation process must take into account.
 	ComparisonAttribute string `json:"comparisonAttribute"`
-	Comparator RolloutRuleComparator `json:"comparator"`
+	Comparator string `json:"comparator"`
 	// The value to compare with the given user attribute's value.
 	ComparisonValue string `json:"comparisonValue"`
 }
@@ -35,7 +35,7 @@ type CreateSegmentModel struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateSegmentModel(name string, comparisonAttribute string, comparator RolloutRuleComparator, comparisonValue string) *CreateSegmentModel {
+func NewCreateSegmentModel(name string, comparisonAttribute string, comparator string, comparisonValue string) *CreateSegmentModel {
 	this := CreateSegmentModel{}
 	this.Name = name
 	this.ComparisonAttribute = comparisonAttribute
@@ -143,9 +143,9 @@ func (o *CreateSegmentModel) SetComparisonAttribute(v string) {
 }
 
 // GetComparator returns the Comparator field value
-func (o *CreateSegmentModel) GetComparator() RolloutRuleComparator {
+func (o *CreateSegmentModel) GetComparator() string {
 	if o == nil {
-		var ret RolloutRuleComparator
+		var ret string
 		return ret
 	}
 
@@ -154,7 +154,7 @@ func (o *CreateSegmentModel) GetComparator() RolloutRuleComparator {
 
 // GetComparatorOk returns a tuple with the Comparator field value
 // and a boolean to check if the value has been set.
-func (o *CreateSegmentModel) GetComparatorOk() (*RolloutRuleComparator, bool) {
+func (o *CreateSegmentModel) GetComparatorOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -162,7 +162,7 @@ func (o *CreateSegmentModel) GetComparatorOk() (*RolloutRuleComparator, bool) {
 }
 
 // SetComparator sets field value
-func (o *CreateSegmentModel) SetComparator(v RolloutRuleComparator) {
+func (o *CreateSegmentModel) SetComparator(v string) {
 	o.Comparator = v
 }
 

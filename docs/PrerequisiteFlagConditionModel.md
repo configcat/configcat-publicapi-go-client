@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PrerequisiteSettingId** | **int32** | The prerequisite flag&#39;s identifier. | 
-**Comparator** | [**PrerequisiteComparator**](PrerequisiteComparator.md) |  | 
+**Comparator** | **string** | Prerequisite flag comparison operator used during the evaluation process. | 
 **PrerequisiteComparisonValue** | [**ValueModel**](ValueModel.md) |  | 
 
 ## Methods
 
 ### NewPrerequisiteFlagConditionModel
 
-`func NewPrerequisiteFlagConditionModel(prerequisiteSettingId int32, comparator PrerequisiteComparator, prerequisiteComparisonValue ValueModel, ) *PrerequisiteFlagConditionModel`
+`func NewPrerequisiteFlagConditionModel(prerequisiteSettingId int32, comparator string, prerequisiteComparisonValue ValueModel, ) *PrerequisiteFlagConditionModel`
 
 NewPrerequisiteFlagConditionModel instantiates a new PrerequisiteFlagConditionModel object
 This constructor will assign default values to properties that have it defined,
@@ -49,20 +49,20 @@ SetPrerequisiteSettingId sets PrerequisiteSettingId field to given value.
 
 ### GetComparator
 
-`func (o *PrerequisiteFlagConditionModel) GetComparator() PrerequisiteComparator`
+`func (o *PrerequisiteFlagConditionModel) GetComparator() string`
 
 GetComparator returns the Comparator field if non-nil, zero value otherwise.
 
 ### GetComparatorOk
 
-`func (o *PrerequisiteFlagConditionModel) GetComparatorOk() (*PrerequisiteComparator, bool)`
+`func (o *PrerequisiteFlagConditionModel) GetComparatorOk() (*string, bool)`
 
 GetComparatorOk returns a tuple with the Comparator field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetComparator
 
-`func (o *PrerequisiteFlagConditionModel) SetComparator(v PrerequisiteComparator)`
+`func (o *PrerequisiteFlagConditionModel) SetComparator(v string)`
 
 SetComparator sets Comparator field to given value.
 

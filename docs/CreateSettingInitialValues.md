@@ -9,14 +9,14 @@ Name | Type | Description | Notes
 **Order** | Pointer to **NullableInt32** | The order of the Setting represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers. | [optional] 
 **Key** | **string** | The key of the Feature Flag or Setting. | 
 **Name** | **string** | The name of the Feature Flag or Setting. | 
-**SettingType** | [**SettingType**](SettingType.md) |  | 
+**SettingType** | **string** | The type of the Feature Flag or Setting. | 
 **InitialValues** | Pointer to [**[]InitialValue**](InitialValue.md) | Optional, initial value of the Feature Flag or Setting in the given Environments. | [optional] 
 
 ## Methods
 
 ### NewCreateSettingInitialValues
 
-`func NewCreateSettingInitialValues(key string, name string, settingType SettingType, ) *CreateSettingInitialValues`
+`func NewCreateSettingInitialValues(key string, name string, settingType string, ) *CreateSettingInitialValues`
 
 NewCreateSettingInitialValues instantiates a new CreateSettingInitialValues object
 This constructor will assign default values to properties that have it defined,
@@ -178,20 +178,20 @@ SetName sets Name field to given value.
 
 ### GetSettingType
 
-`func (o *CreateSettingInitialValues) GetSettingType() SettingType`
+`func (o *CreateSettingInitialValues) GetSettingType() string`
 
 GetSettingType returns the SettingType field if non-nil, zero value otherwise.
 
 ### GetSettingTypeOk
 
-`func (o *CreateSettingInitialValues) GetSettingTypeOk() (*SettingType, bool)`
+`func (o *CreateSettingInitialValues) GetSettingTypeOk() (*string, bool)`
 
 GetSettingTypeOk returns a tuple with the SettingType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSettingType
 
-`func (o *CreateSettingInitialValues) SetSettingType(v SettingType)`
+`func (o *CreateSettingInitialValues) SetSettingType(v string)`
 
 SetSettingType sets SettingType field to given value.
 

@@ -30,7 +30,8 @@ type ConfigModel struct {
 	// The order of the Config represented on the ConfigCat Dashboard.
 	Order *int32 `json:"order,omitempty"`
 	MigratedConfigId NullableString `json:"migratedConfigId,omitempty"`
-	EvaluationVersion *EvaluationVersion `json:"evaluationVersion,omitempty"`
+	// Determines the evaluation version of a Config.  Using `v2` enables the new features of Config V2 (https://configcat.com/docs/advanced/config-v2).
+	EvaluationVersion *string `json:"evaluationVersion,omitempty"`
 }
 
 // NewConfigModel instantiates a new ConfigModel object
@@ -273,9 +274,9 @@ func (o *ConfigModel) UnsetMigratedConfigId() {
 }
 
 // GetEvaluationVersion returns the EvaluationVersion field value if set, zero value otherwise.
-func (o *ConfigModel) GetEvaluationVersion() EvaluationVersion {
+func (o *ConfigModel) GetEvaluationVersion() string {
 	if o == nil || IsNil(o.EvaluationVersion) {
-		var ret EvaluationVersion
+		var ret string
 		return ret
 	}
 	return *o.EvaluationVersion
@@ -283,7 +284,7 @@ func (o *ConfigModel) GetEvaluationVersion() EvaluationVersion {
 
 // GetEvaluationVersionOk returns a tuple with the EvaluationVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigModel) GetEvaluationVersionOk() (*EvaluationVersion, bool) {
+func (o *ConfigModel) GetEvaluationVersionOk() (*string, bool) {
 	if o == nil || IsNil(o.EvaluationVersion) {
 		return nil, false
 	}
@@ -299,8 +300,8 @@ func (o *ConfigModel) HasEvaluationVersion() bool {
 	return false
 }
 
-// SetEvaluationVersion gets a reference to the given EvaluationVersion and assigns it to the EvaluationVersion field.
-func (o *ConfigModel) SetEvaluationVersion(v EvaluationVersion) {
+// SetEvaluationVersion gets a reference to the given string and assigns it to the EvaluationVersion field.
+func (o *ConfigModel) SetEvaluationVersion(v string) {
 	o.EvaluationVersion = &v
 }
 

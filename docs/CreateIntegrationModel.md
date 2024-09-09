@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**IntegrationType** | [**IntegrationType**](IntegrationType.md) |  | 
+**IntegrationType** | **string** | Type of the Integration. | 
 **Name** | **string** | Name of the Integration. | 
 **Parameters** | **map[string]string** | Parameters of the Integration. | 
 **EnvironmentIds** | **[]string** | List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected. | 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewCreateIntegrationModel
 
-`func NewCreateIntegrationModel(integrationType IntegrationType, name string, parameters map[string]string, environmentIds []string, configIds []string, ) *CreateIntegrationModel`
+`func NewCreateIntegrationModel(integrationType string, name string, parameters map[string]string, environmentIds []string, configIds []string, ) *CreateIntegrationModel`
 
 NewCreateIntegrationModel instantiates a new CreateIntegrationModel object
 This constructor will assign default values to properties that have it defined,
@@ -31,20 +31,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetIntegrationType
 
-`func (o *CreateIntegrationModel) GetIntegrationType() IntegrationType`
+`func (o *CreateIntegrationModel) GetIntegrationType() string`
 
 GetIntegrationType returns the IntegrationType field if non-nil, zero value otherwise.
 
 ### GetIntegrationTypeOk
 
-`func (o *CreateIntegrationModel) GetIntegrationTypeOk() (*IntegrationType, bool)`
+`func (o *CreateIntegrationModel) GetIntegrationTypeOk() (*string, bool)`
 
 GetIntegrationTypeOk returns a tuple with the IntegrationType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIntegrationType
 
-`func (o *CreateIntegrationModel) SetIntegrationType(v IntegrationType)`
+`func (o *CreateIntegrationModel) SetIntegrationType(v string)`
 
 SetIntegrationType sets IntegrationType field to given value.
 

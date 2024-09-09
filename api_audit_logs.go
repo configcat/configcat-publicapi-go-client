@@ -31,7 +31,7 @@ type AuditLogsApiGetAuditlogsRequest struct {
 	productId string
 	configId *string
 	environmentId *string
-	auditLogType *AuditLogType
+	auditLogType *string
 	fromUtcDateTime *time.Time
 	toUtcDateTime *time.Time
 }
@@ -49,7 +49,7 @@ func (r AuditLogsApiGetAuditlogsRequest) EnvironmentId(environmentId string) Aud
 }
 
 // Filter Audit logs by Audit log type.
-func (r AuditLogsApiGetAuditlogsRequest) AuditLogType(auditLogType AuditLogType) AuditLogsApiGetAuditlogsRequest {
+func (r AuditLogsApiGetAuditlogsRequest) AuditLogType(auditLogType string) AuditLogsApiGetAuditlogsRequest {
 	r.auditLogType = &auditLogType
 	return r
 }
@@ -289,7 +289,7 @@ type AuditLogsApiGetOrganizationAuditlogsRequest struct {
 	productId *string
 	configId *string
 	environmentId *string
-	auditLogType *AuditLogType
+	auditLogType *string
 	fromUtcDateTime *time.Time
 	toUtcDateTime *time.Time
 }
@@ -313,7 +313,7 @@ func (r AuditLogsApiGetOrganizationAuditlogsRequest) EnvironmentId(environmentId
 }
 
 // Filter Audit logs by Audit log type.
-func (r AuditLogsApiGetOrganizationAuditlogsRequest) AuditLogType(auditLogType AuditLogType) AuditLogsApiGetOrganizationAuditlogsRequest {
+func (r AuditLogsApiGetOrganizationAuditlogsRequest) AuditLogType(auditLogType string) AuditLogsApiGetOrganizationAuditlogsRequest {
 	r.auditLogType = &auditLogType
 	return r
 }

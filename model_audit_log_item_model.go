@@ -23,7 +23,7 @@ var _ MappedNullable = &AuditLogItemModel{}
 type AuditLogItemModel struct {
 	AuditLogId *int64 `json:"auditLogId,omitempty"`
 	AuditLogDateTime *time.Time `json:"auditLogDateTime,omitempty"`
-	AuditLogTypeEnum *AuditLogType `json:"auditLogTypeEnum,omitempty"`
+	AuditLogTypeEnum *string `json:"auditLogTypeEnum,omitempty"`
 	ChangeSetId NullableString `json:"changeSetId,omitempty"`
 	Truncated *bool `json:"truncated,omitempty"`
 	AuditLogType NullableString `json:"auditLogType,omitempty"`
@@ -117,9 +117,9 @@ func (o *AuditLogItemModel) SetAuditLogDateTime(v time.Time) {
 }
 
 // GetAuditLogTypeEnum returns the AuditLogTypeEnum field value if set, zero value otherwise.
-func (o *AuditLogItemModel) GetAuditLogTypeEnum() AuditLogType {
+func (o *AuditLogItemModel) GetAuditLogTypeEnum() string {
 	if o == nil || IsNil(o.AuditLogTypeEnum) {
-		var ret AuditLogType
+		var ret string
 		return ret
 	}
 	return *o.AuditLogTypeEnum
@@ -127,7 +127,7 @@ func (o *AuditLogItemModel) GetAuditLogTypeEnum() AuditLogType {
 
 // GetAuditLogTypeEnumOk returns a tuple with the AuditLogTypeEnum field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AuditLogItemModel) GetAuditLogTypeEnumOk() (*AuditLogType, bool) {
+func (o *AuditLogItemModel) GetAuditLogTypeEnumOk() (*string, bool) {
 	if o == nil || IsNil(o.AuditLogTypeEnum) {
 		return nil, false
 	}
@@ -143,8 +143,8 @@ func (o *AuditLogItemModel) HasAuditLogTypeEnum() bool {
 	return false
 }
 
-// SetAuditLogTypeEnum gets a reference to the given AuditLogType and assigns it to the AuditLogTypeEnum field.
-func (o *AuditLogItemModel) SetAuditLogTypeEnum(v AuditLogType) {
+// SetAuditLogTypeEnum gets a reference to the given string and assigns it to the AuditLogTypeEnum field.
+func (o *AuditLogItemModel) SetAuditLogTypeEnum(v string) {
 	o.AuditLogTypeEnum = &v
 }
 

@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ComparisonAttribute** | **string** | The User Object attribute that the condition is based on. Can be \&quot;User ID\&quot;, \&quot;Email\&quot;, \&quot;Country\&quot; or any custom attribute. | 
-**Comparator** | [**UserComparator**](UserComparator.md) |  | 
+**Comparator** | **string** | The comparison operator which defines the relation between the comparison attribute and the comparison value. | 
 **ComparisonValue** | [**ComparisonValueModel**](ComparisonValueModel.md) |  | 
 
 ## Methods
 
 ### NewUserConditionModel
 
-`func NewUserConditionModel(comparisonAttribute string, comparator UserComparator, comparisonValue ComparisonValueModel, ) *UserConditionModel`
+`func NewUserConditionModel(comparisonAttribute string, comparator string, comparisonValue ComparisonValueModel, ) *UserConditionModel`
 
 NewUserConditionModel instantiates a new UserConditionModel object
 This constructor will assign default values to properties that have it defined,
@@ -49,20 +49,20 @@ SetComparisonAttribute sets ComparisonAttribute field to given value.
 
 ### GetComparator
 
-`func (o *UserConditionModel) GetComparator() UserComparator`
+`func (o *UserConditionModel) GetComparator() string`
 
 GetComparator returns the Comparator field if non-nil, zero value otherwise.
 
 ### GetComparatorOk
 
-`func (o *UserConditionModel) GetComparatorOk() (*UserComparator, bool)`
+`func (o *UserConditionModel) GetComparatorOk() (*string, bool)`
 
 GetComparatorOk returns a tuple with the Comparator field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetComparator
 
-`func (o *UserConditionModel) SetComparator(v UserComparator)`
+`func (o *UserConditionModel) SetComparator(v string)`
 
 SetComparator sets Comparator field to given value.
 

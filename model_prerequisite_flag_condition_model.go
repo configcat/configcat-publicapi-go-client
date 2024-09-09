@@ -22,7 +22,8 @@ var _ MappedNullable = &PrerequisiteFlagConditionModel{}
 type PrerequisiteFlagConditionModel struct {
 	// The prerequisite flag's identifier.
 	PrerequisiteSettingId int32 `json:"prerequisiteSettingId"`
-	Comparator PrerequisiteComparator `json:"comparator"`
+	// Prerequisite flag comparison operator used during the evaluation process.
+	Comparator string `json:"comparator"`
 	PrerequisiteComparisonValue ValueModel `json:"prerequisiteComparisonValue"`
 }
 
@@ -30,7 +31,7 @@ type PrerequisiteFlagConditionModel struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPrerequisiteFlagConditionModel(prerequisiteSettingId int32, comparator PrerequisiteComparator, prerequisiteComparisonValue ValueModel) *PrerequisiteFlagConditionModel {
+func NewPrerequisiteFlagConditionModel(prerequisiteSettingId int32, comparator string, prerequisiteComparisonValue ValueModel) *PrerequisiteFlagConditionModel {
 	this := PrerequisiteFlagConditionModel{}
 	this.PrerequisiteSettingId = prerequisiteSettingId
 	this.Comparator = comparator
@@ -71,9 +72,9 @@ func (o *PrerequisiteFlagConditionModel) SetPrerequisiteSettingId(v int32) {
 }
 
 // GetComparator returns the Comparator field value
-func (o *PrerequisiteFlagConditionModel) GetComparator() PrerequisiteComparator {
+func (o *PrerequisiteFlagConditionModel) GetComparator() string {
 	if o == nil {
-		var ret PrerequisiteComparator
+		var ret string
 		return ret
 	}
 
@@ -82,7 +83,7 @@ func (o *PrerequisiteFlagConditionModel) GetComparator() PrerequisiteComparator 
 
 // GetComparatorOk returns a tuple with the Comparator field value
 // and a boolean to check if the value has been set.
-func (o *PrerequisiteFlagConditionModel) GetComparatorOk() (*PrerequisiteComparator, bool) {
+func (o *PrerequisiteFlagConditionModel) GetComparatorOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,7 +91,7 @@ func (o *PrerequisiteFlagConditionModel) GetComparatorOk() (*PrerequisiteCompara
 }
 
 // SetComparator sets field value
-func (o *PrerequisiteFlagConditionModel) SetComparator(v PrerequisiteComparator) {
+func (o *PrerequisiteFlagConditionModel) SetComparator(v string) {
 	o.Comparator = v
 }
 

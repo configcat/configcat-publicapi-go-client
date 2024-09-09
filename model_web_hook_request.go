@@ -24,7 +24,8 @@ type WebHookRequest struct {
 	Url string `json:"url"`
 	// The HTTP body content.
 	Content NullableString `json:"content,omitempty"`
-	HttpMethod *WebHookHttpMethod `json:"httpMethod,omitempty"`
+	// The HTTP method of the remote endpoint.
+	HttpMethod *string `json:"httpMethod,omitempty"`
 	// List of HTTP headers.
 	WebHookHeaders []WebhookHeaderModel `json:"webHookHeaders,omitempty"`
 }
@@ -114,9 +115,9 @@ func (o *WebHookRequest) UnsetContent() {
 }
 
 // GetHttpMethod returns the HttpMethod field value if set, zero value otherwise.
-func (o *WebHookRequest) GetHttpMethod() WebHookHttpMethod {
+func (o *WebHookRequest) GetHttpMethod() string {
 	if o == nil || IsNil(o.HttpMethod) {
-		var ret WebHookHttpMethod
+		var ret string
 		return ret
 	}
 	return *o.HttpMethod
@@ -124,7 +125,7 @@ func (o *WebHookRequest) GetHttpMethod() WebHookHttpMethod {
 
 // GetHttpMethodOk returns a tuple with the HttpMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WebHookRequest) GetHttpMethodOk() (*WebHookHttpMethod, bool) {
+func (o *WebHookRequest) GetHttpMethodOk() (*string, bool) {
 	if o == nil || IsNil(o.HttpMethod) {
 		return nil, false
 	}
@@ -140,8 +141,8 @@ func (o *WebHookRequest) HasHttpMethod() bool {
 	return false
 }
 
-// SetHttpMethod gets a reference to the given WebHookHttpMethod and assigns it to the HttpMethod field.
-func (o *WebHookRequest) SetHttpMethod(v WebHookHttpMethod) {
+// SetHttpMethod gets a reference to the given string and assigns it to the HttpMethod field.
+func (o *WebHookRequest) SetHttpMethod(v string) {
 	o.HttpMethod = &v
 }
 

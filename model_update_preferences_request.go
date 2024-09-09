@@ -22,7 +22,8 @@ var _ MappedNullable = &UpdatePreferencesRequest{}
 type UpdatePreferencesRequest struct {
 	// Indicates that a mandatory note is required for saving and publishing.
 	ReasonRequired NullableBool `json:"reasonRequired,omitempty"`
-	KeyGenerationMode *KeyGenerationMode `json:"keyGenerationMode,omitempty"`
+	// Determines the Feature Flag key generation mode.
+	KeyGenerationMode NullableString `json:"keyGenerationMode,omitempty"`
 	// Indicates whether a variation ID's must be shown on the ConfigCat Dashboard.
 	ShowVariationId NullableBool `json:"showVariationId,omitempty"`
 	// Indicates whether Feature flags and Settings must have a hint.
@@ -90,36 +91,46 @@ func (o *UpdatePreferencesRequest) UnsetReasonRequired() {
 	o.ReasonRequired.Unset()
 }
 
-// GetKeyGenerationMode returns the KeyGenerationMode field value if set, zero value otherwise.
-func (o *UpdatePreferencesRequest) GetKeyGenerationMode() KeyGenerationMode {
-	if o == nil || IsNil(o.KeyGenerationMode) {
-		var ret KeyGenerationMode
+// GetKeyGenerationMode returns the KeyGenerationMode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdatePreferencesRequest) GetKeyGenerationMode() string {
+	if o == nil || IsNil(o.KeyGenerationMode.Get()) {
+		var ret string
 		return ret
 	}
-	return *o.KeyGenerationMode
+	return *o.KeyGenerationMode.Get()
 }
 
 // GetKeyGenerationModeOk returns a tuple with the KeyGenerationMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePreferencesRequest) GetKeyGenerationModeOk() (*KeyGenerationMode, bool) {
-	if o == nil || IsNil(o.KeyGenerationMode) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdatePreferencesRequest) GetKeyGenerationModeOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.KeyGenerationMode, true
+	return o.KeyGenerationMode.Get(), o.KeyGenerationMode.IsSet()
 }
 
 // HasKeyGenerationMode returns a boolean if a field has been set.
 func (o *UpdatePreferencesRequest) HasKeyGenerationMode() bool {
-	if o != nil && !IsNil(o.KeyGenerationMode) {
+	if o != nil && o.KeyGenerationMode.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetKeyGenerationMode gets a reference to the given KeyGenerationMode and assigns it to the KeyGenerationMode field.
-func (o *UpdatePreferencesRequest) SetKeyGenerationMode(v KeyGenerationMode) {
-	o.KeyGenerationMode = &v
+// SetKeyGenerationMode gets a reference to the given NullableString and assigns it to the KeyGenerationMode field.
+func (o *UpdatePreferencesRequest) SetKeyGenerationMode(v string) {
+	o.KeyGenerationMode.Set(&v)
+}
+// SetKeyGenerationModeNil sets the value for KeyGenerationMode to be an explicit nil
+func (o *UpdatePreferencesRequest) SetKeyGenerationModeNil() {
+	o.KeyGenerationMode.Set(nil)
+}
+
+// UnsetKeyGenerationMode ensures that no value is present for KeyGenerationMode, not even an explicit nil
+func (o *UpdatePreferencesRequest) UnsetKeyGenerationMode() {
+	o.KeyGenerationMode.Unset()
 }
 
 // GetShowVariationId returns the ShowVariationId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -252,8 +263,8 @@ func (o UpdatePreferencesRequest) ToMap() (map[string]interface{}, error) {
 	if o.ReasonRequired.IsSet() {
 		toSerialize["reasonRequired"] = o.ReasonRequired.Get()
 	}
-	if !IsNil(o.KeyGenerationMode) {
-		toSerialize["keyGenerationMode"] = o.KeyGenerationMode
+	if o.KeyGenerationMode.IsSet() {
+		toSerialize["keyGenerationMode"] = o.KeyGenerationMode.Get()
 	}
 	if o.ShowVariationId.IsSet() {
 		toSerialize["showVariationId"] = o.ShowVariationId.Get()

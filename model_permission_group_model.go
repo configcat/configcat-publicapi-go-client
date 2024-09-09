@@ -64,8 +64,10 @@ type PermissionGroupModel struct {
 	CanViewProductAuditLog *bool `json:"canViewProductAuditLog,omitempty"`
 	// Group members has access to product statistics.
 	CanViewProductStatistics *bool `json:"canViewProductStatistics,omitempty"`
-	AccessType *AccessType `json:"accessType,omitempty"`
-	NewEnvironmentAccessType *EnvironmentAccessType `json:"newEnvironmentAccessType,omitempty"`
+	// Represent the Feature Management permission.
+	AccessType *string `json:"accessType,omitempty"`
+	// Represent the environment specific Feature Management permission.
+	NewEnvironmentAccessType *string `json:"newEnvironmentAccessType,omitempty"`
 	// List of environment specific permissions.
 	EnvironmentAccesses []EnvironmentAccessModel `json:"environmentAccesses,omitempty"`
 	Product *ProductModel `json:"product,omitempty"`
@@ -803,9 +805,9 @@ func (o *PermissionGroupModel) SetCanViewProductStatistics(v bool) {
 }
 
 // GetAccessType returns the AccessType field value if set, zero value otherwise.
-func (o *PermissionGroupModel) GetAccessType() AccessType {
+func (o *PermissionGroupModel) GetAccessType() string {
 	if o == nil || IsNil(o.AccessType) {
-		var ret AccessType
+		var ret string
 		return ret
 	}
 	return *o.AccessType
@@ -813,7 +815,7 @@ func (o *PermissionGroupModel) GetAccessType() AccessType {
 
 // GetAccessTypeOk returns a tuple with the AccessType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PermissionGroupModel) GetAccessTypeOk() (*AccessType, bool) {
+func (o *PermissionGroupModel) GetAccessTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.AccessType) {
 		return nil, false
 	}
@@ -829,15 +831,15 @@ func (o *PermissionGroupModel) HasAccessType() bool {
 	return false
 }
 
-// SetAccessType gets a reference to the given AccessType and assigns it to the AccessType field.
-func (o *PermissionGroupModel) SetAccessType(v AccessType) {
+// SetAccessType gets a reference to the given string and assigns it to the AccessType field.
+func (o *PermissionGroupModel) SetAccessType(v string) {
 	o.AccessType = &v
 }
 
 // GetNewEnvironmentAccessType returns the NewEnvironmentAccessType field value if set, zero value otherwise.
-func (o *PermissionGroupModel) GetNewEnvironmentAccessType() EnvironmentAccessType {
+func (o *PermissionGroupModel) GetNewEnvironmentAccessType() string {
 	if o == nil || IsNil(o.NewEnvironmentAccessType) {
-		var ret EnvironmentAccessType
+		var ret string
 		return ret
 	}
 	return *o.NewEnvironmentAccessType
@@ -845,7 +847,7 @@ func (o *PermissionGroupModel) GetNewEnvironmentAccessType() EnvironmentAccessTy
 
 // GetNewEnvironmentAccessTypeOk returns a tuple with the NewEnvironmentAccessType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PermissionGroupModel) GetNewEnvironmentAccessTypeOk() (*EnvironmentAccessType, bool) {
+func (o *PermissionGroupModel) GetNewEnvironmentAccessTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.NewEnvironmentAccessType) {
 		return nil, false
 	}
@@ -861,8 +863,8 @@ func (o *PermissionGroupModel) HasNewEnvironmentAccessType() bool {
 	return false
 }
 
-// SetNewEnvironmentAccessType gets a reference to the given EnvironmentAccessType and assigns it to the NewEnvironmentAccessType field.
-func (o *PermissionGroupModel) SetNewEnvironmentAccessType(v EnvironmentAccessType) {
+// SetNewEnvironmentAccessType gets a reference to the given string and assigns it to the NewEnvironmentAccessType field.
+func (o *PermissionGroupModel) SetNewEnvironmentAccessType(v string) {
 	o.NewEnvironmentAccessType = &v
 }
 

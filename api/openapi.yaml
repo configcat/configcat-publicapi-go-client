@@ -837,9 +837,85 @@ paths:
         name: auditLogType
         required: false
         schema:
-          allOf:
-          - $ref: '#/components/schemas/AuditLogType'
-          nullable: true
+          enum:
+          - productCreated
+          - productChanged
+          - productOwnershipTransferred
+          - productDeleted
+          - productsReordered
+          - teamMemberInvited
+          - teamMemberInvitationRevoked
+          - teamMemberJoined
+          - teamMemberPermissionGroupChanged
+          - teamMemberRemoved
+          - teamMemberLeft
+          - teamMemberInvitationChanged
+          - teamMemberInvitationResent
+          - teamMemberInvitationRejected
+          - configCreated
+          - configChanged
+          - configDeleted
+          - configsReordered
+          - environmentCreated
+          - environmentChanged
+          - environmentDeleted
+          - environmentsReordered
+          - settingCreated
+          - settingChanged
+          - settingDeleted
+          - settingsReordered
+          - settingValueChanged
+          - webHookCreated
+          - webHookChanged
+          - webHookDeleted
+          - permissionGroupCreated
+          - permissionGroupChanged
+          - permissionGroupDeleted
+          - permissionGroupDefault
+          - apiKeyAdded
+          - apiKeyRemoved
+          - integrationAdded
+          - integrationChanged
+          - integrationRemoved
+          - apiKeyConnected
+          - integrationLinkAdded
+          - integrationLinkRemoved
+          - organizationAdded
+          - organizationRemoved
+          - organizationChanged
+          - organizationSubscriptionTypeChanged
+          - organizationAdminChanged
+          - organizationAdminLeft
+          - organizationAdminDisabled2FA
+          - tagAdded
+          - tagChanged
+          - tagRemoved
+          - settingTagAdded
+          - settingTagRemoved
+          - publicApiAccessTokenAdded
+          - publicApiAccessTokenRemoved
+          - domainAdded
+          - domainVerified
+          - domainRemoved
+          - domainSamlConfigured
+          - domainSamlDeleted
+          - autoProvisioningConfigurationChanged
+          - samlIdpConfigurationAdded
+          - samlIdpConfigurationRemoved
+          - samlIdpConfigurationUpdated
+          - organizationMemberJoined
+          - organizationMemberProductJoinRequested
+          - organizationMemberProductJoinRequestRejected
+          - organizationMemberProductJoinRequestApproved
+          - codeReferencesUploaded
+          - codeReferenceDeleted
+          - codeReferenceStaleBranchDeleted
+          - segmentCreated
+          - segmentChanged
+          - segmentDeleted
+          - webhookSigningKeyDeleted
+          - webhookSigningKeyCreated
+          type: string
         style: form
       - description: Filter Audit logs by starting UTC date.
         explode: true
@@ -1389,7 +1465,11 @@ paths:
         name: integrationLinkType
         required: true
         schema:
-          $ref: '#/components/schemas/IntegrationLinkType'
+          enum:
+          - trello
+          - jira
+          - monday
+          type: string
         style: simple
       - description: The key of the integration link.
         explode: false
@@ -1524,9 +1604,85 @@ paths:
         name: auditLogType
         required: false
         schema:
-          allOf:
-          - $ref: '#/components/schemas/AuditLogType'
-          nullable: true
+          enum:
+          - productCreated
+          - productChanged
+          - productOwnershipTransferred
+          - productDeleted
+          - productsReordered
+          - teamMemberInvited
+          - teamMemberInvitationRevoked
+          - teamMemberJoined
+          - teamMemberPermissionGroupChanged
+          - teamMemberRemoved
+          - teamMemberLeft
+          - teamMemberInvitationChanged
+          - teamMemberInvitationResent
+          - teamMemberInvitationRejected
+          - configCreated
+          - configChanged
+          - configDeleted
+          - configsReordered
+          - environmentCreated
+          - environmentChanged
+          - environmentDeleted
+          - environmentsReordered
+          - settingCreated
+          - settingChanged
+          - settingDeleted
+          - settingsReordered
+          - settingValueChanged
+          - webHookCreated
+          - webHookChanged
+          - webHookDeleted
+          - permissionGroupCreated
+          - permissionGroupChanged
+          - permissionGroupDeleted
+          - permissionGroupDefault
+          - apiKeyAdded
+          - apiKeyRemoved
+          - integrationAdded
+          - integrationChanged
+          - integrationRemoved
+          - apiKeyConnected
+          - integrationLinkAdded
+          - integrationLinkRemoved
+          - organizationAdded
+          - organizationRemoved
+          - organizationChanged
+          - organizationSubscriptionTypeChanged
+          - organizationAdminChanged
+          - organizationAdminLeft
+          - organizationAdminDisabled2FA
+          - tagAdded
+          - tagChanged
+          - tagRemoved
+          - settingTagAdded
+          - settingTagRemoved
+          - publicApiAccessTokenAdded
+          - publicApiAccessTokenRemoved
+          - domainAdded
+          - domainVerified
+          - domainRemoved
+          - domainSamlConfigured
+          - domainSamlDeleted
+          - autoProvisioningConfigurationChanged
+          - samlIdpConfigurationAdded
+          - samlIdpConfigurationRemoved
+          - samlIdpConfigurationUpdated
+          - organizationMemberJoined
+          - organizationMemberProductJoinRequested
+          - organizationMemberProductJoinRequestRejected
+          - organizationMemberProductJoinRequestApproved
+          - codeReferencesUploaded
+          - codeReferenceDeleted
+          - codeReferenceStaleBranchDeleted
+          - segmentCreated
+          - segmentChanged
+          - segmentDeleted
+          - webhookSigningKeyDeleted
+          - webhookSigningKeyCreated
+          type: string
         style: form
       - description: Filter Audit logs by starting UTC date.
         explode: true
@@ -4968,7 +5124,11 @@ paths:
         name: integrationLinkType
         required: true
         schema:
-          $ref: '#/components/schemas/IntegrationLinkType'
+          enum:
+          - trello
+          - jira
+          - monday
+          type: string
         style: simple
       - description: The key of the integration link.
         explode: false
@@ -5023,7 +5183,11 @@ paths:
         name: integrationLinkType
         required: true
         schema:
-          $ref: '#/components/schemas/IntegrationLinkType'
+          enum:
+          - trello
+          - jira
+          - monday
+          type: string
         style: simple
       - description: The key of the integration link.
         explode: false
@@ -5486,13 +5650,6 @@ paths:
       - Members
 components:
   schemas:
-    AccessType:
-      description: Represent the Feature Management permission.
-      enum:
-      - readOnly
-      - full
-      - custom
-      type: string
     AddOrUpdateIntegrationLinkModel:
       additionalProperties: false
       example:
@@ -5541,7 +5698,7 @@ components:
     AuditLogItemModel:
       additionalProperties: false
       example:
-        auditLogTypeEnum: null
+        auditLogTypeEnum: productCreated
         auditLogDateTime: 2000-01-23T04:56:07.000+00:00
         auditLogType: auditLogType
         auditLogId: 0
@@ -5561,7 +5718,85 @@ components:
           format: date-time
           type: string
         auditLogTypeEnum:
-          $ref: '#/components/schemas/AuditLogType'
+          enum:
+          - productCreated
+          - productChanged
+          - productOwnershipTransferred
+          - productDeleted
+          - productsReordered
+          - teamMemberInvited
+          - teamMemberInvitationRevoked
+          - teamMemberJoined
+          - teamMemberPermissionGroupChanged
+          - teamMemberRemoved
+          - teamMemberLeft
+          - teamMemberInvitationChanged
+          - teamMemberInvitationResent
+          - teamMemberInvitationRejected
+          - configCreated
+          - configChanged
+          - configDeleted
+          - configsReordered
+          - environmentCreated
+          - environmentChanged
+          - environmentDeleted
+          - environmentsReordered
+          - settingCreated
+          - settingChanged
+          - settingDeleted
+          - settingsReordered
+          - settingValueChanged
+          - webHookCreated
+          - webHookChanged
+          - webHookDeleted
+          - permissionGroupCreated
+          - permissionGroupChanged
+          - permissionGroupDeleted
+          - permissionGroupDefault
+          - apiKeyAdded
+          - apiKeyRemoved
+          - integrationAdded
+          - integrationChanged
+          - integrationRemoved
+          - apiKeyConnected
+          - integrationLinkAdded
+          - integrationLinkRemoved
+          - organizationAdded
+          - organizationRemoved
+          - organizationChanged
+          - organizationSubscriptionTypeChanged
+          - organizationAdminChanged
+          - organizationAdminLeft
+          - organizationAdminDisabled2FA
+          - tagAdded
+          - tagChanged
+          - tagRemoved
+          - settingTagAdded
+          - settingTagRemoved
+          - publicApiAccessTokenAdded
+          - publicApiAccessTokenRemoved
+          - domainAdded
+          - domainVerified
+          - domainRemoved
+          - domainSamlConfigured
+          - domainSamlDeleted
+          - autoProvisioningConfigurationChanged
+          - samlIdpConfigurationAdded
+          - samlIdpConfigurationRemoved
+          - samlIdpConfigurationUpdated
+          - organizationMemberJoined
+          - organizationMemberProductJoinRequested
+          - organizationMemberProductJoinRequestRejected
+          - organizationMemberProductJoinRequestApproved
+          - codeReferencesUploaded
+          - codeReferenceDeleted
+          - codeReferenceStaleBranchDeleted
+          - segmentCreated
+          - segmentChanged
+          - segmentDeleted
+          - webhookSigningKeyDeleted
+          - webhookSigningKeyCreated
+          type: string
         changeSetId:
           format: uuid
           nullable: true
@@ -5590,86 +5825,6 @@ components:
           nullable: true
           type: string
       type: object
-    AuditLogType:
-      enum:
-      - productCreated
-      - productChanged
-      - productOwnershipTransferred
-      - productDeleted
-      - productsReordered
-      - teamMemberInvited
-      - teamMemberInvitationRevoked
-      - teamMemberJoined
-      - teamMemberPermissionGroupChanged
-      - teamMemberRemoved
-      - teamMemberLeft
-      - teamMemberInvitationChanged
-      - teamMemberInvitationResent
-      - teamMemberInvitationRejected
-      - configCreated
-      - configChanged
-      - configDeleted
-      - configsReordered
-      - environmentCreated
-      - environmentChanged
-      - environmentDeleted
-      - environmentsReordered
-      - settingCreated
-      - settingChanged
-      - settingDeleted
-      - settingsReordered
-      - settingValueChanged
-      - webHookCreated
-      - webHookChanged
-      - webHookDeleted
-      - permissionGroupCreated
-      - permissionGroupChanged
-      - permissionGroupDeleted
-      - permissionGroupDefault
-      - apiKeyAdded
-      - apiKeyRemoved
-      - integrationAdded
-      - integrationChanged
-      - integrationRemoved
-      - apiKeyConnected
-      - integrationLinkAdded
-      - integrationLinkRemoved
-      - organizationAdded
-      - organizationRemoved
-      - organizationChanged
-      - organizationSubscriptionTypeChanged
-      - organizationAdminChanged
-      - organizationAdminLeft
-      - organizationAdminDisabled2FA
-      - tagAdded
-      - tagChanged
-      - tagRemoved
-      - settingTagAdded
-      - settingTagRemoved
-      - publicApiAccessTokenAdded
-      - publicApiAccessTokenRemoved
-      - domainAdded
-      - domainVerified
-      - domainRemoved
-      - domainSamlConfigured
-      - domainSamlDeleted
-      - autoProvisioningConfigurationChanged
-      - samlIdpConfigurationAdded
-      - samlIdpConfigurationRemoved
-      - samlIdpConfigurationUpdated
-      - organizationMemberJoined
-      - organizationMemberProductJoinRequested
-      - organizationMemberProductJoinRequestRejected
-      - organizationMemberProductJoinRequestApproved
-      - codeReferencesUploaded
-      - codeReferenceDeleted
-      - codeReferenceStaleBranchDeleted
-      - segmentCreated
-      - segmentChanged
-      - segmentDeleted
-      - webhookSigningKeyDeleted
-      - webhookSigningKeyCreated
-      type: string
     CodeReferenceModel:
       additionalProperties: false
       example:
@@ -5930,10 +6085,10 @@ components:
       additionalProperties: false
       example:
         segmentCondition:
-          comparator: null
+          comparator: isIn
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         userCondition:
-          comparator: null
+          comparator: isOneOf
           comparisonValue:
             listValue:
             - hint: hint
@@ -5944,7 +6099,7 @@ components:
             doubleValue: 1.4658129805029452
           comparisonAttribute: comparisonAttribute
         prerequisiteFlagCondition:
-          comparator: null
+          comparator: equals
           prerequisiteComparisonValue:
             stringValue: stringValue
             intValue: 0
@@ -5976,7 +6131,7 @@ components:
         name: name
         description: description
         migratedConfigId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        evaluationVersion: null
+        evaluationVersion: v1
         order: 0
       properties:
         product:
@@ -6002,7 +6157,12 @@ components:
           nullable: true
           type: string
         evaluationVersion:
-          $ref: '#/components/schemas/EvaluationVersion'
+          description: "Determines the evaluation version of a Config.\r\nUsing `v2`\
+            \ enables the new features of Config V2 (https://configcat.com/docs/advanced/config-v2)."
+          enum:
+          - v1
+          - v2
+          type: string
       type: object
     ConfigSettingFormulaModel:
       additionalProperties: false
@@ -6024,10 +6184,10 @@ components:
               doubleValue: 6.027456183070403
           conditions:
           - segmentCondition:
-              comparator: null
+              comparator: isIn
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: null
+              comparator: isOneOf
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -6038,7 +6198,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: null
+              comparator: equals
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -6046,10 +6206,10 @@ components:
                 doubleValue: 6.027456183070403
               prerequisiteSettingId: 5
           - segmentCondition:
-              comparator: null
+              comparator: isIn
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: null
+              comparator: isOneOf
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -6060,7 +6220,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: null
+              comparator: equals
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -6087,10 +6247,10 @@ components:
               doubleValue: 6.027456183070403
           conditions:
           - segmentCondition:
-              comparator: null
+              comparator: isIn
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: null
+              comparator: isOneOf
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -6101,7 +6261,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: null
+              comparator: equals
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -6109,10 +6269,10 @@ components:
                 doubleValue: 6.027456183070403
               prerequisiteSettingId: 5
           - segmentCondition:
-              comparator: null
+              comparator: isIn
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: null
+              comparator: isOneOf
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -6123,7 +6283,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: null
+              comparator: equals
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -6146,11 +6306,11 @@ components:
         - 0
         lastUpdaterUserEmail: lastUpdaterUserEmail
         integrationLinks:
-        - integrationLinkType: null
+        - integrationLinkType: trello
           description: description
           key: key
           url: url
-        - integrationLinkType: null
+        - integrationLinkType: trello
           description: description
           key: key
           url: url
@@ -6170,7 +6330,7 @@ components:
           name: name
           creatorFullName: creatorFullName
           isWatching: true
-          settingType: null
+          settingType: boolean
           key: key
           settingId: 0
           order: 6
@@ -6275,10 +6435,10 @@ components:
                 doubleValue: 6.027456183070403
             conditions:
             - segmentCondition:
-                comparator: null
+                comparator: isIn
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: null
+                comparator: isOneOf
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -6289,7 +6449,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: null
+                comparator: equals
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -6297,10 +6457,10 @@ components:
                   doubleValue: 6.027456183070403
                 prerequisiteSettingId: 5
             - segmentCondition:
-                comparator: null
+                comparator: isIn
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: null
+                comparator: isOneOf
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -6311,7 +6471,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: null
+                comparator: equals
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -6338,10 +6498,10 @@ components:
                 doubleValue: 6.027456183070403
             conditions:
             - segmentCondition:
-                comparator: null
+                comparator: isIn
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: null
+                comparator: isOneOf
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -6352,7 +6512,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: null
+                comparator: equals
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -6360,10 +6520,10 @@ components:
                   doubleValue: 6.027456183070403
                 prerequisiteSettingId: 5
             - segmentCondition:
-                comparator: null
+                comparator: isIn
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: null
+                comparator: isOneOf
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -6374,7 +6534,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: null
+                comparator: equals
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -6397,11 +6557,11 @@ components:
           - 0
           lastUpdaterUserEmail: lastUpdaterUserEmail
           integrationLinks:
-          - integrationLinkType: null
+          - integrationLinkType: trello
             description: description
             key: key
             url: url
-          - integrationLinkType: null
+          - integrationLinkType: trello
             description: description
             key: key
             url: url
@@ -6421,7 +6581,7 @@ components:
             name: name
             creatorFullName: creatorFullName
             isWatching: true
-            settingType: null
+            settingType: boolean
             key: key
             settingId: 0
             order: 6
@@ -6444,10 +6604,10 @@ components:
                 doubleValue: 6.027456183070403
             conditions:
             - segmentCondition:
-                comparator: null
+                comparator: isIn
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: null
+                comparator: isOneOf
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -6458,7 +6618,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: null
+                comparator: equals
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -6466,10 +6626,10 @@ components:
                   doubleValue: 6.027456183070403
                 prerequisiteSettingId: 5
             - segmentCondition:
-                comparator: null
+                comparator: isIn
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: null
+                comparator: isOneOf
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -6480,7 +6640,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: null
+                comparator: equals
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -6507,10 +6667,10 @@ components:
                 doubleValue: 6.027456183070403
             conditions:
             - segmentCondition:
-                comparator: null
+                comparator: isIn
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: null
+                comparator: isOneOf
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -6521,7 +6681,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: null
+                comparator: equals
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -6529,10 +6689,10 @@ components:
                   doubleValue: 6.027456183070403
                 prerequisiteSettingId: 5
             - segmentCondition:
-                comparator: null
+                comparator: isIn
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: null
+                comparator: isOneOf
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -6543,7 +6703,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: null
+                comparator: equals
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -6566,11 +6726,11 @@ components:
           - 0
           lastUpdaterUserEmail: lastUpdaterUserEmail
           integrationLinks:
-          - integrationLinkType: null
+          - integrationLinkType: trello
             description: description
             key: key
             url: url
-          - integrationLinkType: null
+          - integrationLinkType: trello
             description: description
             key: key
             url: url
@@ -6590,7 +6750,7 @@ components:
             name: name
             creatorFullName: creatorFullName
             isWatching: true
-            settingType: null
+            settingType: boolean
             key: key
             settingId: 0
             order: 6
@@ -6611,7 +6771,7 @@ components:
           name: name
           description: description
           migratedConfigId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          evaluationVersion: null
+          evaluationVersion: v1
           order: 0
       properties:
         config:
@@ -6633,16 +6793,16 @@ components:
       additionalProperties: false
       example:
         rolloutRules:
-        - comparator: null
+        - comparator: isOneOf
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: null
+          segmentComparator: isIn
           value: ""
           comparisonAttribute: comparisonAttribute
-        - comparator: null
+        - comparator: isOneOf
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: null
+          segmentComparator: isIn
           value: ""
           comparisonAttribute: comparisonAttribute
         rolloutPercentageItems:
@@ -6653,11 +6813,11 @@ components:
         lastUpdaterUserEmail: lastUpdaterUserEmail
         value: ""
         integrationLinks:
-        - integrationLinkType: null
+        - integrationLinkType: trello
           description: description
           key: key
           url: url
-        - integrationLinkType: null
+        - integrationLinkType: trello
           description: description
           key: key
           url: url
@@ -6677,7 +6837,7 @@ components:
           name: name
           creatorFullName: creatorFullName
           isWatching: true
-          settingType: null
+          settingType: boolean
           key: key
           settingId: 0
           order: 6
@@ -6758,16 +6918,16 @@ components:
         readOnly: true
         settingValues:
         - rolloutRules:
-          - comparator: null
+          - comparator: isOneOf
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: null
+            segmentComparator: isIn
             value: ""
             comparisonAttribute: comparisonAttribute
-          - comparator: null
+          - comparator: isOneOf
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: null
+            segmentComparator: isIn
             value: ""
             comparisonAttribute: comparisonAttribute
           rolloutPercentageItems:
@@ -6778,11 +6938,11 @@ components:
           lastUpdaterUserEmail: lastUpdaterUserEmail
           value: ""
           integrationLinks:
-          - integrationLinkType: null
+          - integrationLinkType: trello
             description: description
             key: key
             url: url
-          - integrationLinkType: null
+          - integrationLinkType: trello
             description: description
             key: key
             url: url
@@ -6802,23 +6962,23 @@ components:
             name: name
             creatorFullName: creatorFullName
             isWatching: true
-            settingType: null
+            settingType: boolean
             key: key
             settingId: 0
             order: 6
           updatedAt: 2000-01-23T04:56:07.000+00:00
           lastUpdaterUserFullName: lastUpdaterUserFullName
         - rolloutRules:
-          - comparator: null
+          - comparator: isOneOf
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: null
+            segmentComparator: isIn
             value: ""
             comparisonAttribute: comparisonAttribute
-          - comparator: null
+          - comparator: isOneOf
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: null
+            segmentComparator: isIn
             value: ""
             comparisonAttribute: comparisonAttribute
           rolloutPercentageItems:
@@ -6829,11 +6989,11 @@ components:
           lastUpdaterUserEmail: lastUpdaterUserEmail
           value: ""
           integrationLinks:
-          - integrationLinkType: null
+          - integrationLinkType: trello
             description: description
             key: key
             url: url
-          - integrationLinkType: null
+          - integrationLinkType: trello
             description: description
             key: key
             url: url
@@ -6853,7 +7013,7 @@ components:
             name: name
             creatorFullName: creatorFullName
             isWatching: true
-            settingType: null
+            settingType: boolean
             key: key
             settingId: 0
             order: 6
@@ -6873,7 +7033,7 @@ components:
           name: name
           description: description
           migratedConfigId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          evaluationVersion: null
+          evaluationVersion: v1
           order: 0
       properties:
         config:
@@ -6913,7 +7073,7 @@ components:
       example:
         name: name
         description: description
-        evaluationVersion: null
+        evaluationVersion: v1
         order: 0
       properties:
         name:
@@ -6934,7 +7094,12 @@ components:
           nullable: true
           type: integer
         evaluationVersion:
-          $ref: '#/components/schemas/EvaluationVersion'
+          description: "Determines the evaluation version of a Config.\r\nUsing `v2`\
+            \ enables the new features of Config V2 (https://configcat.com/docs/advanced/config-v2)."
+          enum:
+          - v1
+          - v2
+          type: string
       required:
       - name
       type: object
@@ -6975,7 +7140,7 @@ components:
     CreateIntegrationModel:
       additionalProperties: false
       example:
-        integrationType: null
+        integrationType: dataDog
         environmentIds:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -6987,7 +7152,15 @@ components:
           key: parameters
       properties:
         integrationType:
-          $ref: '#/components/schemas/IntegrationType'
+          description: Type of the Integration.
+          enum:
+          - dataDog
+          - slack
+          - amplitude
+          - mixPanel
+          - segment
+          - pubNub
+          type: string
         name:
           description: Name of the Integration.
           minLength: 1
@@ -7023,14 +7196,19 @@ components:
       additionalProperties: false
       example:
         environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        environmentAccessType: null
+        environmentAccessType: full
       properties:
         environmentId:
           description: Identifier of the Environment.
           format: uuid
           type: string
         environmentAccessType:
-          $ref: '#/components/schemas/EnvironmentAccessType'
+          description: Represent the environment specific Feature Management permission.
+          enum:
+          - full
+          - readOnly
+          - none
+          type: string
       type: object
     CreatePermissionGroupRequest:
       additionalProperties: false
@@ -7040,15 +7218,15 @@ components:
         canDeleteTag: true
         environmentAccesses:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          environmentAccessType: null
+          environmentAccessType: full
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          environmentAccessType: null
+          environmentAccessType: full
         canDeleteEnvironment: true
         canCreateOrUpdateConfig: true
         canManageProductPreferences: true
         canManageIntegrations: true
         canDeleteSegments: true
-        accessType: null
+        accessType: readOnly
         canTagSetting: true
         canManageMembers: true
         canManageWebhook: true
@@ -7060,7 +7238,7 @@ components:
         canRotateSdkKey: true
         canViewProductAuditLog: true
         canCreateOrUpdateTag: true
-        newEnvironmentAccessType: null
+        newEnvironmentAccessType: full
         canCreateOrUpdateSegments: true
         canCreateOrUpdateSetting: true
       properties:
@@ -7130,9 +7308,19 @@ components:
           description: Group members has access to product statistics.
           type: boolean
         accessType:
-          $ref: '#/components/schemas/AccessType'
+          description: Represent the Feature Management permission.
+          enum:
+          - readOnly
+          - full
+          - custom
+          type: string
         newEnvironmentAccessType:
-          $ref: '#/components/schemas/EnvironmentAccessType'
+          description: Represent the environment specific Feature Management permission.
+          enum:
+          - full
+          - readOnly
+          - none
+          type: string
         environmentAccesses:
           description: List of environment specific permissions.
           items:
@@ -7172,7 +7360,7 @@ components:
     CreateSegmentModel:
       additionalProperties: false
       example:
-        comparator: null
+        comparator: isOneOf
         comparisonValue: comparisonValue
         name: name
         description: description
@@ -7196,7 +7384,26 @@ components:
           minLength: 1
           type: string
         comparator:
-          $ref: '#/components/schemas/RolloutRuleComparator'
+          enum:
+          - isOneOf
+          - isNotOneOf
+          - contains
+          - doesNotContain
+          - semVerIsOneOf
+          - semVerIsNotOneOf
+          - semVerLess
+          - semVerLessOrEquals
+          - semVerGreater
+          - semVerGreaterOrEquals
+          - numberEquals
+          - numberDoesNotEqual
+          - numberLess
+          - numberLessOrEquals
+          - numberGreater
+          - numberGreaterOrEquals
+          - sensitiveIsOneOf
+          - sensitiveIsNotOneOf
+          type: string
         comparisonValue:
           description: The value to compare with the given user attribute's value.
           minLength: 1
@@ -7217,7 +7424,7 @@ components:
           value: ""
         hint: hint
         name: name
-        settingType: null
+        settingType: boolean
         key: key
         tags:
         - 0
@@ -7255,7 +7462,13 @@ components:
           minLength: 1
           type: string
         settingType:
-          $ref: '#/components/schemas/SettingType'
+          description: The type of the Feature Flag or Setting.
+          enum:
+          - boolean
+          - string
+          - int
+          - double
+          type: string
         initialValues:
           description: "Optional, initial value of the Feature Flag or Setting in\
             \ the given Environments."
@@ -7335,7 +7548,7 @@ components:
       example:
         environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         color: color
-        environmentAccessType: null
+        environmentAccessType: full
         name: name
         description: description
         order: 6
@@ -7366,15 +7579,13 @@ components:
             when the Feature Flags or Settings in the given Environment are saved.
           type: boolean
         environmentAccessType:
-          $ref: '#/components/schemas/EnvironmentAccessType'
+          description: Represent the environment specific Feature Management permission.
+          enum:
+          - full
+          - readOnly
+          - none
+          type: string
       type: object
-    EnvironmentAccessType:
-      description: Represent the environment specific Feature Management permission.
-      enum:
-      - full
-      - readOnly
-      - none
-      type: string
     EnvironmentModel:
       additionalProperties: false
       description: Details of the Environment.
@@ -7422,13 +7633,6 @@ components:
             when the Feature Flags or Settings in the given Environment are saved.
           type: boolean
       type: object
-    EvaluationVersion:
-      description: "Determines the evaluation version of a Config.\r\nUsing `v2` enables\
-        \ the new features of Config V2 (https://configcat.com/docs/advanced/config-v2)."
-      enum:
-      - v1
-      - v2
-      type: string
     FeatureFlagLimitations:
       additionalProperties: false
       description: Subscription limitations regarding Feature flag or Setting values
@@ -7582,7 +7786,7 @@ components:
           name: name
           description: description
           migratedConfigId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          evaluationVersion: null
+          evaluationVersion: v1
           order: 0
         setting:
           createdAt: 2000-01-23T04:56:07.000+00:00
@@ -7591,7 +7795,7 @@ components:
           name: name
           creatorFullName: creatorFullName
           isWatching: true
-          settingType: null
+          settingType: boolean
           key: key
           settingId: 0
           order: 6
@@ -7656,7 +7860,7 @@ components:
             name: name
             description: description
             migratedConfigId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            evaluationVersion: null
+            evaluationVersion: v1
             order: 0
           setting:
             createdAt: 2000-01-23T04:56:07.000+00:00
@@ -7665,7 +7869,7 @@ components:
             name: name
             creatorFullName: creatorFullName
             isWatching: true
-            settingType: null
+            settingType: boolean
             key: key
             settingId: 0
             order: 6
@@ -7710,7 +7914,7 @@ components:
             name: name
             description: description
             migratedConfigId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            evaluationVersion: null
+            evaluationVersion: v1
             order: 0
           setting:
             createdAt: 2000-01-23T04:56:07.000+00:00
@@ -7719,7 +7923,7 @@ components:
             name: name
             creatorFullName: creatorFullName
             isWatching: true
-            settingType: null
+            settingType: boolean
             key: key
             settingId: 0
             order: 6
@@ -7738,7 +7942,7 @@ components:
     IntegrationLinkModel:
       additionalProperties: false
       example:
-        integrationLinkType: null
+        integrationLinkType: trello
         description: description
         key: key
         url: url
@@ -7750,17 +7954,15 @@ components:
           nullable: true
           type: string
         integrationLinkType:
-          $ref: '#/components/schemas/IntegrationLinkType'
+          enum:
+          - trello
+          - jira
+          - monday
+          type: string
         url:
           nullable: true
           type: string
       type: object
-    IntegrationLinkType:
-      enum:
-      - trello
-      - jira
-      - monday
-      type: string
     IntegrationModel:
       additionalProperties: false
       description: Details of the Integration.
@@ -7774,7 +7976,7 @@ components:
           description: description
           order: 0
           reasonRequired: true
-        integrationType: null
+        integrationType: dataDog
         environmentIds:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -7797,7 +7999,15 @@ components:
           nullable: true
           type: string
         integrationType:
-          $ref: '#/components/schemas/IntegrationType'
+          description: Type of the Integration.
+          enum:
+          - dataDog
+          - slack
+          - amplitude
+          - mixPanel
+          - segment
+          - pubNub
+          type: string
         parameters:
           additionalProperties:
             nullable: true
@@ -7822,15 +8032,6 @@ components:
           nullable: true
           type: array
       type: object
-    IntegrationType:
-      enum:
-      - dataDog
-      - slack
-      - amplitude
-      - mixPanel
-      - segment
-      - pubNub
-      type: string
     IntegrationsModel:
       additionalProperties: false
       example:
@@ -7844,7 +8045,7 @@ components:
             description: description
             order: 0
             reasonRequired: true
-          integrationType: null
+          integrationType: dataDog
           environmentIds:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -7864,7 +8065,7 @@ components:
             description: description
             order: 0
             reasonRequired: true
-          integrationType: null
+          integrationType: dataDog
           environmentIds:
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -7938,13 +8139,22 @@ components:
     JsonPatchOperation:
       additionalProperties: false
       example:
-        op: null
+        op: unknown
         path: path
         from: from
         value: ""
       properties:
         op:
-          $ref: '#/components/schemas/OperationType'
+          description: The JSON Patch operation. (https://jsonpatch.com)
+          enum:
+          - unknown
+          - add
+          - remove
+          - replace
+          - move
+          - copy
+          - test
+          type: string
         path:
           description: The source path.
           minLength: 1
@@ -7960,15 +8170,6 @@ components:
       - op
       - path
       type: object
-    KeyGenerationMode:
-      description: Determines the Feature Flag key generation mode.
-      enum:
-      - camelCase
-      - lowerCase
-      - upperCase
-      - pascalCase
-      - kebabCase
-      type: string
     MeModel:
       additionalProperties: false
       example:
@@ -8057,16 +8258,6 @@ components:
       - name
       - parameters
       type: object
-    OperationType:
-      enum:
-      - unknown
-      - add
-      - remove
-      - replace
-      - move
-      - copy
-      - test
-      type: string
     OrganizationAdminModel:
       additionalProperties: false
       description: Describes an Organization Admin.
@@ -8350,14 +8541,14 @@ components:
         environmentAccesses:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           color: color
-          environmentAccessType: null
+          environmentAccessType: full
           name: name
           description: description
           order: 6
           reasonRequired: true
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           color: color
-          environmentAccessType: null
+          environmentAccessType: full
           name: name
           description: description
           order: 6
@@ -8365,7 +8556,7 @@ components:
         canManageProductPreferences: true
         canManageIntegrations: true
         canDeleteSegments: true
-        accessType: null
+        accessType: readOnly
         canManageMembers: true
         canManageWebhook: true
         canUseExportImport: true
@@ -8392,7 +8583,7 @@ components:
         name: name
         canViewProductAuditLog: true
         canCreateOrUpdateTag: true
-        newEnvironmentAccessType: null
+        newEnvironmentAccessType: full
       properties:
         permissionGroupId:
           description: Identifier of the Permission Group.
@@ -8463,9 +8654,19 @@ components:
           description: Group members has access to product statistics.
           type: boolean
         accessType:
-          $ref: '#/components/schemas/AccessType'
+          description: Represent the Feature Management permission.
+          enum:
+          - readOnly
+          - full
+          - custom
+          type: string
         newEnvironmentAccessType:
-          $ref: '#/components/schemas/EnvironmentAccessType'
+          description: Represent the environment specific Feature Management permission.
+          enum:
+          - full
+          - readOnly
+          - none
+          type: string
         environmentAccesses:
           description: List of environment specific permissions.
           items:
@@ -8478,7 +8679,7 @@ components:
     PreferencesModel:
       additionalProperties: false
       example:
-        keyGenerationMode: null
+        keyGenerationMode: camelCase
         showVariationId: true
         mandatorySettingHint: true
         reasonRequiredEnvironments:
@@ -8494,7 +8695,14 @@ components:
           description: Indicates that a mandatory note required for saving and publishing.
           type: boolean
         keyGenerationMode:
-          $ref: '#/components/schemas/KeyGenerationMode'
+          description: Determines the Feature Flag key generation mode.
+          enum:
+          - camelCase
+          - lowerCase
+          - upperCase
+          - pascalCase
+          - kebabCase
+          type: string
         showVariationId:
           description: Indicates whether a variation ID's must be shown on the ConfigCat
             Dashboard.
@@ -8510,18 +8718,11 @@ components:
           description: Indicates whether Feature flags and Settings must have a hint.
           type: boolean
       type: object
-    PrerequisiteComparator:
-      description: Prerequisite flag comparison operator used during the evaluation
-        process.
-      enum:
-      - equals
-      - doesNotEqual
-      type: string
     PrerequisiteFlagConditionModel:
       additionalProperties: false
       description: Describes a condition that is based on a prerequisite flag.
       example:
-        comparator: null
+        comparator: equals
         prerequisiteComparisonValue:
           stringValue: stringValue
           intValue: 0
@@ -8534,7 +8735,12 @@ components:
           format: int32
           type: integer
         comparator:
-          $ref: '#/components/schemas/PrerequisiteComparator'
+          description: Prerequisite flag comparison operator used during the evaluation
+            process.
+          enum:
+          - equals
+          - doesNotEqual
+          type: string
         prerequisiteComparisonValue:
           $ref: '#/components/schemas/ValueModel'
       required:
@@ -8724,36 +8930,13 @@ components:
       required:
       - percentage
       type: object
-    RolloutRuleComparator:
-      description: The comparison operator the evaluation process must use when it
-        compares the given user attribute's value with the comparison value.
-      enum:
-      - isOneOf
-      - isNotOneOf
-      - contains
-      - doesNotContain
-      - semVerIsOneOf
-      - semVerIsNotOneOf
-      - semVerLess
-      - semVerLessOrEquals
-      - semVerGreater
-      - semVerGreaterOrEquals
-      - numberEquals
-      - numberDoesNotEqual
-      - numberLess
-      - numberLessOrEquals
-      - numberGreater
-      - numberGreaterOrEquals
-      - sensitiveIsOneOf
-      - sensitiveIsNotOneOf
-      type: string
     RolloutRuleModel:
       additionalProperties: false
       example:
-        comparator: null
+        comparator: isOneOf
         comparisonValue: comparisonValue
         segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        segmentComparator: null
+        segmentComparator: isIn
         value: ""
         comparisonAttribute: comparisonAttribute
       properties:
@@ -8764,7 +8947,27 @@ components:
           nullable: true
           type: string
         comparator:
-          $ref: '#/components/schemas/RolloutRuleComparator'
+          enum:
+          - isOneOf
+          - isNotOneOf
+          - contains
+          - doesNotContain
+          - semVerIsOneOf
+          - semVerIsNotOneOf
+          - semVerLess
+          - semVerLessOrEquals
+          - semVerGreater
+          - semVerGreaterOrEquals
+          - numberEquals
+          - numberDoesNotEqual
+          - numberLess
+          - numberLessOrEquals
+          - numberGreater
+          - numberGreaterOrEquals
+          - sensitiveIsOneOf
+          - sensitiveIsNotOneOf
+          nullable: true
+          type: string
         comparisonValue:
           description: The value to compare against.
           nullable: true
@@ -8774,7 +8977,12 @@ components:
             the setting type.
           nullable: true
         segmentComparator:
-          $ref: '#/components/schemas/SegmentComparator'
+          description: The segment comparison operator.
+          enum:
+          - isIn
+          - isNotIn
+          nullable: true
+          type: string
         segmentId:
           description: The segment to compare against.
           format: uuid
@@ -8796,17 +9004,11 @@ components:
           nullable: true
           type: string
       type: object
-    SegmentComparator:
-      description: The segment comparison operator used during the evaluation process.
-      enum:
-      - isIn
-      - isNotIn
-      type: string
     SegmentConditionModel:
       additionalProperties: false
       description: Describes a condition that is based on a segment.
       example:
-        comparator: null
+        comparator: isIn
         segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         segmentId:
@@ -8814,7 +9016,12 @@ components:
           format: uuid
           type: string
         comparator:
-          $ref: '#/components/schemas/SegmentComparator'
+          description: The segment comparison operator used during the evaluation
+            process.
+          enum:
+          - isIn
+          - isNotIn
+          type: string
       required:
       - comparator
       - segmentId
@@ -8902,7 +9109,7 @@ components:
         creatorEmail: creatorEmail
         description: description
         createdAt: 2000-01-23T04:56:07.000+00:00
-        comparator: null
+        comparator: isOneOf
         lastUpdaterEmail: lastUpdaterEmail
         segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         name: name
@@ -8955,7 +9162,28 @@ components:
           nullable: true
           type: string
         comparator:
-          $ref: '#/components/schemas/RolloutRuleComparator'
+          description: The comparison operator the evaluation process must use when
+            it compares the given user attribute's value with the comparison value.
+          enum:
+          - isOneOf
+          - isNotOneOf
+          - contains
+          - doesNotContain
+          - semVerIsOneOf
+          - semVerIsNotOneOf
+          - semVerLess
+          - semVerLessOrEquals
+          - semVerGreater
+          - semVerGreaterOrEquals
+          - numberEquals
+          - numberDoesNotEqual
+          - numberLess
+          - numberLessOrEquals
+          - numberGreater
+          - numberGreaterOrEquals
+          - sensitiveIsOneOf
+          - sensitiveIsNotOneOf
+          type: string
         comparisonValue:
           description: The value to compare with the given user attribute's value.
           nullable: true
@@ -8971,7 +9199,7 @@ components:
         name: name
         creatorFullName: creatorFullName
         isWatching: true
-        settingType: null
+        settingType: boolean
         key: key
         settingId: 0
         order: 6
@@ -8993,7 +9221,13 @@ components:
           nullable: true
           type: string
         settingType:
-          $ref: '#/components/schemas/SettingType'
+          description: The type of the Feature Flag or Setting.
+          enum:
+          - boolean
+          - string
+          - int
+          - double
+          type: string
         order:
           description: The order of the Feature Flag or Setting represented on the
             ConfigCat Dashboard.
@@ -9034,10 +9268,10 @@ components:
               doubleValue: 6.027456183070403
           conditions:
           - segmentCondition:
-              comparator: null
+              comparator: isIn
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: null
+              comparator: isOneOf
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9048,7 +9282,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: null
+              comparator: equals
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9056,10 +9290,10 @@ components:
                 doubleValue: 6.027456183070403
               prerequisiteSettingId: 5
           - segmentCondition:
-              comparator: null
+              comparator: isIn
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: null
+              comparator: isOneOf
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9070,7 +9304,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: null
+              comparator: equals
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9097,10 +9331,10 @@ components:
               doubleValue: 6.027456183070403
           conditions:
           - segmentCondition:
-              comparator: null
+              comparator: isIn
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: null
+              comparator: isOneOf
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9111,7 +9345,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: null
+              comparator: equals
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9119,10 +9353,10 @@ components:
                 doubleValue: 6.027456183070403
               prerequisiteSettingId: 5
           - segmentCondition:
-              comparator: null
+              comparator: isIn
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: null
+              comparator: isOneOf
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9133,7 +9367,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: null
+              comparator: equals
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9160,7 +9394,7 @@ components:
           name: name
           creatorFullName: creatorFullName
           isWatching: true
-          settingType: null
+          settingType: boolean
           key: key
           settingId: 0
           order: 6
@@ -9193,11 +9427,11 @@ components:
         - 2
         - 2
         integrationLinks:
-        - integrationLinkType: null
+        - integrationLinkType: trello
           description: description
           key: key
           url: url
-        - integrationLinkType: null
+        - integrationLinkType: trello
           description: description
           key: key
           url: url
@@ -9215,7 +9449,7 @@ components:
           name: name
           description: description
           migratedConfigId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          evaluationVersion: null
+          evaluationVersion: v1
           order: 0
         settingTags:
         - color: color
@@ -9298,7 +9532,7 @@ components:
         configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         hint: hint
         name: name
-        settingType: null
+        settingType: boolean
         key: key
         settingId: 0
         order: 6
@@ -9350,7 +9584,13 @@ components:
           format: int32
           type: integer
         settingType:
-          $ref: '#/components/schemas/SettingType'
+          description: The type of the Feature Flag or Setting.
+          enum:
+          - boolean
+          - string
+          - int
+          - double
+          type: string
         configId:
           description: Identifier of the Feature Flag's Config.
           format: uuid
@@ -9387,28 +9627,20 @@ components:
           nullable: true
           type: string
       type: object
-    SettingType:
-      description: The type of the Feature Flag or Setting.
-      enum:
-      - boolean
-      - string
-      - int
-      - double
-      type: string
     SettingValueModel:
       additionalProperties: false
       example:
         rolloutRules:
-        - comparator: null
+        - comparator: isOneOf
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: null
+          segmentComparator: isIn
           value: ""
           comparisonAttribute: comparisonAttribute
-        - comparator: null
+        - comparator: isOneOf
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: null
+          segmentComparator: isIn
           value: ""
           comparisonAttribute: comparisonAttribute
         rolloutPercentageItems:
@@ -9425,7 +9657,7 @@ components:
           name: name
           creatorFullName: creatorFullName
           isWatching: true
-          settingType: null
+          settingType: boolean
           key: key
           settingId: 0
           order: 6
@@ -9455,11 +9687,11 @@ components:
           maxTargetingRuleCount: 5
         value: ""
         integrationLinks:
-        - integrationLinkType: null
+        - integrationLinkType: trello
           description: description
           key: key
           url: url
-        - integrationLinkType: null
+        - integrationLinkType: trello
           description: description
           key: key
           url: url
@@ -9477,7 +9709,7 @@ components:
           name: name
           description: description
           migratedConfigId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          evaluationVersion: null
+          evaluationVersion: v1
           order: 0
         settingTags:
         - color: color
@@ -9592,10 +9824,10 @@ components:
             doubleValue: 6.027456183070403
         conditions:
         - segmentCondition:
-            comparator: null
+            comparator: isIn
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           userCondition:
-            comparator: null
+            comparator: isOneOf
             comparisonValue:
               listValue:
               - hint: hint
@@ -9606,7 +9838,7 @@ components:
               doubleValue: 1.4658129805029452
             comparisonAttribute: comparisonAttribute
           prerequisiteFlagCondition:
-            comparator: null
+            comparator: equals
             prerequisiteComparisonValue:
               stringValue: stringValue
               intValue: 0
@@ -9614,10 +9846,10 @@ components:
               doubleValue: 6.027456183070403
             prerequisiteSettingId: 5
         - segmentCondition:
-            comparator: null
+            comparator: isIn
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           userCondition:
-            comparator: null
+            comparator: isOneOf
             comparisonValue:
               listValue:
               - hint: hint
@@ -9628,7 +9860,7 @@ components:
               doubleValue: 1.4658129805029452
             comparisonAttribute: comparisonAttribute
           prerequisiteFlagCondition:
-            comparator: null
+            comparator: equals
             prerequisiteComparisonValue:
               stringValue: stringValue
               intValue: 0
@@ -9737,10 +9969,10 @@ components:
               doubleValue: 6.027456183070403
           conditions:
           - segmentCondition:
-              comparator: null
+              comparator: isIn
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: null
+              comparator: isOneOf
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9751,7 +9983,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: null
+              comparator: equals
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9759,10 +9991,10 @@ components:
                 doubleValue: 6.027456183070403
               prerequisiteSettingId: 5
           - segmentCondition:
-              comparator: null
+              comparator: isIn
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: null
+              comparator: isOneOf
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9773,7 +10005,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: null
+              comparator: equals
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9800,10 +10032,10 @@ components:
               doubleValue: 6.027456183070403
           conditions:
           - segmentCondition:
-              comparator: null
+              comparator: isIn
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: null
+              comparator: isOneOf
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9814,7 +10046,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: null
+              comparator: equals
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9822,10 +10054,10 @@ components:
                 doubleValue: 6.027456183070403
               prerequisiteSettingId: 5
           - segmentCondition:
-              comparator: null
+              comparator: isIn
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: null
+              comparator: isOneOf
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9836,7 +10068,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: null
+              comparator: equals
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9891,10 +10123,10 @@ components:
               doubleValue: 6.027456183070403
           conditions:
           - segmentCondition:
-              comparator: null
+              comparator: isIn
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: null
+              comparator: isOneOf
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9905,7 +10137,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: null
+              comparator: equals
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9913,10 +10145,10 @@ components:
                 doubleValue: 6.027456183070403
               prerequisiteSettingId: 5
           - segmentCondition:
-              comparator: null
+              comparator: isIn
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: null
+              comparator: isOneOf
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9927,7 +10159,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: null
+              comparator: equals
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9954,10 +10186,10 @@ components:
               doubleValue: 6.027456183070403
           conditions:
           - segmentCondition:
-              comparator: null
+              comparator: isIn
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: null
+              comparator: isOneOf
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9968,7 +10200,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: null
+              comparator: equals
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -9976,10 +10208,10 @@ components:
                 doubleValue: 6.027456183070403
               prerequisiteSettingId: 5
           - segmentCondition:
-              comparator: null
+              comparator: isIn
               segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             userCondition:
-              comparator: null
+              comparator: isOneOf
               comparisonValue:
                 listValue:
                 - hint: hint
@@ -9990,7 +10222,7 @@ components:
                 doubleValue: 1.4658129805029452
               comparisonAttribute: comparisonAttribute
             prerequisiteFlagCondition:
-              comparator: null
+              comparator: equals
               prerequisiteComparisonValue:
                 stringValue: stringValue
                 intValue: 0
@@ -10051,10 +10283,10 @@ components:
                 doubleValue: 6.027456183070403
             conditions:
             - segmentCondition:
-                comparator: null
+                comparator: isIn
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: null
+                comparator: isOneOf
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -10065,7 +10297,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: null
+                comparator: equals
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -10073,10 +10305,10 @@ components:
                   doubleValue: 6.027456183070403
                 prerequisiteSettingId: 5
             - segmentCondition:
-                comparator: null
+                comparator: isIn
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: null
+                comparator: isOneOf
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -10087,7 +10319,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: null
+                comparator: equals
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -10114,10 +10346,10 @@ components:
                 doubleValue: 6.027456183070403
             conditions:
             - segmentCondition:
-                comparator: null
+                comparator: isIn
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: null
+                comparator: isOneOf
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -10128,7 +10360,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: null
+                comparator: equals
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -10136,10 +10368,10 @@ components:
                   doubleValue: 6.027456183070403
                 prerequisiteSettingId: 5
             - segmentCondition:
-                comparator: null
+                comparator: isIn
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: null
+                comparator: isOneOf
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -10150,7 +10382,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: null
+                comparator: equals
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -10185,10 +10417,10 @@ components:
                 doubleValue: 6.027456183070403
             conditions:
             - segmentCondition:
-                comparator: null
+                comparator: isIn
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: null
+                comparator: isOneOf
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -10199,7 +10431,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: null
+                comparator: equals
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -10207,10 +10439,10 @@ components:
                   doubleValue: 6.027456183070403
                 prerequisiteSettingId: 5
             - segmentCondition:
-                comparator: null
+                comparator: isIn
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: null
+                comparator: isOneOf
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -10221,7 +10453,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: null
+                comparator: equals
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -10248,10 +10480,10 @@ components:
                 doubleValue: 6.027456183070403
             conditions:
             - segmentCondition:
-                comparator: null
+                comparator: isIn
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: null
+                comparator: isOneOf
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -10262,7 +10494,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: null
+                comparator: equals
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -10270,10 +10502,10 @@ components:
                   doubleValue: 6.027456183070403
                 prerequisiteSettingId: 5
             - segmentCondition:
-                comparator: null
+                comparator: isIn
                 segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               userCondition:
-                comparator: null
+                comparator: isOneOf
                 comparisonValue:
                   listValue:
                   - hint: hint
@@ -10284,7 +10516,7 @@ components:
                   doubleValue: 1.4658129805029452
                 comparisonAttribute: comparisonAttribute
               prerequisiteFlagCondition:
-                comparator: null
+                comparator: equals
                 prerequisiteComparisonValue:
                   stringValue: stringValue
                   intValue: 0
@@ -10350,15 +10582,15 @@ components:
         canDeleteTag: true
         environmentAccesses:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          environmentAccessType: null
+          environmentAccessType: full
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          environmentAccessType: null
+          environmentAccessType: full
         canDeleteEnvironment: true
         canCreateOrUpdateConfig: true
         canManageProductPreferences: true
         canManageIntegrations: true
         canDeleteSegments: true
-        accessType: null
+        accessType: readOnly
         canTagSetting: true
         canManageMembers: true
         canManageWebhook: true
@@ -10370,7 +10602,7 @@ components:
         canRotateSdkKey: true
         canViewProductAuditLog: true
         canCreateOrUpdateTag: true
-        newEnvironmentAccessType: null
+        newEnvironmentAccessType: full
         canCreateOrUpdateSegments: true
         canCreateOrUpdateSetting: true
       properties:
@@ -10461,9 +10693,19 @@ components:
           nullable: true
           type: boolean
         accessType:
-          $ref: '#/components/schemas/AccessType'
+          enum:
+          - readOnly
+          - full
+          - custom
+          nullable: true
+          type: string
         newEnvironmentAccessType:
-          $ref: '#/components/schemas/EnvironmentAccessType'
+          enum:
+          - full
+          - readOnly
+          - none
+          nullable: true
+          type: string
         environmentAccesses:
           description: List of environment specific permissions.
           items:
@@ -10474,7 +10716,7 @@ components:
     UpdatePreferencesRequest:
       additionalProperties: false
       example:
-        keyGenerationMode: null
+        keyGenerationMode: camelCase
         showVariationId: true
         mandatorySettingHint: true
         reasonRequiredEnvironments:
@@ -10490,7 +10732,15 @@ components:
           nullable: true
           type: boolean
         keyGenerationMode:
-          $ref: '#/components/schemas/KeyGenerationMode'
+          description: Determines the Feature Flag key generation mode.
+          enum:
+          - camelCase
+          - lowerCase
+          - upperCase
+          - pascalCase
+          - kebabCase
+          nullable: true
+          type: string
         showVariationId:
           description: Indicates whether a variation ID's must be shown on the ConfigCat
             Dashboard.
@@ -10552,7 +10802,7 @@ components:
     UpdateSegmentModel:
       additionalProperties: false
       example:
-        comparator: null
+        comparator: isOneOf
         comparisonValue: comparisonValue
         name: name
         description: description
@@ -10574,7 +10824,27 @@ components:
           nullable: true
           type: string
         comparator:
-          $ref: '#/components/schemas/RolloutRuleComparator'
+          enum:
+          - isOneOf
+          - isNotOneOf
+          - contains
+          - doesNotContain
+          - semVerIsOneOf
+          - semVerIsNotOneOf
+          - semVerLess
+          - semVerLessOrEquals
+          - semVerGreater
+          - semVerGreaterOrEquals
+          - numberEquals
+          - numberDoesNotEqual
+          - numberLess
+          - numberLessOrEquals
+          - numberGreater
+          - numberGreaterOrEquals
+          - sensitiveIsOneOf
+          - sensitiveIsNotOneOf
+          nullable: true
+          type: string
         comparisonValue:
           nullable: true
           type: string
@@ -10583,16 +10853,16 @@ components:
       additionalProperties: false
       example:
         rolloutRules:
-        - comparator: null
+        - comparator: isOneOf
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: null
+          segmentComparator: isIn
           value: ""
           comparisonAttribute: comparisonAttribute
-        - comparator: null
+        - comparator: isOneOf
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: null
+          segmentComparator: isIn
           value: ""
           comparisonAttribute: comparisonAttribute
         rolloutPercentageItems:
@@ -10622,16 +10892,16 @@ components:
       additionalProperties: false
       example:
         rolloutRules:
-        - comparator: null
+        - comparator: isOneOf
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: null
+          segmentComparator: isIn
           value: ""
           comparisonAttribute: comparisonAttribute
-        - comparator: null
+        - comparator: isOneOf
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: null
+          segmentComparator: isIn
           value: ""
           comparisonAttribute: comparisonAttribute
         rolloutPercentageItems:
@@ -10667,16 +10937,16 @@ components:
       example:
         settingValues:
         - rolloutRules:
-          - comparator: null
+          - comparator: isOneOf
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: null
+            segmentComparator: isIn
             value: ""
             comparisonAttribute: comparisonAttribute
-          - comparator: null
+          - comparator: isOneOf
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: null
+            segmentComparator: isIn
             value: ""
             comparisonAttribute: comparisonAttribute
           rolloutPercentageItems:
@@ -10687,16 +10957,16 @@ components:
           value: ""
           settingId: 0
         - rolloutRules:
-          - comparator: null
+          - comparator: isOneOf
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: null
+            segmentComparator: isIn
             value: ""
             comparisonAttribute: comparisonAttribute
-          - comparator: null
+          - comparator: isOneOf
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: null
+            segmentComparator: isIn
             value: ""
             comparisonAttribute: comparisonAttribute
           rolloutPercentageItems:
@@ -10733,52 +11003,11 @@ components:
           nullable: true
           type: string
       type: object
-    UserComparator:
-      description: The comparison operator which defines the relation between the
-        comparison attribute and the comparison value.
-      enum:
-      - isOneOf
-      - isNotOneOf
-      - containsAnyOf
-      - doesNotContainAnyOf
-      - semVerIsOneOf
-      - semVerIsNotOneOf
-      - semVerLess
-      - semVerLessOrEquals
-      - semVerGreater
-      - semVerGreaterOrEquals
-      - numberEquals
-      - numberDoesNotEqual
-      - numberLess
-      - numberLessOrEquals
-      - numberGreater
-      - numberGreaterOrEquals
-      - sensitiveIsOneOf
-      - sensitiveIsNotOneOf
-      - dateTimeBefore
-      - dateTimeAfter
-      - sensitiveTextEquals
-      - sensitiveTextDoesNotEqual
-      - sensitiveTextStartsWithAnyOf
-      - sensitiveTextNotStartsWithAnyOf
-      - sensitiveTextEndsWithAnyOf
-      - sensitiveTextNotEndsWithAnyOf
-      - sensitiveArrayContainsAnyOf
-      - sensitiveArrayDoesNotContainAnyOf
-      - textEquals
-      - textDoesNotEqual
-      - textStartsWithAnyOf
-      - textNotStartsWithAnyOf
-      - textEndsWithAnyOf
-      - textNotEndsWithAnyOf
-      - arrayContainsAnyOf
-      - arrayDoesNotContainAnyOf
-      type: string
     UserConditionModel:
       additionalProperties: false
       description: Describes a condition that is based on user attributes.
       example:
-        comparator: null
+        comparator: isOneOf
         comparisonValue:
           listValue:
           - hint: hint
@@ -10796,7 +11025,46 @@ components:
           minLength: 1
           type: string
         comparator:
-          $ref: '#/components/schemas/UserComparator'
+          description: The comparison operator which defines the relation between
+            the comparison attribute and the comparison value.
+          enum:
+          - isOneOf
+          - isNotOneOf
+          - containsAnyOf
+          - doesNotContainAnyOf
+          - semVerIsOneOf
+          - semVerIsNotOneOf
+          - semVerLess
+          - semVerLessOrEquals
+          - semVerGreater
+          - semVerGreaterOrEquals
+          - numberEquals
+          - numberDoesNotEqual
+          - numberLess
+          - numberLessOrEquals
+          - numberGreater
+          - numberGreaterOrEquals
+          - sensitiveIsOneOf
+          - sensitiveIsNotOneOf
+          - dateTimeBefore
+          - dateTimeAfter
+          - sensitiveTextEquals
+          - sensitiveTextDoesNotEqual
+          - sensitiveTextStartsWithAnyOf
+          - sensitiveTextNotStartsWithAnyOf
+          - sensitiveTextEndsWithAnyOf
+          - sensitiveTextNotEndsWithAnyOf
+          - sensitiveArrayContainsAnyOf
+          - sensitiveArrayDoesNotContainAnyOf
+          - textEquals
+          - textDoesNotEqual
+          - textStartsWithAnyOf
+          - textNotStartsWithAnyOf
+          - textEndsWithAnyOf
+          - textNotEndsWithAnyOf
+          - arrayContainsAnyOf
+          - arrayDoesNotContainAnyOf
+          type: string
         comparisonValue:
           $ref: '#/components/schemas/ComparisonValueModel'
       required:
@@ -10856,11 +11124,6 @@ components:
           nullable: true
           type: number
       type: object
-    WebHookHttpMethod:
-      enum:
-      - get
-      - post
-      type: string
     WebHookRequest:
       additionalProperties: false
       example:
@@ -10871,7 +11134,7 @@ components:
         - isSecure: true
           value: value
           key: key
-        httpMethod: null
+        httpMethod: get
         url: url
         content: content
       properties:
@@ -10887,7 +11150,11 @@ components:
           nullable: true
           type: string
         httpMethod:
-          $ref: '#/components/schemas/WebHookHttpMethod'
+          description: The HTTP method of the remote endpoint.
+          enum:
+          - get
+          - post
+          type: string
         webHookHeaders:
           description: List of HTTP headers.
           items:
@@ -10967,7 +11234,7 @@ components:
           environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name
         webhookId: 0
-        httpMethod: null
+        httpMethod: get
         config:
           configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name
@@ -10983,7 +11250,11 @@ components:
           nullable: true
           type: string
         httpMethod:
-          $ref: '#/components/schemas/WebHookHttpMethod'
+          description: The HTTP method.
+          enum:
+          - get
+          - post
+          type: string
         content:
           description: The HTTP body content.
           nullable: true

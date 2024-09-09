@@ -26,7 +26,8 @@ type CreateConfigRequest struct {
 	Description NullableString `json:"description,omitempty"`
 	// The order of the Config represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers.
 	Order NullableInt32 `json:"order,omitempty"`
-	EvaluationVersion *EvaluationVersion `json:"evaluationVersion,omitempty"`
+	// Determines the evaluation version of a Config.  Using `v2` enables the new features of Config V2 (https://configcat.com/docs/advanced/config-v2).
+	EvaluationVersion *string `json:"evaluationVersion,omitempty"`
 }
 
 // NewCreateConfigRequest instantiates a new CreateConfigRequest object
@@ -156,9 +157,9 @@ func (o *CreateConfigRequest) UnsetOrder() {
 }
 
 // GetEvaluationVersion returns the EvaluationVersion field value if set, zero value otherwise.
-func (o *CreateConfigRequest) GetEvaluationVersion() EvaluationVersion {
+func (o *CreateConfigRequest) GetEvaluationVersion() string {
 	if o == nil || IsNil(o.EvaluationVersion) {
-		var ret EvaluationVersion
+		var ret string
 		return ret
 	}
 	return *o.EvaluationVersion
@@ -166,7 +167,7 @@ func (o *CreateConfigRequest) GetEvaluationVersion() EvaluationVersion {
 
 // GetEvaluationVersionOk returns a tuple with the EvaluationVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateConfigRequest) GetEvaluationVersionOk() (*EvaluationVersion, bool) {
+func (o *CreateConfigRequest) GetEvaluationVersionOk() (*string, bool) {
 	if o == nil || IsNil(o.EvaluationVersion) {
 		return nil, false
 	}
@@ -182,8 +183,8 @@ func (o *CreateConfigRequest) HasEvaluationVersion() bool {
 	return false
 }
 
-// SetEvaluationVersion gets a reference to the given EvaluationVersion and assigns it to the EvaluationVersion field.
-func (o *CreateConfigRequest) SetEvaluationVersion(v EvaluationVersion) {
+// SetEvaluationVersion gets a reference to the given string and assigns it to the EvaluationVersion field.
+func (o *CreateConfigRequest) SetEvaluationVersion(v string) {
 	o.EvaluationVersion = &v
 }
 

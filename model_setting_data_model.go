@@ -29,7 +29,8 @@ type SettingDataModel struct {
 	Name NullableString `json:"name,omitempty"`
 	// Description of the Feature Flag or Setting.
 	Hint NullableString `json:"hint,omitempty"`
-	SettingType *SettingType `json:"settingType,omitempty"`
+	// The type of the Feature Flag or Setting.
+	SettingType *string `json:"settingType,omitempty"`
 	// The order of the Feature Flag or Setting represented on the ConfigCat Dashboard.
 	Order *int32 `json:"order,omitempty"`
 	// The creation time of the Feature Flag or Setting.
@@ -217,9 +218,9 @@ func (o *SettingDataModel) UnsetHint() {
 }
 
 // GetSettingType returns the SettingType field value if set, zero value otherwise.
-func (o *SettingDataModel) GetSettingType() SettingType {
+func (o *SettingDataModel) GetSettingType() string {
 	if o == nil || IsNil(o.SettingType) {
-		var ret SettingType
+		var ret string
 		return ret
 	}
 	return *o.SettingType
@@ -227,7 +228,7 @@ func (o *SettingDataModel) GetSettingType() SettingType {
 
 // GetSettingTypeOk returns a tuple with the SettingType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SettingDataModel) GetSettingTypeOk() (*SettingType, bool) {
+func (o *SettingDataModel) GetSettingTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.SettingType) {
 		return nil, false
 	}
@@ -243,8 +244,8 @@ func (o *SettingDataModel) HasSettingType() bool {
 	return false
 }
 
-// SetSettingType gets a reference to the given SettingType and assigns it to the SettingType field.
-func (o *SettingDataModel) SetSettingType(v SettingType) {
+// SetSettingType gets a reference to the given string and assigns it to the SettingType field.
+func (o *SettingDataModel) SetSettingType(v string) {
 	o.SettingType = &v
 }
 

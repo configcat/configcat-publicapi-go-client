@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **NullableString** | Description of the Config. | [optional] 
 **Order** | Pointer to **int32** | The order of the Config represented on the ConfigCat Dashboard. | [optional] 
 **MigratedConfigId** | Pointer to **NullableString** |  | [optional] 
-**EvaluationVersion** | Pointer to [**EvaluationVersion**](EvaluationVersion.md) |  | [optional] 
+**EvaluationVersion** | Pointer to **string** | Determines the evaluation version of a Config.  Using &#x60;v2&#x60; enables the new features of Config V2 (https://configcat.com/docs/advanced/config-v2). | [optional] 
 
 ## Methods
 
@@ -213,20 +213,20 @@ HasMigratedConfigId returns a boolean if a field has been set.
 UnsetMigratedConfigId ensures that no value is present for MigratedConfigId, not even an explicit nil
 ### GetEvaluationVersion
 
-`func (o *ConfigModel) GetEvaluationVersion() EvaluationVersion`
+`func (o *ConfigModel) GetEvaluationVersion() string`
 
 GetEvaluationVersion returns the EvaluationVersion field if non-nil, zero value otherwise.
 
 ### GetEvaluationVersionOk
 
-`func (o *ConfigModel) GetEvaluationVersionOk() (*EvaluationVersion, bool)`
+`func (o *ConfigModel) GetEvaluationVersionOk() (*string, bool)`
 
 GetEvaluationVersionOk returns a tuple with the EvaluationVersion field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEvaluationVersion
 
-`func (o *ConfigModel) SetEvaluationVersion(v EvaluationVersion)`
+`func (o *ConfigModel) SetEvaluationVersion(v string)`
 
 SetEvaluationVersion sets EvaluationVersion field to given value.
 

@@ -62,8 +62,8 @@ type UpdatePermissionGroupRequest struct {
 	CanViewProductAuditLog NullableBool `json:"canViewProductAuditLog,omitempty"`
 	// Group members has access to product statistics.
 	CanViewProductStatistics NullableBool `json:"canViewProductStatistics,omitempty"`
-	AccessType *AccessType `json:"accessType,omitempty"`
-	NewEnvironmentAccessType *EnvironmentAccessType `json:"newEnvironmentAccessType,omitempty"`
+	AccessType NullableString `json:"accessType,omitempty"`
+	NewEnvironmentAccessType NullableString `json:"newEnvironmentAccessType,omitempty"`
 	// List of environment specific permissions.
 	EnvironmentAccesses []CreateOrUpdateEnvironmentAccessModel `json:"environmentAccesses,omitempty"`
 }
@@ -967,68 +967,88 @@ func (o *UpdatePermissionGroupRequest) UnsetCanViewProductStatistics() {
 	o.CanViewProductStatistics.Unset()
 }
 
-// GetAccessType returns the AccessType field value if set, zero value otherwise.
-func (o *UpdatePermissionGroupRequest) GetAccessType() AccessType {
-	if o == nil || IsNil(o.AccessType) {
-		var ret AccessType
+// GetAccessType returns the AccessType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdatePermissionGroupRequest) GetAccessType() string {
+	if o == nil || IsNil(o.AccessType.Get()) {
+		var ret string
 		return ret
 	}
-	return *o.AccessType
+	return *o.AccessType.Get()
 }
 
 // GetAccessTypeOk returns a tuple with the AccessType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePermissionGroupRequest) GetAccessTypeOk() (*AccessType, bool) {
-	if o == nil || IsNil(o.AccessType) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdatePermissionGroupRequest) GetAccessTypeOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AccessType, true
+	return o.AccessType.Get(), o.AccessType.IsSet()
 }
 
 // HasAccessType returns a boolean if a field has been set.
 func (o *UpdatePermissionGroupRequest) HasAccessType() bool {
-	if o != nil && !IsNil(o.AccessType) {
+	if o != nil && o.AccessType.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccessType gets a reference to the given AccessType and assigns it to the AccessType field.
-func (o *UpdatePermissionGroupRequest) SetAccessType(v AccessType) {
-	o.AccessType = &v
+// SetAccessType gets a reference to the given NullableString and assigns it to the AccessType field.
+func (o *UpdatePermissionGroupRequest) SetAccessType(v string) {
+	o.AccessType.Set(&v)
+}
+// SetAccessTypeNil sets the value for AccessType to be an explicit nil
+func (o *UpdatePermissionGroupRequest) SetAccessTypeNil() {
+	o.AccessType.Set(nil)
 }
 
-// GetNewEnvironmentAccessType returns the NewEnvironmentAccessType field value if set, zero value otherwise.
-func (o *UpdatePermissionGroupRequest) GetNewEnvironmentAccessType() EnvironmentAccessType {
-	if o == nil || IsNil(o.NewEnvironmentAccessType) {
-		var ret EnvironmentAccessType
+// UnsetAccessType ensures that no value is present for AccessType, not even an explicit nil
+func (o *UpdatePermissionGroupRequest) UnsetAccessType() {
+	o.AccessType.Unset()
+}
+
+// GetNewEnvironmentAccessType returns the NewEnvironmentAccessType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdatePermissionGroupRequest) GetNewEnvironmentAccessType() string {
+	if o == nil || IsNil(o.NewEnvironmentAccessType.Get()) {
+		var ret string
 		return ret
 	}
-	return *o.NewEnvironmentAccessType
+	return *o.NewEnvironmentAccessType.Get()
 }
 
 // GetNewEnvironmentAccessTypeOk returns a tuple with the NewEnvironmentAccessType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePermissionGroupRequest) GetNewEnvironmentAccessTypeOk() (*EnvironmentAccessType, bool) {
-	if o == nil || IsNil(o.NewEnvironmentAccessType) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdatePermissionGroupRequest) GetNewEnvironmentAccessTypeOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NewEnvironmentAccessType, true
+	return o.NewEnvironmentAccessType.Get(), o.NewEnvironmentAccessType.IsSet()
 }
 
 // HasNewEnvironmentAccessType returns a boolean if a field has been set.
 func (o *UpdatePermissionGroupRequest) HasNewEnvironmentAccessType() bool {
-	if o != nil && !IsNil(o.NewEnvironmentAccessType) {
+	if o != nil && o.NewEnvironmentAccessType.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNewEnvironmentAccessType gets a reference to the given EnvironmentAccessType and assigns it to the NewEnvironmentAccessType field.
-func (o *UpdatePermissionGroupRequest) SetNewEnvironmentAccessType(v EnvironmentAccessType) {
-	o.NewEnvironmentAccessType = &v
+// SetNewEnvironmentAccessType gets a reference to the given NullableString and assigns it to the NewEnvironmentAccessType field.
+func (o *UpdatePermissionGroupRequest) SetNewEnvironmentAccessType(v string) {
+	o.NewEnvironmentAccessType.Set(&v)
+}
+// SetNewEnvironmentAccessTypeNil sets the value for NewEnvironmentAccessType to be an explicit nil
+func (o *UpdatePermissionGroupRequest) SetNewEnvironmentAccessTypeNil() {
+	o.NewEnvironmentAccessType.Set(nil)
+}
+
+// UnsetNewEnvironmentAccessType ensures that no value is present for NewEnvironmentAccessType, not even an explicit nil
+func (o *UpdatePermissionGroupRequest) UnsetNewEnvironmentAccessType() {
+	o.NewEnvironmentAccessType.Unset()
 }
 
 // GetEnvironmentAccesses returns the EnvironmentAccesses field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1137,11 +1157,11 @@ func (o UpdatePermissionGroupRequest) ToMap() (map[string]interface{}, error) {
 	if o.CanViewProductStatistics.IsSet() {
 		toSerialize["canViewProductStatistics"] = o.CanViewProductStatistics.Get()
 	}
-	if !IsNil(o.AccessType) {
-		toSerialize["accessType"] = o.AccessType
+	if o.AccessType.IsSet() {
+		toSerialize["accessType"] = o.AccessType.Get()
 	}
-	if !IsNil(o.NewEnvironmentAccessType) {
-		toSerialize["newEnvironmentAccessType"] = o.NewEnvironmentAccessType
+	if o.NewEnvironmentAccessType.IsSet() {
+		toSerialize["newEnvironmentAccessType"] = o.NewEnvironmentAccessType.Get()
 	}
 	if o.EnvironmentAccesses != nil {
 		toSerialize["environmentAccesses"] = o.EnvironmentAccesses

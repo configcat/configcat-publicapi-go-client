@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Url** | **string** | The URL of the Webhook. | 
 **Content** | Pointer to **NullableString** | The HTTP body content. | [optional] 
-**HttpMethod** | Pointer to [**WebHookHttpMethod**](WebHookHttpMethod.md) |  | [optional] 
+**HttpMethod** | Pointer to **string** | The HTTP method of the remote endpoint. | [optional] 
 **WebHookHeaders** | Pointer to [**[]WebhookHeaderModel**](WebhookHeaderModel.md) | List of HTTP headers. | [optional] 
 
 ## Methods
@@ -85,20 +85,20 @@ HasContent returns a boolean if a field has been set.
 UnsetContent ensures that no value is present for Content, not even an explicit nil
 ### GetHttpMethod
 
-`func (o *WebHookRequest) GetHttpMethod() WebHookHttpMethod`
+`func (o *WebHookRequest) GetHttpMethod() string`
 
 GetHttpMethod returns the HttpMethod field if non-nil, zero value otherwise.
 
 ### GetHttpMethodOk
 
-`func (o *WebHookRequest) GetHttpMethodOk() (*WebHookHttpMethod, bool)`
+`func (o *WebHookRequest) GetHttpMethodOk() (*string, bool)`
 
 GetHttpMethodOk returns a tuple with the HttpMethod field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHttpMethod
 
-`func (o *WebHookRequest) SetHttpMethod(v WebHookHttpMethod)`
+`func (o *WebHookRequest) SetHttpMethod(v string)`
 
 SetHttpMethod sets HttpMethod field to given value.
 

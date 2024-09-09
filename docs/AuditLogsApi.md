@@ -35,7 +35,7 @@ func main() {
     productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
     configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config. (optional)
     environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment. (optional)
-    auditLogType := openapiclient.AuditLogType("productCreated") // AuditLogType | Filter Audit logs by Audit log type. (optional)
+    auditLogType := "auditLogType_example" // string | Filter Audit logs by Audit log type. (optional)
     fromUtcDateTime := time.Now() // time.Time | Filter Audit logs by starting UTC date. (optional)
     toUtcDateTime := time.Now() // time.Time | Filter Audit logs by ending UTC date. (optional)
 
@@ -69,7 +69,7 @@ Name | Type | Description  | Notes
 
  **configId** | **string** | The identifier of the Config. | 
  **environmentId** | **string** | The identifier of the Environment. | 
- **auditLogType** | [**AuditLogType**](AuditLogType.md) | Filter Audit logs by Audit log type. | 
+ **auditLogType** | **string** | Filter Audit logs by Audit log type. | 
  **fromUtcDateTime** | **time.Time** | Filter Audit logs by starting UTC date. | 
  **toUtcDateTime** | **time.Time** | Filter Audit logs by ending UTC date. | 
 
@@ -187,7 +187,7 @@ func main() {
     productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product. (optional)
     configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config. (optional)
     environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment. (optional)
-    auditLogType := openapiclient.AuditLogType("productCreated") // AuditLogType | Filter Audit logs by Audit log type. (optional)
+    auditLogType := "auditLogType_example" // string | Filter Audit logs by Audit log type. (optional)
     fromUtcDateTime := time.Now() // time.Time | Filter Audit logs by starting UTC date. (optional)
     toUtcDateTime := time.Now() // time.Time | Filter Audit logs by ending UTC date. (optional)
 
@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
  **productId** | **string** | The identifier of the Product. | 
  **configId** | **string** | The identifier of the Config. | 
  **environmentId** | **string** | The identifier of the Environment. | 
- **auditLogType** | [**AuditLogType**](AuditLogType.md) | Filter Audit logs by Audit log type. | 
+ **auditLogType** | **string** | Filter Audit logs by Audit log type. | 
  **fromUtcDateTime** | **time.Time** | Filter Audit logs by starting UTC date. | 
  **toUtcDateTime** | **time.Time** | Filter Audit logs by ending UTC date. | 
 

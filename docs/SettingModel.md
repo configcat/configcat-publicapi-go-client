@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **NullableString** | Name of the Feature Flag or Setting. | [optional] 
 **Hint** | Pointer to **NullableString** | Description of the Feature Flag or Setting. | [optional] 
 **Order** | Pointer to **int32** | The order of the Feature Flag or Setting represented on the ConfigCat Dashboard. | [optional] 
-**SettingType** | Pointer to [**SettingType**](SettingType.md) |  | [optional] 
+**SettingType** | Pointer to **string** | The type of the Feature Flag or Setting. | [optional] 
 **ConfigId** | Pointer to **string** | Identifier of the Feature Flag&#39;s Config. | [optional] 
 **ConfigName** | Pointer to **NullableString** | Name of the Feature Flag&#39;s Config. | [optional] 
 **Tags** | Pointer to [**[]TagModel**](TagModel.md) | The tags attached to the Feature Flag or Setting. | [optional] 
@@ -190,20 +190,20 @@ HasOrder returns a boolean if a field has been set.
 
 ### GetSettingType
 
-`func (o *SettingModel) GetSettingType() SettingType`
+`func (o *SettingModel) GetSettingType() string`
 
 GetSettingType returns the SettingType field if non-nil, zero value otherwise.
 
 ### GetSettingTypeOk
 
-`func (o *SettingModel) GetSettingTypeOk() (*SettingType, bool)`
+`func (o *SettingModel) GetSettingTypeOk() (*string, bool)`
 
 GetSettingTypeOk returns a tuple with the SettingType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSettingType
 
-`func (o *SettingModel) SetSettingType(v SettingType)`
+`func (o *SettingModel) SetSettingType(v string)`
 
 SetSettingType sets SettingType field to given value.
 

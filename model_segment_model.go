@@ -42,7 +42,8 @@ type SegmentModel struct {
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
 	// The user's attribute the evaluation process must take into account.
 	ComparisonAttribute NullableString `json:"comparisonAttribute,omitempty"`
-	Comparator *RolloutRuleComparator `json:"comparator,omitempty"`
+	// The comparison operator the evaluation process must use when it compares the given user attribute's value with the comparison value.
+	Comparator *string `json:"comparator,omitempty"`
 	// The value to compare with the given user attribute's value.
 	ComparisonValue NullableString `json:"comparisonValue,omitempty"`
 }
@@ -487,9 +488,9 @@ func (o *SegmentModel) UnsetComparisonAttribute() {
 }
 
 // GetComparator returns the Comparator field value if set, zero value otherwise.
-func (o *SegmentModel) GetComparator() RolloutRuleComparator {
+func (o *SegmentModel) GetComparator() string {
 	if o == nil || IsNil(o.Comparator) {
-		var ret RolloutRuleComparator
+		var ret string
 		return ret
 	}
 	return *o.Comparator
@@ -497,7 +498,7 @@ func (o *SegmentModel) GetComparator() RolloutRuleComparator {
 
 // GetComparatorOk returns a tuple with the Comparator field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SegmentModel) GetComparatorOk() (*RolloutRuleComparator, bool) {
+func (o *SegmentModel) GetComparatorOk() (*string, bool) {
 	if o == nil || IsNil(o.Comparator) {
 		return nil, false
 	}
@@ -513,8 +514,8 @@ func (o *SegmentModel) HasComparator() bool {
 	return false
 }
 
-// SetComparator gets a reference to the given RolloutRuleComparator and assigns it to the Comparator field.
-func (o *SegmentModel) SetComparator(v RolloutRuleComparator) {
+// SetComparator gets a reference to the given string and assigns it to the Comparator field.
+func (o *SegmentModel) SetComparator(v string) {
 	o.Comparator = &v
 }
 

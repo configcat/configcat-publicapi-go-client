@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Product** | Pointer to [**ProductModel**](ProductModel.md) |  | [optional] 
 **IntegrationId** | Pointer to **string** | Identifier of the Integration. | [optional] 
 **Name** | Pointer to **NullableString** | Name of the Integration. | [optional] 
-**IntegrationType** | Pointer to [**IntegrationType**](IntegrationType.md) |  | [optional] 
+**IntegrationType** | Pointer to **string** | Type of the Integration. | [optional] 
 **Parameters** | Pointer to **map[string]string** | Parameters of the Integration. | [optional] 
 **EnvironmentIds** | Pointer to **[]string** | List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected. | [optional] 
 **ConfigIds** | Pointer to **[]string** | List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected. | [optional] 
@@ -118,20 +118,20 @@ HasName returns a boolean if a field has been set.
 UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetIntegrationType
 
-`func (o *IntegrationModel) GetIntegrationType() IntegrationType`
+`func (o *IntegrationModel) GetIntegrationType() string`
 
 GetIntegrationType returns the IntegrationType field if non-nil, zero value otherwise.
 
 ### GetIntegrationTypeOk
 
-`func (o *IntegrationModel) GetIntegrationTypeOk() (*IntegrationType, bool)`
+`func (o *IntegrationModel) GetIntegrationTypeOk() (*string, bool)`
 
 GetIntegrationTypeOk returns a tuple with the IntegrationType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIntegrationType
 
-`func (o *IntegrationModel) SetIntegrationType(v IntegrationType)`
+`func (o *IntegrationModel) SetIntegrationType(v string)`
 
 SetIntegrationType sets IntegrationType field to given value.
 

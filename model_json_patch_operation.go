@@ -20,7 +20,8 @@ var _ MappedNullable = &JsonPatchOperation{}
 
 // JsonPatchOperation struct for JsonPatchOperation
 type JsonPatchOperation struct {
-	Op OperationType `json:"op"`
+	// The JSON Patch operation. (https://jsonpatch.com)
+	Op string `json:"op"`
 	// The source path.
 	Path string `json:"path"`
 	// The target path.
@@ -33,7 +34,7 @@ type JsonPatchOperation struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewJsonPatchOperation(op OperationType, path string) *JsonPatchOperation {
+func NewJsonPatchOperation(op string, path string) *JsonPatchOperation {
 	this := JsonPatchOperation{}
 	this.Op = op
 	this.Path = path
@@ -49,9 +50,9 @@ func NewJsonPatchOperationWithDefaults() *JsonPatchOperation {
 }
 
 // GetOp returns the Op field value
-func (o *JsonPatchOperation) GetOp() OperationType {
+func (o *JsonPatchOperation) GetOp() string {
 	if o == nil {
-		var ret OperationType
+		var ret string
 		return ret
 	}
 
@@ -60,7 +61,7 @@ func (o *JsonPatchOperation) GetOp() OperationType {
 
 // GetOpOk returns a tuple with the Op field value
 // and a boolean to check if the value has been set.
-func (o *JsonPatchOperation) GetOpOk() (*OperationType, bool) {
+func (o *JsonPatchOperation) GetOpOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -68,7 +69,7 @@ func (o *JsonPatchOperation) GetOpOk() (*OperationType, bool) {
 }
 
 // SetOp sets field value
-func (o *JsonPatchOperation) SetOp(v OperationType) {
+func (o *JsonPatchOperation) SetOp(v string) {
 	o.Op = v
 }
 

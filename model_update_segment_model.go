@@ -23,7 +23,7 @@ type UpdateSegmentModel struct {
 	Name NullableString `json:"name,omitempty"`
 	Description NullableString `json:"description,omitempty"`
 	ComparisonAttribute NullableString `json:"comparisonAttribute,omitempty"`
-	Comparator *RolloutRuleComparator `json:"comparator,omitempty"`
+	Comparator NullableString `json:"comparator,omitempty"`
 	ComparisonValue NullableString `json:"comparisonValue,omitempty"`
 }
 
@@ -170,36 +170,46 @@ func (o *UpdateSegmentModel) UnsetComparisonAttribute() {
 	o.ComparisonAttribute.Unset()
 }
 
-// GetComparator returns the Comparator field value if set, zero value otherwise.
-func (o *UpdateSegmentModel) GetComparator() RolloutRuleComparator {
-	if o == nil || IsNil(o.Comparator) {
-		var ret RolloutRuleComparator
+// GetComparator returns the Comparator field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdateSegmentModel) GetComparator() string {
+	if o == nil || IsNil(o.Comparator.Get()) {
+		var ret string
 		return ret
 	}
-	return *o.Comparator
+	return *o.Comparator.Get()
 }
 
 // GetComparatorOk returns a tuple with the Comparator field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateSegmentModel) GetComparatorOk() (*RolloutRuleComparator, bool) {
-	if o == nil || IsNil(o.Comparator) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdateSegmentModel) GetComparatorOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Comparator, true
+	return o.Comparator.Get(), o.Comparator.IsSet()
 }
 
 // HasComparator returns a boolean if a field has been set.
 func (o *UpdateSegmentModel) HasComparator() bool {
-	if o != nil && !IsNil(o.Comparator) {
+	if o != nil && o.Comparator.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComparator gets a reference to the given RolloutRuleComparator and assigns it to the Comparator field.
-func (o *UpdateSegmentModel) SetComparator(v RolloutRuleComparator) {
-	o.Comparator = &v
+// SetComparator gets a reference to the given NullableString and assigns it to the Comparator field.
+func (o *UpdateSegmentModel) SetComparator(v string) {
+	o.Comparator.Set(&v)
+}
+// SetComparatorNil sets the value for Comparator to be an explicit nil
+func (o *UpdateSegmentModel) SetComparatorNil() {
+	o.Comparator.Set(nil)
+}
+
+// UnsetComparator ensures that no value is present for Comparator, not even an explicit nil
+func (o *UpdateSegmentModel) UnsetComparator() {
+	o.Comparator.Unset()
 }
 
 // GetComparisonValue returns the ComparisonValue field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -263,8 +273,8 @@ func (o UpdateSegmentModel) ToMap() (map[string]interface{}, error) {
 	if o.ComparisonAttribute.IsSet() {
 		toSerialize["comparisonAttribute"] = o.ComparisonAttribute.Get()
 	}
-	if !IsNil(o.Comparator) {
-		toSerialize["comparator"] = o.Comparator
+	if o.Comparator.IsSet() {
+		toSerialize["comparator"] = o.Comparator.Get()
 	}
 	if o.ComparisonValue.IsSet() {
 		toSerialize["comparisonValue"] = o.ComparisonValue.Get()

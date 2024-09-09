@@ -32,7 +32,8 @@ type EnvironmentAccessModel struct {
 	Order *int32 `json:"order,omitempty"`
 	// Determines whether a mandatory reason must be given every time when the Feature Flags or Settings in the given Environment are saved.
 	ReasonRequired *bool `json:"reasonRequired,omitempty"`
-	EnvironmentAccessType *EnvironmentAccessType `json:"environmentAccessType,omitempty"`
+	// Represent the environment specific Feature Management permission.
+	EnvironmentAccessType *string `json:"environmentAccessType,omitempty"`
 }
 
 // NewEnvironmentAccessModel instantiates a new EnvironmentAccessModel object
@@ -275,9 +276,9 @@ func (o *EnvironmentAccessModel) SetReasonRequired(v bool) {
 }
 
 // GetEnvironmentAccessType returns the EnvironmentAccessType field value if set, zero value otherwise.
-func (o *EnvironmentAccessModel) GetEnvironmentAccessType() EnvironmentAccessType {
+func (o *EnvironmentAccessModel) GetEnvironmentAccessType() string {
 	if o == nil || IsNil(o.EnvironmentAccessType) {
-		var ret EnvironmentAccessType
+		var ret string
 		return ret
 	}
 	return *o.EnvironmentAccessType
@@ -285,7 +286,7 @@ func (o *EnvironmentAccessModel) GetEnvironmentAccessType() EnvironmentAccessTyp
 
 // GetEnvironmentAccessTypeOk returns a tuple with the EnvironmentAccessType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *EnvironmentAccessModel) GetEnvironmentAccessTypeOk() (*EnvironmentAccessType, bool) {
+func (o *EnvironmentAccessModel) GetEnvironmentAccessTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.EnvironmentAccessType) {
 		return nil, false
 	}
@@ -301,8 +302,8 @@ func (o *EnvironmentAccessModel) HasEnvironmentAccessType() bool {
 	return false
 }
 
-// SetEnvironmentAccessType gets a reference to the given EnvironmentAccessType and assigns it to the EnvironmentAccessType field.
-func (o *EnvironmentAccessModel) SetEnvironmentAccessType(v EnvironmentAccessType) {
+// SetEnvironmentAccessType gets a reference to the given string and assigns it to the EnvironmentAccessType field.
+func (o *EnvironmentAccessModel) SetEnvironmentAccessType(v string) {
 	o.EnvironmentAccessType = &v
 }
 

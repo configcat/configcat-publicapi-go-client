@@ -35,7 +35,7 @@ import (
 func main() {
     environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
     settingId := int32(56) // int32 | The id of the Setting.
-    integrationLinkType := openapiclient.IntegrationLinkType("trello") // IntegrationLinkType | The integration link's type.
+    integrationLinkType := "integrationLinkType_example" // string | The integration link's type.
     key := "key_example" // string | The key of the integration link.
     addOrUpdateIntegrationLinkModel := *openapiclient.NewAddOrUpdateIntegrationLinkModel() // AddOrUpdateIntegrationLinkModel |  (optional)
 
@@ -59,7 +59,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **environmentId** | **string** | The identifier of the Environment. | 
 **settingId** | **int32** | The id of the Setting. | 
-**integrationLinkType** | [**IntegrationLinkType**](.md) | The integration link&#39;s type. | 
+**integrationLinkType** | **string** | The integration link&#39;s type. | 
 **key** | **string** | The key of the integration link. | 
 
 ### Other Parameters
@@ -116,7 +116,7 @@ import (
 func main() {
     environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
     settingId := int32(56) // int32 | The id of the Setting.
-    integrationLinkType := openapiclient.IntegrationLinkType("trello") // IntegrationLinkType | The integration's type.
+    integrationLinkType := "integrationLinkType_example" // string | The integration's type.
     key := "key_example" // string | The key of the integration link.
 
     configuration := openapiclient.NewConfiguration()
@@ -139,7 +139,7 @@ Name | Type | Description  | Notes
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **environmentId** | **string** | The identifier of the Environment. | 
 **settingId** | **int32** | The id of the Setting. | 
-**integrationLinkType** | [**IntegrationLinkType**](.md) | The integration&#39;s type. | 
+**integrationLinkType** | **string** | The integration&#39;s type. | 
 **key** | **string** | The key of the integration link. | 
 
 ### Other Parameters
@@ -193,7 +193,7 @@ import (
 )
 
 func main() {
-    integrationLinkType := openapiclient.IntegrationLinkType("trello") // IntegrationLinkType | The integration link's type.
+    integrationLinkType := "integrationLinkType_example" // string | The integration link's type.
     key := "key_example" // string | The key of the integration link.
 
     configuration := openapiclient.NewConfiguration()
@@ -214,7 +214,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**integrationLinkType** | [**IntegrationLinkType**](.md) | The integration link&#39;s type. | 
+**integrationLinkType** | **string** | The integration link&#39;s type. | 
 **key** | **string** | The key of the integration link. | 
 
 ### Other Parameters

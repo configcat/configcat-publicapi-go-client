@@ -20,7 +20,8 @@ var _ MappedNullable = &CreateIntegrationModel{}
 
 // CreateIntegrationModel struct for CreateIntegrationModel
 type CreateIntegrationModel struct {
-	IntegrationType IntegrationType `json:"integrationType"`
+	// Type of the Integration.
+	IntegrationType string `json:"integrationType"`
 	// Name of the Integration.
 	Name string `json:"name"`
 	// Parameters of the Integration.
@@ -35,7 +36,7 @@ type CreateIntegrationModel struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateIntegrationModel(integrationType IntegrationType, name string, parameters map[string]string, environmentIds []string, configIds []string) *CreateIntegrationModel {
+func NewCreateIntegrationModel(integrationType string, name string, parameters map[string]string, environmentIds []string, configIds []string) *CreateIntegrationModel {
 	this := CreateIntegrationModel{}
 	this.IntegrationType = integrationType
 	this.Name = name
@@ -54,9 +55,9 @@ func NewCreateIntegrationModelWithDefaults() *CreateIntegrationModel {
 }
 
 // GetIntegrationType returns the IntegrationType field value
-func (o *CreateIntegrationModel) GetIntegrationType() IntegrationType {
+func (o *CreateIntegrationModel) GetIntegrationType() string {
 	if o == nil {
-		var ret IntegrationType
+		var ret string
 		return ret
 	}
 
@@ -65,7 +66,7 @@ func (o *CreateIntegrationModel) GetIntegrationType() IntegrationType {
 
 // GetIntegrationTypeOk returns a tuple with the IntegrationType field value
 // and a boolean to check if the value has been set.
-func (o *CreateIntegrationModel) GetIntegrationTypeOk() (*IntegrationType, bool) {
+func (o *CreateIntegrationModel) GetIntegrationTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -73,7 +74,7 @@ func (o *CreateIntegrationModel) GetIntegrationTypeOk() (*IntegrationType, bool)
 }
 
 // SetIntegrationType sets field value
-func (o *CreateIntegrationModel) SetIntegrationType(v IntegrationType) {
+func (o *CreateIntegrationModel) SetIntegrationType(v string) {
 	o.IntegrationType = v
 }
 

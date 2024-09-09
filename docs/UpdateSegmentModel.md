@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **NullableString** |  | [optional] 
 **Description** | Pointer to **NullableString** |  | [optional] 
 **ComparisonAttribute** | Pointer to **NullableString** |  | [optional] 
-**Comparator** | Pointer to [**RolloutRuleComparator**](RolloutRuleComparator.md) |  | [optional] 
+**Comparator** | Pointer to **NullableString** |  | [optional] 
 **ComparisonValue** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
@@ -136,20 +136,20 @@ HasComparisonAttribute returns a boolean if a field has been set.
 UnsetComparisonAttribute ensures that no value is present for ComparisonAttribute, not even an explicit nil
 ### GetComparator
 
-`func (o *UpdateSegmentModel) GetComparator() RolloutRuleComparator`
+`func (o *UpdateSegmentModel) GetComparator() string`
 
 GetComparator returns the Comparator field if non-nil, zero value otherwise.
 
 ### GetComparatorOk
 
-`func (o *UpdateSegmentModel) GetComparatorOk() (*RolloutRuleComparator, bool)`
+`func (o *UpdateSegmentModel) GetComparatorOk() (*string, bool)`
 
 GetComparatorOk returns a tuple with the Comparator field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetComparator
 
-`func (o *UpdateSegmentModel) SetComparator(v RolloutRuleComparator)`
+`func (o *UpdateSegmentModel) SetComparator(v string)`
 
 SetComparator sets Comparator field to given value.
 
@@ -159,6 +159,16 @@ SetComparator sets Comparator field to given value.
 
 HasComparator returns a boolean if a field has been set.
 
+### SetComparatorNil
+
+`func (o *UpdateSegmentModel) SetComparatorNil(b bool)`
+
+ SetComparatorNil sets the value for Comparator to be an explicit nil
+
+### UnsetComparator
+`func (o *UpdateSegmentModel) UnsetComparator()`
+
+UnsetComparator ensures that no value is present for Comparator, not even an explicit nil
 ### GetComparisonValue
 
 `func (o *UpdateSegmentModel) GetComparisonValue() string`

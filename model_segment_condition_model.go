@@ -22,14 +22,15 @@ var _ MappedNullable = &SegmentConditionModel{}
 type SegmentConditionModel struct {
 	// The segment's identifier.
 	SegmentId string `json:"segmentId"`
-	Comparator SegmentComparator `json:"comparator"`
+	// The segment comparison operator used during the evaluation process.
+	Comparator string `json:"comparator"`
 }
 
 // NewSegmentConditionModel instantiates a new SegmentConditionModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSegmentConditionModel(segmentId string, comparator SegmentComparator) *SegmentConditionModel {
+func NewSegmentConditionModel(segmentId string, comparator string) *SegmentConditionModel {
 	this := SegmentConditionModel{}
 	this.SegmentId = segmentId
 	this.Comparator = comparator
@@ -69,9 +70,9 @@ func (o *SegmentConditionModel) SetSegmentId(v string) {
 }
 
 // GetComparator returns the Comparator field value
-func (o *SegmentConditionModel) GetComparator() SegmentComparator {
+func (o *SegmentConditionModel) GetComparator() string {
 	if o == nil {
-		var ret SegmentComparator
+		var ret string
 		return ret
 	}
 
@@ -80,7 +81,7 @@ func (o *SegmentConditionModel) GetComparator() SegmentComparator {
 
 // GetComparatorOk returns a tuple with the Comparator field value
 // and a boolean to check if the value has been set.
-func (o *SegmentConditionModel) GetComparatorOk() (*SegmentComparator, bool) {
+func (o *SegmentConditionModel) GetComparatorOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,7 +89,7 @@ func (o *SegmentConditionModel) GetComparatorOk() (*SegmentComparator, bool) {
 }
 
 // SetComparator sets field value
-func (o *SegmentConditionModel) SetComparator(v SegmentComparator) {
+func (o *SegmentConditionModel) SetComparator(v string) {
 	o.Comparator = v
 }
 

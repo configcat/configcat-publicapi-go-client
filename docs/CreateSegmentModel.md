@@ -7,14 +7,14 @@ Name | Type | Description | Notes
 **Name** | **string** | Name of the Segment. | 
 **Description** | Pointer to **NullableString** | Description of the Segment. | [optional] 
 **ComparisonAttribute** | **string** | The user&#39;s attribute the evaluation process must take into account. | 
-**Comparator** | [**RolloutRuleComparator**](RolloutRuleComparator.md) |  | 
+**Comparator** | **string** |  | 
 **ComparisonValue** | **string** | The value to compare with the given user attribute&#39;s value. | 
 
 ## Methods
 
 ### NewCreateSegmentModel
 
-`func NewCreateSegmentModel(name string, comparisonAttribute string, comparator RolloutRuleComparator, comparisonValue string, ) *CreateSegmentModel`
+`func NewCreateSegmentModel(name string, comparisonAttribute string, comparator string, comparisonValue string, ) *CreateSegmentModel`
 
 NewCreateSegmentModel instantiates a new CreateSegmentModel object
 This constructor will assign default values to properties that have it defined,
@@ -106,20 +106,20 @@ SetComparisonAttribute sets ComparisonAttribute field to given value.
 
 ### GetComparator
 
-`func (o *CreateSegmentModel) GetComparator() RolloutRuleComparator`
+`func (o *CreateSegmentModel) GetComparator() string`
 
 GetComparator returns the Comparator field if non-nil, zero value otherwise.
 
 ### GetComparatorOk
 
-`func (o *CreateSegmentModel) GetComparatorOk() (*RolloutRuleComparator, bool)`
+`func (o *CreateSegmentModel) GetComparatorOk() (*string, bool)`
 
 GetComparatorOk returns a tuple with the Comparator field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetComparator
 
-`func (o *CreateSegmentModel) SetComparator(v RolloutRuleComparator)`
+`func (o *CreateSegmentModel) SetComparator(v string)`
 
 SetComparator sets Comparator field to given value.
 

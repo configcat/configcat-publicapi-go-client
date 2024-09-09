@@ -29,7 +29,7 @@ type IntegrationLinksApiAddOrUpdateIntegrationLinkRequest struct {
 	ApiService *IntegrationLinksApiService
 	environmentId string
 	settingId int32
-	integrationLinkType IntegrationLinkType
+	integrationLinkType string
 	key string
 	addOrUpdateIntegrationLinkModel *AddOrUpdateIntegrationLinkModel
 }
@@ -55,7 +55,7 @@ AddOrUpdateIntegrationLink Add or update Integration link
  @param key The key of the integration link.
  @return IntegrationLinksApiAddOrUpdateIntegrationLinkRequest
 */
-func (a *IntegrationLinksApiService) AddOrUpdateIntegrationLink(ctx context.Context, environmentId string, settingId int32, integrationLinkType IntegrationLinkType, key string) IntegrationLinksApiAddOrUpdateIntegrationLinkRequest {
+func (a *IntegrationLinksApiService) AddOrUpdateIntegrationLink(ctx context.Context, environmentId string, settingId int32, integrationLinkType string, key string) IntegrationLinksApiAddOrUpdateIntegrationLinkRequest {
 	return IntegrationLinksApiAddOrUpdateIntegrationLinkRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -152,7 +152,7 @@ type IntegrationLinksApiDeleteIntegrationLinkRequest struct {
 	ApiService *IntegrationLinksApiService
 	environmentId string
 	settingId int32
-	integrationLinkType IntegrationLinkType
+	integrationLinkType string
 	key string
 }
 
@@ -172,7 +172,7 @@ DeleteIntegrationLink Delete Integration link
  @param key The key of the integration link.
  @return IntegrationLinksApiDeleteIntegrationLinkRequest
 */
-func (a *IntegrationLinksApiService) DeleteIntegrationLink(ctx context.Context, environmentId string, settingId int32, integrationLinkType IntegrationLinkType, key string) IntegrationLinksApiDeleteIntegrationLinkRequest {
+func (a *IntegrationLinksApiService) DeleteIntegrationLink(ctx context.Context, environmentId string, settingId int32, integrationLinkType string, key string) IntegrationLinksApiDeleteIntegrationLinkRequest {
 	return IntegrationLinksApiDeleteIntegrationLinkRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -265,7 +265,7 @@ func (a *IntegrationLinksApiService) DeleteIntegrationLinkExecute(r IntegrationL
 type IntegrationLinksApiGetIntegrationLinkDetailsRequest struct {
 	ctx context.Context
 	ApiService *IntegrationLinksApiService
-	integrationLinkType IntegrationLinkType
+	integrationLinkType string
 	key string
 }
 
@@ -283,7 +283,7 @@ GetIntegrationLinkDetails Get Integration link
  @param key The key of the integration link.
  @return IntegrationLinksApiGetIntegrationLinkDetailsRequest
 */
-func (a *IntegrationLinksApiService) GetIntegrationLinkDetails(ctx context.Context, integrationLinkType IntegrationLinkType, key string) IntegrationLinksApiGetIntegrationLinkDetailsRequest {
+func (a *IntegrationLinksApiService) GetIntegrationLinkDetails(ctx context.Context, integrationLinkType string, key string) IntegrationLinksApiGetIntegrationLinkDetailsRequest {
 	return IntegrationLinksApiGetIntegrationLinkDetailsRequest{
 		ApiService: a,
 		ctx: ctx,

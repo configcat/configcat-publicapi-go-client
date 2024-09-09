@@ -22,7 +22,8 @@ var _ MappedNullable = &CreateOrUpdateEnvironmentAccessModel{}
 type CreateOrUpdateEnvironmentAccessModel struct {
 	// Identifier of the Environment.
 	EnvironmentId *string `json:"environmentId,omitempty"`
-	EnvironmentAccessType *EnvironmentAccessType `json:"environmentAccessType,omitempty"`
+	// Represent the environment specific Feature Management permission.
+	EnvironmentAccessType *string `json:"environmentAccessType,omitempty"`
 }
 
 // NewCreateOrUpdateEnvironmentAccessModel instantiates a new CreateOrUpdateEnvironmentAccessModel object
@@ -75,9 +76,9 @@ func (o *CreateOrUpdateEnvironmentAccessModel) SetEnvironmentId(v string) {
 }
 
 // GetEnvironmentAccessType returns the EnvironmentAccessType field value if set, zero value otherwise.
-func (o *CreateOrUpdateEnvironmentAccessModel) GetEnvironmentAccessType() EnvironmentAccessType {
+func (o *CreateOrUpdateEnvironmentAccessModel) GetEnvironmentAccessType() string {
 	if o == nil || IsNil(o.EnvironmentAccessType) {
-		var ret EnvironmentAccessType
+		var ret string
 		return ret
 	}
 	return *o.EnvironmentAccessType
@@ -85,7 +86,7 @@ func (o *CreateOrUpdateEnvironmentAccessModel) GetEnvironmentAccessType() Enviro
 
 // GetEnvironmentAccessTypeOk returns a tuple with the EnvironmentAccessType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateOrUpdateEnvironmentAccessModel) GetEnvironmentAccessTypeOk() (*EnvironmentAccessType, bool) {
+func (o *CreateOrUpdateEnvironmentAccessModel) GetEnvironmentAccessTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.EnvironmentAccessType) {
 		return nil, false
 	}
@@ -101,8 +102,8 @@ func (o *CreateOrUpdateEnvironmentAccessModel) HasEnvironmentAccessType() bool {
 	return false
 }
 
-// SetEnvironmentAccessType gets a reference to the given EnvironmentAccessType and assigns it to the EnvironmentAccessType field.
-func (o *CreateOrUpdateEnvironmentAccessModel) SetEnvironmentAccessType(v EnvironmentAccessType) {
+// SetEnvironmentAccessType gets a reference to the given string and assigns it to the EnvironmentAccessType field.
+func (o *CreateOrUpdateEnvironmentAccessModel) SetEnvironmentAccessType(v string) {
 	o.EnvironmentAccessType = &v
 }
 

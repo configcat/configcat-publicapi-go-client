@@ -30,7 +30,8 @@ type CreateSettingInitialValues struct {
 	Key string `json:"key"`
 	// The name of the Feature Flag or Setting.
 	Name string `json:"name"`
-	SettingType SettingType `json:"settingType"`
+	// The type of the Feature Flag or Setting.
+	SettingType string `json:"settingType"`
 	// Optional, initial value of the Feature Flag or Setting in the given Environments.
 	InitialValues []InitialValue `json:"initialValues,omitempty"`
 }
@@ -39,7 +40,7 @@ type CreateSettingInitialValues struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateSettingInitialValues(key string, name string, settingType SettingType) *CreateSettingInitialValues {
+func NewCreateSettingInitialValues(key string, name string, settingType string) *CreateSettingInitialValues {
 	this := CreateSettingInitialValues{}
 	this.Key = key
 	this.Name = name
@@ -221,9 +222,9 @@ func (o *CreateSettingInitialValues) SetName(v string) {
 }
 
 // GetSettingType returns the SettingType field value
-func (o *CreateSettingInitialValues) GetSettingType() SettingType {
+func (o *CreateSettingInitialValues) GetSettingType() string {
 	if o == nil {
-		var ret SettingType
+		var ret string
 		return ret
 	}
 
@@ -232,7 +233,7 @@ func (o *CreateSettingInitialValues) GetSettingType() SettingType {
 
 // GetSettingTypeOk returns a tuple with the SettingType field value
 // and a boolean to check if the value has been set.
-func (o *CreateSettingInitialValues) GetSettingTypeOk() (*SettingType, bool) {
+func (o *CreateSettingInitialValues) GetSettingTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -240,7 +241,7 @@ func (o *CreateSettingInitialValues) GetSettingTypeOk() (*SettingType, bool) {
 }
 
 // SetSettingType sets field value
-func (o *CreateSettingInitialValues) SetSettingType(v SettingType) {
+func (o *CreateSettingInitialValues) SetSettingType(v string) {
 	o.SettingType = v
 }
 

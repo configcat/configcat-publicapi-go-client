@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EnvironmentId** | Pointer to **string** | Identifier of the Environment. | [optional] 
-**EnvironmentAccessType** | Pointer to [**EnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] 
+**EnvironmentAccessType** | Pointer to **string** | Represent the environment specific Feature Management permission. | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasEnvironmentId returns a boolean if a field has been set.
 
 ### GetEnvironmentAccessType
 
-`func (o *CreateOrUpdateEnvironmentAccessModel) GetEnvironmentAccessType() EnvironmentAccessType`
+`func (o *CreateOrUpdateEnvironmentAccessModel) GetEnvironmentAccessType() string`
 
 GetEnvironmentAccessType returns the EnvironmentAccessType field if non-nil, zero value otherwise.
 
 ### GetEnvironmentAccessTypeOk
 
-`func (o *CreateOrUpdateEnvironmentAccessModel) GetEnvironmentAccessTypeOk() (*EnvironmentAccessType, bool)`
+`func (o *CreateOrUpdateEnvironmentAccessModel) GetEnvironmentAccessTypeOk() (*string, bool)`
 
 GetEnvironmentAccessTypeOk returns a tuple with the EnvironmentAccessType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironmentAccessType
 
-`func (o *CreateOrUpdateEnvironmentAccessModel) SetEnvironmentAccessType(v EnvironmentAccessType)`
+`func (o *CreateOrUpdateEnvironmentAccessModel) SetEnvironmentAccessType(v string)`
 
 SetEnvironmentAccessType sets EnvironmentAccessType field to given value.
 

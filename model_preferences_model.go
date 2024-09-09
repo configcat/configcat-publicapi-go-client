@@ -22,7 +22,8 @@ var _ MappedNullable = &PreferencesModel{}
 type PreferencesModel struct {
 	// Indicates that a mandatory note required for saving and publishing.
 	ReasonRequired *bool `json:"reasonRequired,omitempty"`
-	KeyGenerationMode *KeyGenerationMode `json:"keyGenerationMode,omitempty"`
+	// Determines the Feature Flag key generation mode.
+	KeyGenerationMode *string `json:"keyGenerationMode,omitempty"`
 	// Indicates whether a variation ID's must be shown on the ConfigCat Dashboard.
 	ShowVariationId *bool `json:"showVariationId,omitempty"`
 	// List of Environments where mandatory note must be set before saving and publishing.
@@ -81,9 +82,9 @@ func (o *PreferencesModel) SetReasonRequired(v bool) {
 }
 
 // GetKeyGenerationMode returns the KeyGenerationMode field value if set, zero value otherwise.
-func (o *PreferencesModel) GetKeyGenerationMode() KeyGenerationMode {
+func (o *PreferencesModel) GetKeyGenerationMode() string {
 	if o == nil || IsNil(o.KeyGenerationMode) {
-		var ret KeyGenerationMode
+		var ret string
 		return ret
 	}
 	return *o.KeyGenerationMode
@@ -91,7 +92,7 @@ func (o *PreferencesModel) GetKeyGenerationMode() KeyGenerationMode {
 
 // GetKeyGenerationModeOk returns a tuple with the KeyGenerationMode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PreferencesModel) GetKeyGenerationModeOk() (*KeyGenerationMode, bool) {
+func (o *PreferencesModel) GetKeyGenerationModeOk() (*string, bool) {
 	if o == nil || IsNil(o.KeyGenerationMode) {
 		return nil, false
 	}
@@ -107,8 +108,8 @@ func (o *PreferencesModel) HasKeyGenerationMode() bool {
 	return false
 }
 
-// SetKeyGenerationMode gets a reference to the given KeyGenerationMode and assigns it to the KeyGenerationMode field.
-func (o *PreferencesModel) SetKeyGenerationMode(v KeyGenerationMode) {
+// SetKeyGenerationMode gets a reference to the given string and assigns it to the KeyGenerationMode field.
+func (o *PreferencesModel) SetKeyGenerationMode(v string) {
 	o.KeyGenerationMode = &v
 }
 
