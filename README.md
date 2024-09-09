@@ -3,9 +3,9 @@
 The purpose of this API is to access the ConfigCat platform programmatically.
 You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.
 
-**Base API URL**: https://test-api.configcat.com
+**Base API URL**: https://api.configcat.com
 
-If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).
+If you prefer the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).
 
 The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON 
 format. 
@@ -15,8 +15,8 @@ format.
 # OpenAPI Specification
 
 The complete specification is publicly available in the following formats: 
-- [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json)
-- [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)
+- [OpenAPI v3](https://api.configcat.com/docs/v1/swagger.json)
+- [Swagger v2](https://api.configcat.com/docs/v1/swagger.v2.json)
 
 You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or
 [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.
@@ -109,7 +109,7 @@ ctx = context.WithValue(context.Background(), configcatpublicapi.ContextOperatio
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://test-api.configcat.com*
+All URIs are relative to *https://api.configcat.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
