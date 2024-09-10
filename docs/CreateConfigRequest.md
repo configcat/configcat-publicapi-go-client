@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | **string** | The name of the Config. | 
 **Description** | Pointer to **NullableString** | The description of the Config. | [optional] 
 **Order** | Pointer to **NullableInt32** | The order of the Config represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers. | [optional] 
-**EvaluationVersion** | Pointer to [**EvaluationVersion**](EvaluationVersion.md) |  | [optional] 
+**EvaluationVersion** | Pointer to **string** | Determines the evaluation version of a Config.  Using &#x60;v2&#x60; enables the new features of Config V2 (https://configcat.com/docs/advanced/config-v2). | [optional] 
 
 ## Methods
 
@@ -120,20 +120,20 @@ HasOrder returns a boolean if a field has been set.
 UnsetOrder ensures that no value is present for Order, not even an explicit nil
 ### GetEvaluationVersion
 
-`func (o *CreateConfigRequest) GetEvaluationVersion() EvaluationVersion`
+`func (o *CreateConfigRequest) GetEvaluationVersion() string`
 
 GetEvaluationVersion returns the EvaluationVersion field if non-nil, zero value otherwise.
 
 ### GetEvaluationVersionOk
 
-`func (o *CreateConfigRequest) GetEvaluationVersionOk() (*EvaluationVersion, bool)`
+`func (o *CreateConfigRequest) GetEvaluationVersionOk() (*string, bool)`
 
 GetEvaluationVersionOk returns a tuple with the EvaluationVersion field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEvaluationVersion
 
-`func (o *CreateConfigRequest) SetEvaluationVersion(v EvaluationVersion)`
+`func (o *CreateConfigRequest) SetEvaluationVersion(v string)`
 
 SetEvaluationVersion sets EvaluationVersion field to given value.
 

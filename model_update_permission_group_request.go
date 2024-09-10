@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -62,8 +62,8 @@ type UpdatePermissionGroupRequest struct {
 	CanViewProductAuditLog NullableBool `json:"canViewProductAuditLog,omitempty"`
 	// Group members has access to product statistics.
 	CanViewProductStatistics NullableBool `json:"canViewProductStatistics,omitempty"`
-	AccessType *AccessType `json:"accessType,omitempty"`
-	NewEnvironmentAccessType *EnvironmentAccessType `json:"newEnvironmentAccessType,omitempty"`
+	AccessType NullableString `json:"accessType,omitempty"`
+	NewEnvironmentAccessType NullableString `json:"newEnvironmentAccessType,omitempty"`
 	// List of environment specific permissions.
 	EnvironmentAccesses []CreateOrUpdateEnvironmentAccessModel `json:"environmentAccesses,omitempty"`
 }
@@ -967,68 +967,88 @@ func (o *UpdatePermissionGroupRequest) UnsetCanViewProductStatistics() {
 	o.CanViewProductStatistics.Unset()
 }
 
-// GetAccessType returns the AccessType field value if set, zero value otherwise.
-func (o *UpdatePermissionGroupRequest) GetAccessType() AccessType {
-	if o == nil || IsNil(o.AccessType) {
-		var ret AccessType
+// GetAccessType returns the AccessType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdatePermissionGroupRequest) GetAccessType() string {
+	if o == nil || IsNil(o.AccessType.Get()) {
+		var ret string
 		return ret
 	}
-	return *o.AccessType
+	return *o.AccessType.Get()
 }
 
 // GetAccessTypeOk returns a tuple with the AccessType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePermissionGroupRequest) GetAccessTypeOk() (*AccessType, bool) {
-	if o == nil || IsNil(o.AccessType) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdatePermissionGroupRequest) GetAccessTypeOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AccessType, true
+	return o.AccessType.Get(), o.AccessType.IsSet()
 }
 
 // HasAccessType returns a boolean if a field has been set.
 func (o *UpdatePermissionGroupRequest) HasAccessType() bool {
-	if o != nil && !IsNil(o.AccessType) {
+	if o != nil && o.AccessType.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccessType gets a reference to the given AccessType and assigns it to the AccessType field.
-func (o *UpdatePermissionGroupRequest) SetAccessType(v AccessType) {
-	o.AccessType = &v
+// SetAccessType gets a reference to the given NullableString and assigns it to the AccessType field.
+func (o *UpdatePermissionGroupRequest) SetAccessType(v string) {
+	o.AccessType.Set(&v)
+}
+// SetAccessTypeNil sets the value for AccessType to be an explicit nil
+func (o *UpdatePermissionGroupRequest) SetAccessTypeNil() {
+	o.AccessType.Set(nil)
 }
 
-// GetNewEnvironmentAccessType returns the NewEnvironmentAccessType field value if set, zero value otherwise.
-func (o *UpdatePermissionGroupRequest) GetNewEnvironmentAccessType() EnvironmentAccessType {
-	if o == nil || IsNil(o.NewEnvironmentAccessType) {
-		var ret EnvironmentAccessType
+// UnsetAccessType ensures that no value is present for AccessType, not even an explicit nil
+func (o *UpdatePermissionGroupRequest) UnsetAccessType() {
+	o.AccessType.Unset()
+}
+
+// GetNewEnvironmentAccessType returns the NewEnvironmentAccessType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdatePermissionGroupRequest) GetNewEnvironmentAccessType() string {
+	if o == nil || IsNil(o.NewEnvironmentAccessType.Get()) {
+		var ret string
 		return ret
 	}
-	return *o.NewEnvironmentAccessType
+	return *o.NewEnvironmentAccessType.Get()
 }
 
 // GetNewEnvironmentAccessTypeOk returns a tuple with the NewEnvironmentAccessType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePermissionGroupRequest) GetNewEnvironmentAccessTypeOk() (*EnvironmentAccessType, bool) {
-	if o == nil || IsNil(o.NewEnvironmentAccessType) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdatePermissionGroupRequest) GetNewEnvironmentAccessTypeOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NewEnvironmentAccessType, true
+	return o.NewEnvironmentAccessType.Get(), o.NewEnvironmentAccessType.IsSet()
 }
 
 // HasNewEnvironmentAccessType returns a boolean if a field has been set.
 func (o *UpdatePermissionGroupRequest) HasNewEnvironmentAccessType() bool {
-	if o != nil && !IsNil(o.NewEnvironmentAccessType) {
+	if o != nil && o.NewEnvironmentAccessType.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNewEnvironmentAccessType gets a reference to the given EnvironmentAccessType and assigns it to the NewEnvironmentAccessType field.
-func (o *UpdatePermissionGroupRequest) SetNewEnvironmentAccessType(v EnvironmentAccessType) {
-	o.NewEnvironmentAccessType = &v
+// SetNewEnvironmentAccessType gets a reference to the given NullableString and assigns it to the NewEnvironmentAccessType field.
+func (o *UpdatePermissionGroupRequest) SetNewEnvironmentAccessType(v string) {
+	o.NewEnvironmentAccessType.Set(&v)
+}
+// SetNewEnvironmentAccessTypeNil sets the value for NewEnvironmentAccessType to be an explicit nil
+func (o *UpdatePermissionGroupRequest) SetNewEnvironmentAccessTypeNil() {
+	o.NewEnvironmentAccessType.Set(nil)
+}
+
+// UnsetNewEnvironmentAccessType ensures that no value is present for NewEnvironmentAccessType, not even an explicit nil
+func (o *UpdatePermissionGroupRequest) UnsetNewEnvironmentAccessType() {
+	o.NewEnvironmentAccessType.Unset()
 }
 
 // GetEnvironmentAccesses returns the EnvironmentAccesses field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1137,11 +1157,11 @@ func (o UpdatePermissionGroupRequest) ToMap() (map[string]interface{}, error) {
 	if o.CanViewProductStatistics.IsSet() {
 		toSerialize["canViewProductStatistics"] = o.CanViewProductStatistics.Get()
 	}
-	if !IsNil(o.AccessType) {
-		toSerialize["accessType"] = o.AccessType
+	if o.AccessType.IsSet() {
+		toSerialize["accessType"] = o.AccessType.Get()
 	}
-	if !IsNil(o.NewEnvironmentAccessType) {
-		toSerialize["newEnvironmentAccessType"] = o.NewEnvironmentAccessType
+	if o.NewEnvironmentAccessType.IsSet() {
+		toSerialize["newEnvironmentAccessType"] = o.NewEnvironmentAccessType.Get()
 	}
 	if o.EnvironmentAccesses != nil {
 		toSerialize["environmentAccesses"] = o.EnvironmentAccesses

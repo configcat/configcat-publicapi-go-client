@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AuditLogId** | Pointer to **int64** |  | [optional] 
 **AuditLogDateTime** | Pointer to **time.Time** |  | [optional] 
-**AuditLogTypeEnum** | Pointer to [**AuditLogType**](AuditLogType.md) |  | [optional] 
+**AuditLogTypeEnum** | Pointer to **string** |  | [optional] 
 **ChangeSetId** | Pointer to **NullableString** |  | [optional] 
 **Truncated** | Pointer to **bool** |  | [optional] 
 **AuditLogType** | Pointer to **NullableString** |  | [optional] 
@@ -88,20 +88,20 @@ HasAuditLogDateTime returns a boolean if a field has been set.
 
 ### GetAuditLogTypeEnum
 
-`func (o *AuditLogItemModel) GetAuditLogTypeEnum() AuditLogType`
+`func (o *AuditLogItemModel) GetAuditLogTypeEnum() string`
 
 GetAuditLogTypeEnum returns the AuditLogTypeEnum field if non-nil, zero value otherwise.
 
 ### GetAuditLogTypeEnumOk
 
-`func (o *AuditLogItemModel) GetAuditLogTypeEnumOk() (*AuditLogType, bool)`
+`func (o *AuditLogItemModel) GetAuditLogTypeEnumOk() (*string, bool)`
 
 GetAuditLogTypeEnumOk returns a tuple with the AuditLogTypeEnum field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAuditLogTypeEnum
 
-`func (o *AuditLogItemModel) SetAuditLogTypeEnum(v AuditLogType)`
+`func (o *AuditLogItemModel) SetAuditLogTypeEnum(v string)`
 
 SetAuditLogTypeEnum sets AuditLogTypeEnum field to given value.
 

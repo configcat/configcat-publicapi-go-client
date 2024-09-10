@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ReasonRequired** | Pointer to **bool** | Indicates that a mandatory note required for saving and publishing. | [optional] 
-**KeyGenerationMode** | Pointer to [**KeyGenerationMode**](KeyGenerationMode.md) |  | [optional] 
+**KeyGenerationMode** | Pointer to **string** | Determines the Feature Flag key generation mode. | [optional] 
 **ShowVariationId** | Pointer to **bool** | Indicates whether a variation ID&#39;s must be shown on the ConfigCat Dashboard. | [optional] 
 **ReasonRequiredEnvironments** | Pointer to [**[]ReasonRequiredEnvironmentModel**](ReasonRequiredEnvironmentModel.md) | List of Environments where mandatory note must be set before saving and publishing. | [optional] 
 **MandatorySettingHint** | Pointer to **bool** | Indicates whether Feature flags and Settings must have a hint. | [optional] 
@@ -56,20 +56,20 @@ HasReasonRequired returns a boolean if a field has been set.
 
 ### GetKeyGenerationMode
 
-`func (o *PreferencesModel) GetKeyGenerationMode() KeyGenerationMode`
+`func (o *PreferencesModel) GetKeyGenerationMode() string`
 
 GetKeyGenerationMode returns the KeyGenerationMode field if non-nil, zero value otherwise.
 
 ### GetKeyGenerationModeOk
 
-`func (o *PreferencesModel) GetKeyGenerationModeOk() (*KeyGenerationMode, bool)`
+`func (o *PreferencesModel) GetKeyGenerationModeOk() (*string, bool)`
 
 GetKeyGenerationModeOk returns a tuple with the KeyGenerationMode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetKeyGenerationMode
 
-`func (o *PreferencesModel) SetKeyGenerationMode(v KeyGenerationMode)`
+`func (o *PreferencesModel) SetKeyGenerationMode(v string)`
 
 SetKeyGenerationMode sets KeyGenerationMode field to given value.
 

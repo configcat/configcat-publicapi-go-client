@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -23,7 +23,7 @@ var _ MappedNullable = &AuditLogItemModel{}
 type AuditLogItemModel struct {
 	AuditLogId *int64 `json:"auditLogId,omitempty"`
 	AuditLogDateTime *time.Time `json:"auditLogDateTime,omitempty"`
-	AuditLogTypeEnum *AuditLogType `json:"auditLogTypeEnum,omitempty"`
+	AuditLogTypeEnum *string `json:"auditLogTypeEnum,omitempty"`
 	ChangeSetId NullableString `json:"changeSetId,omitempty"`
 	Truncated *bool `json:"truncated,omitempty"`
 	AuditLogType NullableString `json:"auditLogType,omitempty"`
@@ -117,9 +117,9 @@ func (o *AuditLogItemModel) SetAuditLogDateTime(v time.Time) {
 }
 
 // GetAuditLogTypeEnum returns the AuditLogTypeEnum field value if set, zero value otherwise.
-func (o *AuditLogItemModel) GetAuditLogTypeEnum() AuditLogType {
+func (o *AuditLogItemModel) GetAuditLogTypeEnum() string {
 	if o == nil || IsNil(o.AuditLogTypeEnum) {
-		var ret AuditLogType
+		var ret string
 		return ret
 	}
 	return *o.AuditLogTypeEnum
@@ -127,7 +127,7 @@ func (o *AuditLogItemModel) GetAuditLogTypeEnum() AuditLogType {
 
 // GetAuditLogTypeEnumOk returns a tuple with the AuditLogTypeEnum field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AuditLogItemModel) GetAuditLogTypeEnumOk() (*AuditLogType, bool) {
+func (o *AuditLogItemModel) GetAuditLogTypeEnumOk() (*string, bool) {
 	if o == nil || IsNil(o.AuditLogTypeEnum) {
 		return nil, false
 	}
@@ -143,8 +143,8 @@ func (o *AuditLogItemModel) HasAuditLogTypeEnum() bool {
 	return false
 }
 
-// SetAuditLogTypeEnum gets a reference to the given AuditLogType and assigns it to the AuditLogTypeEnum field.
-func (o *AuditLogItemModel) SetAuditLogTypeEnum(v AuditLogType) {
+// SetAuditLogTypeEnum gets a reference to the given string and assigns it to the AuditLogTypeEnum field.
+func (o *AuditLogItemModel) SetAuditLogTypeEnum(v string) {
 	o.AuditLogTypeEnum = &v
 }
 

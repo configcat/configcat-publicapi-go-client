@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **NullableString** | Description of the Environment. | [optional] 
 **Order** | Pointer to **int32** | The order of the Environment represented on the ConfigCat Dashboard. | [optional] 
 **ReasonRequired** | Pointer to **bool** | Determines whether a mandatory reason must be given every time when the Feature Flags or Settings in the given Environment are saved. | [optional] 
-**EnvironmentAccessType** | Pointer to [**EnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] 
+**EnvironmentAccessType** | Pointer to **string** | Represent the environment specific Feature Management permission. | [optional] 
 
 ## Methods
 
@@ -213,20 +213,20 @@ HasReasonRequired returns a boolean if a field has been set.
 
 ### GetEnvironmentAccessType
 
-`func (o *EnvironmentAccessModel) GetEnvironmentAccessType() EnvironmentAccessType`
+`func (o *EnvironmentAccessModel) GetEnvironmentAccessType() string`
 
 GetEnvironmentAccessType returns the EnvironmentAccessType field if non-nil, zero value otherwise.
 
 ### GetEnvironmentAccessTypeOk
 
-`func (o *EnvironmentAccessModel) GetEnvironmentAccessTypeOk() (*EnvironmentAccessType, bool)`
+`func (o *EnvironmentAccessModel) GetEnvironmentAccessTypeOk() (*string, bool)`
 
 GetEnvironmentAccessTypeOk returns a tuple with the EnvironmentAccessType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironmentAccessType
 
-`func (o *EnvironmentAccessModel) SetEnvironmentAccessType(v EnvironmentAccessType)`
+`func (o *EnvironmentAccessModel) SetEnvironmentAccessType(v string)`
 
 SetEnvironmentAccessType sets EnvironmentAccessType field to given value.
 

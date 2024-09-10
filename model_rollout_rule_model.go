@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -22,12 +22,13 @@ var _ MappedNullable = &RolloutRuleModel{}
 type RolloutRuleModel struct {
 	// The user attribute to compare.
 	ComparisonAttribute NullableString `json:"comparisonAttribute,omitempty"`
-	Comparator *RolloutRuleComparator `json:"comparator,omitempty"`
+	Comparator NullableString `json:"comparator,omitempty"`
 	// The value to compare against.
 	ComparisonValue NullableString `json:"comparisonValue,omitempty"`
 	// The value to serve when the comparison matches. It must respect the setting type.
 	Value interface{} `json:"value,omitempty"`
-	SegmentComparator *SegmentComparator `json:"segmentComparator,omitempty"`
+	// The segment comparison operator.
+	SegmentComparator NullableString `json:"segmentComparator,omitempty"`
 	// The segment to compare against.
 	SegmentId NullableString `json:"segmentId,omitempty"`
 }
@@ -91,36 +92,46 @@ func (o *RolloutRuleModel) UnsetComparisonAttribute() {
 	o.ComparisonAttribute.Unset()
 }
 
-// GetComparator returns the Comparator field value if set, zero value otherwise.
-func (o *RolloutRuleModel) GetComparator() RolloutRuleComparator {
-	if o == nil || IsNil(o.Comparator) {
-		var ret RolloutRuleComparator
+// GetComparator returns the Comparator field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RolloutRuleModel) GetComparator() string {
+	if o == nil || IsNil(o.Comparator.Get()) {
+		var ret string
 		return ret
 	}
-	return *o.Comparator
+	return *o.Comparator.Get()
 }
 
 // GetComparatorOk returns a tuple with the Comparator field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RolloutRuleModel) GetComparatorOk() (*RolloutRuleComparator, bool) {
-	if o == nil || IsNil(o.Comparator) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RolloutRuleModel) GetComparatorOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Comparator, true
+	return o.Comparator.Get(), o.Comparator.IsSet()
 }
 
 // HasComparator returns a boolean if a field has been set.
 func (o *RolloutRuleModel) HasComparator() bool {
-	if o != nil && !IsNil(o.Comparator) {
+	if o != nil && o.Comparator.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetComparator gets a reference to the given RolloutRuleComparator and assigns it to the Comparator field.
-func (o *RolloutRuleModel) SetComparator(v RolloutRuleComparator) {
-	o.Comparator = &v
+// SetComparator gets a reference to the given NullableString and assigns it to the Comparator field.
+func (o *RolloutRuleModel) SetComparator(v string) {
+	o.Comparator.Set(&v)
+}
+// SetComparatorNil sets the value for Comparator to be an explicit nil
+func (o *RolloutRuleModel) SetComparatorNil() {
+	o.Comparator.Set(nil)
+}
+
+// UnsetComparator ensures that no value is present for Comparator, not even an explicit nil
+func (o *RolloutRuleModel) UnsetComparator() {
+	o.Comparator.Unset()
 }
 
 // GetComparisonValue returns the ComparisonValue field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -198,36 +209,46 @@ func (o *RolloutRuleModel) SetValue(v interface{}) {
 	o.Value = v
 }
 
-// GetSegmentComparator returns the SegmentComparator field value if set, zero value otherwise.
-func (o *RolloutRuleModel) GetSegmentComparator() SegmentComparator {
-	if o == nil || IsNil(o.SegmentComparator) {
-		var ret SegmentComparator
+// GetSegmentComparator returns the SegmentComparator field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *RolloutRuleModel) GetSegmentComparator() string {
+	if o == nil || IsNil(o.SegmentComparator.Get()) {
+		var ret string
 		return ret
 	}
-	return *o.SegmentComparator
+	return *o.SegmentComparator.Get()
 }
 
 // GetSegmentComparatorOk returns a tuple with the SegmentComparator field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RolloutRuleModel) GetSegmentComparatorOk() (*SegmentComparator, bool) {
-	if o == nil || IsNil(o.SegmentComparator) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *RolloutRuleModel) GetSegmentComparatorOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SegmentComparator, true
+	return o.SegmentComparator.Get(), o.SegmentComparator.IsSet()
 }
 
 // HasSegmentComparator returns a boolean if a field has been set.
 func (o *RolloutRuleModel) HasSegmentComparator() bool {
-	if o != nil && !IsNil(o.SegmentComparator) {
+	if o != nil && o.SegmentComparator.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSegmentComparator gets a reference to the given SegmentComparator and assigns it to the SegmentComparator field.
-func (o *RolloutRuleModel) SetSegmentComparator(v SegmentComparator) {
-	o.SegmentComparator = &v
+// SetSegmentComparator gets a reference to the given NullableString and assigns it to the SegmentComparator field.
+func (o *RolloutRuleModel) SetSegmentComparator(v string) {
+	o.SegmentComparator.Set(&v)
+}
+// SetSegmentComparatorNil sets the value for SegmentComparator to be an explicit nil
+func (o *RolloutRuleModel) SetSegmentComparatorNil() {
+	o.SegmentComparator.Set(nil)
+}
+
+// UnsetSegmentComparator ensures that no value is present for SegmentComparator, not even an explicit nil
+func (o *RolloutRuleModel) UnsetSegmentComparator() {
+	o.SegmentComparator.Unset()
 }
 
 // GetSegmentId returns the SegmentId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -285,8 +306,8 @@ func (o RolloutRuleModel) ToMap() (map[string]interface{}, error) {
 	if o.ComparisonAttribute.IsSet() {
 		toSerialize["comparisonAttribute"] = o.ComparisonAttribute.Get()
 	}
-	if !IsNil(o.Comparator) {
-		toSerialize["comparator"] = o.Comparator
+	if o.Comparator.IsSet() {
+		toSerialize["comparator"] = o.Comparator.Get()
 	}
 	if o.ComparisonValue.IsSet() {
 		toSerialize["comparisonValue"] = o.ComparisonValue.Get()
@@ -294,8 +315,8 @@ func (o RolloutRuleModel) ToMap() (map[string]interface{}, error) {
 	if o.Value != nil {
 		toSerialize["value"] = o.Value
 	}
-	if !IsNil(o.SegmentComparator) {
-		toSerialize["segmentComparator"] = o.SegmentComparator
+	if o.SegmentComparator.IsSet() {
+		toSerialize["segmentComparator"] = o.SegmentComparator.Get()
 	}
 	if o.SegmentId.IsSet() {
 		toSerialize["segmentId"] = o.SegmentId.Get()

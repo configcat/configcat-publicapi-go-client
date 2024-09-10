@@ -3,9 +3,9 @@
 The purpose of this API is to access the ConfigCat platform programmatically.
 You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.
 
-**Base API URL**: https://test-api.configcat.com
+**Base API URL**: https://api.configcat.com
 
-If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).
+If you prefer the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).
 
 The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON 
 format. 
@@ -15,8 +15,8 @@ format.
 # OpenAPI Specification
 
 The complete specification is publicly available in the following formats: 
-- [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json)
-- [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)
+- [OpenAPI v3](https://api.configcat.com/docs/v1/swagger.json)
+- [Swagger v2](https://api.configcat.com/docs/v1/swagger.v2.json)
 
 You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or
 [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.
@@ -109,7 +109,7 @@ ctx = context.WithValue(context.Background(), configcatpublicapi.ContextOperatio
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://test-api.configcat.com*
+All URIs are relative to *https://api.configcat.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
@@ -208,11 +208,9 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [AccessType](docs/AccessType.md)
  - [AddOrUpdateIntegrationLinkModel](docs/AddOrUpdateIntegrationLinkModel.md)
  - [AddOrUpdateJiraIntegrationLinkModel](docs/AddOrUpdateJiraIntegrationLinkModel.md)
  - [AuditLogItemModel](docs/AuditLogItemModel.md)
- - [AuditLogType](docs/AuditLogType.md)
  - [CodeReferenceModel](docs/CodeReferenceModel.md)
  - [CodeReferenceRequest](docs/CodeReferenceRequest.md)
  - [ComparisonValueListModel](docs/ComparisonValueListModel.md)
@@ -236,27 +234,21 @@ Class | Method | HTTP request | Description
  - [DeleteIntegrationLinkModel](docs/DeleteIntegrationLinkModel.md)
  - [DeleteRepositoryReportsRequest](docs/DeleteRepositoryReportsRequest.md)
  - [EnvironmentAccessModel](docs/EnvironmentAccessModel.md)
- - [EnvironmentAccessType](docs/EnvironmentAccessType.md)
  - [EnvironmentModel](docs/EnvironmentModel.md)
- - [EvaluationVersion](docs/EvaluationVersion.md)
  - [FeatureFlagLimitations](docs/FeatureFlagLimitations.md)
  - [FlagReference](docs/FlagReference.md)
  - [InitialValue](docs/InitialValue.md)
  - [IntegrationLinkDetail](docs/IntegrationLinkDetail.md)
  - [IntegrationLinkDetailsModel](docs/IntegrationLinkDetailsModel.md)
  - [IntegrationLinkModel](docs/IntegrationLinkModel.md)
- - [IntegrationLinkType](docs/IntegrationLinkType.md)
  - [IntegrationModel](docs/IntegrationModel.md)
- - [IntegrationType](docs/IntegrationType.md)
  - [IntegrationsModel](docs/IntegrationsModel.md)
  - [InvitationModel](docs/InvitationModel.md)
  - [InviteMembersRequest](docs/InviteMembersRequest.md)
  - [JsonPatchOperation](docs/JsonPatchOperation.md)
- - [KeyGenerationMode](docs/KeyGenerationMode.md)
  - [MeModel](docs/MeModel.md)
  - [MemberModel](docs/MemberModel.md)
  - [ModifyIntegrationRequest](docs/ModifyIntegrationRequest.md)
- - [OperationType](docs/OperationType.md)
  - [OrganizationAdminModel](docs/OrganizationAdminModel.md)
  - [OrganizationInvitationModel](docs/OrganizationInvitationModel.md)
  - [OrganizationMemberModel](docs/OrganizationMemberModel.md)
@@ -268,7 +260,6 @@ Class | Method | HTTP request | Description
  - [PercentageOptionModel](docs/PercentageOptionModel.md)
  - [PermissionGroupModel](docs/PermissionGroupModel.md)
  - [PreferencesModel](docs/PreferencesModel.md)
- - [PrerequisiteComparator](docs/PrerequisiteComparator.md)
  - [PrerequisiteFlagConditionModel](docs/PrerequisiteFlagConditionModel.md)
  - [ProductModel](docs/ProductModel.md)
  - [ReasonRequiredEnvironmentModel](docs/ReasonRequiredEnvironmentModel.md)
@@ -276,10 +267,8 @@ Class | Method | HTTP request | Description
  - [ReferenceLines](docs/ReferenceLines.md)
  - [ReplaceSettingModel](docs/ReplaceSettingModel.md)
  - [RolloutPercentageItemModel](docs/RolloutPercentageItemModel.md)
- - [RolloutRuleComparator](docs/RolloutRuleComparator.md)
  - [RolloutRuleModel](docs/RolloutRuleModel.md)
  - [SdkKeysModel](docs/SdkKeysModel.md)
- - [SegmentComparator](docs/SegmentComparator.md)
  - [SegmentConditionModel](docs/SegmentConditionModel.md)
  - [SegmentListModel](docs/SegmentListModel.md)
  - [SegmentModel](docs/SegmentModel.md)
@@ -287,7 +276,6 @@ Class | Method | HTTP request | Description
  - [SettingFormulaModel](docs/SettingFormulaModel.md)
  - [SettingModel](docs/SettingModel.md)
  - [SettingTagModel](docs/SettingTagModel.md)
- - [SettingType](docs/SettingType.md)
  - [SettingValueModel](docs/SettingValueModel.md)
  - [TagModel](docs/TagModel.md)
  - [TargetingRuleModel](docs/TargetingRuleModel.md)
@@ -306,11 +294,9 @@ Class | Method | HTTP request | Description
  - [UpdateSettingValueWithSettingIdModel](docs/UpdateSettingValueWithSettingIdModel.md)
  - [UpdateSettingValuesWithIdModel](docs/UpdateSettingValuesWithIdModel.md)
  - [UpdateTagModel](docs/UpdateTagModel.md)
- - [UserComparator](docs/UserComparator.md)
  - [UserConditionModel](docs/UserConditionModel.md)
  - [UserModel](docs/UserModel.md)
  - [ValueModel](docs/ValueModel.md)
- - [WebHookHttpMethod](docs/WebHookHttpMethod.md)
  - [WebHookRequest](docs/WebHookRequest.md)
  - [WebhookConfig](docs/WebhookConfig.md)
  - [WebhookEnvironment](docs/WebhookEnvironment.md)

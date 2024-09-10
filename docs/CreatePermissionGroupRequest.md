@@ -25,8 +25,8 @@ Name | Type | Description | Notes
 **CanDeleteSegments** | Pointer to **bool** | Group members can delete Segments. | [optional] 
 **CanViewProductAuditLog** | Pointer to **bool** | Group members has access to audit logs. | [optional] 
 **CanViewProductStatistics** | Pointer to **bool** | Group members has access to product statistics. | [optional] 
-**AccessType** | Pointer to [**AccessType**](AccessType.md) |  | [optional] 
-**NewEnvironmentAccessType** | Pointer to [**EnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] 
+**AccessType** | Pointer to **string** | Represent the Feature Management permission. | [optional] 
+**NewEnvironmentAccessType** | Pointer to **string** | Represent the environment specific Feature Management permission. | [optional] 
 **EnvironmentAccesses** | Pointer to [**[]CreateOrUpdateEnvironmentAccessModel**](CreateOrUpdateEnvironmentAccessModel.md) | List of environment specific permissions. | [optional] 
 
 ## Methods
@@ -570,20 +570,20 @@ HasCanViewProductStatistics returns a boolean if a field has been set.
 
 ### GetAccessType
 
-`func (o *CreatePermissionGroupRequest) GetAccessType() AccessType`
+`func (o *CreatePermissionGroupRequest) GetAccessType() string`
 
 GetAccessType returns the AccessType field if non-nil, zero value otherwise.
 
 ### GetAccessTypeOk
 
-`func (o *CreatePermissionGroupRequest) GetAccessTypeOk() (*AccessType, bool)`
+`func (o *CreatePermissionGroupRequest) GetAccessTypeOk() (*string, bool)`
 
 GetAccessTypeOk returns a tuple with the AccessType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAccessType
 
-`func (o *CreatePermissionGroupRequest) SetAccessType(v AccessType)`
+`func (o *CreatePermissionGroupRequest) SetAccessType(v string)`
 
 SetAccessType sets AccessType field to given value.
 
@@ -595,20 +595,20 @@ HasAccessType returns a boolean if a field has been set.
 
 ### GetNewEnvironmentAccessType
 
-`func (o *CreatePermissionGroupRequest) GetNewEnvironmentAccessType() EnvironmentAccessType`
+`func (o *CreatePermissionGroupRequest) GetNewEnvironmentAccessType() string`
 
 GetNewEnvironmentAccessType returns the NewEnvironmentAccessType field if non-nil, zero value otherwise.
 
 ### GetNewEnvironmentAccessTypeOk
 
-`func (o *CreatePermissionGroupRequest) GetNewEnvironmentAccessTypeOk() (*EnvironmentAccessType, bool)`
+`func (o *CreatePermissionGroupRequest) GetNewEnvironmentAccessTypeOk() (*string, bool)`
 
 GetNewEnvironmentAccessTypeOk returns a tuple with the NewEnvironmentAccessType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNewEnvironmentAccessType
 
-`func (o *CreatePermissionGroupRequest) SetNewEnvironmentAccessType(v EnvironmentAccessType)`
+`func (o *CreatePermissionGroupRequest) SetNewEnvironmentAccessType(v string)`
 
 SetNewEnvironmentAccessType sets NewEnvironmentAccessType field to given value.
 

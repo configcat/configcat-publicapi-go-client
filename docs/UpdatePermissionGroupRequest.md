@@ -25,8 +25,8 @@ Name | Type | Description | Notes
 **CanDeleteSegments** | Pointer to **NullableBool** | Group members can delete Segments. | [optional] 
 **CanViewProductAuditLog** | Pointer to **NullableBool** | Group members has access to audit logs. | [optional] 
 **CanViewProductStatistics** | Pointer to **NullableBool** | Group members has access to product statistics. | [optional] 
-**AccessType** | Pointer to [**AccessType**](AccessType.md) |  | [optional] 
-**NewEnvironmentAccessType** | Pointer to [**EnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] 
+**AccessType** | Pointer to **NullableString** |  | [optional] 
+**NewEnvironmentAccessType** | Pointer to **NullableString** |  | [optional] 
 **EnvironmentAccesses** | Pointer to [**[]CreateOrUpdateEnvironmentAccessModel**](CreateOrUpdateEnvironmentAccessModel.md) | List of environment specific permissions. | [optional] 
 
 ## Methods
@@ -785,20 +785,20 @@ HasCanViewProductStatistics returns a boolean if a field has been set.
 UnsetCanViewProductStatistics ensures that no value is present for CanViewProductStatistics, not even an explicit nil
 ### GetAccessType
 
-`func (o *UpdatePermissionGroupRequest) GetAccessType() AccessType`
+`func (o *UpdatePermissionGroupRequest) GetAccessType() string`
 
 GetAccessType returns the AccessType field if non-nil, zero value otherwise.
 
 ### GetAccessTypeOk
 
-`func (o *UpdatePermissionGroupRequest) GetAccessTypeOk() (*AccessType, bool)`
+`func (o *UpdatePermissionGroupRequest) GetAccessTypeOk() (*string, bool)`
 
 GetAccessTypeOk returns a tuple with the AccessType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAccessType
 
-`func (o *UpdatePermissionGroupRequest) SetAccessType(v AccessType)`
+`func (o *UpdatePermissionGroupRequest) SetAccessType(v string)`
 
 SetAccessType sets AccessType field to given value.
 
@@ -808,22 +808,32 @@ SetAccessType sets AccessType field to given value.
 
 HasAccessType returns a boolean if a field has been set.
 
+### SetAccessTypeNil
+
+`func (o *UpdatePermissionGroupRequest) SetAccessTypeNil(b bool)`
+
+ SetAccessTypeNil sets the value for AccessType to be an explicit nil
+
+### UnsetAccessType
+`func (o *UpdatePermissionGroupRequest) UnsetAccessType()`
+
+UnsetAccessType ensures that no value is present for AccessType, not even an explicit nil
 ### GetNewEnvironmentAccessType
 
-`func (o *UpdatePermissionGroupRequest) GetNewEnvironmentAccessType() EnvironmentAccessType`
+`func (o *UpdatePermissionGroupRequest) GetNewEnvironmentAccessType() string`
 
 GetNewEnvironmentAccessType returns the NewEnvironmentAccessType field if non-nil, zero value otherwise.
 
 ### GetNewEnvironmentAccessTypeOk
 
-`func (o *UpdatePermissionGroupRequest) GetNewEnvironmentAccessTypeOk() (*EnvironmentAccessType, bool)`
+`func (o *UpdatePermissionGroupRequest) GetNewEnvironmentAccessTypeOk() (*string, bool)`
 
 GetNewEnvironmentAccessTypeOk returns a tuple with the NewEnvironmentAccessType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetNewEnvironmentAccessType
 
-`func (o *UpdatePermissionGroupRequest) SetNewEnvironmentAccessType(v EnvironmentAccessType)`
+`func (o *UpdatePermissionGroupRequest) SetNewEnvironmentAccessType(v string)`
 
 SetNewEnvironmentAccessType sets NewEnvironmentAccessType field to given value.
 
@@ -833,6 +843,16 @@ SetNewEnvironmentAccessType sets NewEnvironmentAccessType field to given value.
 
 HasNewEnvironmentAccessType returns a boolean if a field has been set.
 
+### SetNewEnvironmentAccessTypeNil
+
+`func (o *UpdatePermissionGroupRequest) SetNewEnvironmentAccessTypeNil(b bool)`
+
+ SetNewEnvironmentAccessTypeNil sets the value for NewEnvironmentAccessType to be an explicit nil
+
+### UnsetNewEnvironmentAccessType
+`func (o *UpdatePermissionGroupRequest) UnsetNewEnvironmentAccessType()`
+
+UnsetNewEnvironmentAccessType ensures that no value is present for NewEnvironmentAccessType, not even an explicit nil
 ### GetEnvironmentAccesses
 
 `func (o *UpdatePermissionGroupRequest) GetEnvironmentAccesses() []CreateOrUpdateEnvironmentAccessModel`

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Key** | Pointer to **NullableString** | Key of the Feature Flag or Setting. | [optional] 
 **Name** | Pointer to **NullableString** | Name of the Feature Flag or Setting. | [optional] 
 **Hint** | Pointer to **NullableString** | Description of the Feature Flag or Setting. | [optional] 
-**SettingType** | Pointer to [**SettingType**](SettingType.md) |  | [optional] 
+**SettingType** | Pointer to **string** | The type of the Feature Flag or Setting. | [optional] 
 **Order** | Pointer to **int32** | The order of the Feature Flag or Setting represented on the ConfigCat Dashboard. | [optional] 
 **CreatedAt** | Pointer to **NullableTime** | The creation time of the Feature Flag or Setting. | [optional] 
 **CreatorEmail** | Pointer to **NullableString** | The user&#39;s email address who created the Feature Flag or Setting. | [optional] 
@@ -166,20 +166,20 @@ HasHint returns a boolean if a field has been set.
 UnsetHint ensures that no value is present for Hint, not even an explicit nil
 ### GetSettingType
 
-`func (o *SettingDataModel) GetSettingType() SettingType`
+`func (o *SettingDataModel) GetSettingType() string`
 
 GetSettingType returns the SettingType field if non-nil, zero value otherwise.
 
 ### GetSettingTypeOk
 
-`func (o *SettingDataModel) GetSettingTypeOk() (*SettingType, bool)`
+`func (o *SettingDataModel) GetSettingTypeOk() (*string, bool)`
 
 GetSettingTypeOk returns a tuple with the SettingType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSettingType
 
-`func (o *SettingDataModel) SetSettingType(v SettingType)`
+`func (o *SettingDataModel) SetSettingType(v string)`
 
 SetSettingType sets SettingType field to given value.
 

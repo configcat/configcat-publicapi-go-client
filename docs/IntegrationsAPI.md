@@ -1,6 +1,6 @@
 # \IntegrationsApi
 
-All URIs are relative to *https://test-api.configcat.com*
+All URIs are relative to *https://api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -34,7 +34,7 @@ import (
 
 func main() {
     productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
-    createIntegrationModel := *openapiclient.NewCreateIntegrationModel(openapiclient.IntegrationType("dataDog"), "Name_example", map[string]string{"key": "Inner_example"}, []string{"EnvironmentIds_example"}, []string{"ConfigIds_example"}) // CreateIntegrationModel | 
+    createIntegrationModel := *openapiclient.NewCreateIntegrationModel("IntegrationType_example", "Name_example", map[string]string{"key": "Inner_example"}, []string{"EnvironmentIds_example"}, []string{"ConfigIds_example"}) // CreateIntegrationModel | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

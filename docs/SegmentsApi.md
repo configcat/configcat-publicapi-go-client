@@ -1,6 +1,6 @@
 # \SegmentsApi
 
-All URIs are relative to *https://test-api.configcat.com*
+All URIs are relative to *https://api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -34,7 +34,7 @@ import (
 
 func main() {
     productId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Product.
-    createSegmentModel := *openapiclient.NewCreateSegmentModel("Name_example", "ComparisonAttribute_example", openapiclient.RolloutRuleComparator("isOneOf"), "ComparisonValue_example") // CreateSegmentModel | 
+    createSegmentModel := *openapiclient.NewCreateSegmentModel("Name_example", "ComparisonAttribute_example", "Comparator_example", "ComparisonValue_example") // CreateSegmentModel | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

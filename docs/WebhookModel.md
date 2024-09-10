@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **WebhookId** | Pointer to **int32** | The identifier of the Webhook. | [optional] 
 **Url** | Pointer to **NullableString** | The URL of the Webhook. | [optional] 
-**HttpMethod** | Pointer to [**WebHookHttpMethod**](WebHookHttpMethod.md) |  | [optional] 
+**HttpMethod** | Pointer to **string** | The HTTP method. | [optional] 
 **Content** | Pointer to **NullableString** | The HTTP body content. | [optional] 
 **WebHookHeaders** | Pointer to [**[]WebhookHeaderModel**](WebhookHeaderModel.md) | List of HTTP headers that the Webhook must send. | [optional] 
 **Config** | Pointer to [**WebhookConfig**](WebhookConfig.md) |  | [optional] 
@@ -93,20 +93,20 @@ HasUrl returns a boolean if a field has been set.
 UnsetUrl ensures that no value is present for Url, not even an explicit nil
 ### GetHttpMethod
 
-`func (o *WebhookModel) GetHttpMethod() WebHookHttpMethod`
+`func (o *WebhookModel) GetHttpMethod() string`
 
 GetHttpMethod returns the HttpMethod field if non-nil, zero value otherwise.
 
 ### GetHttpMethodOk
 
-`func (o *WebhookModel) GetHttpMethodOk() (*WebHookHttpMethod, bool)`
+`func (o *WebhookModel) GetHttpMethodOk() (*string, bool)`
 
 GetHttpMethodOk returns a tuple with the HttpMethod field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHttpMethod
 
-`func (o *WebhookModel) SetHttpMethod(v WebHookHttpMethod)`
+`func (o *WebhookModel) SetHttpMethod(v string)`
 
 SetHttpMethod sets HttpMethod field to given value.
 

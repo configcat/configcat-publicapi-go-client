@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Op** | [**OperationType**](OperationType.md) |  | 
+**Op** | **string** | The JSON Patch operation. (https://jsonpatch.com) | 
 **Path** | **string** | The source path. | 
 **From** | Pointer to **NullableString** | The target path. | [optional] 
 **Value** | Pointer to **interface{}** | The discrete value. | [optional] 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewJsonPatchOperation
 
-`func NewJsonPatchOperation(op OperationType, path string, ) *JsonPatchOperation`
+`func NewJsonPatchOperation(op string, path string, ) *JsonPatchOperation`
 
 NewJsonPatchOperation instantiates a new JsonPatchOperation object
 This constructor will assign default values to properties that have it defined,
@@ -30,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetOp
 
-`func (o *JsonPatchOperation) GetOp() OperationType`
+`func (o *JsonPatchOperation) GetOp() string`
 
 GetOp returns the Op field if non-nil, zero value otherwise.
 
 ### GetOpOk
 
-`func (o *JsonPatchOperation) GetOpOk() (*OperationType, bool)`
+`func (o *JsonPatchOperation) GetOpOk() (*string, bool)`
 
 GetOpOk returns a tuple with the Op field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOp
 
-`func (o *JsonPatchOperation) SetOp(v OperationType)`
+`func (o *JsonPatchOperation) SetOp(v string)`
 
 SetOp sets Op field to given value.
 

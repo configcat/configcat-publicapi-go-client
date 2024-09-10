@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ComparisonAttribute** | Pointer to **NullableString** | The user attribute to compare. | [optional] 
-**Comparator** | Pointer to [**RolloutRuleComparator**](RolloutRuleComparator.md) |  | [optional] 
+**Comparator** | Pointer to **NullableString** |  | [optional] 
 **ComparisonValue** | Pointer to **NullableString** | The value to compare against. | [optional] 
 **Value** | Pointer to **interface{}** | The value to serve when the comparison matches. It must respect the setting type. | [optional] 
-**SegmentComparator** | Pointer to [**SegmentComparator**](SegmentComparator.md) |  | [optional] 
+**SegmentComparator** | Pointer to **NullableString** | The segment comparison operator. | [optional] 
 **SegmentId** | Pointer to **NullableString** | The segment to compare against. | [optional] 
 
 ## Methods
@@ -67,20 +67,20 @@ HasComparisonAttribute returns a boolean if a field has been set.
 UnsetComparisonAttribute ensures that no value is present for ComparisonAttribute, not even an explicit nil
 ### GetComparator
 
-`func (o *RolloutRuleModel) GetComparator() RolloutRuleComparator`
+`func (o *RolloutRuleModel) GetComparator() string`
 
 GetComparator returns the Comparator field if non-nil, zero value otherwise.
 
 ### GetComparatorOk
 
-`func (o *RolloutRuleModel) GetComparatorOk() (*RolloutRuleComparator, bool)`
+`func (o *RolloutRuleModel) GetComparatorOk() (*string, bool)`
 
 GetComparatorOk returns a tuple with the Comparator field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetComparator
 
-`func (o *RolloutRuleModel) SetComparator(v RolloutRuleComparator)`
+`func (o *RolloutRuleModel) SetComparator(v string)`
 
 SetComparator sets Comparator field to given value.
 
@@ -90,6 +90,16 @@ SetComparator sets Comparator field to given value.
 
 HasComparator returns a boolean if a field has been set.
 
+### SetComparatorNil
+
+`func (o *RolloutRuleModel) SetComparatorNil(b bool)`
+
+ SetComparatorNil sets the value for Comparator to be an explicit nil
+
+### UnsetComparator
+`func (o *RolloutRuleModel) UnsetComparator()`
+
+UnsetComparator ensures that no value is present for Comparator, not even an explicit nil
 ### GetComparisonValue
 
 `func (o *RolloutRuleModel) GetComparisonValue() string`
@@ -162,20 +172,20 @@ HasValue returns a boolean if a field has been set.
 UnsetValue ensures that no value is present for Value, not even an explicit nil
 ### GetSegmentComparator
 
-`func (o *RolloutRuleModel) GetSegmentComparator() SegmentComparator`
+`func (o *RolloutRuleModel) GetSegmentComparator() string`
 
 GetSegmentComparator returns the SegmentComparator field if non-nil, zero value otherwise.
 
 ### GetSegmentComparatorOk
 
-`func (o *RolloutRuleModel) GetSegmentComparatorOk() (*SegmentComparator, bool)`
+`func (o *RolloutRuleModel) GetSegmentComparatorOk() (*string, bool)`
 
 GetSegmentComparatorOk returns a tuple with the SegmentComparator field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSegmentComparator
 
-`func (o *RolloutRuleModel) SetSegmentComparator(v SegmentComparator)`
+`func (o *RolloutRuleModel) SetSegmentComparator(v string)`
 
 SetSegmentComparator sets SegmentComparator field to given value.
 
@@ -185,6 +195,16 @@ SetSegmentComparator sets SegmentComparator field to given value.
 
 HasSegmentComparator returns a boolean if a field has been set.
 
+### SetSegmentComparatorNil
+
+`func (o *RolloutRuleModel) SetSegmentComparatorNil(b bool)`
+
+ SetSegmentComparatorNil sets the value for SegmentComparator to be an explicit nil
+
+### UnsetSegmentComparator
+`func (o *RolloutRuleModel) UnsetSegmentComparator()`
+
+UnsetSegmentComparator ensures that no value is present for SegmentComparator, not even an explicit nil
 ### GetSegmentId
 
 `func (o *RolloutRuleModel) GetSegmentId() string`

@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **LastUpdaterFullName** | Pointer to **NullableString** | The name of the user who last updated the Segment. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when the Segment was last updated. | [optional] 
 **ComparisonAttribute** | Pointer to **NullableString** | The user&#39;s attribute the evaluation process must take into account. | [optional] 
-**Comparator** | Pointer to [**RolloutRuleComparator**](RolloutRuleComparator.md) |  | [optional] 
+**Comparator** | Pointer to **string** | The comparison operator the evaluation process must use when it compares the given user attribute&#39;s value with the comparison value. | [optional] 
 **ComparisonValue** | Pointer to **NullableString** | The value to compare with the given user attribute&#39;s value. | [optional] 
 
 ## Methods
@@ -384,20 +384,20 @@ HasComparisonAttribute returns a boolean if a field has been set.
 UnsetComparisonAttribute ensures that no value is present for ComparisonAttribute, not even an explicit nil
 ### GetComparator
 
-`func (o *SegmentModel) GetComparator() RolloutRuleComparator`
+`func (o *SegmentModel) GetComparator() string`
 
 GetComparator returns the Comparator field if non-nil, zero value otherwise.
 
 ### GetComparatorOk
 
-`func (o *SegmentModel) GetComparatorOk() (*RolloutRuleComparator, bool)`
+`func (o *SegmentModel) GetComparatorOk() (*string, bool)`
 
 GetComparatorOk returns a tuple with the Comparator field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetComparator
 
-`func (o *SegmentModel) SetComparator(v RolloutRuleComparator)`
+`func (o *SegmentModel) SetComparator(v string)`
 
 SetComparator sets Comparator field to given value.
 

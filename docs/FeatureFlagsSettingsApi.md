@@ -1,6 +1,6 @@
 # \FeatureFlagsSettingsApi
 
-All URIs are relative to *https://test-api.configcat.com*
+All URIs are relative to *https://api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -35,7 +35,7 @@ import (
 
 func main() {
     configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
-    createSettingInitialValues := *openapiclient.NewCreateSettingInitialValues("Key_example", "Name_example", openapiclient.SettingType("boolean")) // CreateSettingInitialValues | 
+    createSettingInitialValues := *openapiclient.NewCreateSettingInitialValues("Key_example", "Name_example", "SettingType_example") // CreateSettingInitialValues | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -387,7 +387,7 @@ import (
 
 func main() {
     settingId := int32(56) // int32 | The identifier of the Setting.
-    jsonPatchOperation := []openapiclient.JsonPatchOperation{*openapiclient.NewJsonPatchOperation(openapiclient.OperationType("unknown"), "Path_example")} // []JsonPatchOperation | 
+    jsonPatchOperation := []openapiclient.JsonPatchOperation{*openapiclient.NewJsonPatchOperation("Op_example", "Path_example")} // []JsonPatchOperation | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
