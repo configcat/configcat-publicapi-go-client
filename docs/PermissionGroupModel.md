@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **CanDeleteSegments** | Pointer to **bool** | Group members can delete Segments. | [optional] 
 **CanViewProductAuditLog** | Pointer to **bool** | Group members has access to audit logs. | [optional] 
 **CanViewProductStatistics** | Pointer to **bool** | Group members has access to product statistics. | [optional] 
+**CanDisable2FA** | Pointer to **bool** | Group members can disable two-factor authentication for other members. | [optional] 
 **AccessType** | Pointer to [**AccessType**](AccessType.md) |  | [optional] 
 **NewEnvironmentAccessType** | Pointer to [**EnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] 
 **EnvironmentAccesses** | Pointer to [**[]EnvironmentAccessModel**](EnvironmentAccessModel.md) | List of environment specific permissions. | [optional] 
@@ -609,6 +610,31 @@ SetCanViewProductStatistics sets CanViewProductStatistics field to given value.
 `func (o *PermissionGroupModel) HasCanViewProductStatistics() bool`
 
 HasCanViewProductStatistics returns a boolean if a field has been set.
+
+### GetCanDisable2FA
+
+`func (o *PermissionGroupModel) GetCanDisable2FA() bool`
+
+GetCanDisable2FA returns the CanDisable2FA field if non-nil, zero value otherwise.
+
+### GetCanDisable2FAOk
+
+`func (o *PermissionGroupModel) GetCanDisable2FAOk() (*bool, bool)`
+
+GetCanDisable2FAOk returns a tuple with the CanDisable2FA field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanDisable2FA
+
+`func (o *PermissionGroupModel) SetCanDisable2FA(v bool)`
+
+SetCanDisable2FA sets CanDisable2FA field to given value.
+
+### HasCanDisable2FA
+
+`func (o *PermissionGroupModel) HasCanDisable2FA() bool`
+
+HasCanDisable2FA returns a boolean if a field has been set.
 
 ### GetAccessType
 

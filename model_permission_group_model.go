@@ -64,6 +64,8 @@ type PermissionGroupModel struct {
 	CanViewProductAuditLog *bool `json:"canViewProductAuditLog,omitempty"`
 	// Group members has access to product statistics.
 	CanViewProductStatistics *bool `json:"canViewProductStatistics,omitempty"`
+	// Group members can disable two-factor authentication for other members.
+	CanDisable2FA *bool `json:"canDisable2FA,omitempty"`
 	AccessType *AccessType `json:"accessType,omitempty"`
 	NewEnvironmentAccessType *EnvironmentAccessType `json:"newEnvironmentAccessType,omitempty"`
 	// List of environment specific permissions.
@@ -802,6 +804,38 @@ func (o *PermissionGroupModel) SetCanViewProductStatistics(v bool) {
 	o.CanViewProductStatistics = &v
 }
 
+// GetCanDisable2FA returns the CanDisable2FA field value if set, zero value otherwise.
+func (o *PermissionGroupModel) GetCanDisable2FA() bool {
+	if o == nil || IsNil(o.CanDisable2FA) {
+		var ret bool
+		return ret
+	}
+	return *o.CanDisable2FA
+}
+
+// GetCanDisable2FAOk returns a tuple with the CanDisable2FA field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PermissionGroupModel) GetCanDisable2FAOk() (*bool, bool) {
+	if o == nil || IsNil(o.CanDisable2FA) {
+		return nil, false
+	}
+	return o.CanDisable2FA, true
+}
+
+// HasCanDisable2FA returns a boolean if a field has been set.
+func (o *PermissionGroupModel) HasCanDisable2FA() bool {
+	if o != nil && !IsNil(o.CanDisable2FA) {
+		return true
+	}
+
+	return false
+}
+
+// SetCanDisable2FA gets a reference to the given bool and assigns it to the CanDisable2FA field.
+func (o *PermissionGroupModel) SetCanDisable2FA(v bool) {
+	o.CanDisable2FA = &v
+}
+
 // GetAccessType returns the AccessType field value if set, zero value otherwise.
 func (o *PermissionGroupModel) GetAccessType() AccessType {
 	if o == nil || IsNil(o.AccessType) {
@@ -1006,6 +1040,9 @@ func (o PermissionGroupModel) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.CanViewProductStatistics) {
 		toSerialize["canViewProductStatistics"] = o.CanViewProductStatistics
+	}
+	if !IsNil(o.CanDisable2FA) {
+		toSerialize["canDisable2FA"] = o.CanDisable2FA
 	}
 	if !IsNil(o.AccessType) {
 		toSerialize["accessType"] = o.AccessType

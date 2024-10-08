@@ -8391,6 +8391,7 @@ components:
           order: 0
           reasonRequired: true
         canDeleteConfig: true
+        canDisable2FA: true
         canDeleteEnvironment: true
         canCreateOrUpdateConfig: true
         canTagSetting: true
@@ -8467,6 +8468,10 @@ components:
           type: boolean
         canViewProductStatistics:
           description: Group members has access to product statistics.
+          type: boolean
+        canDisable2FA:
+          description: Group members can disable two-factor authentication for other
+            members.
           type: boolean
         accessType:
           $ref: '#/components/schemas/AccessType'
