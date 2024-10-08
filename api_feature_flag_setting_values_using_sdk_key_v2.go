@@ -110,7 +110,7 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyV2APIService) GetSettingValueBySdkke
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.xCONFIGCATSDKKEY != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-CONFIGCAT-SDKKEY", r.xCONFIGCATSDKKEY, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-CONFIGCAT-SDKKEY", r.xCONFIGCATSDKKEY, "simple", "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -274,7 +274,7 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyV2APIService) ReplaceSettingValueByS
 	}
 
 	if r.reason != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}
@@ -294,7 +294,7 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyV2APIService) ReplaceSettingValueByS
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.xCONFIGCATSDKKEY != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-CONFIGCAT-SDKKEY", r.xCONFIGCATSDKKEY, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-CONFIGCAT-SDKKEY", r.xCONFIGCATSDKKEY, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.updateEvaluationFormulaModel
@@ -482,7 +482,7 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyV2APIService) UpdateSettingValueBySd
 	}
 
 	if r.reason != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}
@@ -502,7 +502,7 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyV2APIService) UpdateSettingValueBySd
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	if r.xCONFIGCATSDKKEY != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-CONFIGCAT-SDKKEY", r.xCONFIGCATSDKKEY, "")
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-CONFIGCAT-SDKKEY", r.xCONFIGCATSDKKEY, "simple", "")
 	}
 	// body params
 	localVarPostBody = r.jsonPatchOperation

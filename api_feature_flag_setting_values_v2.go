@@ -300,7 +300,7 @@ It's important to set every other field that you don't want to change in its ori
 For example: We have the following resource of a Feature Flag.
 ```json
 {
-  "settingValues": [
+  "settingFormulas": [
     {
       "defaultValue": {
         "boolValue": false
@@ -332,7 +332,7 @@ For example: We have the following resource of a Feature Flag.
 If we send a batch replace request body as below:
 ```json
 { 
-  "settingValues": [
+  "updateFormulas": [
     {
       "defaultValue": {
         "boolValue": false
@@ -346,7 +346,7 @@ Then besides that the default value is set to `true`, all Targeting Rules of the
 So we get a response like this:
 ```json
 {
-  "settingValues": [
+  "settingFormulas": [
     {
       "defaultValue": {
         "boolValue": false
@@ -402,7 +402,7 @@ func (a *FeatureFlagSettingValuesV2APIService) PostSettingValuesV2Execute(r Feat
 	}
 
 	if r.reason != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}
@@ -582,7 +582,7 @@ func (a *FeatureFlagSettingValuesV2APIService) ReplaceSettingValueV2Execute(r Fe
 	}
 
 	if r.reason != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}
@@ -784,7 +784,7 @@ func (a *FeatureFlagSettingValuesV2APIService) UpdateSettingValueV2Execute(r Fea
 	}
 
 	if r.reason != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}

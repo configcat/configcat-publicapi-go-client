@@ -111,19 +111,19 @@ func (a *AuditLogsAPIService) GetAuditlogsExecute(r AuditLogsAPIGetAuditlogsRequ
 	localVarFormParams := url.Values{}
 
 	if r.configId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "configId", r.configId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "configId", r.configId, "form", "")
 	}
 	if r.environmentId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "environmentId", r.environmentId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "environmentId", r.environmentId, "form", "")
 	}
 	if r.auditLogType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "auditLogType", r.auditLogType, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "auditLogType", r.auditLogType, "form", "")
 	}
 	if r.fromUtcDateTime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fromUtcDateTime", r.fromUtcDateTime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromUtcDateTime", r.fromUtcDateTime, "form", "")
 	}
 	if r.toUtcDateTime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "toUtcDateTime", r.toUtcDateTime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toUtcDateTime", r.toUtcDateTime, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -375,22 +375,22 @@ func (a *AuditLogsAPIService) GetOrganizationAuditlogsExecute(r AuditLogsAPIGetO
 	localVarFormParams := url.Values{}
 
 	if r.productId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "productId", r.productId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "productId", r.productId, "form", "")
 	}
 	if r.configId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "configId", r.configId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "configId", r.configId, "form", "")
 	}
 	if r.environmentId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "environmentId", r.environmentId, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "environmentId", r.environmentId, "form", "")
 	}
 	if r.auditLogType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "auditLogType", r.auditLogType, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "auditLogType", r.auditLogType, "form", "")
 	}
 	if r.fromUtcDateTime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fromUtcDateTime", r.fromUtcDateTime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromUtcDateTime", r.fromUtcDateTime, "form", "")
 	}
 	if r.toUtcDateTime != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "toUtcDateTime", r.toUtcDateTime, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toUtcDateTime", r.toUtcDateTime, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

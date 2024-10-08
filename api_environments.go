@@ -196,7 +196,7 @@ func (a *EnvironmentsAPIService) DeleteEnvironmentExecute(r EnvironmentsAPIDelet
 	localVarFormParams := url.Values{}
 
 	if r.cleanupAuditLogs != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cleanupAuditLogs", r.cleanupAuditLogs, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cleanupAuditLogs", r.cleanupAuditLogs, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

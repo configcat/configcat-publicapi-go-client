@@ -3305,7 +3305,7 @@ paths:
                 description: This example adds an evaluation rule with two conditions
                   to the Flag's targeting rules.
                 value:
-                - op: replace
+                - op: add
                   path: /targetingRules/-
                   value:
                     conditions:
@@ -3386,7 +3386,7 @@ paths:
                 description: This example adds an evaluation rule with two conditions
                   to the Flag's targeting rules.
                 value:
-                - op: replace
+                - op: add
                   path: /targetingRules/-
                   value:
                     conditions:
@@ -3467,7 +3467,7 @@ paths:
                 description: This example adds an evaluation rule with two conditions
                   to the Flag's targeting rules.
                 value:
-                - op: replace
+                - op: add
                   path: /targetingRules/-
                   value:
                     conditions:
@@ -3918,7 +3918,7 @@ paths:
                 description: This example adds an evaluation rule with two conditions
                   to the Flag's targeting rules.
                 value:
-                - op: replace
+                - op: add
                   path: /targetingRules/-
                   value:
                     conditions:
@@ -3999,7 +3999,7 @@ paths:
                 description: This example adds an evaluation rule with two conditions
                   to the Flag's targeting rules.
                 value:
-                - op: replace
+                - op: add
                   path: /targetingRules/-
                   value:
                     conditions:
@@ -4080,7 +4080,7 @@ paths:
                 description: This example adds an evaluation rule with two conditions
                   to the Flag's targeting rules.
                 value:
-                - op: replace
+                - op: add
                   path: /targetingRules/-
                   value:
                     conditions:
@@ -4556,7 +4556,7 @@ paths:
         \ on those Feature Flags and Settings, which are set in the request. \nIt's\
         \ important to set every other field that you don't want to change in its\
         \ original state. Not listing a field means that it will reset.\n\nFor example:\
-        \ We have the following resource of a Feature Flag.\n```json\n{\n  \"settingValues\"\
+        \ We have the following resource of a Feature Flag.\n```json\n{\n  \"settingFormulas\"\
         : [\n    {\n      \"defaultValue\": {\n        \"boolValue\": false\n    \
         \  },\n      \"targetingRules\": [\n        {\n          \"conditions\": [\n\
         \            {\n              \"userCondition\": {\n                \"comparisonAttribute\"\
@@ -4566,11 +4566,11 @@ paths:
         \          ],\n          \"percentageOptions\": [],\n          \"value\":\
         \ {\n            \"boolValue\": true\n          }\n        }\n      ],\n \
         \     \"settingId\": 1\n    }\n  ]\n}\n```\nIf we send a batch replace request\
-        \ body as below:\n```json\n{ \n  \"settingValues\": [\n    {\n      \"defaultValue\"\
+        \ body as below:\n```json\n{ \n  \"updateFormulas\": [\n    {\n      \"defaultValue\"\
         : {\n        \"boolValue\": false\n      },\n      \"settingId\": 1\n    }\n\
         \  ]\n}\n```\nThen besides that the default value is set to `true`, all Targeting\
         \ Rules of the related Feature Flag are deleted.\nSo we get a response like\
-        \ this:\n```json\n{\n  \"settingValues\": [\n    {\n      \"defaultValue\"\
+        \ this:\n```json\n{\n  \"settingFormulas\": [\n    {\n      \"defaultValue\"\
         : {\n        \"boolValue\": false\n      },\n      \"targetingRules\": [],\n\
         \      \"setting\": \n      {\n        \"settingId\": 1\n      }\n    }\n\
         \  ]\n}\n```"
@@ -5640,7 +5640,7 @@ components:
       - organizationSubscriptionTypeChanged
       - organizationAdminChanged
       - organizationAdminLeft
-      - organizationAdminDisabled2FA
+      - twoFactorDisabledForMember
       - tagAdded
       - tagChanged
       - tagRemoved
@@ -5661,6 +5661,7 @@ components:
       - organizationMemberProductJoinRequested
       - organizationMemberProductJoinRequestRejected
       - organizationMemberProductJoinRequestApproved
+      - organizationMemberRemoved
       - codeReferencesUploaded
       - codeReferenceDeleted
       - codeReferenceStaleBranchDeleted
@@ -7036,33 +7037,34 @@ components:
       additionalProperties: false
       example:
         canViewProductStatistics: true
-        canDeleteConfig: true
         canDeleteTag: true
         environmentAccesses:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           environmentAccessType: null
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           environmentAccessType: null
-        canDeleteEnvironment: true
-        canCreateOrUpdateConfig: true
         canManageProductPreferences: true
         canManageIntegrations: true
         canDeleteSegments: true
         accessType: readOnly
-        canTagSetting: true
         canManageMembers: true
         canManageWebhook: true
         canUseExportImport: true
         canViewSdkKey: true
-        canCreateOrUpdateEnvironment: true
         canDeleteSetting: true
-        name: name
         canRotateSdkKey: true
+        canCreateOrUpdateSegments: true
+        canCreateOrUpdateSetting: true
+        canDeleteConfig: true
+        canDisable2FA: true
+        canDeleteEnvironment: true
+        canCreateOrUpdateConfig: true
+        canTagSetting: true
+        canCreateOrUpdateEnvironment: true
+        name: name
         canViewProductAuditLog: true
         canCreateOrUpdateTag: true
         newEnvironmentAccessType: full
-        canCreateOrUpdateSegments: true
-        canCreateOrUpdateSetting: true
       properties:
         name:
           description: Name of the Permission Group.
@@ -7139,6 +7141,10 @@ components:
             $ref: '#/components/schemas/CreateOrUpdateEnvironmentAccessModel'
           nullable: true
           type: array
+        canDisable2FA:
+          description: Group members can disable two-factor authentication for other
+            members.
+          type: boolean
       required:
       - name
       type: object
@@ -10346,33 +10352,34 @@ components:
       additionalProperties: false
       example:
         canViewProductStatistics: true
-        canDeleteConfig: true
         canDeleteTag: true
         environmentAccesses:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           environmentAccessType: null
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           environmentAccessType: null
-        canDeleteEnvironment: true
-        canCreateOrUpdateConfig: true
         canManageProductPreferences: true
         canManageIntegrations: true
         canDeleteSegments: true
         accessType: readOnly
-        canTagSetting: true
         canManageMembers: true
         canManageWebhook: true
         canUseExportImport: true
         canViewSdkKey: true
-        canCreateOrUpdateEnvironment: true
         canDeleteSetting: true
-        name: name
         canRotateSdkKey: true
+        canCreateOrUpdateSegments: true
+        canCreateOrUpdateSetting: true
+        canDeleteConfig: true
+        canDisable2FA: true
+        canDeleteEnvironment: true
+        canCreateOrUpdateConfig: true
+        canTagSetting: true
+        canCreateOrUpdateEnvironment: true
+        name: name
         canViewProductAuditLog: true
         canCreateOrUpdateTag: true
         newEnvironmentAccessType: full
-        canCreateOrUpdateSegments: true
-        canCreateOrUpdateSetting: true
       properties:
         name:
           description: Name of the Permission Group.
@@ -10458,6 +10465,11 @@ components:
           type: boolean
         canViewProductStatistics:
           description: Group members has access to product statistics.
+          nullable: true
+          type: boolean
+        canDisable2FA:
+          description: Group members can disable two-factor authentication for other
+            members.
           nullable: true
           type: boolean
         accessType:

@@ -69,7 +69,7 @@ const (
 	AUDITLOGTYPE_ORGANIZATION_SUBSCRIPTION_TYPE_CHANGED AuditLogType = "organizationSubscriptionTypeChanged"
 	AUDITLOGTYPE_ORGANIZATION_ADMIN_CHANGED AuditLogType = "organizationAdminChanged"
 	AUDITLOGTYPE_ORGANIZATION_ADMIN_LEFT AuditLogType = "organizationAdminLeft"
-	AUDITLOGTYPE_ORGANIZATION_ADMIN_DISABLED2_FA AuditLogType = "organizationAdminDisabled2FA"
+	AUDITLOGTYPE_TWO_FACTOR_DISABLED_FOR_MEMBER AuditLogType = "twoFactorDisabledForMember"
 	AUDITLOGTYPE_TAG_ADDED AuditLogType = "tagAdded"
 	AUDITLOGTYPE_TAG_CHANGED AuditLogType = "tagChanged"
 	AUDITLOGTYPE_TAG_REMOVED AuditLogType = "tagRemoved"
@@ -90,6 +90,7 @@ const (
 	AUDITLOGTYPE_ORGANIZATION_MEMBER_PRODUCT_JOIN_REQUESTED AuditLogType = "organizationMemberProductJoinRequested"
 	AUDITLOGTYPE_ORGANIZATION_MEMBER_PRODUCT_JOIN_REQUEST_REJECTED AuditLogType = "organizationMemberProductJoinRequestRejected"
 	AUDITLOGTYPE_ORGANIZATION_MEMBER_PRODUCT_JOIN_REQUEST_APPROVED AuditLogType = "organizationMemberProductJoinRequestApproved"
+	AUDITLOGTYPE_ORGANIZATION_MEMBER_REMOVED AuditLogType = "organizationMemberRemoved"
 	AUDITLOGTYPE_CODE_REFERENCES_UPLOADED AuditLogType = "codeReferencesUploaded"
 	AUDITLOGTYPE_CODE_REFERENCE_DELETED AuditLogType = "codeReferenceDeleted"
 	AUDITLOGTYPE_CODE_REFERENCE_STALE_BRANCH_DELETED AuditLogType = "codeReferenceStaleBranchDeleted"
@@ -150,7 +151,7 @@ var AllowedAuditLogTypeEnumValues = []AuditLogType{
 	"organizationSubscriptionTypeChanged",
 	"organizationAdminChanged",
 	"organizationAdminLeft",
-	"organizationAdminDisabled2FA",
+	"twoFactorDisabledForMember",
 	"tagAdded",
 	"tagChanged",
 	"tagRemoved",
@@ -171,6 +172,7 @@ var AllowedAuditLogTypeEnumValues = []AuditLogType{
 	"organizationMemberProductJoinRequested",
 	"organizationMemberProductJoinRequestRejected",
 	"organizationMemberProductJoinRequestApproved",
+	"organizationMemberRemoved",
 	"codeReferencesUploaded",
 	"codeReferenceDeleted",
 	"codeReferenceStaleBranchDeleted",

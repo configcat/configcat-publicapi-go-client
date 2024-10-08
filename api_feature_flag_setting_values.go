@@ -390,7 +390,7 @@ func (a *FeatureFlagSettingValuesAPIService) PostSettingValuesExecute(r FeatureF
 	}
 
 	if r.reason != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}
@@ -561,7 +561,7 @@ func (a *FeatureFlagSettingValuesAPIService) ReplaceSettingValueExecute(r Featur
 	}
 
 	if r.reason != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}
@@ -747,7 +747,7 @@ func (a *FeatureFlagSettingValuesAPIService) UpdateSettingValueExecute(r Feature
 	}
 
 	if r.reason != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}
