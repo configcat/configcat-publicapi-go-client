@@ -886,7 +886,7 @@ paths:
           - organizationSubscriptionTypeChanged
           - organizationAdminChanged
           - organizationAdminLeft
-          - organizationAdminDisabled2FA
+          - twoFactorDisabledForMember
           - tagAdded
           - tagChanged
           - tagRemoved
@@ -907,6 +907,7 @@ paths:
           - organizationMemberProductJoinRequested
           - organizationMemberProductJoinRequestRejected
           - organizationMemberProductJoinRequestApproved
+          - organizationMemberRemoved
           - codeReferencesUploaded
           - codeReferenceDeleted
           - codeReferenceStaleBranchDeleted
@@ -1653,7 +1654,7 @@ paths:
           - organizationSubscriptionTypeChanged
           - organizationAdminChanged
           - organizationAdminLeft
-          - organizationAdminDisabled2FA
+          - twoFactorDisabledForMember
           - tagAdded
           - tagChanged
           - tagRemoved
@@ -1674,6 +1675,7 @@ paths:
           - organizationMemberProductJoinRequested
           - organizationMemberProductJoinRequestRejected
           - organizationMemberProductJoinRequestApproved
+          - organizationMemberRemoved
           - codeReferencesUploaded
           - codeReferenceDeleted
           - codeReferenceStaleBranchDeleted
@@ -5767,7 +5769,7 @@ components:
           - organizationSubscriptionTypeChanged
           - organizationAdminChanged
           - organizationAdminLeft
-          - organizationAdminDisabled2FA
+          - twoFactorDisabledForMember
           - tagAdded
           - tagChanged
           - tagRemoved
@@ -5788,6 +5790,7 @@ components:
           - organizationMemberProductJoinRequested
           - organizationMemberProductJoinRequestRejected
           - organizationMemberProductJoinRequestApproved
+          - organizationMemberRemoved
           - codeReferencesUploaded
           - codeReferenceDeleted
           - codeReferenceStaleBranchDeleted
@@ -7214,33 +7217,34 @@ components:
       additionalProperties: false
       example:
         canViewProductStatistics: true
-        canDeleteConfig: true
         canDeleteTag: true
         environmentAccesses:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           environmentAccessType: full
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           environmentAccessType: full
-        canDeleteEnvironment: true
-        canCreateOrUpdateConfig: true
         canManageProductPreferences: true
         canManageIntegrations: true
         canDeleteSegments: true
         accessType: readOnly
-        canTagSetting: true
         canManageMembers: true
         canManageWebhook: true
         canUseExportImport: true
         canViewSdkKey: true
-        canCreateOrUpdateEnvironment: true
         canDeleteSetting: true
-        name: name
         canRotateSdkKey: true
+        canCreateOrUpdateSegments: true
+        canCreateOrUpdateSetting: true
+        canDeleteConfig: true
+        canDisable2FA: true
+        canDeleteEnvironment: true
+        canCreateOrUpdateConfig: true
+        canTagSetting: true
+        canCreateOrUpdateEnvironment: true
+        name: name
         canViewProductAuditLog: true
         canCreateOrUpdateTag: true
         newEnvironmentAccessType: full
-        canCreateOrUpdateSegments: true
-        canCreateOrUpdateSetting: true
       properties:
         name:
           description: Name of the Permission Group.
@@ -7327,6 +7331,10 @@ components:
             $ref: '#/components/schemas/CreateOrUpdateEnvironmentAccessModel'
           nullable: true
           type: array
+        canDisable2FA:
+          description: Group members can disable two-factor authentication for other
+            members.
+          type: boolean
       required:
       - name
       type: object
@@ -10578,33 +10586,34 @@ components:
       additionalProperties: false
       example:
         canViewProductStatistics: true
-        canDeleteConfig: true
         canDeleteTag: true
         environmentAccesses:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           environmentAccessType: full
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           environmentAccessType: full
-        canDeleteEnvironment: true
-        canCreateOrUpdateConfig: true
         canManageProductPreferences: true
         canManageIntegrations: true
         canDeleteSegments: true
         accessType: readOnly
-        canTagSetting: true
         canManageMembers: true
         canManageWebhook: true
         canUseExportImport: true
         canViewSdkKey: true
-        canCreateOrUpdateEnvironment: true
         canDeleteSetting: true
-        name: name
         canRotateSdkKey: true
+        canCreateOrUpdateSegments: true
+        canCreateOrUpdateSetting: true
+        canDeleteConfig: true
+        canDisable2FA: true
+        canDeleteEnvironment: true
+        canCreateOrUpdateConfig: true
+        canTagSetting: true
+        canCreateOrUpdateEnvironment: true
+        name: name
         canViewProductAuditLog: true
         canCreateOrUpdateTag: true
         newEnvironmentAccessType: full
-        canCreateOrUpdateSegments: true
-        canCreateOrUpdateSetting: true
       properties:
         name:
           description: Name of the Permission Group.
@@ -10690,6 +10699,11 @@ components:
           type: boolean
         canViewProductStatistics:
           description: Group members has access to product statistics.
+          nullable: true
+          type: boolean
+        canDisable2FA:
+          description: Group members can disable two-factor authentication for other
+            members.
           nullable: true
           type: boolean
         accessType:

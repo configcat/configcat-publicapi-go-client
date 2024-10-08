@@ -62,6 +62,8 @@ type UpdatePermissionGroupRequest struct {
 	CanViewProductAuditLog NullableBool `json:"canViewProductAuditLog,omitempty"`
 	// Group members has access to product statistics.
 	CanViewProductStatistics NullableBool `json:"canViewProductStatistics,omitempty"`
+	// Group members can disable two-factor authentication for other members.
+	CanDisable2FA NullableBool `json:"canDisable2FA,omitempty"`
 	AccessType NullableString `json:"accessType,omitempty"`
 	NewEnvironmentAccessType NullableString `json:"newEnvironmentAccessType,omitempty"`
 	// List of environment specific permissions.
@@ -967,6 +969,48 @@ func (o *UpdatePermissionGroupRequest) UnsetCanViewProductStatistics() {
 	o.CanViewProductStatistics.Unset()
 }
 
+// GetCanDisable2FA returns the CanDisable2FA field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdatePermissionGroupRequest) GetCanDisable2FA() bool {
+	if o == nil || IsNil(o.CanDisable2FA.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.CanDisable2FA.Get()
+}
+
+// GetCanDisable2FAOk returns a tuple with the CanDisable2FA field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdatePermissionGroupRequest) GetCanDisable2FAOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CanDisable2FA.Get(), o.CanDisable2FA.IsSet()
+}
+
+// HasCanDisable2FA returns a boolean if a field has been set.
+func (o *UpdatePermissionGroupRequest) HasCanDisable2FA() bool {
+	if o != nil && o.CanDisable2FA.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCanDisable2FA gets a reference to the given NullableBool and assigns it to the CanDisable2FA field.
+func (o *UpdatePermissionGroupRequest) SetCanDisable2FA(v bool) {
+	o.CanDisable2FA.Set(&v)
+}
+// SetCanDisable2FANil sets the value for CanDisable2FA to be an explicit nil
+func (o *UpdatePermissionGroupRequest) SetCanDisable2FANil() {
+	o.CanDisable2FA.Set(nil)
+}
+
+// UnsetCanDisable2FA ensures that no value is present for CanDisable2FA, not even an explicit nil
+func (o *UpdatePermissionGroupRequest) UnsetCanDisable2FA() {
+	o.CanDisable2FA.Unset()
+}
+
 // GetAccessType returns the AccessType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *UpdatePermissionGroupRequest) GetAccessType() string {
 	if o == nil || IsNil(o.AccessType.Get()) {
@@ -1156,6 +1200,9 @@ func (o UpdatePermissionGroupRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.CanViewProductStatistics.IsSet() {
 		toSerialize["canViewProductStatistics"] = o.CanViewProductStatistics.Get()
+	}
+	if o.CanDisable2FA.IsSet() {
+		toSerialize["canDisable2FA"] = o.CanDisable2FA.Get()
 	}
 	if o.AccessType.IsSet() {
 		toSerialize["accessType"] = o.AccessType.Get()

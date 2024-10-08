@@ -28,6 +28,7 @@ Name | Type | Description | Notes
 **AccessType** | Pointer to **string** | Represent the Feature Management permission. | [optional] 
 **NewEnvironmentAccessType** | Pointer to **string** | Represent the environment specific Feature Management permission. | [optional] 
 **EnvironmentAccesses** | Pointer to [**[]CreateOrUpdateEnvironmentAccessModel**](CreateOrUpdateEnvironmentAccessModel.md) | List of environment specific permissions. | [optional] 
+**CanDisable2FA** | Pointer to **bool** | Group members can disable two-factor authentication for other members. | [optional] 
 
 ## Methods
 
@@ -653,6 +654,31 @@ HasEnvironmentAccesses returns a boolean if a field has been set.
 `func (o *CreatePermissionGroupRequest) UnsetEnvironmentAccesses()`
 
 UnsetEnvironmentAccesses ensures that no value is present for EnvironmentAccesses, not even an explicit nil
+### GetCanDisable2FA
+
+`func (o *CreatePermissionGroupRequest) GetCanDisable2FA() bool`
+
+GetCanDisable2FA returns the CanDisable2FA field if non-nil, zero value otherwise.
+
+### GetCanDisable2FAOk
+
+`func (o *CreatePermissionGroupRequest) GetCanDisable2FAOk() (*bool, bool)`
+
+GetCanDisable2FAOk returns a tuple with the CanDisable2FA field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanDisable2FA
+
+`func (o *CreatePermissionGroupRequest) SetCanDisable2FA(v bool)`
+
+SetCanDisable2FA sets CanDisable2FA field to given value.
+
+### HasCanDisable2FA
+
+`func (o *CreatePermissionGroupRequest) HasCanDisable2FA() bool`
+
+HasCanDisable2FA returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
