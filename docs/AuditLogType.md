@@ -99,7 +99,7 @@
 
 * `ORGANIZATION_ADMIN_LEFT` (value: `"organizationAdminLeft"`)
 
-* `ORGANIZATION_ADMIN_DISABLED2_FA` (value: `"organizationAdminDisabled2FA"`)
+* `TWO_FACTOR_DISABLED_FOR_MEMBER` (value: `"twoFactorDisabledForMember"`)
 
 * `TAG_ADDED` (value: `"tagAdded"`)
 
@@ -140,6 +140,8 @@
 * `ORGANIZATION_MEMBER_PRODUCT_JOIN_REQUEST_REJECTED` (value: `"organizationMemberProductJoinRequestRejected"`)
 
 * `ORGANIZATION_MEMBER_PRODUCT_JOIN_REQUEST_APPROVED` (value: `"organizationMemberProductJoinRequestApproved"`)
+
+* `ORGANIZATION_MEMBER_REMOVED` (value: `"organizationMemberRemoved"`)
 
 * `CODE_REFERENCES_UPLOADED` (value: `"codeReferencesUploaded"`)
 

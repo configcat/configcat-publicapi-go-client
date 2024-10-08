@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **CanDeleteSegments** | Pointer to **NullableBool** | Group members can delete Segments. | [optional] 
 **CanViewProductAuditLog** | Pointer to **NullableBool** | Group members has access to audit logs. | [optional] 
 **CanViewProductStatistics** | Pointer to **NullableBool** | Group members has access to product statistics. | [optional] 
+**CanDisable2FA** | Pointer to **NullableBool** | Group members can disable two-factor authentication for other members. | [optional] 
 **AccessType** | Pointer to [**AccessType**](AccessType.md) |  | [optional] 
 **NewEnvironmentAccessType** | Pointer to [**EnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] 
 **EnvironmentAccesses** | Pointer to [**[]CreateOrUpdateEnvironmentAccessModel**](CreateOrUpdateEnvironmentAccessModel.md) | List of environment specific permissions. | [optional] 
@@ -783,6 +784,41 @@ HasCanViewProductStatistics returns a boolean if a field has been set.
 `func (o *UpdatePermissionGroupRequest) UnsetCanViewProductStatistics()`
 
 UnsetCanViewProductStatistics ensures that no value is present for CanViewProductStatistics, not even an explicit nil
+### GetCanDisable2FA
+
+`func (o *UpdatePermissionGroupRequest) GetCanDisable2FA() bool`
+
+GetCanDisable2FA returns the CanDisable2FA field if non-nil, zero value otherwise.
+
+### GetCanDisable2FAOk
+
+`func (o *UpdatePermissionGroupRequest) GetCanDisable2FAOk() (*bool, bool)`
+
+GetCanDisable2FAOk returns a tuple with the CanDisable2FA field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanDisable2FA
+
+`func (o *UpdatePermissionGroupRequest) SetCanDisable2FA(v bool)`
+
+SetCanDisable2FA sets CanDisable2FA field to given value.
+
+### HasCanDisable2FA
+
+`func (o *UpdatePermissionGroupRequest) HasCanDisable2FA() bool`
+
+HasCanDisable2FA returns a boolean if a field has been set.
+
+### SetCanDisable2FANil
+
+`func (o *UpdatePermissionGroupRequest) SetCanDisable2FANil(b bool)`
+
+ SetCanDisable2FANil sets the value for CanDisable2FA to be an explicit nil
+
+### UnsetCanDisable2FA
+`func (o *UpdatePermissionGroupRequest) UnsetCanDisable2FA()`
+
+UnsetCanDisable2FA ensures that no value is present for CanDisable2FA, not even an explicit nil
 ### GetAccessType
 
 `func (o *UpdatePermissionGroupRequest) GetAccessType() AccessType`

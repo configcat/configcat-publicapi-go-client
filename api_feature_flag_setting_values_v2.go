@@ -300,7 +300,7 @@ It's important to set every other field that you don't want to change in its ori
 For example: We have the following resource of a Feature Flag.
 ```json
 {
-  "settingValues": [
+  "settingFormulas": [
     {
       "defaultValue": {
         "boolValue": false
@@ -332,7 +332,7 @@ For example: We have the following resource of a Feature Flag.
 If we send a batch replace request body as below:
 ```json
 { 
-  "settingValues": [
+  "updateFormulas": [
     {
       "defaultValue": {
         "boolValue": false
@@ -346,7 +346,7 @@ Then besides that the default value is set to `true`, all Targeting Rules of the
 So we get a response like this:
 ```json
 {
-  "settingValues": [
+  "settingFormulas": [
     {
       "defaultValue": {
         "boolValue": false

@@ -68,6 +68,8 @@ type CreatePermissionGroupRequest struct {
 	NewEnvironmentAccessType *EnvironmentAccessType `json:"newEnvironmentAccessType,omitempty"`
 	// List of environment specific permissions.
 	EnvironmentAccesses []CreateOrUpdateEnvironmentAccessModel `json:"environmentAccesses,omitempty"`
+	// Group members can disable two-factor authentication for other members.
+	CanDisable2FA *bool `json:"canDisable2FA,omitempty"`
 }
 
 type _CreatePermissionGroupRequest CreatePermissionGroupRequest
@@ -851,6 +853,38 @@ func (o *CreatePermissionGroupRequest) SetEnvironmentAccesses(v []CreateOrUpdate
 	o.EnvironmentAccesses = v
 }
 
+// GetCanDisable2FA returns the CanDisable2FA field value if set, zero value otherwise.
+func (o *CreatePermissionGroupRequest) GetCanDisable2FA() bool {
+	if o == nil || IsNil(o.CanDisable2FA) {
+		var ret bool
+		return ret
+	}
+	return *o.CanDisable2FA
+}
+
+// GetCanDisable2FAOk returns a tuple with the CanDisable2FA field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreatePermissionGroupRequest) GetCanDisable2FAOk() (*bool, bool) {
+	if o == nil || IsNil(o.CanDisable2FA) {
+		return nil, false
+	}
+	return o.CanDisable2FA, true
+}
+
+// HasCanDisable2FA returns a boolean if a field has been set.
+func (o *CreatePermissionGroupRequest) HasCanDisable2FA() bool {
+	if o != nil && !IsNil(o.CanDisable2FA) {
+		return true
+	}
+
+	return false
+}
+
+// SetCanDisable2FA gets a reference to the given bool and assigns it to the CanDisable2FA field.
+func (o *CreatePermissionGroupRequest) SetCanDisable2FA(v bool) {
+	o.CanDisable2FA = &v
+}
+
 func (o CreatePermissionGroupRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -930,6 +964,9 @@ func (o CreatePermissionGroupRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.EnvironmentAccesses != nil {
 		toSerialize["environmentAccesses"] = o.EnvironmentAccesses
+	}
+	if !IsNil(o.CanDisable2FA) {
+		toSerialize["canDisable2FA"] = o.CanDisable2FA
 	}
 	return toSerialize, nil
 }
