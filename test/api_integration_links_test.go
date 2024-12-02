@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
 )
 
 func Test_configcatpublicapi_IntegrationLinksApiService(t *testing.T) {
