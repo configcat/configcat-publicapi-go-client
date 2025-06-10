@@ -6,11 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Hint** | Pointer to **NullableString** | A short description for the setting, shown on the Dashboard UI. | [optional] 
 **Tags** | Pointer to **[]int64** | The IDs of the tags which are attached to the setting. | [optional] 
-**Order** | Pointer to **NullableInt32** | The order of the Setting represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers. | [optional] 
+**Order** | Pointer to **NullableInt32** | The order of the Setting represented on the ConfigCat Dashboard. Determined from an ascending sequence of integers. | [optional] 
 **Key** | **string** | The key of the Feature Flag or Setting. | 
 **Name** | **string** | The name of the Feature Flag or Setting. | 
 **SettingType** | [**SettingType**](SettingType.md) |  | 
-**InitialValues** | Pointer to [**[]InitialValue**](InitialValue.md) | Optional, initial value of the Feature Flag or Setting in the given Environments. | [optional] 
+**InitialValues** | Pointer to [**[]InitialValue**](InitialValue.md) | Optional, initial value of the Feature Flag or Setting in the given Environments. Only one of the SettingIdToInitFrom or the InitialValues properties can be set. | [optional] 
+**SettingIdToInitFrom** | Pointer to **NullableInt32** | Optional, the SettingId to initialize the values and tags of the Feature Flag or Setting from. Only can be set if you have at least ReadOnly access in all the Environments. Only one of the SettingIdToInitFrom or the InitialValues properties can be set. | [optional] 
 
 ## Methods
 
@@ -231,6 +232,41 @@ HasInitialValues returns a boolean if a field has been set.
 `func (o *CreateSettingInitialValues) UnsetInitialValues()`
 
 UnsetInitialValues ensures that no value is present for InitialValues, not even an explicit nil
+### GetSettingIdToInitFrom
+
+`func (o *CreateSettingInitialValues) GetSettingIdToInitFrom() int32`
+
+GetSettingIdToInitFrom returns the SettingIdToInitFrom field if non-nil, zero value otherwise.
+
+### GetSettingIdToInitFromOk
+
+`func (o *CreateSettingInitialValues) GetSettingIdToInitFromOk() (*int32, bool)`
+
+GetSettingIdToInitFromOk returns a tuple with the SettingIdToInitFrom field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSettingIdToInitFrom
+
+`func (o *CreateSettingInitialValues) SetSettingIdToInitFrom(v int32)`
+
+SetSettingIdToInitFrom sets SettingIdToInitFrom field to given value.
+
+### HasSettingIdToInitFrom
+
+`func (o *CreateSettingInitialValues) HasSettingIdToInitFrom() bool`
+
+HasSettingIdToInitFrom returns a boolean if a field has been set.
+
+### SetSettingIdToInitFromNil
+
+`func (o *CreateSettingInitialValues) SetSettingIdToInitFromNil(b bool)`
+
+ SetSettingIdToInitFromNil sets the value for SettingIdToInitFrom to be an explicit nil
+
+### UnsetSettingIdToInitFrom
+`func (o *CreateSettingInitialValues) UnsetSettingIdToInitFrom()`
+
+UnsetSettingIdToInitFrom ensures that no value is present for SettingIdToInitFrom, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

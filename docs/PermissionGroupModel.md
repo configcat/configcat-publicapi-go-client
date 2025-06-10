@@ -4,39 +4,39 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PermissionGroupId** | Pointer to **int64** | Identifier of the Permission Group. | [optional] 
-**Name** | Pointer to **NullableString** | Name of the Permission Group. | [optional] 
-**CanManageMembers** | Pointer to **bool** | Group members can manage team members. | [optional] 
-**CanCreateOrUpdateConfig** | Pointer to **bool** | Group members can create/update Configs. | [optional] 
-**CanDeleteConfig** | Pointer to **bool** | Group members can delete Configs. | [optional] 
-**CanCreateOrUpdateEnvironment** | Pointer to **bool** | Group members can create/update Environments. | [optional] 
-**CanDeleteEnvironment** | Pointer to **bool** | Group members can delete Environments. | [optional] 
-**CanCreateOrUpdateSetting** | Pointer to **bool** | Group members can create/update Feature Flags and Settings. | [optional] 
-**CanTagSetting** | Pointer to **bool** | Group members can attach/detach Tags to Feature Flags and Settings. | [optional] 
-**CanDeleteSetting** | Pointer to **bool** | Group members can delete Feature Flags and Settings. | [optional] 
-**CanCreateOrUpdateTag** | Pointer to **bool** | Group members can create/update Tags. | [optional] 
-**CanDeleteTag** | Pointer to **bool** | Group members can delete Tags. | [optional] 
-**CanManageWebhook** | Pointer to **bool** | Group members can create/update/delete Webhooks. | [optional] 
-**CanUseExportImport** | Pointer to **bool** | Group members can use the export/import feature. | [optional] 
-**CanManageProductPreferences** | Pointer to **bool** | Group members can update Product preferences. | [optional] 
-**CanManageIntegrations** | Pointer to **bool** | Group members can add and configure integrations. | [optional] 
-**CanViewSdkKey** | Pointer to **bool** | Group members has access to SDK keys. | [optional] 
-**CanRotateSdkKey** | Pointer to **bool** | Group members can rotate SDK keys. | [optional] 
-**CanCreateOrUpdateSegments** | Pointer to **bool** | Group members can create/update Segments. | [optional] 
-**CanDeleteSegments** | Pointer to **bool** | Group members can delete Segments. | [optional] 
-**CanViewProductAuditLog** | Pointer to **bool** | Group members has access to audit logs. | [optional] 
-**CanViewProductStatistics** | Pointer to **bool** | Group members has access to product statistics. | [optional] 
-**CanDisable2FA** | Pointer to **bool** | Group members can disable two-factor authentication for other members. | [optional] 
-**AccessType** | Pointer to [**AccessType**](AccessType.md) |  | [optional] 
-**NewEnvironmentAccessType** | Pointer to [**EnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] 
-**EnvironmentAccesses** | Pointer to [**[]EnvironmentAccessModel**](EnvironmentAccessModel.md) | List of environment specific permissions. | [optional] 
-**Product** | Pointer to [**ProductModel**](ProductModel.md) |  | [optional] 
+**PermissionGroupId** | **int64** | Identifier of the Permission Group. | 
+**Name** | **string** | Name of the Permission Group. | 
+**CanManageMembers** | **bool** | Group members can manage team members. | 
+**CanCreateOrUpdateConfig** | **bool** | Group members can create/update Configs. | 
+**CanDeleteConfig** | **bool** | Group members can delete Configs. | 
+**CanCreateOrUpdateEnvironment** | **bool** | Group members can create/update Environments. | 
+**CanDeleteEnvironment** | **bool** | Group members can delete Environments. | 
+**CanCreateOrUpdateSetting** | **bool** | Group members can create/update Feature Flags and Settings. | 
+**CanTagSetting** | **bool** | Group members can attach/detach Tags to Feature Flags and Settings. | 
+**CanDeleteSetting** | **bool** | Group members can delete Feature Flags and Settings. | 
+**CanCreateOrUpdateTag** | **bool** | Group members can create/update Tags. | 
+**CanDeleteTag** | **bool** | Group members can delete Tags. | 
+**CanManageWebhook** | **bool** | Group members can create/update/delete Webhooks. | 
+**CanUseExportImport** | **bool** | Group members can use the export/import feature. | 
+**CanManageProductPreferences** | **bool** | Group members can update Product preferences. | 
+**CanManageIntegrations** | **bool** | Group members can add and configure integrations. | 
+**CanViewSdkKey** | **bool** | Group members has access to SDK keys. | 
+**CanRotateSdkKey** | **bool** | Group members can rotate SDK keys. | 
+**CanCreateOrUpdateSegments** | **bool** | Group members can create/update Segments. | 
+**CanDeleteSegments** | **bool** | Group members can delete Segments. | 
+**CanViewProductAuditLog** | **bool** | Group members has access to audit logs. | 
+**CanViewProductStatistics** | **bool** | Group members has access to product statistics. | 
+**CanDisable2FA** | **bool** | Group members can disable two-factor authentication for other members. | 
+**AccessType** | [**AccessType**](AccessType.md) |  | 
+**NewEnvironmentAccessType** | [**EnvironmentAccessType**](EnvironmentAccessType.md) |  | 
+**EnvironmentAccesses** | [**[]EnvironmentAccessModel**](EnvironmentAccessModel.md) | List of environment specific permissions. | 
+**Product** | [**ProductModel**](ProductModel.md) |  | 
 
 ## Methods
 
 ### NewPermissionGroupModel
 
-`func NewPermissionGroupModel() *PermissionGroupModel`
+`func NewPermissionGroupModel(permissionGroupId int64, name string, canManageMembers bool, canCreateOrUpdateConfig bool, canDeleteConfig bool, canCreateOrUpdateEnvironment bool, canDeleteEnvironment bool, canCreateOrUpdateSetting bool, canTagSetting bool, canDeleteSetting bool, canCreateOrUpdateTag bool, canDeleteTag bool, canManageWebhook bool, canUseExportImport bool, canManageProductPreferences bool, canManageIntegrations bool, canViewSdkKey bool, canRotateSdkKey bool, canCreateOrUpdateSegments bool, canDeleteSegments bool, canViewProductAuditLog bool, canViewProductStatistics bool, canDisable2FA bool, accessType AccessType, newEnvironmentAccessType EnvironmentAccessType, environmentAccesses []EnvironmentAccessModel, product ProductModel, ) *PermissionGroupModel`
 
 NewPermissionGroupModel instantiates a new PermissionGroupModel object
 This constructor will assign default values to properties that have it defined,
@@ -70,11 +70,6 @@ and a boolean to check if the value has been set.
 
 SetPermissionGroupId sets PermissionGroupId field to given value.
 
-### HasPermissionGroupId
-
-`func (o *PermissionGroupModel) HasPermissionGroupId() bool`
-
-HasPermissionGroupId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -95,22 +90,7 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
 
-`func (o *PermissionGroupModel) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### SetNameNil
-
-`func (o *PermissionGroupModel) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *PermissionGroupModel) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetCanManageMembers
 
 `func (o *PermissionGroupModel) GetCanManageMembers() bool`
@@ -130,11 +110,6 @@ and a boolean to check if the value has been set.
 
 SetCanManageMembers sets CanManageMembers field to given value.
 
-### HasCanManageMembers
-
-`func (o *PermissionGroupModel) HasCanManageMembers() bool`
-
-HasCanManageMembers returns a boolean if a field has been set.
 
 ### GetCanCreateOrUpdateConfig
 
@@ -155,11 +130,6 @@ and a boolean to check if the value has been set.
 
 SetCanCreateOrUpdateConfig sets CanCreateOrUpdateConfig field to given value.
 
-### HasCanCreateOrUpdateConfig
-
-`func (o *PermissionGroupModel) HasCanCreateOrUpdateConfig() bool`
-
-HasCanCreateOrUpdateConfig returns a boolean if a field has been set.
 
 ### GetCanDeleteConfig
 
@@ -180,11 +150,6 @@ and a boolean to check if the value has been set.
 
 SetCanDeleteConfig sets CanDeleteConfig field to given value.
 
-### HasCanDeleteConfig
-
-`func (o *PermissionGroupModel) HasCanDeleteConfig() bool`
-
-HasCanDeleteConfig returns a boolean if a field has been set.
 
 ### GetCanCreateOrUpdateEnvironment
 
@@ -205,11 +170,6 @@ and a boolean to check if the value has been set.
 
 SetCanCreateOrUpdateEnvironment sets CanCreateOrUpdateEnvironment field to given value.
 
-### HasCanCreateOrUpdateEnvironment
-
-`func (o *PermissionGroupModel) HasCanCreateOrUpdateEnvironment() bool`
-
-HasCanCreateOrUpdateEnvironment returns a boolean if a field has been set.
 
 ### GetCanDeleteEnvironment
 
@@ -230,11 +190,6 @@ and a boolean to check if the value has been set.
 
 SetCanDeleteEnvironment sets CanDeleteEnvironment field to given value.
 
-### HasCanDeleteEnvironment
-
-`func (o *PermissionGroupModel) HasCanDeleteEnvironment() bool`
-
-HasCanDeleteEnvironment returns a boolean if a field has been set.
 
 ### GetCanCreateOrUpdateSetting
 
@@ -255,11 +210,6 @@ and a boolean to check if the value has been set.
 
 SetCanCreateOrUpdateSetting sets CanCreateOrUpdateSetting field to given value.
 
-### HasCanCreateOrUpdateSetting
-
-`func (o *PermissionGroupModel) HasCanCreateOrUpdateSetting() bool`
-
-HasCanCreateOrUpdateSetting returns a boolean if a field has been set.
 
 ### GetCanTagSetting
 
@@ -280,11 +230,6 @@ and a boolean to check if the value has been set.
 
 SetCanTagSetting sets CanTagSetting field to given value.
 
-### HasCanTagSetting
-
-`func (o *PermissionGroupModel) HasCanTagSetting() bool`
-
-HasCanTagSetting returns a boolean if a field has been set.
 
 ### GetCanDeleteSetting
 
@@ -305,11 +250,6 @@ and a boolean to check if the value has been set.
 
 SetCanDeleteSetting sets CanDeleteSetting field to given value.
 
-### HasCanDeleteSetting
-
-`func (o *PermissionGroupModel) HasCanDeleteSetting() bool`
-
-HasCanDeleteSetting returns a boolean if a field has been set.
 
 ### GetCanCreateOrUpdateTag
 
@@ -330,11 +270,6 @@ and a boolean to check if the value has been set.
 
 SetCanCreateOrUpdateTag sets CanCreateOrUpdateTag field to given value.
 
-### HasCanCreateOrUpdateTag
-
-`func (o *PermissionGroupModel) HasCanCreateOrUpdateTag() bool`
-
-HasCanCreateOrUpdateTag returns a boolean if a field has been set.
 
 ### GetCanDeleteTag
 
@@ -355,11 +290,6 @@ and a boolean to check if the value has been set.
 
 SetCanDeleteTag sets CanDeleteTag field to given value.
 
-### HasCanDeleteTag
-
-`func (o *PermissionGroupModel) HasCanDeleteTag() bool`
-
-HasCanDeleteTag returns a boolean if a field has been set.
 
 ### GetCanManageWebhook
 
@@ -380,11 +310,6 @@ and a boolean to check if the value has been set.
 
 SetCanManageWebhook sets CanManageWebhook field to given value.
 
-### HasCanManageWebhook
-
-`func (o *PermissionGroupModel) HasCanManageWebhook() bool`
-
-HasCanManageWebhook returns a boolean if a field has been set.
 
 ### GetCanUseExportImport
 
@@ -405,11 +330,6 @@ and a boolean to check if the value has been set.
 
 SetCanUseExportImport sets CanUseExportImport field to given value.
 
-### HasCanUseExportImport
-
-`func (o *PermissionGroupModel) HasCanUseExportImport() bool`
-
-HasCanUseExportImport returns a boolean if a field has been set.
 
 ### GetCanManageProductPreferences
 
@@ -430,11 +350,6 @@ and a boolean to check if the value has been set.
 
 SetCanManageProductPreferences sets CanManageProductPreferences field to given value.
 
-### HasCanManageProductPreferences
-
-`func (o *PermissionGroupModel) HasCanManageProductPreferences() bool`
-
-HasCanManageProductPreferences returns a boolean if a field has been set.
 
 ### GetCanManageIntegrations
 
@@ -455,11 +370,6 @@ and a boolean to check if the value has been set.
 
 SetCanManageIntegrations sets CanManageIntegrations field to given value.
 
-### HasCanManageIntegrations
-
-`func (o *PermissionGroupModel) HasCanManageIntegrations() bool`
-
-HasCanManageIntegrations returns a boolean if a field has been set.
 
 ### GetCanViewSdkKey
 
@@ -480,11 +390,6 @@ and a boolean to check if the value has been set.
 
 SetCanViewSdkKey sets CanViewSdkKey field to given value.
 
-### HasCanViewSdkKey
-
-`func (o *PermissionGroupModel) HasCanViewSdkKey() bool`
-
-HasCanViewSdkKey returns a boolean if a field has been set.
 
 ### GetCanRotateSdkKey
 
@@ -505,11 +410,6 @@ and a boolean to check if the value has been set.
 
 SetCanRotateSdkKey sets CanRotateSdkKey field to given value.
 
-### HasCanRotateSdkKey
-
-`func (o *PermissionGroupModel) HasCanRotateSdkKey() bool`
-
-HasCanRotateSdkKey returns a boolean if a field has been set.
 
 ### GetCanCreateOrUpdateSegments
 
@@ -530,11 +430,6 @@ and a boolean to check if the value has been set.
 
 SetCanCreateOrUpdateSegments sets CanCreateOrUpdateSegments field to given value.
 
-### HasCanCreateOrUpdateSegments
-
-`func (o *PermissionGroupModel) HasCanCreateOrUpdateSegments() bool`
-
-HasCanCreateOrUpdateSegments returns a boolean if a field has been set.
 
 ### GetCanDeleteSegments
 
@@ -555,11 +450,6 @@ and a boolean to check if the value has been set.
 
 SetCanDeleteSegments sets CanDeleteSegments field to given value.
 
-### HasCanDeleteSegments
-
-`func (o *PermissionGroupModel) HasCanDeleteSegments() bool`
-
-HasCanDeleteSegments returns a boolean if a field has been set.
 
 ### GetCanViewProductAuditLog
 
@@ -580,11 +470,6 @@ and a boolean to check if the value has been set.
 
 SetCanViewProductAuditLog sets CanViewProductAuditLog field to given value.
 
-### HasCanViewProductAuditLog
-
-`func (o *PermissionGroupModel) HasCanViewProductAuditLog() bool`
-
-HasCanViewProductAuditLog returns a boolean if a field has been set.
 
 ### GetCanViewProductStatistics
 
@@ -605,11 +490,6 @@ and a boolean to check if the value has been set.
 
 SetCanViewProductStatistics sets CanViewProductStatistics field to given value.
 
-### HasCanViewProductStatistics
-
-`func (o *PermissionGroupModel) HasCanViewProductStatistics() bool`
-
-HasCanViewProductStatistics returns a boolean if a field has been set.
 
 ### GetCanDisable2FA
 
@@ -630,11 +510,6 @@ and a boolean to check if the value has been set.
 
 SetCanDisable2FA sets CanDisable2FA field to given value.
 
-### HasCanDisable2FA
-
-`func (o *PermissionGroupModel) HasCanDisable2FA() bool`
-
-HasCanDisable2FA returns a boolean if a field has been set.
 
 ### GetAccessType
 
@@ -655,11 +530,6 @@ and a boolean to check if the value has been set.
 
 SetAccessType sets AccessType field to given value.
 
-### HasAccessType
-
-`func (o *PermissionGroupModel) HasAccessType() bool`
-
-HasAccessType returns a boolean if a field has been set.
 
 ### GetNewEnvironmentAccessType
 
@@ -680,11 +550,6 @@ and a boolean to check if the value has been set.
 
 SetNewEnvironmentAccessType sets NewEnvironmentAccessType field to given value.
 
-### HasNewEnvironmentAccessType
-
-`func (o *PermissionGroupModel) HasNewEnvironmentAccessType() bool`
-
-HasNewEnvironmentAccessType returns a boolean if a field has been set.
 
 ### GetEnvironmentAccesses
 
@@ -705,22 +570,7 @@ and a boolean to check if the value has been set.
 
 SetEnvironmentAccesses sets EnvironmentAccesses field to given value.
 
-### HasEnvironmentAccesses
 
-`func (o *PermissionGroupModel) HasEnvironmentAccesses() bool`
-
-HasEnvironmentAccesses returns a boolean if a field has been set.
-
-### SetEnvironmentAccessesNil
-
-`func (o *PermissionGroupModel) SetEnvironmentAccessesNil(b bool)`
-
- SetEnvironmentAccessesNil sets the value for EnvironmentAccesses to be an explicit nil
-
-### UnsetEnvironmentAccesses
-`func (o *PermissionGroupModel) UnsetEnvironmentAccesses()`
-
-UnsetEnvironmentAccesses ensures that no value is present for EnvironmentAccesses, not even an explicit nil
 ### GetProduct
 
 `func (o *PermissionGroupModel) GetProduct() ProductModel`
@@ -740,11 +590,6 @@ and a boolean to check if the value has been set.
 
 SetProduct sets Product field to given value.
 
-### HasProduct
-
-`func (o *PermissionGroupModel) HasProduct() bool`
-
-HasProduct returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

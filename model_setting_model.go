@@ -13,6 +13,9 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the SettingModel type satisfies the MappedNullable interface at compile time
@@ -21,30 +24,44 @@ var _ MappedNullable = &SettingModel{}
 // SettingModel Metadata of a Feature Flag or Setting.
 type SettingModel struct {
 	// Identifier of the Feature Flag or Setting.
-	SettingId *int32 `json:"settingId,omitempty"`
+	SettingId int32 `json:"settingId"`
 	// Key of the Feature Flag or Setting.
-	Key NullableString `json:"key,omitempty"`
+	Key string `json:"key"`
 	// Name of the Feature Flag or Setting.
-	Name NullableString `json:"name,omitempty"`
+	Name string `json:"name"`
 	// Description of the Feature Flag or Setting.
-	Hint NullableString `json:"hint,omitempty"`
+	Hint NullableString `json:"hint"`
 	// The order of the Feature Flag or Setting represented on the ConfigCat Dashboard.
-	Order *int32 `json:"order,omitempty"`
-	SettingType *SettingType `json:"settingType,omitempty"`
+	Order int32 `json:"order"`
+	SettingType SettingType `json:"settingType"`
 	// Identifier of the Feature Flag's Config.
-	ConfigId *string `json:"configId,omitempty"`
+	ConfigId string `json:"configId"`
 	// Name of the Feature Flag's Config.
-	ConfigName NullableString `json:"configName,omitempty"`
+	ConfigName string `json:"configName"`
+	// The creation time of the Feature Flag or Setting.
+	CreatedAt NullableTime `json:"createdAt"`
 	// The tags attached to the Feature Flag or Setting.
-	Tags []TagModel `json:"tags,omitempty"`
+	Tags []TagModel `json:"tags"`
 }
+
+type _SettingModel SettingModel
 
 // NewSettingModel instantiates a new SettingModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSettingModel() *SettingModel {
+func NewSettingModel(settingId int32, key string, name string, hint NullableString, order int32, settingType SettingType, configId string, configName string, createdAt NullableTime, tags []TagModel) *SettingModel {
 	this := SettingModel{}
+	this.SettingId = settingId
+	this.Key = key
+	this.Name = name
+	this.Hint = hint
+	this.Order = order
+	this.SettingType = settingType
+	this.ConfigId = configId
+	this.ConfigName = configName
+	this.CreatedAt = createdAt
+	this.Tags = tags
 	return &this
 }
 
@@ -56,132 +73,90 @@ func NewSettingModelWithDefaults() *SettingModel {
 	return &this
 }
 
-// GetSettingId returns the SettingId field value if set, zero value otherwise.
+// GetSettingId returns the SettingId field value
 func (o *SettingModel) GetSettingId() int32 {
-	if o == nil || IsNil(o.SettingId) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.SettingId
+
+	return o.SettingId
 }
 
-// GetSettingIdOk returns a tuple with the SettingId field value if set, nil otherwise
+// GetSettingIdOk returns a tuple with the SettingId field value
 // and a boolean to check if the value has been set.
 func (o *SettingModel) GetSettingIdOk() (*int32, bool) {
-	if o == nil || IsNil(o.SettingId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SettingId, true
+	return &o.SettingId, true
 }
 
-// HasSettingId returns a boolean if a field has been set.
-func (o *SettingModel) HasSettingId() bool {
-	if o != nil && !IsNil(o.SettingId) {
-		return true
-	}
-
-	return false
-}
-
-// SetSettingId gets a reference to the given int32 and assigns it to the SettingId field.
+// SetSettingId sets field value
 func (o *SettingModel) SetSettingId(v int32) {
-	o.SettingId = &v
+	o.SettingId = v
 }
 
-// GetKey returns the Key field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetKey returns the Key field value
 func (o *SettingModel) GetKey() string {
-	if o == nil || IsNil(o.Key.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Key.Get()
+
+	return o.Key
 }
 
-// GetKeyOk returns a tuple with the Key field value if set, nil otherwise
+// GetKeyOk returns a tuple with the Key field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingModel) GetKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Key.Get(), o.Key.IsSet()
+	return &o.Key, true
 }
 
-// HasKey returns a boolean if a field has been set.
-func (o *SettingModel) HasKey() bool {
-	if o != nil && o.Key.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetKey gets a reference to the given NullableString and assigns it to the Key field.
+// SetKey sets field value
 func (o *SettingModel) SetKey(v string) {
-	o.Key.Set(&v)
-}
-// SetKeyNil sets the value for Key to be an explicit nil
-func (o *SettingModel) SetKeyNil() {
-	o.Key.Set(nil)
+	o.Key = v
 }
 
-// UnsetKey ensures that no value is present for Key, not even an explicit nil
-func (o *SettingModel) UnsetKey() {
-	o.Key.Unset()
-}
-
-// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetName returns the Name field value
 func (o *SettingModel) GetName() string {
-	if o == nil || IsNil(o.Name.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name.Get()
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingModel) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *SettingModel) HasName() bool {
-	if o != nil && o.Name.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given NullableString and assigns it to the Name field.
+// SetName sets field value
 func (o *SettingModel) SetName(v string) {
-	o.Name.Set(&v)
-}
-// SetNameNil sets the value for Name to be an explicit nil
-func (o *SettingModel) SetNameNil() {
-	o.Name.Set(nil)
+	o.Name = v
 }
 
-// UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *SettingModel) UnsetName() {
-	o.Name.Unset()
-}
-
-// GetHint returns the Hint field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetHint returns the Hint field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *SettingModel) GetHint() string {
-	if o == nil || IsNil(o.Hint.Get()) {
+	if o == nil || o.Hint.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Hint.Get()
 }
 
-// GetHintOk returns a tuple with the Hint field value if set, nil otherwise
+// GetHintOk returns a tuple with the Hint field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingModel) GetHintOk() (*string, bool) {
@@ -191,196 +166,153 @@ func (o *SettingModel) GetHintOk() (*string, bool) {
 	return o.Hint.Get(), o.Hint.IsSet()
 }
 
-// HasHint returns a boolean if a field has been set.
-func (o *SettingModel) HasHint() bool {
-	if o != nil && o.Hint.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetHint gets a reference to the given NullableString and assigns it to the Hint field.
+// SetHint sets field value
 func (o *SettingModel) SetHint(v string) {
 	o.Hint.Set(&v)
 }
-// SetHintNil sets the value for Hint to be an explicit nil
-func (o *SettingModel) SetHintNil() {
-	o.Hint.Set(nil)
-}
 
-// UnsetHint ensures that no value is present for Hint, not even an explicit nil
-func (o *SettingModel) UnsetHint() {
-	o.Hint.Unset()
-}
-
-// GetOrder returns the Order field value if set, zero value otherwise.
+// GetOrder returns the Order field value
 func (o *SettingModel) GetOrder() int32 {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Order
+
+	return o.Order
 }
 
-// GetOrderOk returns a tuple with the Order field value if set, nil otherwise
+// GetOrderOk returns a tuple with the Order field value
 // and a boolean to check if the value has been set.
 func (o *SettingModel) GetOrderOk() (*int32, bool) {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Order, true
+	return &o.Order, true
 }
 
-// HasOrder returns a boolean if a field has been set.
-func (o *SettingModel) HasOrder() bool {
-	if o != nil && !IsNil(o.Order) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrder gets a reference to the given int32 and assigns it to the Order field.
+// SetOrder sets field value
 func (o *SettingModel) SetOrder(v int32) {
-	o.Order = &v
+	o.Order = v
 }
 
-// GetSettingType returns the SettingType field value if set, zero value otherwise.
+// GetSettingType returns the SettingType field value
 func (o *SettingModel) GetSettingType() SettingType {
-	if o == nil || IsNil(o.SettingType) {
+	if o == nil {
 		var ret SettingType
 		return ret
 	}
-	return *o.SettingType
+
+	return o.SettingType
 }
 
-// GetSettingTypeOk returns a tuple with the SettingType field value if set, nil otherwise
+// GetSettingTypeOk returns a tuple with the SettingType field value
 // and a boolean to check if the value has been set.
 func (o *SettingModel) GetSettingTypeOk() (*SettingType, bool) {
-	if o == nil || IsNil(o.SettingType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SettingType, true
+	return &o.SettingType, true
 }
 
-// HasSettingType returns a boolean if a field has been set.
-func (o *SettingModel) HasSettingType() bool {
-	if o != nil && !IsNil(o.SettingType) {
-		return true
-	}
-
-	return false
-}
-
-// SetSettingType gets a reference to the given SettingType and assigns it to the SettingType field.
+// SetSettingType sets field value
 func (o *SettingModel) SetSettingType(v SettingType) {
-	o.SettingType = &v
+	o.SettingType = v
 }
 
-// GetConfigId returns the ConfigId field value if set, zero value otherwise.
+// GetConfigId returns the ConfigId field value
 func (o *SettingModel) GetConfigId() string {
-	if o == nil || IsNil(o.ConfigId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ConfigId
+
+	return o.ConfigId
 }
 
-// GetConfigIdOk returns a tuple with the ConfigId field value if set, nil otherwise
+// GetConfigIdOk returns a tuple with the ConfigId field value
 // and a boolean to check if the value has been set.
 func (o *SettingModel) GetConfigIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ConfigId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ConfigId, true
+	return &o.ConfigId, true
 }
 
-// HasConfigId returns a boolean if a field has been set.
-func (o *SettingModel) HasConfigId() bool {
-	if o != nil && !IsNil(o.ConfigId) {
-		return true
-	}
-
-	return false
-}
-
-// SetConfigId gets a reference to the given string and assigns it to the ConfigId field.
+// SetConfigId sets field value
 func (o *SettingModel) SetConfigId(v string) {
-	o.ConfigId = &v
+	o.ConfigId = v
 }
 
-// GetConfigName returns the ConfigName field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetConfigName returns the ConfigName field value
 func (o *SettingModel) GetConfigName() string {
-	if o == nil || IsNil(o.ConfigName.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ConfigName.Get()
+
+	return o.ConfigName
 }
 
-// GetConfigNameOk returns a tuple with the ConfigName field value if set, nil otherwise
+// GetConfigNameOk returns a tuple with the ConfigName field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingModel) GetConfigNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.ConfigName.Get(), o.ConfigName.IsSet()
+	return &o.ConfigName, true
 }
 
-// HasConfigName returns a boolean if a field has been set.
-func (o *SettingModel) HasConfigName() bool {
-	if o != nil && o.ConfigName.IsSet() {
-		return true
+// SetConfigName sets field value
+func (o *SettingModel) SetConfigName(v string) {
+	o.ConfigName = v
+}
+
+// GetCreatedAt returns the CreatedAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
+func (o *SettingModel) GetCreatedAt() time.Time {
+	if o == nil || o.CreatedAt.Get() == nil {
+		var ret time.Time
+		return ret
 	}
 
-	return false
+	return *o.CreatedAt.Get()
 }
 
-// SetConfigName gets a reference to the given NullableString and assigns it to the ConfigName field.
-func (o *SettingModel) SetConfigName(v string) {
-	o.ConfigName.Set(&v)
-}
-// SetConfigNameNil sets the value for ConfigName to be an explicit nil
-func (o *SettingModel) SetConfigNameNil() {
-	o.ConfigName.Set(nil)
-}
-
-// UnsetConfigName ensures that no value is present for ConfigName, not even an explicit nil
-func (o *SettingModel) UnsetConfigName() {
-	o.ConfigName.Unset()
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *SettingModel) GetCreatedAtOk() (*time.Time, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.CreatedAt.Get(), o.CreatedAt.IsSet()
 }
 
-// GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
+// SetCreatedAt sets field value
+func (o *SettingModel) SetCreatedAt(v time.Time) {
+	o.CreatedAt.Set(&v)
+}
+
+// GetTags returns the Tags field value
 func (o *SettingModel) GetTags() []TagModel {
 	if o == nil {
 		var ret []TagModel
 		return ret
 	}
+
 	return o.Tags
 }
 
-// GetTagsOk returns a tuple with the Tags field value if set, nil otherwise
+// GetTagsOk returns a tuple with the Tags field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingModel) GetTagsOk() ([]TagModel, bool) {
-	if o == nil || IsNil(o.Tags) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Tags, true
 }
 
-// HasTags returns a boolean if a field has been set.
-func (o *SettingModel) HasTags() bool {
-	if o != nil && !IsNil(o.Tags) {
-		return true
-	}
-
-	return false
-}
-
-// SetTags gets a reference to the given []TagModel and assigns it to the Tags field.
+// SetTags sets field value
 func (o *SettingModel) SetTags(v []TagModel) {
 	o.Tags = v
 }
@@ -395,34 +327,63 @@ func (o SettingModel) MarshalJSON() ([]byte, error) {
 
 func (o SettingModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.SettingId) {
-		toSerialize["settingId"] = o.SettingId
-	}
-	if o.Key.IsSet() {
-		toSerialize["key"] = o.Key.Get()
-	}
-	if o.Name.IsSet() {
-		toSerialize["name"] = o.Name.Get()
-	}
-	if o.Hint.IsSet() {
-		toSerialize["hint"] = o.Hint.Get()
-	}
-	if !IsNil(o.Order) {
-		toSerialize["order"] = o.Order
-	}
-	if !IsNil(o.SettingType) {
-		toSerialize["settingType"] = o.SettingType
-	}
-	if !IsNil(o.ConfigId) {
-		toSerialize["configId"] = o.ConfigId
-	}
-	if o.ConfigName.IsSet() {
-		toSerialize["configName"] = o.ConfigName.Get()
-	}
-	if o.Tags != nil {
-		toSerialize["tags"] = o.Tags
-	}
+	toSerialize["settingId"] = o.SettingId
+	toSerialize["key"] = o.Key
+	toSerialize["name"] = o.Name
+	toSerialize["hint"] = o.Hint.Get()
+	toSerialize["order"] = o.Order
+	toSerialize["settingType"] = o.SettingType
+	toSerialize["configId"] = o.ConfigId
+	toSerialize["configName"] = o.ConfigName
+	toSerialize["createdAt"] = o.CreatedAt.Get()
+	toSerialize["tags"] = o.Tags
 	return toSerialize, nil
+}
+
+func (o *SettingModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"settingId",
+		"key",
+		"name",
+		"hint",
+		"order",
+		"settingType",
+		"configId",
+		"configName",
+		"createdAt",
+		"tags",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSettingModel := _SettingModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varSettingModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SettingModel(varSettingModel)
+
+	return err
 }
 
 type NullableSettingModel struct {

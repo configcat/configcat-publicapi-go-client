@@ -27,7 +27,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
 func main() {
@@ -91,7 +91,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
 func main() {
@@ -155,7 +155,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
 func main() {

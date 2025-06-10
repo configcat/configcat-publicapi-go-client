@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the OrganizationPermissionModel type satisfies the MappedNullable interface at compile time
@@ -20,16 +22,20 @@ var _ MappedNullable = &OrganizationPermissionModel{}
 
 // OrganizationPermissionModel Describes the Member's permission.
 type OrganizationPermissionModel struct {
-	Product *OrganizationProductModel `json:"product,omitempty"`
-	PermissionGroup *OrganizationPermissionGroupModel `json:"permissionGroup,omitempty"`
+	Product OrganizationProductModel `json:"product"`
+	PermissionGroup OrganizationPermissionGroupModel `json:"permissionGroup"`
 }
+
+type _OrganizationPermissionModel OrganizationPermissionModel
 
 // NewOrganizationPermissionModel instantiates a new OrganizationPermissionModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrganizationPermissionModel() *OrganizationPermissionModel {
+func NewOrganizationPermissionModel(product OrganizationProductModel, permissionGroup OrganizationPermissionGroupModel) *OrganizationPermissionModel {
 	this := OrganizationPermissionModel{}
+	this.Product = product
+	this.PermissionGroup = permissionGroup
 	return &this
 }
 
@@ -41,68 +47,52 @@ func NewOrganizationPermissionModelWithDefaults() *OrganizationPermissionModel {
 	return &this
 }
 
-// GetProduct returns the Product field value if set, zero value otherwise.
+// GetProduct returns the Product field value
 func (o *OrganizationPermissionModel) GetProduct() OrganizationProductModel {
-	if o == nil || IsNil(o.Product) {
+	if o == nil {
 		var ret OrganizationProductModel
 		return ret
 	}
-	return *o.Product
+
+	return o.Product
 }
 
-// GetProductOk returns a tuple with the Product field value if set, nil otherwise
+// GetProductOk returns a tuple with the Product field value
 // and a boolean to check if the value has been set.
 func (o *OrganizationPermissionModel) GetProductOk() (*OrganizationProductModel, bool) {
-	if o == nil || IsNil(o.Product) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Product, true
+	return &o.Product, true
 }
 
-// HasProduct returns a boolean if a field has been set.
-func (o *OrganizationPermissionModel) HasProduct() bool {
-	if o != nil && !IsNil(o.Product) {
-		return true
-	}
-
-	return false
-}
-
-// SetProduct gets a reference to the given OrganizationProductModel and assigns it to the Product field.
+// SetProduct sets field value
 func (o *OrganizationPermissionModel) SetProduct(v OrganizationProductModel) {
-	o.Product = &v
+	o.Product = v
 }
 
-// GetPermissionGroup returns the PermissionGroup field value if set, zero value otherwise.
+// GetPermissionGroup returns the PermissionGroup field value
 func (o *OrganizationPermissionModel) GetPermissionGroup() OrganizationPermissionGroupModel {
-	if o == nil || IsNil(o.PermissionGroup) {
+	if o == nil {
 		var ret OrganizationPermissionGroupModel
 		return ret
 	}
-	return *o.PermissionGroup
+
+	return o.PermissionGroup
 }
 
-// GetPermissionGroupOk returns a tuple with the PermissionGroup field value if set, nil otherwise
+// GetPermissionGroupOk returns a tuple with the PermissionGroup field value
 // and a boolean to check if the value has been set.
 func (o *OrganizationPermissionModel) GetPermissionGroupOk() (*OrganizationPermissionGroupModel, bool) {
-	if o == nil || IsNil(o.PermissionGroup) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PermissionGroup, true
+	return &o.PermissionGroup, true
 }
 
-// HasPermissionGroup returns a boolean if a field has been set.
-func (o *OrganizationPermissionModel) HasPermissionGroup() bool {
-	if o != nil && !IsNil(o.PermissionGroup) {
-		return true
-	}
-
-	return false
-}
-
-// SetPermissionGroup gets a reference to the given OrganizationPermissionGroupModel and assigns it to the PermissionGroup field.
+// SetPermissionGroup sets field value
 func (o *OrganizationPermissionModel) SetPermissionGroup(v OrganizationPermissionGroupModel) {
-	o.PermissionGroup = &v
+	o.PermissionGroup = v
 }
 
 func (o OrganizationPermissionModel) MarshalJSON() ([]byte, error) {
@@ -115,13 +105,47 @@ func (o OrganizationPermissionModel) MarshalJSON() ([]byte, error) {
 
 func (o OrganizationPermissionModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Product) {
-		toSerialize["product"] = o.Product
-	}
-	if !IsNil(o.PermissionGroup) {
-		toSerialize["permissionGroup"] = o.PermissionGroup
-	}
+	toSerialize["product"] = o.Product
+	toSerialize["permissionGroup"] = o.PermissionGroup
 	return toSerialize, nil
+}
+
+func (o *OrganizationPermissionModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"product",
+		"permissionGroup",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOrganizationPermissionModel := _OrganizationPermissionModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOrganizationPermissionModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrganizationPermissionModel(varOrganizationPermissionModel)
+
+	return err
 }
 
 type NullableOrganizationPermissionModel struct {

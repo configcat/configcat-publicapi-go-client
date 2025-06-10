@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-Testing IntegrationLinksApiService
+Testing IntegrationLinksAPIService
 
 */
 
@@ -14,15 +14,15 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
-func Test_configcatpublicapi_IntegrationLinksApiService(t *testing.T) {
+func Test_configcatpublicapi_IntegrationLinksAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test IntegrationLinksApiService AddOrUpdateIntegrationLink", func(t *testing.T) {
+	t.Run("Test IntegrationLinksAPIService AddOrUpdateIntegrationLink", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -31,7 +31,7 @@ func Test_configcatpublicapi_IntegrationLinksApiService(t *testing.T) {
 		var integrationLinkType IntegrationLinkType
 		var key string
 
-		resp, httpRes, err := apiClient.IntegrationLinksApi.AddOrUpdateIntegrationLink(context.Background(), environmentId, settingId, integrationLinkType, key).Execute()
+		resp, httpRes, err := apiClient.IntegrationLinksAPI.AddOrUpdateIntegrationLink(context.Background(), environmentId, settingId, integrationLinkType, key).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -39,7 +39,7 @@ func Test_configcatpublicapi_IntegrationLinksApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test IntegrationLinksApiService DeleteIntegrationLink", func(t *testing.T) {
+	t.Run("Test IntegrationLinksAPIService DeleteIntegrationLink", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -48,7 +48,7 @@ func Test_configcatpublicapi_IntegrationLinksApiService(t *testing.T) {
 		var integrationLinkType IntegrationLinkType
 		var key string
 
-		resp, httpRes, err := apiClient.IntegrationLinksApi.DeleteIntegrationLink(context.Background(), environmentId, settingId, integrationLinkType, key).Execute()
+		resp, httpRes, err := apiClient.IntegrationLinksAPI.DeleteIntegrationLink(context.Background(), environmentId, settingId, integrationLinkType, key).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -56,14 +56,14 @@ func Test_configcatpublicapi_IntegrationLinksApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test IntegrationLinksApiService GetIntegrationLinkDetails", func(t *testing.T) {
+	t.Run("Test IntegrationLinksAPIService GetIntegrationLinkDetails", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var integrationLinkType IntegrationLinkType
 		var key string
 
-		resp, httpRes, err := apiClient.IntegrationLinksApi.GetIntegrationLinkDetails(context.Background(), integrationLinkType, key).Execute()
+		resp, httpRes, err := apiClient.IntegrationLinksAPI.GetIntegrationLinkDetails(context.Background(), integrationLinkType, key).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -71,7 +71,7 @@ func Test_configcatpublicapi_IntegrationLinksApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test IntegrationLinksApiService JiraAddOrUpdateIntegrationLink", func(t *testing.T) {
+	t.Run("Test IntegrationLinksAPIService JiraAddOrUpdateIntegrationLink", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
@@ -79,7 +79,7 @@ func Test_configcatpublicapi_IntegrationLinksApiService(t *testing.T) {
 		var settingId int32
 		var key string
 
-		resp, httpRes, err := apiClient.IntegrationLinksApi.JiraAddOrUpdateIntegrationLink(context.Background(), environmentId, settingId, key).Execute()
+		resp, httpRes, err := apiClient.IntegrationLinksAPI.JiraAddOrUpdateIntegrationLink(context.Background(), environmentId, settingId, key).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -87,11 +87,11 @@ func Test_configcatpublicapi_IntegrationLinksApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test IntegrationLinksApiService V1JiraConnectPost", func(t *testing.T) {
+	t.Run("Test IntegrationLinksAPIService JiraConnect", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		httpRes, err := apiClient.IntegrationLinksApi.V1JiraConnectPost(context.Background()).Execute()
+		httpRes, err := apiClient.IntegrationLinksAPI.JiraConnect(context.Background()).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

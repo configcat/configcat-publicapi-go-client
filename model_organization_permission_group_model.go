@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the OrganizationPermissionGroupModel type satisfies the MappedNullable interface at compile time
@@ -21,17 +23,21 @@ var _ MappedNullable = &OrganizationPermissionGroupModel{}
 // OrganizationPermissionGroupModel Describes the Member's Permission Group within a Product.
 type OrganizationPermissionGroupModel struct {
 	// Identifier of the Member's Permission Group.
-	PermissionGroupId *int64 `json:"permissionGroupId,omitempty"`
+	PermissionGroupId int64 `json:"permissionGroupId"`
 	// Name of the Member's Permission Group.
-	Name NullableString `json:"name,omitempty"`
+	Name string `json:"name"`
 }
+
+type _OrganizationPermissionGroupModel OrganizationPermissionGroupModel
 
 // NewOrganizationPermissionGroupModel instantiates a new OrganizationPermissionGroupModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrganizationPermissionGroupModel() *OrganizationPermissionGroupModel {
+func NewOrganizationPermissionGroupModel(permissionGroupId int64, name string) *OrganizationPermissionGroupModel {
 	this := OrganizationPermissionGroupModel{}
+	this.PermissionGroupId = permissionGroupId
+	this.Name = name
 	return &this
 }
 
@@ -43,78 +49,52 @@ func NewOrganizationPermissionGroupModelWithDefaults() *OrganizationPermissionGr
 	return &this
 }
 
-// GetPermissionGroupId returns the PermissionGroupId field value if set, zero value otherwise.
+// GetPermissionGroupId returns the PermissionGroupId field value
 func (o *OrganizationPermissionGroupModel) GetPermissionGroupId() int64 {
-	if o == nil || IsNil(o.PermissionGroupId) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.PermissionGroupId
+
+	return o.PermissionGroupId
 }
 
-// GetPermissionGroupIdOk returns a tuple with the PermissionGroupId field value if set, nil otherwise
+// GetPermissionGroupIdOk returns a tuple with the PermissionGroupId field value
 // and a boolean to check if the value has been set.
 func (o *OrganizationPermissionGroupModel) GetPermissionGroupIdOk() (*int64, bool) {
-	if o == nil || IsNil(o.PermissionGroupId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PermissionGroupId, true
+	return &o.PermissionGroupId, true
 }
 
-// HasPermissionGroupId returns a boolean if a field has been set.
-func (o *OrganizationPermissionGroupModel) HasPermissionGroupId() bool {
-	if o != nil && !IsNil(o.PermissionGroupId) {
-		return true
-	}
-
-	return false
-}
-
-// SetPermissionGroupId gets a reference to the given int64 and assigns it to the PermissionGroupId field.
+// SetPermissionGroupId sets field value
 func (o *OrganizationPermissionGroupModel) SetPermissionGroupId(v int64) {
-	o.PermissionGroupId = &v
+	o.PermissionGroupId = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetName returns the Name field value
 func (o *OrganizationPermissionGroupModel) GetName() string {
-	if o == nil || IsNil(o.Name.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name.Get()
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OrganizationPermissionGroupModel) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *OrganizationPermissionGroupModel) HasName() bool {
-	if o != nil && o.Name.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given NullableString and assigns it to the Name field.
+// SetName sets field value
 func (o *OrganizationPermissionGroupModel) SetName(v string) {
-	o.Name.Set(&v)
-}
-// SetNameNil sets the value for Name to be an explicit nil
-func (o *OrganizationPermissionGroupModel) SetNameNil() {
-	o.Name.Set(nil)
-}
-
-// UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *OrganizationPermissionGroupModel) UnsetName() {
-	o.Name.Unset()
+	o.Name = v
 }
 
 func (o OrganizationPermissionGroupModel) MarshalJSON() ([]byte, error) {
@@ -127,13 +107,47 @@ func (o OrganizationPermissionGroupModel) MarshalJSON() ([]byte, error) {
 
 func (o OrganizationPermissionGroupModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.PermissionGroupId) {
-		toSerialize["permissionGroupId"] = o.PermissionGroupId
-	}
-	if o.Name.IsSet() {
-		toSerialize["name"] = o.Name.Get()
-	}
+	toSerialize["permissionGroupId"] = o.PermissionGroupId
+	toSerialize["name"] = o.Name
 	return toSerialize, nil
+}
+
+func (o *OrganizationPermissionGroupModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"permissionGroupId",
+		"name",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOrganizationPermissionGroupModel := _OrganizationPermissionGroupModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOrganizationPermissionGroupModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrganizationPermissionGroupModel(varOrganizationPermissionGroupModel)
+
+	return err
 }
 
 type NullableOrganizationPermissionGroupModel struct {

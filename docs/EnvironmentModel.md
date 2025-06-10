@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Product** | Pointer to [**ProductModel**](ProductModel.md) |  | [optional] 
-**EnvironmentId** | Pointer to **string** | Identifier of the Environment. | [optional] 
-**Name** | Pointer to **NullableString** | Name of the Environment. | [optional] 
-**Color** | Pointer to **NullableString** | The configured color of the Environment. | [optional] 
-**Description** | Pointer to **NullableString** | Description of the Environment. | [optional] 
-**Order** | Pointer to **int32** | The order of the Environment represented on the ConfigCat Dashboard. | [optional] 
-**ReasonRequired** | Pointer to **bool** | Determines whether a mandatory reason must be given every time when the Feature Flags or Settings in the given Environment are saved. | [optional] 
+**Product** | [**ProductModel**](ProductModel.md) |  | 
+**EnvironmentId** | **string** | Identifier of the Environment. | 
+**Name** | **string** | Name of the Environment. | 
+**Color** | **NullableString** | The configured color of the Environment. | 
+**Description** | **NullableString** | Description of the Environment. | 
+**Order** | **int32** | The order of the Environment represented on the ConfigCat Dashboard. | 
+**ReasonRequired** | **bool** | Determines whether a mandatory reason must be given every time when the Feature Flags or Settings in the given Environment are saved. | 
 
 ## Methods
 
 ### NewEnvironmentModel
 
-`func NewEnvironmentModel() *EnvironmentModel`
+`func NewEnvironmentModel(product ProductModel, environmentId string, name string, color NullableString, description NullableString, order int32, reasonRequired bool, ) *EnvironmentModel`
 
 NewEnvironmentModel instantiates a new EnvironmentModel object
 This constructor will assign default values to properties that have it defined,
@@ -50,11 +50,6 @@ and a boolean to check if the value has been set.
 
 SetProduct sets Product field to given value.
 
-### HasProduct
-
-`func (o *EnvironmentModel) HasProduct() bool`
-
-HasProduct returns a boolean if a field has been set.
 
 ### GetEnvironmentId
 
@@ -75,11 +70,6 @@ and a boolean to check if the value has been set.
 
 SetEnvironmentId sets EnvironmentId field to given value.
 
-### HasEnvironmentId
-
-`func (o *EnvironmentModel) HasEnvironmentId() bool`
-
-HasEnvironmentId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -100,22 +90,7 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
 
-`func (o *EnvironmentModel) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### SetNameNil
-
-`func (o *EnvironmentModel) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *EnvironmentModel) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetColor
 
 `func (o *EnvironmentModel) GetColor() string`
@@ -135,11 +110,6 @@ and a boolean to check if the value has been set.
 
 SetColor sets Color field to given value.
 
-### HasColor
-
-`func (o *EnvironmentModel) HasColor() bool`
-
-HasColor returns a boolean if a field has been set.
 
 ### SetColorNil
 
@@ -170,11 +140,6 @@ and a boolean to check if the value has been set.
 
 SetDescription sets Description field to given value.
 
-### HasDescription
-
-`func (o *EnvironmentModel) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
 
 ### SetDescriptionNil
 
@@ -205,11 +170,6 @@ and a boolean to check if the value has been set.
 
 SetOrder sets Order field to given value.
 
-### HasOrder
-
-`func (o *EnvironmentModel) HasOrder() bool`
-
-HasOrder returns a boolean if a field has been set.
 
 ### GetReasonRequired
 
@@ -230,11 +190,6 @@ and a boolean to check if the value has been set.
 
 SetReasonRequired sets ReasonRequired field to given value.
 
-### HasReasonRequired
-
-`func (o *EnvironmentModel) HasReasonRequired() bool`
-
-HasReasonRequired returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

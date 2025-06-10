@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Product** | Pointer to [**ProductModel**](ProductModel.md) |  | [optional] 
-**ConfigId** | Pointer to **string** | Identifier of the Config. | [optional] 
-**Name** | Pointer to **NullableString** | Name of the Config. | [optional] 
-**Description** | Pointer to **NullableString** | Description of the Config. | [optional] 
-**Order** | Pointer to **int32** | The order of the Config represented on the ConfigCat Dashboard. | [optional] 
-**MigratedConfigId** | Pointer to **NullableString** |  | [optional] 
-**EvaluationVersion** | Pointer to [**EvaluationVersion**](EvaluationVersion.md) |  | [optional] 
+**Product** | [**ProductModel**](ProductModel.md) |  | 
+**ConfigId** | **string** | Identifier of the Config. | 
+**Name** | **string** | Name of the Config. | 
+**Description** | **NullableString** | Description of the Config. | 
+**Order** | **int32** | The order of the Config represented on the ConfigCat Dashboard. | 
+**MigratedConfigId** | **NullableString** |  | 
+**EvaluationVersion** | [**EvaluationVersion**](EvaluationVersion.md) |  | 
 
 ## Methods
 
 ### NewConfigModel
 
-`func NewConfigModel() *ConfigModel`
+`func NewConfigModel(product ProductModel, configId string, name string, description NullableString, order int32, migratedConfigId NullableString, evaluationVersion EvaluationVersion, ) *ConfigModel`
 
 NewConfigModel instantiates a new ConfigModel object
 This constructor will assign default values to properties that have it defined,
@@ -50,11 +50,6 @@ and a boolean to check if the value has been set.
 
 SetProduct sets Product field to given value.
 
-### HasProduct
-
-`func (o *ConfigModel) HasProduct() bool`
-
-HasProduct returns a boolean if a field has been set.
 
 ### GetConfigId
 
@@ -75,11 +70,6 @@ and a boolean to check if the value has been set.
 
 SetConfigId sets ConfigId field to given value.
 
-### HasConfigId
-
-`func (o *ConfigModel) HasConfigId() bool`
-
-HasConfigId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -100,22 +90,7 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
 
-`func (o *ConfigModel) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### SetNameNil
-
-`func (o *ConfigModel) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *ConfigModel) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetDescription
 
 `func (o *ConfigModel) GetDescription() string`
@@ -135,11 +110,6 @@ and a boolean to check if the value has been set.
 
 SetDescription sets Description field to given value.
 
-### HasDescription
-
-`func (o *ConfigModel) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
 
 ### SetDescriptionNil
 
@@ -170,11 +140,6 @@ and a boolean to check if the value has been set.
 
 SetOrder sets Order field to given value.
 
-### HasOrder
-
-`func (o *ConfigModel) HasOrder() bool`
-
-HasOrder returns a boolean if a field has been set.
 
 ### GetMigratedConfigId
 
@@ -195,11 +160,6 @@ and a boolean to check if the value has been set.
 
 SetMigratedConfigId sets MigratedConfigId field to given value.
 
-### HasMigratedConfigId
-
-`func (o *ConfigModel) HasMigratedConfigId() bool`
-
-HasMigratedConfigId returns a boolean if a field has been set.
 
 ### SetMigratedConfigIdNil
 
@@ -230,11 +190,6 @@ and a boolean to check if the value has been set.
 
 SetEvaluationVersion sets EvaluationVersion field to given value.
 
-### HasEvaluationVersion
-
-`func (o *ConfigModel) HasEvaluationVersion() bool`
-
-HasEvaluationVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

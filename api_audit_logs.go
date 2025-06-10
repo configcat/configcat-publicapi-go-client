@@ -76,6 +76,10 @@ GetAuditlogs List Audit log items for Product
 This endpoint returns the list of Audit log items for a given Product 
 and the result can be optionally filtered by Config and/or Environment.
 
+If neither `fromUtcDateTime` nor `toUtcDateTime` is set, the audit logs for the **last 7 days** will be returned.
+
+The distance between `fromUtcDateTime` and `toUtcDateTime` cannot exceed **30 days**.
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
  @return AuditLogsAPIGetAuditlogsRequest
@@ -185,7 +189,7 @@ type AuditLogsAPIGetDeletedSettingsRequest struct {
 	configId string
 }
 
-func (r AuditLogsAPIGetDeletedSettingsRequest) Execute() ([]SettingModel, *http.Response, error) {
+func (r AuditLogsAPIGetDeletedSettingsRequest) Execute() ([]DeletedSettingModel, *http.Response, error) {
 	return r.ApiService.GetDeletedSettingsExecute(r)
 }
 
@@ -207,13 +211,13 @@ func (a *AuditLogsAPIService) GetDeletedSettings(ctx context.Context, configId s
 }
 
 // Execute executes the request
-//  @return []SettingModel
-func (a *AuditLogsAPIService) GetDeletedSettingsExecute(r AuditLogsAPIGetDeletedSettingsRequest) ([]SettingModel, *http.Response, error) {
+//  @return []DeletedSettingModel
+func (a *AuditLogsAPIService) GetDeletedSettingsExecute(r AuditLogsAPIGetDeletedSettingsRequest) ([]DeletedSettingModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []SettingModel
+		localVarReturnValue  []DeletedSettingModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditLogsAPIService.GetDeletedSettings")
@@ -339,6 +343,10 @@ GetOrganizationAuditlogs List Audit log items for Organization
 
 This endpoint returns the list of Audit log items for a given Organization 
 and the result can be optionally filtered by Product and/or Config and/or Environment.
+
+If neither `fromUtcDateTime` nor `toUtcDateTime` is set, the audit logs for the **last 7 days** will be returned.
+
+The distance between `fromUtcDateTime` and `toUtcDateTime` cannot exceed **30 days**.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organizationId The identifier of the Organization.

@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the WebhookSigningKeysModel type satisfies the MappedNullable interface at compile time
@@ -21,17 +23,21 @@ var _ MappedNullable = &WebhookSigningKeysModel{}
 // WebhookSigningKeysModel struct for WebhookSigningKeysModel
 type WebhookSigningKeysModel struct {
 	// The first signing key.
-	Key1 NullableString `json:"key1,omitempty"`
+	Key1 NullableString `json:"key1"`
 	// The second signing key.
-	Key2 NullableString `json:"key2,omitempty"`
+	Key2 NullableString `json:"key2"`
 }
+
+type _WebhookSigningKeysModel WebhookSigningKeysModel
 
 // NewWebhookSigningKeysModel instantiates a new WebhookSigningKeysModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWebhookSigningKeysModel() *WebhookSigningKeysModel {
+func NewWebhookSigningKeysModel(key1 NullableString, key2 NullableString) *WebhookSigningKeysModel {
 	this := WebhookSigningKeysModel{}
+	this.Key1 = key1
+	this.Key2 = key2
 	return &this
 }
 
@@ -43,16 +49,18 @@ func NewWebhookSigningKeysModelWithDefaults() *WebhookSigningKeysModel {
 	return &this
 }
 
-// GetKey1 returns the Key1 field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetKey1 returns the Key1 field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *WebhookSigningKeysModel) GetKey1() string {
-	if o == nil || IsNil(o.Key1.Get()) {
+	if o == nil || o.Key1.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Key1.Get()
 }
 
-// GetKey1Ok returns a tuple with the Key1 field value if set, nil otherwise
+// GetKey1Ok returns a tuple with the Key1 field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WebhookSigningKeysModel) GetKey1Ok() (*string, bool) {
@@ -62,39 +70,23 @@ func (o *WebhookSigningKeysModel) GetKey1Ok() (*string, bool) {
 	return o.Key1.Get(), o.Key1.IsSet()
 }
 
-// HasKey1 returns a boolean if a field has been set.
-func (o *WebhookSigningKeysModel) HasKey1() bool {
-	if o != nil && o.Key1.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetKey1 gets a reference to the given NullableString and assigns it to the Key1 field.
+// SetKey1 sets field value
 func (o *WebhookSigningKeysModel) SetKey1(v string) {
 	o.Key1.Set(&v)
 }
-// SetKey1Nil sets the value for Key1 to be an explicit nil
-func (o *WebhookSigningKeysModel) SetKey1Nil() {
-	o.Key1.Set(nil)
-}
 
-// UnsetKey1 ensures that no value is present for Key1, not even an explicit nil
-func (o *WebhookSigningKeysModel) UnsetKey1() {
-	o.Key1.Unset()
-}
-
-// GetKey2 returns the Key2 field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetKey2 returns the Key2 field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *WebhookSigningKeysModel) GetKey2() string {
-	if o == nil || IsNil(o.Key2.Get()) {
+	if o == nil || o.Key2.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Key2.Get()
 }
 
-// GetKey2Ok returns a tuple with the Key2 field value if set, nil otherwise
+// GetKey2Ok returns a tuple with the Key2 field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WebhookSigningKeysModel) GetKey2Ok() (*string, bool) {
@@ -104,27 +96,9 @@ func (o *WebhookSigningKeysModel) GetKey2Ok() (*string, bool) {
 	return o.Key2.Get(), o.Key2.IsSet()
 }
 
-// HasKey2 returns a boolean if a field has been set.
-func (o *WebhookSigningKeysModel) HasKey2() bool {
-	if o != nil && o.Key2.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetKey2 gets a reference to the given NullableString and assigns it to the Key2 field.
+// SetKey2 sets field value
 func (o *WebhookSigningKeysModel) SetKey2(v string) {
 	o.Key2.Set(&v)
-}
-// SetKey2Nil sets the value for Key2 to be an explicit nil
-func (o *WebhookSigningKeysModel) SetKey2Nil() {
-	o.Key2.Set(nil)
-}
-
-// UnsetKey2 ensures that no value is present for Key2, not even an explicit nil
-func (o *WebhookSigningKeysModel) UnsetKey2() {
-	o.Key2.Unset()
 }
 
 func (o WebhookSigningKeysModel) MarshalJSON() ([]byte, error) {
@@ -137,13 +111,47 @@ func (o WebhookSigningKeysModel) MarshalJSON() ([]byte, error) {
 
 func (o WebhookSigningKeysModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Key1.IsSet() {
-		toSerialize["key1"] = o.Key1.Get()
-	}
-	if o.Key2.IsSet() {
-		toSerialize["key2"] = o.Key2.Get()
-	}
+	toSerialize["key1"] = o.Key1.Get()
+	toSerialize["key2"] = o.Key2.Get()
 	return toSerialize, nil
+}
+
+func (o *WebhookSigningKeysModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"key1",
+		"key2",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varWebhookSigningKeysModel := _WebhookSigningKeysModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varWebhookSigningKeysModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WebhookSigningKeysModel(varWebhookSigningKeysModel)
+
+	return err
 }
 
 type NullableWebhookSigningKeysModel struct {

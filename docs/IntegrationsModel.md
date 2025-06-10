@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Integrations** | Pointer to [**[]IntegrationModel**](IntegrationModel.md) | The Integrations of the Product. | [optional] 
+**Integrations** | [**[]IntegrationModel**](IntegrationModel.md) | The Integrations of the Product. | 
 
 ## Methods
 
 ### NewIntegrationsModel
 
-`func NewIntegrationsModel() *IntegrationsModel`
+`func NewIntegrationsModel(integrations []IntegrationModel, ) *IntegrationsModel`
 
 NewIntegrationsModel instantiates a new IntegrationsModel object
 This constructor will assign default values to properties that have it defined,
@@ -44,11 +44,6 @@ and a boolean to check if the value has been set.
 
 SetIntegrations sets Integrations field to given value.
 
-### HasIntegrations
-
-`func (o *IntegrationsModel) HasIntegrations() bool`
-
-HasIntegrations returns a boolean if a field has been set.
 
 ### SetIntegrationsNil
 

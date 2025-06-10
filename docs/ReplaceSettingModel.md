@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Hint** | Pointer to **NullableString** | A short description for the setting, shown on the Dashboard UI. | [optional] 
 **Tags** | Pointer to **[]int64** | The IDs of the tags which are attached to the setting. | [optional] 
-**Order** | Pointer to **NullableInt32** | The order of the Setting represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers. | [optional] 
-**Name** | **string** | The name of the Feature Flag or Setting. | 
+**Order** | Pointer to **NullableInt32** | The order of the Setting represented on the ConfigCat Dashboard. Determined from an ascending sequence of integers. | [optional] 
+**Name** | Pointer to **NullableString** | The name of the Feature Flag or Setting. | [optional] 
 
 ## Methods
 
 ### NewReplaceSettingModel
 
-`func NewReplaceSettingModel(name string, ) *ReplaceSettingModel`
+`func NewReplaceSettingModel() *ReplaceSettingModel`
 
 NewReplaceSettingModel instantiates a new ReplaceSettingModel object
 This constructor will assign default values to properties that have it defined,
@@ -152,7 +152,22 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+### HasName
 
+`func (o *ReplaceSettingModel) HasName() bool`
+
+HasName returns a boolean if a field has been set.
+
+### SetNameNil
+
+`func (o *ReplaceSettingModel) SetNameNil(b bool)`
+
+ SetNameNil sets the value for Name to be an explicit nil
+
+### UnsetName
+`func (o *ReplaceSettingModel) UnsetName()`
+
+UnsetName ensures that no value is present for Name, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

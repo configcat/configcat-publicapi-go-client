@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **NullableString** | The name of the Product. | [optional] 
 **Description** | Pointer to **NullableString** | The description of the Product. | [optional] 
-**Order** | Pointer to **NullableInt32** | The order of the Product represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers. | [optional] 
+**Order** | Pointer to **NullableInt32** | The order of the Product represented on the ConfigCat Dashboard. Determined from an ascending sequence of integers. | [optional] 
 
 ## Methods
 

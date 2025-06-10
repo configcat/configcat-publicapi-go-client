@@ -22,9 +22,9 @@ var _ MappedNullable = &UpdateEvaluationFormulaModel{}
 
 // UpdateEvaluationFormulaModel struct for UpdateEvaluationFormulaModel
 type UpdateEvaluationFormulaModel struct {
-	DefaultValue ValueModel `json:"defaultValue"`
+	DefaultValue UpdateValueModel `json:"defaultValue"`
 	// The targeting rules of the Feature Flag or Setting.
-	TargetingRules []TargetingRuleModel `json:"targetingRules,omitempty"`
+	TargetingRules []UpdateTargetingRuleModel `json:"targetingRules,omitempty"`
 	// The user attribute used for percentage evaluation. If not set, it defaults to the `Identifier` user object attribute.
 	PercentageEvaluationAttribute NullableString `json:"percentageEvaluationAttribute,omitempty"`
 }
@@ -35,7 +35,7 @@ type _UpdateEvaluationFormulaModel UpdateEvaluationFormulaModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateEvaluationFormulaModel(defaultValue ValueModel) *UpdateEvaluationFormulaModel {
+func NewUpdateEvaluationFormulaModel(defaultValue UpdateValueModel) *UpdateEvaluationFormulaModel {
 	this := UpdateEvaluationFormulaModel{}
 	this.DefaultValue = defaultValue
 	return &this
@@ -50,9 +50,9 @@ func NewUpdateEvaluationFormulaModelWithDefaults() *UpdateEvaluationFormulaModel
 }
 
 // GetDefaultValue returns the DefaultValue field value
-func (o *UpdateEvaluationFormulaModel) GetDefaultValue() ValueModel {
+func (o *UpdateEvaluationFormulaModel) GetDefaultValue() UpdateValueModel {
 	if o == nil {
-		var ret ValueModel
+		var ret UpdateValueModel
 		return ret
 	}
 
@@ -61,7 +61,7 @@ func (o *UpdateEvaluationFormulaModel) GetDefaultValue() ValueModel {
 
 // GetDefaultValueOk returns a tuple with the DefaultValue field value
 // and a boolean to check if the value has been set.
-func (o *UpdateEvaluationFormulaModel) GetDefaultValueOk() (*ValueModel, bool) {
+func (o *UpdateEvaluationFormulaModel) GetDefaultValueOk() (*UpdateValueModel, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -69,14 +69,14 @@ func (o *UpdateEvaluationFormulaModel) GetDefaultValueOk() (*ValueModel, bool) {
 }
 
 // SetDefaultValue sets field value
-func (o *UpdateEvaluationFormulaModel) SetDefaultValue(v ValueModel) {
+func (o *UpdateEvaluationFormulaModel) SetDefaultValue(v UpdateValueModel) {
 	o.DefaultValue = v
 }
 
 // GetTargetingRules returns the TargetingRules field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UpdateEvaluationFormulaModel) GetTargetingRules() []TargetingRuleModel {
+func (o *UpdateEvaluationFormulaModel) GetTargetingRules() []UpdateTargetingRuleModel {
 	if o == nil {
-		var ret []TargetingRuleModel
+		var ret []UpdateTargetingRuleModel
 		return ret
 	}
 	return o.TargetingRules
@@ -85,7 +85,7 @@ func (o *UpdateEvaluationFormulaModel) GetTargetingRules() []TargetingRuleModel 
 // GetTargetingRulesOk returns a tuple with the TargetingRules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpdateEvaluationFormulaModel) GetTargetingRulesOk() ([]TargetingRuleModel, bool) {
+func (o *UpdateEvaluationFormulaModel) GetTargetingRulesOk() ([]UpdateTargetingRuleModel, bool) {
 	if o == nil || IsNil(o.TargetingRules) {
 		return nil, false
 	}
@@ -101,8 +101,8 @@ func (o *UpdateEvaluationFormulaModel) HasTargetingRules() bool {
 	return false
 }
 
-// SetTargetingRules gets a reference to the given []TargetingRuleModel and assigns it to the TargetingRules field.
-func (o *UpdateEvaluationFormulaModel) SetTargetingRules(v []TargetingRuleModel) {
+// SetTargetingRules gets a reference to the given []UpdateTargetingRuleModel and assigns it to the TargetingRules field.
+func (o *UpdateEvaluationFormulaModel) SetTargetingRules(v []UpdateTargetingRuleModel) {
 	o.TargetingRules = v
 }
 

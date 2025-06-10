@@ -26,8 +26,8 @@ Name | Type | Description | Notes
 **CanViewProductAuditLog** | Pointer to **NullableBool** | Group members has access to audit logs. | [optional] 
 **CanViewProductStatistics** | Pointer to **NullableBool** | Group members has access to product statistics. | [optional] 
 **CanDisable2FA** | Pointer to **NullableBool** | Group members can disable two-factor authentication for other members. | [optional] 
-**AccessType** | Pointer to [**AccessType**](AccessType.md) |  | [optional] 
-**NewEnvironmentAccessType** | Pointer to [**EnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] 
+**AccessType** | Pointer to [**NullableAccessType**](AccessType.md) |  | [optional] 
+**NewEnvironmentAccessType** | Pointer to [**NullableEnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] 
 **EnvironmentAccesses** | Pointer to [**[]CreateOrUpdateEnvironmentAccessModel**](CreateOrUpdateEnvironmentAccessModel.md) | List of environment specific permissions. | [optional] 
 
 ## Methods
@@ -844,6 +844,16 @@ SetAccessType sets AccessType field to given value.
 
 HasAccessType returns a boolean if a field has been set.
 
+### SetAccessTypeNil
+
+`func (o *UpdatePermissionGroupRequest) SetAccessTypeNil(b bool)`
+
+ SetAccessTypeNil sets the value for AccessType to be an explicit nil
+
+### UnsetAccessType
+`func (o *UpdatePermissionGroupRequest) UnsetAccessType()`
+
+UnsetAccessType ensures that no value is present for AccessType, not even an explicit nil
 ### GetNewEnvironmentAccessType
 
 `func (o *UpdatePermissionGroupRequest) GetNewEnvironmentAccessType() EnvironmentAccessType`
@@ -869,6 +879,16 @@ SetNewEnvironmentAccessType sets NewEnvironmentAccessType field to given value.
 
 HasNewEnvironmentAccessType returns a boolean if a field has been set.
 
+### SetNewEnvironmentAccessTypeNil
+
+`func (o *UpdatePermissionGroupRequest) SetNewEnvironmentAccessTypeNil(b bool)`
+
+ SetNewEnvironmentAccessTypeNil sets the value for NewEnvironmentAccessType to be an explicit nil
+
+### UnsetNewEnvironmentAccessType
+`func (o *UpdatePermissionGroupRequest) UnsetNewEnvironmentAccessType()`
+
+UnsetNewEnvironmentAccessType ensures that no value is present for NewEnvironmentAccessType, not even an explicit nil
 ### GetEnvironmentAccesses
 
 `func (o *UpdatePermissionGroupRequest) GetEnvironmentAccesses() []CreateOrUpdateEnvironmentAccessModel`

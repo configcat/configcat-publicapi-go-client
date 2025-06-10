@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-Testing SegmentsApiService
+Testing SegmentsAPIService
 
 */
 
@@ -14,21 +14,21 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
-func Test_configcatpublicapi_SegmentsApiService(t *testing.T) {
+func Test_configcatpublicapi_SegmentsAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test SegmentsApiService CreateSegment", func(t *testing.T) {
+	t.Run("Test SegmentsAPIService CreateSegment", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var productId string
 
-		resp, httpRes, err := apiClient.SegmentsApi.CreateSegment(context.Background(), productId).Execute()
+		resp, httpRes, err := apiClient.SegmentsAPI.CreateSegment(context.Background(), productId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,26 +36,26 @@ func Test_configcatpublicapi_SegmentsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test SegmentsApiService DeleteSegment", func(t *testing.T) {
+	t.Run("Test SegmentsAPIService DeleteSegment", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var segmentId string
 
-		httpRes, err := apiClient.SegmentsApi.DeleteSegment(context.Background(), segmentId).Execute()
+		httpRes, err := apiClient.SegmentsAPI.DeleteSegment(context.Background(), segmentId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test SegmentsApiService GetSegment", func(t *testing.T) {
+	t.Run("Test SegmentsAPIService GetSegment", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var segmentId string
 
-		resp, httpRes, err := apiClient.SegmentsApi.GetSegment(context.Background(), segmentId).Execute()
+		resp, httpRes, err := apiClient.SegmentsAPI.GetSegment(context.Background(), segmentId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -63,13 +63,13 @@ func Test_configcatpublicapi_SegmentsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test SegmentsApiService GetSegments", func(t *testing.T) {
+	t.Run("Test SegmentsAPIService GetSegments", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var productId string
 
-		resp, httpRes, err := apiClient.SegmentsApi.GetSegments(context.Background(), productId).Execute()
+		resp, httpRes, err := apiClient.SegmentsAPI.GetSegments(context.Background(), productId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -77,13 +77,13 @@ func Test_configcatpublicapi_SegmentsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test SegmentsApiService UpdateSegment", func(t *testing.T) {
+	t.Run("Test SegmentsAPIService UpdateSegment", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var segmentId string
 
-		resp, httpRes, err := apiClient.SegmentsApi.UpdateSegment(context.Background(), segmentId).Execute()
+		resp, httpRes, err := apiClient.SegmentsAPI.UpdateSegment(context.Background(), segmentId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

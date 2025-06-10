@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Config** | Pointer to [**ConfigModel**](ConfigModel.md) |  | [optional] 
-**Environment** | Pointer to [**EnvironmentModel**](EnvironmentModel.md) |  | [optional] 
-**ReadOnly** | Pointer to **bool** |  | [optional] 
-**SettingFormulas** | Pointer to [**[]ConfigSettingFormulaModel**](ConfigSettingFormulaModel.md) | Evaluation descriptors of each updated Feature Flag and Setting. | [optional] 
-**FeatureFlagLimitations** | Pointer to [**FeatureFlagLimitations**](FeatureFlagLimitations.md) |  | [optional] 
+**Config** | [**ConfigModel**](ConfigModel.md) |  | 
+**Environment** | [**EnvironmentModel**](EnvironmentModel.md) |  | 
+**ReadOnly** | **bool** |  | 
+**SettingFormulas** | [**[]ConfigSettingFormulaModel**](ConfigSettingFormulaModel.md) | Evaluation descriptors of each updated Feature Flag and Setting. | 
+**FeatureFlagLimitations** | [**FeatureFlagLimitations**](FeatureFlagLimitations.md) |  | 
 
 ## Methods
 
 ### NewConfigSettingFormulasModel
 
-`func NewConfigSettingFormulasModel() *ConfigSettingFormulasModel`
+`func NewConfigSettingFormulasModel(config ConfigModel, environment EnvironmentModel, readOnly bool, settingFormulas []ConfigSettingFormulaModel, featureFlagLimitations FeatureFlagLimitations, ) *ConfigSettingFormulasModel`
 
 NewConfigSettingFormulasModel instantiates a new ConfigSettingFormulasModel object
 This constructor will assign default values to properties that have it defined,
@@ -48,11 +48,6 @@ and a boolean to check if the value has been set.
 
 SetConfig sets Config field to given value.
 
-### HasConfig
-
-`func (o *ConfigSettingFormulasModel) HasConfig() bool`
-
-HasConfig returns a boolean if a field has been set.
 
 ### GetEnvironment
 
@@ -73,11 +68,6 @@ and a boolean to check if the value has been set.
 
 SetEnvironment sets Environment field to given value.
 
-### HasEnvironment
-
-`func (o *ConfigSettingFormulasModel) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
 
 ### GetReadOnly
 
@@ -98,11 +88,6 @@ and a boolean to check if the value has been set.
 
 SetReadOnly sets ReadOnly field to given value.
 
-### HasReadOnly
-
-`func (o *ConfigSettingFormulasModel) HasReadOnly() bool`
-
-HasReadOnly returns a boolean if a field has been set.
 
 ### GetSettingFormulas
 
@@ -123,22 +108,7 @@ and a boolean to check if the value has been set.
 
 SetSettingFormulas sets SettingFormulas field to given value.
 
-### HasSettingFormulas
 
-`func (o *ConfigSettingFormulasModel) HasSettingFormulas() bool`
-
-HasSettingFormulas returns a boolean if a field has been set.
-
-### SetSettingFormulasNil
-
-`func (o *ConfigSettingFormulasModel) SetSettingFormulasNil(b bool)`
-
- SetSettingFormulasNil sets the value for SettingFormulas to be an explicit nil
-
-### UnsetSettingFormulas
-`func (o *ConfigSettingFormulasModel) UnsetSettingFormulas()`
-
-UnsetSettingFormulas ensures that no value is present for SettingFormulas, not even an explicit nil
 ### GetFeatureFlagLimitations
 
 `func (o *ConfigSettingFormulasModel) GetFeatureFlagLimitations() FeatureFlagLimitations`
@@ -158,11 +128,6 @@ and a boolean to check if the value has been set.
 
 SetFeatureFlagLimitations sets FeatureFlagLimitations field to given value.
 
-### HasFeatureFlagLimitations
-
-`func (o *ConfigSettingFormulasModel) HasFeatureFlagLimitations() bool`
-
-HasFeatureFlagLimitations returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UserId** | Pointer to **NullableString** | Identifier of the Organization Admin. | [optional] 
-**FullName** | Pointer to **NullableString** | Name of the Organization Admin. | [optional] 
-**Email** | Pointer to **NullableString** | Email of the OrganizationAdmin. | [optional] 
-**TwoFactorEnabled** | Pointer to **bool** | Determines whether 2FA is enabled for the Organization Admin. | [optional] 
+**UserId** | **string** | Identifier of the Organization Admin. | 
+**FullName** | **string** | Name of the Organization Admin. | 
+**Email** | **string** | Email of the OrganizationAdmin. | 
+**TwoFactorEnabled** | **bool** | Determines whether 2FA is enabled for the Organization Admin. | 
 
 ## Methods
 
 ### NewOrganizationAdminModel
 
-`func NewOrganizationAdminModel() *OrganizationAdminModel`
+`func NewOrganizationAdminModel(userId string, fullName string, email string, twoFactorEnabled bool, ) *OrganizationAdminModel`
 
 NewOrganizationAdminModel instantiates a new OrganizationAdminModel object
 This constructor will assign default values to properties that have it defined,
@@ -47,22 +47,7 @@ and a boolean to check if the value has been set.
 
 SetUserId sets UserId field to given value.
 
-### HasUserId
 
-`func (o *OrganizationAdminModel) HasUserId() bool`
-
-HasUserId returns a boolean if a field has been set.
-
-### SetUserIdNil
-
-`func (o *OrganizationAdminModel) SetUserIdNil(b bool)`
-
- SetUserIdNil sets the value for UserId to be an explicit nil
-
-### UnsetUserId
-`func (o *OrganizationAdminModel) UnsetUserId()`
-
-UnsetUserId ensures that no value is present for UserId, not even an explicit nil
 ### GetFullName
 
 `func (o *OrganizationAdminModel) GetFullName() string`
@@ -82,22 +67,7 @@ and a boolean to check if the value has been set.
 
 SetFullName sets FullName field to given value.
 
-### HasFullName
 
-`func (o *OrganizationAdminModel) HasFullName() bool`
-
-HasFullName returns a boolean if a field has been set.
-
-### SetFullNameNil
-
-`func (o *OrganizationAdminModel) SetFullNameNil(b bool)`
-
- SetFullNameNil sets the value for FullName to be an explicit nil
-
-### UnsetFullName
-`func (o *OrganizationAdminModel) UnsetFullName()`
-
-UnsetFullName ensures that no value is present for FullName, not even an explicit nil
 ### GetEmail
 
 `func (o *OrganizationAdminModel) GetEmail() string`
@@ -117,22 +87,7 @@ and a boolean to check if the value has been set.
 
 SetEmail sets Email field to given value.
 
-### HasEmail
 
-`func (o *OrganizationAdminModel) HasEmail() bool`
-
-HasEmail returns a boolean if a field has been set.
-
-### SetEmailNil
-
-`func (o *OrganizationAdminModel) SetEmailNil(b bool)`
-
- SetEmailNil sets the value for Email to be an explicit nil
-
-### UnsetEmail
-`func (o *OrganizationAdminModel) UnsetEmail()`
-
-UnsetEmail ensures that no value is present for Email, not even an explicit nil
 ### GetTwoFactorEnabled
 
 `func (o *OrganizationAdminModel) GetTwoFactorEnabled() bool`
@@ -152,11 +107,6 @@ and a boolean to check if the value has been set.
 
 SetTwoFactorEnabled sets TwoFactorEnabled field to given value.
 
-### HasTwoFactorEnabled
-
-`func (o *OrganizationAdminModel) HasTwoFactorEnabled() bool`
-
-HasTwoFactorEnabled returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

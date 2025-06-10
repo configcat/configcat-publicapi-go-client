@@ -4,27 +4,27 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**LastVersionId** | Pointer to **string** |  | [optional] 
-**DefaultValue** | Pointer to [**ValueModel**](ValueModel.md) |  | [optional] 
-**TargetingRules** | Pointer to [**[]TargetingRuleModel**](TargetingRuleModel.md) | The targeting rules of the Feature Flag or Setting. | [optional] 
-**Setting** | Pointer to [**SettingDataModel**](SettingDataModel.md) |  | [optional] 
-**UpdatedAt** | Pointer to **NullableTime** | The last updated date and time when the Feature Flag or Setting. | [optional] 
-**PercentageEvaluationAttribute** | Pointer to **NullableString** | The user attribute used for percentage evaluation. If not set, it defaults to the &#x60;Identifier&#x60; user object attribute. | [optional] 
-**LastUpdaterUserEmail** | Pointer to **NullableString** | The email of the user who last updated the Feature Flag or Setting. | [optional] 
-**LastUpdaterUserFullName** | Pointer to **NullableString** | The name of the user who last updated the Feature Flag or Setting. | [optional] 
-**IntegrationLinks** | Pointer to [**[]IntegrationLinkModel**](IntegrationLinkModel.md) | The integration links attached to the Feature Flag or Setting. | [optional] 
-**SettingTags** | Pointer to [**[]SettingTagModel**](SettingTagModel.md) | The tags attached to the Feature Flag or Setting. | [optional] 
-**SettingIdsWherePrerequisite** | Pointer to **[]int32** | List of Feature Flag and Setting IDs where the actual Feature Flag or Setting is prerequisite. | [optional] 
-**Config** | Pointer to [**ConfigModel**](ConfigModel.md) |  | [optional] 
-**Environment** | Pointer to [**EnvironmentModel**](EnvironmentModel.md) |  | [optional] 
-**ReadOnly** | Pointer to **bool** |  | [optional] 
-**FeatureFlagLimitations** | Pointer to [**FeatureFlagLimitations**](FeatureFlagLimitations.md) |  | [optional] 
+**LastVersionId** | **string** |  | 
+**DefaultValue** | [**ValueModel**](ValueModel.md) |  | 
+**TargetingRules** | [**[]TargetingRuleModel**](TargetingRuleModel.md) | The targeting rules of the Feature Flag or Setting. | 
+**Setting** | [**SettingDataModel**](SettingDataModel.md) |  | 
+**UpdatedAt** | **NullableTime** | The last updated date and time when the Feature Flag or Setting. | 
+**PercentageEvaluationAttribute** | **NullableString** | The user attribute used for percentage evaluation. If not set, it defaults to the &#x60;Identifier&#x60; user object attribute. | 
+**LastUpdaterUserEmail** | **NullableString** | The email of the user who last updated the Feature Flag or Setting. | 
+**LastUpdaterUserFullName** | **NullableString** | The name of the user who last updated the Feature Flag or Setting. | 
+**IntegrationLinks** | [**[]IntegrationLinkModel**](IntegrationLinkModel.md) | The integration links attached to the Feature Flag or Setting. | 
+**SettingTags** | [**[]SettingTagModel**](SettingTagModel.md) | The tags attached to the Feature Flag or Setting. | 
+**SettingIdsWherePrerequisite** | **[]int32** | List of Feature Flag and Setting IDs where the actual Feature Flag or Setting is prerequisite. | 
+**Config** | [**ConfigModel**](ConfigModel.md) |  | 
+**Environment** | [**EnvironmentModel**](EnvironmentModel.md) |  | 
+**ReadOnly** | **bool** |  | 
+**FeatureFlagLimitations** | [**FeatureFlagLimitations**](FeatureFlagLimitations.md) |  | 
 
 ## Methods
 
 ### NewSettingFormulaModel
 
-`func NewSettingFormulaModel() *SettingFormulaModel`
+`func NewSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targetingRules []TargetingRuleModel, setting SettingDataModel, updatedAt NullableTime, percentageEvaluationAttribute NullableString, lastUpdaterUserEmail NullableString, lastUpdaterUserFullName NullableString, integrationLinks []IntegrationLinkModel, settingTags []SettingTagModel, settingIdsWherePrerequisite []int32, config ConfigModel, environment EnvironmentModel, readOnly bool, featureFlagLimitations FeatureFlagLimitations, ) *SettingFormulaModel`
 
 NewSettingFormulaModel instantiates a new SettingFormulaModel object
 This constructor will assign default values to properties that have it defined,
@@ -58,11 +58,6 @@ and a boolean to check if the value has been set.
 
 SetLastVersionId sets LastVersionId field to given value.
 
-### HasLastVersionId
-
-`func (o *SettingFormulaModel) HasLastVersionId() bool`
-
-HasLastVersionId returns a boolean if a field has been set.
 
 ### GetDefaultValue
 
@@ -83,11 +78,6 @@ and a boolean to check if the value has been set.
 
 SetDefaultValue sets DefaultValue field to given value.
 
-### HasDefaultValue
-
-`func (o *SettingFormulaModel) HasDefaultValue() bool`
-
-HasDefaultValue returns a boolean if a field has been set.
 
 ### GetTargetingRules
 
@@ -108,22 +98,7 @@ and a boolean to check if the value has been set.
 
 SetTargetingRules sets TargetingRules field to given value.
 
-### HasTargetingRules
 
-`func (o *SettingFormulaModel) HasTargetingRules() bool`
-
-HasTargetingRules returns a boolean if a field has been set.
-
-### SetTargetingRulesNil
-
-`func (o *SettingFormulaModel) SetTargetingRulesNil(b bool)`
-
- SetTargetingRulesNil sets the value for TargetingRules to be an explicit nil
-
-### UnsetTargetingRules
-`func (o *SettingFormulaModel) UnsetTargetingRules()`
-
-UnsetTargetingRules ensures that no value is present for TargetingRules, not even an explicit nil
 ### GetSetting
 
 `func (o *SettingFormulaModel) GetSetting() SettingDataModel`
@@ -143,11 +118,6 @@ and a boolean to check if the value has been set.
 
 SetSetting sets Setting field to given value.
 
-### HasSetting
-
-`func (o *SettingFormulaModel) HasSetting() bool`
-
-HasSetting returns a boolean if a field has been set.
 
 ### GetUpdatedAt
 
@@ -168,11 +138,6 @@ and a boolean to check if the value has been set.
 
 SetUpdatedAt sets UpdatedAt field to given value.
 
-### HasUpdatedAt
-
-`func (o *SettingFormulaModel) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 ### SetUpdatedAtNil
 
@@ -203,11 +168,6 @@ and a boolean to check if the value has been set.
 
 SetPercentageEvaluationAttribute sets PercentageEvaluationAttribute field to given value.
 
-### HasPercentageEvaluationAttribute
-
-`func (o *SettingFormulaModel) HasPercentageEvaluationAttribute() bool`
-
-HasPercentageEvaluationAttribute returns a boolean if a field has been set.
 
 ### SetPercentageEvaluationAttributeNil
 
@@ -238,11 +198,6 @@ and a boolean to check if the value has been set.
 
 SetLastUpdaterUserEmail sets LastUpdaterUserEmail field to given value.
 
-### HasLastUpdaterUserEmail
-
-`func (o *SettingFormulaModel) HasLastUpdaterUserEmail() bool`
-
-HasLastUpdaterUserEmail returns a boolean if a field has been set.
 
 ### SetLastUpdaterUserEmailNil
 
@@ -273,11 +228,6 @@ and a boolean to check if the value has been set.
 
 SetLastUpdaterUserFullName sets LastUpdaterUserFullName field to given value.
 
-### HasLastUpdaterUserFullName
-
-`func (o *SettingFormulaModel) HasLastUpdaterUserFullName() bool`
-
-HasLastUpdaterUserFullName returns a boolean if a field has been set.
 
 ### SetLastUpdaterUserFullNameNil
 
@@ -308,22 +258,7 @@ and a boolean to check if the value has been set.
 
 SetIntegrationLinks sets IntegrationLinks field to given value.
 
-### HasIntegrationLinks
 
-`func (o *SettingFormulaModel) HasIntegrationLinks() bool`
-
-HasIntegrationLinks returns a boolean if a field has been set.
-
-### SetIntegrationLinksNil
-
-`func (o *SettingFormulaModel) SetIntegrationLinksNil(b bool)`
-
- SetIntegrationLinksNil sets the value for IntegrationLinks to be an explicit nil
-
-### UnsetIntegrationLinks
-`func (o *SettingFormulaModel) UnsetIntegrationLinks()`
-
-UnsetIntegrationLinks ensures that no value is present for IntegrationLinks, not even an explicit nil
 ### GetSettingTags
 
 `func (o *SettingFormulaModel) GetSettingTags() []SettingTagModel`
@@ -343,22 +278,7 @@ and a boolean to check if the value has been set.
 
 SetSettingTags sets SettingTags field to given value.
 
-### HasSettingTags
 
-`func (o *SettingFormulaModel) HasSettingTags() bool`
-
-HasSettingTags returns a boolean if a field has been set.
-
-### SetSettingTagsNil
-
-`func (o *SettingFormulaModel) SetSettingTagsNil(b bool)`
-
- SetSettingTagsNil sets the value for SettingTags to be an explicit nil
-
-### UnsetSettingTags
-`func (o *SettingFormulaModel) UnsetSettingTags()`
-
-UnsetSettingTags ensures that no value is present for SettingTags, not even an explicit nil
 ### GetSettingIdsWherePrerequisite
 
 `func (o *SettingFormulaModel) GetSettingIdsWherePrerequisite() []int32`
@@ -378,22 +298,7 @@ and a boolean to check if the value has been set.
 
 SetSettingIdsWherePrerequisite sets SettingIdsWherePrerequisite field to given value.
 
-### HasSettingIdsWherePrerequisite
 
-`func (o *SettingFormulaModel) HasSettingIdsWherePrerequisite() bool`
-
-HasSettingIdsWherePrerequisite returns a boolean if a field has been set.
-
-### SetSettingIdsWherePrerequisiteNil
-
-`func (o *SettingFormulaModel) SetSettingIdsWherePrerequisiteNil(b bool)`
-
- SetSettingIdsWherePrerequisiteNil sets the value for SettingIdsWherePrerequisite to be an explicit nil
-
-### UnsetSettingIdsWherePrerequisite
-`func (o *SettingFormulaModel) UnsetSettingIdsWherePrerequisite()`
-
-UnsetSettingIdsWherePrerequisite ensures that no value is present for SettingIdsWherePrerequisite, not even an explicit nil
 ### GetConfig
 
 `func (o *SettingFormulaModel) GetConfig() ConfigModel`
@@ -413,11 +318,6 @@ and a boolean to check if the value has been set.
 
 SetConfig sets Config field to given value.
 
-### HasConfig
-
-`func (o *SettingFormulaModel) HasConfig() bool`
-
-HasConfig returns a boolean if a field has been set.
 
 ### GetEnvironment
 
@@ -438,11 +338,6 @@ and a boolean to check if the value has been set.
 
 SetEnvironment sets Environment field to given value.
 
-### HasEnvironment
-
-`func (o *SettingFormulaModel) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
 
 ### GetReadOnly
 
@@ -463,11 +358,6 @@ and a boolean to check if the value has been set.
 
 SetReadOnly sets ReadOnly field to given value.
 
-### HasReadOnly
-
-`func (o *SettingFormulaModel) HasReadOnly() bool`
-
-HasReadOnly returns a boolean if a field has been set.
 
 ### GetFeatureFlagLimitations
 
@@ -488,11 +378,6 @@ and a boolean to check if the value has been set.
 
 SetFeatureFlagLimitations sets FeatureFlagLimitations field to given value.
 
-### HasFeatureFlagLimitations
-
-`func (o *SettingFormulaModel) HasFeatureFlagLimitations() bool`
-
-HasFeatureFlagLimitations returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

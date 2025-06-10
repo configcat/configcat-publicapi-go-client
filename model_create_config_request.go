@@ -26,7 +26,7 @@ type CreateConfigRequest struct {
 	Name string `json:"name"`
 	// The description of the Config.
 	Description NullableString `json:"description,omitempty"`
-	// The order of the Config represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers.
+	// The order of the Config represented on the ConfigCat Dashboard. Determined from an ascending sequence of integers.
 	Order NullableInt32 `json:"order,omitempty"`
 	EvaluationVersion *EvaluationVersion `json:"evaluationVersion,omitempty"`
 }

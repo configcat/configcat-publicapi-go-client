@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HasRemainingIntegrationLink** | Pointer to **bool** |  | [optional] 
+**HasRemainingIntegrationLink** | **bool** |  | 
 
 ## Methods
 
 ### NewDeleteIntegrationLinkModel
 
-`func NewDeleteIntegrationLinkModel() *DeleteIntegrationLinkModel`
+`func NewDeleteIntegrationLinkModel(hasRemainingIntegrationLink bool, ) *DeleteIntegrationLinkModel`
 
 NewDeleteIntegrationLinkModel instantiates a new DeleteIntegrationLinkModel object
 This constructor will assign default values to properties that have it defined,
@@ -44,11 +44,6 @@ and a boolean to check if the value has been set.
 
 SetHasRemainingIntegrationLink sets HasRemainingIntegrationLink field to given value.
 
-### HasHasRemainingIntegrationLink
-
-`func (o *DeleteIntegrationLinkModel) HasHasRemainingIntegrationLink() bool`
-
-HasHasRemainingIntegrationLink returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

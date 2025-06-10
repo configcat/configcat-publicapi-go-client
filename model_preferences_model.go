@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the PreferencesModel type satisfies the MappedNullable interface at compile time
@@ -21,22 +23,29 @@ var _ MappedNullable = &PreferencesModel{}
 // PreferencesModel struct for PreferencesModel
 type PreferencesModel struct {
 	// Indicates that a mandatory note required for saving and publishing.
-	ReasonRequired *bool `json:"reasonRequired,omitempty"`
-	KeyGenerationMode *KeyGenerationMode `json:"keyGenerationMode,omitempty"`
+	ReasonRequired bool `json:"reasonRequired"`
+	KeyGenerationMode KeyGenerationMode `json:"keyGenerationMode"`
 	// Indicates whether a variation ID's must be shown on the ConfigCat Dashboard.
-	ShowVariationId *bool `json:"showVariationId,omitempty"`
+	ShowVariationId bool `json:"showVariationId"`
 	// List of Environments where mandatory note must be set before saving and publishing.
-	ReasonRequiredEnvironments []ReasonRequiredEnvironmentModel `json:"reasonRequiredEnvironments,omitempty"`
+	ReasonRequiredEnvironments []ReasonRequiredEnvironmentModel `json:"reasonRequiredEnvironments"`
 	// Indicates whether Feature flags and Settings must have a hint.
-	MandatorySettingHint *bool `json:"mandatorySettingHint,omitempty"`
+	MandatorySettingHint bool `json:"mandatorySettingHint"`
 }
+
+type _PreferencesModel PreferencesModel
 
 // NewPreferencesModel instantiates a new PreferencesModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPreferencesModel() *PreferencesModel {
+func NewPreferencesModel(reasonRequired bool, keyGenerationMode KeyGenerationMode, showVariationId bool, reasonRequiredEnvironments []ReasonRequiredEnvironmentModel, mandatorySettingHint bool) *PreferencesModel {
 	this := PreferencesModel{}
+	this.ReasonRequired = reasonRequired
+	this.KeyGenerationMode = keyGenerationMode
+	this.ShowVariationId = showVariationId
+	this.ReasonRequiredEnvironments = reasonRequiredEnvironments
+	this.MandatorySettingHint = mandatorySettingHint
 	return &this
 }
 
@@ -48,112 +57,90 @@ func NewPreferencesModelWithDefaults() *PreferencesModel {
 	return &this
 }
 
-// GetReasonRequired returns the ReasonRequired field value if set, zero value otherwise.
+// GetReasonRequired returns the ReasonRequired field value
 func (o *PreferencesModel) GetReasonRequired() bool {
-	if o == nil || IsNil(o.ReasonRequired) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.ReasonRequired
+
+	return o.ReasonRequired
 }
 
-// GetReasonRequiredOk returns a tuple with the ReasonRequired field value if set, nil otherwise
+// GetReasonRequiredOk returns a tuple with the ReasonRequired field value
 // and a boolean to check if the value has been set.
 func (o *PreferencesModel) GetReasonRequiredOk() (*bool, bool) {
-	if o == nil || IsNil(o.ReasonRequired) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReasonRequired, true
+	return &o.ReasonRequired, true
 }
 
-// HasReasonRequired returns a boolean if a field has been set.
-func (o *PreferencesModel) HasReasonRequired() bool {
-	if o != nil && !IsNil(o.ReasonRequired) {
-		return true
-	}
-
-	return false
-}
-
-// SetReasonRequired gets a reference to the given bool and assigns it to the ReasonRequired field.
+// SetReasonRequired sets field value
 func (o *PreferencesModel) SetReasonRequired(v bool) {
-	o.ReasonRequired = &v
+	o.ReasonRequired = v
 }
 
-// GetKeyGenerationMode returns the KeyGenerationMode field value if set, zero value otherwise.
+// GetKeyGenerationMode returns the KeyGenerationMode field value
 func (o *PreferencesModel) GetKeyGenerationMode() KeyGenerationMode {
-	if o == nil || IsNil(o.KeyGenerationMode) {
+	if o == nil {
 		var ret KeyGenerationMode
 		return ret
 	}
-	return *o.KeyGenerationMode
+
+	return o.KeyGenerationMode
 }
 
-// GetKeyGenerationModeOk returns a tuple with the KeyGenerationMode field value if set, nil otherwise
+// GetKeyGenerationModeOk returns a tuple with the KeyGenerationMode field value
 // and a boolean to check if the value has been set.
 func (o *PreferencesModel) GetKeyGenerationModeOk() (*KeyGenerationMode, bool) {
-	if o == nil || IsNil(o.KeyGenerationMode) {
+	if o == nil {
 		return nil, false
 	}
-	return o.KeyGenerationMode, true
+	return &o.KeyGenerationMode, true
 }
 
-// HasKeyGenerationMode returns a boolean if a field has been set.
-func (o *PreferencesModel) HasKeyGenerationMode() bool {
-	if o != nil && !IsNil(o.KeyGenerationMode) {
-		return true
-	}
-
-	return false
-}
-
-// SetKeyGenerationMode gets a reference to the given KeyGenerationMode and assigns it to the KeyGenerationMode field.
+// SetKeyGenerationMode sets field value
 func (o *PreferencesModel) SetKeyGenerationMode(v KeyGenerationMode) {
-	o.KeyGenerationMode = &v
+	o.KeyGenerationMode = v
 }
 
-// GetShowVariationId returns the ShowVariationId field value if set, zero value otherwise.
+// GetShowVariationId returns the ShowVariationId field value
 func (o *PreferencesModel) GetShowVariationId() bool {
-	if o == nil || IsNil(o.ShowVariationId) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.ShowVariationId
+
+	return o.ShowVariationId
 }
 
-// GetShowVariationIdOk returns a tuple with the ShowVariationId field value if set, nil otherwise
+// GetShowVariationIdOk returns a tuple with the ShowVariationId field value
 // and a boolean to check if the value has been set.
 func (o *PreferencesModel) GetShowVariationIdOk() (*bool, bool) {
-	if o == nil || IsNil(o.ShowVariationId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ShowVariationId, true
+	return &o.ShowVariationId, true
 }
 
-// HasShowVariationId returns a boolean if a field has been set.
-func (o *PreferencesModel) HasShowVariationId() bool {
-	if o != nil && !IsNil(o.ShowVariationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetShowVariationId gets a reference to the given bool and assigns it to the ShowVariationId field.
+// SetShowVariationId sets field value
 func (o *PreferencesModel) SetShowVariationId(v bool) {
-	o.ShowVariationId = &v
+	o.ShowVariationId = v
 }
 
-// GetReasonRequiredEnvironments returns the ReasonRequiredEnvironments field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetReasonRequiredEnvironments returns the ReasonRequiredEnvironments field value
+// If the value is explicit nil, the zero value for []ReasonRequiredEnvironmentModel will be returned
 func (o *PreferencesModel) GetReasonRequiredEnvironments() []ReasonRequiredEnvironmentModel {
 	if o == nil {
 		var ret []ReasonRequiredEnvironmentModel
 		return ret
 	}
+
 	return o.ReasonRequiredEnvironments
 }
 
-// GetReasonRequiredEnvironmentsOk returns a tuple with the ReasonRequiredEnvironments field value if set, nil otherwise
+// GetReasonRequiredEnvironmentsOk returns a tuple with the ReasonRequiredEnvironments field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PreferencesModel) GetReasonRequiredEnvironmentsOk() ([]ReasonRequiredEnvironmentModel, bool) {
@@ -163,50 +150,33 @@ func (o *PreferencesModel) GetReasonRequiredEnvironmentsOk() ([]ReasonRequiredEn
 	return o.ReasonRequiredEnvironments, true
 }
 
-// HasReasonRequiredEnvironments returns a boolean if a field has been set.
-func (o *PreferencesModel) HasReasonRequiredEnvironments() bool {
-	if o != nil && !IsNil(o.ReasonRequiredEnvironments) {
-		return true
-	}
-
-	return false
-}
-
-// SetReasonRequiredEnvironments gets a reference to the given []ReasonRequiredEnvironmentModel and assigns it to the ReasonRequiredEnvironments field.
+// SetReasonRequiredEnvironments sets field value
 func (o *PreferencesModel) SetReasonRequiredEnvironments(v []ReasonRequiredEnvironmentModel) {
 	o.ReasonRequiredEnvironments = v
 }
 
-// GetMandatorySettingHint returns the MandatorySettingHint field value if set, zero value otherwise.
+// GetMandatorySettingHint returns the MandatorySettingHint field value
 func (o *PreferencesModel) GetMandatorySettingHint() bool {
-	if o == nil || IsNil(o.MandatorySettingHint) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.MandatorySettingHint
+
+	return o.MandatorySettingHint
 }
 
-// GetMandatorySettingHintOk returns a tuple with the MandatorySettingHint field value if set, nil otherwise
+// GetMandatorySettingHintOk returns a tuple with the MandatorySettingHint field value
 // and a boolean to check if the value has been set.
 func (o *PreferencesModel) GetMandatorySettingHintOk() (*bool, bool) {
-	if o == nil || IsNil(o.MandatorySettingHint) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MandatorySettingHint, true
+	return &o.MandatorySettingHint, true
 }
 
-// HasMandatorySettingHint returns a boolean if a field has been set.
-func (o *PreferencesModel) HasMandatorySettingHint() bool {
-	if o != nil && !IsNil(o.MandatorySettingHint) {
-		return true
-	}
-
-	return false
-}
-
-// SetMandatorySettingHint gets a reference to the given bool and assigns it to the MandatorySettingHint field.
+// SetMandatorySettingHint sets field value
 func (o *PreferencesModel) SetMandatorySettingHint(v bool) {
-	o.MandatorySettingHint = &v
+	o.MandatorySettingHint = v
 }
 
 func (o PreferencesModel) MarshalJSON() ([]byte, error) {
@@ -219,22 +189,55 @@ func (o PreferencesModel) MarshalJSON() ([]byte, error) {
 
 func (o PreferencesModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ReasonRequired) {
-		toSerialize["reasonRequired"] = o.ReasonRequired
-	}
-	if !IsNil(o.KeyGenerationMode) {
-		toSerialize["keyGenerationMode"] = o.KeyGenerationMode
-	}
-	if !IsNil(o.ShowVariationId) {
-		toSerialize["showVariationId"] = o.ShowVariationId
-	}
+	toSerialize["reasonRequired"] = o.ReasonRequired
+	toSerialize["keyGenerationMode"] = o.KeyGenerationMode
+	toSerialize["showVariationId"] = o.ShowVariationId
 	if o.ReasonRequiredEnvironments != nil {
 		toSerialize["reasonRequiredEnvironments"] = o.ReasonRequiredEnvironments
 	}
-	if !IsNil(o.MandatorySettingHint) {
-		toSerialize["mandatorySettingHint"] = o.MandatorySettingHint
-	}
+	toSerialize["mandatorySettingHint"] = o.MandatorySettingHint
 	return toSerialize, nil
+}
+
+func (o *PreferencesModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"reasonRequired",
+		"keyGenerationMode",
+		"showVariationId",
+		"reasonRequiredEnvironments",
+		"mandatorySettingHint",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPreferencesModel := _PreferencesModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPreferencesModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PreferencesModel(varPreferencesModel)
+
+	return err
 }
 
 type NullablePreferencesModel struct {

@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-Testing OrganizationsApiService
+Testing OrganizationsAPIService
 
 */
 
@@ -14,19 +14,19 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
-func Test_configcatpublicapi_OrganizationsApiService(t *testing.T) {
+func Test_configcatpublicapi_OrganizationsAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test OrganizationsApiService GetOrganizations", func(t *testing.T) {
+	t.Run("Test OrganizationsAPIService GetOrganizations", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		resp, httpRes, err := apiClient.OrganizationsApi.GetOrganizations(context.Background()).Execute()
+		resp, httpRes, err := apiClient.OrganizationsAPI.GetOrganizations(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

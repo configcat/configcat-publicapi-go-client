@@ -4,25 +4,25 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Product** | Pointer to [**ProductModel**](ProductModel.md) |  | [optional] 
-**SegmentId** | Pointer to **string** | Identifier of the Segment. | [optional] 
-**Name** | Pointer to **NullableString** | Name of the Segment. | [optional] 
-**Description** | Pointer to **NullableString** | Description of the Segment. | [optional] 
-**CreatorEmail** | Pointer to **NullableString** | The email of the user who created the Segment. | [optional] 
-**CreatorFullName** | Pointer to **NullableString** | The name of the user who created the Segment. | [optional] 
-**CreatedAt** | Pointer to **time.Time** | The date and time when the Segment was created. | [optional] 
-**LastUpdaterEmail** | Pointer to **NullableString** | The email of the user who last updated the Segment. | [optional] 
-**LastUpdaterFullName** | Pointer to **NullableString** | The name of the user who last updated the Segment. | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | The date and time when the Segment was last updated. | [optional] 
-**ComparisonAttribute** | Pointer to **NullableString** | The user&#39;s attribute the evaluation process must take into account. | [optional] 
-**Comparator** | Pointer to [**RolloutRuleComparator**](RolloutRuleComparator.md) |  | [optional] 
-**ComparisonValue** | Pointer to **NullableString** | The value to compare with the given user attribute&#39;s value. | [optional] 
+**Product** | [**ProductModel**](ProductModel.md) |  | 
+**SegmentId** | **string** | Identifier of the Segment. | 
+**Name** | **string** | Name of the Segment. | 
+**Description** | **NullableString** | Description of the Segment. | 
+**CreatorEmail** | **NullableString** | The email of the user who created the Segment. | 
+**CreatorFullName** | **NullableString** | The name of the user who created the Segment. | 
+**CreatedAt** | **time.Time** | The date and time when the Segment was created. | 
+**LastUpdaterEmail** | **NullableString** | The email of the user who last updated the Segment. | 
+**LastUpdaterFullName** | **NullableString** | The name of the user who last updated the Segment. | 
+**UpdatedAt** | **time.Time** | The date and time when the Segment was last updated. | 
+**ComparisonAttribute** | **string** | The user&#39;s attribute the evaluation process must take into account. | 
+**Comparator** | [**RolloutRuleComparator**](RolloutRuleComparator.md) |  | 
+**ComparisonValue** | **string** | The value to compare with the given user attribute&#39;s value. | 
 
 ## Methods
 
 ### NewSegmentModel
 
-`func NewSegmentModel() *SegmentModel`
+`func NewSegmentModel(product ProductModel, segmentId string, name string, description NullableString, creatorEmail NullableString, creatorFullName NullableString, createdAt time.Time, lastUpdaterEmail NullableString, lastUpdaterFullName NullableString, updatedAt time.Time, comparisonAttribute string, comparator RolloutRuleComparator, comparisonValue string, ) *SegmentModel`
 
 NewSegmentModel instantiates a new SegmentModel object
 This constructor will assign default values to properties that have it defined,
@@ -56,11 +56,6 @@ and a boolean to check if the value has been set.
 
 SetProduct sets Product field to given value.
 
-### HasProduct
-
-`func (o *SegmentModel) HasProduct() bool`
-
-HasProduct returns a boolean if a field has been set.
 
 ### GetSegmentId
 
@@ -81,11 +76,6 @@ and a boolean to check if the value has been set.
 
 SetSegmentId sets SegmentId field to given value.
 
-### HasSegmentId
-
-`func (o *SegmentModel) HasSegmentId() bool`
-
-HasSegmentId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -106,22 +96,7 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
 
-`func (o *SegmentModel) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### SetNameNil
-
-`func (o *SegmentModel) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *SegmentModel) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetDescription
 
 `func (o *SegmentModel) GetDescription() string`
@@ -141,11 +116,6 @@ and a boolean to check if the value has been set.
 
 SetDescription sets Description field to given value.
 
-### HasDescription
-
-`func (o *SegmentModel) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
 
 ### SetDescriptionNil
 
@@ -176,11 +146,6 @@ and a boolean to check if the value has been set.
 
 SetCreatorEmail sets CreatorEmail field to given value.
 
-### HasCreatorEmail
-
-`func (o *SegmentModel) HasCreatorEmail() bool`
-
-HasCreatorEmail returns a boolean if a field has been set.
 
 ### SetCreatorEmailNil
 
@@ -211,11 +176,6 @@ and a boolean to check if the value has been set.
 
 SetCreatorFullName sets CreatorFullName field to given value.
 
-### HasCreatorFullName
-
-`func (o *SegmentModel) HasCreatorFullName() bool`
-
-HasCreatorFullName returns a boolean if a field has been set.
 
 ### SetCreatorFullNameNil
 
@@ -246,11 +206,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *SegmentModel) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetLastUpdaterEmail
 
@@ -271,11 +226,6 @@ and a boolean to check if the value has been set.
 
 SetLastUpdaterEmail sets LastUpdaterEmail field to given value.
 
-### HasLastUpdaterEmail
-
-`func (o *SegmentModel) HasLastUpdaterEmail() bool`
-
-HasLastUpdaterEmail returns a boolean if a field has been set.
 
 ### SetLastUpdaterEmailNil
 
@@ -306,11 +256,6 @@ and a boolean to check if the value has been set.
 
 SetLastUpdaterFullName sets LastUpdaterFullName field to given value.
 
-### HasLastUpdaterFullName
-
-`func (o *SegmentModel) HasLastUpdaterFullName() bool`
-
-HasLastUpdaterFullName returns a boolean if a field has been set.
 
 ### SetLastUpdaterFullNameNil
 
@@ -341,11 +286,6 @@ and a boolean to check if the value has been set.
 
 SetUpdatedAt sets UpdatedAt field to given value.
 
-### HasUpdatedAt
-
-`func (o *SegmentModel) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 ### GetComparisonAttribute
 
@@ -366,22 +306,7 @@ and a boolean to check if the value has been set.
 
 SetComparisonAttribute sets ComparisonAttribute field to given value.
 
-### HasComparisonAttribute
 
-`func (o *SegmentModel) HasComparisonAttribute() bool`
-
-HasComparisonAttribute returns a boolean if a field has been set.
-
-### SetComparisonAttributeNil
-
-`func (o *SegmentModel) SetComparisonAttributeNil(b bool)`
-
- SetComparisonAttributeNil sets the value for ComparisonAttribute to be an explicit nil
-
-### UnsetComparisonAttribute
-`func (o *SegmentModel) UnsetComparisonAttribute()`
-
-UnsetComparisonAttribute ensures that no value is present for ComparisonAttribute, not even an explicit nil
 ### GetComparator
 
 `func (o *SegmentModel) GetComparator() RolloutRuleComparator`
@@ -401,11 +326,6 @@ and a boolean to check if the value has been set.
 
 SetComparator sets Comparator field to given value.
 
-### HasComparator
-
-`func (o *SegmentModel) HasComparator() bool`
-
-HasComparator returns a boolean if a field has been set.
 
 ### GetComparisonValue
 
@@ -426,22 +346,7 @@ and a boolean to check if the value has been set.
 
 SetComparisonValue sets ComparisonValue field to given value.
 
-### HasComparisonValue
 
-`func (o *SegmentModel) HasComparisonValue() bool`
-
-HasComparisonValue returns a boolean if a field has been set.
-
-### SetComparisonValueNil
-
-`func (o *SegmentModel) SetComparisonValueNil(b bool)`
-
- SetComparisonValueNil sets the value for ComparisonValue to be an explicit nil
-
-### UnsetComparisonValue
-`func (o *SegmentModel) UnsetComparisonValue()`
-
-UnsetComparisonValue ensures that no value is present for ComparisonValue, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -14,6 +14,8 @@ package configcatpublicapi
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the CodeReferenceModel type satisfies the MappedNullable interface at compile time
@@ -22,29 +24,39 @@ var _ MappedNullable = &CodeReferenceModel{}
 // CodeReferenceModel struct for CodeReferenceModel
 type CodeReferenceModel struct {
 	// The source control branch on where the scan was performed. (Source of the branch selector on the ConfigCat Dashboard)
-	Branch NullableString `json:"branch,omitempty"`
+	Branch NullableString `json:"branch"`
 	// The actual references to the given Feature Flag or Setting.
-	References []ReferenceLines `json:"references,omitempty"`
+	References []ReferenceLinesModel `json:"references"`
 	// The related commit's URL.
-	CommitUrl NullableString `json:"commitUrl,omitempty"`
+	CommitUrl NullableString `json:"commitUrl"`
 	// The related commit's hash.
-	CommitHash NullableString `json:"commitHash,omitempty"`
+	CommitHash NullableString `json:"commitHash"`
 	// The date and time when the reference report was uploaded.
-	SyncedAt *time.Time `json:"syncedAt,omitempty"`
+	SyncedAt time.Time `json:"syncedAt"`
 	// The source control repository that contains the scanned code.
-	Repository NullableString `json:"repository,omitempty"`
+	Repository NullableString `json:"repository"`
 	// The identifier of the reference report.
-	CodeReferenceId *string `json:"codeReferenceId,omitempty"`
+	CodeReferenceId string `json:"codeReferenceId"`
 	// The code reference scanning tool's name.
-	Uploader NullableString `json:"uploader,omitempty"`
+	Uploader NullableString `json:"uploader"`
 }
+
+type _CodeReferenceModel CodeReferenceModel
 
 // NewCodeReferenceModel instantiates a new CodeReferenceModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCodeReferenceModel() *CodeReferenceModel {
+func NewCodeReferenceModel(branch NullableString, references []ReferenceLinesModel, commitUrl NullableString, commitHash NullableString, syncedAt time.Time, repository NullableString, codeReferenceId string, uploader NullableString) *CodeReferenceModel {
 	this := CodeReferenceModel{}
+	this.Branch = branch
+	this.References = references
+	this.CommitUrl = commitUrl
+	this.CommitHash = commitHash
+	this.SyncedAt = syncedAt
+	this.Repository = repository
+	this.CodeReferenceId = codeReferenceId
+	this.Uploader = uploader
 	return &this
 }
 
@@ -56,16 +68,18 @@ func NewCodeReferenceModelWithDefaults() *CodeReferenceModel {
 	return &this
 }
 
-// GetBranch returns the Branch field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetBranch returns the Branch field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *CodeReferenceModel) GetBranch() string {
-	if o == nil || IsNil(o.Branch.Get()) {
+	if o == nil || o.Branch.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Branch.Get()
 }
 
-// GetBranchOk returns a tuple with the Branch field value if set, nil otherwise
+// GetBranchOk returns a tuple with the Branch field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CodeReferenceModel) GetBranchOk() (*string, bool) {
@@ -75,72 +89,49 @@ func (o *CodeReferenceModel) GetBranchOk() (*string, bool) {
 	return o.Branch.Get(), o.Branch.IsSet()
 }
 
-// HasBranch returns a boolean if a field has been set.
-func (o *CodeReferenceModel) HasBranch() bool {
-	if o != nil && o.Branch.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetBranch gets a reference to the given NullableString and assigns it to the Branch field.
+// SetBranch sets field value
 func (o *CodeReferenceModel) SetBranch(v string) {
 	o.Branch.Set(&v)
 }
-// SetBranchNil sets the value for Branch to be an explicit nil
-func (o *CodeReferenceModel) SetBranchNil() {
-	o.Branch.Set(nil)
-}
 
-// UnsetBranch ensures that no value is present for Branch, not even an explicit nil
-func (o *CodeReferenceModel) UnsetBranch() {
-	o.Branch.Unset()
-}
-
-// GetReferences returns the References field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CodeReferenceModel) GetReferences() []ReferenceLines {
+// GetReferences returns the References field value
+// If the value is explicit nil, the zero value for []ReferenceLinesModel will be returned
+func (o *CodeReferenceModel) GetReferences() []ReferenceLinesModel {
 	if o == nil {
-		var ret []ReferenceLines
+		var ret []ReferenceLinesModel
 		return ret
 	}
+
 	return o.References
 }
 
-// GetReferencesOk returns a tuple with the References field value if set, nil otherwise
+// GetReferencesOk returns a tuple with the References field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CodeReferenceModel) GetReferencesOk() ([]ReferenceLines, bool) {
+func (o *CodeReferenceModel) GetReferencesOk() ([]ReferenceLinesModel, bool) {
 	if o == nil || IsNil(o.References) {
 		return nil, false
 	}
 	return o.References, true
 }
 
-// HasReferences returns a boolean if a field has been set.
-func (o *CodeReferenceModel) HasReferences() bool {
-	if o != nil && !IsNil(o.References) {
-		return true
-	}
-
-	return false
-}
-
-// SetReferences gets a reference to the given []ReferenceLines and assigns it to the References field.
-func (o *CodeReferenceModel) SetReferences(v []ReferenceLines) {
+// SetReferences sets field value
+func (o *CodeReferenceModel) SetReferences(v []ReferenceLinesModel) {
 	o.References = v
 }
 
-// GetCommitUrl returns the CommitUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetCommitUrl returns the CommitUrl field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *CodeReferenceModel) GetCommitUrl() string {
-	if o == nil || IsNil(o.CommitUrl.Get()) {
+	if o == nil || o.CommitUrl.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.CommitUrl.Get()
 }
 
-// GetCommitUrlOk returns a tuple with the CommitUrl field value if set, nil otherwise
+// GetCommitUrlOk returns a tuple with the CommitUrl field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CodeReferenceModel) GetCommitUrlOk() (*string, bool) {
@@ -150,39 +141,23 @@ func (o *CodeReferenceModel) GetCommitUrlOk() (*string, bool) {
 	return o.CommitUrl.Get(), o.CommitUrl.IsSet()
 }
 
-// HasCommitUrl returns a boolean if a field has been set.
-func (o *CodeReferenceModel) HasCommitUrl() bool {
-	if o != nil && o.CommitUrl.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCommitUrl gets a reference to the given NullableString and assigns it to the CommitUrl field.
+// SetCommitUrl sets field value
 func (o *CodeReferenceModel) SetCommitUrl(v string) {
 	o.CommitUrl.Set(&v)
 }
-// SetCommitUrlNil sets the value for CommitUrl to be an explicit nil
-func (o *CodeReferenceModel) SetCommitUrlNil() {
-	o.CommitUrl.Set(nil)
-}
 
-// UnsetCommitUrl ensures that no value is present for CommitUrl, not even an explicit nil
-func (o *CodeReferenceModel) UnsetCommitUrl() {
-	o.CommitUrl.Unset()
-}
-
-// GetCommitHash returns the CommitHash field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetCommitHash returns the CommitHash field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *CodeReferenceModel) GetCommitHash() string {
-	if o == nil || IsNil(o.CommitHash.Get()) {
+	if o == nil || o.CommitHash.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.CommitHash.Get()
 }
 
-// GetCommitHashOk returns a tuple with the CommitHash field value if set, nil otherwise
+// GetCommitHashOk returns a tuple with the CommitHash field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CodeReferenceModel) GetCommitHashOk() (*string, bool) {
@@ -192,71 +167,47 @@ func (o *CodeReferenceModel) GetCommitHashOk() (*string, bool) {
 	return o.CommitHash.Get(), o.CommitHash.IsSet()
 }
 
-// HasCommitHash returns a boolean if a field has been set.
-func (o *CodeReferenceModel) HasCommitHash() bool {
-	if o != nil && o.CommitHash.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCommitHash gets a reference to the given NullableString and assigns it to the CommitHash field.
+// SetCommitHash sets field value
 func (o *CodeReferenceModel) SetCommitHash(v string) {
 	o.CommitHash.Set(&v)
 }
-// SetCommitHashNil sets the value for CommitHash to be an explicit nil
-func (o *CodeReferenceModel) SetCommitHashNil() {
-	o.CommitHash.Set(nil)
-}
 
-// UnsetCommitHash ensures that no value is present for CommitHash, not even an explicit nil
-func (o *CodeReferenceModel) UnsetCommitHash() {
-	o.CommitHash.Unset()
-}
-
-// GetSyncedAt returns the SyncedAt field value if set, zero value otherwise.
+// GetSyncedAt returns the SyncedAt field value
 func (o *CodeReferenceModel) GetSyncedAt() time.Time {
-	if o == nil || IsNil(o.SyncedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.SyncedAt
+
+	return o.SyncedAt
 }
 
-// GetSyncedAtOk returns a tuple with the SyncedAt field value if set, nil otherwise
+// GetSyncedAtOk returns a tuple with the SyncedAt field value
 // and a boolean to check if the value has been set.
 func (o *CodeReferenceModel) GetSyncedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.SyncedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SyncedAt, true
+	return &o.SyncedAt, true
 }
 
-// HasSyncedAt returns a boolean if a field has been set.
-func (o *CodeReferenceModel) HasSyncedAt() bool {
-	if o != nil && !IsNil(o.SyncedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetSyncedAt gets a reference to the given time.Time and assigns it to the SyncedAt field.
+// SetSyncedAt sets field value
 func (o *CodeReferenceModel) SetSyncedAt(v time.Time) {
-	o.SyncedAt = &v
+	o.SyncedAt = v
 }
 
-// GetRepository returns the Repository field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetRepository returns the Repository field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *CodeReferenceModel) GetRepository() string {
-	if o == nil || IsNil(o.Repository.Get()) {
+	if o == nil || o.Repository.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Repository.Get()
 }
 
-// GetRepositoryOk returns a tuple with the Repository field value if set, nil otherwise
+// GetRepositoryOk returns a tuple with the Repository field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CodeReferenceModel) GetRepositoryOk() (*string, bool) {
@@ -266,71 +217,47 @@ func (o *CodeReferenceModel) GetRepositoryOk() (*string, bool) {
 	return o.Repository.Get(), o.Repository.IsSet()
 }
 
-// HasRepository returns a boolean if a field has been set.
-func (o *CodeReferenceModel) HasRepository() bool {
-	if o != nil && o.Repository.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetRepository gets a reference to the given NullableString and assigns it to the Repository field.
+// SetRepository sets field value
 func (o *CodeReferenceModel) SetRepository(v string) {
 	o.Repository.Set(&v)
 }
-// SetRepositoryNil sets the value for Repository to be an explicit nil
-func (o *CodeReferenceModel) SetRepositoryNil() {
-	o.Repository.Set(nil)
-}
 
-// UnsetRepository ensures that no value is present for Repository, not even an explicit nil
-func (o *CodeReferenceModel) UnsetRepository() {
-	o.Repository.Unset()
-}
-
-// GetCodeReferenceId returns the CodeReferenceId field value if set, zero value otherwise.
+// GetCodeReferenceId returns the CodeReferenceId field value
 func (o *CodeReferenceModel) GetCodeReferenceId() string {
-	if o == nil || IsNil(o.CodeReferenceId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.CodeReferenceId
+
+	return o.CodeReferenceId
 }
 
-// GetCodeReferenceIdOk returns a tuple with the CodeReferenceId field value if set, nil otherwise
+// GetCodeReferenceIdOk returns a tuple with the CodeReferenceId field value
 // and a boolean to check if the value has been set.
 func (o *CodeReferenceModel) GetCodeReferenceIdOk() (*string, bool) {
-	if o == nil || IsNil(o.CodeReferenceId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CodeReferenceId, true
+	return &o.CodeReferenceId, true
 }
 
-// HasCodeReferenceId returns a boolean if a field has been set.
-func (o *CodeReferenceModel) HasCodeReferenceId() bool {
-	if o != nil && !IsNil(o.CodeReferenceId) {
-		return true
-	}
-
-	return false
-}
-
-// SetCodeReferenceId gets a reference to the given string and assigns it to the CodeReferenceId field.
+// SetCodeReferenceId sets field value
 func (o *CodeReferenceModel) SetCodeReferenceId(v string) {
-	o.CodeReferenceId = &v
+	o.CodeReferenceId = v
 }
 
-// GetUploader returns the Uploader field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetUploader returns the Uploader field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *CodeReferenceModel) GetUploader() string {
-	if o == nil || IsNil(o.Uploader.Get()) {
+	if o == nil || o.Uploader.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Uploader.Get()
 }
 
-// GetUploaderOk returns a tuple with the Uploader field value if set, nil otherwise
+// GetUploaderOk returns a tuple with the Uploader field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CodeReferenceModel) GetUploaderOk() (*string, bool) {
@@ -340,27 +267,9 @@ func (o *CodeReferenceModel) GetUploaderOk() (*string, bool) {
 	return o.Uploader.Get(), o.Uploader.IsSet()
 }
 
-// HasUploader returns a boolean if a field has been set.
-func (o *CodeReferenceModel) HasUploader() bool {
-	if o != nil && o.Uploader.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetUploader gets a reference to the given NullableString and assigns it to the Uploader field.
+// SetUploader sets field value
 func (o *CodeReferenceModel) SetUploader(v string) {
 	o.Uploader.Set(&v)
-}
-// SetUploaderNil sets the value for Uploader to be an explicit nil
-func (o *CodeReferenceModel) SetUploaderNil() {
-	o.Uploader.Set(nil)
-}
-
-// UnsetUploader ensures that no value is present for Uploader, not even an explicit nil
-func (o *CodeReferenceModel) UnsetUploader() {
-	o.Uploader.Unset()
 }
 
 func (o CodeReferenceModel) MarshalJSON() ([]byte, error) {
@@ -373,31 +282,61 @@ func (o CodeReferenceModel) MarshalJSON() ([]byte, error) {
 
 func (o CodeReferenceModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Branch.IsSet() {
-		toSerialize["branch"] = o.Branch.Get()
-	}
+	toSerialize["branch"] = o.Branch.Get()
 	if o.References != nil {
 		toSerialize["references"] = o.References
 	}
-	if o.CommitUrl.IsSet() {
-		toSerialize["commitUrl"] = o.CommitUrl.Get()
-	}
-	if o.CommitHash.IsSet() {
-		toSerialize["commitHash"] = o.CommitHash.Get()
-	}
-	if !IsNil(o.SyncedAt) {
-		toSerialize["syncedAt"] = o.SyncedAt
-	}
-	if o.Repository.IsSet() {
-		toSerialize["repository"] = o.Repository.Get()
-	}
-	if !IsNil(o.CodeReferenceId) {
-		toSerialize["codeReferenceId"] = o.CodeReferenceId
-	}
-	if o.Uploader.IsSet() {
-		toSerialize["uploader"] = o.Uploader.Get()
-	}
+	toSerialize["commitUrl"] = o.CommitUrl.Get()
+	toSerialize["commitHash"] = o.CommitHash.Get()
+	toSerialize["syncedAt"] = o.SyncedAt
+	toSerialize["repository"] = o.Repository.Get()
+	toSerialize["codeReferenceId"] = o.CodeReferenceId
+	toSerialize["uploader"] = o.Uploader.Get()
 	return toSerialize, nil
+}
+
+func (o *CodeReferenceModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"branch",
+		"references",
+		"commitUrl",
+		"commitHash",
+		"syncedAt",
+		"repository",
+		"codeReferenceId",
+		"uploader",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCodeReferenceModel := _CodeReferenceModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCodeReferenceModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CodeReferenceModel(varCodeReferenceModel)
+
+	return err
 }
 
 type NullableCodeReferenceModel struct {

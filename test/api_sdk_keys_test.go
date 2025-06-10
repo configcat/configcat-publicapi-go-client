@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-Testing SDKKeysApiService
+Testing SDKKeysAPIService
 
 */
 
@@ -14,22 +14,22 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
-func Test_configcatpublicapi_SDKKeysApiService(t *testing.T) {
+func Test_configcatpublicapi_SDKKeysAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test SDKKeysApiService GetSdkKeys", func(t *testing.T) {
+	t.Run("Test SDKKeysAPIService GetSdkKeys", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var configId string
 		var environmentId string
 
-		resp, httpRes, err := apiClient.SDKKeysApi.GetSdkKeys(context.Background(), configId, environmentId).Execute()
+		resp, httpRes, err := apiClient.SDKKeysAPI.GetSdkKeys(context.Background(), configId, environmentId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

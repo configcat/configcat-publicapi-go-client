@@ -14,6 +14,8 @@ package configcatpublicapi
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the InvitationModel type satisfies the MappedNullable interface at compile time
@@ -22,23 +24,30 @@ var _ MappedNullable = &InvitationModel{}
 // InvitationModel struct for InvitationModel
 type InvitationModel struct {
 	// The identifier of the Invitation.
-	InvitationId *string `json:"invitationId,omitempty"`
+	InvitationId string `json:"invitationId"`
 	// The invited user's email address.
-	Email NullableString `json:"email,omitempty"`
+	Email NullableString `json:"email"`
 	// The identifier of the Permission Group the user was invited to.
-	PermissionGroupId *int64 `json:"permissionGroupId,omitempty"`
+	PermissionGroupId int64 `json:"permissionGroupId"`
 	// Creation time of the Invitation.
-	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	CreatedAt time.Time `json:"createdAt"`
 	// Determines whether the Invitation is expired.
-	Expired *bool `json:"expired,omitempty"`
+	Expired bool `json:"expired"`
 }
+
+type _InvitationModel InvitationModel
 
 // NewInvitationModel instantiates a new InvitationModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInvitationModel() *InvitationModel {
+func NewInvitationModel(invitationId string, email NullableString, permissionGroupId int64, createdAt time.Time, expired bool) *InvitationModel {
 	this := InvitationModel{}
+	this.InvitationId = invitationId
+	this.Email = email
+	this.PermissionGroupId = permissionGroupId
+	this.CreatedAt = createdAt
+	this.Expired = expired
 	return &this
 }
 
@@ -50,48 +59,42 @@ func NewInvitationModelWithDefaults() *InvitationModel {
 	return &this
 }
 
-// GetInvitationId returns the InvitationId field value if set, zero value otherwise.
+// GetInvitationId returns the InvitationId field value
 func (o *InvitationModel) GetInvitationId() string {
-	if o == nil || IsNil(o.InvitationId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.InvitationId
+
+	return o.InvitationId
 }
 
-// GetInvitationIdOk returns a tuple with the InvitationId field value if set, nil otherwise
+// GetInvitationIdOk returns a tuple with the InvitationId field value
 // and a boolean to check if the value has been set.
 func (o *InvitationModel) GetInvitationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.InvitationId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.InvitationId, true
+	return &o.InvitationId, true
 }
 
-// HasInvitationId returns a boolean if a field has been set.
-func (o *InvitationModel) HasInvitationId() bool {
-	if o != nil && !IsNil(o.InvitationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetInvitationId gets a reference to the given string and assigns it to the InvitationId field.
+// SetInvitationId sets field value
 func (o *InvitationModel) SetInvitationId(v string) {
-	o.InvitationId = &v
+	o.InvitationId = v
 }
 
-// GetEmail returns the Email field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetEmail returns the Email field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *InvitationModel) GetEmail() string {
-	if o == nil || IsNil(o.Email.Get()) {
+	if o == nil || o.Email.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Email.Get()
 }
 
-// GetEmailOk returns a tuple with the Email field value if set, nil otherwise
+// GetEmailOk returns a tuple with the Email field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InvitationModel) GetEmailOk() (*string, bool) {
@@ -101,123 +104,81 @@ func (o *InvitationModel) GetEmailOk() (*string, bool) {
 	return o.Email.Get(), o.Email.IsSet()
 }
 
-// HasEmail returns a boolean if a field has been set.
-func (o *InvitationModel) HasEmail() bool {
-	if o != nil && o.Email.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetEmail gets a reference to the given NullableString and assigns it to the Email field.
+// SetEmail sets field value
 func (o *InvitationModel) SetEmail(v string) {
 	o.Email.Set(&v)
 }
-// SetEmailNil sets the value for Email to be an explicit nil
-func (o *InvitationModel) SetEmailNil() {
-	o.Email.Set(nil)
-}
 
-// UnsetEmail ensures that no value is present for Email, not even an explicit nil
-func (o *InvitationModel) UnsetEmail() {
-	o.Email.Unset()
-}
-
-// GetPermissionGroupId returns the PermissionGroupId field value if set, zero value otherwise.
+// GetPermissionGroupId returns the PermissionGroupId field value
 func (o *InvitationModel) GetPermissionGroupId() int64 {
-	if o == nil || IsNil(o.PermissionGroupId) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.PermissionGroupId
+
+	return o.PermissionGroupId
 }
 
-// GetPermissionGroupIdOk returns a tuple with the PermissionGroupId field value if set, nil otherwise
+// GetPermissionGroupIdOk returns a tuple with the PermissionGroupId field value
 // and a boolean to check if the value has been set.
 func (o *InvitationModel) GetPermissionGroupIdOk() (*int64, bool) {
-	if o == nil || IsNil(o.PermissionGroupId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PermissionGroupId, true
+	return &o.PermissionGroupId, true
 }
 
-// HasPermissionGroupId returns a boolean if a field has been set.
-func (o *InvitationModel) HasPermissionGroupId() bool {
-	if o != nil && !IsNil(o.PermissionGroupId) {
-		return true
-	}
-
-	return false
-}
-
-// SetPermissionGroupId gets a reference to the given int64 and assigns it to the PermissionGroupId field.
+// SetPermissionGroupId sets field value
 func (o *InvitationModel) SetPermissionGroupId(v int64) {
-	o.PermissionGroupId = &v
+	o.PermissionGroupId = v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value
 func (o *InvitationModel) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *InvitationModel) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *InvitationModel) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *InvitationModel) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
-// GetExpired returns the Expired field value if set, zero value otherwise.
+// GetExpired returns the Expired field value
 func (o *InvitationModel) GetExpired() bool {
-	if o == nil || IsNil(o.Expired) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Expired
+
+	return o.Expired
 }
 
-// GetExpiredOk returns a tuple with the Expired field value if set, nil otherwise
+// GetExpiredOk returns a tuple with the Expired field value
 // and a boolean to check if the value has been set.
 func (o *InvitationModel) GetExpiredOk() (*bool, bool) {
-	if o == nil || IsNil(o.Expired) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Expired, true
+	return &o.Expired, true
 }
 
-// HasExpired returns a boolean if a field has been set.
-func (o *InvitationModel) HasExpired() bool {
-	if o != nil && !IsNil(o.Expired) {
-		return true
-	}
-
-	return false
-}
-
-// SetExpired gets a reference to the given bool and assigns it to the Expired field.
+// SetExpired sets field value
 func (o *InvitationModel) SetExpired(v bool) {
-	o.Expired = &v
+	o.Expired = v
 }
 
 func (o InvitationModel) MarshalJSON() ([]byte, error) {
@@ -230,22 +191,53 @@ func (o InvitationModel) MarshalJSON() ([]byte, error) {
 
 func (o InvitationModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.InvitationId) {
-		toSerialize["invitationId"] = o.InvitationId
-	}
-	if o.Email.IsSet() {
-		toSerialize["email"] = o.Email.Get()
-	}
-	if !IsNil(o.PermissionGroupId) {
-		toSerialize["permissionGroupId"] = o.PermissionGroupId
-	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["createdAt"] = o.CreatedAt
-	}
-	if !IsNil(o.Expired) {
-		toSerialize["expired"] = o.Expired
-	}
+	toSerialize["invitationId"] = o.InvitationId
+	toSerialize["email"] = o.Email.Get()
+	toSerialize["permissionGroupId"] = o.PermissionGroupId
+	toSerialize["createdAt"] = o.CreatedAt
+	toSerialize["expired"] = o.Expired
 	return toSerialize, nil
+}
+
+func (o *InvitationModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"invitationId",
+		"email",
+		"permissionGroupId",
+		"createdAt",
+		"expired",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varInvitationModel := _InvitationModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varInvitationModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InvitationModel(varInvitationModel)
+
+	return err
 }
 
 type NullableInvitationModel struct {

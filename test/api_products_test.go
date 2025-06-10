@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-Testing ProductsApiService
+Testing ProductsAPIService
 
 */
 
@@ -14,21 +14,21 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
-func Test_configcatpublicapi_ProductsApiService(t *testing.T) {
+func Test_configcatpublicapi_ProductsAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test ProductsApiService CreateProduct", func(t *testing.T) {
+	t.Run("Test ProductsAPIService CreateProduct", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organizationId string
 
-		resp, httpRes, err := apiClient.ProductsApi.CreateProduct(context.Background(), organizationId).Execute()
+		resp, httpRes, err := apiClient.ProductsAPI.CreateProduct(context.Background(), organizationId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,38 +36,26 @@ func Test_configcatpublicapi_ProductsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test ProductsApiService DeleteProduct", func(t *testing.T) {
+	t.Run("Test ProductsAPIService DeleteProduct", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var productId string
 
-		httpRes, err := apiClient.ProductsApi.DeleteProduct(context.Background(), productId).Execute()
+		httpRes, err := apiClient.ProductsAPI.DeleteProduct(context.Background(), productId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test ProductsApiService GetProduct", func(t *testing.T) {
+	t.Run("Test ProductsAPIService GetProduct", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var productId string
 
-		resp, httpRes, err := apiClient.ProductsApi.GetProduct(context.Background(), productId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test ProductsApiService GetProducts", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		resp, httpRes, err := apiClient.ProductsApi.GetProducts(context.Background()).Execute()
+		resp, httpRes, err := apiClient.ProductsAPI.GetProduct(context.Background(), productId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -75,13 +63,53 @@ func Test_configcatpublicapi_ProductsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test ProductsApiService UpdateProduct", func(t *testing.T) {
+	t.Run("Test ProductsAPIService GetProductPreferences", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var productId string
 
-		resp, httpRes, err := apiClient.ProductsApi.UpdateProduct(context.Background(), productId).Execute()
+		resp, httpRes, err := apiClient.ProductsAPI.GetProductPreferences(context.Background(), productId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ProductsAPIService GetProducts", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		resp, httpRes, err := apiClient.ProductsAPI.GetProducts(context.Background()).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ProductsAPIService UpdateProduct", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var productId string
+
+		resp, httpRes, err := apiClient.ProductsAPI.UpdateProduct(context.Background(), productId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test ProductsAPIService UpdateProductPreferences", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var productId string
+
+		resp, httpRes, err := apiClient.ProductsAPI.UpdateProductPreferences(context.Background(), productId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

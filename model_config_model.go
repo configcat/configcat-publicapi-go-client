@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ConfigModel type satisfies the MappedNullable interface at compile time
@@ -20,25 +22,34 @@ var _ MappedNullable = &ConfigModel{}
 
 // ConfigModel Details of the Config.
 type ConfigModel struct {
-	Product *ProductModel `json:"product,omitempty"`
+	Product ProductModel `json:"product"`
 	// Identifier of the Config.
-	ConfigId *string `json:"configId,omitempty"`
+	ConfigId string `json:"configId"`
 	// Name of the Config.
-	Name NullableString `json:"name,omitempty"`
+	Name string `json:"name"`
 	// Description of the Config.
-	Description NullableString `json:"description,omitempty"`
+	Description NullableString `json:"description"`
 	// The order of the Config represented on the ConfigCat Dashboard.
-	Order *int32 `json:"order,omitempty"`
-	MigratedConfigId NullableString `json:"migratedConfigId,omitempty"`
-	EvaluationVersion *EvaluationVersion `json:"evaluationVersion,omitempty"`
+	Order int32 `json:"order"`
+	MigratedConfigId NullableString `json:"migratedConfigId"`
+	EvaluationVersion EvaluationVersion `json:"evaluationVersion"`
 }
+
+type _ConfigModel ConfigModel
 
 // NewConfigModel instantiates a new ConfigModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfigModel() *ConfigModel {
+func NewConfigModel(product ProductModel, configId string, name string, description NullableString, order int32, migratedConfigId NullableString, evaluationVersion EvaluationVersion) *ConfigModel {
 	this := ConfigModel{}
+	this.Product = product
+	this.ConfigId = configId
+	this.Name = name
+	this.Description = description
+	this.Order = order
+	this.MigratedConfigId = migratedConfigId
+	this.EvaluationVersion = evaluationVersion
 	return &this
 }
 
@@ -50,122 +61,90 @@ func NewConfigModelWithDefaults() *ConfigModel {
 	return &this
 }
 
-// GetProduct returns the Product field value if set, zero value otherwise.
+// GetProduct returns the Product field value
 func (o *ConfigModel) GetProduct() ProductModel {
-	if o == nil || IsNil(o.Product) {
+	if o == nil {
 		var ret ProductModel
 		return ret
 	}
-	return *o.Product
+
+	return o.Product
 }
 
-// GetProductOk returns a tuple with the Product field value if set, nil otherwise
+// GetProductOk returns a tuple with the Product field value
 // and a boolean to check if the value has been set.
 func (o *ConfigModel) GetProductOk() (*ProductModel, bool) {
-	if o == nil || IsNil(o.Product) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Product, true
+	return &o.Product, true
 }
 
-// HasProduct returns a boolean if a field has been set.
-func (o *ConfigModel) HasProduct() bool {
-	if o != nil && !IsNil(o.Product) {
-		return true
-	}
-
-	return false
-}
-
-// SetProduct gets a reference to the given ProductModel and assigns it to the Product field.
+// SetProduct sets field value
 func (o *ConfigModel) SetProduct(v ProductModel) {
-	o.Product = &v
+	o.Product = v
 }
 
-// GetConfigId returns the ConfigId field value if set, zero value otherwise.
+// GetConfigId returns the ConfigId field value
 func (o *ConfigModel) GetConfigId() string {
-	if o == nil || IsNil(o.ConfigId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ConfigId
+
+	return o.ConfigId
 }
 
-// GetConfigIdOk returns a tuple with the ConfigId field value if set, nil otherwise
+// GetConfigIdOk returns a tuple with the ConfigId field value
 // and a boolean to check if the value has been set.
 func (o *ConfigModel) GetConfigIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ConfigId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ConfigId, true
+	return &o.ConfigId, true
 }
 
-// HasConfigId returns a boolean if a field has been set.
-func (o *ConfigModel) HasConfigId() bool {
-	if o != nil && !IsNil(o.ConfigId) {
-		return true
-	}
-
-	return false
-}
-
-// SetConfigId gets a reference to the given string and assigns it to the ConfigId field.
+// SetConfigId sets field value
 func (o *ConfigModel) SetConfigId(v string) {
-	o.ConfigId = &v
+	o.ConfigId = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetName returns the Name field value
 func (o *ConfigModel) GetName() string {
-	if o == nil || IsNil(o.Name.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name.Get()
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConfigModel) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *ConfigModel) HasName() bool {
-	if o != nil && o.Name.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given NullableString and assigns it to the Name field.
+// SetName sets field value
 func (o *ConfigModel) SetName(v string) {
-	o.Name.Set(&v)
-}
-// SetNameNil sets the value for Name to be an explicit nil
-func (o *ConfigModel) SetNameNil() {
-	o.Name.Set(nil)
+	o.Name = v
 }
 
-// UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *ConfigModel) UnsetName() {
-	o.Name.Unset()
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDescription returns the Description field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ConfigModel) GetDescription() string {
-	if o == nil || IsNil(o.Description.Get()) {
+	if o == nil || o.Description.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Description.Get()
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConfigModel) GetDescriptionOk() (*string, bool) {
@@ -175,71 +154,47 @@ func (o *ConfigModel) GetDescriptionOk() (*string, bool) {
 	return o.Description.Get(), o.Description.IsSet()
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *ConfigModel) HasDescription() bool {
-	if o != nil && o.Description.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
+// SetDescription sets field value
 func (o *ConfigModel) SetDescription(v string) {
 	o.Description.Set(&v)
 }
-// SetDescriptionNil sets the value for Description to be an explicit nil
-func (o *ConfigModel) SetDescriptionNil() {
-	o.Description.Set(nil)
-}
 
-// UnsetDescription ensures that no value is present for Description, not even an explicit nil
-func (o *ConfigModel) UnsetDescription() {
-	o.Description.Unset()
-}
-
-// GetOrder returns the Order field value if set, zero value otherwise.
+// GetOrder returns the Order field value
 func (o *ConfigModel) GetOrder() int32 {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Order
+
+	return o.Order
 }
 
-// GetOrderOk returns a tuple with the Order field value if set, nil otherwise
+// GetOrderOk returns a tuple with the Order field value
 // and a boolean to check if the value has been set.
 func (o *ConfigModel) GetOrderOk() (*int32, bool) {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Order, true
+	return &o.Order, true
 }
 
-// HasOrder returns a boolean if a field has been set.
-func (o *ConfigModel) HasOrder() bool {
-	if o != nil && !IsNil(o.Order) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrder gets a reference to the given int32 and assigns it to the Order field.
+// SetOrder sets field value
 func (o *ConfigModel) SetOrder(v int32) {
-	o.Order = &v
+	o.Order = v
 }
 
-// GetMigratedConfigId returns the MigratedConfigId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetMigratedConfigId returns the MigratedConfigId field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ConfigModel) GetMigratedConfigId() string {
-	if o == nil || IsNil(o.MigratedConfigId.Get()) {
+	if o == nil || o.MigratedConfigId.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.MigratedConfigId.Get()
 }
 
-// GetMigratedConfigIdOk returns a tuple with the MigratedConfigId field value if set, nil otherwise
+// GetMigratedConfigIdOk returns a tuple with the MigratedConfigId field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConfigModel) GetMigratedConfigIdOk() (*string, bool) {
@@ -249,59 +204,33 @@ func (o *ConfigModel) GetMigratedConfigIdOk() (*string, bool) {
 	return o.MigratedConfigId.Get(), o.MigratedConfigId.IsSet()
 }
 
-// HasMigratedConfigId returns a boolean if a field has been set.
-func (o *ConfigModel) HasMigratedConfigId() bool {
-	if o != nil && o.MigratedConfigId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetMigratedConfigId gets a reference to the given NullableString and assigns it to the MigratedConfigId field.
+// SetMigratedConfigId sets field value
 func (o *ConfigModel) SetMigratedConfigId(v string) {
 	o.MigratedConfigId.Set(&v)
 }
-// SetMigratedConfigIdNil sets the value for MigratedConfigId to be an explicit nil
-func (o *ConfigModel) SetMigratedConfigIdNil() {
-	o.MigratedConfigId.Set(nil)
-}
 
-// UnsetMigratedConfigId ensures that no value is present for MigratedConfigId, not even an explicit nil
-func (o *ConfigModel) UnsetMigratedConfigId() {
-	o.MigratedConfigId.Unset()
-}
-
-// GetEvaluationVersion returns the EvaluationVersion field value if set, zero value otherwise.
+// GetEvaluationVersion returns the EvaluationVersion field value
 func (o *ConfigModel) GetEvaluationVersion() EvaluationVersion {
-	if o == nil || IsNil(o.EvaluationVersion) {
+	if o == nil {
 		var ret EvaluationVersion
 		return ret
 	}
-	return *o.EvaluationVersion
+
+	return o.EvaluationVersion
 }
 
-// GetEvaluationVersionOk returns a tuple with the EvaluationVersion field value if set, nil otherwise
+// GetEvaluationVersionOk returns a tuple with the EvaluationVersion field value
 // and a boolean to check if the value has been set.
 func (o *ConfigModel) GetEvaluationVersionOk() (*EvaluationVersion, bool) {
-	if o == nil || IsNil(o.EvaluationVersion) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EvaluationVersion, true
+	return &o.EvaluationVersion, true
 }
 
-// HasEvaluationVersion returns a boolean if a field has been set.
-func (o *ConfigModel) HasEvaluationVersion() bool {
-	if o != nil && !IsNil(o.EvaluationVersion) {
-		return true
-	}
-
-	return false
-}
-
-// SetEvaluationVersion gets a reference to the given EvaluationVersion and assigns it to the EvaluationVersion field.
+// SetEvaluationVersion sets field value
 func (o *ConfigModel) SetEvaluationVersion(v EvaluationVersion) {
-	o.EvaluationVersion = &v
+	o.EvaluationVersion = v
 }
 
 func (o ConfigModel) MarshalJSON() ([]byte, error) {
@@ -314,28 +243,57 @@ func (o ConfigModel) MarshalJSON() ([]byte, error) {
 
 func (o ConfigModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Product) {
-		toSerialize["product"] = o.Product
-	}
-	if !IsNil(o.ConfigId) {
-		toSerialize["configId"] = o.ConfigId
-	}
-	if o.Name.IsSet() {
-		toSerialize["name"] = o.Name.Get()
-	}
-	if o.Description.IsSet() {
-		toSerialize["description"] = o.Description.Get()
-	}
-	if !IsNil(o.Order) {
-		toSerialize["order"] = o.Order
-	}
-	if o.MigratedConfigId.IsSet() {
-		toSerialize["migratedConfigId"] = o.MigratedConfigId.Get()
-	}
-	if !IsNil(o.EvaluationVersion) {
-		toSerialize["evaluationVersion"] = o.EvaluationVersion
-	}
+	toSerialize["product"] = o.Product
+	toSerialize["configId"] = o.ConfigId
+	toSerialize["name"] = o.Name
+	toSerialize["description"] = o.Description.Get()
+	toSerialize["order"] = o.Order
+	toSerialize["migratedConfigId"] = o.MigratedConfigId.Get()
+	toSerialize["evaluationVersion"] = o.EvaluationVersion
 	return toSerialize, nil
+}
+
+func (o *ConfigModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"product",
+		"configId",
+		"name",
+		"description",
+		"order",
+		"migratedConfigId",
+		"evaluationVersion",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varConfigModel := _ConfigModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varConfigModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfigModel(varConfigModel)
+
+	return err
 }
 
 type NullableConfigModel struct {

@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the TagModel type satisfies the MappedNullable interface at compile time
@@ -20,21 +22,27 @@ var _ MappedNullable = &TagModel{}
 
 // TagModel struct for TagModel
 type TagModel struct {
-	Product *ProductModel `json:"product,omitempty"`
+	Product ProductModel `json:"product"`
 	// Identifier of the Tag.
-	TagId *int64 `json:"tagId,omitempty"`
+	TagId int64 `json:"tagId"`
 	// Name of the Tag.
-	Name NullableString `json:"name,omitempty"`
+	Name string `json:"name"`
 	// The configured color of the Tag.
-	Color NullableString `json:"color,omitempty"`
+	Color NullableString `json:"color"`
 }
+
+type _TagModel TagModel
 
 // NewTagModel instantiates a new TagModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTagModel() *TagModel {
+func NewTagModel(product ProductModel, tagId int64, name string, color NullableString) *TagModel {
 	this := TagModel{}
+	this.Product = product
+	this.TagId = tagId
+	this.Name = name
+	this.Color = color
 	return &this
 }
 
@@ -46,122 +54,90 @@ func NewTagModelWithDefaults() *TagModel {
 	return &this
 }
 
-// GetProduct returns the Product field value if set, zero value otherwise.
+// GetProduct returns the Product field value
 func (o *TagModel) GetProduct() ProductModel {
-	if o == nil || IsNil(o.Product) {
+	if o == nil {
 		var ret ProductModel
 		return ret
 	}
-	return *o.Product
+
+	return o.Product
 }
 
-// GetProductOk returns a tuple with the Product field value if set, nil otherwise
+// GetProductOk returns a tuple with the Product field value
 // and a boolean to check if the value has been set.
 func (o *TagModel) GetProductOk() (*ProductModel, bool) {
-	if o == nil || IsNil(o.Product) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Product, true
+	return &o.Product, true
 }
 
-// HasProduct returns a boolean if a field has been set.
-func (o *TagModel) HasProduct() bool {
-	if o != nil && !IsNil(o.Product) {
-		return true
-	}
-
-	return false
-}
-
-// SetProduct gets a reference to the given ProductModel and assigns it to the Product field.
+// SetProduct sets field value
 func (o *TagModel) SetProduct(v ProductModel) {
-	o.Product = &v
+	o.Product = v
 }
 
-// GetTagId returns the TagId field value if set, zero value otherwise.
+// GetTagId returns the TagId field value
 func (o *TagModel) GetTagId() int64 {
-	if o == nil || IsNil(o.TagId) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.TagId
+
+	return o.TagId
 }
 
-// GetTagIdOk returns a tuple with the TagId field value if set, nil otherwise
+// GetTagIdOk returns a tuple with the TagId field value
 // and a boolean to check if the value has been set.
 func (o *TagModel) GetTagIdOk() (*int64, bool) {
-	if o == nil || IsNil(o.TagId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TagId, true
+	return &o.TagId, true
 }
 
-// HasTagId returns a boolean if a field has been set.
-func (o *TagModel) HasTagId() bool {
-	if o != nil && !IsNil(o.TagId) {
-		return true
-	}
-
-	return false
-}
-
-// SetTagId gets a reference to the given int64 and assigns it to the TagId field.
+// SetTagId sets field value
 func (o *TagModel) SetTagId(v int64) {
-	o.TagId = &v
+	o.TagId = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetName returns the Name field value
 func (o *TagModel) GetName() string {
-	if o == nil || IsNil(o.Name.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name.Get()
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TagModel) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *TagModel) HasName() bool {
-	if o != nil && o.Name.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given NullableString and assigns it to the Name field.
+// SetName sets field value
 func (o *TagModel) SetName(v string) {
-	o.Name.Set(&v)
-}
-// SetNameNil sets the value for Name to be an explicit nil
-func (o *TagModel) SetNameNil() {
-	o.Name.Set(nil)
+	o.Name = v
 }
 
-// UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *TagModel) UnsetName() {
-	o.Name.Unset()
-}
-
-// GetColor returns the Color field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetColor returns the Color field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *TagModel) GetColor() string {
-	if o == nil || IsNil(o.Color.Get()) {
+	if o == nil || o.Color.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Color.Get()
 }
 
-// GetColorOk returns a tuple with the Color field value if set, nil otherwise
+// GetColorOk returns a tuple with the Color field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TagModel) GetColorOk() (*string, bool) {
@@ -171,27 +147,9 @@ func (o *TagModel) GetColorOk() (*string, bool) {
 	return o.Color.Get(), o.Color.IsSet()
 }
 
-// HasColor returns a boolean if a field has been set.
-func (o *TagModel) HasColor() bool {
-	if o != nil && o.Color.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetColor gets a reference to the given NullableString and assigns it to the Color field.
+// SetColor sets field value
 func (o *TagModel) SetColor(v string) {
 	o.Color.Set(&v)
-}
-// SetColorNil sets the value for Color to be an explicit nil
-func (o *TagModel) SetColorNil() {
-	o.Color.Set(nil)
-}
-
-// UnsetColor ensures that no value is present for Color, not even an explicit nil
-func (o *TagModel) UnsetColor() {
-	o.Color.Unset()
 }
 
 func (o TagModel) MarshalJSON() ([]byte, error) {
@@ -204,19 +162,51 @@ func (o TagModel) MarshalJSON() ([]byte, error) {
 
 func (o TagModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Product) {
-		toSerialize["product"] = o.Product
-	}
-	if !IsNil(o.TagId) {
-		toSerialize["tagId"] = o.TagId
-	}
-	if o.Name.IsSet() {
-		toSerialize["name"] = o.Name.Get()
-	}
-	if o.Color.IsSet() {
-		toSerialize["color"] = o.Color.Get()
-	}
+	toSerialize["product"] = o.Product
+	toSerialize["tagId"] = o.TagId
+	toSerialize["name"] = o.Name
+	toSerialize["color"] = o.Color.Get()
 	return toSerialize, nil
+}
+
+func (o *TagModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"product",
+		"tagId",
+		"name",
+		"color",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTagModel := _TagModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varTagModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TagModel(varTagModel)
+
+	return err
 }
 
 type NullableTagModel struct {

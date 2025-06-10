@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **SettingId** | **int32** | The identifier of the Feature Flag or Setting the code reference belongs to. | 
-**References** | [**[]ReferenceLines**](ReferenceLines.md) | The actual references to the given Feature Flag or Setting. | 
+**References** | [**[]ReferenceLinesRequest**](ReferenceLinesRequest.md) | The actual references to the given Feature Flag or Setting. | 
 
 ## Methods
 
 ### NewFlagReference
 
-`func NewFlagReference(settingId int32, references []ReferenceLines, ) *FlagReference`
+`func NewFlagReference(settingId int32, references []ReferenceLinesRequest, ) *FlagReference`
 
 NewFlagReference instantiates a new FlagReference object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetSettingId sets SettingId field to given value.
 
 ### GetReferences
 
-`func (o *FlagReference) GetReferences() []ReferenceLines`
+`func (o *FlagReference) GetReferences() []ReferenceLinesRequest`
 
 GetReferences returns the References field if non-nil, zero value otherwise.
 
 ### GetReferencesOk
 
-`func (o *FlagReference) GetReferencesOk() (*[]ReferenceLines, bool)`
+`func (o *FlagReference) GetReferencesOk() (*[]ReferenceLinesRequest, bool)`
 
 GetReferencesOk returns a tuple with the References field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetReferences
 
-`func (o *FlagReference) SetReferences(v []ReferenceLines)`
+`func (o *FlagReference) SetReferences(v []ReferenceLinesRequest)`
 
 SetReferences sets References field to given value.
 

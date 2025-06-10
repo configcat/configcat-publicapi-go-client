@@ -28,7 +28,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
 func main() {
@@ -93,7 +93,7 @@ Name | Type | Description  | Notes
 
 ## GetDeletedSettings
 
-> []SettingModel GetDeletedSettings(ctx, configId).Execute()
+> []DeletedSettingModel GetDeletedSettings(ctx, configId).Execute()
 
 List Deleted Settings
 
@@ -108,7 +108,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
 func main() {
@@ -121,7 +121,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `AuditLogsAPI.GetDeletedSettings``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetDeletedSettings`: []SettingModel
+	// response from `GetDeletedSettings`: []DeletedSettingModel
 	fmt.Fprintf(os.Stdout, "Response from `AuditLogsAPI.GetDeletedSettings`: %v\n", resp)
 }
 ```
@@ -145,7 +145,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]SettingModel**](SettingModel.md)
+[**[]DeletedSettingModel**](DeletedSettingModel.md)
 
 ### Authorization
 
@@ -179,7 +179,7 @@ import (
 	"fmt"
 	"os"
     "time"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
 func main() {

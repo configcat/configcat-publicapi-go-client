@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ConditionModel type satisfies the MappedNullable interface at compile time
@@ -20,17 +22,22 @@ var _ MappedNullable = &ConditionModel{}
 
 // ConditionModel struct for ConditionModel
 type ConditionModel struct {
-	UserCondition *UserConditionModel `json:"userCondition,omitempty"`
-	SegmentCondition *SegmentConditionModel `json:"segmentCondition,omitempty"`
-	PrerequisiteFlagCondition *PrerequisiteFlagConditionModel `json:"prerequisiteFlagCondition,omitempty"`
+	UserCondition NullableUserConditionModel `json:"userCondition"`
+	SegmentCondition NullableSegmentConditionModel `json:"segmentCondition"`
+	PrerequisiteFlagCondition NullablePrerequisiteFlagConditionModel `json:"prerequisiteFlagCondition"`
 }
+
+type _ConditionModel ConditionModel
 
 // NewConditionModel instantiates a new ConditionModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConditionModel() *ConditionModel {
+func NewConditionModel(userCondition NullableUserConditionModel, segmentCondition NullableSegmentConditionModel, prerequisiteFlagCondition NullablePrerequisiteFlagConditionModel) *ConditionModel {
 	this := ConditionModel{}
+	this.UserCondition = userCondition
+	this.SegmentCondition = segmentCondition
+	this.PrerequisiteFlagCondition = prerequisiteFlagCondition
 	return &this
 }
 
@@ -42,100 +49,82 @@ func NewConditionModelWithDefaults() *ConditionModel {
 	return &this
 }
 
-// GetUserCondition returns the UserCondition field value if set, zero value otherwise.
+// GetUserCondition returns the UserCondition field value
+// If the value is explicit nil, the zero value for UserConditionModel will be returned
 func (o *ConditionModel) GetUserCondition() UserConditionModel {
-	if o == nil || IsNil(o.UserCondition) {
+	if o == nil || o.UserCondition.Get() == nil {
 		var ret UserConditionModel
 		return ret
 	}
-	return *o.UserCondition
+
+	return *o.UserCondition.Get()
 }
 
-// GetUserConditionOk returns a tuple with the UserCondition field value if set, nil otherwise
+// GetUserConditionOk returns a tuple with the UserCondition field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConditionModel) GetUserConditionOk() (*UserConditionModel, bool) {
-	if o == nil || IsNil(o.UserCondition) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UserCondition, true
+	return o.UserCondition.Get(), o.UserCondition.IsSet()
 }
 
-// HasUserCondition returns a boolean if a field has been set.
-func (o *ConditionModel) HasUserCondition() bool {
-	if o != nil && !IsNil(o.UserCondition) {
-		return true
-	}
-
-	return false
-}
-
-// SetUserCondition gets a reference to the given UserConditionModel and assigns it to the UserCondition field.
+// SetUserCondition sets field value
 func (o *ConditionModel) SetUserCondition(v UserConditionModel) {
-	o.UserCondition = &v
+	o.UserCondition.Set(&v)
 }
 
-// GetSegmentCondition returns the SegmentCondition field value if set, zero value otherwise.
+// GetSegmentCondition returns the SegmentCondition field value
+// If the value is explicit nil, the zero value for SegmentConditionModel will be returned
 func (o *ConditionModel) GetSegmentCondition() SegmentConditionModel {
-	if o == nil || IsNil(o.SegmentCondition) {
+	if o == nil || o.SegmentCondition.Get() == nil {
 		var ret SegmentConditionModel
 		return ret
 	}
-	return *o.SegmentCondition
+
+	return *o.SegmentCondition.Get()
 }
 
-// GetSegmentConditionOk returns a tuple with the SegmentCondition field value if set, nil otherwise
+// GetSegmentConditionOk returns a tuple with the SegmentCondition field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConditionModel) GetSegmentConditionOk() (*SegmentConditionModel, bool) {
-	if o == nil || IsNil(o.SegmentCondition) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SegmentCondition, true
+	return o.SegmentCondition.Get(), o.SegmentCondition.IsSet()
 }
 
-// HasSegmentCondition returns a boolean if a field has been set.
-func (o *ConditionModel) HasSegmentCondition() bool {
-	if o != nil && !IsNil(o.SegmentCondition) {
-		return true
-	}
-
-	return false
-}
-
-// SetSegmentCondition gets a reference to the given SegmentConditionModel and assigns it to the SegmentCondition field.
+// SetSegmentCondition sets field value
 func (o *ConditionModel) SetSegmentCondition(v SegmentConditionModel) {
-	o.SegmentCondition = &v
+	o.SegmentCondition.Set(&v)
 }
 
-// GetPrerequisiteFlagCondition returns the PrerequisiteFlagCondition field value if set, zero value otherwise.
+// GetPrerequisiteFlagCondition returns the PrerequisiteFlagCondition field value
+// If the value is explicit nil, the zero value for PrerequisiteFlagConditionModel will be returned
 func (o *ConditionModel) GetPrerequisiteFlagCondition() PrerequisiteFlagConditionModel {
-	if o == nil || IsNil(o.PrerequisiteFlagCondition) {
+	if o == nil || o.PrerequisiteFlagCondition.Get() == nil {
 		var ret PrerequisiteFlagConditionModel
 		return ret
 	}
-	return *o.PrerequisiteFlagCondition
+
+	return *o.PrerequisiteFlagCondition.Get()
 }
 
-// GetPrerequisiteFlagConditionOk returns a tuple with the PrerequisiteFlagCondition field value if set, nil otherwise
+// GetPrerequisiteFlagConditionOk returns a tuple with the PrerequisiteFlagCondition field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConditionModel) GetPrerequisiteFlagConditionOk() (*PrerequisiteFlagConditionModel, bool) {
-	if o == nil || IsNil(o.PrerequisiteFlagCondition) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PrerequisiteFlagCondition, true
+	return o.PrerequisiteFlagCondition.Get(), o.PrerequisiteFlagCondition.IsSet()
 }
 
-// HasPrerequisiteFlagCondition returns a boolean if a field has been set.
-func (o *ConditionModel) HasPrerequisiteFlagCondition() bool {
-	if o != nil && !IsNil(o.PrerequisiteFlagCondition) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrerequisiteFlagCondition gets a reference to the given PrerequisiteFlagConditionModel and assigns it to the PrerequisiteFlagCondition field.
+// SetPrerequisiteFlagCondition sets field value
 func (o *ConditionModel) SetPrerequisiteFlagCondition(v PrerequisiteFlagConditionModel) {
-	o.PrerequisiteFlagCondition = &v
+	o.PrerequisiteFlagCondition.Set(&v)
 }
 
 func (o ConditionModel) MarshalJSON() ([]byte, error) {
@@ -148,16 +137,49 @@ func (o ConditionModel) MarshalJSON() ([]byte, error) {
 
 func (o ConditionModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.UserCondition) {
-		toSerialize["userCondition"] = o.UserCondition
-	}
-	if !IsNil(o.SegmentCondition) {
-		toSerialize["segmentCondition"] = o.SegmentCondition
-	}
-	if !IsNil(o.PrerequisiteFlagCondition) {
-		toSerialize["prerequisiteFlagCondition"] = o.PrerequisiteFlagCondition
-	}
+	toSerialize["userCondition"] = o.UserCondition.Get()
+	toSerialize["segmentCondition"] = o.SegmentCondition.Get()
+	toSerialize["prerequisiteFlagCondition"] = o.PrerequisiteFlagCondition.Get()
 	return toSerialize, nil
+}
+
+func (o *ConditionModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"userCondition",
+		"segmentCondition",
+		"prerequisiteFlagCondition",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varConditionModel := _ConditionModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varConditionModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConditionModel(varConditionModel)
+
+	return err
 }
 
 type NullableConditionModel struct {

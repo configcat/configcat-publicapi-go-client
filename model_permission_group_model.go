@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the PermissionGroupModel type satisfies the MappedNullable interface at compile time
@@ -21,64 +23,93 @@ var _ MappedNullable = &PermissionGroupModel{}
 // PermissionGroupModel struct for PermissionGroupModel
 type PermissionGroupModel struct {
 	// Identifier of the Permission Group.
-	PermissionGroupId *int64 `json:"permissionGroupId,omitempty"`
+	PermissionGroupId int64 `json:"permissionGroupId"`
 	// Name of the Permission Group.
-	Name NullableString `json:"name,omitempty"`
+	Name string `json:"name"`
 	// Group members can manage team members.
-	CanManageMembers *bool `json:"canManageMembers,omitempty"`
+	CanManageMembers bool `json:"canManageMembers"`
 	// Group members can create/update Configs.
-	CanCreateOrUpdateConfig *bool `json:"canCreateOrUpdateConfig,omitempty"`
+	CanCreateOrUpdateConfig bool `json:"canCreateOrUpdateConfig"`
 	// Group members can delete Configs.
-	CanDeleteConfig *bool `json:"canDeleteConfig,omitempty"`
+	CanDeleteConfig bool `json:"canDeleteConfig"`
 	// Group members can create/update Environments.
-	CanCreateOrUpdateEnvironment *bool `json:"canCreateOrUpdateEnvironment,omitempty"`
+	CanCreateOrUpdateEnvironment bool `json:"canCreateOrUpdateEnvironment"`
 	// Group members can delete Environments.
-	CanDeleteEnvironment *bool `json:"canDeleteEnvironment,omitempty"`
+	CanDeleteEnvironment bool `json:"canDeleteEnvironment"`
 	// Group members can create/update Feature Flags and Settings.
-	CanCreateOrUpdateSetting *bool `json:"canCreateOrUpdateSetting,omitempty"`
+	CanCreateOrUpdateSetting bool `json:"canCreateOrUpdateSetting"`
 	// Group members can attach/detach Tags to Feature Flags and Settings.
-	CanTagSetting *bool `json:"canTagSetting,omitempty"`
+	CanTagSetting bool `json:"canTagSetting"`
 	// Group members can delete Feature Flags and Settings.
-	CanDeleteSetting *bool `json:"canDeleteSetting,omitempty"`
+	CanDeleteSetting bool `json:"canDeleteSetting"`
 	// Group members can create/update Tags.
-	CanCreateOrUpdateTag *bool `json:"canCreateOrUpdateTag,omitempty"`
+	CanCreateOrUpdateTag bool `json:"canCreateOrUpdateTag"`
 	// Group members can delete Tags.
-	CanDeleteTag *bool `json:"canDeleteTag,omitempty"`
+	CanDeleteTag bool `json:"canDeleteTag"`
 	// Group members can create/update/delete Webhooks.
-	CanManageWebhook *bool `json:"canManageWebhook,omitempty"`
+	CanManageWebhook bool `json:"canManageWebhook"`
 	// Group members can use the export/import feature.
-	CanUseExportImport *bool `json:"canUseExportImport,omitempty"`
+	CanUseExportImport bool `json:"canUseExportImport"`
 	// Group members can update Product preferences.
-	CanManageProductPreferences *bool `json:"canManageProductPreferences,omitempty"`
+	CanManageProductPreferences bool `json:"canManageProductPreferences"`
 	// Group members can add and configure integrations.
-	CanManageIntegrations *bool `json:"canManageIntegrations,omitempty"`
+	CanManageIntegrations bool `json:"canManageIntegrations"`
 	// Group members has access to SDK keys.
-	CanViewSdkKey *bool `json:"canViewSdkKey,omitempty"`
+	CanViewSdkKey bool `json:"canViewSdkKey"`
 	// Group members can rotate SDK keys.
-	CanRotateSdkKey *bool `json:"canRotateSdkKey,omitempty"`
+	CanRotateSdkKey bool `json:"canRotateSdkKey"`
 	// Group members can create/update Segments.
-	CanCreateOrUpdateSegments *bool `json:"canCreateOrUpdateSegments,omitempty"`
+	CanCreateOrUpdateSegments bool `json:"canCreateOrUpdateSegments"`
 	// Group members can delete Segments.
-	CanDeleteSegments *bool `json:"canDeleteSegments,omitempty"`
+	CanDeleteSegments bool `json:"canDeleteSegments"`
 	// Group members has access to audit logs.
-	CanViewProductAuditLog *bool `json:"canViewProductAuditLog,omitempty"`
+	CanViewProductAuditLog bool `json:"canViewProductAuditLog"`
 	// Group members has access to product statistics.
-	CanViewProductStatistics *bool `json:"canViewProductStatistics,omitempty"`
+	CanViewProductStatistics bool `json:"canViewProductStatistics"`
 	// Group members can disable two-factor authentication for other members.
-	CanDisable2FA *bool `json:"canDisable2FA,omitempty"`
-	AccessType *AccessType `json:"accessType,omitempty"`
-	NewEnvironmentAccessType *EnvironmentAccessType `json:"newEnvironmentAccessType,omitempty"`
+	CanDisable2FA bool `json:"canDisable2FA"`
+	AccessType AccessType `json:"accessType"`
+	NewEnvironmentAccessType EnvironmentAccessType `json:"newEnvironmentAccessType"`
 	// List of environment specific permissions.
-	EnvironmentAccesses []EnvironmentAccessModel `json:"environmentAccesses,omitempty"`
-	Product *ProductModel `json:"product,omitempty"`
+	EnvironmentAccesses []EnvironmentAccessModel `json:"environmentAccesses"`
+	Product ProductModel `json:"product"`
 }
+
+type _PermissionGroupModel PermissionGroupModel
 
 // NewPermissionGroupModel instantiates a new PermissionGroupModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPermissionGroupModel() *PermissionGroupModel {
+func NewPermissionGroupModel(permissionGroupId int64, name string, canManageMembers bool, canCreateOrUpdateConfig bool, canDeleteConfig bool, canCreateOrUpdateEnvironment bool, canDeleteEnvironment bool, canCreateOrUpdateSetting bool, canTagSetting bool, canDeleteSetting bool, canCreateOrUpdateTag bool, canDeleteTag bool, canManageWebhook bool, canUseExportImport bool, canManageProductPreferences bool, canManageIntegrations bool, canViewSdkKey bool, canRotateSdkKey bool, canCreateOrUpdateSegments bool, canDeleteSegments bool, canViewProductAuditLog bool, canViewProductStatistics bool, canDisable2FA bool, accessType AccessType, newEnvironmentAccessType EnvironmentAccessType, environmentAccesses []EnvironmentAccessModel, product ProductModel) *PermissionGroupModel {
 	this := PermissionGroupModel{}
+	this.PermissionGroupId = permissionGroupId
+	this.Name = name
+	this.CanManageMembers = canManageMembers
+	this.CanCreateOrUpdateConfig = canCreateOrUpdateConfig
+	this.CanDeleteConfig = canDeleteConfig
+	this.CanCreateOrUpdateEnvironment = canCreateOrUpdateEnvironment
+	this.CanDeleteEnvironment = canDeleteEnvironment
+	this.CanCreateOrUpdateSetting = canCreateOrUpdateSetting
+	this.CanTagSetting = canTagSetting
+	this.CanDeleteSetting = canDeleteSetting
+	this.CanCreateOrUpdateTag = canCreateOrUpdateTag
+	this.CanDeleteTag = canDeleteTag
+	this.CanManageWebhook = canManageWebhook
+	this.CanUseExportImport = canUseExportImport
+	this.CanManageProductPreferences = canManageProductPreferences
+	this.CanManageIntegrations = canManageIntegrations
+	this.CanViewSdkKey = canViewSdkKey
+	this.CanRotateSdkKey = canRotateSdkKey
+	this.CanCreateOrUpdateSegments = canCreateOrUpdateSegments
+	this.CanDeleteSegments = canDeleteSegments
+	this.CanViewProductAuditLog = canViewProductAuditLog
+	this.CanViewProductStatistics = canViewProductStatistics
+	this.CanDisable2FA = canDisable2FA
+	this.AccessType = accessType
+	this.NewEnvironmentAccessType = newEnvironmentAccessType
+	this.EnvironmentAccesses = environmentAccesses
+	this.Product = product
 	return &this
 }
 
@@ -90,879 +121,652 @@ func NewPermissionGroupModelWithDefaults() *PermissionGroupModel {
 	return &this
 }
 
-// GetPermissionGroupId returns the PermissionGroupId field value if set, zero value otherwise.
+// GetPermissionGroupId returns the PermissionGroupId field value
 func (o *PermissionGroupModel) GetPermissionGroupId() int64 {
-	if o == nil || IsNil(o.PermissionGroupId) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.PermissionGroupId
+
+	return o.PermissionGroupId
 }
 
-// GetPermissionGroupIdOk returns a tuple with the PermissionGroupId field value if set, nil otherwise
+// GetPermissionGroupIdOk returns a tuple with the PermissionGroupId field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetPermissionGroupIdOk() (*int64, bool) {
-	if o == nil || IsNil(o.PermissionGroupId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PermissionGroupId, true
+	return &o.PermissionGroupId, true
 }
 
-// HasPermissionGroupId returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasPermissionGroupId() bool {
-	if o != nil && !IsNil(o.PermissionGroupId) {
-		return true
-	}
-
-	return false
-}
-
-// SetPermissionGroupId gets a reference to the given int64 and assigns it to the PermissionGroupId field.
+// SetPermissionGroupId sets field value
 func (o *PermissionGroupModel) SetPermissionGroupId(v int64) {
-	o.PermissionGroupId = &v
+	o.PermissionGroupId = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetName returns the Name field value
 func (o *PermissionGroupModel) GetName() string {
-	if o == nil || IsNil(o.Name.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name.Get()
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PermissionGroupModel) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasName() bool {
-	if o != nil && o.Name.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given NullableString and assigns it to the Name field.
+// SetName sets field value
 func (o *PermissionGroupModel) SetName(v string) {
-	o.Name.Set(&v)
-}
-// SetNameNil sets the value for Name to be an explicit nil
-func (o *PermissionGroupModel) SetNameNil() {
-	o.Name.Set(nil)
+	o.Name = v
 }
 
-// UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *PermissionGroupModel) UnsetName() {
-	o.Name.Unset()
-}
-
-// GetCanManageMembers returns the CanManageMembers field value if set, zero value otherwise.
+// GetCanManageMembers returns the CanManageMembers field value
 func (o *PermissionGroupModel) GetCanManageMembers() bool {
-	if o == nil || IsNil(o.CanManageMembers) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanManageMembers
+
+	return o.CanManageMembers
 }
 
-// GetCanManageMembersOk returns a tuple with the CanManageMembers field value if set, nil otherwise
+// GetCanManageMembersOk returns a tuple with the CanManageMembers field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanManageMembersOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanManageMembers) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanManageMembers, true
+	return &o.CanManageMembers, true
 }
 
-// HasCanManageMembers returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanManageMembers() bool {
-	if o != nil && !IsNil(o.CanManageMembers) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanManageMembers gets a reference to the given bool and assigns it to the CanManageMembers field.
+// SetCanManageMembers sets field value
 func (o *PermissionGroupModel) SetCanManageMembers(v bool) {
-	o.CanManageMembers = &v
+	o.CanManageMembers = v
 }
 
-// GetCanCreateOrUpdateConfig returns the CanCreateOrUpdateConfig field value if set, zero value otherwise.
+// GetCanCreateOrUpdateConfig returns the CanCreateOrUpdateConfig field value
 func (o *PermissionGroupModel) GetCanCreateOrUpdateConfig() bool {
-	if o == nil || IsNil(o.CanCreateOrUpdateConfig) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanCreateOrUpdateConfig
+
+	return o.CanCreateOrUpdateConfig
 }
 
-// GetCanCreateOrUpdateConfigOk returns a tuple with the CanCreateOrUpdateConfig field value if set, nil otherwise
+// GetCanCreateOrUpdateConfigOk returns a tuple with the CanCreateOrUpdateConfig field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanCreateOrUpdateConfigOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanCreateOrUpdateConfig) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanCreateOrUpdateConfig, true
+	return &o.CanCreateOrUpdateConfig, true
 }
 
-// HasCanCreateOrUpdateConfig returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanCreateOrUpdateConfig() bool {
-	if o != nil && !IsNil(o.CanCreateOrUpdateConfig) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanCreateOrUpdateConfig gets a reference to the given bool and assigns it to the CanCreateOrUpdateConfig field.
+// SetCanCreateOrUpdateConfig sets field value
 func (o *PermissionGroupModel) SetCanCreateOrUpdateConfig(v bool) {
-	o.CanCreateOrUpdateConfig = &v
+	o.CanCreateOrUpdateConfig = v
 }
 
-// GetCanDeleteConfig returns the CanDeleteConfig field value if set, zero value otherwise.
+// GetCanDeleteConfig returns the CanDeleteConfig field value
 func (o *PermissionGroupModel) GetCanDeleteConfig() bool {
-	if o == nil || IsNil(o.CanDeleteConfig) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanDeleteConfig
+
+	return o.CanDeleteConfig
 }
 
-// GetCanDeleteConfigOk returns a tuple with the CanDeleteConfig field value if set, nil otherwise
+// GetCanDeleteConfigOk returns a tuple with the CanDeleteConfig field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanDeleteConfigOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanDeleteConfig) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanDeleteConfig, true
+	return &o.CanDeleteConfig, true
 }
 
-// HasCanDeleteConfig returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanDeleteConfig() bool {
-	if o != nil && !IsNil(o.CanDeleteConfig) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanDeleteConfig gets a reference to the given bool and assigns it to the CanDeleteConfig field.
+// SetCanDeleteConfig sets field value
 func (o *PermissionGroupModel) SetCanDeleteConfig(v bool) {
-	o.CanDeleteConfig = &v
+	o.CanDeleteConfig = v
 }
 
-// GetCanCreateOrUpdateEnvironment returns the CanCreateOrUpdateEnvironment field value if set, zero value otherwise.
+// GetCanCreateOrUpdateEnvironment returns the CanCreateOrUpdateEnvironment field value
 func (o *PermissionGroupModel) GetCanCreateOrUpdateEnvironment() bool {
-	if o == nil || IsNil(o.CanCreateOrUpdateEnvironment) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanCreateOrUpdateEnvironment
+
+	return o.CanCreateOrUpdateEnvironment
 }
 
-// GetCanCreateOrUpdateEnvironmentOk returns a tuple with the CanCreateOrUpdateEnvironment field value if set, nil otherwise
+// GetCanCreateOrUpdateEnvironmentOk returns a tuple with the CanCreateOrUpdateEnvironment field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanCreateOrUpdateEnvironmentOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanCreateOrUpdateEnvironment) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanCreateOrUpdateEnvironment, true
+	return &o.CanCreateOrUpdateEnvironment, true
 }
 
-// HasCanCreateOrUpdateEnvironment returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanCreateOrUpdateEnvironment() bool {
-	if o != nil && !IsNil(o.CanCreateOrUpdateEnvironment) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanCreateOrUpdateEnvironment gets a reference to the given bool and assigns it to the CanCreateOrUpdateEnvironment field.
+// SetCanCreateOrUpdateEnvironment sets field value
 func (o *PermissionGroupModel) SetCanCreateOrUpdateEnvironment(v bool) {
-	o.CanCreateOrUpdateEnvironment = &v
+	o.CanCreateOrUpdateEnvironment = v
 }
 
-// GetCanDeleteEnvironment returns the CanDeleteEnvironment field value if set, zero value otherwise.
+// GetCanDeleteEnvironment returns the CanDeleteEnvironment field value
 func (o *PermissionGroupModel) GetCanDeleteEnvironment() bool {
-	if o == nil || IsNil(o.CanDeleteEnvironment) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanDeleteEnvironment
+
+	return o.CanDeleteEnvironment
 }
 
-// GetCanDeleteEnvironmentOk returns a tuple with the CanDeleteEnvironment field value if set, nil otherwise
+// GetCanDeleteEnvironmentOk returns a tuple with the CanDeleteEnvironment field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanDeleteEnvironmentOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanDeleteEnvironment) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanDeleteEnvironment, true
+	return &o.CanDeleteEnvironment, true
 }
 
-// HasCanDeleteEnvironment returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanDeleteEnvironment() bool {
-	if o != nil && !IsNil(o.CanDeleteEnvironment) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanDeleteEnvironment gets a reference to the given bool and assigns it to the CanDeleteEnvironment field.
+// SetCanDeleteEnvironment sets field value
 func (o *PermissionGroupModel) SetCanDeleteEnvironment(v bool) {
-	o.CanDeleteEnvironment = &v
+	o.CanDeleteEnvironment = v
 }
 
-// GetCanCreateOrUpdateSetting returns the CanCreateOrUpdateSetting field value if set, zero value otherwise.
+// GetCanCreateOrUpdateSetting returns the CanCreateOrUpdateSetting field value
 func (o *PermissionGroupModel) GetCanCreateOrUpdateSetting() bool {
-	if o == nil || IsNil(o.CanCreateOrUpdateSetting) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanCreateOrUpdateSetting
+
+	return o.CanCreateOrUpdateSetting
 }
 
-// GetCanCreateOrUpdateSettingOk returns a tuple with the CanCreateOrUpdateSetting field value if set, nil otherwise
+// GetCanCreateOrUpdateSettingOk returns a tuple with the CanCreateOrUpdateSetting field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanCreateOrUpdateSettingOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanCreateOrUpdateSetting) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanCreateOrUpdateSetting, true
+	return &o.CanCreateOrUpdateSetting, true
 }
 
-// HasCanCreateOrUpdateSetting returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanCreateOrUpdateSetting() bool {
-	if o != nil && !IsNil(o.CanCreateOrUpdateSetting) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanCreateOrUpdateSetting gets a reference to the given bool and assigns it to the CanCreateOrUpdateSetting field.
+// SetCanCreateOrUpdateSetting sets field value
 func (o *PermissionGroupModel) SetCanCreateOrUpdateSetting(v bool) {
-	o.CanCreateOrUpdateSetting = &v
+	o.CanCreateOrUpdateSetting = v
 }
 
-// GetCanTagSetting returns the CanTagSetting field value if set, zero value otherwise.
+// GetCanTagSetting returns the CanTagSetting field value
 func (o *PermissionGroupModel) GetCanTagSetting() bool {
-	if o == nil || IsNil(o.CanTagSetting) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanTagSetting
+
+	return o.CanTagSetting
 }
 
-// GetCanTagSettingOk returns a tuple with the CanTagSetting field value if set, nil otherwise
+// GetCanTagSettingOk returns a tuple with the CanTagSetting field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanTagSettingOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanTagSetting) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanTagSetting, true
+	return &o.CanTagSetting, true
 }
 
-// HasCanTagSetting returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanTagSetting() bool {
-	if o != nil && !IsNil(o.CanTagSetting) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanTagSetting gets a reference to the given bool and assigns it to the CanTagSetting field.
+// SetCanTagSetting sets field value
 func (o *PermissionGroupModel) SetCanTagSetting(v bool) {
-	o.CanTagSetting = &v
+	o.CanTagSetting = v
 }
 
-// GetCanDeleteSetting returns the CanDeleteSetting field value if set, zero value otherwise.
+// GetCanDeleteSetting returns the CanDeleteSetting field value
 func (o *PermissionGroupModel) GetCanDeleteSetting() bool {
-	if o == nil || IsNil(o.CanDeleteSetting) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanDeleteSetting
+
+	return o.CanDeleteSetting
 }
 
-// GetCanDeleteSettingOk returns a tuple with the CanDeleteSetting field value if set, nil otherwise
+// GetCanDeleteSettingOk returns a tuple with the CanDeleteSetting field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanDeleteSettingOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanDeleteSetting) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanDeleteSetting, true
+	return &o.CanDeleteSetting, true
 }
 
-// HasCanDeleteSetting returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanDeleteSetting() bool {
-	if o != nil && !IsNil(o.CanDeleteSetting) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanDeleteSetting gets a reference to the given bool and assigns it to the CanDeleteSetting field.
+// SetCanDeleteSetting sets field value
 func (o *PermissionGroupModel) SetCanDeleteSetting(v bool) {
-	o.CanDeleteSetting = &v
+	o.CanDeleteSetting = v
 }
 
-// GetCanCreateOrUpdateTag returns the CanCreateOrUpdateTag field value if set, zero value otherwise.
+// GetCanCreateOrUpdateTag returns the CanCreateOrUpdateTag field value
 func (o *PermissionGroupModel) GetCanCreateOrUpdateTag() bool {
-	if o == nil || IsNil(o.CanCreateOrUpdateTag) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanCreateOrUpdateTag
+
+	return o.CanCreateOrUpdateTag
 }
 
-// GetCanCreateOrUpdateTagOk returns a tuple with the CanCreateOrUpdateTag field value if set, nil otherwise
+// GetCanCreateOrUpdateTagOk returns a tuple with the CanCreateOrUpdateTag field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanCreateOrUpdateTagOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanCreateOrUpdateTag) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanCreateOrUpdateTag, true
+	return &o.CanCreateOrUpdateTag, true
 }
 
-// HasCanCreateOrUpdateTag returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanCreateOrUpdateTag() bool {
-	if o != nil && !IsNil(o.CanCreateOrUpdateTag) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanCreateOrUpdateTag gets a reference to the given bool and assigns it to the CanCreateOrUpdateTag field.
+// SetCanCreateOrUpdateTag sets field value
 func (o *PermissionGroupModel) SetCanCreateOrUpdateTag(v bool) {
-	o.CanCreateOrUpdateTag = &v
+	o.CanCreateOrUpdateTag = v
 }
 
-// GetCanDeleteTag returns the CanDeleteTag field value if set, zero value otherwise.
+// GetCanDeleteTag returns the CanDeleteTag field value
 func (o *PermissionGroupModel) GetCanDeleteTag() bool {
-	if o == nil || IsNil(o.CanDeleteTag) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanDeleteTag
+
+	return o.CanDeleteTag
 }
 
-// GetCanDeleteTagOk returns a tuple with the CanDeleteTag field value if set, nil otherwise
+// GetCanDeleteTagOk returns a tuple with the CanDeleteTag field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanDeleteTagOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanDeleteTag) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanDeleteTag, true
+	return &o.CanDeleteTag, true
 }
 
-// HasCanDeleteTag returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanDeleteTag() bool {
-	if o != nil && !IsNil(o.CanDeleteTag) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanDeleteTag gets a reference to the given bool and assigns it to the CanDeleteTag field.
+// SetCanDeleteTag sets field value
 func (o *PermissionGroupModel) SetCanDeleteTag(v bool) {
-	o.CanDeleteTag = &v
+	o.CanDeleteTag = v
 }
 
-// GetCanManageWebhook returns the CanManageWebhook field value if set, zero value otherwise.
+// GetCanManageWebhook returns the CanManageWebhook field value
 func (o *PermissionGroupModel) GetCanManageWebhook() bool {
-	if o == nil || IsNil(o.CanManageWebhook) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanManageWebhook
+
+	return o.CanManageWebhook
 }
 
-// GetCanManageWebhookOk returns a tuple with the CanManageWebhook field value if set, nil otherwise
+// GetCanManageWebhookOk returns a tuple with the CanManageWebhook field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanManageWebhookOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanManageWebhook) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanManageWebhook, true
+	return &o.CanManageWebhook, true
 }
 
-// HasCanManageWebhook returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanManageWebhook() bool {
-	if o != nil && !IsNil(o.CanManageWebhook) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanManageWebhook gets a reference to the given bool and assigns it to the CanManageWebhook field.
+// SetCanManageWebhook sets field value
 func (o *PermissionGroupModel) SetCanManageWebhook(v bool) {
-	o.CanManageWebhook = &v
+	o.CanManageWebhook = v
 }
 
-// GetCanUseExportImport returns the CanUseExportImport field value if set, zero value otherwise.
+// GetCanUseExportImport returns the CanUseExportImport field value
 func (o *PermissionGroupModel) GetCanUseExportImport() bool {
-	if o == nil || IsNil(o.CanUseExportImport) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanUseExportImport
+
+	return o.CanUseExportImport
 }
 
-// GetCanUseExportImportOk returns a tuple with the CanUseExportImport field value if set, nil otherwise
+// GetCanUseExportImportOk returns a tuple with the CanUseExportImport field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanUseExportImportOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanUseExportImport) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanUseExportImport, true
+	return &o.CanUseExportImport, true
 }
 
-// HasCanUseExportImport returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanUseExportImport() bool {
-	if o != nil && !IsNil(o.CanUseExportImport) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanUseExportImport gets a reference to the given bool and assigns it to the CanUseExportImport field.
+// SetCanUseExportImport sets field value
 func (o *PermissionGroupModel) SetCanUseExportImport(v bool) {
-	o.CanUseExportImport = &v
+	o.CanUseExportImport = v
 }
 
-// GetCanManageProductPreferences returns the CanManageProductPreferences field value if set, zero value otherwise.
+// GetCanManageProductPreferences returns the CanManageProductPreferences field value
 func (o *PermissionGroupModel) GetCanManageProductPreferences() bool {
-	if o == nil || IsNil(o.CanManageProductPreferences) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanManageProductPreferences
+
+	return o.CanManageProductPreferences
 }
 
-// GetCanManageProductPreferencesOk returns a tuple with the CanManageProductPreferences field value if set, nil otherwise
+// GetCanManageProductPreferencesOk returns a tuple with the CanManageProductPreferences field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanManageProductPreferencesOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanManageProductPreferences) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanManageProductPreferences, true
+	return &o.CanManageProductPreferences, true
 }
 
-// HasCanManageProductPreferences returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanManageProductPreferences() bool {
-	if o != nil && !IsNil(o.CanManageProductPreferences) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanManageProductPreferences gets a reference to the given bool and assigns it to the CanManageProductPreferences field.
+// SetCanManageProductPreferences sets field value
 func (o *PermissionGroupModel) SetCanManageProductPreferences(v bool) {
-	o.CanManageProductPreferences = &v
+	o.CanManageProductPreferences = v
 }
 
-// GetCanManageIntegrations returns the CanManageIntegrations field value if set, zero value otherwise.
+// GetCanManageIntegrations returns the CanManageIntegrations field value
 func (o *PermissionGroupModel) GetCanManageIntegrations() bool {
-	if o == nil || IsNil(o.CanManageIntegrations) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanManageIntegrations
+
+	return o.CanManageIntegrations
 }
 
-// GetCanManageIntegrationsOk returns a tuple with the CanManageIntegrations field value if set, nil otherwise
+// GetCanManageIntegrationsOk returns a tuple with the CanManageIntegrations field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanManageIntegrationsOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanManageIntegrations) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanManageIntegrations, true
+	return &o.CanManageIntegrations, true
 }
 
-// HasCanManageIntegrations returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanManageIntegrations() bool {
-	if o != nil && !IsNil(o.CanManageIntegrations) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanManageIntegrations gets a reference to the given bool and assigns it to the CanManageIntegrations field.
+// SetCanManageIntegrations sets field value
 func (o *PermissionGroupModel) SetCanManageIntegrations(v bool) {
-	o.CanManageIntegrations = &v
+	o.CanManageIntegrations = v
 }
 
-// GetCanViewSdkKey returns the CanViewSdkKey field value if set, zero value otherwise.
+// GetCanViewSdkKey returns the CanViewSdkKey field value
 func (o *PermissionGroupModel) GetCanViewSdkKey() bool {
-	if o == nil || IsNil(o.CanViewSdkKey) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanViewSdkKey
+
+	return o.CanViewSdkKey
 }
 
-// GetCanViewSdkKeyOk returns a tuple with the CanViewSdkKey field value if set, nil otherwise
+// GetCanViewSdkKeyOk returns a tuple with the CanViewSdkKey field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanViewSdkKeyOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanViewSdkKey) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanViewSdkKey, true
+	return &o.CanViewSdkKey, true
 }
 
-// HasCanViewSdkKey returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanViewSdkKey() bool {
-	if o != nil && !IsNil(o.CanViewSdkKey) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanViewSdkKey gets a reference to the given bool and assigns it to the CanViewSdkKey field.
+// SetCanViewSdkKey sets field value
 func (o *PermissionGroupModel) SetCanViewSdkKey(v bool) {
-	o.CanViewSdkKey = &v
+	o.CanViewSdkKey = v
 }
 
-// GetCanRotateSdkKey returns the CanRotateSdkKey field value if set, zero value otherwise.
+// GetCanRotateSdkKey returns the CanRotateSdkKey field value
 func (o *PermissionGroupModel) GetCanRotateSdkKey() bool {
-	if o == nil || IsNil(o.CanRotateSdkKey) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanRotateSdkKey
+
+	return o.CanRotateSdkKey
 }
 
-// GetCanRotateSdkKeyOk returns a tuple with the CanRotateSdkKey field value if set, nil otherwise
+// GetCanRotateSdkKeyOk returns a tuple with the CanRotateSdkKey field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanRotateSdkKeyOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanRotateSdkKey) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanRotateSdkKey, true
+	return &o.CanRotateSdkKey, true
 }
 
-// HasCanRotateSdkKey returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanRotateSdkKey() bool {
-	if o != nil && !IsNil(o.CanRotateSdkKey) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanRotateSdkKey gets a reference to the given bool and assigns it to the CanRotateSdkKey field.
+// SetCanRotateSdkKey sets field value
 func (o *PermissionGroupModel) SetCanRotateSdkKey(v bool) {
-	o.CanRotateSdkKey = &v
+	o.CanRotateSdkKey = v
 }
 
-// GetCanCreateOrUpdateSegments returns the CanCreateOrUpdateSegments field value if set, zero value otherwise.
+// GetCanCreateOrUpdateSegments returns the CanCreateOrUpdateSegments field value
 func (o *PermissionGroupModel) GetCanCreateOrUpdateSegments() bool {
-	if o == nil || IsNil(o.CanCreateOrUpdateSegments) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanCreateOrUpdateSegments
+
+	return o.CanCreateOrUpdateSegments
 }
 
-// GetCanCreateOrUpdateSegmentsOk returns a tuple with the CanCreateOrUpdateSegments field value if set, nil otherwise
+// GetCanCreateOrUpdateSegmentsOk returns a tuple with the CanCreateOrUpdateSegments field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanCreateOrUpdateSegmentsOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanCreateOrUpdateSegments) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanCreateOrUpdateSegments, true
+	return &o.CanCreateOrUpdateSegments, true
 }
 
-// HasCanCreateOrUpdateSegments returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanCreateOrUpdateSegments() bool {
-	if o != nil && !IsNil(o.CanCreateOrUpdateSegments) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanCreateOrUpdateSegments gets a reference to the given bool and assigns it to the CanCreateOrUpdateSegments field.
+// SetCanCreateOrUpdateSegments sets field value
 func (o *PermissionGroupModel) SetCanCreateOrUpdateSegments(v bool) {
-	o.CanCreateOrUpdateSegments = &v
+	o.CanCreateOrUpdateSegments = v
 }
 
-// GetCanDeleteSegments returns the CanDeleteSegments field value if set, zero value otherwise.
+// GetCanDeleteSegments returns the CanDeleteSegments field value
 func (o *PermissionGroupModel) GetCanDeleteSegments() bool {
-	if o == nil || IsNil(o.CanDeleteSegments) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanDeleteSegments
+
+	return o.CanDeleteSegments
 }
 
-// GetCanDeleteSegmentsOk returns a tuple with the CanDeleteSegments field value if set, nil otherwise
+// GetCanDeleteSegmentsOk returns a tuple with the CanDeleteSegments field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanDeleteSegmentsOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanDeleteSegments) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanDeleteSegments, true
+	return &o.CanDeleteSegments, true
 }
 
-// HasCanDeleteSegments returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanDeleteSegments() bool {
-	if o != nil && !IsNil(o.CanDeleteSegments) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanDeleteSegments gets a reference to the given bool and assigns it to the CanDeleteSegments field.
+// SetCanDeleteSegments sets field value
 func (o *PermissionGroupModel) SetCanDeleteSegments(v bool) {
-	o.CanDeleteSegments = &v
+	o.CanDeleteSegments = v
 }
 
-// GetCanViewProductAuditLog returns the CanViewProductAuditLog field value if set, zero value otherwise.
+// GetCanViewProductAuditLog returns the CanViewProductAuditLog field value
 func (o *PermissionGroupModel) GetCanViewProductAuditLog() bool {
-	if o == nil || IsNil(o.CanViewProductAuditLog) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanViewProductAuditLog
+
+	return o.CanViewProductAuditLog
 }
 
-// GetCanViewProductAuditLogOk returns a tuple with the CanViewProductAuditLog field value if set, nil otherwise
+// GetCanViewProductAuditLogOk returns a tuple with the CanViewProductAuditLog field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanViewProductAuditLogOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanViewProductAuditLog) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanViewProductAuditLog, true
+	return &o.CanViewProductAuditLog, true
 }
 
-// HasCanViewProductAuditLog returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanViewProductAuditLog() bool {
-	if o != nil && !IsNil(o.CanViewProductAuditLog) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanViewProductAuditLog gets a reference to the given bool and assigns it to the CanViewProductAuditLog field.
+// SetCanViewProductAuditLog sets field value
 func (o *PermissionGroupModel) SetCanViewProductAuditLog(v bool) {
-	o.CanViewProductAuditLog = &v
+	o.CanViewProductAuditLog = v
 }
 
-// GetCanViewProductStatistics returns the CanViewProductStatistics field value if set, zero value otherwise.
+// GetCanViewProductStatistics returns the CanViewProductStatistics field value
 func (o *PermissionGroupModel) GetCanViewProductStatistics() bool {
-	if o == nil || IsNil(o.CanViewProductStatistics) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanViewProductStatistics
+
+	return o.CanViewProductStatistics
 }
 
-// GetCanViewProductStatisticsOk returns a tuple with the CanViewProductStatistics field value if set, nil otherwise
+// GetCanViewProductStatisticsOk returns a tuple with the CanViewProductStatistics field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanViewProductStatisticsOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanViewProductStatistics) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanViewProductStatistics, true
+	return &o.CanViewProductStatistics, true
 }
 
-// HasCanViewProductStatistics returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanViewProductStatistics() bool {
-	if o != nil && !IsNil(o.CanViewProductStatistics) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanViewProductStatistics gets a reference to the given bool and assigns it to the CanViewProductStatistics field.
+// SetCanViewProductStatistics sets field value
 func (o *PermissionGroupModel) SetCanViewProductStatistics(v bool) {
-	o.CanViewProductStatistics = &v
+	o.CanViewProductStatistics = v
 }
 
-// GetCanDisable2FA returns the CanDisable2FA field value if set, zero value otherwise.
+// GetCanDisable2FA returns the CanDisable2FA field value
 func (o *PermissionGroupModel) GetCanDisable2FA() bool {
-	if o == nil || IsNil(o.CanDisable2FA) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.CanDisable2FA
+
+	return o.CanDisable2FA
 }
 
-// GetCanDisable2FAOk returns a tuple with the CanDisable2FA field value if set, nil otherwise
+// GetCanDisable2FAOk returns a tuple with the CanDisable2FA field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetCanDisable2FAOk() (*bool, bool) {
-	if o == nil || IsNil(o.CanDisable2FA) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CanDisable2FA, true
+	return &o.CanDisable2FA, true
 }
 
-// HasCanDisable2FA returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasCanDisable2FA() bool {
-	if o != nil && !IsNil(o.CanDisable2FA) {
-		return true
-	}
-
-	return false
-}
-
-// SetCanDisable2FA gets a reference to the given bool and assigns it to the CanDisable2FA field.
+// SetCanDisable2FA sets field value
 func (o *PermissionGroupModel) SetCanDisable2FA(v bool) {
-	o.CanDisable2FA = &v
+	o.CanDisable2FA = v
 }
 
-// GetAccessType returns the AccessType field value if set, zero value otherwise.
+// GetAccessType returns the AccessType field value
 func (o *PermissionGroupModel) GetAccessType() AccessType {
-	if o == nil || IsNil(o.AccessType) {
+	if o == nil {
 		var ret AccessType
 		return ret
 	}
-	return *o.AccessType
+
+	return o.AccessType
 }
 
-// GetAccessTypeOk returns a tuple with the AccessType field value if set, nil otherwise
+// GetAccessTypeOk returns a tuple with the AccessType field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetAccessTypeOk() (*AccessType, bool) {
-	if o == nil || IsNil(o.AccessType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AccessType, true
+	return &o.AccessType, true
 }
 
-// HasAccessType returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasAccessType() bool {
-	if o != nil && !IsNil(o.AccessType) {
-		return true
-	}
-
-	return false
-}
-
-// SetAccessType gets a reference to the given AccessType and assigns it to the AccessType field.
+// SetAccessType sets field value
 func (o *PermissionGroupModel) SetAccessType(v AccessType) {
-	o.AccessType = &v
+	o.AccessType = v
 }
 
-// GetNewEnvironmentAccessType returns the NewEnvironmentAccessType field value if set, zero value otherwise.
+// GetNewEnvironmentAccessType returns the NewEnvironmentAccessType field value
 func (o *PermissionGroupModel) GetNewEnvironmentAccessType() EnvironmentAccessType {
-	if o == nil || IsNil(o.NewEnvironmentAccessType) {
+	if o == nil {
 		var ret EnvironmentAccessType
 		return ret
 	}
-	return *o.NewEnvironmentAccessType
+
+	return o.NewEnvironmentAccessType
 }
 
-// GetNewEnvironmentAccessTypeOk returns a tuple with the NewEnvironmentAccessType field value if set, nil otherwise
+// GetNewEnvironmentAccessTypeOk returns a tuple with the NewEnvironmentAccessType field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetNewEnvironmentAccessTypeOk() (*EnvironmentAccessType, bool) {
-	if o == nil || IsNil(o.NewEnvironmentAccessType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.NewEnvironmentAccessType, true
+	return &o.NewEnvironmentAccessType, true
 }
 
-// HasNewEnvironmentAccessType returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasNewEnvironmentAccessType() bool {
-	if o != nil && !IsNil(o.NewEnvironmentAccessType) {
-		return true
-	}
-
-	return false
-}
-
-// SetNewEnvironmentAccessType gets a reference to the given EnvironmentAccessType and assigns it to the NewEnvironmentAccessType field.
+// SetNewEnvironmentAccessType sets field value
 func (o *PermissionGroupModel) SetNewEnvironmentAccessType(v EnvironmentAccessType) {
-	o.NewEnvironmentAccessType = &v
+	o.NewEnvironmentAccessType = v
 }
 
-// GetEnvironmentAccesses returns the EnvironmentAccesses field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetEnvironmentAccesses returns the EnvironmentAccesses field value
 func (o *PermissionGroupModel) GetEnvironmentAccesses() []EnvironmentAccessModel {
 	if o == nil {
 		var ret []EnvironmentAccessModel
 		return ret
 	}
+
 	return o.EnvironmentAccesses
 }
 
-// GetEnvironmentAccessesOk returns a tuple with the EnvironmentAccesses field value if set, nil otherwise
+// GetEnvironmentAccessesOk returns a tuple with the EnvironmentAccesses field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PermissionGroupModel) GetEnvironmentAccessesOk() ([]EnvironmentAccessModel, bool) {
-	if o == nil || IsNil(o.EnvironmentAccesses) {
+	if o == nil {
 		return nil, false
 	}
 	return o.EnvironmentAccesses, true
 }
 
-// HasEnvironmentAccesses returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasEnvironmentAccesses() bool {
-	if o != nil && !IsNil(o.EnvironmentAccesses) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironmentAccesses gets a reference to the given []EnvironmentAccessModel and assigns it to the EnvironmentAccesses field.
+// SetEnvironmentAccesses sets field value
 func (o *PermissionGroupModel) SetEnvironmentAccesses(v []EnvironmentAccessModel) {
 	o.EnvironmentAccesses = v
 }
 
-// GetProduct returns the Product field value if set, zero value otherwise.
+// GetProduct returns the Product field value
 func (o *PermissionGroupModel) GetProduct() ProductModel {
-	if o == nil || IsNil(o.Product) {
+	if o == nil {
 		var ret ProductModel
 		return ret
 	}
-	return *o.Product
+
+	return o.Product
 }
 
-// GetProductOk returns a tuple with the Product field value if set, nil otherwise
+// GetProductOk returns a tuple with the Product field value
 // and a boolean to check if the value has been set.
 func (o *PermissionGroupModel) GetProductOk() (*ProductModel, bool) {
-	if o == nil || IsNil(o.Product) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Product, true
+	return &o.Product, true
 }
 
-// HasProduct returns a boolean if a field has been set.
-func (o *PermissionGroupModel) HasProduct() bool {
-	if o != nil && !IsNil(o.Product) {
-		return true
-	}
-
-	return false
-}
-
-// SetProduct gets a reference to the given ProductModel and assigns it to the Product field.
+// SetProduct sets field value
 func (o *PermissionGroupModel) SetProduct(v ProductModel) {
-	o.Product = &v
+	o.Product = v
 }
 
 func (o PermissionGroupModel) MarshalJSON() ([]byte, error) {
@@ -975,88 +779,97 @@ func (o PermissionGroupModel) MarshalJSON() ([]byte, error) {
 
 func (o PermissionGroupModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.PermissionGroupId) {
-		toSerialize["permissionGroupId"] = o.PermissionGroupId
-	}
-	if o.Name.IsSet() {
-		toSerialize["name"] = o.Name.Get()
-	}
-	if !IsNil(o.CanManageMembers) {
-		toSerialize["canManageMembers"] = o.CanManageMembers
-	}
-	if !IsNil(o.CanCreateOrUpdateConfig) {
-		toSerialize["canCreateOrUpdateConfig"] = o.CanCreateOrUpdateConfig
-	}
-	if !IsNil(o.CanDeleteConfig) {
-		toSerialize["canDeleteConfig"] = o.CanDeleteConfig
-	}
-	if !IsNil(o.CanCreateOrUpdateEnvironment) {
-		toSerialize["canCreateOrUpdateEnvironment"] = o.CanCreateOrUpdateEnvironment
-	}
-	if !IsNil(o.CanDeleteEnvironment) {
-		toSerialize["canDeleteEnvironment"] = o.CanDeleteEnvironment
-	}
-	if !IsNil(o.CanCreateOrUpdateSetting) {
-		toSerialize["canCreateOrUpdateSetting"] = o.CanCreateOrUpdateSetting
-	}
-	if !IsNil(o.CanTagSetting) {
-		toSerialize["canTagSetting"] = o.CanTagSetting
-	}
-	if !IsNil(o.CanDeleteSetting) {
-		toSerialize["canDeleteSetting"] = o.CanDeleteSetting
-	}
-	if !IsNil(o.CanCreateOrUpdateTag) {
-		toSerialize["canCreateOrUpdateTag"] = o.CanCreateOrUpdateTag
-	}
-	if !IsNil(o.CanDeleteTag) {
-		toSerialize["canDeleteTag"] = o.CanDeleteTag
-	}
-	if !IsNil(o.CanManageWebhook) {
-		toSerialize["canManageWebhook"] = o.CanManageWebhook
-	}
-	if !IsNil(o.CanUseExportImport) {
-		toSerialize["canUseExportImport"] = o.CanUseExportImport
-	}
-	if !IsNil(o.CanManageProductPreferences) {
-		toSerialize["canManageProductPreferences"] = o.CanManageProductPreferences
-	}
-	if !IsNil(o.CanManageIntegrations) {
-		toSerialize["canManageIntegrations"] = o.CanManageIntegrations
-	}
-	if !IsNil(o.CanViewSdkKey) {
-		toSerialize["canViewSdkKey"] = o.CanViewSdkKey
-	}
-	if !IsNil(o.CanRotateSdkKey) {
-		toSerialize["canRotateSdkKey"] = o.CanRotateSdkKey
-	}
-	if !IsNil(o.CanCreateOrUpdateSegments) {
-		toSerialize["canCreateOrUpdateSegments"] = o.CanCreateOrUpdateSegments
-	}
-	if !IsNil(o.CanDeleteSegments) {
-		toSerialize["canDeleteSegments"] = o.CanDeleteSegments
-	}
-	if !IsNil(o.CanViewProductAuditLog) {
-		toSerialize["canViewProductAuditLog"] = o.CanViewProductAuditLog
-	}
-	if !IsNil(o.CanViewProductStatistics) {
-		toSerialize["canViewProductStatistics"] = o.CanViewProductStatistics
-	}
-	if !IsNil(o.CanDisable2FA) {
-		toSerialize["canDisable2FA"] = o.CanDisable2FA
-	}
-	if !IsNil(o.AccessType) {
-		toSerialize["accessType"] = o.AccessType
-	}
-	if !IsNil(o.NewEnvironmentAccessType) {
-		toSerialize["newEnvironmentAccessType"] = o.NewEnvironmentAccessType
-	}
-	if o.EnvironmentAccesses != nil {
-		toSerialize["environmentAccesses"] = o.EnvironmentAccesses
-	}
-	if !IsNil(o.Product) {
-		toSerialize["product"] = o.Product
-	}
+	toSerialize["permissionGroupId"] = o.PermissionGroupId
+	toSerialize["name"] = o.Name
+	toSerialize["canManageMembers"] = o.CanManageMembers
+	toSerialize["canCreateOrUpdateConfig"] = o.CanCreateOrUpdateConfig
+	toSerialize["canDeleteConfig"] = o.CanDeleteConfig
+	toSerialize["canCreateOrUpdateEnvironment"] = o.CanCreateOrUpdateEnvironment
+	toSerialize["canDeleteEnvironment"] = o.CanDeleteEnvironment
+	toSerialize["canCreateOrUpdateSetting"] = o.CanCreateOrUpdateSetting
+	toSerialize["canTagSetting"] = o.CanTagSetting
+	toSerialize["canDeleteSetting"] = o.CanDeleteSetting
+	toSerialize["canCreateOrUpdateTag"] = o.CanCreateOrUpdateTag
+	toSerialize["canDeleteTag"] = o.CanDeleteTag
+	toSerialize["canManageWebhook"] = o.CanManageWebhook
+	toSerialize["canUseExportImport"] = o.CanUseExportImport
+	toSerialize["canManageProductPreferences"] = o.CanManageProductPreferences
+	toSerialize["canManageIntegrations"] = o.CanManageIntegrations
+	toSerialize["canViewSdkKey"] = o.CanViewSdkKey
+	toSerialize["canRotateSdkKey"] = o.CanRotateSdkKey
+	toSerialize["canCreateOrUpdateSegments"] = o.CanCreateOrUpdateSegments
+	toSerialize["canDeleteSegments"] = o.CanDeleteSegments
+	toSerialize["canViewProductAuditLog"] = o.CanViewProductAuditLog
+	toSerialize["canViewProductStatistics"] = o.CanViewProductStatistics
+	toSerialize["canDisable2FA"] = o.CanDisable2FA
+	toSerialize["accessType"] = o.AccessType
+	toSerialize["newEnvironmentAccessType"] = o.NewEnvironmentAccessType
+	toSerialize["environmentAccesses"] = o.EnvironmentAccesses
+	toSerialize["product"] = o.Product
 	return toSerialize, nil
+}
+
+func (o *PermissionGroupModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"permissionGroupId",
+		"name",
+		"canManageMembers",
+		"canCreateOrUpdateConfig",
+		"canDeleteConfig",
+		"canCreateOrUpdateEnvironment",
+		"canDeleteEnvironment",
+		"canCreateOrUpdateSetting",
+		"canTagSetting",
+		"canDeleteSetting",
+		"canCreateOrUpdateTag",
+		"canDeleteTag",
+		"canManageWebhook",
+		"canUseExportImport",
+		"canManageProductPreferences",
+		"canManageIntegrations",
+		"canViewSdkKey",
+		"canRotateSdkKey",
+		"canCreateOrUpdateSegments",
+		"canDeleteSegments",
+		"canViewProductAuditLog",
+		"canViewProductStatistics",
+		"canDisable2FA",
+		"accessType",
+		"newEnvironmentAccessType",
+		"environmentAccesses",
+		"product",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varPermissionGroupModel := _PermissionGroupModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varPermissionGroupModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = PermissionGroupModel(varPermissionGroupModel)
+
+	return err
 }
 
 type NullablePermissionGroupModel struct {

@@ -14,6 +14,8 @@ package configcatpublicapi
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the SettingFormulaModel type satisfies the MappedNullable interface at compile time
@@ -21,37 +23,54 @@ var _ MappedNullable = &SettingFormulaModel{}
 
 // SettingFormulaModel struct for SettingFormulaModel
 type SettingFormulaModel struct {
-	LastVersionId *string `json:"lastVersionId,omitempty"`
-	DefaultValue *ValueModel `json:"defaultValue,omitempty"`
+	LastVersionId string `json:"lastVersionId"`
+	DefaultValue ValueModel `json:"defaultValue"`
 	// The targeting rules of the Feature Flag or Setting.
-	TargetingRules []TargetingRuleModel `json:"targetingRules,omitempty"`
-	Setting *SettingDataModel `json:"setting,omitempty"`
+	TargetingRules []TargetingRuleModel `json:"targetingRules"`
+	Setting SettingDataModel `json:"setting"`
 	// The last updated date and time when the Feature Flag or Setting.
-	UpdatedAt NullableTime `json:"updatedAt,omitempty"`
+	UpdatedAt NullableTime `json:"updatedAt"`
 	// The user attribute used for percentage evaluation. If not set, it defaults to the `Identifier` user object attribute.
-	PercentageEvaluationAttribute NullableString `json:"percentageEvaluationAttribute,omitempty"`
+	PercentageEvaluationAttribute NullableString `json:"percentageEvaluationAttribute"`
 	// The email of the user who last updated the Feature Flag or Setting.
-	LastUpdaterUserEmail NullableString `json:"lastUpdaterUserEmail,omitempty"`
+	LastUpdaterUserEmail NullableString `json:"lastUpdaterUserEmail"`
 	// The name of the user who last updated the Feature Flag or Setting.
-	LastUpdaterUserFullName NullableString `json:"lastUpdaterUserFullName,omitempty"`
+	LastUpdaterUserFullName NullableString `json:"lastUpdaterUserFullName"`
 	// The integration links attached to the Feature Flag or Setting.
-	IntegrationLinks []IntegrationLinkModel `json:"integrationLinks,omitempty"`
+	IntegrationLinks []IntegrationLinkModel `json:"integrationLinks"`
 	// The tags attached to the Feature Flag or Setting.
-	SettingTags []SettingTagModel `json:"settingTags,omitempty"`
+	SettingTags []SettingTagModel `json:"settingTags"`
 	// List of Feature Flag and Setting IDs where the actual Feature Flag or Setting is prerequisite.
-	SettingIdsWherePrerequisite []int32 `json:"settingIdsWherePrerequisite,omitempty"`
-	Config *ConfigModel `json:"config,omitempty"`
-	Environment *EnvironmentModel `json:"environment,omitempty"`
-	ReadOnly *bool `json:"readOnly,omitempty"`
-	FeatureFlagLimitations *FeatureFlagLimitations `json:"featureFlagLimitations,omitempty"`
+	SettingIdsWherePrerequisite []int32 `json:"settingIdsWherePrerequisite"`
+	Config ConfigModel `json:"config"`
+	Environment EnvironmentModel `json:"environment"`
+	ReadOnly bool `json:"readOnly"`
+	FeatureFlagLimitations FeatureFlagLimitations `json:"featureFlagLimitations"`
 }
+
+type _SettingFormulaModel SettingFormulaModel
 
 // NewSettingFormulaModel instantiates a new SettingFormulaModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSettingFormulaModel() *SettingFormulaModel {
+func NewSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targetingRules []TargetingRuleModel, setting SettingDataModel, updatedAt NullableTime, percentageEvaluationAttribute NullableString, lastUpdaterUserEmail NullableString, lastUpdaterUserFullName NullableString, integrationLinks []IntegrationLinkModel, settingTags []SettingTagModel, settingIdsWherePrerequisite []int32, config ConfigModel, environment EnvironmentModel, readOnly bool, featureFlagLimitations FeatureFlagLimitations) *SettingFormulaModel {
 	this := SettingFormulaModel{}
+	this.LastVersionId = lastVersionId
+	this.DefaultValue = defaultValue
+	this.TargetingRules = targetingRules
+	this.Setting = setting
+	this.UpdatedAt = updatedAt
+	this.PercentageEvaluationAttribute = percentageEvaluationAttribute
+	this.LastUpdaterUserEmail = lastUpdaterUserEmail
+	this.LastUpdaterUserFullName = lastUpdaterUserFullName
+	this.IntegrationLinks = integrationLinks
+	this.SettingTags = settingTags
+	this.SettingIdsWherePrerequisite = settingIdsWherePrerequisite
+	this.Config = config
+	this.Environment = environment
+	this.ReadOnly = readOnly
+	this.FeatureFlagLimitations = featureFlagLimitations
 	return &this
 }
 
@@ -63,145 +82,114 @@ func NewSettingFormulaModelWithDefaults() *SettingFormulaModel {
 	return &this
 }
 
-// GetLastVersionId returns the LastVersionId field value if set, zero value otherwise.
+// GetLastVersionId returns the LastVersionId field value
 func (o *SettingFormulaModel) GetLastVersionId() string {
-	if o == nil || IsNil(o.LastVersionId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.LastVersionId
+
+	return o.LastVersionId
 }
 
-// GetLastVersionIdOk returns a tuple with the LastVersionId field value if set, nil otherwise
+// GetLastVersionIdOk returns a tuple with the LastVersionId field value
 // and a boolean to check if the value has been set.
 func (o *SettingFormulaModel) GetLastVersionIdOk() (*string, bool) {
-	if o == nil || IsNil(o.LastVersionId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LastVersionId, true
+	return &o.LastVersionId, true
 }
 
-// HasLastVersionId returns a boolean if a field has been set.
-func (o *SettingFormulaModel) HasLastVersionId() bool {
-	if o != nil && !IsNil(o.LastVersionId) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastVersionId gets a reference to the given string and assigns it to the LastVersionId field.
+// SetLastVersionId sets field value
 func (o *SettingFormulaModel) SetLastVersionId(v string) {
-	o.LastVersionId = &v
+	o.LastVersionId = v
 }
 
-// GetDefaultValue returns the DefaultValue field value if set, zero value otherwise.
+// GetDefaultValue returns the DefaultValue field value
 func (o *SettingFormulaModel) GetDefaultValue() ValueModel {
-	if o == nil || IsNil(o.DefaultValue) {
+	if o == nil {
 		var ret ValueModel
 		return ret
 	}
-	return *o.DefaultValue
+
+	return o.DefaultValue
 }
 
-// GetDefaultValueOk returns a tuple with the DefaultValue field value if set, nil otherwise
+// GetDefaultValueOk returns a tuple with the DefaultValue field value
 // and a boolean to check if the value has been set.
 func (o *SettingFormulaModel) GetDefaultValueOk() (*ValueModel, bool) {
-	if o == nil || IsNil(o.DefaultValue) {
+	if o == nil {
 		return nil, false
 	}
-	return o.DefaultValue, true
+	return &o.DefaultValue, true
 }
 
-// HasDefaultValue returns a boolean if a field has been set.
-func (o *SettingFormulaModel) HasDefaultValue() bool {
-	if o != nil && !IsNil(o.DefaultValue) {
-		return true
-	}
-
-	return false
-}
-
-// SetDefaultValue gets a reference to the given ValueModel and assigns it to the DefaultValue field.
+// SetDefaultValue sets field value
 func (o *SettingFormulaModel) SetDefaultValue(v ValueModel) {
-	o.DefaultValue = &v
+	o.DefaultValue = v
 }
 
-// GetTargetingRules returns the TargetingRules field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetTargetingRules returns the TargetingRules field value
 func (o *SettingFormulaModel) GetTargetingRules() []TargetingRuleModel {
 	if o == nil {
 		var ret []TargetingRuleModel
 		return ret
 	}
+
 	return o.TargetingRules
 }
 
-// GetTargetingRulesOk returns a tuple with the TargetingRules field value if set, nil otherwise
+// GetTargetingRulesOk returns a tuple with the TargetingRules field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingFormulaModel) GetTargetingRulesOk() ([]TargetingRuleModel, bool) {
-	if o == nil || IsNil(o.TargetingRules) {
+	if o == nil {
 		return nil, false
 	}
 	return o.TargetingRules, true
 }
 
-// HasTargetingRules returns a boolean if a field has been set.
-func (o *SettingFormulaModel) HasTargetingRules() bool {
-	if o != nil && !IsNil(o.TargetingRules) {
-		return true
-	}
-
-	return false
-}
-
-// SetTargetingRules gets a reference to the given []TargetingRuleModel and assigns it to the TargetingRules field.
+// SetTargetingRules sets field value
 func (o *SettingFormulaModel) SetTargetingRules(v []TargetingRuleModel) {
 	o.TargetingRules = v
 }
 
-// GetSetting returns the Setting field value if set, zero value otherwise.
+// GetSetting returns the Setting field value
 func (o *SettingFormulaModel) GetSetting() SettingDataModel {
-	if o == nil || IsNil(o.Setting) {
+	if o == nil {
 		var ret SettingDataModel
 		return ret
 	}
-	return *o.Setting
+
+	return o.Setting
 }
 
-// GetSettingOk returns a tuple with the Setting field value if set, nil otherwise
+// GetSettingOk returns a tuple with the Setting field value
 // and a boolean to check if the value has been set.
 func (o *SettingFormulaModel) GetSettingOk() (*SettingDataModel, bool) {
-	if o == nil || IsNil(o.Setting) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Setting, true
+	return &o.Setting, true
 }
 
-// HasSetting returns a boolean if a field has been set.
-func (o *SettingFormulaModel) HasSetting() bool {
-	if o != nil && !IsNil(o.Setting) {
-		return true
-	}
-
-	return false
-}
-
-// SetSetting gets a reference to the given SettingDataModel and assigns it to the Setting field.
+// SetSetting sets field value
 func (o *SettingFormulaModel) SetSetting(v SettingDataModel) {
-	o.Setting = &v
+	o.Setting = v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetUpdatedAt returns the UpdatedAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *SettingFormulaModel) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt.Get()) {
+	if o == nil || o.UpdatedAt.Get() == nil {
 		var ret time.Time
 		return ret
 	}
+
 	return *o.UpdatedAt.Get()
 }
 
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingFormulaModel) GetUpdatedAtOk() (*time.Time, bool) {
@@ -211,39 +199,23 @@ func (o *SettingFormulaModel) GetUpdatedAtOk() (*time.Time, bool) {
 	return o.UpdatedAt.Get(), o.UpdatedAt.IsSet()
 }
 
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *SettingFormulaModel) HasUpdatedAt() bool {
-	if o != nil && o.UpdatedAt.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given NullableTime and assigns it to the UpdatedAt field.
+// SetUpdatedAt sets field value
 func (o *SettingFormulaModel) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt.Set(&v)
 }
-// SetUpdatedAtNil sets the value for UpdatedAt to be an explicit nil
-func (o *SettingFormulaModel) SetUpdatedAtNil() {
-	o.UpdatedAt.Set(nil)
-}
 
-// UnsetUpdatedAt ensures that no value is present for UpdatedAt, not even an explicit nil
-func (o *SettingFormulaModel) UnsetUpdatedAt() {
-	o.UpdatedAt.Unset()
-}
-
-// GetPercentageEvaluationAttribute returns the PercentageEvaluationAttribute field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetPercentageEvaluationAttribute returns the PercentageEvaluationAttribute field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *SettingFormulaModel) GetPercentageEvaluationAttribute() string {
-	if o == nil || IsNil(o.PercentageEvaluationAttribute.Get()) {
+	if o == nil || o.PercentageEvaluationAttribute.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.PercentageEvaluationAttribute.Get()
 }
 
-// GetPercentageEvaluationAttributeOk returns a tuple with the PercentageEvaluationAttribute field value if set, nil otherwise
+// GetPercentageEvaluationAttributeOk returns a tuple with the PercentageEvaluationAttribute field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingFormulaModel) GetPercentageEvaluationAttributeOk() (*string, bool) {
@@ -253,39 +225,23 @@ func (o *SettingFormulaModel) GetPercentageEvaluationAttributeOk() (*string, boo
 	return o.PercentageEvaluationAttribute.Get(), o.PercentageEvaluationAttribute.IsSet()
 }
 
-// HasPercentageEvaluationAttribute returns a boolean if a field has been set.
-func (o *SettingFormulaModel) HasPercentageEvaluationAttribute() bool {
-	if o != nil && o.PercentageEvaluationAttribute.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetPercentageEvaluationAttribute gets a reference to the given NullableString and assigns it to the PercentageEvaluationAttribute field.
+// SetPercentageEvaluationAttribute sets field value
 func (o *SettingFormulaModel) SetPercentageEvaluationAttribute(v string) {
 	o.PercentageEvaluationAttribute.Set(&v)
 }
-// SetPercentageEvaluationAttributeNil sets the value for PercentageEvaluationAttribute to be an explicit nil
-func (o *SettingFormulaModel) SetPercentageEvaluationAttributeNil() {
-	o.PercentageEvaluationAttribute.Set(nil)
-}
 
-// UnsetPercentageEvaluationAttribute ensures that no value is present for PercentageEvaluationAttribute, not even an explicit nil
-func (o *SettingFormulaModel) UnsetPercentageEvaluationAttribute() {
-	o.PercentageEvaluationAttribute.Unset()
-}
-
-// GetLastUpdaterUserEmail returns the LastUpdaterUserEmail field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLastUpdaterUserEmail returns the LastUpdaterUserEmail field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *SettingFormulaModel) GetLastUpdaterUserEmail() string {
-	if o == nil || IsNil(o.LastUpdaterUserEmail.Get()) {
+	if o == nil || o.LastUpdaterUserEmail.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.LastUpdaterUserEmail.Get()
 }
 
-// GetLastUpdaterUserEmailOk returns a tuple with the LastUpdaterUserEmail field value if set, nil otherwise
+// GetLastUpdaterUserEmailOk returns a tuple with the LastUpdaterUserEmail field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingFormulaModel) GetLastUpdaterUserEmailOk() (*string, bool) {
@@ -295,39 +251,23 @@ func (o *SettingFormulaModel) GetLastUpdaterUserEmailOk() (*string, bool) {
 	return o.LastUpdaterUserEmail.Get(), o.LastUpdaterUserEmail.IsSet()
 }
 
-// HasLastUpdaterUserEmail returns a boolean if a field has been set.
-func (o *SettingFormulaModel) HasLastUpdaterUserEmail() bool {
-	if o != nil && o.LastUpdaterUserEmail.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLastUpdaterUserEmail gets a reference to the given NullableString and assigns it to the LastUpdaterUserEmail field.
+// SetLastUpdaterUserEmail sets field value
 func (o *SettingFormulaModel) SetLastUpdaterUserEmail(v string) {
 	o.LastUpdaterUserEmail.Set(&v)
 }
-// SetLastUpdaterUserEmailNil sets the value for LastUpdaterUserEmail to be an explicit nil
-func (o *SettingFormulaModel) SetLastUpdaterUserEmailNil() {
-	o.LastUpdaterUserEmail.Set(nil)
-}
 
-// UnsetLastUpdaterUserEmail ensures that no value is present for LastUpdaterUserEmail, not even an explicit nil
-func (o *SettingFormulaModel) UnsetLastUpdaterUserEmail() {
-	o.LastUpdaterUserEmail.Unset()
-}
-
-// GetLastUpdaterUserFullName returns the LastUpdaterUserFullName field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLastUpdaterUserFullName returns the LastUpdaterUserFullName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *SettingFormulaModel) GetLastUpdaterUserFullName() string {
-	if o == nil || IsNil(o.LastUpdaterUserFullName.Get()) {
+	if o == nil || o.LastUpdaterUserFullName.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.LastUpdaterUserFullName.Get()
 }
 
-// GetLastUpdaterUserFullNameOk returns a tuple with the LastUpdaterUserFullName field value if set, nil otherwise
+// GetLastUpdaterUserFullNameOk returns a tuple with the LastUpdaterUserFullName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingFormulaModel) GetLastUpdaterUserFullNameOk() (*string, bool) {
@@ -337,254 +277,177 @@ func (o *SettingFormulaModel) GetLastUpdaterUserFullNameOk() (*string, bool) {
 	return o.LastUpdaterUserFullName.Get(), o.LastUpdaterUserFullName.IsSet()
 }
 
-// HasLastUpdaterUserFullName returns a boolean if a field has been set.
-func (o *SettingFormulaModel) HasLastUpdaterUserFullName() bool {
-	if o != nil && o.LastUpdaterUserFullName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLastUpdaterUserFullName gets a reference to the given NullableString and assigns it to the LastUpdaterUserFullName field.
+// SetLastUpdaterUserFullName sets field value
 func (o *SettingFormulaModel) SetLastUpdaterUserFullName(v string) {
 	o.LastUpdaterUserFullName.Set(&v)
 }
-// SetLastUpdaterUserFullNameNil sets the value for LastUpdaterUserFullName to be an explicit nil
-func (o *SettingFormulaModel) SetLastUpdaterUserFullNameNil() {
-	o.LastUpdaterUserFullName.Set(nil)
-}
 
-// UnsetLastUpdaterUserFullName ensures that no value is present for LastUpdaterUserFullName, not even an explicit nil
-func (o *SettingFormulaModel) UnsetLastUpdaterUserFullName() {
-	o.LastUpdaterUserFullName.Unset()
-}
-
-// GetIntegrationLinks returns the IntegrationLinks field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetIntegrationLinks returns the IntegrationLinks field value
 func (o *SettingFormulaModel) GetIntegrationLinks() []IntegrationLinkModel {
 	if o == nil {
 		var ret []IntegrationLinkModel
 		return ret
 	}
+
 	return o.IntegrationLinks
 }
 
-// GetIntegrationLinksOk returns a tuple with the IntegrationLinks field value if set, nil otherwise
+// GetIntegrationLinksOk returns a tuple with the IntegrationLinks field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingFormulaModel) GetIntegrationLinksOk() ([]IntegrationLinkModel, bool) {
-	if o == nil || IsNil(o.IntegrationLinks) {
+	if o == nil {
 		return nil, false
 	}
 	return o.IntegrationLinks, true
 }
 
-// HasIntegrationLinks returns a boolean if a field has been set.
-func (o *SettingFormulaModel) HasIntegrationLinks() bool {
-	if o != nil && !IsNil(o.IntegrationLinks) {
-		return true
-	}
-
-	return false
-}
-
-// SetIntegrationLinks gets a reference to the given []IntegrationLinkModel and assigns it to the IntegrationLinks field.
+// SetIntegrationLinks sets field value
 func (o *SettingFormulaModel) SetIntegrationLinks(v []IntegrationLinkModel) {
 	o.IntegrationLinks = v
 }
 
-// GetSettingTags returns the SettingTags field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSettingTags returns the SettingTags field value
 func (o *SettingFormulaModel) GetSettingTags() []SettingTagModel {
 	if o == nil {
 		var ret []SettingTagModel
 		return ret
 	}
+
 	return o.SettingTags
 }
 
-// GetSettingTagsOk returns a tuple with the SettingTags field value if set, nil otherwise
+// GetSettingTagsOk returns a tuple with the SettingTags field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingFormulaModel) GetSettingTagsOk() ([]SettingTagModel, bool) {
-	if o == nil || IsNil(o.SettingTags) {
+	if o == nil {
 		return nil, false
 	}
 	return o.SettingTags, true
 }
 
-// HasSettingTags returns a boolean if a field has been set.
-func (o *SettingFormulaModel) HasSettingTags() bool {
-	if o != nil && !IsNil(o.SettingTags) {
-		return true
-	}
-
-	return false
-}
-
-// SetSettingTags gets a reference to the given []SettingTagModel and assigns it to the SettingTags field.
+// SetSettingTags sets field value
 func (o *SettingFormulaModel) SetSettingTags(v []SettingTagModel) {
 	o.SettingTags = v
 }
 
-// GetSettingIdsWherePrerequisite returns the SettingIdsWherePrerequisite field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSettingIdsWherePrerequisite returns the SettingIdsWherePrerequisite field value
 func (o *SettingFormulaModel) GetSettingIdsWherePrerequisite() []int32 {
 	if o == nil {
 		var ret []int32
 		return ret
 	}
+
 	return o.SettingIdsWherePrerequisite
 }
 
-// GetSettingIdsWherePrerequisiteOk returns a tuple with the SettingIdsWherePrerequisite field value if set, nil otherwise
+// GetSettingIdsWherePrerequisiteOk returns a tuple with the SettingIdsWherePrerequisite field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingFormulaModel) GetSettingIdsWherePrerequisiteOk() ([]int32, bool) {
-	if o == nil || IsNil(o.SettingIdsWherePrerequisite) {
+	if o == nil {
 		return nil, false
 	}
 	return o.SettingIdsWherePrerequisite, true
 }
 
-// HasSettingIdsWherePrerequisite returns a boolean if a field has been set.
-func (o *SettingFormulaModel) HasSettingIdsWherePrerequisite() bool {
-	if o != nil && !IsNil(o.SettingIdsWherePrerequisite) {
-		return true
-	}
-
-	return false
-}
-
-// SetSettingIdsWherePrerequisite gets a reference to the given []int32 and assigns it to the SettingIdsWherePrerequisite field.
+// SetSettingIdsWherePrerequisite sets field value
 func (o *SettingFormulaModel) SetSettingIdsWherePrerequisite(v []int32) {
 	o.SettingIdsWherePrerequisite = v
 }
 
-// GetConfig returns the Config field value if set, zero value otherwise.
+// GetConfig returns the Config field value
 func (o *SettingFormulaModel) GetConfig() ConfigModel {
-	if o == nil || IsNil(o.Config) {
+	if o == nil {
 		var ret ConfigModel
 		return ret
 	}
-	return *o.Config
+
+	return o.Config
 }
 
-// GetConfigOk returns a tuple with the Config field value if set, nil otherwise
+// GetConfigOk returns a tuple with the Config field value
 // and a boolean to check if the value has been set.
 func (o *SettingFormulaModel) GetConfigOk() (*ConfigModel, bool) {
-	if o == nil || IsNil(o.Config) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Config, true
+	return &o.Config, true
 }
 
-// HasConfig returns a boolean if a field has been set.
-func (o *SettingFormulaModel) HasConfig() bool {
-	if o != nil && !IsNil(o.Config) {
-		return true
-	}
-
-	return false
-}
-
-// SetConfig gets a reference to the given ConfigModel and assigns it to the Config field.
+// SetConfig sets field value
 func (o *SettingFormulaModel) SetConfig(v ConfigModel) {
-	o.Config = &v
+	o.Config = v
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
+// GetEnvironment returns the Environment field value
 func (o *SettingFormulaModel) GetEnvironment() EnvironmentModel {
-	if o == nil || IsNil(o.Environment) {
+	if o == nil {
 		var ret EnvironmentModel
 		return ret
 	}
-	return *o.Environment
+
+	return o.Environment
 }
 
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
+// GetEnvironmentOk returns a tuple with the Environment field value
 // and a boolean to check if the value has been set.
 func (o *SettingFormulaModel) GetEnvironmentOk() (*EnvironmentModel, bool) {
-	if o == nil || IsNil(o.Environment) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Environment, true
+	return &o.Environment, true
 }
 
-// HasEnvironment returns a boolean if a field has been set.
-func (o *SettingFormulaModel) HasEnvironment() bool {
-	if o != nil && !IsNil(o.Environment) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given EnvironmentModel and assigns it to the Environment field.
+// SetEnvironment sets field value
 func (o *SettingFormulaModel) SetEnvironment(v EnvironmentModel) {
-	o.Environment = &v
+	o.Environment = v
 }
 
-// GetReadOnly returns the ReadOnly field value if set, zero value otherwise.
+// GetReadOnly returns the ReadOnly field value
 func (o *SettingFormulaModel) GetReadOnly() bool {
-	if o == nil || IsNil(o.ReadOnly) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.ReadOnly
+
+	return o.ReadOnly
 }
 
-// GetReadOnlyOk returns a tuple with the ReadOnly field value if set, nil otherwise
+// GetReadOnlyOk returns a tuple with the ReadOnly field value
 // and a boolean to check if the value has been set.
 func (o *SettingFormulaModel) GetReadOnlyOk() (*bool, bool) {
-	if o == nil || IsNil(o.ReadOnly) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReadOnly, true
+	return &o.ReadOnly, true
 }
 
-// HasReadOnly returns a boolean if a field has been set.
-func (o *SettingFormulaModel) HasReadOnly() bool {
-	if o != nil && !IsNil(o.ReadOnly) {
-		return true
-	}
-
-	return false
-}
-
-// SetReadOnly gets a reference to the given bool and assigns it to the ReadOnly field.
+// SetReadOnly sets field value
 func (o *SettingFormulaModel) SetReadOnly(v bool) {
-	o.ReadOnly = &v
+	o.ReadOnly = v
 }
 
-// GetFeatureFlagLimitations returns the FeatureFlagLimitations field value if set, zero value otherwise.
+// GetFeatureFlagLimitations returns the FeatureFlagLimitations field value
 func (o *SettingFormulaModel) GetFeatureFlagLimitations() FeatureFlagLimitations {
-	if o == nil || IsNil(o.FeatureFlagLimitations) {
+	if o == nil {
 		var ret FeatureFlagLimitations
 		return ret
 	}
-	return *o.FeatureFlagLimitations
+
+	return o.FeatureFlagLimitations
 }
 
-// GetFeatureFlagLimitationsOk returns a tuple with the FeatureFlagLimitations field value if set, nil otherwise
+// GetFeatureFlagLimitationsOk returns a tuple with the FeatureFlagLimitations field value
 // and a boolean to check if the value has been set.
 func (o *SettingFormulaModel) GetFeatureFlagLimitationsOk() (*FeatureFlagLimitations, bool) {
-	if o == nil || IsNil(o.FeatureFlagLimitations) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FeatureFlagLimitations, true
+	return &o.FeatureFlagLimitations, true
 }
 
-// HasFeatureFlagLimitations returns a boolean if a field has been set.
-func (o *SettingFormulaModel) HasFeatureFlagLimitations() bool {
-	if o != nil && !IsNil(o.FeatureFlagLimitations) {
-		return true
-	}
-
-	return false
-}
-
-// SetFeatureFlagLimitations gets a reference to the given FeatureFlagLimitations and assigns it to the FeatureFlagLimitations field.
+// SetFeatureFlagLimitations sets field value
 func (o *SettingFormulaModel) SetFeatureFlagLimitations(v FeatureFlagLimitations) {
-	o.FeatureFlagLimitations = &v
+	o.FeatureFlagLimitations = v
 }
 
 func (o SettingFormulaModel) MarshalJSON() ([]byte, error) {
@@ -597,52 +460,73 @@ func (o SettingFormulaModel) MarshalJSON() ([]byte, error) {
 
 func (o SettingFormulaModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.LastVersionId) {
-		toSerialize["lastVersionId"] = o.LastVersionId
-	}
-	if !IsNil(o.DefaultValue) {
-		toSerialize["defaultValue"] = o.DefaultValue
-	}
-	if o.TargetingRules != nil {
-		toSerialize["targetingRules"] = o.TargetingRules
-	}
-	if !IsNil(o.Setting) {
-		toSerialize["setting"] = o.Setting
-	}
-	if o.UpdatedAt.IsSet() {
-		toSerialize["updatedAt"] = o.UpdatedAt.Get()
-	}
-	if o.PercentageEvaluationAttribute.IsSet() {
-		toSerialize["percentageEvaluationAttribute"] = o.PercentageEvaluationAttribute.Get()
-	}
-	if o.LastUpdaterUserEmail.IsSet() {
-		toSerialize["lastUpdaterUserEmail"] = o.LastUpdaterUserEmail.Get()
-	}
-	if o.LastUpdaterUserFullName.IsSet() {
-		toSerialize["lastUpdaterUserFullName"] = o.LastUpdaterUserFullName.Get()
-	}
-	if o.IntegrationLinks != nil {
-		toSerialize["integrationLinks"] = o.IntegrationLinks
-	}
-	if o.SettingTags != nil {
-		toSerialize["settingTags"] = o.SettingTags
-	}
-	if o.SettingIdsWherePrerequisite != nil {
-		toSerialize["settingIdsWherePrerequisite"] = o.SettingIdsWherePrerequisite
-	}
-	if !IsNil(o.Config) {
-		toSerialize["config"] = o.Config
-	}
-	if !IsNil(o.Environment) {
-		toSerialize["environment"] = o.Environment
-	}
-	if !IsNil(o.ReadOnly) {
-		toSerialize["readOnly"] = o.ReadOnly
-	}
-	if !IsNil(o.FeatureFlagLimitations) {
-		toSerialize["featureFlagLimitations"] = o.FeatureFlagLimitations
-	}
+	toSerialize["lastVersionId"] = o.LastVersionId
+	toSerialize["defaultValue"] = o.DefaultValue
+	toSerialize["targetingRules"] = o.TargetingRules
+	toSerialize["setting"] = o.Setting
+	toSerialize["updatedAt"] = o.UpdatedAt.Get()
+	toSerialize["percentageEvaluationAttribute"] = o.PercentageEvaluationAttribute.Get()
+	toSerialize["lastUpdaterUserEmail"] = o.LastUpdaterUserEmail.Get()
+	toSerialize["lastUpdaterUserFullName"] = o.LastUpdaterUserFullName.Get()
+	toSerialize["integrationLinks"] = o.IntegrationLinks
+	toSerialize["settingTags"] = o.SettingTags
+	toSerialize["settingIdsWherePrerequisite"] = o.SettingIdsWherePrerequisite
+	toSerialize["config"] = o.Config
+	toSerialize["environment"] = o.Environment
+	toSerialize["readOnly"] = o.ReadOnly
+	toSerialize["featureFlagLimitations"] = o.FeatureFlagLimitations
 	return toSerialize, nil
+}
+
+func (o *SettingFormulaModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"lastVersionId",
+		"defaultValue",
+		"targetingRules",
+		"setting",
+		"updatedAt",
+		"percentageEvaluationAttribute",
+		"lastUpdaterUserEmail",
+		"lastUpdaterUserFullName",
+		"integrationLinks",
+		"settingTags",
+		"settingIdsWherePrerequisite",
+		"config",
+		"environment",
+		"readOnly",
+		"featureFlagLimitations",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSettingFormulaModel := _SettingFormulaModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varSettingFormulaModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SettingFormulaModel(varSettingFormulaModel)
+
+	return err
 }
 
 type NullableSettingFormulaModel struct {

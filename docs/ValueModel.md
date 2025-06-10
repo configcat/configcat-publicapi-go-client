@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BoolValue** | Pointer to **NullableBool** | The served value in case of a boolean Feature Flag. | [optional] 
-**StringValue** | Pointer to **NullableString** | The served value in case of a text Setting. | [optional] 
-**IntValue** | Pointer to **NullableInt32** | The served value in case of a whole number Setting. | [optional] 
-**DoubleValue** | Pointer to **NullableFloat64** | The served value in case of a decimal number Setting. | [optional] 
+**BoolValue** | **NullableBool** | The served value in case of a boolean Feature Flag. | 
+**StringValue** | **NullableString** | The served value in case of a text Setting. | 
+**IntValue** | **NullableInt32** | The served value in case of a whole number Setting. | 
+**DoubleValue** | **NullableFloat64** | The served value in case of a decimal number Setting. | 
 
 ## Methods
 
 ### NewValueModel
 
-`func NewValueModel() *ValueModel`
+`func NewValueModel(boolValue NullableBool, stringValue NullableString, intValue NullableInt32, doubleValue NullableFloat64, ) *ValueModel`
 
 NewValueModel instantiates a new ValueModel object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetBoolValue sets BoolValue field to given value.
 
-### HasBoolValue
-
-`func (o *ValueModel) HasBoolValue() bool`
-
-HasBoolValue returns a boolean if a field has been set.
 
 ### SetBoolValueNil
 
@@ -82,11 +77,6 @@ and a boolean to check if the value has been set.
 
 SetStringValue sets StringValue field to given value.
 
-### HasStringValue
-
-`func (o *ValueModel) HasStringValue() bool`
-
-HasStringValue returns a boolean if a field has been set.
 
 ### SetStringValueNil
 
@@ -117,11 +107,6 @@ and a boolean to check if the value has been set.
 
 SetIntValue sets IntValue field to given value.
 
-### HasIntValue
-
-`func (o *ValueModel) HasIntValue() bool`
-
-HasIntValue returns a boolean if a field has been set.
 
 ### SetIntValueNil
 
@@ -152,11 +137,6 @@ and a boolean to check if the value has been set.
 
 SetDoubleValue sets DoubleValue field to given value.
 
-### HasDoubleValue
-
-`func (o *ValueModel) HasDoubleValue() bool`
-
-HasDoubleValue returns a boolean if a field has been set.
 
 ### SetDoubleValueNil
 

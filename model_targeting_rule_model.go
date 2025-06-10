@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the TargetingRuleModel type satisfies the MappedNullable interface at compile time
@@ -20,19 +22,24 @@ var _ MappedNullable = &TargetingRuleModel{}
 
 // TargetingRuleModel struct for TargetingRuleModel
 type TargetingRuleModel struct {
-	// The list of conditions that are combined with logical AND operators.  It can be one of the following:  - User condition  - Segment condition  - Prerequisite flag condition
-	Conditions []ConditionModel `json:"conditions,omitempty"`
+	// The list of conditions that are combined with logical AND operators. It can be one of the following: - User condition - Segment condition - Prerequisite flag condition
+	Conditions []ConditionModel `json:"conditions"`
 	// The percentage options from where the evaluation process will choose a value based on the flag's percentage evaluation attribute.
-	PercentageOptions []PercentageOptionModel `json:"percentageOptions,omitempty"`
-	Value *ValueModel `json:"value,omitempty"`
+	PercentageOptions []PercentageOptionModel `json:"percentageOptions"`
+	Value NullableValueModel `json:"value"`
 }
+
+type _TargetingRuleModel TargetingRuleModel
 
 // NewTargetingRuleModel instantiates a new TargetingRuleModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTargetingRuleModel() *TargetingRuleModel {
+func NewTargetingRuleModel(conditions []ConditionModel, percentageOptions []PercentageOptionModel, value NullableValueModel) *TargetingRuleModel {
 	this := TargetingRuleModel{}
+	this.Conditions = conditions
+	this.PercentageOptions = percentageOptions
+	this.Value = value
 	return &this
 }
 
@@ -44,102 +51,78 @@ func NewTargetingRuleModelWithDefaults() *TargetingRuleModel {
 	return &this
 }
 
-// GetConditions returns the Conditions field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetConditions returns the Conditions field value
 func (o *TargetingRuleModel) GetConditions() []ConditionModel {
 	if o == nil {
 		var ret []ConditionModel
 		return ret
 	}
+
 	return o.Conditions
 }
 
-// GetConditionsOk returns a tuple with the Conditions field value if set, nil otherwise
+// GetConditionsOk returns a tuple with the Conditions field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TargetingRuleModel) GetConditionsOk() ([]ConditionModel, bool) {
-	if o == nil || IsNil(o.Conditions) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Conditions, true
 }
 
-// HasConditions returns a boolean if a field has been set.
-func (o *TargetingRuleModel) HasConditions() bool {
-	if o != nil && !IsNil(o.Conditions) {
-		return true
-	}
-
-	return false
-}
-
-// SetConditions gets a reference to the given []ConditionModel and assigns it to the Conditions field.
+// SetConditions sets field value
 func (o *TargetingRuleModel) SetConditions(v []ConditionModel) {
 	o.Conditions = v
 }
 
-// GetPercentageOptions returns the PercentageOptions field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetPercentageOptions returns the PercentageOptions field value
 func (o *TargetingRuleModel) GetPercentageOptions() []PercentageOptionModel {
 	if o == nil {
 		var ret []PercentageOptionModel
 		return ret
 	}
+
 	return o.PercentageOptions
 }
 
-// GetPercentageOptionsOk returns a tuple with the PercentageOptions field value if set, nil otherwise
+// GetPercentageOptionsOk returns a tuple with the PercentageOptions field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TargetingRuleModel) GetPercentageOptionsOk() ([]PercentageOptionModel, bool) {
-	if o == nil || IsNil(o.PercentageOptions) {
+	if o == nil {
 		return nil, false
 	}
 	return o.PercentageOptions, true
 }
 
-// HasPercentageOptions returns a boolean if a field has been set.
-func (o *TargetingRuleModel) HasPercentageOptions() bool {
-	if o != nil && !IsNil(o.PercentageOptions) {
-		return true
-	}
-
-	return false
-}
-
-// SetPercentageOptions gets a reference to the given []PercentageOptionModel and assigns it to the PercentageOptions field.
+// SetPercentageOptions sets field value
 func (o *TargetingRuleModel) SetPercentageOptions(v []PercentageOptionModel) {
 	o.PercentageOptions = v
 }
 
-// GetValue returns the Value field value if set, zero value otherwise.
+// GetValue returns the Value field value
+// If the value is explicit nil, the zero value for ValueModel will be returned
 func (o *TargetingRuleModel) GetValue() ValueModel {
-	if o == nil || IsNil(o.Value) {
+	if o == nil || o.Value.Get() == nil {
 		var ret ValueModel
 		return ret
 	}
-	return *o.Value
+
+	return *o.Value.Get()
 }
 
-// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TargetingRuleModel) GetValueOk() (*ValueModel, bool) {
-	if o == nil || IsNil(o.Value) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Value, true
+	return o.Value.Get(), o.Value.IsSet()
 }
 
-// HasValue returns a boolean if a field has been set.
-func (o *TargetingRuleModel) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
-		return true
-	}
-
-	return false
-}
-
-// SetValue gets a reference to the given ValueModel and assigns it to the Value field.
+// SetValue sets field value
 func (o *TargetingRuleModel) SetValue(v ValueModel) {
-	o.Value = &v
+	o.Value.Set(&v)
 }
 
 func (o TargetingRuleModel) MarshalJSON() ([]byte, error) {
@@ -152,16 +135,49 @@ func (o TargetingRuleModel) MarshalJSON() ([]byte, error) {
 
 func (o TargetingRuleModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Conditions != nil {
-		toSerialize["conditions"] = o.Conditions
-	}
-	if o.PercentageOptions != nil {
-		toSerialize["percentageOptions"] = o.PercentageOptions
-	}
-	if !IsNil(o.Value) {
-		toSerialize["value"] = o.Value
-	}
+	toSerialize["conditions"] = o.Conditions
+	toSerialize["percentageOptions"] = o.PercentageOptions
+	toSerialize["value"] = o.Value.Get()
 	return toSerialize, nil
+}
+
+func (o *TargetingRuleModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"conditions",
+		"percentageOptions",
+		"value",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varTargetingRuleModel := _TargetingRuleModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varTargetingRuleModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = TargetingRuleModel(varTargetingRuleModel)
+
+	return err
 }
 
 type NullableTargetingRuleModel struct {

@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Key1** | Pointer to **NullableString** | The first signing key. | [optional] 
-**Key2** | Pointer to **NullableString** | The second signing key. | [optional] 
+**Key1** | **NullableString** | The first signing key. | 
+**Key2** | **NullableString** | The second signing key. | 
 
 ## Methods
 
 ### NewWebhookSigningKeysModel
 
-`func NewWebhookSigningKeysModel() *WebhookSigningKeysModel`
+`func NewWebhookSigningKeysModel(key1 NullableString, key2 NullableString, ) *WebhookSigningKeysModel`
 
 NewWebhookSigningKeysModel instantiates a new WebhookSigningKeysModel object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetKey1 sets Key1 field to given value.
 
-### HasKey1
-
-`func (o *WebhookSigningKeysModel) HasKey1() bool`
-
-HasKey1 returns a boolean if a field has been set.
 
 ### SetKey1Nil
 
@@ -80,11 +75,6 @@ and a boolean to check if the value has been set.
 
 SetKey2 sets Key2 field to given value.
 
-### HasKey2
-
-`func (o *WebhookSigningKeysModel) HasKey2() bool`
-
-HasKey2 returns a boolean if a field has been set.
 
 ### SetKey2Nil
 

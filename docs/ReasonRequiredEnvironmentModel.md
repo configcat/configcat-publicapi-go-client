@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EnvironmentId** | Pointer to **string** | Identifier of the Environment. | [optional] 
-**ReasonRequired** | Pointer to **bool** | Indicates that a mandatory note is required in this Environment for saving and publishing. | [optional] 
-**EnvironmentName** | Pointer to **NullableString** | Name of the Environment. | [optional] 
+**EnvironmentId** | **string** | Identifier of the Environment. | 
+**ReasonRequired** | **bool** | Indicates that a mandatory note is required in this Environment for saving and publishing. | 
+**EnvironmentName** | **NullableString** | Name of the Environment. | 
 
 ## Methods
 
 ### NewReasonRequiredEnvironmentModel
 
-`func NewReasonRequiredEnvironmentModel() *ReasonRequiredEnvironmentModel`
+`func NewReasonRequiredEnvironmentModel(environmentId string, reasonRequired bool, environmentName NullableString, ) *ReasonRequiredEnvironmentModel`
 
 NewReasonRequiredEnvironmentModel instantiates a new ReasonRequiredEnvironmentModel object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetEnvironmentId sets EnvironmentId field to given value.
 
-### HasEnvironmentId
-
-`func (o *ReasonRequiredEnvironmentModel) HasEnvironmentId() bool`
-
-HasEnvironmentId returns a boolean if a field has been set.
 
 ### GetReasonRequired
 
@@ -71,11 +66,6 @@ and a boolean to check if the value has been set.
 
 SetReasonRequired sets ReasonRequired field to given value.
 
-### HasReasonRequired
-
-`func (o *ReasonRequiredEnvironmentModel) HasReasonRequired() bool`
-
-HasReasonRequired returns a boolean if a field has been set.
 
 ### GetEnvironmentName
 
@@ -96,11 +86,6 @@ and a boolean to check if the value has been set.
 
 SetEnvironmentName sets EnvironmentName field to given value.
 
-### HasEnvironmentName
-
-`func (o *ReasonRequiredEnvironmentModel) HasEnvironmentName() bool`
-
-HasEnvironmentName returns a boolean if a field has been set.
 
 ### SetEnvironmentNameNil
 

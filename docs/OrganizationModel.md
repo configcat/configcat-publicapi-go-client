@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrganizationId** | Pointer to **string** | Identifier of the Organization. | [optional] 
-**Name** | Pointer to **NullableString** | Name of the Organization. | [optional] 
+**OrganizationId** | **string** | Identifier of the Organization. | 
+**Name** | **string** | Name of the Organization. | 
 
 ## Methods
 
 ### NewOrganizationModel
 
-`func NewOrganizationModel() *OrganizationModel`
+`func NewOrganizationModel(organizationId string, name string, ) *OrganizationModel`
 
 NewOrganizationModel instantiates a new OrganizationModel object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetOrganizationId sets OrganizationId field to given value.
 
-### HasOrganizationId
-
-`func (o *OrganizationModel) HasOrganizationId() bool`
-
-HasOrganizationId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -70,22 +65,7 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
 
-`func (o *OrganizationModel) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### SetNameNil
-
-`func (o *OrganizationModel) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *OrganizationModel) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

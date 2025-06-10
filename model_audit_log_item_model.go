@@ -14,6 +14,8 @@ package configcatpublicapi
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the AuditLogItemModel type satisfies the MappedNullable interface at compile time
@@ -21,26 +23,40 @@ var _ MappedNullable = &AuditLogItemModel{}
 
 // AuditLogItemModel struct for AuditLogItemModel
 type AuditLogItemModel struct {
-	AuditLogId *int64 `json:"auditLogId,omitempty"`
-	AuditLogDateTime *time.Time `json:"auditLogDateTime,omitempty"`
-	AuditLogTypeEnum *AuditLogType `json:"auditLogTypeEnum,omitempty"`
-	ChangeSetId NullableString `json:"changeSetId,omitempty"`
-	Truncated *bool `json:"truncated,omitempty"`
-	AuditLogType NullableString `json:"auditLogType,omitempty"`
-	UserEmail NullableString `json:"userEmail,omitempty"`
-	UserName NullableString `json:"userName,omitempty"`
-	Where NullableString `json:"where,omitempty"`
-	Why NullableString `json:"why,omitempty"`
-	ActionTarget NullableString `json:"actionTarget,omitempty"`
-	Details NullableString `json:"details,omitempty"`
+	AuditLogId int64 `json:"auditLogId"`
+	AuditLogDateTime time.Time `json:"auditLogDateTime"`
+	AuditLogTypeEnum AuditLogType `json:"auditLogTypeEnum"`
+	ChangeSetId NullableString `json:"changeSetId"`
+	Truncated bool `json:"truncated"`
+	AuditLogType NullableString `json:"auditLogType"`
+	UserEmail NullableString `json:"userEmail"`
+	UserName NullableString `json:"userName"`
+	Where NullableString `json:"where"`
+	Why NullableString `json:"why"`
+	ActionTarget NullableString `json:"actionTarget"`
+	Details NullableString `json:"details"`
 }
+
+type _AuditLogItemModel AuditLogItemModel
 
 // NewAuditLogItemModel instantiates a new AuditLogItemModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAuditLogItemModel() *AuditLogItemModel {
+func NewAuditLogItemModel(auditLogId int64, auditLogDateTime time.Time, auditLogTypeEnum AuditLogType, changeSetId NullableString, truncated bool, auditLogType NullableString, userEmail NullableString, userName NullableString, where NullableString, why NullableString, actionTarget NullableString, details NullableString) *AuditLogItemModel {
 	this := AuditLogItemModel{}
+	this.AuditLogId = auditLogId
+	this.AuditLogDateTime = auditLogDateTime
+	this.AuditLogTypeEnum = auditLogTypeEnum
+	this.ChangeSetId = changeSetId
+	this.Truncated = truncated
+	this.AuditLogType = auditLogType
+	this.UserEmail = userEmail
+	this.UserName = userName
+	this.Where = where
+	this.Why = why
+	this.ActionTarget = actionTarget
+	this.Details = details
 	return &this
 }
 
@@ -52,112 +68,90 @@ func NewAuditLogItemModelWithDefaults() *AuditLogItemModel {
 	return &this
 }
 
-// GetAuditLogId returns the AuditLogId field value if set, zero value otherwise.
+// GetAuditLogId returns the AuditLogId field value
 func (o *AuditLogItemModel) GetAuditLogId() int64 {
-	if o == nil || IsNil(o.AuditLogId) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.AuditLogId
+
+	return o.AuditLogId
 }
 
-// GetAuditLogIdOk returns a tuple with the AuditLogId field value if set, nil otherwise
+// GetAuditLogIdOk returns a tuple with the AuditLogId field value
 // and a boolean to check if the value has been set.
 func (o *AuditLogItemModel) GetAuditLogIdOk() (*int64, bool) {
-	if o == nil || IsNil(o.AuditLogId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AuditLogId, true
+	return &o.AuditLogId, true
 }
 
-// HasAuditLogId returns a boolean if a field has been set.
-func (o *AuditLogItemModel) HasAuditLogId() bool {
-	if o != nil && !IsNil(o.AuditLogId) {
-		return true
-	}
-
-	return false
-}
-
-// SetAuditLogId gets a reference to the given int64 and assigns it to the AuditLogId field.
+// SetAuditLogId sets field value
 func (o *AuditLogItemModel) SetAuditLogId(v int64) {
-	o.AuditLogId = &v
+	o.AuditLogId = v
 }
 
-// GetAuditLogDateTime returns the AuditLogDateTime field value if set, zero value otherwise.
+// GetAuditLogDateTime returns the AuditLogDateTime field value
 func (o *AuditLogItemModel) GetAuditLogDateTime() time.Time {
-	if o == nil || IsNil(o.AuditLogDateTime) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.AuditLogDateTime
+
+	return o.AuditLogDateTime
 }
 
-// GetAuditLogDateTimeOk returns a tuple with the AuditLogDateTime field value if set, nil otherwise
+// GetAuditLogDateTimeOk returns a tuple with the AuditLogDateTime field value
 // and a boolean to check if the value has been set.
 func (o *AuditLogItemModel) GetAuditLogDateTimeOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.AuditLogDateTime) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AuditLogDateTime, true
+	return &o.AuditLogDateTime, true
 }
 
-// HasAuditLogDateTime returns a boolean if a field has been set.
-func (o *AuditLogItemModel) HasAuditLogDateTime() bool {
-	if o != nil && !IsNil(o.AuditLogDateTime) {
-		return true
-	}
-
-	return false
-}
-
-// SetAuditLogDateTime gets a reference to the given time.Time and assigns it to the AuditLogDateTime field.
+// SetAuditLogDateTime sets field value
 func (o *AuditLogItemModel) SetAuditLogDateTime(v time.Time) {
-	o.AuditLogDateTime = &v
+	o.AuditLogDateTime = v
 }
 
-// GetAuditLogTypeEnum returns the AuditLogTypeEnum field value if set, zero value otherwise.
+// GetAuditLogTypeEnum returns the AuditLogTypeEnum field value
 func (o *AuditLogItemModel) GetAuditLogTypeEnum() AuditLogType {
-	if o == nil || IsNil(o.AuditLogTypeEnum) {
+	if o == nil {
 		var ret AuditLogType
 		return ret
 	}
-	return *o.AuditLogTypeEnum
+
+	return o.AuditLogTypeEnum
 }
 
-// GetAuditLogTypeEnumOk returns a tuple with the AuditLogTypeEnum field value if set, nil otherwise
+// GetAuditLogTypeEnumOk returns a tuple with the AuditLogTypeEnum field value
 // and a boolean to check if the value has been set.
 func (o *AuditLogItemModel) GetAuditLogTypeEnumOk() (*AuditLogType, bool) {
-	if o == nil || IsNil(o.AuditLogTypeEnum) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AuditLogTypeEnum, true
+	return &o.AuditLogTypeEnum, true
 }
 
-// HasAuditLogTypeEnum returns a boolean if a field has been set.
-func (o *AuditLogItemModel) HasAuditLogTypeEnum() bool {
-	if o != nil && !IsNil(o.AuditLogTypeEnum) {
-		return true
-	}
-
-	return false
-}
-
-// SetAuditLogTypeEnum gets a reference to the given AuditLogType and assigns it to the AuditLogTypeEnum field.
+// SetAuditLogTypeEnum sets field value
 func (o *AuditLogItemModel) SetAuditLogTypeEnum(v AuditLogType) {
-	o.AuditLogTypeEnum = &v
+	o.AuditLogTypeEnum = v
 }
 
-// GetChangeSetId returns the ChangeSetId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetChangeSetId returns the ChangeSetId field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *AuditLogItemModel) GetChangeSetId() string {
-	if o == nil || IsNil(o.ChangeSetId.Get()) {
+	if o == nil || o.ChangeSetId.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.ChangeSetId.Get()
 }
 
-// GetChangeSetIdOk returns a tuple with the ChangeSetId field value if set, nil otherwise
+// GetChangeSetIdOk returns a tuple with the ChangeSetId field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AuditLogItemModel) GetChangeSetIdOk() (*string, bool) {
@@ -167,71 +161,47 @@ func (o *AuditLogItemModel) GetChangeSetIdOk() (*string, bool) {
 	return o.ChangeSetId.Get(), o.ChangeSetId.IsSet()
 }
 
-// HasChangeSetId returns a boolean if a field has been set.
-func (o *AuditLogItemModel) HasChangeSetId() bool {
-	if o != nil && o.ChangeSetId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetChangeSetId gets a reference to the given NullableString and assigns it to the ChangeSetId field.
+// SetChangeSetId sets field value
 func (o *AuditLogItemModel) SetChangeSetId(v string) {
 	o.ChangeSetId.Set(&v)
 }
-// SetChangeSetIdNil sets the value for ChangeSetId to be an explicit nil
-func (o *AuditLogItemModel) SetChangeSetIdNil() {
-	o.ChangeSetId.Set(nil)
-}
 
-// UnsetChangeSetId ensures that no value is present for ChangeSetId, not even an explicit nil
-func (o *AuditLogItemModel) UnsetChangeSetId() {
-	o.ChangeSetId.Unset()
-}
-
-// GetTruncated returns the Truncated field value if set, zero value otherwise.
+// GetTruncated returns the Truncated field value
 func (o *AuditLogItemModel) GetTruncated() bool {
-	if o == nil || IsNil(o.Truncated) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Truncated
+
+	return o.Truncated
 }
 
-// GetTruncatedOk returns a tuple with the Truncated field value if set, nil otherwise
+// GetTruncatedOk returns a tuple with the Truncated field value
 // and a boolean to check if the value has been set.
 func (o *AuditLogItemModel) GetTruncatedOk() (*bool, bool) {
-	if o == nil || IsNil(o.Truncated) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Truncated, true
+	return &o.Truncated, true
 }
 
-// HasTruncated returns a boolean if a field has been set.
-func (o *AuditLogItemModel) HasTruncated() bool {
-	if o != nil && !IsNil(o.Truncated) {
-		return true
-	}
-
-	return false
-}
-
-// SetTruncated gets a reference to the given bool and assigns it to the Truncated field.
+// SetTruncated sets field value
 func (o *AuditLogItemModel) SetTruncated(v bool) {
-	o.Truncated = &v
+	o.Truncated = v
 }
 
-// GetAuditLogType returns the AuditLogType field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetAuditLogType returns the AuditLogType field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *AuditLogItemModel) GetAuditLogType() string {
-	if o == nil || IsNil(o.AuditLogType.Get()) {
+	if o == nil || o.AuditLogType.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.AuditLogType.Get()
 }
 
-// GetAuditLogTypeOk returns a tuple with the AuditLogType field value if set, nil otherwise
+// GetAuditLogTypeOk returns a tuple with the AuditLogType field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AuditLogItemModel) GetAuditLogTypeOk() (*string, bool) {
@@ -241,39 +211,23 @@ func (o *AuditLogItemModel) GetAuditLogTypeOk() (*string, bool) {
 	return o.AuditLogType.Get(), o.AuditLogType.IsSet()
 }
 
-// HasAuditLogType returns a boolean if a field has been set.
-func (o *AuditLogItemModel) HasAuditLogType() bool {
-	if o != nil && o.AuditLogType.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAuditLogType gets a reference to the given NullableString and assigns it to the AuditLogType field.
+// SetAuditLogType sets field value
 func (o *AuditLogItemModel) SetAuditLogType(v string) {
 	o.AuditLogType.Set(&v)
 }
-// SetAuditLogTypeNil sets the value for AuditLogType to be an explicit nil
-func (o *AuditLogItemModel) SetAuditLogTypeNil() {
-	o.AuditLogType.Set(nil)
-}
 
-// UnsetAuditLogType ensures that no value is present for AuditLogType, not even an explicit nil
-func (o *AuditLogItemModel) UnsetAuditLogType() {
-	o.AuditLogType.Unset()
-}
-
-// GetUserEmail returns the UserEmail field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetUserEmail returns the UserEmail field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *AuditLogItemModel) GetUserEmail() string {
-	if o == nil || IsNil(o.UserEmail.Get()) {
+	if o == nil || o.UserEmail.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.UserEmail.Get()
 }
 
-// GetUserEmailOk returns a tuple with the UserEmail field value if set, nil otherwise
+// GetUserEmailOk returns a tuple with the UserEmail field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AuditLogItemModel) GetUserEmailOk() (*string, bool) {
@@ -283,39 +237,23 @@ func (o *AuditLogItemModel) GetUserEmailOk() (*string, bool) {
 	return o.UserEmail.Get(), o.UserEmail.IsSet()
 }
 
-// HasUserEmail returns a boolean if a field has been set.
-func (o *AuditLogItemModel) HasUserEmail() bool {
-	if o != nil && o.UserEmail.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetUserEmail gets a reference to the given NullableString and assigns it to the UserEmail field.
+// SetUserEmail sets field value
 func (o *AuditLogItemModel) SetUserEmail(v string) {
 	o.UserEmail.Set(&v)
 }
-// SetUserEmailNil sets the value for UserEmail to be an explicit nil
-func (o *AuditLogItemModel) SetUserEmailNil() {
-	o.UserEmail.Set(nil)
-}
 
-// UnsetUserEmail ensures that no value is present for UserEmail, not even an explicit nil
-func (o *AuditLogItemModel) UnsetUserEmail() {
-	o.UserEmail.Unset()
-}
-
-// GetUserName returns the UserName field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetUserName returns the UserName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *AuditLogItemModel) GetUserName() string {
-	if o == nil || IsNil(o.UserName.Get()) {
+	if o == nil || o.UserName.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.UserName.Get()
 }
 
-// GetUserNameOk returns a tuple with the UserName field value if set, nil otherwise
+// GetUserNameOk returns a tuple with the UserName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AuditLogItemModel) GetUserNameOk() (*string, bool) {
@@ -325,39 +263,23 @@ func (o *AuditLogItemModel) GetUserNameOk() (*string, bool) {
 	return o.UserName.Get(), o.UserName.IsSet()
 }
 
-// HasUserName returns a boolean if a field has been set.
-func (o *AuditLogItemModel) HasUserName() bool {
-	if o != nil && o.UserName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetUserName gets a reference to the given NullableString and assigns it to the UserName field.
+// SetUserName sets field value
 func (o *AuditLogItemModel) SetUserName(v string) {
 	o.UserName.Set(&v)
 }
-// SetUserNameNil sets the value for UserName to be an explicit nil
-func (o *AuditLogItemModel) SetUserNameNil() {
-	o.UserName.Set(nil)
-}
 
-// UnsetUserName ensures that no value is present for UserName, not even an explicit nil
-func (o *AuditLogItemModel) UnsetUserName() {
-	o.UserName.Unset()
-}
-
-// GetWhere returns the Where field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetWhere returns the Where field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *AuditLogItemModel) GetWhere() string {
-	if o == nil || IsNil(o.Where.Get()) {
+	if o == nil || o.Where.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Where.Get()
 }
 
-// GetWhereOk returns a tuple with the Where field value if set, nil otherwise
+// GetWhereOk returns a tuple with the Where field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AuditLogItemModel) GetWhereOk() (*string, bool) {
@@ -367,39 +289,23 @@ func (o *AuditLogItemModel) GetWhereOk() (*string, bool) {
 	return o.Where.Get(), o.Where.IsSet()
 }
 
-// HasWhere returns a boolean if a field has been set.
-func (o *AuditLogItemModel) HasWhere() bool {
-	if o != nil && o.Where.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetWhere gets a reference to the given NullableString and assigns it to the Where field.
+// SetWhere sets field value
 func (o *AuditLogItemModel) SetWhere(v string) {
 	o.Where.Set(&v)
 }
-// SetWhereNil sets the value for Where to be an explicit nil
-func (o *AuditLogItemModel) SetWhereNil() {
-	o.Where.Set(nil)
-}
 
-// UnsetWhere ensures that no value is present for Where, not even an explicit nil
-func (o *AuditLogItemModel) UnsetWhere() {
-	o.Where.Unset()
-}
-
-// GetWhy returns the Why field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetWhy returns the Why field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *AuditLogItemModel) GetWhy() string {
-	if o == nil || IsNil(o.Why.Get()) {
+	if o == nil || o.Why.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Why.Get()
 }
 
-// GetWhyOk returns a tuple with the Why field value if set, nil otherwise
+// GetWhyOk returns a tuple with the Why field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AuditLogItemModel) GetWhyOk() (*string, bool) {
@@ -409,39 +315,23 @@ func (o *AuditLogItemModel) GetWhyOk() (*string, bool) {
 	return o.Why.Get(), o.Why.IsSet()
 }
 
-// HasWhy returns a boolean if a field has been set.
-func (o *AuditLogItemModel) HasWhy() bool {
-	if o != nil && o.Why.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetWhy gets a reference to the given NullableString and assigns it to the Why field.
+// SetWhy sets field value
 func (o *AuditLogItemModel) SetWhy(v string) {
 	o.Why.Set(&v)
 }
-// SetWhyNil sets the value for Why to be an explicit nil
-func (o *AuditLogItemModel) SetWhyNil() {
-	o.Why.Set(nil)
-}
 
-// UnsetWhy ensures that no value is present for Why, not even an explicit nil
-func (o *AuditLogItemModel) UnsetWhy() {
-	o.Why.Unset()
-}
-
-// GetActionTarget returns the ActionTarget field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetActionTarget returns the ActionTarget field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *AuditLogItemModel) GetActionTarget() string {
-	if o == nil || IsNil(o.ActionTarget.Get()) {
+	if o == nil || o.ActionTarget.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.ActionTarget.Get()
 }
 
-// GetActionTargetOk returns a tuple with the ActionTarget field value if set, nil otherwise
+// GetActionTargetOk returns a tuple with the ActionTarget field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AuditLogItemModel) GetActionTargetOk() (*string, bool) {
@@ -451,39 +341,23 @@ func (o *AuditLogItemModel) GetActionTargetOk() (*string, bool) {
 	return o.ActionTarget.Get(), o.ActionTarget.IsSet()
 }
 
-// HasActionTarget returns a boolean if a field has been set.
-func (o *AuditLogItemModel) HasActionTarget() bool {
-	if o != nil && o.ActionTarget.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetActionTarget gets a reference to the given NullableString and assigns it to the ActionTarget field.
+// SetActionTarget sets field value
 func (o *AuditLogItemModel) SetActionTarget(v string) {
 	o.ActionTarget.Set(&v)
 }
-// SetActionTargetNil sets the value for ActionTarget to be an explicit nil
-func (o *AuditLogItemModel) SetActionTargetNil() {
-	o.ActionTarget.Set(nil)
-}
 
-// UnsetActionTarget ensures that no value is present for ActionTarget, not even an explicit nil
-func (o *AuditLogItemModel) UnsetActionTarget() {
-	o.ActionTarget.Unset()
-}
-
-// GetDetails returns the Details field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDetails returns the Details field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *AuditLogItemModel) GetDetails() string {
-	if o == nil || IsNil(o.Details.Get()) {
+	if o == nil || o.Details.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Details.Get()
 }
 
-// GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
+// GetDetailsOk returns a tuple with the Details field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AuditLogItemModel) GetDetailsOk() (*string, bool) {
@@ -493,27 +367,9 @@ func (o *AuditLogItemModel) GetDetailsOk() (*string, bool) {
 	return o.Details.Get(), o.Details.IsSet()
 }
 
-// HasDetails returns a boolean if a field has been set.
-func (o *AuditLogItemModel) HasDetails() bool {
-	if o != nil && o.Details.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDetails gets a reference to the given NullableString and assigns it to the Details field.
+// SetDetails sets field value
 func (o *AuditLogItemModel) SetDetails(v string) {
 	o.Details.Set(&v)
-}
-// SetDetailsNil sets the value for Details to be an explicit nil
-func (o *AuditLogItemModel) SetDetailsNil() {
-	o.Details.Set(nil)
-}
-
-// UnsetDetails ensures that no value is present for Details, not even an explicit nil
-func (o *AuditLogItemModel) UnsetDetails() {
-	o.Details.Unset()
 }
 
 func (o AuditLogItemModel) MarshalJSON() ([]byte, error) {
@@ -526,43 +382,67 @@ func (o AuditLogItemModel) MarshalJSON() ([]byte, error) {
 
 func (o AuditLogItemModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AuditLogId) {
-		toSerialize["auditLogId"] = o.AuditLogId
-	}
-	if !IsNil(o.AuditLogDateTime) {
-		toSerialize["auditLogDateTime"] = o.AuditLogDateTime
-	}
-	if !IsNil(o.AuditLogTypeEnum) {
-		toSerialize["auditLogTypeEnum"] = o.AuditLogTypeEnum
-	}
-	if o.ChangeSetId.IsSet() {
-		toSerialize["changeSetId"] = o.ChangeSetId.Get()
-	}
-	if !IsNil(o.Truncated) {
-		toSerialize["truncated"] = o.Truncated
-	}
-	if o.AuditLogType.IsSet() {
-		toSerialize["auditLogType"] = o.AuditLogType.Get()
-	}
-	if o.UserEmail.IsSet() {
-		toSerialize["userEmail"] = o.UserEmail.Get()
-	}
-	if o.UserName.IsSet() {
-		toSerialize["userName"] = o.UserName.Get()
-	}
-	if o.Where.IsSet() {
-		toSerialize["where"] = o.Where.Get()
-	}
-	if o.Why.IsSet() {
-		toSerialize["why"] = o.Why.Get()
-	}
-	if o.ActionTarget.IsSet() {
-		toSerialize["actionTarget"] = o.ActionTarget.Get()
-	}
-	if o.Details.IsSet() {
-		toSerialize["details"] = o.Details.Get()
-	}
+	toSerialize["auditLogId"] = o.AuditLogId
+	toSerialize["auditLogDateTime"] = o.AuditLogDateTime
+	toSerialize["auditLogTypeEnum"] = o.AuditLogTypeEnum
+	toSerialize["changeSetId"] = o.ChangeSetId.Get()
+	toSerialize["truncated"] = o.Truncated
+	toSerialize["auditLogType"] = o.AuditLogType.Get()
+	toSerialize["userEmail"] = o.UserEmail.Get()
+	toSerialize["userName"] = o.UserName.Get()
+	toSerialize["where"] = o.Where.Get()
+	toSerialize["why"] = o.Why.Get()
+	toSerialize["actionTarget"] = o.ActionTarget.Get()
+	toSerialize["details"] = o.Details.Get()
 	return toSerialize, nil
+}
+
+func (o *AuditLogItemModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"auditLogId",
+		"auditLogDateTime",
+		"auditLogTypeEnum",
+		"changeSetId",
+		"truncated",
+		"auditLogType",
+		"userEmail",
+		"userName",
+		"where",
+		"why",
+		"actionTarget",
+		"details",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varAuditLogItemModel := _AuditLogItemModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varAuditLogItemModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = AuditLogItemModel(varAuditLogItemModel)
+
+	return err
 }
 
 type NullableAuditLogItemModel struct {

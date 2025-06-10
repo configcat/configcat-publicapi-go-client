@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UserCondition** | Pointer to [**UserConditionModel**](UserConditionModel.md) |  | [optional] 
-**SegmentCondition** | Pointer to [**SegmentConditionModel**](SegmentConditionModel.md) |  | [optional] 
-**PrerequisiteFlagCondition** | Pointer to [**PrerequisiteFlagConditionModel**](PrerequisiteFlagConditionModel.md) |  | [optional] 
+**UserCondition** | [**NullableUserConditionModel**](UserConditionModel.md) |  | 
+**SegmentCondition** | [**NullableSegmentConditionModel**](SegmentConditionModel.md) |  | 
+**PrerequisiteFlagCondition** | [**NullablePrerequisiteFlagConditionModel**](PrerequisiteFlagConditionModel.md) |  | 
 
 ## Methods
 
 ### NewConditionModel
 
-`func NewConditionModel() *ConditionModel`
+`func NewConditionModel(userCondition NullableUserConditionModel, segmentCondition NullableSegmentConditionModel, prerequisiteFlagCondition NullablePrerequisiteFlagConditionModel, ) *ConditionModel`
 
 NewConditionModel instantiates a new ConditionModel object
 This constructor will assign default values to properties that have it defined,
@@ -46,12 +46,17 @@ and a boolean to check if the value has been set.
 
 SetUserCondition sets UserCondition field to given value.
 
-### HasUserCondition
 
-`func (o *ConditionModel) HasUserCondition() bool`
+### SetUserConditionNil
 
-HasUserCondition returns a boolean if a field has been set.
+`func (o *ConditionModel) SetUserConditionNil(b bool)`
 
+ SetUserConditionNil sets the value for UserCondition to be an explicit nil
+
+### UnsetUserCondition
+`func (o *ConditionModel) UnsetUserCondition()`
+
+UnsetUserCondition ensures that no value is present for UserCondition, not even an explicit nil
 ### GetSegmentCondition
 
 `func (o *ConditionModel) GetSegmentCondition() SegmentConditionModel`
@@ -71,12 +76,17 @@ and a boolean to check if the value has been set.
 
 SetSegmentCondition sets SegmentCondition field to given value.
 
-### HasSegmentCondition
 
-`func (o *ConditionModel) HasSegmentCondition() bool`
+### SetSegmentConditionNil
 
-HasSegmentCondition returns a boolean if a field has been set.
+`func (o *ConditionModel) SetSegmentConditionNil(b bool)`
 
+ SetSegmentConditionNil sets the value for SegmentCondition to be an explicit nil
+
+### UnsetSegmentCondition
+`func (o *ConditionModel) UnsetSegmentCondition()`
+
+UnsetSegmentCondition ensures that no value is present for SegmentCondition, not even an explicit nil
 ### GetPrerequisiteFlagCondition
 
 `func (o *ConditionModel) GetPrerequisiteFlagCondition() PrerequisiteFlagConditionModel`
@@ -96,12 +106,17 @@ and a boolean to check if the value has been set.
 
 SetPrerequisiteFlagCondition sets PrerequisiteFlagCondition field to given value.
 
-### HasPrerequisiteFlagCondition
 
-`func (o *ConditionModel) HasPrerequisiteFlagCondition() bool`
+### SetPrerequisiteFlagConditionNil
 
-HasPrerequisiteFlagCondition returns a boolean if a field has been set.
+`func (o *ConditionModel) SetPrerequisiteFlagConditionNil(b bool)`
 
+ SetPrerequisiteFlagConditionNil sets the value for PrerequisiteFlagCondition to be an explicit nil
+
+### UnsetPrerequisiteFlagCondition
+`func (o *ConditionModel) UnsetPrerequisiteFlagCondition()`
+
+UnsetPrerequisiteFlagCondition ensures that no value is present for PrerequisiteFlagCondition, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

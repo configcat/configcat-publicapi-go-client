@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MaxPercentageOptionCount** | Pointer to **int32** | Maximum number of percentage options a Feature Flag or Setting can have within a targeting rule. | [optional] 
-**MaxTargetingRuleCount** | Pointer to **int32** | Maximum number of targeting rules a Feature Flag or Setting can have. | [optional] 
-**MaxComparisonValueLength** | Pointer to **int32** | Maximum length of a text comparison value. | [optional] 
-**MaxComparisonValueListLength** | Pointer to **int32** | Maximum item count of a list comparison value. | [optional] 
-**MaxComparisonValueListItemLength** | Pointer to **int32** | Maximum length of a list comparison value&#39;s item. | [optional] 
-**MaxStringFlagValueLength** | Pointer to **int32** | Maximum length of a text Setting&#39;s value. | [optional] 
-**MaxConditionPerTargetingRuleCount** | Pointer to **int32** | Maximum number of &#x60;AND&#x60; conditions a Feature Flag or Setting can have within a targeting rule. | [optional] 
+**MaxPercentageOptionCount** | **int32** | Maximum number of percentage options a Feature Flag or Setting can have within a targeting rule. | 
+**MaxTargetingRuleCount** | **int32** | Maximum number of targeting rules a Feature Flag or Setting can have. | 
+**MaxComparisonValueLength** | **int32** | Maximum length of a text comparison value. | 
+**MaxComparisonValueListLength** | **int32** | Maximum item count of a list comparison value. | 
+**MaxComparisonValueListItemLength** | **int32** | Maximum length of a list comparison value&#39;s item. | 
+**MaxStringFlagValueLength** | **int32** | Maximum length of a text Setting&#39;s value. | 
+**MaxConditionPerTargetingRuleCount** | **int32** | Maximum number of &#x60;AND&#x60; conditions a Feature Flag or Setting can have within a targeting rule. | 
 
 ## Methods
 
 ### NewFeatureFlagLimitations
 
-`func NewFeatureFlagLimitations() *FeatureFlagLimitations`
+`func NewFeatureFlagLimitations(maxPercentageOptionCount int32, maxTargetingRuleCount int32, maxComparisonValueLength int32, maxComparisonValueListLength int32, maxComparisonValueListItemLength int32, maxStringFlagValueLength int32, maxConditionPerTargetingRuleCount int32, ) *FeatureFlagLimitations`
 
 NewFeatureFlagLimitations instantiates a new FeatureFlagLimitations object
 This constructor will assign default values to properties that have it defined,
@@ -50,11 +50,6 @@ and a boolean to check if the value has been set.
 
 SetMaxPercentageOptionCount sets MaxPercentageOptionCount field to given value.
 
-### HasMaxPercentageOptionCount
-
-`func (o *FeatureFlagLimitations) HasMaxPercentageOptionCount() bool`
-
-HasMaxPercentageOptionCount returns a boolean if a field has been set.
 
 ### GetMaxTargetingRuleCount
 
@@ -75,11 +70,6 @@ and a boolean to check if the value has been set.
 
 SetMaxTargetingRuleCount sets MaxTargetingRuleCount field to given value.
 
-### HasMaxTargetingRuleCount
-
-`func (o *FeatureFlagLimitations) HasMaxTargetingRuleCount() bool`
-
-HasMaxTargetingRuleCount returns a boolean if a field has been set.
 
 ### GetMaxComparisonValueLength
 
@@ -100,11 +90,6 @@ and a boolean to check if the value has been set.
 
 SetMaxComparisonValueLength sets MaxComparisonValueLength field to given value.
 
-### HasMaxComparisonValueLength
-
-`func (o *FeatureFlagLimitations) HasMaxComparisonValueLength() bool`
-
-HasMaxComparisonValueLength returns a boolean if a field has been set.
 
 ### GetMaxComparisonValueListLength
 
@@ -125,11 +110,6 @@ and a boolean to check if the value has been set.
 
 SetMaxComparisonValueListLength sets MaxComparisonValueListLength field to given value.
 
-### HasMaxComparisonValueListLength
-
-`func (o *FeatureFlagLimitations) HasMaxComparisonValueListLength() bool`
-
-HasMaxComparisonValueListLength returns a boolean if a field has been set.
 
 ### GetMaxComparisonValueListItemLength
 
@@ -150,11 +130,6 @@ and a boolean to check if the value has been set.
 
 SetMaxComparisonValueListItemLength sets MaxComparisonValueListItemLength field to given value.
 
-### HasMaxComparisonValueListItemLength
-
-`func (o *FeatureFlagLimitations) HasMaxComparisonValueListItemLength() bool`
-
-HasMaxComparisonValueListItemLength returns a boolean if a field has been set.
 
 ### GetMaxStringFlagValueLength
 
@@ -175,11 +150,6 @@ and a boolean to check if the value has been set.
 
 SetMaxStringFlagValueLength sets MaxStringFlagValueLength field to given value.
 
-### HasMaxStringFlagValueLength
-
-`func (o *FeatureFlagLimitations) HasMaxStringFlagValueLength() bool`
-
-HasMaxStringFlagValueLength returns a boolean if a field has been set.
 
 ### GetMaxConditionPerTargetingRuleCount
 
@@ -200,11 +170,6 @@ and a boolean to check if the value has been set.
 
 SetMaxConditionPerTargetingRuleCount sets MaxConditionPerTargetingRuleCount field to given value.
 
-### HasMaxConditionPerTargetingRuleCount
-
-`func (o *FeatureFlagLimitations) HasMaxConditionPerTargetingRuleCount() bool`
-
-HasMaxConditionPerTargetingRuleCount returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

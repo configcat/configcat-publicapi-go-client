@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the OrganizationMembersModel type satisfies the MappedNullable interface at compile time
@@ -21,19 +23,24 @@ var _ MappedNullable = &OrganizationMembersModel{}
 // OrganizationMembersModel struct for OrganizationMembersModel
 type OrganizationMembersModel struct {
 	// List of Organization Admins.
-	Admins []OrganizationAdminModel `json:"admins,omitempty"`
+	Admins []OrganizationAdminModel `json:"admins"`
 	// List of Billing Managers.
-	BillingManagers []OrganizationAdminModel `json:"billingManagers,omitempty"`
+	BillingManagers []OrganizationAdminModel `json:"billingManagers"`
 	// List of Organization Members.
-	Members []OrganizationMemberModel `json:"members,omitempty"`
+	Members []OrganizationMemberModel `json:"members"`
 }
+
+type _OrganizationMembersModel OrganizationMembersModel
 
 // NewOrganizationMembersModel instantiates a new OrganizationMembersModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrganizationMembersModel() *OrganizationMembersModel {
+func NewOrganizationMembersModel(admins []OrganizationAdminModel, billingManagers []OrganizationAdminModel, members []OrganizationMemberModel) *OrganizationMembersModel {
 	this := OrganizationMembersModel{}
+	this.Admins = admins
+	this.BillingManagers = billingManagers
+	this.Members = members
 	return &this
 }
 
@@ -45,101 +52,74 @@ func NewOrganizationMembersModelWithDefaults() *OrganizationMembersModel {
 	return &this
 }
 
-// GetAdmins returns the Admins field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetAdmins returns the Admins field value
 func (o *OrganizationMembersModel) GetAdmins() []OrganizationAdminModel {
 	if o == nil {
 		var ret []OrganizationAdminModel
 		return ret
 	}
+
 	return o.Admins
 }
 
-// GetAdminsOk returns a tuple with the Admins field value if set, nil otherwise
+// GetAdminsOk returns a tuple with the Admins field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OrganizationMembersModel) GetAdminsOk() ([]OrganizationAdminModel, bool) {
-	if o == nil || IsNil(o.Admins) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Admins, true
 }
 
-// HasAdmins returns a boolean if a field has been set.
-func (o *OrganizationMembersModel) HasAdmins() bool {
-	if o != nil && !IsNil(o.Admins) {
-		return true
-	}
-
-	return false
-}
-
-// SetAdmins gets a reference to the given []OrganizationAdminModel and assigns it to the Admins field.
+// SetAdmins sets field value
 func (o *OrganizationMembersModel) SetAdmins(v []OrganizationAdminModel) {
 	o.Admins = v
 }
 
-// GetBillingManagers returns the BillingManagers field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetBillingManagers returns the BillingManagers field value
 func (o *OrganizationMembersModel) GetBillingManagers() []OrganizationAdminModel {
 	if o == nil {
 		var ret []OrganizationAdminModel
 		return ret
 	}
+
 	return o.BillingManagers
 }
 
-// GetBillingManagersOk returns a tuple with the BillingManagers field value if set, nil otherwise
+// GetBillingManagersOk returns a tuple with the BillingManagers field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OrganizationMembersModel) GetBillingManagersOk() ([]OrganizationAdminModel, bool) {
-	if o == nil || IsNil(o.BillingManagers) {
+	if o == nil {
 		return nil, false
 	}
 	return o.BillingManagers, true
 }
 
-// HasBillingManagers returns a boolean if a field has been set.
-func (o *OrganizationMembersModel) HasBillingManagers() bool {
-	if o != nil && !IsNil(o.BillingManagers) {
-		return true
-	}
-
-	return false
-}
-
-// SetBillingManagers gets a reference to the given []OrganizationAdminModel and assigns it to the BillingManagers field.
+// SetBillingManagers sets field value
 func (o *OrganizationMembersModel) SetBillingManagers(v []OrganizationAdminModel) {
 	o.BillingManagers = v
 }
 
-// GetMembers returns the Members field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetMembers returns the Members field value
 func (o *OrganizationMembersModel) GetMembers() []OrganizationMemberModel {
 	if o == nil {
 		var ret []OrganizationMemberModel
 		return ret
 	}
+
 	return o.Members
 }
 
-// GetMembersOk returns a tuple with the Members field value if set, nil otherwise
+// GetMembersOk returns a tuple with the Members field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OrganizationMembersModel) GetMembersOk() ([]OrganizationMemberModel, bool) {
-	if o == nil || IsNil(o.Members) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Members, true
 }
 
-// HasMembers returns a boolean if a field has been set.
-func (o *OrganizationMembersModel) HasMembers() bool {
-	if o != nil && !IsNil(o.Members) {
-		return true
-	}
-
-	return false
-}
-
-// SetMembers gets a reference to the given []OrganizationMemberModel and assigns it to the Members field.
+// SetMembers sets field value
 func (o *OrganizationMembersModel) SetMembers(v []OrganizationMemberModel) {
 	o.Members = v
 }
@@ -154,16 +134,49 @@ func (o OrganizationMembersModel) MarshalJSON() ([]byte, error) {
 
 func (o OrganizationMembersModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Admins != nil {
-		toSerialize["admins"] = o.Admins
-	}
-	if o.BillingManagers != nil {
-		toSerialize["billingManagers"] = o.BillingManagers
-	}
-	if o.Members != nil {
-		toSerialize["members"] = o.Members
-	}
+	toSerialize["admins"] = o.Admins
+	toSerialize["billingManagers"] = o.BillingManagers
+	toSerialize["members"] = o.Members
 	return toSerialize, nil
+}
+
+func (o *OrganizationMembersModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"admins",
+		"billingManagers",
+		"members",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOrganizationMembersModel := _OrganizationMembersModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOrganizationMembersModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrganizationMembersModel(varOrganizationMembersModel)
+
+	return err
 }
 
 type NullableOrganizationMembersModel struct {

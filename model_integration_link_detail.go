@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the IntegrationLinkDetail type satisfies the MappedNullable interface at compile time
@@ -20,20 +22,28 @@ var _ MappedNullable = &IntegrationLinkDetail{}
 
 // IntegrationLinkDetail struct for IntegrationLinkDetail
 type IntegrationLinkDetail struct {
-	Product *ProductModel `json:"product,omitempty"`
-	Config *ConfigModel `json:"config,omitempty"`
-	Environment *EnvironmentModel `json:"environment,omitempty"`
-	Setting *SettingDataModel `json:"setting,omitempty"`
-	ReadOnly *bool `json:"readOnly,omitempty"`
-	Status NullableString `json:"status,omitempty"`
+	Product ProductModel `json:"product"`
+	Config ConfigModel `json:"config"`
+	Environment EnvironmentModel `json:"environment"`
+	Setting SettingDataModel `json:"setting"`
+	ReadOnly bool `json:"readOnly"`
+	Status string `json:"status"`
 }
+
+type _IntegrationLinkDetail IntegrationLinkDetail
 
 // NewIntegrationLinkDetail instantiates a new IntegrationLinkDetail object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationLinkDetail() *IntegrationLinkDetail {
+func NewIntegrationLinkDetail(product ProductModel, config ConfigModel, environment EnvironmentModel, setting SettingDataModel, readOnly bool, status string) *IntegrationLinkDetail {
 	this := IntegrationLinkDetail{}
+	this.Product = product
+	this.Config = config
+	this.Environment = environment
+	this.Setting = setting
+	this.ReadOnly = readOnly
+	this.Status = status
 	return &this
 }
 
@@ -45,206 +55,148 @@ func NewIntegrationLinkDetailWithDefaults() *IntegrationLinkDetail {
 	return &this
 }
 
-// GetProduct returns the Product field value if set, zero value otherwise.
+// GetProduct returns the Product field value
 func (o *IntegrationLinkDetail) GetProduct() ProductModel {
-	if o == nil || IsNil(o.Product) {
+	if o == nil {
 		var ret ProductModel
 		return ret
 	}
-	return *o.Product
+
+	return o.Product
 }
 
-// GetProductOk returns a tuple with the Product field value if set, nil otherwise
+// GetProductOk returns a tuple with the Product field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationLinkDetail) GetProductOk() (*ProductModel, bool) {
-	if o == nil || IsNil(o.Product) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Product, true
+	return &o.Product, true
 }
 
-// HasProduct returns a boolean if a field has been set.
-func (o *IntegrationLinkDetail) HasProduct() bool {
-	if o != nil && !IsNil(o.Product) {
-		return true
-	}
-
-	return false
-}
-
-// SetProduct gets a reference to the given ProductModel and assigns it to the Product field.
+// SetProduct sets field value
 func (o *IntegrationLinkDetail) SetProduct(v ProductModel) {
-	o.Product = &v
+	o.Product = v
 }
 
-// GetConfig returns the Config field value if set, zero value otherwise.
+// GetConfig returns the Config field value
 func (o *IntegrationLinkDetail) GetConfig() ConfigModel {
-	if o == nil || IsNil(o.Config) {
+	if o == nil {
 		var ret ConfigModel
 		return ret
 	}
-	return *o.Config
+
+	return o.Config
 }
 
-// GetConfigOk returns a tuple with the Config field value if set, nil otherwise
+// GetConfigOk returns a tuple with the Config field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationLinkDetail) GetConfigOk() (*ConfigModel, bool) {
-	if o == nil || IsNil(o.Config) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Config, true
+	return &o.Config, true
 }
 
-// HasConfig returns a boolean if a field has been set.
-func (o *IntegrationLinkDetail) HasConfig() bool {
-	if o != nil && !IsNil(o.Config) {
-		return true
-	}
-
-	return false
-}
-
-// SetConfig gets a reference to the given ConfigModel and assigns it to the Config field.
+// SetConfig sets field value
 func (o *IntegrationLinkDetail) SetConfig(v ConfigModel) {
-	o.Config = &v
+	o.Config = v
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
+// GetEnvironment returns the Environment field value
 func (o *IntegrationLinkDetail) GetEnvironment() EnvironmentModel {
-	if o == nil || IsNil(o.Environment) {
+	if o == nil {
 		var ret EnvironmentModel
 		return ret
 	}
-	return *o.Environment
+
+	return o.Environment
 }
 
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
+// GetEnvironmentOk returns a tuple with the Environment field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationLinkDetail) GetEnvironmentOk() (*EnvironmentModel, bool) {
-	if o == nil || IsNil(o.Environment) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Environment, true
+	return &o.Environment, true
 }
 
-// HasEnvironment returns a boolean if a field has been set.
-func (o *IntegrationLinkDetail) HasEnvironment() bool {
-	if o != nil && !IsNil(o.Environment) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given EnvironmentModel and assigns it to the Environment field.
+// SetEnvironment sets field value
 func (o *IntegrationLinkDetail) SetEnvironment(v EnvironmentModel) {
-	o.Environment = &v
+	o.Environment = v
 }
 
-// GetSetting returns the Setting field value if set, zero value otherwise.
+// GetSetting returns the Setting field value
 func (o *IntegrationLinkDetail) GetSetting() SettingDataModel {
-	if o == nil || IsNil(o.Setting) {
+	if o == nil {
 		var ret SettingDataModel
 		return ret
 	}
-	return *o.Setting
+
+	return o.Setting
 }
 
-// GetSettingOk returns a tuple with the Setting field value if set, nil otherwise
+// GetSettingOk returns a tuple with the Setting field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationLinkDetail) GetSettingOk() (*SettingDataModel, bool) {
-	if o == nil || IsNil(o.Setting) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Setting, true
+	return &o.Setting, true
 }
 
-// HasSetting returns a boolean if a field has been set.
-func (o *IntegrationLinkDetail) HasSetting() bool {
-	if o != nil && !IsNil(o.Setting) {
-		return true
-	}
-
-	return false
-}
-
-// SetSetting gets a reference to the given SettingDataModel and assigns it to the Setting field.
+// SetSetting sets field value
 func (o *IntegrationLinkDetail) SetSetting(v SettingDataModel) {
-	o.Setting = &v
+	o.Setting = v
 }
 
-// GetReadOnly returns the ReadOnly field value if set, zero value otherwise.
+// GetReadOnly returns the ReadOnly field value
 func (o *IntegrationLinkDetail) GetReadOnly() bool {
-	if o == nil || IsNil(o.ReadOnly) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.ReadOnly
+
+	return o.ReadOnly
 }
 
-// GetReadOnlyOk returns a tuple with the ReadOnly field value if set, nil otherwise
+// GetReadOnlyOk returns a tuple with the ReadOnly field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationLinkDetail) GetReadOnlyOk() (*bool, bool) {
-	if o == nil || IsNil(o.ReadOnly) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReadOnly, true
+	return &o.ReadOnly, true
 }
 
-// HasReadOnly returns a boolean if a field has been set.
-func (o *IntegrationLinkDetail) HasReadOnly() bool {
-	if o != nil && !IsNil(o.ReadOnly) {
-		return true
-	}
-
-	return false
-}
-
-// SetReadOnly gets a reference to the given bool and assigns it to the ReadOnly field.
+// SetReadOnly sets field value
 func (o *IntegrationLinkDetail) SetReadOnly(v bool) {
-	o.ReadOnly = &v
+	o.ReadOnly = v
 }
 
-// GetStatus returns the Status field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetStatus returns the Status field value
 func (o *IntegrationLinkDetail) GetStatus() string {
-	if o == nil || IsNil(o.Status.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Status.Get()
+
+	return o.Status
 }
 
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IntegrationLinkDetail) GetStatusOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Status.Get(), o.Status.IsSet()
+	return &o.Status, true
 }
 
-// HasStatus returns a boolean if a field has been set.
-func (o *IntegrationLinkDetail) HasStatus() bool {
-	if o != nil && o.Status.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given NullableString and assigns it to the Status field.
+// SetStatus sets field value
 func (o *IntegrationLinkDetail) SetStatus(v string) {
-	o.Status.Set(&v)
-}
-// SetStatusNil sets the value for Status to be an explicit nil
-func (o *IntegrationLinkDetail) SetStatusNil() {
-	o.Status.Set(nil)
-}
-
-// UnsetStatus ensures that no value is present for Status, not even an explicit nil
-func (o *IntegrationLinkDetail) UnsetStatus() {
-	o.Status.Unset()
+	o.Status = v
 }
 
 func (o IntegrationLinkDetail) MarshalJSON() ([]byte, error) {
@@ -257,25 +209,55 @@ func (o IntegrationLinkDetail) MarshalJSON() ([]byte, error) {
 
 func (o IntegrationLinkDetail) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Product) {
-		toSerialize["product"] = o.Product
-	}
-	if !IsNil(o.Config) {
-		toSerialize["config"] = o.Config
-	}
-	if !IsNil(o.Environment) {
-		toSerialize["environment"] = o.Environment
-	}
-	if !IsNil(o.Setting) {
-		toSerialize["setting"] = o.Setting
-	}
-	if !IsNil(o.ReadOnly) {
-		toSerialize["readOnly"] = o.ReadOnly
-	}
-	if o.Status.IsSet() {
-		toSerialize["status"] = o.Status.Get()
-	}
+	toSerialize["product"] = o.Product
+	toSerialize["config"] = o.Config
+	toSerialize["environment"] = o.Environment
+	toSerialize["setting"] = o.Setting
+	toSerialize["readOnly"] = o.ReadOnly
+	toSerialize["status"] = o.Status
 	return toSerialize, nil
+}
+
+func (o *IntegrationLinkDetail) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"product",
+		"config",
+		"environment",
+		"setting",
+		"readOnly",
+		"status",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIntegrationLinkDetail := _IntegrationLinkDetail{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varIntegrationLinkDetail)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationLinkDetail(varIntegrationLinkDetail)
+
+	return err
 }
 
 type NullableIntegrationLinkDetail struct {

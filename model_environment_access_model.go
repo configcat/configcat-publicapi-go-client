@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the EnvironmentAccessModel type satisfies the MappedNullable interface at compile time
@@ -21,26 +23,35 @@ var _ MappedNullable = &EnvironmentAccessModel{}
 // EnvironmentAccessModel struct for EnvironmentAccessModel
 type EnvironmentAccessModel struct {
 	// Identifier of the Environment.
-	EnvironmentId *string `json:"environmentId,omitempty"`
+	EnvironmentId string `json:"environmentId"`
 	// Name of the Environment.
-	Name NullableString `json:"name,omitempty"`
+	Name NullableString `json:"name"`
 	// Color of the Environment.
-	Color NullableString `json:"color,omitempty"`
+	Color NullableString `json:"color"`
 	// Description of the Environment.
-	Description NullableString `json:"description,omitempty"`
+	Description NullableString `json:"description"`
 	// The order of the Environment represented on the ConfigCat Dashboard.
-	Order *int32 `json:"order,omitempty"`
+	Order int32 `json:"order"`
 	// Determines whether a mandatory reason must be given every time when the Feature Flags or Settings in the given Environment are saved.
-	ReasonRequired *bool `json:"reasonRequired,omitempty"`
-	EnvironmentAccessType *EnvironmentAccessType `json:"environmentAccessType,omitempty"`
+	ReasonRequired bool `json:"reasonRequired"`
+	EnvironmentAccessType EnvironmentAccessType `json:"environmentAccessType"`
 }
+
+type _EnvironmentAccessModel EnvironmentAccessModel
 
 // NewEnvironmentAccessModel instantiates a new EnvironmentAccessModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEnvironmentAccessModel() *EnvironmentAccessModel {
+func NewEnvironmentAccessModel(environmentId string, name NullableString, color NullableString, description NullableString, order int32, reasonRequired bool, environmentAccessType EnvironmentAccessType) *EnvironmentAccessModel {
 	this := EnvironmentAccessModel{}
+	this.EnvironmentId = environmentId
+	this.Name = name
+	this.Color = color
+	this.Description = description
+	this.Order = order
+	this.ReasonRequired = reasonRequired
+	this.EnvironmentAccessType = environmentAccessType
 	return &this
 }
 
@@ -52,48 +63,42 @@ func NewEnvironmentAccessModelWithDefaults() *EnvironmentAccessModel {
 	return &this
 }
 
-// GetEnvironmentId returns the EnvironmentId field value if set, zero value otherwise.
+// GetEnvironmentId returns the EnvironmentId field value
 func (o *EnvironmentAccessModel) GetEnvironmentId() string {
-	if o == nil || IsNil(o.EnvironmentId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.EnvironmentId
+
+	return o.EnvironmentId
 }
 
-// GetEnvironmentIdOk returns a tuple with the EnvironmentId field value if set, nil otherwise
+// GetEnvironmentIdOk returns a tuple with the EnvironmentId field value
 // and a boolean to check if the value has been set.
 func (o *EnvironmentAccessModel) GetEnvironmentIdOk() (*string, bool) {
-	if o == nil || IsNil(o.EnvironmentId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EnvironmentId, true
+	return &o.EnvironmentId, true
 }
 
-// HasEnvironmentId returns a boolean if a field has been set.
-func (o *EnvironmentAccessModel) HasEnvironmentId() bool {
-	if o != nil && !IsNil(o.EnvironmentId) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironmentId gets a reference to the given string and assigns it to the EnvironmentId field.
+// SetEnvironmentId sets field value
 func (o *EnvironmentAccessModel) SetEnvironmentId(v string) {
-	o.EnvironmentId = &v
+	o.EnvironmentId = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetName returns the Name field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *EnvironmentAccessModel) GetName() string {
-	if o == nil || IsNil(o.Name.Get()) {
+	if o == nil || o.Name.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Name.Get()
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EnvironmentAccessModel) GetNameOk() (*string, bool) {
@@ -103,39 +108,23 @@ func (o *EnvironmentAccessModel) GetNameOk() (*string, bool) {
 	return o.Name.Get(), o.Name.IsSet()
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *EnvironmentAccessModel) HasName() bool {
-	if o != nil && o.Name.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given NullableString and assigns it to the Name field.
+// SetName sets field value
 func (o *EnvironmentAccessModel) SetName(v string) {
 	o.Name.Set(&v)
 }
-// SetNameNil sets the value for Name to be an explicit nil
-func (o *EnvironmentAccessModel) SetNameNil() {
-	o.Name.Set(nil)
-}
 
-// UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *EnvironmentAccessModel) UnsetName() {
-	o.Name.Unset()
-}
-
-// GetColor returns the Color field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetColor returns the Color field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *EnvironmentAccessModel) GetColor() string {
-	if o == nil || IsNil(o.Color.Get()) {
+	if o == nil || o.Color.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Color.Get()
 }
 
-// GetColorOk returns a tuple with the Color field value if set, nil otherwise
+// GetColorOk returns a tuple with the Color field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EnvironmentAccessModel) GetColorOk() (*string, bool) {
@@ -145,39 +134,23 @@ func (o *EnvironmentAccessModel) GetColorOk() (*string, bool) {
 	return o.Color.Get(), o.Color.IsSet()
 }
 
-// HasColor returns a boolean if a field has been set.
-func (o *EnvironmentAccessModel) HasColor() bool {
-	if o != nil && o.Color.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetColor gets a reference to the given NullableString and assigns it to the Color field.
+// SetColor sets field value
 func (o *EnvironmentAccessModel) SetColor(v string) {
 	o.Color.Set(&v)
 }
-// SetColorNil sets the value for Color to be an explicit nil
-func (o *EnvironmentAccessModel) SetColorNil() {
-	o.Color.Set(nil)
-}
 
-// UnsetColor ensures that no value is present for Color, not even an explicit nil
-func (o *EnvironmentAccessModel) UnsetColor() {
-	o.Color.Unset()
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDescription returns the Description field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *EnvironmentAccessModel) GetDescription() string {
-	if o == nil || IsNil(o.Description.Get()) {
+	if o == nil || o.Description.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Description.Get()
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EnvironmentAccessModel) GetDescriptionOk() (*string, bool) {
@@ -187,123 +160,81 @@ func (o *EnvironmentAccessModel) GetDescriptionOk() (*string, bool) {
 	return o.Description.Get(), o.Description.IsSet()
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *EnvironmentAccessModel) HasDescription() bool {
-	if o != nil && o.Description.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
+// SetDescription sets field value
 func (o *EnvironmentAccessModel) SetDescription(v string) {
 	o.Description.Set(&v)
 }
-// SetDescriptionNil sets the value for Description to be an explicit nil
-func (o *EnvironmentAccessModel) SetDescriptionNil() {
-	o.Description.Set(nil)
-}
 
-// UnsetDescription ensures that no value is present for Description, not even an explicit nil
-func (o *EnvironmentAccessModel) UnsetDescription() {
-	o.Description.Unset()
-}
-
-// GetOrder returns the Order field value if set, zero value otherwise.
+// GetOrder returns the Order field value
 func (o *EnvironmentAccessModel) GetOrder() int32 {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Order
+
+	return o.Order
 }
 
-// GetOrderOk returns a tuple with the Order field value if set, nil otherwise
+// GetOrderOk returns a tuple with the Order field value
 // and a boolean to check if the value has been set.
 func (o *EnvironmentAccessModel) GetOrderOk() (*int32, bool) {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Order, true
+	return &o.Order, true
 }
 
-// HasOrder returns a boolean if a field has been set.
-func (o *EnvironmentAccessModel) HasOrder() bool {
-	if o != nil && !IsNil(o.Order) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrder gets a reference to the given int32 and assigns it to the Order field.
+// SetOrder sets field value
 func (o *EnvironmentAccessModel) SetOrder(v int32) {
-	o.Order = &v
+	o.Order = v
 }
 
-// GetReasonRequired returns the ReasonRequired field value if set, zero value otherwise.
+// GetReasonRequired returns the ReasonRequired field value
 func (o *EnvironmentAccessModel) GetReasonRequired() bool {
-	if o == nil || IsNil(o.ReasonRequired) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.ReasonRequired
+
+	return o.ReasonRequired
 }
 
-// GetReasonRequiredOk returns a tuple with the ReasonRequired field value if set, nil otherwise
+// GetReasonRequiredOk returns a tuple with the ReasonRequired field value
 // and a boolean to check if the value has been set.
 func (o *EnvironmentAccessModel) GetReasonRequiredOk() (*bool, bool) {
-	if o == nil || IsNil(o.ReasonRequired) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReasonRequired, true
+	return &o.ReasonRequired, true
 }
 
-// HasReasonRequired returns a boolean if a field has been set.
-func (o *EnvironmentAccessModel) HasReasonRequired() bool {
-	if o != nil && !IsNil(o.ReasonRequired) {
-		return true
-	}
-
-	return false
-}
-
-// SetReasonRequired gets a reference to the given bool and assigns it to the ReasonRequired field.
+// SetReasonRequired sets field value
 func (o *EnvironmentAccessModel) SetReasonRequired(v bool) {
-	o.ReasonRequired = &v
+	o.ReasonRequired = v
 }
 
-// GetEnvironmentAccessType returns the EnvironmentAccessType field value if set, zero value otherwise.
+// GetEnvironmentAccessType returns the EnvironmentAccessType field value
 func (o *EnvironmentAccessModel) GetEnvironmentAccessType() EnvironmentAccessType {
-	if o == nil || IsNil(o.EnvironmentAccessType) {
+	if o == nil {
 		var ret EnvironmentAccessType
 		return ret
 	}
-	return *o.EnvironmentAccessType
+
+	return o.EnvironmentAccessType
 }
 
-// GetEnvironmentAccessTypeOk returns a tuple with the EnvironmentAccessType field value if set, nil otherwise
+// GetEnvironmentAccessTypeOk returns a tuple with the EnvironmentAccessType field value
 // and a boolean to check if the value has been set.
 func (o *EnvironmentAccessModel) GetEnvironmentAccessTypeOk() (*EnvironmentAccessType, bool) {
-	if o == nil || IsNil(o.EnvironmentAccessType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EnvironmentAccessType, true
+	return &o.EnvironmentAccessType, true
 }
 
-// HasEnvironmentAccessType returns a boolean if a field has been set.
-func (o *EnvironmentAccessModel) HasEnvironmentAccessType() bool {
-	if o != nil && !IsNil(o.EnvironmentAccessType) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironmentAccessType gets a reference to the given EnvironmentAccessType and assigns it to the EnvironmentAccessType field.
+// SetEnvironmentAccessType sets field value
 func (o *EnvironmentAccessModel) SetEnvironmentAccessType(v EnvironmentAccessType) {
-	o.EnvironmentAccessType = &v
+	o.EnvironmentAccessType = v
 }
 
 func (o EnvironmentAccessModel) MarshalJSON() ([]byte, error) {
@@ -316,28 +247,57 @@ func (o EnvironmentAccessModel) MarshalJSON() ([]byte, error) {
 
 func (o EnvironmentAccessModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EnvironmentId) {
-		toSerialize["environmentId"] = o.EnvironmentId
-	}
-	if o.Name.IsSet() {
-		toSerialize["name"] = o.Name.Get()
-	}
-	if o.Color.IsSet() {
-		toSerialize["color"] = o.Color.Get()
-	}
-	if o.Description.IsSet() {
-		toSerialize["description"] = o.Description.Get()
-	}
-	if !IsNil(o.Order) {
-		toSerialize["order"] = o.Order
-	}
-	if !IsNil(o.ReasonRequired) {
-		toSerialize["reasonRequired"] = o.ReasonRequired
-	}
-	if !IsNil(o.EnvironmentAccessType) {
-		toSerialize["environmentAccessType"] = o.EnvironmentAccessType
-	}
+	toSerialize["environmentId"] = o.EnvironmentId
+	toSerialize["name"] = o.Name.Get()
+	toSerialize["color"] = o.Color.Get()
+	toSerialize["description"] = o.Description.Get()
+	toSerialize["order"] = o.Order
+	toSerialize["reasonRequired"] = o.ReasonRequired
+	toSerialize["environmentAccessType"] = o.EnvironmentAccessType
 	return toSerialize, nil
+}
+
+func (o *EnvironmentAccessModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"environmentId",
+		"name",
+		"color",
+		"description",
+		"order",
+		"reasonRequired",
+		"environmentAccessType",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varEnvironmentAccessModel := _EnvironmentAccessModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varEnvironmentAccessModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EnvironmentAccessModel(varEnvironmentAccessModel)
+
+	return err
 }
 
 type NullableEnvironmentAccessModel struct {

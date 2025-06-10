@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Details** | Pointer to [**[]IntegrationLinkDetail**](IntegrationLinkDetail.md) |  | [optional] [readonly] 
-**AllIntegrationLinkCount** | Pointer to **int32** |  | [optional] 
+**Details** | [**[]IntegrationLinkDetail**](IntegrationLinkDetail.md) |  | [readonly] 
+**AllIntegrationLinkCount** | **int32** |  | 
 
 ## Methods
 
 ### NewIntegrationLinkDetailsModel
 
-`func NewIntegrationLinkDetailsModel() *IntegrationLinkDetailsModel`
+`func NewIntegrationLinkDetailsModel(details []IntegrationLinkDetail, allIntegrationLinkCount int32, ) *IntegrationLinkDetailsModel`
 
 NewIntegrationLinkDetailsModel instantiates a new IntegrationLinkDetailsModel object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetDetails sets Details field to given value.
 
-### HasDetails
-
-`func (o *IntegrationLinkDetailsModel) HasDetails() bool`
-
-HasDetails returns a boolean if a field has been set.
 
 ### SetDetailsNil
 
@@ -80,11 +75,6 @@ and a boolean to check if the value has been set.
 
 SetAllIntegrationLinkCount sets AllIntegrationLinkCount field to given value.
 
-### HasAllIntegrationLinkCount
-
-`func (o *IntegrationLinkDetailsModel) HasAllIntegrationLinkCount() bool`
-
-HasAllIntegrationLinkCount returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

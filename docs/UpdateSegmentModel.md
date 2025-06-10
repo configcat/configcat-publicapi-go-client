@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **NullableString** |  | [optional] 
 **Description** | Pointer to **NullableString** |  | [optional] 
 **ComparisonAttribute** | Pointer to **NullableString** |  | [optional] 
-**Comparator** | Pointer to [**RolloutRuleComparator**](RolloutRuleComparator.md) |  | [optional] 
+**Comparator** | Pointer to [**NullableRolloutRuleComparator**](RolloutRuleComparator.md) |  | [optional] 
 **ComparisonValue** | Pointer to **NullableString** |  | [optional] 
 
 ## Methods
@@ -159,6 +159,16 @@ SetComparator sets Comparator field to given value.
 
 HasComparator returns a boolean if a field has been set.
 
+### SetComparatorNil
+
+`func (o *UpdateSegmentModel) SetComparatorNil(b bool)`
+
+ SetComparatorNil sets the value for Comparator to be an explicit nil
+
+### UnsetComparator
+`func (o *UpdateSegmentModel) UnsetComparator()`
+
+UnsetComparator ensures that no value is present for Comparator, not even an explicit nil
 ### GetComparisonValue
 
 `func (o *UpdateSegmentModel) GetComparisonValue() string`

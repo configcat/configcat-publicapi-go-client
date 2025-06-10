@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 ## CreateWebhook
 
-> WebhookModel CreateWebhook(ctx, configId, environmentId).WebHookRequest(webHookRequest).Execute()
+> WebhookResponseModel CreateWebhook(ctx, configId, environmentId).WebHookRequestModel(webHookRequestModel).Execute()
 
 Create Webhook
 
@@ -31,22 +31,22 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
 func main() {
 	configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
 	environmentId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Environment.
-	webHookRequest := *openapiclient.NewWebHookRequest("Url_example") // WebHookRequest | 
+	webHookRequestModel := *openapiclient.NewWebHookRequestModel("Url_example") // WebHookRequestModel | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WebhooksAPI.CreateWebhook(context.Background(), configId, environmentId).WebHookRequest(webHookRequest).Execute()
+	resp, r, err := apiClient.WebhooksAPI.CreateWebhook(context.Background(), configId, environmentId).WebHookRequestModel(webHookRequestModel).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.CreateWebhook``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateWebhook`: WebhookModel
+	// response from `CreateWebhook`: WebhookResponseModel
 	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.CreateWebhook`: %v\n", resp)
 }
 ```
@@ -69,11 +69,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **webHookRequest** | [**WebHookRequest**](WebHookRequest.md) |  | 
+ **webHookRequestModel** | [**WebHookRequestModel**](WebHookRequestModel.md) |  | 
 
 ### Return type
 
-[**WebhookModel**](WebhookModel.md)
+[**WebhookResponseModel**](WebhookResponseModel.md)
 
 ### Authorization
 
@@ -106,7 +106,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
 func main() {
@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 
 ## GetWebhook
 
-> WebhookModel GetWebhook(ctx, webhookId).Execute()
+> WebhookResponseModel GetWebhook(ctx, webhookId).Execute()
 
 Get Webhook
 
@@ -174,7 +174,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
 func main() {
@@ -187,7 +187,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.GetWebhook``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetWebhook`: WebhookModel
+	// response from `GetWebhook`: WebhookResponseModel
 	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.GetWebhook`: %v\n", resp)
 }
 ```
@@ -211,7 +211,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**WebhookModel**](WebhookModel.md)
+[**WebhookResponseModel**](WebhookResponseModel.md)
 
 ### Authorization
 
@@ -244,7 +244,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
 func main() {
@@ -299,7 +299,7 @@ Name | Type | Description  | Notes
 
 ## GetWebhooks
 
-> []WebhookModel GetWebhooks(ctx, productId).Execute()
+> []WebhookResponseModel GetWebhooks(ctx, productId).Execute()
 
 List Webhooks
 
@@ -314,7 +314,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
 func main() {
@@ -327,7 +327,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.GetWebhooks``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetWebhooks`: []WebhookModel
+	// response from `GetWebhooks`: []WebhookResponseModel
 	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.GetWebhooks`: %v\n", resp)
 }
 ```
@@ -351,7 +351,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]WebhookModel**](WebhookModel.md)
+[**[]WebhookResponseModel**](WebhookResponseModel.md)
 
 ### Authorization
 
@@ -369,7 +369,7 @@ Name | Type | Description  | Notes
 
 ## ReplaceWebhook
 
-> WebhookModel ReplaceWebhook(ctx, webhookId).WebHookRequest(webHookRequest).Execute()
+> WebhookResponseModel ReplaceWebhook(ctx, webhookId).WebHookRequestModel(webHookRequestModel).Execute()
 
 Replace Webhook
 
@@ -384,21 +384,21 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
 func main() {
 	webhookId := int32(56) // int32 | The identifier of the Webhook.
-	webHookRequest := *openapiclient.NewWebHookRequest("Url_example") // WebHookRequest | 
+	webHookRequestModel := *openapiclient.NewWebHookRequestModel("Url_example") // WebHookRequestModel | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WebhooksAPI.ReplaceWebhook(context.Background(), webhookId).WebHookRequest(webHookRequest).Execute()
+	resp, r, err := apiClient.WebhooksAPI.ReplaceWebhook(context.Background(), webhookId).WebHookRequestModel(webHookRequestModel).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.ReplaceWebhook``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `ReplaceWebhook`: WebhookModel
+	// response from `ReplaceWebhook`: WebhookResponseModel
 	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.ReplaceWebhook`: %v\n", resp)
 }
 ```
@@ -419,11 +419,11 @@ Other parameters are passed through a pointer to a apiReplaceWebhookRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **webHookRequest** | [**WebHookRequest**](WebHookRequest.md) |  | 
+ **webHookRequestModel** | [**WebHookRequestModel**](WebHookRequestModel.md) |  | 
 
 ### Return type
 
-[**WebhookModel**](WebhookModel.md)
+[**WebhookResponseModel**](WebhookResponseModel.md)
 
 ### Authorization
 
@@ -441,7 +441,7 @@ Name | Type | Description  | Notes
 
 ## UpdateWebhook
 
-> WebhookModel UpdateWebhook(ctx, webhookId).JsonPatchOperation(jsonPatchOperation).Execute()
+> WebhookResponseModel UpdateWebhook(ctx, webhookId).JsonPatchOperation(jsonPatchOperation).Execute()
 
 Update Webhook
 
@@ -456,7 +456,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
 func main() {
@@ -470,7 +470,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.UpdateWebhook``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdateWebhook`: WebhookModel
+	// response from `UpdateWebhook`: WebhookResponseModel
 	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.UpdateWebhook`: %v\n", resp)
 }
 ```
@@ -495,7 +495,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**WebhookModel**](WebhookModel.md)
+[**WebhookResponseModel**](WebhookResponseModel.md)
 
 ### Authorization
 

@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the FeatureFlagLimitations type satisfies the MappedNullable interface at compile time
@@ -21,27 +23,36 @@ var _ MappedNullable = &FeatureFlagLimitations{}
 // FeatureFlagLimitations Subscription limitations regarding Feature flag or Setting values and targeting.
 type FeatureFlagLimitations struct {
 	// Maximum number of percentage options a Feature Flag or Setting can have within a targeting rule.
-	MaxPercentageOptionCount *int32 `json:"maxPercentageOptionCount,omitempty"`
+	MaxPercentageOptionCount int32 `json:"maxPercentageOptionCount"`
 	// Maximum number of targeting rules a Feature Flag or Setting can have.
-	MaxTargetingRuleCount *int32 `json:"maxTargetingRuleCount,omitempty"`
+	MaxTargetingRuleCount int32 `json:"maxTargetingRuleCount"`
 	// Maximum length of a text comparison value.
-	MaxComparisonValueLength *int32 `json:"maxComparisonValueLength,omitempty"`
+	MaxComparisonValueLength int32 `json:"maxComparisonValueLength"`
 	// Maximum item count of a list comparison value.
-	MaxComparisonValueListLength *int32 `json:"maxComparisonValueListLength,omitempty"`
+	MaxComparisonValueListLength int32 `json:"maxComparisonValueListLength"`
 	// Maximum length of a list comparison value's item.
-	MaxComparisonValueListItemLength *int32 `json:"maxComparisonValueListItemLength,omitempty"`
+	MaxComparisonValueListItemLength int32 `json:"maxComparisonValueListItemLength"`
 	// Maximum length of a text Setting's value.
-	MaxStringFlagValueLength *int32 `json:"maxStringFlagValueLength,omitempty"`
+	MaxStringFlagValueLength int32 `json:"maxStringFlagValueLength"`
 	// Maximum number of `AND` conditions a Feature Flag or Setting can have within a targeting rule.
-	MaxConditionPerTargetingRuleCount *int32 `json:"maxConditionPerTargetingRuleCount,omitempty"`
+	MaxConditionPerTargetingRuleCount int32 `json:"maxConditionPerTargetingRuleCount"`
 }
+
+type _FeatureFlagLimitations FeatureFlagLimitations
 
 // NewFeatureFlagLimitations instantiates a new FeatureFlagLimitations object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFeatureFlagLimitations() *FeatureFlagLimitations {
+func NewFeatureFlagLimitations(maxPercentageOptionCount int32, maxTargetingRuleCount int32, maxComparisonValueLength int32, maxComparisonValueListLength int32, maxComparisonValueListItemLength int32, maxStringFlagValueLength int32, maxConditionPerTargetingRuleCount int32) *FeatureFlagLimitations {
 	this := FeatureFlagLimitations{}
+	this.MaxPercentageOptionCount = maxPercentageOptionCount
+	this.MaxTargetingRuleCount = maxTargetingRuleCount
+	this.MaxComparisonValueLength = maxComparisonValueLength
+	this.MaxComparisonValueListLength = maxComparisonValueListLength
+	this.MaxComparisonValueListItemLength = maxComparisonValueListItemLength
+	this.MaxStringFlagValueLength = maxStringFlagValueLength
+	this.MaxConditionPerTargetingRuleCount = maxConditionPerTargetingRuleCount
 	return &this
 }
 
@@ -53,228 +64,172 @@ func NewFeatureFlagLimitationsWithDefaults() *FeatureFlagLimitations {
 	return &this
 }
 
-// GetMaxPercentageOptionCount returns the MaxPercentageOptionCount field value if set, zero value otherwise.
+// GetMaxPercentageOptionCount returns the MaxPercentageOptionCount field value
 func (o *FeatureFlagLimitations) GetMaxPercentageOptionCount() int32 {
-	if o == nil || IsNil(o.MaxPercentageOptionCount) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.MaxPercentageOptionCount
+
+	return o.MaxPercentageOptionCount
 }
 
-// GetMaxPercentageOptionCountOk returns a tuple with the MaxPercentageOptionCount field value if set, nil otherwise
+// GetMaxPercentageOptionCountOk returns a tuple with the MaxPercentageOptionCount field value
 // and a boolean to check if the value has been set.
 func (o *FeatureFlagLimitations) GetMaxPercentageOptionCountOk() (*int32, bool) {
-	if o == nil || IsNil(o.MaxPercentageOptionCount) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxPercentageOptionCount, true
+	return &o.MaxPercentageOptionCount, true
 }
 
-// HasMaxPercentageOptionCount returns a boolean if a field has been set.
-func (o *FeatureFlagLimitations) HasMaxPercentageOptionCount() bool {
-	if o != nil && !IsNil(o.MaxPercentageOptionCount) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxPercentageOptionCount gets a reference to the given int32 and assigns it to the MaxPercentageOptionCount field.
+// SetMaxPercentageOptionCount sets field value
 func (o *FeatureFlagLimitations) SetMaxPercentageOptionCount(v int32) {
-	o.MaxPercentageOptionCount = &v
+	o.MaxPercentageOptionCount = v
 }
 
-// GetMaxTargetingRuleCount returns the MaxTargetingRuleCount field value if set, zero value otherwise.
+// GetMaxTargetingRuleCount returns the MaxTargetingRuleCount field value
 func (o *FeatureFlagLimitations) GetMaxTargetingRuleCount() int32 {
-	if o == nil || IsNil(o.MaxTargetingRuleCount) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.MaxTargetingRuleCount
+
+	return o.MaxTargetingRuleCount
 }
 
-// GetMaxTargetingRuleCountOk returns a tuple with the MaxTargetingRuleCount field value if set, nil otherwise
+// GetMaxTargetingRuleCountOk returns a tuple with the MaxTargetingRuleCount field value
 // and a boolean to check if the value has been set.
 func (o *FeatureFlagLimitations) GetMaxTargetingRuleCountOk() (*int32, bool) {
-	if o == nil || IsNil(o.MaxTargetingRuleCount) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxTargetingRuleCount, true
+	return &o.MaxTargetingRuleCount, true
 }
 
-// HasMaxTargetingRuleCount returns a boolean if a field has been set.
-func (o *FeatureFlagLimitations) HasMaxTargetingRuleCount() bool {
-	if o != nil && !IsNil(o.MaxTargetingRuleCount) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxTargetingRuleCount gets a reference to the given int32 and assigns it to the MaxTargetingRuleCount field.
+// SetMaxTargetingRuleCount sets field value
 func (o *FeatureFlagLimitations) SetMaxTargetingRuleCount(v int32) {
-	o.MaxTargetingRuleCount = &v
+	o.MaxTargetingRuleCount = v
 }
 
-// GetMaxComparisonValueLength returns the MaxComparisonValueLength field value if set, zero value otherwise.
+// GetMaxComparisonValueLength returns the MaxComparisonValueLength field value
 func (o *FeatureFlagLimitations) GetMaxComparisonValueLength() int32 {
-	if o == nil || IsNil(o.MaxComparisonValueLength) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.MaxComparisonValueLength
+
+	return o.MaxComparisonValueLength
 }
 
-// GetMaxComparisonValueLengthOk returns a tuple with the MaxComparisonValueLength field value if set, nil otherwise
+// GetMaxComparisonValueLengthOk returns a tuple with the MaxComparisonValueLength field value
 // and a boolean to check if the value has been set.
 func (o *FeatureFlagLimitations) GetMaxComparisonValueLengthOk() (*int32, bool) {
-	if o == nil || IsNil(o.MaxComparisonValueLength) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxComparisonValueLength, true
+	return &o.MaxComparisonValueLength, true
 }
 
-// HasMaxComparisonValueLength returns a boolean if a field has been set.
-func (o *FeatureFlagLimitations) HasMaxComparisonValueLength() bool {
-	if o != nil && !IsNil(o.MaxComparisonValueLength) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxComparisonValueLength gets a reference to the given int32 and assigns it to the MaxComparisonValueLength field.
+// SetMaxComparisonValueLength sets field value
 func (o *FeatureFlagLimitations) SetMaxComparisonValueLength(v int32) {
-	o.MaxComparisonValueLength = &v
+	o.MaxComparisonValueLength = v
 }
 
-// GetMaxComparisonValueListLength returns the MaxComparisonValueListLength field value if set, zero value otherwise.
+// GetMaxComparisonValueListLength returns the MaxComparisonValueListLength field value
 func (o *FeatureFlagLimitations) GetMaxComparisonValueListLength() int32 {
-	if o == nil || IsNil(o.MaxComparisonValueListLength) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.MaxComparisonValueListLength
+
+	return o.MaxComparisonValueListLength
 }
 
-// GetMaxComparisonValueListLengthOk returns a tuple with the MaxComparisonValueListLength field value if set, nil otherwise
+// GetMaxComparisonValueListLengthOk returns a tuple with the MaxComparisonValueListLength field value
 // and a boolean to check if the value has been set.
 func (o *FeatureFlagLimitations) GetMaxComparisonValueListLengthOk() (*int32, bool) {
-	if o == nil || IsNil(o.MaxComparisonValueListLength) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxComparisonValueListLength, true
+	return &o.MaxComparisonValueListLength, true
 }
 
-// HasMaxComparisonValueListLength returns a boolean if a field has been set.
-func (o *FeatureFlagLimitations) HasMaxComparisonValueListLength() bool {
-	if o != nil && !IsNil(o.MaxComparisonValueListLength) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxComparisonValueListLength gets a reference to the given int32 and assigns it to the MaxComparisonValueListLength field.
+// SetMaxComparisonValueListLength sets field value
 func (o *FeatureFlagLimitations) SetMaxComparisonValueListLength(v int32) {
-	o.MaxComparisonValueListLength = &v
+	o.MaxComparisonValueListLength = v
 }
 
-// GetMaxComparisonValueListItemLength returns the MaxComparisonValueListItemLength field value if set, zero value otherwise.
+// GetMaxComparisonValueListItemLength returns the MaxComparisonValueListItemLength field value
 func (o *FeatureFlagLimitations) GetMaxComparisonValueListItemLength() int32 {
-	if o == nil || IsNil(o.MaxComparisonValueListItemLength) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.MaxComparisonValueListItemLength
+
+	return o.MaxComparisonValueListItemLength
 }
 
-// GetMaxComparisonValueListItemLengthOk returns a tuple with the MaxComparisonValueListItemLength field value if set, nil otherwise
+// GetMaxComparisonValueListItemLengthOk returns a tuple with the MaxComparisonValueListItemLength field value
 // and a boolean to check if the value has been set.
 func (o *FeatureFlagLimitations) GetMaxComparisonValueListItemLengthOk() (*int32, bool) {
-	if o == nil || IsNil(o.MaxComparisonValueListItemLength) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxComparisonValueListItemLength, true
+	return &o.MaxComparisonValueListItemLength, true
 }
 
-// HasMaxComparisonValueListItemLength returns a boolean if a field has been set.
-func (o *FeatureFlagLimitations) HasMaxComparisonValueListItemLength() bool {
-	if o != nil && !IsNil(o.MaxComparisonValueListItemLength) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxComparisonValueListItemLength gets a reference to the given int32 and assigns it to the MaxComparisonValueListItemLength field.
+// SetMaxComparisonValueListItemLength sets field value
 func (o *FeatureFlagLimitations) SetMaxComparisonValueListItemLength(v int32) {
-	o.MaxComparisonValueListItemLength = &v
+	o.MaxComparisonValueListItemLength = v
 }
 
-// GetMaxStringFlagValueLength returns the MaxStringFlagValueLength field value if set, zero value otherwise.
+// GetMaxStringFlagValueLength returns the MaxStringFlagValueLength field value
 func (o *FeatureFlagLimitations) GetMaxStringFlagValueLength() int32 {
-	if o == nil || IsNil(o.MaxStringFlagValueLength) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.MaxStringFlagValueLength
+
+	return o.MaxStringFlagValueLength
 }
 
-// GetMaxStringFlagValueLengthOk returns a tuple with the MaxStringFlagValueLength field value if set, nil otherwise
+// GetMaxStringFlagValueLengthOk returns a tuple with the MaxStringFlagValueLength field value
 // and a boolean to check if the value has been set.
 func (o *FeatureFlagLimitations) GetMaxStringFlagValueLengthOk() (*int32, bool) {
-	if o == nil || IsNil(o.MaxStringFlagValueLength) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxStringFlagValueLength, true
+	return &o.MaxStringFlagValueLength, true
 }
 
-// HasMaxStringFlagValueLength returns a boolean if a field has been set.
-func (o *FeatureFlagLimitations) HasMaxStringFlagValueLength() bool {
-	if o != nil && !IsNil(o.MaxStringFlagValueLength) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxStringFlagValueLength gets a reference to the given int32 and assigns it to the MaxStringFlagValueLength field.
+// SetMaxStringFlagValueLength sets field value
 func (o *FeatureFlagLimitations) SetMaxStringFlagValueLength(v int32) {
-	o.MaxStringFlagValueLength = &v
+	o.MaxStringFlagValueLength = v
 }
 
-// GetMaxConditionPerTargetingRuleCount returns the MaxConditionPerTargetingRuleCount field value if set, zero value otherwise.
+// GetMaxConditionPerTargetingRuleCount returns the MaxConditionPerTargetingRuleCount field value
 func (o *FeatureFlagLimitations) GetMaxConditionPerTargetingRuleCount() int32 {
-	if o == nil || IsNil(o.MaxConditionPerTargetingRuleCount) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.MaxConditionPerTargetingRuleCount
+
+	return o.MaxConditionPerTargetingRuleCount
 }
 
-// GetMaxConditionPerTargetingRuleCountOk returns a tuple with the MaxConditionPerTargetingRuleCount field value if set, nil otherwise
+// GetMaxConditionPerTargetingRuleCountOk returns a tuple with the MaxConditionPerTargetingRuleCount field value
 // and a boolean to check if the value has been set.
 func (o *FeatureFlagLimitations) GetMaxConditionPerTargetingRuleCountOk() (*int32, bool) {
-	if o == nil || IsNil(o.MaxConditionPerTargetingRuleCount) {
+	if o == nil {
 		return nil, false
 	}
-	return o.MaxConditionPerTargetingRuleCount, true
+	return &o.MaxConditionPerTargetingRuleCount, true
 }
 
-// HasMaxConditionPerTargetingRuleCount returns a boolean if a field has been set.
-func (o *FeatureFlagLimitations) HasMaxConditionPerTargetingRuleCount() bool {
-	if o != nil && !IsNil(o.MaxConditionPerTargetingRuleCount) {
-		return true
-	}
-
-	return false
-}
-
-// SetMaxConditionPerTargetingRuleCount gets a reference to the given int32 and assigns it to the MaxConditionPerTargetingRuleCount field.
+// SetMaxConditionPerTargetingRuleCount sets field value
 func (o *FeatureFlagLimitations) SetMaxConditionPerTargetingRuleCount(v int32) {
-	o.MaxConditionPerTargetingRuleCount = &v
+	o.MaxConditionPerTargetingRuleCount = v
 }
 
 func (o FeatureFlagLimitations) MarshalJSON() ([]byte, error) {
@@ -287,28 +242,57 @@ func (o FeatureFlagLimitations) MarshalJSON() ([]byte, error) {
 
 func (o FeatureFlagLimitations) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.MaxPercentageOptionCount) {
-		toSerialize["maxPercentageOptionCount"] = o.MaxPercentageOptionCount
-	}
-	if !IsNil(o.MaxTargetingRuleCount) {
-		toSerialize["maxTargetingRuleCount"] = o.MaxTargetingRuleCount
-	}
-	if !IsNil(o.MaxComparisonValueLength) {
-		toSerialize["maxComparisonValueLength"] = o.MaxComparisonValueLength
-	}
-	if !IsNil(o.MaxComparisonValueListLength) {
-		toSerialize["maxComparisonValueListLength"] = o.MaxComparisonValueListLength
-	}
-	if !IsNil(o.MaxComparisonValueListItemLength) {
-		toSerialize["maxComparisonValueListItemLength"] = o.MaxComparisonValueListItemLength
-	}
-	if !IsNil(o.MaxStringFlagValueLength) {
-		toSerialize["maxStringFlagValueLength"] = o.MaxStringFlagValueLength
-	}
-	if !IsNil(o.MaxConditionPerTargetingRuleCount) {
-		toSerialize["maxConditionPerTargetingRuleCount"] = o.MaxConditionPerTargetingRuleCount
-	}
+	toSerialize["maxPercentageOptionCount"] = o.MaxPercentageOptionCount
+	toSerialize["maxTargetingRuleCount"] = o.MaxTargetingRuleCount
+	toSerialize["maxComparisonValueLength"] = o.MaxComparisonValueLength
+	toSerialize["maxComparisonValueListLength"] = o.MaxComparisonValueListLength
+	toSerialize["maxComparisonValueListItemLength"] = o.MaxComparisonValueListItemLength
+	toSerialize["maxStringFlagValueLength"] = o.MaxStringFlagValueLength
+	toSerialize["maxConditionPerTargetingRuleCount"] = o.MaxConditionPerTargetingRuleCount
 	return toSerialize, nil
+}
+
+func (o *FeatureFlagLimitations) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"maxPercentageOptionCount",
+		"maxTargetingRuleCount",
+		"maxComparisonValueLength",
+		"maxComparisonValueListLength",
+		"maxComparisonValueListItemLength",
+		"maxStringFlagValueLength",
+		"maxConditionPerTargetingRuleCount",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varFeatureFlagLimitations := _FeatureFlagLimitations{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varFeatureFlagLimitations)
+
+	if err != nil {
+		return err
+	}
+
+	*o = FeatureFlagLimitations(varFeatureFlagLimitations)
+
+	return err
 }
 
 type NullableFeatureFlagLimitations struct {

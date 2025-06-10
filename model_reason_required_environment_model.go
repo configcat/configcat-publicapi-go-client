@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ReasonRequiredEnvironmentModel type satisfies the MappedNullable interface at compile time
@@ -21,19 +23,24 @@ var _ MappedNullable = &ReasonRequiredEnvironmentModel{}
 // ReasonRequiredEnvironmentModel struct for ReasonRequiredEnvironmentModel
 type ReasonRequiredEnvironmentModel struct {
 	// Identifier of the Environment.
-	EnvironmentId *string `json:"environmentId,omitempty"`
+	EnvironmentId string `json:"environmentId"`
 	// Indicates that a mandatory note is required in this Environment for saving and publishing.
-	ReasonRequired *bool `json:"reasonRequired,omitempty"`
+	ReasonRequired bool `json:"reasonRequired"`
 	// Name of the Environment.
-	EnvironmentName NullableString `json:"environmentName,omitempty"`
+	EnvironmentName NullableString `json:"environmentName"`
 }
+
+type _ReasonRequiredEnvironmentModel ReasonRequiredEnvironmentModel
 
 // NewReasonRequiredEnvironmentModel instantiates a new ReasonRequiredEnvironmentModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReasonRequiredEnvironmentModel() *ReasonRequiredEnvironmentModel {
+func NewReasonRequiredEnvironmentModel(environmentId string, reasonRequired bool, environmentName NullableString) *ReasonRequiredEnvironmentModel {
 	this := ReasonRequiredEnvironmentModel{}
+	this.EnvironmentId = environmentId
+	this.ReasonRequired = reasonRequired
+	this.EnvironmentName = environmentName
 	return &this
 }
 
@@ -45,80 +52,66 @@ func NewReasonRequiredEnvironmentModelWithDefaults() *ReasonRequiredEnvironmentM
 	return &this
 }
 
-// GetEnvironmentId returns the EnvironmentId field value if set, zero value otherwise.
+// GetEnvironmentId returns the EnvironmentId field value
 func (o *ReasonRequiredEnvironmentModel) GetEnvironmentId() string {
-	if o == nil || IsNil(o.EnvironmentId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.EnvironmentId
+
+	return o.EnvironmentId
 }
 
-// GetEnvironmentIdOk returns a tuple with the EnvironmentId field value if set, nil otherwise
+// GetEnvironmentIdOk returns a tuple with the EnvironmentId field value
 // and a boolean to check if the value has been set.
 func (o *ReasonRequiredEnvironmentModel) GetEnvironmentIdOk() (*string, bool) {
-	if o == nil || IsNil(o.EnvironmentId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EnvironmentId, true
+	return &o.EnvironmentId, true
 }
 
-// HasEnvironmentId returns a boolean if a field has been set.
-func (o *ReasonRequiredEnvironmentModel) HasEnvironmentId() bool {
-	if o != nil && !IsNil(o.EnvironmentId) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironmentId gets a reference to the given string and assigns it to the EnvironmentId field.
+// SetEnvironmentId sets field value
 func (o *ReasonRequiredEnvironmentModel) SetEnvironmentId(v string) {
-	o.EnvironmentId = &v
+	o.EnvironmentId = v
 }
 
-// GetReasonRequired returns the ReasonRequired field value if set, zero value otherwise.
+// GetReasonRequired returns the ReasonRequired field value
 func (o *ReasonRequiredEnvironmentModel) GetReasonRequired() bool {
-	if o == nil || IsNil(o.ReasonRequired) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.ReasonRequired
+
+	return o.ReasonRequired
 }
 
-// GetReasonRequiredOk returns a tuple with the ReasonRequired field value if set, nil otherwise
+// GetReasonRequiredOk returns a tuple with the ReasonRequired field value
 // and a boolean to check if the value has been set.
 func (o *ReasonRequiredEnvironmentModel) GetReasonRequiredOk() (*bool, bool) {
-	if o == nil || IsNil(o.ReasonRequired) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReasonRequired, true
+	return &o.ReasonRequired, true
 }
 
-// HasReasonRequired returns a boolean if a field has been set.
-func (o *ReasonRequiredEnvironmentModel) HasReasonRequired() bool {
-	if o != nil && !IsNil(o.ReasonRequired) {
-		return true
-	}
-
-	return false
-}
-
-// SetReasonRequired gets a reference to the given bool and assigns it to the ReasonRequired field.
+// SetReasonRequired sets field value
 func (o *ReasonRequiredEnvironmentModel) SetReasonRequired(v bool) {
-	o.ReasonRequired = &v
+	o.ReasonRequired = v
 }
 
-// GetEnvironmentName returns the EnvironmentName field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetEnvironmentName returns the EnvironmentName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ReasonRequiredEnvironmentModel) GetEnvironmentName() string {
-	if o == nil || IsNil(o.EnvironmentName.Get()) {
+	if o == nil || o.EnvironmentName.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.EnvironmentName.Get()
 }
 
-// GetEnvironmentNameOk returns a tuple with the EnvironmentName field value if set, nil otherwise
+// GetEnvironmentNameOk returns a tuple with the EnvironmentName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ReasonRequiredEnvironmentModel) GetEnvironmentNameOk() (*string, bool) {
@@ -128,27 +121,9 @@ func (o *ReasonRequiredEnvironmentModel) GetEnvironmentNameOk() (*string, bool) 
 	return o.EnvironmentName.Get(), o.EnvironmentName.IsSet()
 }
 
-// HasEnvironmentName returns a boolean if a field has been set.
-func (o *ReasonRequiredEnvironmentModel) HasEnvironmentName() bool {
-	if o != nil && o.EnvironmentName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironmentName gets a reference to the given NullableString and assigns it to the EnvironmentName field.
+// SetEnvironmentName sets field value
 func (o *ReasonRequiredEnvironmentModel) SetEnvironmentName(v string) {
 	o.EnvironmentName.Set(&v)
-}
-// SetEnvironmentNameNil sets the value for EnvironmentName to be an explicit nil
-func (o *ReasonRequiredEnvironmentModel) SetEnvironmentNameNil() {
-	o.EnvironmentName.Set(nil)
-}
-
-// UnsetEnvironmentName ensures that no value is present for EnvironmentName, not even an explicit nil
-func (o *ReasonRequiredEnvironmentModel) UnsetEnvironmentName() {
-	o.EnvironmentName.Unset()
 }
 
 func (o ReasonRequiredEnvironmentModel) MarshalJSON() ([]byte, error) {
@@ -161,16 +136,49 @@ func (o ReasonRequiredEnvironmentModel) MarshalJSON() ([]byte, error) {
 
 func (o ReasonRequiredEnvironmentModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.EnvironmentId) {
-		toSerialize["environmentId"] = o.EnvironmentId
-	}
-	if !IsNil(o.ReasonRequired) {
-		toSerialize["reasonRequired"] = o.ReasonRequired
-	}
-	if o.EnvironmentName.IsSet() {
-		toSerialize["environmentName"] = o.EnvironmentName.Get()
-	}
+	toSerialize["environmentId"] = o.EnvironmentId
+	toSerialize["reasonRequired"] = o.ReasonRequired
+	toSerialize["environmentName"] = o.EnvironmentName.Get()
 	return toSerialize, nil
+}
+
+func (o *ReasonRequiredEnvironmentModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"environmentId",
+		"reasonRequired",
+		"environmentName",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varReasonRequiredEnvironmentModel := _ReasonRequiredEnvironmentModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varReasonRequiredEnvironmentModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ReasonRequiredEnvironmentModel(varReasonRequiredEnvironmentModel)
+
+	return err
 }
 
 type NullableReasonRequiredEnvironmentModel struct {

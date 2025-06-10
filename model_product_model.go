@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ProductModel type satisfies the MappedNullable interface at compile time
@@ -20,25 +22,33 @@ var _ MappedNullable = &ProductModel{}
 
 // ProductModel Details of the Product.
 type ProductModel struct {
-	Organization *OrganizationModel `json:"organization,omitempty"`
+	Organization OrganizationModel `json:"organization"`
 	// Identifier of the Product.
-	ProductId *string `json:"productId,omitempty"`
+	ProductId string `json:"productId"`
 	// Name of the Product.
-	Name NullableString `json:"name,omitempty"`
+	Name string `json:"name"`
 	// Description of the Product.
-	Description NullableString `json:"description,omitempty"`
-	// The order of the Product represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers.
-	Order *int32 `json:"order,omitempty"`
+	Description NullableString `json:"description"`
+	// The order of the Product represented on the ConfigCat Dashboard. Determined from an ascending sequence of integers.
+	Order int32 `json:"order"`
 	// Determines whether a mandatory reason must be given every time when the Feature Flags or Settings within a Product are saved.
-	ReasonRequired *bool `json:"reasonRequired,omitempty"`
+	ReasonRequired bool `json:"reasonRequired"`
 }
+
+type _ProductModel ProductModel
 
 // NewProductModel instantiates a new ProductModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProductModel() *ProductModel {
+func NewProductModel(organization OrganizationModel, productId string, name string, description NullableString, order int32, reasonRequired bool) *ProductModel {
 	this := ProductModel{}
+	this.Organization = organization
+	this.ProductId = productId
+	this.Name = name
+	this.Description = description
+	this.Order = order
+	this.ReasonRequired = reasonRequired
 	return &this
 }
 
@@ -50,122 +60,90 @@ func NewProductModelWithDefaults() *ProductModel {
 	return &this
 }
 
-// GetOrganization returns the Organization field value if set, zero value otherwise.
+// GetOrganization returns the Organization field value
 func (o *ProductModel) GetOrganization() OrganizationModel {
-	if o == nil || IsNil(o.Organization) {
+	if o == nil {
 		var ret OrganizationModel
 		return ret
 	}
-	return *o.Organization
+
+	return o.Organization
 }
 
-// GetOrganizationOk returns a tuple with the Organization field value if set, nil otherwise
+// GetOrganizationOk returns a tuple with the Organization field value
 // and a boolean to check if the value has been set.
 func (o *ProductModel) GetOrganizationOk() (*OrganizationModel, bool) {
-	if o == nil || IsNil(o.Organization) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Organization, true
+	return &o.Organization, true
 }
 
-// HasOrganization returns a boolean if a field has been set.
-func (o *ProductModel) HasOrganization() bool {
-	if o != nil && !IsNil(o.Organization) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganization gets a reference to the given OrganizationModel and assigns it to the Organization field.
+// SetOrganization sets field value
 func (o *ProductModel) SetOrganization(v OrganizationModel) {
-	o.Organization = &v
+	o.Organization = v
 }
 
-// GetProductId returns the ProductId field value if set, zero value otherwise.
+// GetProductId returns the ProductId field value
 func (o *ProductModel) GetProductId() string {
-	if o == nil || IsNil(o.ProductId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ProductId
+
+	return o.ProductId
 }
 
-// GetProductIdOk returns a tuple with the ProductId field value if set, nil otherwise
+// GetProductIdOk returns a tuple with the ProductId field value
 // and a boolean to check if the value has been set.
 func (o *ProductModel) GetProductIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ProductId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProductId, true
+	return &o.ProductId, true
 }
 
-// HasProductId returns a boolean if a field has been set.
-func (o *ProductModel) HasProductId() bool {
-	if o != nil && !IsNil(o.ProductId) {
-		return true
-	}
-
-	return false
-}
-
-// SetProductId gets a reference to the given string and assigns it to the ProductId field.
+// SetProductId sets field value
 func (o *ProductModel) SetProductId(v string) {
-	o.ProductId = &v
+	o.ProductId = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetName returns the Name field value
 func (o *ProductModel) GetName() string {
-	if o == nil || IsNil(o.Name.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name.Get()
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProductModel) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *ProductModel) HasName() bool {
-	if o != nil && o.Name.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given NullableString and assigns it to the Name field.
+// SetName sets field value
 func (o *ProductModel) SetName(v string) {
-	o.Name.Set(&v)
-}
-// SetNameNil sets the value for Name to be an explicit nil
-func (o *ProductModel) SetNameNil() {
-	o.Name.Set(nil)
+	o.Name = v
 }
 
-// UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *ProductModel) UnsetName() {
-	o.Name.Unset()
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDescription returns the Description field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ProductModel) GetDescription() string {
-	if o == nil || IsNil(o.Description.Get()) {
+	if o == nil || o.Description.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Description.Get()
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ProductModel) GetDescriptionOk() (*string, bool) {
@@ -175,91 +153,57 @@ func (o *ProductModel) GetDescriptionOk() (*string, bool) {
 	return o.Description.Get(), o.Description.IsSet()
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *ProductModel) HasDescription() bool {
-	if o != nil && o.Description.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
+// SetDescription sets field value
 func (o *ProductModel) SetDescription(v string) {
 	o.Description.Set(&v)
 }
-// SetDescriptionNil sets the value for Description to be an explicit nil
-func (o *ProductModel) SetDescriptionNil() {
-	o.Description.Set(nil)
-}
 
-// UnsetDescription ensures that no value is present for Description, not even an explicit nil
-func (o *ProductModel) UnsetDescription() {
-	o.Description.Unset()
-}
-
-// GetOrder returns the Order field value if set, zero value otherwise.
+// GetOrder returns the Order field value
 func (o *ProductModel) GetOrder() int32 {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Order
+
+	return o.Order
 }
 
-// GetOrderOk returns a tuple with the Order field value if set, nil otherwise
+// GetOrderOk returns a tuple with the Order field value
 // and a boolean to check if the value has been set.
 func (o *ProductModel) GetOrderOk() (*int32, bool) {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Order, true
+	return &o.Order, true
 }
 
-// HasOrder returns a boolean if a field has been set.
-func (o *ProductModel) HasOrder() bool {
-	if o != nil && !IsNil(o.Order) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrder gets a reference to the given int32 and assigns it to the Order field.
+// SetOrder sets field value
 func (o *ProductModel) SetOrder(v int32) {
-	o.Order = &v
+	o.Order = v
 }
 
-// GetReasonRequired returns the ReasonRequired field value if set, zero value otherwise.
+// GetReasonRequired returns the ReasonRequired field value
 func (o *ProductModel) GetReasonRequired() bool {
-	if o == nil || IsNil(o.ReasonRequired) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.ReasonRequired
+
+	return o.ReasonRequired
 }
 
-// GetReasonRequiredOk returns a tuple with the ReasonRequired field value if set, nil otherwise
+// GetReasonRequiredOk returns a tuple with the ReasonRequired field value
 // and a boolean to check if the value has been set.
 func (o *ProductModel) GetReasonRequiredOk() (*bool, bool) {
-	if o == nil || IsNil(o.ReasonRequired) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReasonRequired, true
+	return &o.ReasonRequired, true
 }
 
-// HasReasonRequired returns a boolean if a field has been set.
-func (o *ProductModel) HasReasonRequired() bool {
-	if o != nil && !IsNil(o.ReasonRequired) {
-		return true
-	}
-
-	return false
-}
-
-// SetReasonRequired gets a reference to the given bool and assigns it to the ReasonRequired field.
+// SetReasonRequired sets field value
 func (o *ProductModel) SetReasonRequired(v bool) {
-	o.ReasonRequired = &v
+	o.ReasonRequired = v
 }
 
 func (o ProductModel) MarshalJSON() ([]byte, error) {
@@ -272,25 +216,55 @@ func (o ProductModel) MarshalJSON() ([]byte, error) {
 
 func (o ProductModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Organization) {
-		toSerialize["organization"] = o.Organization
-	}
-	if !IsNil(o.ProductId) {
-		toSerialize["productId"] = o.ProductId
-	}
-	if o.Name.IsSet() {
-		toSerialize["name"] = o.Name.Get()
-	}
-	if o.Description.IsSet() {
-		toSerialize["description"] = o.Description.Get()
-	}
-	if !IsNil(o.Order) {
-		toSerialize["order"] = o.Order
-	}
-	if !IsNil(o.ReasonRequired) {
-		toSerialize["reasonRequired"] = o.ReasonRequired
-	}
+	toSerialize["organization"] = o.Organization
+	toSerialize["productId"] = o.ProductId
+	toSerialize["name"] = o.Name
+	toSerialize["description"] = o.Description.Get()
+	toSerialize["order"] = o.Order
+	toSerialize["reasonRequired"] = o.ReasonRequired
 	return toSerialize, nil
+}
+
+func (o *ProductModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"organization",
+		"productId",
+		"name",
+		"description",
+		"order",
+		"reasonRequired",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varProductModel := _ProductModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varProductModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ProductModel(varProductModel)
+
+	return err
 }
 
 type NullableProductModel struct {

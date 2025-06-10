@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the RolloutRuleModel type satisfies the MappedNullable interface at compile time
@@ -21,23 +23,31 @@ var _ MappedNullable = &RolloutRuleModel{}
 // RolloutRuleModel struct for RolloutRuleModel
 type RolloutRuleModel struct {
 	// The user attribute to compare.
-	ComparisonAttribute NullableString `json:"comparisonAttribute,omitempty"`
-	Comparator *RolloutRuleComparator `json:"comparator,omitempty"`
+	ComparisonAttribute NullableString `json:"comparisonAttribute"`
+	Comparator NullableRolloutRuleComparator `json:"comparator"`
 	// The value to compare against.
-	ComparisonValue NullableString `json:"comparisonValue,omitempty"`
-	// The value to serve when the comparison matches. It must respect the setting type.
-	Value interface{} `json:"value,omitempty"`
-	SegmentComparator *SegmentComparator `json:"segmentComparator,omitempty"`
+	ComparisonValue NullableString `json:"comparisonValue"`
+	// The value to serve when the comparison matches. It must respect the setting type. In some generated clients for strictly typed languages you may use double/float properties to handle integer values.
+	Value SettingValueType `json:"value"`
+	SegmentComparator NullableSegmentComparator `json:"segmentComparator"`
 	// The segment to compare against.
-	SegmentId NullableString `json:"segmentId,omitempty"`
+	SegmentId NullableString `json:"segmentId"`
 }
+
+type _RolloutRuleModel RolloutRuleModel
 
 // NewRolloutRuleModel instantiates a new RolloutRuleModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRolloutRuleModel() *RolloutRuleModel {
+func NewRolloutRuleModel(comparisonAttribute NullableString, comparator NullableRolloutRuleComparator, comparisonValue NullableString, value SettingValueType, segmentComparator NullableSegmentComparator, segmentId NullableString) *RolloutRuleModel {
 	this := RolloutRuleModel{}
+	this.ComparisonAttribute = comparisonAttribute
+	this.Comparator = comparator
+	this.ComparisonValue = comparisonValue
+	this.Value = value
+	this.SegmentComparator = segmentComparator
+	this.SegmentId = segmentId
 	return &this
 }
 
@@ -49,16 +59,18 @@ func NewRolloutRuleModelWithDefaults() *RolloutRuleModel {
 	return &this
 }
 
-// GetComparisonAttribute returns the ComparisonAttribute field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetComparisonAttribute returns the ComparisonAttribute field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *RolloutRuleModel) GetComparisonAttribute() string {
-	if o == nil || IsNil(o.ComparisonAttribute.Get()) {
+	if o == nil || o.ComparisonAttribute.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.ComparisonAttribute.Get()
 }
 
-// GetComparisonAttributeOk returns a tuple with the ComparisonAttribute field value if set, nil otherwise
+// GetComparisonAttributeOk returns a tuple with the ComparisonAttribute field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RolloutRuleModel) GetComparisonAttributeOk() (*string, bool) {
@@ -68,71 +80,49 @@ func (o *RolloutRuleModel) GetComparisonAttributeOk() (*string, bool) {
 	return o.ComparisonAttribute.Get(), o.ComparisonAttribute.IsSet()
 }
 
-// HasComparisonAttribute returns a boolean if a field has been set.
-func (o *RolloutRuleModel) HasComparisonAttribute() bool {
-	if o != nil && o.ComparisonAttribute.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetComparisonAttribute gets a reference to the given NullableString and assigns it to the ComparisonAttribute field.
+// SetComparisonAttribute sets field value
 func (o *RolloutRuleModel) SetComparisonAttribute(v string) {
 	o.ComparisonAttribute.Set(&v)
 }
-// SetComparisonAttributeNil sets the value for ComparisonAttribute to be an explicit nil
-func (o *RolloutRuleModel) SetComparisonAttributeNil() {
-	o.ComparisonAttribute.Set(nil)
-}
 
-// UnsetComparisonAttribute ensures that no value is present for ComparisonAttribute, not even an explicit nil
-func (o *RolloutRuleModel) UnsetComparisonAttribute() {
-	o.ComparisonAttribute.Unset()
-}
-
-// GetComparator returns the Comparator field value if set, zero value otherwise.
+// GetComparator returns the Comparator field value
+// If the value is explicit nil, the zero value for RolloutRuleComparator will be returned
 func (o *RolloutRuleModel) GetComparator() RolloutRuleComparator {
-	if o == nil || IsNil(o.Comparator) {
+	if o == nil || o.Comparator.Get() == nil {
 		var ret RolloutRuleComparator
 		return ret
 	}
-	return *o.Comparator
+
+	return *o.Comparator.Get()
 }
 
-// GetComparatorOk returns a tuple with the Comparator field value if set, nil otherwise
+// GetComparatorOk returns a tuple with the Comparator field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RolloutRuleModel) GetComparatorOk() (*RolloutRuleComparator, bool) {
-	if o == nil || IsNil(o.Comparator) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Comparator, true
+	return o.Comparator.Get(), o.Comparator.IsSet()
 }
 
-// HasComparator returns a boolean if a field has been set.
-func (o *RolloutRuleModel) HasComparator() bool {
-	if o != nil && !IsNil(o.Comparator) {
-		return true
-	}
-
-	return false
-}
-
-// SetComparator gets a reference to the given RolloutRuleComparator and assigns it to the Comparator field.
+// SetComparator sets field value
 func (o *RolloutRuleModel) SetComparator(v RolloutRuleComparator) {
-	o.Comparator = &v
+	o.Comparator.Set(&v)
 }
 
-// GetComparisonValue returns the ComparisonValue field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetComparisonValue returns the ComparisonValue field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *RolloutRuleModel) GetComparisonValue() string {
-	if o == nil || IsNil(o.ComparisonValue.Get()) {
+	if o == nil || o.ComparisonValue.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.ComparisonValue.Get()
 }
 
-// GetComparisonValueOk returns a tuple with the ComparisonValue field value if set, nil otherwise
+// GetComparisonValueOk returns a tuple with the ComparisonValue field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RolloutRuleModel) GetComparisonValueOk() (*string, bool) {
@@ -142,104 +132,73 @@ func (o *RolloutRuleModel) GetComparisonValueOk() (*string, bool) {
 	return o.ComparisonValue.Get(), o.ComparisonValue.IsSet()
 }
 
-// HasComparisonValue returns a boolean if a field has been set.
-func (o *RolloutRuleModel) HasComparisonValue() bool {
-	if o != nil && o.ComparisonValue.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetComparisonValue gets a reference to the given NullableString and assigns it to the ComparisonValue field.
+// SetComparisonValue sets field value
 func (o *RolloutRuleModel) SetComparisonValue(v string) {
 	o.ComparisonValue.Set(&v)
 }
-// SetComparisonValueNil sets the value for ComparisonValue to be an explicit nil
-func (o *RolloutRuleModel) SetComparisonValueNil() {
-	o.ComparisonValue.Set(nil)
-}
 
-// UnsetComparisonValue ensures that no value is present for ComparisonValue, not even an explicit nil
-func (o *RolloutRuleModel) UnsetComparisonValue() {
-	o.ComparisonValue.Unset()
-}
-
-// GetValue returns the Value field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *RolloutRuleModel) GetValue() interface{} {
+// GetValue returns the Value field value
+func (o *RolloutRuleModel) GetValue() SettingValueType {
 	if o == nil {
-		var ret interface{}
+		var ret SettingValueType
 		return ret
 	}
+
 	return o.Value
 }
 
-// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *RolloutRuleModel) GetValueOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Value) {
+func (o *RolloutRuleModel) GetValueOk() (*SettingValueType, bool) {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Value, true
 }
 
-// HasValue returns a boolean if a field has been set.
-func (o *RolloutRuleModel) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
-		return true
-	}
-
-	return false
-}
-
-// SetValue gets a reference to the given interface{} and assigns it to the Value field.
-func (o *RolloutRuleModel) SetValue(v interface{}) {
+// SetValue sets field value
+func (o *RolloutRuleModel) SetValue(v SettingValueType) {
 	o.Value = v
 }
 
-// GetSegmentComparator returns the SegmentComparator field value if set, zero value otherwise.
+// GetSegmentComparator returns the SegmentComparator field value
+// If the value is explicit nil, the zero value for SegmentComparator will be returned
 func (o *RolloutRuleModel) GetSegmentComparator() SegmentComparator {
-	if o == nil || IsNil(o.SegmentComparator) {
+	if o == nil || o.SegmentComparator.Get() == nil {
 		var ret SegmentComparator
 		return ret
 	}
-	return *o.SegmentComparator
+
+	return *o.SegmentComparator.Get()
 }
 
-// GetSegmentComparatorOk returns a tuple with the SegmentComparator field value if set, nil otherwise
+// GetSegmentComparatorOk returns a tuple with the SegmentComparator field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RolloutRuleModel) GetSegmentComparatorOk() (*SegmentComparator, bool) {
-	if o == nil || IsNil(o.SegmentComparator) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SegmentComparator, true
+	return o.SegmentComparator.Get(), o.SegmentComparator.IsSet()
 }
 
-// HasSegmentComparator returns a boolean if a field has been set.
-func (o *RolloutRuleModel) HasSegmentComparator() bool {
-	if o != nil && !IsNil(o.SegmentComparator) {
-		return true
-	}
-
-	return false
-}
-
-// SetSegmentComparator gets a reference to the given SegmentComparator and assigns it to the SegmentComparator field.
+// SetSegmentComparator sets field value
 func (o *RolloutRuleModel) SetSegmentComparator(v SegmentComparator) {
-	o.SegmentComparator = &v
+	o.SegmentComparator.Set(&v)
 }
 
-// GetSegmentId returns the SegmentId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSegmentId returns the SegmentId field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *RolloutRuleModel) GetSegmentId() string {
-	if o == nil || IsNil(o.SegmentId.Get()) {
+	if o == nil || o.SegmentId.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.SegmentId.Get()
 }
 
-// GetSegmentIdOk returns a tuple with the SegmentId field value if set, nil otherwise
+// GetSegmentIdOk returns a tuple with the SegmentId field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RolloutRuleModel) GetSegmentIdOk() (*string, bool) {
@@ -249,27 +208,9 @@ func (o *RolloutRuleModel) GetSegmentIdOk() (*string, bool) {
 	return o.SegmentId.Get(), o.SegmentId.IsSet()
 }
 
-// HasSegmentId returns a boolean if a field has been set.
-func (o *RolloutRuleModel) HasSegmentId() bool {
-	if o != nil && o.SegmentId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSegmentId gets a reference to the given NullableString and assigns it to the SegmentId field.
+// SetSegmentId sets field value
 func (o *RolloutRuleModel) SetSegmentId(v string) {
 	o.SegmentId.Set(&v)
-}
-// SetSegmentIdNil sets the value for SegmentId to be an explicit nil
-func (o *RolloutRuleModel) SetSegmentIdNil() {
-	o.SegmentId.Set(nil)
-}
-
-// UnsetSegmentId ensures that no value is present for SegmentId, not even an explicit nil
-func (o *RolloutRuleModel) UnsetSegmentId() {
-	o.SegmentId.Unset()
 }
 
 func (o RolloutRuleModel) MarshalJSON() ([]byte, error) {
@@ -282,25 +223,55 @@ func (o RolloutRuleModel) MarshalJSON() ([]byte, error) {
 
 func (o RolloutRuleModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ComparisonAttribute.IsSet() {
-		toSerialize["comparisonAttribute"] = o.ComparisonAttribute.Get()
-	}
-	if !IsNil(o.Comparator) {
-		toSerialize["comparator"] = o.Comparator
-	}
-	if o.ComparisonValue.IsSet() {
-		toSerialize["comparisonValue"] = o.ComparisonValue.Get()
-	}
-	if o.Value != nil {
-		toSerialize["value"] = o.Value
-	}
-	if !IsNil(o.SegmentComparator) {
-		toSerialize["segmentComparator"] = o.SegmentComparator
-	}
-	if o.SegmentId.IsSet() {
-		toSerialize["segmentId"] = o.SegmentId.Get()
-	}
+	toSerialize["comparisonAttribute"] = o.ComparisonAttribute.Get()
+	toSerialize["comparator"] = o.Comparator.Get()
+	toSerialize["comparisonValue"] = o.ComparisonValue.Get()
+	toSerialize["value"] = o.Value
+	toSerialize["segmentComparator"] = o.SegmentComparator.Get()
+	toSerialize["segmentId"] = o.SegmentId.Get()
 	return toSerialize, nil
+}
+
+func (o *RolloutRuleModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"comparisonAttribute",
+		"comparator",
+		"comparisonValue",
+		"value",
+		"segmentComparator",
+		"segmentId",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varRolloutRuleModel := _RolloutRuleModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varRolloutRuleModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RolloutRuleModel(varRolloutRuleModel)
+
+	return err
 }
 
 type NullableRolloutRuleModel struct {

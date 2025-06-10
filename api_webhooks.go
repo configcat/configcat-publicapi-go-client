@@ -29,15 +29,15 @@ type WebhooksAPICreateWebhookRequest struct {
 	ApiService *WebhooksAPIService
 	configId string
 	environmentId string
-	webHookRequest *WebHookRequest
+	webHookRequestModel *WebHookRequestModel
 }
 
-func (r WebhooksAPICreateWebhookRequest) WebHookRequest(webHookRequest WebHookRequest) WebhooksAPICreateWebhookRequest {
-	r.webHookRequest = &webHookRequest
+func (r WebhooksAPICreateWebhookRequest) WebHookRequestModel(webHookRequestModel WebHookRequestModel) WebhooksAPICreateWebhookRequest {
+	r.webHookRequestModel = &webHookRequestModel
 	return r
 }
 
-func (r WebhooksAPICreateWebhookRequest) Execute() (*WebhookModel, *http.Response, error) {
+func (r WebhooksAPICreateWebhookRequest) Execute() (*WebhookResponseModel, *http.Response, error) {
 	return r.ApiService.CreateWebhookExecute(r)
 }
 
@@ -62,13 +62,13 @@ func (a *WebhooksAPIService) CreateWebhook(ctx context.Context, configId string,
 }
 
 // Execute executes the request
-//  @return WebhookModel
-func (a *WebhooksAPIService) CreateWebhookExecute(r WebhooksAPICreateWebhookRequest) (*WebhookModel, *http.Response, error) {
+//  @return WebhookResponseModel
+func (a *WebhooksAPIService) CreateWebhookExecute(r WebhooksAPICreateWebhookRequest) (*WebhookResponseModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *WebhookModel
+		localVarReturnValue  *WebhookResponseModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.CreateWebhook")
@@ -83,8 +83,8 @@ func (a *WebhooksAPIService) CreateWebhookExecute(r WebhooksAPICreateWebhookRequ
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.webHookRequest == nil {
-		return localVarReturnValue, nil, reportError("webHookRequest is required and must be specified")
+	if r.webHookRequestModel == nil {
+		return localVarReturnValue, nil, reportError("webHookRequestModel is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -105,7 +105,7 @@ func (a *WebhooksAPIService) CreateWebhookExecute(r WebhooksAPICreateWebhookRequ
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.webHookRequest
+	localVarPostBody = r.webHookRequestModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -241,7 +241,7 @@ type WebhooksAPIGetWebhookRequest struct {
 	webhookId int32
 }
 
-func (r WebhooksAPIGetWebhookRequest) Execute() (*WebhookModel, *http.Response, error) {
+func (r WebhooksAPIGetWebhookRequest) Execute() (*WebhookResponseModel, *http.Response, error) {
 	return r.ApiService.GetWebhookExecute(r)
 }
 
@@ -264,13 +264,13 @@ func (a *WebhooksAPIService) GetWebhook(ctx context.Context, webhookId int32) We
 }
 
 // Execute executes the request
-//  @return WebhookModel
-func (a *WebhooksAPIService) GetWebhookExecute(r WebhooksAPIGetWebhookRequest) (*WebhookModel, *http.Response, error) {
+//  @return WebhookResponseModel
+func (a *WebhooksAPIService) GetWebhookExecute(r WebhooksAPIGetWebhookRequest) (*WebhookResponseModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *WebhookModel
+		localVarReturnValue  *WebhookResponseModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.GetWebhook")
@@ -453,7 +453,7 @@ type WebhooksAPIGetWebhooksRequest struct {
 	productId string
 }
 
-func (r WebhooksAPIGetWebhooksRequest) Execute() ([]WebhookModel, *http.Response, error) {
+func (r WebhooksAPIGetWebhooksRequest) Execute() ([]WebhookResponseModel, *http.Response, error) {
 	return r.ApiService.GetWebhooksExecute(r)
 }
 
@@ -476,13 +476,13 @@ func (a *WebhooksAPIService) GetWebhooks(ctx context.Context, productId string) 
 }
 
 // Execute executes the request
-//  @return []WebhookModel
-func (a *WebhooksAPIService) GetWebhooksExecute(r WebhooksAPIGetWebhooksRequest) ([]WebhookModel, *http.Response, error) {
+//  @return []WebhookResponseModel
+func (a *WebhooksAPIService) GetWebhooksExecute(r WebhooksAPIGetWebhooksRequest) ([]WebhookResponseModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []WebhookModel
+		localVarReturnValue  []WebhookResponseModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.GetWebhooks")
@@ -555,15 +555,15 @@ type WebhooksAPIReplaceWebhookRequest struct {
 	ctx context.Context
 	ApiService *WebhooksAPIService
 	webhookId int32
-	webHookRequest *WebHookRequest
+	webHookRequestModel *WebHookRequestModel
 }
 
-func (r WebhooksAPIReplaceWebhookRequest) WebHookRequest(webHookRequest WebHookRequest) WebhooksAPIReplaceWebhookRequest {
-	r.webHookRequest = &webHookRequest
+func (r WebhooksAPIReplaceWebhookRequest) WebHookRequestModel(webHookRequestModel WebHookRequestModel) WebhooksAPIReplaceWebhookRequest {
+	r.webHookRequestModel = &webHookRequestModel
 	return r
 }
 
-func (r WebhooksAPIReplaceWebhookRequest) Execute() (*WebhookModel, *http.Response, error) {
+func (r WebhooksAPIReplaceWebhookRequest) Execute() (*WebhookResponseModel, *http.Response, error) {
 	return r.ApiService.ReplaceWebhookExecute(r)
 }
 
@@ -588,13 +588,13 @@ func (a *WebhooksAPIService) ReplaceWebhook(ctx context.Context, webhookId int32
 }
 
 // Execute executes the request
-//  @return WebhookModel
-func (a *WebhooksAPIService) ReplaceWebhookExecute(r WebhooksAPIReplaceWebhookRequest) (*WebhookModel, *http.Response, error) {
+//  @return WebhookResponseModel
+func (a *WebhooksAPIService) ReplaceWebhookExecute(r WebhooksAPIReplaceWebhookRequest) (*WebhookResponseModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *WebhookModel
+		localVarReturnValue  *WebhookResponseModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.ReplaceWebhook")
@@ -608,8 +608,8 @@ func (a *WebhooksAPIService) ReplaceWebhookExecute(r WebhooksAPIReplaceWebhookRe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.webHookRequest == nil {
-		return localVarReturnValue, nil, reportError("webHookRequest is required and must be specified")
+	if r.webHookRequestModel == nil {
+		return localVarReturnValue, nil, reportError("webHookRequestModel is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -630,7 +630,7 @@ func (a *WebhooksAPIService) ReplaceWebhookExecute(r WebhooksAPIReplaceWebhookRe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.webHookRequest
+	localVarPostBody = r.webHookRequestModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -680,7 +680,7 @@ func (r WebhooksAPIUpdateWebhookRequest) JsonPatchOperation(jsonPatchOperation [
 	return r
 }
 
-func (r WebhooksAPIUpdateWebhookRequest) Execute() (*WebhookModel, *http.Response, error) {
+func (r WebhooksAPIUpdateWebhookRequest) Execute() (*WebhookResponseModel, *http.Response, error) {
 	return r.ApiService.UpdateWebhookExecute(r)
 }
 
@@ -750,13 +750,13 @@ func (a *WebhooksAPIService) UpdateWebhook(ctx context.Context, webhookId int32)
 }
 
 // Execute executes the request
-//  @return WebhookModel
-func (a *WebhooksAPIService) UpdateWebhookExecute(r WebhooksAPIUpdateWebhookRequest) (*WebhookModel, *http.Response, error) {
+//  @return WebhookResponseModel
+func (a *WebhooksAPIService) UpdateWebhookExecute(r WebhooksAPIUpdateWebhookRequest) (*WebhookResponseModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *WebhookModel
+		localVarReturnValue  *WebhookResponseModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.UpdateWebhook")

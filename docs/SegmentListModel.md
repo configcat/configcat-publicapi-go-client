@@ -4,23 +4,23 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Product** | Pointer to [**ProductModel**](ProductModel.md) |  | [optional] 
-**SegmentId** | Pointer to **string** | Identifier of the Segment. | [optional] 
-**Name** | Pointer to **NullableString** | Name of the Segment. | [optional] 
-**Description** | Pointer to **NullableString** | Description of the Segment. | [optional] 
-**CreatorEmail** | Pointer to **NullableString** | The email of the user who created the Segment. | [optional] 
-**CreatorFullName** | Pointer to **NullableString** | The name of the user who created the Segment. | [optional] 
-**CreatedAt** | Pointer to **time.Time** | The date and time when the Segment was created. | [optional] 
-**LastUpdaterEmail** | Pointer to **NullableString** | The email of the user who last updated the Segment. | [optional] 
-**LastUpdaterFullName** | Pointer to **NullableString** | The name of the user who last updated the Segment. | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | The date and time when the Segment was last updated. | [optional] 
-**Usage** | Pointer to **int32** | Determines how many Feature Flags and Settings are using the Segment. | [optional] 
+**Product** | [**ProductModel**](ProductModel.md) |  | 
+**SegmentId** | **string** | Identifier of the Segment. | 
+**Name** | **string** | Name of the Segment. | 
+**Description** | **NullableString** | Description of the Segment. | 
+**CreatorEmail** | **NullableString** | The email of the user who created the Segment. | 
+**CreatorFullName** | **NullableString** | The name of the user who created the Segment. | 
+**CreatedAt** | **time.Time** | The date and time when the Segment was created. | 
+**LastUpdaterEmail** | **NullableString** | The email of the user who last updated the Segment. | 
+**LastUpdaterFullName** | **NullableString** | The name of the user who last updated the Segment. | 
+**UpdatedAt** | **time.Time** | The date and time when the Segment was last updated. | 
+**Usage** | **int32** | Determines how many Feature Flags and Settings are using the Segment. | 
 
 ## Methods
 
 ### NewSegmentListModel
 
-`func NewSegmentListModel() *SegmentListModel`
+`func NewSegmentListModel(product ProductModel, segmentId string, name string, description NullableString, creatorEmail NullableString, creatorFullName NullableString, createdAt time.Time, lastUpdaterEmail NullableString, lastUpdaterFullName NullableString, updatedAt time.Time, usage int32, ) *SegmentListModel`
 
 NewSegmentListModel instantiates a new SegmentListModel object
 This constructor will assign default values to properties that have it defined,
@@ -54,11 +54,6 @@ and a boolean to check if the value has been set.
 
 SetProduct sets Product field to given value.
 
-### HasProduct
-
-`func (o *SegmentListModel) HasProduct() bool`
-
-HasProduct returns a boolean if a field has been set.
 
 ### GetSegmentId
 
@@ -79,11 +74,6 @@ and a boolean to check if the value has been set.
 
 SetSegmentId sets SegmentId field to given value.
 
-### HasSegmentId
-
-`func (o *SegmentListModel) HasSegmentId() bool`
-
-HasSegmentId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -104,22 +94,7 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
 
-`func (o *SegmentListModel) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### SetNameNil
-
-`func (o *SegmentListModel) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *SegmentListModel) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetDescription
 
 `func (o *SegmentListModel) GetDescription() string`
@@ -139,11 +114,6 @@ and a boolean to check if the value has been set.
 
 SetDescription sets Description field to given value.
 
-### HasDescription
-
-`func (o *SegmentListModel) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
 
 ### SetDescriptionNil
 
@@ -174,11 +144,6 @@ and a boolean to check if the value has been set.
 
 SetCreatorEmail sets CreatorEmail field to given value.
 
-### HasCreatorEmail
-
-`func (o *SegmentListModel) HasCreatorEmail() bool`
-
-HasCreatorEmail returns a boolean if a field has been set.
 
 ### SetCreatorEmailNil
 
@@ -209,11 +174,6 @@ and a boolean to check if the value has been set.
 
 SetCreatorFullName sets CreatorFullName field to given value.
 
-### HasCreatorFullName
-
-`func (o *SegmentListModel) HasCreatorFullName() bool`
-
-HasCreatorFullName returns a boolean if a field has been set.
 
 ### SetCreatorFullNameNil
 
@@ -244,11 +204,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *SegmentListModel) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetLastUpdaterEmail
 
@@ -269,11 +224,6 @@ and a boolean to check if the value has been set.
 
 SetLastUpdaterEmail sets LastUpdaterEmail field to given value.
 
-### HasLastUpdaterEmail
-
-`func (o *SegmentListModel) HasLastUpdaterEmail() bool`
-
-HasLastUpdaterEmail returns a boolean if a field has been set.
 
 ### SetLastUpdaterEmailNil
 
@@ -304,11 +254,6 @@ and a boolean to check if the value has been set.
 
 SetLastUpdaterFullName sets LastUpdaterFullName field to given value.
 
-### HasLastUpdaterFullName
-
-`func (o *SegmentListModel) HasLastUpdaterFullName() bool`
-
-HasLastUpdaterFullName returns a boolean if a field has been set.
 
 ### SetLastUpdaterFullNameNil
 
@@ -339,11 +284,6 @@ and a boolean to check if the value has been set.
 
 SetUpdatedAt sets UpdatedAt field to given value.
 
-### HasUpdatedAt
-
-`func (o *SegmentListModel) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
 
 ### GetUsage
 
@@ -364,11 +304,6 @@ and a boolean to check if the value has been set.
 
 SetUsage sets Usage field to given value.
 
-### HasUsage
-
-`func (o *SegmentListModel) HasUsage() bool`
-
-HasUsage returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Organization** | Pointer to [**OrganizationModel**](OrganizationModel.md) |  | [optional] 
-**ProductId** | Pointer to **string** | Identifier of the Product. | [optional] 
-**Name** | Pointer to **NullableString** | Name of the Product. | [optional] 
-**Description** | Pointer to **NullableString** | Description of the Product. | [optional] 
-**Order** | Pointer to **int32** | The order of the Product represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers. | [optional] 
-**ReasonRequired** | Pointer to **bool** | Determines whether a mandatory reason must be given every time when the Feature Flags or Settings within a Product are saved. | [optional] 
+**Organization** | [**OrganizationModel**](OrganizationModel.md) |  | 
+**ProductId** | **string** | Identifier of the Product. | 
+**Name** | **string** | Name of the Product. | 
+**Description** | **NullableString** | Description of the Product. | 
+**Order** | **int32** | The order of the Product represented on the ConfigCat Dashboard. Determined from an ascending sequence of integers. | 
+**ReasonRequired** | **bool** | Determines whether a mandatory reason must be given every time when the Feature Flags or Settings within a Product are saved. | 
 
 ## Methods
 
 ### NewProductModel
 
-`func NewProductModel() *ProductModel`
+`func NewProductModel(organization OrganizationModel, productId string, name string, description NullableString, order int32, reasonRequired bool, ) *ProductModel`
 
 NewProductModel instantiates a new ProductModel object
 This constructor will assign default values to properties that have it defined,
@@ -49,11 +49,6 @@ and a boolean to check if the value has been set.
 
 SetOrganization sets Organization field to given value.
 
-### HasOrganization
-
-`func (o *ProductModel) HasOrganization() bool`
-
-HasOrganization returns a boolean if a field has been set.
 
 ### GetProductId
 
@@ -74,11 +69,6 @@ and a boolean to check if the value has been set.
 
 SetProductId sets ProductId field to given value.
 
-### HasProductId
-
-`func (o *ProductModel) HasProductId() bool`
-
-HasProductId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -99,22 +89,7 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
 
-`func (o *ProductModel) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### SetNameNil
-
-`func (o *ProductModel) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *ProductModel) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetDescription
 
 `func (o *ProductModel) GetDescription() string`
@@ -134,11 +109,6 @@ and a boolean to check if the value has been set.
 
 SetDescription sets Description field to given value.
 
-### HasDescription
-
-`func (o *ProductModel) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
 
 ### SetDescriptionNil
 
@@ -169,11 +139,6 @@ and a boolean to check if the value has been set.
 
 SetOrder sets Order field to given value.
 
-### HasOrder
-
-`func (o *ProductModel) HasOrder() bool`
-
-HasOrder returns a boolean if a field has been set.
 
 ### GetReasonRequired
 
@@ -194,11 +159,6 @@ and a boolean to check if the value has been set.
 
 SetReasonRequired sets ReasonRequired field to given value.
 
-### HasReasonRequired
-
-`func (o *ProductModel) HasReasonRequired() bool`
-
-HasReasonRequired returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -28,7 +28,7 @@ type CreateEnvironmentModel struct {
 	Color NullableString `json:"color,omitempty"`
 	// The description of the Environment.
 	Description NullableString `json:"description,omitempty"`
-	// The order of the Environment represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers.
+	// The order of the Environment represented on the ConfigCat Dashboard. Determined from an ascending sequence of integers.
 	Order NullableInt32 `json:"order,omitempty"`
 }
 

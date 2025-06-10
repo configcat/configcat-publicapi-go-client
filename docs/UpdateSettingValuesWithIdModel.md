@@ -50,16 +50,6 @@ SetSettingValues sets SettingValues field to given value.
 
 HasSettingValues returns a boolean if a field has been set.
 
-### SetSettingValuesNil
-
-`func (o *UpdateSettingValuesWithIdModel) SetSettingValuesNil(b bool)`
-
- SetSettingValuesNil sets the value for SettingValues to be an explicit nil
-
-### UnsetSettingValues
-`func (o *UpdateSettingValuesWithIdModel) UnsetSettingValues()`
-
-UnsetSettingValues ensures that no value is present for SettingValues, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the InitialValue type satisfies the MappedNullable interface at compile time
@@ -22,16 +24,19 @@ var _ MappedNullable = &InitialValue{}
 type InitialValue struct {
 	// The ID of the Environment where the initial value must be set.
 	EnvironmentId *string `json:"environmentId,omitempty"`
-	// The initial value in the given Environment. It must respect the setting type.
-	Value interface{} `json:"value,omitempty"`
+	// The initial value in the given Environment. It must respect the setting type. In some generated clients for strictly typed languages you may use double/float properties to handle integer values.
+	Value SettingValueType `json:"value"`
 }
+
+type _InitialValue InitialValue
 
 // NewInitialValue instantiates a new InitialValue object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInitialValue() *InitialValue {
+func NewInitialValue(value SettingValueType) *InitialValue {
 	this := InitialValue{}
+	this.Value = value
 	return &this
 }
 
@@ -75,36 +80,27 @@ func (o *InitialValue) SetEnvironmentId(v string) {
 	o.EnvironmentId = &v
 }
 
-// GetValue returns the Value field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *InitialValue) GetValue() interface{} {
+// GetValue returns the Value field value
+func (o *InitialValue) GetValue() SettingValueType {
 	if o == nil {
-		var ret interface{}
+		var ret SettingValueType
 		return ret
 	}
+
 	return o.Value
 }
 
-// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *InitialValue) GetValueOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Value) {
+func (o *InitialValue) GetValueOk() (*SettingValueType, bool) {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Value, true
 }
 
-// HasValue returns a boolean if a field has been set.
-func (o *InitialValue) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
-		return true
-	}
-
-	return false
-}
-
-// SetValue gets a reference to the given interface{} and assigns it to the Value field.
-func (o *InitialValue) SetValue(v interface{}) {
+// SetValue sets field value
+func (o *InitialValue) SetValue(v SettingValueType) {
 	o.Value = v
 }
 
@@ -121,10 +117,45 @@ func (o InitialValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EnvironmentId) {
 		toSerialize["environmentId"] = o.EnvironmentId
 	}
-	if o.Value != nil {
-		toSerialize["value"] = o.Value
-	}
+	toSerialize["value"] = o.Value
 	return toSerialize, nil
+}
+
+func (o *InitialValue) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"value",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varInitialValue := _InitialValue{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varInitialValue)
+
+	if err != nil {
+		return err
+	}
+
+	*o = InitialValue(varInitialValue)
+
+	return err
 }
 
 type NullableInitialValue struct {

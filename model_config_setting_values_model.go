@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ConfigSettingValuesModel type satisfies the MappedNullable interface at compile time
@@ -20,19 +22,26 @@ var _ MappedNullable = &ConfigSettingValuesModel{}
 
 // ConfigSettingValuesModel struct for ConfigSettingValuesModel
 type ConfigSettingValuesModel struct {
-	Config *ConfigModel `json:"config,omitempty"`
-	Environment *EnvironmentModel `json:"environment,omitempty"`
-	ReadOnly *bool `json:"readOnly,omitempty"`
-	SettingValues []ConfigSettingValueModel `json:"settingValues,omitempty"`
-	FeatureFlagLimitations *FeatureFlagLimitations `json:"featureFlagLimitations,omitempty"`
+	Config ConfigModel `json:"config"`
+	Environment EnvironmentModel `json:"environment"`
+	ReadOnly bool `json:"readOnly"`
+	SettingValues []ConfigSettingValueModel `json:"settingValues"`
+	FeatureFlagLimitations FeatureFlagLimitations `json:"featureFlagLimitations"`
 }
+
+type _ConfigSettingValuesModel ConfigSettingValuesModel
 
 // NewConfigSettingValuesModel instantiates a new ConfigSettingValuesModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfigSettingValuesModel() *ConfigSettingValuesModel {
+func NewConfigSettingValuesModel(config ConfigModel, environment EnvironmentModel, readOnly bool, settingValues []ConfigSettingValueModel, featureFlagLimitations FeatureFlagLimitations) *ConfigSettingValuesModel {
 	this := ConfigSettingValuesModel{}
+	this.Config = config
+	this.Environment = environment
+	this.ReadOnly = readOnly
+	this.SettingValues = settingValues
+	this.FeatureFlagLimitations = featureFlagLimitations
 	return &this
 }
 
@@ -44,165 +53,124 @@ func NewConfigSettingValuesModelWithDefaults() *ConfigSettingValuesModel {
 	return &this
 }
 
-// GetConfig returns the Config field value if set, zero value otherwise.
+// GetConfig returns the Config field value
 func (o *ConfigSettingValuesModel) GetConfig() ConfigModel {
-	if o == nil || IsNil(o.Config) {
+	if o == nil {
 		var ret ConfigModel
 		return ret
 	}
-	return *o.Config
+
+	return o.Config
 }
 
-// GetConfigOk returns a tuple with the Config field value if set, nil otherwise
+// GetConfigOk returns a tuple with the Config field value
 // and a boolean to check if the value has been set.
 func (o *ConfigSettingValuesModel) GetConfigOk() (*ConfigModel, bool) {
-	if o == nil || IsNil(o.Config) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Config, true
+	return &o.Config, true
 }
 
-// HasConfig returns a boolean if a field has been set.
-func (o *ConfigSettingValuesModel) HasConfig() bool {
-	if o != nil && !IsNil(o.Config) {
-		return true
-	}
-
-	return false
-}
-
-// SetConfig gets a reference to the given ConfigModel and assigns it to the Config field.
+// SetConfig sets field value
 func (o *ConfigSettingValuesModel) SetConfig(v ConfigModel) {
-	o.Config = &v
+	o.Config = v
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
+// GetEnvironment returns the Environment field value
 func (o *ConfigSettingValuesModel) GetEnvironment() EnvironmentModel {
-	if o == nil || IsNil(o.Environment) {
+	if o == nil {
 		var ret EnvironmentModel
 		return ret
 	}
-	return *o.Environment
+
+	return o.Environment
 }
 
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
+// GetEnvironmentOk returns a tuple with the Environment field value
 // and a boolean to check if the value has been set.
 func (o *ConfigSettingValuesModel) GetEnvironmentOk() (*EnvironmentModel, bool) {
-	if o == nil || IsNil(o.Environment) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Environment, true
+	return &o.Environment, true
 }
 
-// HasEnvironment returns a boolean if a field has been set.
-func (o *ConfigSettingValuesModel) HasEnvironment() bool {
-	if o != nil && !IsNil(o.Environment) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given EnvironmentModel and assigns it to the Environment field.
+// SetEnvironment sets field value
 func (o *ConfigSettingValuesModel) SetEnvironment(v EnvironmentModel) {
-	o.Environment = &v
+	o.Environment = v
 }
 
-// GetReadOnly returns the ReadOnly field value if set, zero value otherwise.
+// GetReadOnly returns the ReadOnly field value
 func (o *ConfigSettingValuesModel) GetReadOnly() bool {
-	if o == nil || IsNil(o.ReadOnly) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.ReadOnly
+
+	return o.ReadOnly
 }
 
-// GetReadOnlyOk returns a tuple with the ReadOnly field value if set, nil otherwise
+// GetReadOnlyOk returns a tuple with the ReadOnly field value
 // and a boolean to check if the value has been set.
 func (o *ConfigSettingValuesModel) GetReadOnlyOk() (*bool, bool) {
-	if o == nil || IsNil(o.ReadOnly) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReadOnly, true
+	return &o.ReadOnly, true
 }
 
-// HasReadOnly returns a boolean if a field has been set.
-func (o *ConfigSettingValuesModel) HasReadOnly() bool {
-	if o != nil && !IsNil(o.ReadOnly) {
-		return true
-	}
-
-	return false
-}
-
-// SetReadOnly gets a reference to the given bool and assigns it to the ReadOnly field.
+// SetReadOnly sets field value
 func (o *ConfigSettingValuesModel) SetReadOnly(v bool) {
-	o.ReadOnly = &v
+	o.ReadOnly = v
 }
 
-// GetSettingValues returns the SettingValues field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSettingValues returns the SettingValues field value
 func (o *ConfigSettingValuesModel) GetSettingValues() []ConfigSettingValueModel {
 	if o == nil {
 		var ret []ConfigSettingValueModel
 		return ret
 	}
+
 	return o.SettingValues
 }
 
-// GetSettingValuesOk returns a tuple with the SettingValues field value if set, nil otherwise
+// GetSettingValuesOk returns a tuple with the SettingValues field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConfigSettingValuesModel) GetSettingValuesOk() ([]ConfigSettingValueModel, bool) {
-	if o == nil || IsNil(o.SettingValues) {
+	if o == nil {
 		return nil, false
 	}
 	return o.SettingValues, true
 }
 
-// HasSettingValues returns a boolean if a field has been set.
-func (o *ConfigSettingValuesModel) HasSettingValues() bool {
-	if o != nil && !IsNil(o.SettingValues) {
-		return true
-	}
-
-	return false
-}
-
-// SetSettingValues gets a reference to the given []ConfigSettingValueModel and assigns it to the SettingValues field.
+// SetSettingValues sets field value
 func (o *ConfigSettingValuesModel) SetSettingValues(v []ConfigSettingValueModel) {
 	o.SettingValues = v
 }
 
-// GetFeatureFlagLimitations returns the FeatureFlagLimitations field value if set, zero value otherwise.
+// GetFeatureFlagLimitations returns the FeatureFlagLimitations field value
 func (o *ConfigSettingValuesModel) GetFeatureFlagLimitations() FeatureFlagLimitations {
-	if o == nil || IsNil(o.FeatureFlagLimitations) {
+	if o == nil {
 		var ret FeatureFlagLimitations
 		return ret
 	}
-	return *o.FeatureFlagLimitations
+
+	return o.FeatureFlagLimitations
 }
 
-// GetFeatureFlagLimitationsOk returns a tuple with the FeatureFlagLimitations field value if set, nil otherwise
+// GetFeatureFlagLimitationsOk returns a tuple with the FeatureFlagLimitations field value
 // and a boolean to check if the value has been set.
 func (o *ConfigSettingValuesModel) GetFeatureFlagLimitationsOk() (*FeatureFlagLimitations, bool) {
-	if o == nil || IsNil(o.FeatureFlagLimitations) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FeatureFlagLimitations, true
+	return &o.FeatureFlagLimitations, true
 }
 
-// HasFeatureFlagLimitations returns a boolean if a field has been set.
-func (o *ConfigSettingValuesModel) HasFeatureFlagLimitations() bool {
-	if o != nil && !IsNil(o.FeatureFlagLimitations) {
-		return true
-	}
-
-	return false
-}
-
-// SetFeatureFlagLimitations gets a reference to the given FeatureFlagLimitations and assigns it to the FeatureFlagLimitations field.
+// SetFeatureFlagLimitations sets field value
 func (o *ConfigSettingValuesModel) SetFeatureFlagLimitations(v FeatureFlagLimitations) {
-	o.FeatureFlagLimitations = &v
+	o.FeatureFlagLimitations = v
 }
 
 func (o ConfigSettingValuesModel) MarshalJSON() ([]byte, error) {
@@ -215,22 +183,53 @@ func (o ConfigSettingValuesModel) MarshalJSON() ([]byte, error) {
 
 func (o ConfigSettingValuesModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Config) {
-		toSerialize["config"] = o.Config
-	}
-	if !IsNil(o.Environment) {
-		toSerialize["environment"] = o.Environment
-	}
-	if !IsNil(o.ReadOnly) {
-		toSerialize["readOnly"] = o.ReadOnly
-	}
-	if o.SettingValues != nil {
-		toSerialize["settingValues"] = o.SettingValues
-	}
-	if !IsNil(o.FeatureFlagLimitations) {
-		toSerialize["featureFlagLimitations"] = o.FeatureFlagLimitations
-	}
+	toSerialize["config"] = o.Config
+	toSerialize["environment"] = o.Environment
+	toSerialize["readOnly"] = o.ReadOnly
+	toSerialize["settingValues"] = o.SettingValues
+	toSerialize["featureFlagLimitations"] = o.FeatureFlagLimitations
 	return toSerialize, nil
+}
+
+func (o *ConfigSettingValuesModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"config",
+		"environment",
+		"readOnly",
+		"settingValues",
+		"featureFlagLimitations",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varConfigSettingValuesModel := _ConfigSettingValuesModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varConfigSettingValuesModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfigSettingValuesModel(varConfigSettingValuesModel)
+
+	return err
 }
 
 type NullableConfigSettingValuesModel struct {

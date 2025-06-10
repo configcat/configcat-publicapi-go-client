@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the WebhookEnvironment type satisfies the MappedNullable interface at compile time
@@ -21,17 +23,21 @@ var _ MappedNullable = &WebhookEnvironment{}
 // WebhookEnvironment The Environment where the applied changes will invoke the Webhook.
 type WebhookEnvironment struct {
 	// The Environment's name.
-	Name NullableString `json:"name,omitempty"`
+	Name string `json:"name"`
 	// The Environment's identifier.
-	EnvironmentId *string `json:"environmentId,omitempty"`
+	EnvironmentId string `json:"environmentId"`
 }
+
+type _WebhookEnvironment WebhookEnvironment
 
 // NewWebhookEnvironment instantiates a new WebhookEnvironment object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWebhookEnvironment() *WebhookEnvironment {
+func NewWebhookEnvironment(name string, environmentId string) *WebhookEnvironment {
 	this := WebhookEnvironment{}
+	this.Name = name
+	this.EnvironmentId = environmentId
 	return &this
 }
 
@@ -43,78 +49,52 @@ func NewWebhookEnvironmentWithDefaults() *WebhookEnvironment {
 	return &this
 }
 
-// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetName returns the Name field value
 func (o *WebhookEnvironment) GetName() string {
-	if o == nil || IsNil(o.Name.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name.Get()
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WebhookEnvironment) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *WebhookEnvironment) HasName() bool {
-	if o != nil && o.Name.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given NullableString and assigns it to the Name field.
+// SetName sets field value
 func (o *WebhookEnvironment) SetName(v string) {
-	o.Name.Set(&v)
-}
-// SetNameNil sets the value for Name to be an explicit nil
-func (o *WebhookEnvironment) SetNameNil() {
-	o.Name.Set(nil)
+	o.Name = v
 }
 
-// UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *WebhookEnvironment) UnsetName() {
-	o.Name.Unset()
-}
-
-// GetEnvironmentId returns the EnvironmentId field value if set, zero value otherwise.
+// GetEnvironmentId returns the EnvironmentId field value
 func (o *WebhookEnvironment) GetEnvironmentId() string {
-	if o == nil || IsNil(o.EnvironmentId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.EnvironmentId
+
+	return o.EnvironmentId
 }
 
-// GetEnvironmentIdOk returns a tuple with the EnvironmentId field value if set, nil otherwise
+// GetEnvironmentIdOk returns a tuple with the EnvironmentId field value
 // and a boolean to check if the value has been set.
 func (o *WebhookEnvironment) GetEnvironmentIdOk() (*string, bool) {
-	if o == nil || IsNil(o.EnvironmentId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EnvironmentId, true
+	return &o.EnvironmentId, true
 }
 
-// HasEnvironmentId returns a boolean if a field has been set.
-func (o *WebhookEnvironment) HasEnvironmentId() bool {
-	if o != nil && !IsNil(o.EnvironmentId) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironmentId gets a reference to the given string and assigns it to the EnvironmentId field.
+// SetEnvironmentId sets field value
 func (o *WebhookEnvironment) SetEnvironmentId(v string) {
-	o.EnvironmentId = &v
+	o.EnvironmentId = v
 }
 
 func (o WebhookEnvironment) MarshalJSON() ([]byte, error) {
@@ -127,13 +107,47 @@ func (o WebhookEnvironment) MarshalJSON() ([]byte, error) {
 
 func (o WebhookEnvironment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Name.IsSet() {
-		toSerialize["name"] = o.Name.Get()
-	}
-	if !IsNil(o.EnvironmentId) {
-		toSerialize["environmentId"] = o.EnvironmentId
-	}
+	toSerialize["name"] = o.Name
+	toSerialize["environmentId"] = o.EnvironmentId
 	return toSerialize, nil
+}
+
+func (o *WebhookEnvironment) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"environmentId",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varWebhookEnvironment := _WebhookEnvironment{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varWebhookEnvironment)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WebhookEnvironment(varWebhookEnvironment)
+
+	return err
 }
 
 type NullableWebhookEnvironment struct {

@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-Testing PermissionGroupsApiService
+Testing PermissionGroupsAPIService
 
 */
 
@@ -14,21 +14,21 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
-func Test_configcatpublicapi_PermissionGroupsApiService(t *testing.T) {
+func Test_configcatpublicapi_PermissionGroupsAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test PermissionGroupsApiService CreatePermissionGroup", func(t *testing.T) {
+	t.Run("Test PermissionGroupsAPIService CreatePermissionGroup", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var productId string
 
-		resp, httpRes, err := apiClient.PermissionGroupsApi.CreatePermissionGroup(context.Background(), productId).Execute()
+		resp, httpRes, err := apiClient.PermissionGroupsAPI.CreatePermissionGroup(context.Background(), productId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,26 +36,26 @@ func Test_configcatpublicapi_PermissionGroupsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test PermissionGroupsApiService DeletePermissionGroup", func(t *testing.T) {
+	t.Run("Test PermissionGroupsAPIService DeletePermissionGroup", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var permissionGroupId int64
 
-		httpRes, err := apiClient.PermissionGroupsApi.DeletePermissionGroup(context.Background(), permissionGroupId).Execute()
+		httpRes, err := apiClient.PermissionGroupsAPI.DeletePermissionGroup(context.Background(), permissionGroupId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test PermissionGroupsApiService GetPermissionGroup", func(t *testing.T) {
+	t.Run("Test PermissionGroupsAPIService GetPermissionGroup", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var permissionGroupId int64
 
-		resp, httpRes, err := apiClient.PermissionGroupsApi.GetPermissionGroup(context.Background(), permissionGroupId).Execute()
+		resp, httpRes, err := apiClient.PermissionGroupsAPI.GetPermissionGroup(context.Background(), permissionGroupId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -63,13 +63,13 @@ func Test_configcatpublicapi_PermissionGroupsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test PermissionGroupsApiService GetPermissionGroups", func(t *testing.T) {
+	t.Run("Test PermissionGroupsAPIService GetPermissionGroups", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var productId string
 
-		resp, httpRes, err := apiClient.PermissionGroupsApi.GetPermissionGroups(context.Background(), productId).Execute()
+		resp, httpRes, err := apiClient.PermissionGroupsAPI.GetPermissionGroups(context.Background(), productId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -77,13 +77,13 @@ func Test_configcatpublicapi_PermissionGroupsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test PermissionGroupsApiService UpdatePermissionGroup", func(t *testing.T) {
+	t.Run("Test PermissionGroupsAPIService UpdatePermissionGroup", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var permissionGroupId int64
 
-		resp, httpRes, err := apiClient.PermissionGroupsApi.UpdatePermissionGroup(context.Background(), permissionGroupId).Execute()
+		resp, httpRes, err := apiClient.PermissionGroupsAPI.UpdatePermissionGroup(context.Background(), permissionGroupId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the UserModel type satisfies the MappedNullable interface at compile time
@@ -21,21 +23,27 @@ var _ MappedNullable = &UserModel{}
 // UserModel struct for UserModel
 type UserModel struct {
 	// Identifier of the Member.
-	UserId NullableString `json:"userId,omitempty"`
+	UserId NullableString `json:"userId"`
 	// Name of the Member.
-	FullName NullableString `json:"fullName,omitempty"`
+	FullName NullableString `json:"fullName"`
 	// Email of the Member.
-	Email NullableString `json:"email,omitempty"`
+	Email NullableString `json:"email"`
 	// Determines whether 2FA is enabled for the Member.
-	TwoFactorEnabled *bool `json:"twoFactorEnabled,omitempty"`
+	TwoFactorEnabled bool `json:"twoFactorEnabled"`
 }
+
+type _UserModel UserModel
 
 // NewUserModel instantiates a new UserModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserModel() *UserModel {
+func NewUserModel(userId NullableString, fullName NullableString, email NullableString, twoFactorEnabled bool) *UserModel {
 	this := UserModel{}
+	this.UserId = userId
+	this.FullName = fullName
+	this.Email = email
+	this.TwoFactorEnabled = twoFactorEnabled
 	return &this
 }
 
@@ -47,16 +55,18 @@ func NewUserModelWithDefaults() *UserModel {
 	return &this
 }
 
-// GetUserId returns the UserId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetUserId returns the UserId field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *UserModel) GetUserId() string {
-	if o == nil || IsNil(o.UserId.Get()) {
+	if o == nil || o.UserId.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.UserId.Get()
 }
 
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UserModel) GetUserIdOk() (*string, bool) {
@@ -66,39 +76,23 @@ func (o *UserModel) GetUserIdOk() (*string, bool) {
 	return o.UserId.Get(), o.UserId.IsSet()
 }
 
-// HasUserId returns a boolean if a field has been set.
-func (o *UserModel) HasUserId() bool {
-	if o != nil && o.UserId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetUserId gets a reference to the given NullableString and assigns it to the UserId field.
+// SetUserId sets field value
 func (o *UserModel) SetUserId(v string) {
 	o.UserId.Set(&v)
 }
-// SetUserIdNil sets the value for UserId to be an explicit nil
-func (o *UserModel) SetUserIdNil() {
-	o.UserId.Set(nil)
-}
 
-// UnsetUserId ensures that no value is present for UserId, not even an explicit nil
-func (o *UserModel) UnsetUserId() {
-	o.UserId.Unset()
-}
-
-// GetFullName returns the FullName field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetFullName returns the FullName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *UserModel) GetFullName() string {
-	if o == nil || IsNil(o.FullName.Get()) {
+	if o == nil || o.FullName.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.FullName.Get()
 }
 
-// GetFullNameOk returns a tuple with the FullName field value if set, nil otherwise
+// GetFullNameOk returns a tuple with the FullName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UserModel) GetFullNameOk() (*string, bool) {
@@ -108,39 +102,23 @@ func (o *UserModel) GetFullNameOk() (*string, bool) {
 	return o.FullName.Get(), o.FullName.IsSet()
 }
 
-// HasFullName returns a boolean if a field has been set.
-func (o *UserModel) HasFullName() bool {
-	if o != nil && o.FullName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFullName gets a reference to the given NullableString and assigns it to the FullName field.
+// SetFullName sets field value
 func (o *UserModel) SetFullName(v string) {
 	o.FullName.Set(&v)
 }
-// SetFullNameNil sets the value for FullName to be an explicit nil
-func (o *UserModel) SetFullNameNil() {
-	o.FullName.Set(nil)
-}
 
-// UnsetFullName ensures that no value is present for FullName, not even an explicit nil
-func (o *UserModel) UnsetFullName() {
-	o.FullName.Unset()
-}
-
-// GetEmail returns the Email field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetEmail returns the Email field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *UserModel) GetEmail() string {
-	if o == nil || IsNil(o.Email.Get()) {
+	if o == nil || o.Email.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Email.Get()
 }
 
-// GetEmailOk returns a tuple with the Email field value if set, nil otherwise
+// GetEmailOk returns a tuple with the Email field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UserModel) GetEmailOk() (*string, bool) {
@@ -150,59 +128,33 @@ func (o *UserModel) GetEmailOk() (*string, bool) {
 	return o.Email.Get(), o.Email.IsSet()
 }
 
-// HasEmail returns a boolean if a field has been set.
-func (o *UserModel) HasEmail() bool {
-	if o != nil && o.Email.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetEmail gets a reference to the given NullableString and assigns it to the Email field.
+// SetEmail sets field value
 func (o *UserModel) SetEmail(v string) {
 	o.Email.Set(&v)
 }
-// SetEmailNil sets the value for Email to be an explicit nil
-func (o *UserModel) SetEmailNil() {
-	o.Email.Set(nil)
-}
 
-// UnsetEmail ensures that no value is present for Email, not even an explicit nil
-func (o *UserModel) UnsetEmail() {
-	o.Email.Unset()
-}
-
-// GetTwoFactorEnabled returns the TwoFactorEnabled field value if set, zero value otherwise.
+// GetTwoFactorEnabled returns the TwoFactorEnabled field value
 func (o *UserModel) GetTwoFactorEnabled() bool {
-	if o == nil || IsNil(o.TwoFactorEnabled) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.TwoFactorEnabled
+
+	return o.TwoFactorEnabled
 }
 
-// GetTwoFactorEnabledOk returns a tuple with the TwoFactorEnabled field value if set, nil otherwise
+// GetTwoFactorEnabledOk returns a tuple with the TwoFactorEnabled field value
 // and a boolean to check if the value has been set.
 func (o *UserModel) GetTwoFactorEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.TwoFactorEnabled) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TwoFactorEnabled, true
+	return &o.TwoFactorEnabled, true
 }
 
-// HasTwoFactorEnabled returns a boolean if a field has been set.
-func (o *UserModel) HasTwoFactorEnabled() bool {
-	if o != nil && !IsNil(o.TwoFactorEnabled) {
-		return true
-	}
-
-	return false
-}
-
-// SetTwoFactorEnabled gets a reference to the given bool and assigns it to the TwoFactorEnabled field.
+// SetTwoFactorEnabled sets field value
 func (o *UserModel) SetTwoFactorEnabled(v bool) {
-	o.TwoFactorEnabled = &v
+	o.TwoFactorEnabled = v
 }
 
 func (o UserModel) MarshalJSON() ([]byte, error) {
@@ -215,19 +167,51 @@ func (o UserModel) MarshalJSON() ([]byte, error) {
 
 func (o UserModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.UserId.IsSet() {
-		toSerialize["userId"] = o.UserId.Get()
-	}
-	if o.FullName.IsSet() {
-		toSerialize["fullName"] = o.FullName.Get()
-	}
-	if o.Email.IsSet() {
-		toSerialize["email"] = o.Email.Get()
-	}
-	if !IsNil(o.TwoFactorEnabled) {
-		toSerialize["twoFactorEnabled"] = o.TwoFactorEnabled
-	}
+	toSerialize["userId"] = o.UserId.Get()
+	toSerialize["fullName"] = o.FullName.Get()
+	toSerialize["email"] = o.Email.Get()
+	toSerialize["twoFactorEnabled"] = o.TwoFactorEnabled
 	return toSerialize, nil
+}
+
+func (o *UserModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"userId",
+		"fullName",
+		"email",
+		"twoFactorEnabled",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUserModel := _UserModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUserModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UserModel(varUserModel)
+
+	return err
 }
 
 type NullableUserModel struct {

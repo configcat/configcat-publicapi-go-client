@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PermissionGroupId** | Pointer to **int64** | Identifier of the Member&#39;s Permission Group. | [optional] 
-**Name** | Pointer to **NullableString** | Name of the Member&#39;s Permission Group. | [optional] 
+**PermissionGroupId** | **int64** | Identifier of the Member&#39;s Permission Group. | 
+**Name** | **string** | Name of the Member&#39;s Permission Group. | 
 
 ## Methods
 
 ### NewOrganizationPermissionGroupModel
 
-`func NewOrganizationPermissionGroupModel() *OrganizationPermissionGroupModel`
+`func NewOrganizationPermissionGroupModel(permissionGroupId int64, name string, ) *OrganizationPermissionGroupModel`
 
 NewOrganizationPermissionGroupModel instantiates a new OrganizationPermissionGroupModel object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetPermissionGroupId sets PermissionGroupId field to given value.
 
-### HasPermissionGroupId
-
-`func (o *OrganizationPermissionGroupModel) HasPermissionGroupId() bool`
-
-HasPermissionGroupId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -70,22 +65,7 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
 
-`func (o *OrganizationPermissionGroupModel) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### SetNameNil
-
-`func (o *OrganizationPermissionGroupModel) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *OrganizationPermissionGroupModel) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EnvironmentId** | Pointer to **string** | The ID of the Environment where the initial value must be set. | [optional] 
-**Value** | Pointer to **interface{}** | The initial value in the given Environment. It must respect the setting type. | [optional] 
+**Value** | [**SettingValueType**](SettingValueType.md) | The initial value in the given Environment. It must respect the setting type. In some generated clients for strictly typed languages you may use double/float properties to handle integer values. | 
 
 ## Methods
 
 ### NewInitialValue
 
-`func NewInitialValue() *InitialValue`
+`func NewInitialValue(value SettingValueType, ) *InitialValue`
 
 NewInitialValue instantiates a new InitialValue object
 This constructor will assign default values to properties that have it defined,
@@ -53,39 +53,24 @@ HasEnvironmentId returns a boolean if a field has been set.
 
 ### GetValue
 
-`func (o *InitialValue) GetValue() interface{}`
+`func (o *InitialValue) GetValue() SettingValueType`
 
 GetValue returns the Value field if non-nil, zero value otherwise.
 
 ### GetValueOk
 
-`func (o *InitialValue) GetValueOk() (*interface{}, bool)`
+`func (o *InitialValue) GetValueOk() (*SettingValueType, bool)`
 
 GetValueOk returns a tuple with the Value field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetValue
 
-`func (o *InitialValue) SetValue(v interface{})`
+`func (o *InitialValue) SetValue(v SettingValueType)`
 
 SetValue sets Value field to given value.
 
-### HasValue
 
-`func (o *InitialValue) HasValue() bool`
-
-HasValue returns a boolean if a field has been set.
-
-### SetValueNil
-
-`func (o *InitialValue) SetValueNil(b bool)`
-
- SetValueNil sets the value for Value to be an explicit nil
-
-### UnsetValue
-`func (o *InitialValue) UnsetValue()`
-
-UnsetValue ensures that no value is present for Value, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

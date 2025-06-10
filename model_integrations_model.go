@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the IntegrationsModel type satisfies the MappedNullable interface at compile time
@@ -21,15 +23,18 @@ var _ MappedNullable = &IntegrationsModel{}
 // IntegrationsModel struct for IntegrationsModel
 type IntegrationsModel struct {
 	// The Integrations of the Product.
-	Integrations []IntegrationModel `json:"integrations,omitempty"`
+	Integrations []IntegrationModel `json:"integrations"`
 }
+
+type _IntegrationsModel IntegrationsModel
 
 // NewIntegrationsModel instantiates a new IntegrationsModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationsModel() *IntegrationsModel {
+func NewIntegrationsModel(integrations []IntegrationModel) *IntegrationsModel {
 	this := IntegrationsModel{}
+	this.Integrations = integrations
 	return &this
 }
 
@@ -41,16 +46,18 @@ func NewIntegrationsModelWithDefaults() *IntegrationsModel {
 	return &this
 }
 
-// GetIntegrations returns the Integrations field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetIntegrations returns the Integrations field value
+// If the value is explicit nil, the zero value for []IntegrationModel will be returned
 func (o *IntegrationsModel) GetIntegrations() []IntegrationModel {
 	if o == nil {
 		var ret []IntegrationModel
 		return ret
 	}
+
 	return o.Integrations
 }
 
-// GetIntegrationsOk returns a tuple with the Integrations field value if set, nil otherwise
+// GetIntegrationsOk returns a tuple with the Integrations field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IntegrationsModel) GetIntegrationsOk() ([]IntegrationModel, bool) {
@@ -60,16 +67,7 @@ func (o *IntegrationsModel) GetIntegrationsOk() ([]IntegrationModel, bool) {
 	return o.Integrations, true
 }
 
-// HasIntegrations returns a boolean if a field has been set.
-func (o *IntegrationsModel) HasIntegrations() bool {
-	if o != nil && !IsNil(o.Integrations) {
-		return true
-	}
-
-	return false
-}
-
-// SetIntegrations gets a reference to the given []IntegrationModel and assigns it to the Integrations field.
+// SetIntegrations sets field value
 func (o *IntegrationsModel) SetIntegrations(v []IntegrationModel) {
 	o.Integrations = v
 }
@@ -88,6 +86,43 @@ func (o IntegrationsModel) ToMap() (map[string]interface{}, error) {
 		toSerialize["integrations"] = o.Integrations
 	}
 	return toSerialize, nil
+}
+
+func (o *IntegrationsModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"integrations",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIntegrationsModel := _IntegrationsModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varIntegrationsModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationsModel(varIntegrationsModel)
+
+	return err
 }
 
 type NullableIntegrationsModel struct {

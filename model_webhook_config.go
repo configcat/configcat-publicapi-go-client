@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the WebhookConfig type satisfies the MappedNullable interface at compile time
@@ -21,17 +23,21 @@ var _ MappedNullable = &WebhookConfig{}
 // WebhookConfig The Config where the applied changes will invoke the Webhook.
 type WebhookConfig struct {
 	// The Config's name.
-	Name NullableString `json:"name,omitempty"`
+	Name string `json:"name"`
 	// The Config's identifier.
-	ConfigId *string `json:"configId,omitempty"`
+	ConfigId string `json:"configId"`
 }
+
+type _WebhookConfig WebhookConfig
 
 // NewWebhookConfig instantiates a new WebhookConfig object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWebhookConfig() *WebhookConfig {
+func NewWebhookConfig(name string, configId string) *WebhookConfig {
 	this := WebhookConfig{}
+	this.Name = name
+	this.ConfigId = configId
 	return &this
 }
 
@@ -43,78 +49,52 @@ func NewWebhookConfigWithDefaults() *WebhookConfig {
 	return &this
 }
 
-// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetName returns the Name field value
 func (o *WebhookConfig) GetName() string {
-	if o == nil || IsNil(o.Name.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name.Get()
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WebhookConfig) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *WebhookConfig) HasName() bool {
-	if o != nil && o.Name.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given NullableString and assigns it to the Name field.
+// SetName sets field value
 func (o *WebhookConfig) SetName(v string) {
-	o.Name.Set(&v)
-}
-// SetNameNil sets the value for Name to be an explicit nil
-func (o *WebhookConfig) SetNameNil() {
-	o.Name.Set(nil)
+	o.Name = v
 }
 
-// UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *WebhookConfig) UnsetName() {
-	o.Name.Unset()
-}
-
-// GetConfigId returns the ConfigId field value if set, zero value otherwise.
+// GetConfigId returns the ConfigId field value
 func (o *WebhookConfig) GetConfigId() string {
-	if o == nil || IsNil(o.ConfigId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ConfigId
+
+	return o.ConfigId
 }
 
-// GetConfigIdOk returns a tuple with the ConfigId field value if set, nil otherwise
+// GetConfigIdOk returns a tuple with the ConfigId field value
 // and a boolean to check if the value has been set.
 func (o *WebhookConfig) GetConfigIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ConfigId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ConfigId, true
+	return &o.ConfigId, true
 }
 
-// HasConfigId returns a boolean if a field has been set.
-func (o *WebhookConfig) HasConfigId() bool {
-	if o != nil && !IsNil(o.ConfigId) {
-		return true
-	}
-
-	return false
-}
-
-// SetConfigId gets a reference to the given string and assigns it to the ConfigId field.
+// SetConfigId sets field value
 func (o *WebhookConfig) SetConfigId(v string) {
-	o.ConfigId = &v
+	o.ConfigId = v
 }
 
 func (o WebhookConfig) MarshalJSON() ([]byte, error) {
@@ -127,13 +107,47 @@ func (o WebhookConfig) MarshalJSON() ([]byte, error) {
 
 func (o WebhookConfig) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Name.IsSet() {
-		toSerialize["name"] = o.Name.Get()
-	}
-	if !IsNil(o.ConfigId) {
-		toSerialize["configId"] = o.ConfigId
-	}
+	toSerialize["name"] = o.Name
+	toSerialize["configId"] = o.ConfigId
 	return toSerialize, nil
+}
+
+func (o *WebhookConfig) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"name",
+		"configId",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varWebhookConfig := _WebhookConfig{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varWebhookConfig)
+
+	if err != nil {
+		return err
+	}
+
+	*o = WebhookConfig(varWebhookConfig)
+
+	return err
 }
 
 type NullableWebhookConfig struct {

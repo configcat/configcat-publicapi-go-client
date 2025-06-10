@@ -41,9 +41,9 @@ func NewUpdateSettingValuesWithIdModelWithDefaults() *UpdateSettingValuesWithIdM
 	return &this
 }
 
-// GetSettingValues returns the SettingValues field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSettingValues returns the SettingValues field value if set, zero value otherwise.
 func (o *UpdateSettingValuesWithIdModel) GetSettingValues() []UpdateSettingValueWithSettingIdModel {
-	if o == nil {
+	if o == nil || IsNil(o.SettingValues) {
 		var ret []UpdateSettingValueWithSettingIdModel
 		return ret
 	}
@@ -52,7 +52,6 @@ func (o *UpdateSettingValuesWithIdModel) GetSettingValues() []UpdateSettingValue
 
 // GetSettingValuesOk returns a tuple with the SettingValues field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateSettingValuesWithIdModel) GetSettingValuesOk() ([]UpdateSettingValueWithSettingIdModel, bool) {
 	if o == nil || IsNil(o.SettingValues) {
 		return nil, false
@@ -84,7 +83,7 @@ func (o UpdateSettingValuesWithIdModel) MarshalJSON() ([]byte, error) {
 
 func (o UpdateSettingValuesWithIdModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.SettingValues != nil {
+	if !IsNil(o.SettingValues) {
 		toSerialize["settingValues"] = o.SettingValues
 	}
 	return toSerialize, nil

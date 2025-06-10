@@ -4,20 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Branch** | Pointer to **NullableString** | The source control branch on where the scan was performed. (Source of the branch selector on the ConfigCat Dashboard) | [optional] 
-**References** | Pointer to [**[]ReferenceLines**](ReferenceLines.md) | The actual references to the given Feature Flag or Setting. | [optional] 
-**CommitUrl** | Pointer to **NullableString** | The related commit&#39;s URL. | [optional] 
-**CommitHash** | Pointer to **NullableString** | The related commit&#39;s hash. | [optional] 
-**SyncedAt** | Pointer to **time.Time** | The date and time when the reference report was uploaded. | [optional] 
-**Repository** | Pointer to **NullableString** | The source control repository that contains the scanned code. | [optional] 
-**CodeReferenceId** | Pointer to **string** | The identifier of the reference report. | [optional] 
-**Uploader** | Pointer to **NullableString** | The code reference scanning tool&#39;s name. | [optional] 
+**Branch** | **NullableString** | The source control branch on where the scan was performed. (Source of the branch selector on the ConfigCat Dashboard) | 
+**References** | [**[]ReferenceLinesModel**](ReferenceLinesModel.md) | The actual references to the given Feature Flag or Setting. | 
+**CommitUrl** | **NullableString** | The related commit&#39;s URL. | 
+**CommitHash** | **NullableString** | The related commit&#39;s hash. | 
+**SyncedAt** | **time.Time** | The date and time when the reference report was uploaded. | 
+**Repository** | **NullableString** | The source control repository that contains the scanned code. | 
+**CodeReferenceId** | **string** | The identifier of the reference report. | 
+**Uploader** | **NullableString** | The code reference scanning tool&#39;s name. | 
 
 ## Methods
 
 ### NewCodeReferenceModel
 
-`func NewCodeReferenceModel() *CodeReferenceModel`
+`func NewCodeReferenceModel(branch NullableString, references []ReferenceLinesModel, commitUrl NullableString, commitHash NullableString, syncedAt time.Time, repository NullableString, codeReferenceId string, uploader NullableString, ) *CodeReferenceModel`
 
 NewCodeReferenceModel instantiates a new CodeReferenceModel object
 This constructor will assign default values to properties that have it defined,
@@ -51,11 +51,6 @@ and a boolean to check if the value has been set.
 
 SetBranch sets Branch field to given value.
 
-### HasBranch
-
-`func (o *CodeReferenceModel) HasBranch() bool`
-
-HasBranch returns a boolean if a field has been set.
 
 ### SetBranchNil
 
@@ -69,28 +64,23 @@ HasBranch returns a boolean if a field has been set.
 UnsetBranch ensures that no value is present for Branch, not even an explicit nil
 ### GetReferences
 
-`func (o *CodeReferenceModel) GetReferences() []ReferenceLines`
+`func (o *CodeReferenceModel) GetReferences() []ReferenceLinesModel`
 
 GetReferences returns the References field if non-nil, zero value otherwise.
 
 ### GetReferencesOk
 
-`func (o *CodeReferenceModel) GetReferencesOk() (*[]ReferenceLines, bool)`
+`func (o *CodeReferenceModel) GetReferencesOk() (*[]ReferenceLinesModel, bool)`
 
 GetReferencesOk returns a tuple with the References field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetReferences
 
-`func (o *CodeReferenceModel) SetReferences(v []ReferenceLines)`
+`func (o *CodeReferenceModel) SetReferences(v []ReferenceLinesModel)`
 
 SetReferences sets References field to given value.
 
-### HasReferences
-
-`func (o *CodeReferenceModel) HasReferences() bool`
-
-HasReferences returns a boolean if a field has been set.
 
 ### SetReferencesNil
 
@@ -121,11 +111,6 @@ and a boolean to check if the value has been set.
 
 SetCommitUrl sets CommitUrl field to given value.
 
-### HasCommitUrl
-
-`func (o *CodeReferenceModel) HasCommitUrl() bool`
-
-HasCommitUrl returns a boolean if a field has been set.
 
 ### SetCommitUrlNil
 
@@ -156,11 +141,6 @@ and a boolean to check if the value has been set.
 
 SetCommitHash sets CommitHash field to given value.
 
-### HasCommitHash
-
-`func (o *CodeReferenceModel) HasCommitHash() bool`
-
-HasCommitHash returns a boolean if a field has been set.
 
 ### SetCommitHashNil
 
@@ -191,11 +171,6 @@ and a boolean to check if the value has been set.
 
 SetSyncedAt sets SyncedAt field to given value.
 
-### HasSyncedAt
-
-`func (o *CodeReferenceModel) HasSyncedAt() bool`
-
-HasSyncedAt returns a boolean if a field has been set.
 
 ### GetRepository
 
@@ -216,11 +191,6 @@ and a boolean to check if the value has been set.
 
 SetRepository sets Repository field to given value.
 
-### HasRepository
-
-`func (o *CodeReferenceModel) HasRepository() bool`
-
-HasRepository returns a boolean if a field has been set.
 
 ### SetRepositoryNil
 
@@ -251,11 +221,6 @@ and a boolean to check if the value has been set.
 
 SetCodeReferenceId sets CodeReferenceId field to given value.
 
-### HasCodeReferenceId
-
-`func (o *CodeReferenceModel) HasCodeReferenceId() bool`
-
-HasCodeReferenceId returns a boolean if a field has been set.
 
 ### GetUploader
 
@@ -276,11 +241,6 @@ and a boolean to check if the value has been set.
 
 SetUploader sets Uploader field to given value.
 
-### HasUploader
-
-`func (o *CodeReferenceModel) HasUploader() bool`
-
-HasUploader returns a boolean if a field has been set.
 
 ### SetUploaderNil
 

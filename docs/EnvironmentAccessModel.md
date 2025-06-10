@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**EnvironmentId** | Pointer to **string** | Identifier of the Environment. | [optional] 
-**Name** | Pointer to **NullableString** | Name of the Environment. | [optional] 
-**Color** | Pointer to **NullableString** | Color of the Environment. | [optional] 
-**Description** | Pointer to **NullableString** | Description of the Environment. | [optional] 
-**Order** | Pointer to **int32** | The order of the Environment represented on the ConfigCat Dashboard. | [optional] 
-**ReasonRequired** | Pointer to **bool** | Determines whether a mandatory reason must be given every time when the Feature Flags or Settings in the given Environment are saved. | [optional] 
-**EnvironmentAccessType** | Pointer to [**EnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] 
+**EnvironmentId** | **string** | Identifier of the Environment. | 
+**Name** | **NullableString** | Name of the Environment. | 
+**Color** | **NullableString** | Color of the Environment. | 
+**Description** | **NullableString** | Description of the Environment. | 
+**Order** | **int32** | The order of the Environment represented on the ConfigCat Dashboard. | 
+**ReasonRequired** | **bool** | Determines whether a mandatory reason must be given every time when the Feature Flags or Settings in the given Environment are saved. | 
+**EnvironmentAccessType** | [**EnvironmentAccessType**](EnvironmentAccessType.md) |  | 
 
 ## Methods
 
 ### NewEnvironmentAccessModel
 
-`func NewEnvironmentAccessModel() *EnvironmentAccessModel`
+`func NewEnvironmentAccessModel(environmentId string, name NullableString, color NullableString, description NullableString, order int32, reasonRequired bool, environmentAccessType EnvironmentAccessType, ) *EnvironmentAccessModel`
 
 NewEnvironmentAccessModel instantiates a new EnvironmentAccessModel object
 This constructor will assign default values to properties that have it defined,
@@ -50,11 +50,6 @@ and a boolean to check if the value has been set.
 
 SetEnvironmentId sets EnvironmentId field to given value.
 
-### HasEnvironmentId
-
-`func (o *EnvironmentAccessModel) HasEnvironmentId() bool`
-
-HasEnvironmentId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -75,11 +70,6 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
-
-`func (o *EnvironmentAccessModel) HasName() bool`
-
-HasName returns a boolean if a field has been set.
 
 ### SetNameNil
 
@@ -110,11 +100,6 @@ and a boolean to check if the value has been set.
 
 SetColor sets Color field to given value.
 
-### HasColor
-
-`func (o *EnvironmentAccessModel) HasColor() bool`
-
-HasColor returns a boolean if a field has been set.
 
 ### SetColorNil
 
@@ -145,11 +130,6 @@ and a boolean to check if the value has been set.
 
 SetDescription sets Description field to given value.
 
-### HasDescription
-
-`func (o *EnvironmentAccessModel) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
 
 ### SetDescriptionNil
 
@@ -180,11 +160,6 @@ and a boolean to check if the value has been set.
 
 SetOrder sets Order field to given value.
 
-### HasOrder
-
-`func (o *EnvironmentAccessModel) HasOrder() bool`
-
-HasOrder returns a boolean if a field has been set.
 
 ### GetReasonRequired
 
@@ -205,11 +180,6 @@ and a boolean to check if the value has been set.
 
 SetReasonRequired sets ReasonRequired field to given value.
 
-### HasReasonRequired
-
-`func (o *EnvironmentAccessModel) HasReasonRequired() bool`
-
-HasReasonRequired returns a boolean if a field has been set.
 
 ### GetEnvironmentAccessType
 
@@ -230,11 +200,6 @@ and a boolean to check if the value has been set.
 
 SetEnvironmentAccessType sets EnvironmentAccessType field to given value.
 
-### HasEnvironmentAccessType
-
-`func (o *EnvironmentAccessModel) HasEnvironmentAccessType() bool`
-
-HasEnvironmentAccessType returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

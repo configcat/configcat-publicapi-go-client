@@ -41,9 +41,9 @@ func NewUpdateEvaluationFormulasModelWithDefaults() *UpdateEvaluationFormulasMod
 	return &this
 }
 
-// GetUpdateFormulas returns the UpdateFormulas field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetUpdateFormulas returns the UpdateFormulas field value if set, zero value otherwise.
 func (o *UpdateEvaluationFormulasModel) GetUpdateFormulas() []UpdateEvaluationFormulaWithIdModel {
-	if o == nil {
+	if o == nil || IsNil(o.UpdateFormulas) {
 		var ret []UpdateEvaluationFormulaWithIdModel
 		return ret
 	}
@@ -52,7 +52,6 @@ func (o *UpdateEvaluationFormulasModel) GetUpdateFormulas() []UpdateEvaluationFo
 
 // GetUpdateFormulasOk returns a tuple with the UpdateFormulas field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateEvaluationFormulasModel) GetUpdateFormulasOk() ([]UpdateEvaluationFormulaWithIdModel, bool) {
 	if o == nil || IsNil(o.UpdateFormulas) {
 		return nil, false
@@ -84,7 +83,7 @@ func (o UpdateEvaluationFormulasModel) MarshalJSON() ([]byte, error) {
 
 func (o UpdateEvaluationFormulasModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.UpdateFormulas != nil {
+	if !IsNil(o.UpdateFormulas) {
 		toSerialize["updateFormulas"] = o.UpdateFormulas
 	}
 	return toSerialize, nil
