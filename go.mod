@@ -1,8 +1,11 @@
-module github.com/configcat/configcat-publicapi-go-client/v2
+module github.com/configcat/configcat-publicapi-go-client/v3
 
 go 1.18
 
-require github.com/stretchr/testify v1.10.0
+require (
+	github.com/stretchr/testify v1.10.0
+	gopkg.in/validator.v2 v2.0.1
+)
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect

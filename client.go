@@ -89,6 +89,8 @@ type APIClient struct {
 	TagsAPI *TagsAPIService
 
 	WebhooksAPI *WebhooksAPIService
+
+	ZombieStaleFlagsAPI *ZombieStaleFlagsAPIService
 }
 
 type service struct {
@@ -127,6 +129,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.SegmentsAPI = (*SegmentsAPIService)(&c.common)
 	c.TagsAPI = (*TagsAPIService)(&c.common)
 	c.WebhooksAPI = (*WebhooksAPIService)(&c.common)
+	c.ZombieStaleFlagsAPI = (*ZombieStaleFlagsAPIService)(&c.common)
 
 	return c
 }

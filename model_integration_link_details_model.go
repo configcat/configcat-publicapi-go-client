@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the IntegrationLinkDetailsModel type satisfies the MappedNullable interface at compile time
@@ -20,16 +22,20 @@ var _ MappedNullable = &IntegrationLinkDetailsModel{}
 
 // IntegrationLinkDetailsModel struct for IntegrationLinkDetailsModel
 type IntegrationLinkDetailsModel struct {
-	Details []IntegrationLinkDetail `json:"details,omitempty"`
-	AllIntegrationLinkCount *int32 `json:"allIntegrationLinkCount,omitempty"`
+	Details []IntegrationLinkDetail `json:"details"`
+	AllIntegrationLinkCount int32 `json:"allIntegrationLinkCount"`
 }
+
+type _IntegrationLinkDetailsModel IntegrationLinkDetailsModel
 
 // NewIntegrationLinkDetailsModel instantiates a new IntegrationLinkDetailsModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationLinkDetailsModel() *IntegrationLinkDetailsModel {
+func NewIntegrationLinkDetailsModel(details []IntegrationLinkDetail, allIntegrationLinkCount int32) *IntegrationLinkDetailsModel {
 	this := IntegrationLinkDetailsModel{}
+	this.Details = details
+	this.AllIntegrationLinkCount = allIntegrationLinkCount
 	return &this
 }
 
@@ -41,16 +47,18 @@ func NewIntegrationLinkDetailsModelWithDefaults() *IntegrationLinkDetailsModel {
 	return &this
 }
 
-// GetDetails returns the Details field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDetails returns the Details field value
+// If the value is explicit nil, the zero value for []IntegrationLinkDetail will be returned
 func (o *IntegrationLinkDetailsModel) GetDetails() []IntegrationLinkDetail {
 	if o == nil {
 		var ret []IntegrationLinkDetail
 		return ret
 	}
+
 	return o.Details
 }
 
-// GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
+// GetDetailsOk returns a tuple with the Details field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IntegrationLinkDetailsModel) GetDetailsOk() ([]IntegrationLinkDetail, bool) {
@@ -60,50 +68,33 @@ func (o *IntegrationLinkDetailsModel) GetDetailsOk() ([]IntegrationLinkDetail, b
 	return o.Details, true
 }
 
-// HasDetails returns a boolean if a field has been set.
-func (o *IntegrationLinkDetailsModel) HasDetails() bool {
-	if o != nil && !IsNil(o.Details) {
-		return true
-	}
-
-	return false
-}
-
-// SetDetails gets a reference to the given []IntegrationLinkDetail and assigns it to the Details field.
+// SetDetails sets field value
 func (o *IntegrationLinkDetailsModel) SetDetails(v []IntegrationLinkDetail) {
 	o.Details = v
 }
 
-// GetAllIntegrationLinkCount returns the AllIntegrationLinkCount field value if set, zero value otherwise.
+// GetAllIntegrationLinkCount returns the AllIntegrationLinkCount field value
 func (o *IntegrationLinkDetailsModel) GetAllIntegrationLinkCount() int32 {
-	if o == nil || IsNil(o.AllIntegrationLinkCount) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.AllIntegrationLinkCount
+
+	return o.AllIntegrationLinkCount
 }
 
-// GetAllIntegrationLinkCountOk returns a tuple with the AllIntegrationLinkCount field value if set, nil otherwise
+// GetAllIntegrationLinkCountOk returns a tuple with the AllIntegrationLinkCount field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationLinkDetailsModel) GetAllIntegrationLinkCountOk() (*int32, bool) {
-	if o == nil || IsNil(o.AllIntegrationLinkCount) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AllIntegrationLinkCount, true
+	return &o.AllIntegrationLinkCount, true
 }
 
-// HasAllIntegrationLinkCount returns a boolean if a field has been set.
-func (o *IntegrationLinkDetailsModel) HasAllIntegrationLinkCount() bool {
-	if o != nil && !IsNil(o.AllIntegrationLinkCount) {
-		return true
-	}
-
-	return false
-}
-
-// SetAllIntegrationLinkCount gets a reference to the given int32 and assigns it to the AllIntegrationLinkCount field.
+// SetAllIntegrationLinkCount sets field value
 func (o *IntegrationLinkDetailsModel) SetAllIntegrationLinkCount(v int32) {
-	o.AllIntegrationLinkCount = &v
+	o.AllIntegrationLinkCount = v
 }
 
 func (o IntegrationLinkDetailsModel) MarshalJSON() ([]byte, error) {
@@ -119,10 +110,46 @@ func (o IntegrationLinkDetailsModel) ToMap() (map[string]interface{}, error) {
 	if o.Details != nil {
 		toSerialize["details"] = o.Details
 	}
-	if !IsNil(o.AllIntegrationLinkCount) {
-		toSerialize["allIntegrationLinkCount"] = o.AllIntegrationLinkCount
-	}
+	toSerialize["allIntegrationLinkCount"] = o.AllIntegrationLinkCount
 	return toSerialize, nil
+}
+
+func (o *IntegrationLinkDetailsModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"details",
+		"allIntegrationLinkCount",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIntegrationLinkDetailsModel := _IntegrationLinkDetailsModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varIntegrationLinkDetailsModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationLinkDetailsModel(varIntegrationLinkDetailsModel)
+
+	return err
 }
 
 type NullableIntegrationLinkDetailsModel struct {

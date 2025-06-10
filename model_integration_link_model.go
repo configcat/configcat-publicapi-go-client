@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the IntegrationLinkModel type satisfies the MappedNullable interface at compile time
@@ -20,18 +22,24 @@ var _ MappedNullable = &IntegrationLinkModel{}
 
 // IntegrationLinkModel struct for IntegrationLinkModel
 type IntegrationLinkModel struct {
-	Key NullableString `json:"key,omitempty"`
-	Description NullableString `json:"description,omitempty"`
-	IntegrationLinkType *IntegrationLinkType `json:"integrationLinkType,omitempty"`
-	Url NullableString `json:"url,omitempty"`
+	Key NullableString `json:"key"`
+	Description NullableString `json:"description"`
+	IntegrationLinkType IntegrationLinkType `json:"integrationLinkType"`
+	Url NullableString `json:"url"`
 }
+
+type _IntegrationLinkModel IntegrationLinkModel
 
 // NewIntegrationLinkModel instantiates a new IntegrationLinkModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationLinkModel() *IntegrationLinkModel {
+func NewIntegrationLinkModel(key NullableString, description NullableString, integrationLinkType IntegrationLinkType, url NullableString) *IntegrationLinkModel {
 	this := IntegrationLinkModel{}
+	this.Key = key
+	this.Description = description
+	this.IntegrationLinkType = integrationLinkType
+	this.Url = url
 	return &this
 }
 
@@ -43,16 +51,18 @@ func NewIntegrationLinkModelWithDefaults() *IntegrationLinkModel {
 	return &this
 }
 
-// GetKey returns the Key field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetKey returns the Key field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *IntegrationLinkModel) GetKey() string {
-	if o == nil || IsNil(o.Key.Get()) {
+	if o == nil || o.Key.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Key.Get()
 }
 
-// GetKeyOk returns a tuple with the Key field value if set, nil otherwise
+// GetKeyOk returns a tuple with the Key field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IntegrationLinkModel) GetKeyOk() (*string, bool) {
@@ -62,39 +72,23 @@ func (o *IntegrationLinkModel) GetKeyOk() (*string, bool) {
 	return o.Key.Get(), o.Key.IsSet()
 }
 
-// HasKey returns a boolean if a field has been set.
-func (o *IntegrationLinkModel) HasKey() bool {
-	if o != nil && o.Key.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetKey gets a reference to the given NullableString and assigns it to the Key field.
+// SetKey sets field value
 func (o *IntegrationLinkModel) SetKey(v string) {
 	o.Key.Set(&v)
 }
-// SetKeyNil sets the value for Key to be an explicit nil
-func (o *IntegrationLinkModel) SetKeyNil() {
-	o.Key.Set(nil)
-}
 
-// UnsetKey ensures that no value is present for Key, not even an explicit nil
-func (o *IntegrationLinkModel) UnsetKey() {
-	o.Key.Unset()
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDescription returns the Description field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *IntegrationLinkModel) GetDescription() string {
-	if o == nil || IsNil(o.Description.Get()) {
+	if o == nil || o.Description.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Description.Get()
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IntegrationLinkModel) GetDescriptionOk() (*string, bool) {
@@ -104,71 +98,47 @@ func (o *IntegrationLinkModel) GetDescriptionOk() (*string, bool) {
 	return o.Description.Get(), o.Description.IsSet()
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *IntegrationLinkModel) HasDescription() bool {
-	if o != nil && o.Description.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
+// SetDescription sets field value
 func (o *IntegrationLinkModel) SetDescription(v string) {
 	o.Description.Set(&v)
 }
-// SetDescriptionNil sets the value for Description to be an explicit nil
-func (o *IntegrationLinkModel) SetDescriptionNil() {
-	o.Description.Set(nil)
-}
 
-// UnsetDescription ensures that no value is present for Description, not even an explicit nil
-func (o *IntegrationLinkModel) UnsetDescription() {
-	o.Description.Unset()
-}
-
-// GetIntegrationLinkType returns the IntegrationLinkType field value if set, zero value otherwise.
+// GetIntegrationLinkType returns the IntegrationLinkType field value
 func (o *IntegrationLinkModel) GetIntegrationLinkType() IntegrationLinkType {
-	if o == nil || IsNil(o.IntegrationLinkType) {
+	if o == nil {
 		var ret IntegrationLinkType
 		return ret
 	}
-	return *o.IntegrationLinkType
+
+	return o.IntegrationLinkType
 }
 
-// GetIntegrationLinkTypeOk returns a tuple with the IntegrationLinkType field value if set, nil otherwise
+// GetIntegrationLinkTypeOk returns a tuple with the IntegrationLinkType field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationLinkModel) GetIntegrationLinkTypeOk() (*IntegrationLinkType, bool) {
-	if o == nil || IsNil(o.IntegrationLinkType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IntegrationLinkType, true
+	return &o.IntegrationLinkType, true
 }
 
-// HasIntegrationLinkType returns a boolean if a field has been set.
-func (o *IntegrationLinkModel) HasIntegrationLinkType() bool {
-	if o != nil && !IsNil(o.IntegrationLinkType) {
-		return true
-	}
-
-	return false
-}
-
-// SetIntegrationLinkType gets a reference to the given IntegrationLinkType and assigns it to the IntegrationLinkType field.
+// SetIntegrationLinkType sets field value
 func (o *IntegrationLinkModel) SetIntegrationLinkType(v IntegrationLinkType) {
-	o.IntegrationLinkType = &v
+	o.IntegrationLinkType = v
 }
 
-// GetUrl returns the Url field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetUrl returns the Url field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *IntegrationLinkModel) GetUrl() string {
-	if o == nil || IsNil(o.Url.Get()) {
+	if o == nil || o.Url.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Url.Get()
 }
 
-// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IntegrationLinkModel) GetUrlOk() (*string, bool) {
@@ -178,27 +148,9 @@ func (o *IntegrationLinkModel) GetUrlOk() (*string, bool) {
 	return o.Url.Get(), o.Url.IsSet()
 }
 
-// HasUrl returns a boolean if a field has been set.
-func (o *IntegrationLinkModel) HasUrl() bool {
-	if o != nil && o.Url.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetUrl gets a reference to the given NullableString and assigns it to the Url field.
+// SetUrl sets field value
 func (o *IntegrationLinkModel) SetUrl(v string) {
 	o.Url.Set(&v)
-}
-// SetUrlNil sets the value for Url to be an explicit nil
-func (o *IntegrationLinkModel) SetUrlNil() {
-	o.Url.Set(nil)
-}
-
-// UnsetUrl ensures that no value is present for Url, not even an explicit nil
-func (o *IntegrationLinkModel) UnsetUrl() {
-	o.Url.Unset()
 }
 
 func (o IntegrationLinkModel) MarshalJSON() ([]byte, error) {
@@ -211,19 +163,51 @@ func (o IntegrationLinkModel) MarshalJSON() ([]byte, error) {
 
 func (o IntegrationLinkModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Key.IsSet() {
-		toSerialize["key"] = o.Key.Get()
-	}
-	if o.Description.IsSet() {
-		toSerialize["description"] = o.Description.Get()
-	}
-	if !IsNil(o.IntegrationLinkType) {
-		toSerialize["integrationLinkType"] = o.IntegrationLinkType
-	}
-	if o.Url.IsSet() {
-		toSerialize["url"] = o.Url.Get()
-	}
+	toSerialize["key"] = o.Key.Get()
+	toSerialize["description"] = o.Description.Get()
+	toSerialize["integrationLinkType"] = o.IntegrationLinkType
+	toSerialize["url"] = o.Url.Get()
 	return toSerialize, nil
+}
+
+func (o *IntegrationLinkModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"key",
+		"description",
+		"integrationLinkType",
+		"url",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIntegrationLinkModel := _IntegrationLinkModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varIntegrationLinkModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationLinkModel(varIntegrationLinkModel)
+
+	return err
 }
 
 type NullableIntegrationLinkModel struct {

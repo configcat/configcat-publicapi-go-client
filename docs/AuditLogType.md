@@ -133,6 +133,8 @@
 
 * `SAML_IDP_CONFIGURATION_UPDATED` (value: `"samlIdpConfigurationUpdated"`)
 
+* `AUTO_PROVISIONING_ENABLED_CHANGED` (value: `"autoProvisioningEnabledChanged"`)
+
 * `ORGANIZATION_MEMBER_JOINED` (value: `"organizationMemberJoined"`)
 
 * `ORGANIZATION_MEMBER_PRODUCT_JOIN_REQUESTED` (value: `"organizationMemberProductJoinRequested"`)
@@ -158,6 +160,32 @@
 * `WEBHOOK_SIGNING_KEY_DELETED` (value: `"webhookSigningKeyDeleted"`)
 
 * `WEBHOOK_SIGNING_KEY_CREATED` (value: `"webhookSigningKeyCreated"`)
+
+* `USER_PROVISIONING_CONFIGURATION_CHANGED` (value: `"userProvisioningConfigurationChanged"`)
+
+* `SYNC_GROUP_PROVISIONING_RULE_CHANGED` (value: `"syncGroupProvisioningRuleChanged"`)
+
+* `SYNC_GROUPS_REORDERED` (value: `"syncGroupsReordered"`)
+
+* `SYNC_USER_PROVISIONING_ENABLED` (value: `"syncUserProvisioningEnabled"`)
+
+* `SYNC_USER_PROVISIONING_DISABLED` (value: `"syncUserProvisioningDisabled"`)
+
+* `USER_EMAIL_CHANGED` (value: `"userEmailChanged"`)
+
+* `USER_FULL_NAME_CHANGED` (value: `"userFullNameChanged"`)
+
+* `USER_DISABLED` (value: `"userDisabled"`)
+
+* `AWS_CONNECTED` (value: `"awsConnected"`)
+
+* `AWS_DISCONNECTED` (value: `"awsDisconnected"`)
+
+* `USER_ENABLED` (value: `"userEnabled"`)
+
+* `SYNC_USER_DELETED` (value: `"syncUserDeleted"`)
+
+* `SYNC_GROUP_DELETED` (value: `"syncGroupDeleted"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

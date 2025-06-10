@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Product** | Pointer to [**OrganizationProductModel**](OrganizationProductModel.md) |  | [optional] 
-**PermissionGroup** | Pointer to [**OrganizationPermissionGroupModel**](OrganizationPermissionGroupModel.md) |  | [optional] 
+**Product** | [**OrganizationProductModel**](OrganizationProductModel.md) |  | 
+**PermissionGroup** | [**OrganizationPermissionGroupModel**](OrganizationPermissionGroupModel.md) |  | 
 
 ## Methods
 
 ### NewOrganizationPermissionModel
 
-`func NewOrganizationPermissionModel() *OrganizationPermissionModel`
+`func NewOrganizationPermissionModel(product OrganizationProductModel, permissionGroup OrganizationPermissionGroupModel, ) *OrganizationPermissionModel`
 
 NewOrganizationPermissionModel instantiates a new OrganizationPermissionModel object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetProduct sets Product field to given value.
 
-### HasProduct
-
-`func (o *OrganizationPermissionModel) HasProduct() bool`
-
-HasProduct returns a boolean if a field has been set.
 
 ### GetPermissionGroup
 
@@ -70,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetPermissionGroup sets PermissionGroup field to given value.
 
-### HasPermissionGroup
-
-`func (o *OrganizationPermissionModel) HasPermissionGroup() bool`
-
-HasPermissionGroup returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

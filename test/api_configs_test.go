@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-Testing ConfigsApiService
+Testing ConfigsAPIService
 
 */
 
@@ -14,21 +14,21 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
-func Test_configcatpublicapi_ConfigsApiService(t *testing.T) {
+func Test_configcatpublicapi_ConfigsAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test ConfigsApiService CreateConfig", func(t *testing.T) {
+	t.Run("Test ConfigsAPIService CreateConfig", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var productId string
 
-		resp, httpRes, err := apiClient.ConfigsApi.CreateConfig(context.Background(), productId).Execute()
+		resp, httpRes, err := apiClient.ConfigsAPI.CreateConfig(context.Background(), productId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,26 +36,26 @@ func Test_configcatpublicapi_ConfigsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test ConfigsApiService DeleteConfig", func(t *testing.T) {
+	t.Run("Test ConfigsAPIService DeleteConfig", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var configId string
 
-		httpRes, err := apiClient.ConfigsApi.DeleteConfig(context.Background(), configId).Execute()
+		httpRes, err := apiClient.ConfigsAPI.DeleteConfig(context.Background(), configId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test ConfigsApiService GetConfig", func(t *testing.T) {
+	t.Run("Test ConfigsAPIService GetConfig", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var configId string
 
-		resp, httpRes, err := apiClient.ConfigsApi.GetConfig(context.Background(), configId).Execute()
+		resp, httpRes, err := apiClient.ConfigsAPI.GetConfig(context.Background(), configId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -63,13 +63,13 @@ func Test_configcatpublicapi_ConfigsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test ConfigsApiService GetConfigs", func(t *testing.T) {
+	t.Run("Test ConfigsAPIService GetConfigs", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var productId string
 
-		resp, httpRes, err := apiClient.ConfigsApi.GetConfigs(context.Background(), productId).Execute()
+		resp, httpRes, err := apiClient.ConfigsAPI.GetConfigs(context.Background(), productId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -77,13 +77,13 @@ func Test_configcatpublicapi_ConfigsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test ConfigsApiService UpdateConfig", func(t *testing.T) {
+	t.Run("Test ConfigsAPIService UpdateConfig", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var configId string
 
-		resp, httpRes, err := apiClient.ConfigsApi.UpdateConfig(context.Background(), configId).Execute()
+		resp, httpRes, err := apiClient.ConfigsAPI.UpdateConfig(context.Background(), configId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

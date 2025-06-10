@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-Testing EnvironmentsApiService
+Testing EnvironmentsAPIService
 
 */
 
@@ -14,21 +14,21 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
-func Test_configcatpublicapi_EnvironmentsApiService(t *testing.T) {
+func Test_configcatpublicapi_EnvironmentsAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test EnvironmentsApiService CreateEnvironment", func(t *testing.T) {
+	t.Run("Test EnvironmentsAPIService CreateEnvironment", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var productId string
 
-		resp, httpRes, err := apiClient.EnvironmentsApi.CreateEnvironment(context.Background(), productId).Execute()
+		resp, httpRes, err := apiClient.EnvironmentsAPI.CreateEnvironment(context.Background(), productId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,26 +36,26 @@ func Test_configcatpublicapi_EnvironmentsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test EnvironmentsApiService DeleteEnvironment", func(t *testing.T) {
+	t.Run("Test EnvironmentsAPIService DeleteEnvironment", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var environmentId string
 
-		httpRes, err := apiClient.EnvironmentsApi.DeleteEnvironment(context.Background(), environmentId).Execute()
+		httpRes, err := apiClient.EnvironmentsAPI.DeleteEnvironment(context.Background(), environmentId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test EnvironmentsApiService GetEnvironment", func(t *testing.T) {
+	t.Run("Test EnvironmentsAPIService GetEnvironment", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var environmentId string
 
-		resp, httpRes, err := apiClient.EnvironmentsApi.GetEnvironment(context.Background(), environmentId).Execute()
+		resp, httpRes, err := apiClient.EnvironmentsAPI.GetEnvironment(context.Background(), environmentId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -63,13 +63,13 @@ func Test_configcatpublicapi_EnvironmentsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test EnvironmentsApiService GetEnvironments", func(t *testing.T) {
+	t.Run("Test EnvironmentsAPIService GetEnvironments", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var productId string
 
-		resp, httpRes, err := apiClient.EnvironmentsApi.GetEnvironments(context.Background(), productId).Execute()
+		resp, httpRes, err := apiClient.EnvironmentsAPI.GetEnvironments(context.Background(), productId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -77,13 +77,13 @@ func Test_configcatpublicapi_EnvironmentsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test EnvironmentsApiService UpdateEnvironment", func(t *testing.T) {
+	t.Run("Test EnvironmentsAPIService UpdateEnvironment", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var environmentId string
 
-		resp, httpRes, err := apiClient.EnvironmentsApi.UpdateEnvironment(context.Background(), environmentId).Execute()
+		resp, httpRes, err := apiClient.EnvironmentsAPI.UpdateEnvironment(context.Background(), environmentId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

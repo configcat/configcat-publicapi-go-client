@@ -222,16 +222,6 @@ SetActiveBranches sets ActiveBranches field to given value.
 
 HasActiveBranches returns a boolean if a field has been set.
 
-### SetActiveBranchesNil
-
-`func (o *CodeReferenceRequest) SetActiveBranchesNil(b bool)`
-
- SetActiveBranchesNil sets the value for ActiveBranches to be an explicit nil
-
-### UnsetActiveBranches
-`func (o *CodeReferenceRequest) UnsetActiveBranches()`
-
-UnsetActiveBranches ensures that no value is present for ActiveBranches, not even an explicit nil
 ### GetFlagReferences
 
 `func (o *CodeReferenceRequest) GetFlagReferences() []FlagReference`
@@ -257,16 +247,6 @@ SetFlagReferences sets FlagReferences field to given value.
 
 HasFlagReferences returns a boolean if a field has been set.
 
-### SetFlagReferencesNil
-
-`func (o *CodeReferenceRequest) SetFlagReferencesNil(b bool)`
-
- SetFlagReferencesNil sets the value for FlagReferences to be an explicit nil
-
-### UnsetFlagReferences
-`func (o *CodeReferenceRequest) UnsetFlagReferences()`
-
-UnsetFlagReferences ensures that no value is present for FlagReferences, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

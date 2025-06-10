@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Key** | Pointer to **NullableString** |  | [optional] 
-**Description** | Pointer to **NullableString** |  | [optional] 
-**IntegrationLinkType** | Pointer to [**IntegrationLinkType**](IntegrationLinkType.md) |  | [optional] 
-**Url** | Pointer to **NullableString** |  | [optional] 
+**Key** | **NullableString** |  | 
+**Description** | **NullableString** |  | 
+**IntegrationLinkType** | [**IntegrationLinkType**](IntegrationLinkType.md) |  | 
+**Url** | **NullableString** |  | 
 
 ## Methods
 
 ### NewIntegrationLinkModel
 
-`func NewIntegrationLinkModel() *IntegrationLinkModel`
+`func NewIntegrationLinkModel(key NullableString, description NullableString, integrationLinkType IntegrationLinkType, url NullableString, ) *IntegrationLinkModel`
 
 NewIntegrationLinkModel instantiates a new IntegrationLinkModel object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetKey sets Key field to given value.
 
-### HasKey
-
-`func (o *IntegrationLinkModel) HasKey() bool`
-
-HasKey returns a boolean if a field has been set.
 
 ### SetKeyNil
 
@@ -82,11 +77,6 @@ and a boolean to check if the value has been set.
 
 SetDescription sets Description field to given value.
 
-### HasDescription
-
-`func (o *IntegrationLinkModel) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
 
 ### SetDescriptionNil
 
@@ -117,11 +107,6 @@ and a boolean to check if the value has been set.
 
 SetIntegrationLinkType sets IntegrationLinkType field to given value.
 
-### HasIntegrationLinkType
-
-`func (o *IntegrationLinkModel) HasIntegrationLinkType() bool`
-
-HasIntegrationLinkType returns a boolean if a field has been set.
 
 ### GetUrl
 
@@ -142,11 +127,6 @@ and a boolean to check if the value has been set.
 
 SetUrl sets Url field to given value.
 
-### HasUrl
-
-`func (o *IntegrationLinkModel) HasUrl() bool`
-
-HasUrl returns a boolean if a field has been set.
 
 ### SetUrlNil
 

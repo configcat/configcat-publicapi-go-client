@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the MemberModel type satisfies the MappedNullable interface at compile time
@@ -21,23 +23,30 @@ var _ MappedNullable = &MemberModel{}
 // MemberModel struct for MemberModel
 type MemberModel struct {
 	// Identifier of the Member.
-	UserId NullableString `json:"userId,omitempty"`
+	UserId NullableString `json:"userId"`
 	// Identifier of the Product where the Member has access.
-	ProductId *string `json:"productId,omitempty"`
+	ProductId string `json:"productId"`
 	// Identifier of the Member's Permission Group.
-	PermissionGroupId *int64 `json:"permissionGroupId,omitempty"`
+	PermissionGroupId int64 `json:"permissionGroupId"`
 	// Name of the Member.
-	FullName NullableString `json:"fullName,omitempty"`
+	FullName NullableString `json:"fullName"`
 	// Email of the Member.
-	Email NullableString `json:"email,omitempty"`
+	Email NullableString `json:"email"`
 }
+
+type _MemberModel MemberModel
 
 // NewMemberModel instantiates a new MemberModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMemberModel() *MemberModel {
+func NewMemberModel(userId NullableString, productId string, permissionGroupId int64, fullName NullableString, email NullableString) *MemberModel {
 	this := MemberModel{}
+	this.UserId = userId
+	this.ProductId = productId
+	this.PermissionGroupId = permissionGroupId
+	this.FullName = fullName
+	this.Email = email
 	return &this
 }
 
@@ -49,16 +58,18 @@ func NewMemberModelWithDefaults() *MemberModel {
 	return &this
 }
 
-// GetUserId returns the UserId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetUserId returns the UserId field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *MemberModel) GetUserId() string {
-	if o == nil || IsNil(o.UserId.Get()) {
+	if o == nil || o.UserId.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.UserId.Get()
 }
 
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemberModel) GetUserIdOk() (*string, bool) {
@@ -68,103 +79,71 @@ func (o *MemberModel) GetUserIdOk() (*string, bool) {
 	return o.UserId.Get(), o.UserId.IsSet()
 }
 
-// HasUserId returns a boolean if a field has been set.
-func (o *MemberModel) HasUserId() bool {
-	if o != nil && o.UserId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetUserId gets a reference to the given NullableString and assigns it to the UserId field.
+// SetUserId sets field value
 func (o *MemberModel) SetUserId(v string) {
 	o.UserId.Set(&v)
 }
-// SetUserIdNil sets the value for UserId to be an explicit nil
-func (o *MemberModel) SetUserIdNil() {
-	o.UserId.Set(nil)
-}
 
-// UnsetUserId ensures that no value is present for UserId, not even an explicit nil
-func (o *MemberModel) UnsetUserId() {
-	o.UserId.Unset()
-}
-
-// GetProductId returns the ProductId field value if set, zero value otherwise.
+// GetProductId returns the ProductId field value
 func (o *MemberModel) GetProductId() string {
-	if o == nil || IsNil(o.ProductId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ProductId
+
+	return o.ProductId
 }
 
-// GetProductIdOk returns a tuple with the ProductId field value if set, nil otherwise
+// GetProductIdOk returns a tuple with the ProductId field value
 // and a boolean to check if the value has been set.
 func (o *MemberModel) GetProductIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ProductId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProductId, true
+	return &o.ProductId, true
 }
 
-// HasProductId returns a boolean if a field has been set.
-func (o *MemberModel) HasProductId() bool {
-	if o != nil && !IsNil(o.ProductId) {
-		return true
-	}
-
-	return false
-}
-
-// SetProductId gets a reference to the given string and assigns it to the ProductId field.
+// SetProductId sets field value
 func (o *MemberModel) SetProductId(v string) {
-	o.ProductId = &v
+	o.ProductId = v
 }
 
-// GetPermissionGroupId returns the PermissionGroupId field value if set, zero value otherwise.
+// GetPermissionGroupId returns the PermissionGroupId field value
 func (o *MemberModel) GetPermissionGroupId() int64 {
-	if o == nil || IsNil(o.PermissionGroupId) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.PermissionGroupId
+
+	return o.PermissionGroupId
 }
 
-// GetPermissionGroupIdOk returns a tuple with the PermissionGroupId field value if set, nil otherwise
+// GetPermissionGroupIdOk returns a tuple with the PermissionGroupId field value
 // and a boolean to check if the value has been set.
 func (o *MemberModel) GetPermissionGroupIdOk() (*int64, bool) {
-	if o == nil || IsNil(o.PermissionGroupId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PermissionGroupId, true
+	return &o.PermissionGroupId, true
 }
 
-// HasPermissionGroupId returns a boolean if a field has been set.
-func (o *MemberModel) HasPermissionGroupId() bool {
-	if o != nil && !IsNil(o.PermissionGroupId) {
-		return true
-	}
-
-	return false
-}
-
-// SetPermissionGroupId gets a reference to the given int64 and assigns it to the PermissionGroupId field.
+// SetPermissionGroupId sets field value
 func (o *MemberModel) SetPermissionGroupId(v int64) {
-	o.PermissionGroupId = &v
+	o.PermissionGroupId = v
 }
 
-// GetFullName returns the FullName field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetFullName returns the FullName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *MemberModel) GetFullName() string {
-	if o == nil || IsNil(o.FullName.Get()) {
+	if o == nil || o.FullName.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.FullName.Get()
 }
 
-// GetFullNameOk returns a tuple with the FullName field value if set, nil otherwise
+// GetFullNameOk returns a tuple with the FullName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemberModel) GetFullNameOk() (*string, bool) {
@@ -174,39 +153,23 @@ func (o *MemberModel) GetFullNameOk() (*string, bool) {
 	return o.FullName.Get(), o.FullName.IsSet()
 }
 
-// HasFullName returns a boolean if a field has been set.
-func (o *MemberModel) HasFullName() bool {
-	if o != nil && o.FullName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFullName gets a reference to the given NullableString and assigns it to the FullName field.
+// SetFullName sets field value
 func (o *MemberModel) SetFullName(v string) {
 	o.FullName.Set(&v)
 }
-// SetFullNameNil sets the value for FullName to be an explicit nil
-func (o *MemberModel) SetFullNameNil() {
-	o.FullName.Set(nil)
-}
 
-// UnsetFullName ensures that no value is present for FullName, not even an explicit nil
-func (o *MemberModel) UnsetFullName() {
-	o.FullName.Unset()
-}
-
-// GetEmail returns the Email field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetEmail returns the Email field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *MemberModel) GetEmail() string {
-	if o == nil || IsNil(o.Email.Get()) {
+	if o == nil || o.Email.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Email.Get()
 }
 
-// GetEmailOk returns a tuple with the Email field value if set, nil otherwise
+// GetEmailOk returns a tuple with the Email field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *MemberModel) GetEmailOk() (*string, bool) {
@@ -216,27 +179,9 @@ func (o *MemberModel) GetEmailOk() (*string, bool) {
 	return o.Email.Get(), o.Email.IsSet()
 }
 
-// HasEmail returns a boolean if a field has been set.
-func (o *MemberModel) HasEmail() bool {
-	if o != nil && o.Email.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetEmail gets a reference to the given NullableString and assigns it to the Email field.
+// SetEmail sets field value
 func (o *MemberModel) SetEmail(v string) {
 	o.Email.Set(&v)
-}
-// SetEmailNil sets the value for Email to be an explicit nil
-func (o *MemberModel) SetEmailNil() {
-	o.Email.Set(nil)
-}
-
-// UnsetEmail ensures that no value is present for Email, not even an explicit nil
-func (o *MemberModel) UnsetEmail() {
-	o.Email.Unset()
 }
 
 func (o MemberModel) MarshalJSON() ([]byte, error) {
@@ -249,22 +194,53 @@ func (o MemberModel) MarshalJSON() ([]byte, error) {
 
 func (o MemberModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.UserId.IsSet() {
-		toSerialize["userId"] = o.UserId.Get()
-	}
-	if !IsNil(o.ProductId) {
-		toSerialize["productId"] = o.ProductId
-	}
-	if !IsNil(o.PermissionGroupId) {
-		toSerialize["permissionGroupId"] = o.PermissionGroupId
-	}
-	if o.FullName.IsSet() {
-		toSerialize["fullName"] = o.FullName.Get()
-	}
-	if o.Email.IsSet() {
-		toSerialize["email"] = o.Email.Get()
-	}
+	toSerialize["userId"] = o.UserId.Get()
+	toSerialize["productId"] = o.ProductId
+	toSerialize["permissionGroupId"] = o.PermissionGroupId
+	toSerialize["fullName"] = o.FullName.Get()
+	toSerialize["email"] = o.Email.Get()
 	return toSerialize, nil
+}
+
+func (o *MemberModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"userId",
+		"productId",
+		"permissionGroupId",
+		"fullName",
+		"email",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varMemberModel := _MemberModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varMemberModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = MemberModel(varMemberModel)
+
+	return err
 }
 
 type NullableMemberModel struct {

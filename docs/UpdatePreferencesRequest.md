@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ReasonRequired** | Pointer to **NullableBool** | Indicates that a mandatory note is required for saving and publishing. | [optional] 
-**KeyGenerationMode** | Pointer to [**KeyGenerationMode**](KeyGenerationMode.md) |  | [optional] 
+**KeyGenerationMode** | Pointer to [**NullableKeyGenerationMode**](KeyGenerationMode.md) |  | [optional] 
 **ShowVariationId** | Pointer to **NullableBool** | Indicates whether a variation ID&#39;s must be shown on the ConfigCat Dashboard. | [optional] 
 **MandatorySettingHint** | Pointer to **NullableBool** | Indicates whether Feature flags and Settings must have a hint. | [optional] 
 **ReasonRequiredEnvironments** | Pointer to [**[]UpdateReasonRequiredEnvironmentModel**](UpdateReasonRequiredEnvironmentModel.md) | List of Environments where mandatory note must be set before saving and publishing. | [optional] 
@@ -89,6 +89,16 @@ SetKeyGenerationMode sets KeyGenerationMode field to given value.
 
 HasKeyGenerationMode returns a boolean if a field has been set.
 
+### SetKeyGenerationModeNil
+
+`func (o *UpdatePreferencesRequest) SetKeyGenerationModeNil(b bool)`
+
+ SetKeyGenerationModeNil sets the value for KeyGenerationMode to be an explicit nil
+
+### UnsetKeyGenerationMode
+`func (o *UpdatePreferencesRequest) UnsetKeyGenerationMode()`
+
+UnsetKeyGenerationMode ensures that no value is present for KeyGenerationMode, not even an explicit nil
 ### GetShowVariationId
 
 `func (o *UpdatePreferencesRequest) GetShowVariationId() bool`

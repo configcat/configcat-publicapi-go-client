@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the DeleteIntegrationLinkModel type satisfies the MappedNullable interface at compile time
@@ -20,15 +22,18 @@ var _ MappedNullable = &DeleteIntegrationLinkModel{}
 
 // DeleteIntegrationLinkModel struct for DeleteIntegrationLinkModel
 type DeleteIntegrationLinkModel struct {
-	HasRemainingIntegrationLink *bool `json:"hasRemainingIntegrationLink,omitempty"`
+	HasRemainingIntegrationLink bool `json:"hasRemainingIntegrationLink"`
 }
+
+type _DeleteIntegrationLinkModel DeleteIntegrationLinkModel
 
 // NewDeleteIntegrationLinkModel instantiates a new DeleteIntegrationLinkModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDeleteIntegrationLinkModel() *DeleteIntegrationLinkModel {
+func NewDeleteIntegrationLinkModel(hasRemainingIntegrationLink bool) *DeleteIntegrationLinkModel {
 	this := DeleteIntegrationLinkModel{}
+	this.HasRemainingIntegrationLink = hasRemainingIntegrationLink
 	return &this
 }
 
@@ -40,36 +45,28 @@ func NewDeleteIntegrationLinkModelWithDefaults() *DeleteIntegrationLinkModel {
 	return &this
 }
 
-// GetHasRemainingIntegrationLink returns the HasRemainingIntegrationLink field value if set, zero value otherwise.
+// GetHasRemainingIntegrationLink returns the HasRemainingIntegrationLink field value
 func (o *DeleteIntegrationLinkModel) GetHasRemainingIntegrationLink() bool {
-	if o == nil || IsNil(o.HasRemainingIntegrationLink) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.HasRemainingIntegrationLink
+
+	return o.HasRemainingIntegrationLink
 }
 
-// GetHasRemainingIntegrationLinkOk returns a tuple with the HasRemainingIntegrationLink field value if set, nil otherwise
+// GetHasRemainingIntegrationLinkOk returns a tuple with the HasRemainingIntegrationLink field value
 // and a boolean to check if the value has been set.
 func (o *DeleteIntegrationLinkModel) GetHasRemainingIntegrationLinkOk() (*bool, bool) {
-	if o == nil || IsNil(o.HasRemainingIntegrationLink) {
+	if o == nil {
 		return nil, false
 	}
-	return o.HasRemainingIntegrationLink, true
+	return &o.HasRemainingIntegrationLink, true
 }
 
-// HasHasRemainingIntegrationLink returns a boolean if a field has been set.
-func (o *DeleteIntegrationLinkModel) HasHasRemainingIntegrationLink() bool {
-	if o != nil && !IsNil(o.HasRemainingIntegrationLink) {
-		return true
-	}
-
-	return false
-}
-
-// SetHasRemainingIntegrationLink gets a reference to the given bool and assigns it to the HasRemainingIntegrationLink field.
+// SetHasRemainingIntegrationLink sets field value
 func (o *DeleteIntegrationLinkModel) SetHasRemainingIntegrationLink(v bool) {
-	o.HasRemainingIntegrationLink = &v
+	o.HasRemainingIntegrationLink = v
 }
 
 func (o DeleteIntegrationLinkModel) MarshalJSON() ([]byte, error) {
@@ -82,10 +79,45 @@ func (o DeleteIntegrationLinkModel) MarshalJSON() ([]byte, error) {
 
 func (o DeleteIntegrationLinkModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.HasRemainingIntegrationLink) {
-		toSerialize["hasRemainingIntegrationLink"] = o.HasRemainingIntegrationLink
-	}
+	toSerialize["hasRemainingIntegrationLink"] = o.HasRemainingIntegrationLink
 	return toSerialize, nil
+}
+
+func (o *DeleteIntegrationLinkModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"hasRemainingIntegrationLink",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varDeleteIntegrationLinkModel := _DeleteIntegrationLinkModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varDeleteIntegrationLinkModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = DeleteIntegrationLinkModel(varDeleteIntegrationLinkModel)
+
+	return err
 }
 
 type NullableDeleteIntegrationLinkModel struct {

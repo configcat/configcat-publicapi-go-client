@@ -14,6 +14,8 @@ package configcatpublicapi
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ConfigSettingValueModel type satisfies the MappedNullable interface at compile time
@@ -21,31 +23,42 @@ var _ MappedNullable = &ConfigSettingValueModel{}
 
 // ConfigSettingValueModel struct for ConfigSettingValueModel
 type ConfigSettingValueModel struct {
-	// The targeting rule collection.
-	RolloutRules []RolloutRuleModel `json:"rolloutRules,omitempty"`
-	// The percentage rule collection.
-	RolloutPercentageItems []RolloutPercentageItemModel `json:"rolloutPercentageItems,omitempty"`
-	// The value to serve. It must respect the setting type.
-	Value interface{} `json:"value,omitempty"`
-	Setting *SettingDataModel `json:"setting,omitempty"`
+	Setting SettingDataModel `json:"setting"`
 	// The last updated date and time when the Feature Flag or Setting.
-	UpdatedAt NullableTime `json:"updatedAt,omitempty"`
+	UpdatedAt NullableTime `json:"updatedAt"`
 	// The email of the user who last updated the Feature Flag or Setting.
-	LastUpdaterUserEmail NullableString `json:"lastUpdaterUserEmail,omitempty"`
+	LastUpdaterUserEmail NullableString `json:"lastUpdaterUserEmail"`
 	// The name of the user who last updated the Feature Flag or Setting.
-	LastUpdaterUserFullName NullableString `json:"lastUpdaterUserFullName,omitempty"`
+	LastUpdaterUserFullName NullableString `json:"lastUpdaterUserFullName"`
 	// The integration links attached to the Feature Flag or Setting.
-	IntegrationLinks []IntegrationLinkModel `json:"integrationLinks,omitempty"`
+	IntegrationLinks []IntegrationLinkModel `json:"integrationLinks"`
 	// The tags attached to the Feature Flag or Setting.
-	SettingTags []SettingTagModel `json:"settingTags,omitempty"`
+	SettingTags []SettingTagModel `json:"settingTags"`
+	// The targeting rule collection.
+	RolloutRules []RolloutRuleModel `json:"rolloutRules"`
+	// The percentage rule collection.
+	RolloutPercentageItems []RolloutPercentageItemModel `json:"rolloutPercentageItems"`
+	// The value to serve. It must respect the setting type. In some generated clients for strictly typed languages you may use double/float properties to handle integer values.
+	Value SettingValueType `json:"value"`
 }
+
+type _ConfigSettingValueModel ConfigSettingValueModel
 
 // NewConfigSettingValueModel instantiates a new ConfigSettingValueModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfigSettingValueModel() *ConfigSettingValueModel {
+func NewConfigSettingValueModel(setting SettingDataModel, updatedAt NullableTime, lastUpdaterUserEmail NullableString, lastUpdaterUserFullName NullableString, integrationLinks []IntegrationLinkModel, settingTags []SettingTagModel, rolloutRules []RolloutRuleModel, rolloutPercentageItems []RolloutPercentageItemModel, value SettingValueType) *ConfigSettingValueModel {
 	this := ConfigSettingValueModel{}
+	this.Setting = setting
+	this.UpdatedAt = updatedAt
+	this.LastUpdaterUserEmail = lastUpdaterUserEmail
+	this.LastUpdaterUserFullName = lastUpdaterUserFullName
+	this.IntegrationLinks = integrationLinks
+	this.SettingTags = settingTags
+	this.RolloutRules = rolloutRules
+	this.RolloutPercentageItems = rolloutPercentageItems
+	this.Value = value
 	return &this
 }
 
@@ -57,147 +70,42 @@ func NewConfigSettingValueModelWithDefaults() *ConfigSettingValueModel {
 	return &this
 }
 
-// GetRolloutRules returns the RolloutRules field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ConfigSettingValueModel) GetRolloutRules() []RolloutRuleModel {
-	if o == nil {
-		var ret []RolloutRuleModel
-		return ret
-	}
-	return o.RolloutRules
-}
-
-// GetRolloutRulesOk returns a tuple with the RolloutRules field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ConfigSettingValueModel) GetRolloutRulesOk() ([]RolloutRuleModel, bool) {
-	if o == nil || IsNil(o.RolloutRules) {
-		return nil, false
-	}
-	return o.RolloutRules, true
-}
-
-// HasRolloutRules returns a boolean if a field has been set.
-func (o *ConfigSettingValueModel) HasRolloutRules() bool {
-	if o != nil && !IsNil(o.RolloutRules) {
-		return true
-	}
-
-	return false
-}
-
-// SetRolloutRules gets a reference to the given []RolloutRuleModel and assigns it to the RolloutRules field.
-func (o *ConfigSettingValueModel) SetRolloutRules(v []RolloutRuleModel) {
-	o.RolloutRules = v
-}
-
-// GetRolloutPercentageItems returns the RolloutPercentageItems field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ConfigSettingValueModel) GetRolloutPercentageItems() []RolloutPercentageItemModel {
-	if o == nil {
-		var ret []RolloutPercentageItemModel
-		return ret
-	}
-	return o.RolloutPercentageItems
-}
-
-// GetRolloutPercentageItemsOk returns a tuple with the RolloutPercentageItems field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ConfigSettingValueModel) GetRolloutPercentageItemsOk() ([]RolloutPercentageItemModel, bool) {
-	if o == nil || IsNil(o.RolloutPercentageItems) {
-		return nil, false
-	}
-	return o.RolloutPercentageItems, true
-}
-
-// HasRolloutPercentageItems returns a boolean if a field has been set.
-func (o *ConfigSettingValueModel) HasRolloutPercentageItems() bool {
-	if o != nil && !IsNil(o.RolloutPercentageItems) {
-		return true
-	}
-
-	return false
-}
-
-// SetRolloutPercentageItems gets a reference to the given []RolloutPercentageItemModel and assigns it to the RolloutPercentageItems field.
-func (o *ConfigSettingValueModel) SetRolloutPercentageItems(v []RolloutPercentageItemModel) {
-	o.RolloutPercentageItems = v
-}
-
-// GetValue returns the Value field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ConfigSettingValueModel) GetValue() interface{} {
-	if o == nil {
-		var ret interface{}
-		return ret
-	}
-	return o.Value
-}
-
-// GetValueOk returns a tuple with the Value field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ConfigSettingValueModel) GetValueOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Value) {
-		return nil, false
-	}
-	return &o.Value, true
-}
-
-// HasValue returns a boolean if a field has been set.
-func (o *ConfigSettingValueModel) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
-		return true
-	}
-
-	return false
-}
-
-// SetValue gets a reference to the given interface{} and assigns it to the Value field.
-func (o *ConfigSettingValueModel) SetValue(v interface{}) {
-	o.Value = v
-}
-
-// GetSetting returns the Setting field value if set, zero value otherwise.
+// GetSetting returns the Setting field value
 func (o *ConfigSettingValueModel) GetSetting() SettingDataModel {
-	if o == nil || IsNil(o.Setting) {
+	if o == nil {
 		var ret SettingDataModel
 		return ret
 	}
-	return *o.Setting
+
+	return o.Setting
 }
 
-// GetSettingOk returns a tuple with the Setting field value if set, nil otherwise
+// GetSettingOk returns a tuple with the Setting field value
 // and a boolean to check if the value has been set.
 func (o *ConfigSettingValueModel) GetSettingOk() (*SettingDataModel, bool) {
-	if o == nil || IsNil(o.Setting) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Setting, true
+	return &o.Setting, true
 }
 
-// HasSetting returns a boolean if a field has been set.
-func (o *ConfigSettingValueModel) HasSetting() bool {
-	if o != nil && !IsNil(o.Setting) {
-		return true
-	}
-
-	return false
-}
-
-// SetSetting gets a reference to the given SettingDataModel and assigns it to the Setting field.
+// SetSetting sets field value
 func (o *ConfigSettingValueModel) SetSetting(v SettingDataModel) {
-	o.Setting = &v
+	o.Setting = v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetUpdatedAt returns the UpdatedAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *ConfigSettingValueModel) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt.Get()) {
+	if o == nil || o.UpdatedAt.Get() == nil {
 		var ret time.Time
 		return ret
 	}
+
 	return *o.UpdatedAt.Get()
 }
 
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConfigSettingValueModel) GetUpdatedAtOk() (*time.Time, bool) {
@@ -207,39 +115,23 @@ func (o *ConfigSettingValueModel) GetUpdatedAtOk() (*time.Time, bool) {
 	return o.UpdatedAt.Get(), o.UpdatedAt.IsSet()
 }
 
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *ConfigSettingValueModel) HasUpdatedAt() bool {
-	if o != nil && o.UpdatedAt.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given NullableTime and assigns it to the UpdatedAt field.
+// SetUpdatedAt sets field value
 func (o *ConfigSettingValueModel) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt.Set(&v)
 }
-// SetUpdatedAtNil sets the value for UpdatedAt to be an explicit nil
-func (o *ConfigSettingValueModel) SetUpdatedAtNil() {
-	o.UpdatedAt.Set(nil)
-}
 
-// UnsetUpdatedAt ensures that no value is present for UpdatedAt, not even an explicit nil
-func (o *ConfigSettingValueModel) UnsetUpdatedAt() {
-	o.UpdatedAt.Unset()
-}
-
-// GetLastUpdaterUserEmail returns the LastUpdaterUserEmail field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLastUpdaterUserEmail returns the LastUpdaterUserEmail field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ConfigSettingValueModel) GetLastUpdaterUserEmail() string {
-	if o == nil || IsNil(o.LastUpdaterUserEmail.Get()) {
+	if o == nil || o.LastUpdaterUserEmail.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.LastUpdaterUserEmail.Get()
 }
 
-// GetLastUpdaterUserEmailOk returns a tuple with the LastUpdaterUserEmail field value if set, nil otherwise
+// GetLastUpdaterUserEmailOk returns a tuple with the LastUpdaterUserEmail field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConfigSettingValueModel) GetLastUpdaterUserEmailOk() (*string, bool) {
@@ -249,39 +141,23 @@ func (o *ConfigSettingValueModel) GetLastUpdaterUserEmailOk() (*string, bool) {
 	return o.LastUpdaterUserEmail.Get(), o.LastUpdaterUserEmail.IsSet()
 }
 
-// HasLastUpdaterUserEmail returns a boolean if a field has been set.
-func (o *ConfigSettingValueModel) HasLastUpdaterUserEmail() bool {
-	if o != nil && o.LastUpdaterUserEmail.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLastUpdaterUserEmail gets a reference to the given NullableString and assigns it to the LastUpdaterUserEmail field.
+// SetLastUpdaterUserEmail sets field value
 func (o *ConfigSettingValueModel) SetLastUpdaterUserEmail(v string) {
 	o.LastUpdaterUserEmail.Set(&v)
 }
-// SetLastUpdaterUserEmailNil sets the value for LastUpdaterUserEmail to be an explicit nil
-func (o *ConfigSettingValueModel) SetLastUpdaterUserEmailNil() {
-	o.LastUpdaterUserEmail.Set(nil)
-}
 
-// UnsetLastUpdaterUserEmail ensures that no value is present for LastUpdaterUserEmail, not even an explicit nil
-func (o *ConfigSettingValueModel) UnsetLastUpdaterUserEmail() {
-	o.LastUpdaterUserEmail.Unset()
-}
-
-// GetLastUpdaterUserFullName returns the LastUpdaterUserFullName field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLastUpdaterUserFullName returns the LastUpdaterUserFullName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ConfigSettingValueModel) GetLastUpdaterUserFullName() string {
-	if o == nil || IsNil(o.LastUpdaterUserFullName.Get()) {
+	if o == nil || o.LastUpdaterUserFullName.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.LastUpdaterUserFullName.Get()
 }
 
-// GetLastUpdaterUserFullNameOk returns a tuple with the LastUpdaterUserFullName field value if set, nil otherwise
+// GetLastUpdaterUserFullNameOk returns a tuple with the LastUpdaterUserFullName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConfigSettingValueModel) GetLastUpdaterUserFullNameOk() (*string, bool) {
@@ -291,93 +167,129 @@ func (o *ConfigSettingValueModel) GetLastUpdaterUserFullNameOk() (*string, bool)
 	return o.LastUpdaterUserFullName.Get(), o.LastUpdaterUserFullName.IsSet()
 }
 
-// HasLastUpdaterUserFullName returns a boolean if a field has been set.
-func (o *ConfigSettingValueModel) HasLastUpdaterUserFullName() bool {
-	if o != nil && o.LastUpdaterUserFullName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLastUpdaterUserFullName gets a reference to the given NullableString and assigns it to the LastUpdaterUserFullName field.
+// SetLastUpdaterUserFullName sets field value
 func (o *ConfigSettingValueModel) SetLastUpdaterUserFullName(v string) {
 	o.LastUpdaterUserFullName.Set(&v)
 }
-// SetLastUpdaterUserFullNameNil sets the value for LastUpdaterUserFullName to be an explicit nil
-func (o *ConfigSettingValueModel) SetLastUpdaterUserFullNameNil() {
-	o.LastUpdaterUserFullName.Set(nil)
-}
 
-// UnsetLastUpdaterUserFullName ensures that no value is present for LastUpdaterUserFullName, not even an explicit nil
-func (o *ConfigSettingValueModel) UnsetLastUpdaterUserFullName() {
-	o.LastUpdaterUserFullName.Unset()
-}
-
-// GetIntegrationLinks returns the IntegrationLinks field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetIntegrationLinks returns the IntegrationLinks field value
 func (o *ConfigSettingValueModel) GetIntegrationLinks() []IntegrationLinkModel {
 	if o == nil {
 		var ret []IntegrationLinkModel
 		return ret
 	}
+
 	return o.IntegrationLinks
 }
 
-// GetIntegrationLinksOk returns a tuple with the IntegrationLinks field value if set, nil otherwise
+// GetIntegrationLinksOk returns a tuple with the IntegrationLinks field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConfigSettingValueModel) GetIntegrationLinksOk() ([]IntegrationLinkModel, bool) {
-	if o == nil || IsNil(o.IntegrationLinks) {
+	if o == nil {
 		return nil, false
 	}
 	return o.IntegrationLinks, true
 }
 
-// HasIntegrationLinks returns a boolean if a field has been set.
-func (o *ConfigSettingValueModel) HasIntegrationLinks() bool {
-	if o != nil && !IsNil(o.IntegrationLinks) {
-		return true
-	}
-
-	return false
-}
-
-// SetIntegrationLinks gets a reference to the given []IntegrationLinkModel and assigns it to the IntegrationLinks field.
+// SetIntegrationLinks sets field value
 func (o *ConfigSettingValueModel) SetIntegrationLinks(v []IntegrationLinkModel) {
 	o.IntegrationLinks = v
 }
 
-// GetSettingTags returns the SettingTags field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSettingTags returns the SettingTags field value
 func (o *ConfigSettingValueModel) GetSettingTags() []SettingTagModel {
 	if o == nil {
 		var ret []SettingTagModel
 		return ret
 	}
+
 	return o.SettingTags
 }
 
-// GetSettingTagsOk returns a tuple with the SettingTags field value if set, nil otherwise
+// GetSettingTagsOk returns a tuple with the SettingTags field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConfigSettingValueModel) GetSettingTagsOk() ([]SettingTagModel, bool) {
-	if o == nil || IsNil(o.SettingTags) {
+	if o == nil {
 		return nil, false
 	}
 	return o.SettingTags, true
 }
 
-// HasSettingTags returns a boolean if a field has been set.
-func (o *ConfigSettingValueModel) HasSettingTags() bool {
-	if o != nil && !IsNil(o.SettingTags) {
-		return true
-	}
-
-	return false
-}
-
-// SetSettingTags gets a reference to the given []SettingTagModel and assigns it to the SettingTags field.
+// SetSettingTags sets field value
 func (o *ConfigSettingValueModel) SetSettingTags(v []SettingTagModel) {
 	o.SettingTags = v
+}
+
+// GetRolloutRules returns the RolloutRules field value
+func (o *ConfigSettingValueModel) GetRolloutRules() []RolloutRuleModel {
+	if o == nil {
+		var ret []RolloutRuleModel
+		return ret
+	}
+
+	return o.RolloutRules
+}
+
+// GetRolloutRulesOk returns a tuple with the RolloutRules field value
+// and a boolean to check if the value has been set.
+func (o *ConfigSettingValueModel) GetRolloutRulesOk() ([]RolloutRuleModel, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RolloutRules, true
+}
+
+// SetRolloutRules sets field value
+func (o *ConfigSettingValueModel) SetRolloutRules(v []RolloutRuleModel) {
+	o.RolloutRules = v
+}
+
+// GetRolloutPercentageItems returns the RolloutPercentageItems field value
+func (o *ConfigSettingValueModel) GetRolloutPercentageItems() []RolloutPercentageItemModel {
+	if o == nil {
+		var ret []RolloutPercentageItemModel
+		return ret
+	}
+
+	return o.RolloutPercentageItems
+}
+
+// GetRolloutPercentageItemsOk returns a tuple with the RolloutPercentageItems field value
+// and a boolean to check if the value has been set.
+func (o *ConfigSettingValueModel) GetRolloutPercentageItemsOk() ([]RolloutPercentageItemModel, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.RolloutPercentageItems, true
+}
+
+// SetRolloutPercentageItems sets field value
+func (o *ConfigSettingValueModel) SetRolloutPercentageItems(v []RolloutPercentageItemModel) {
+	o.RolloutPercentageItems = v
+}
+
+// GetValue returns the Value field value
+func (o *ConfigSettingValueModel) GetValue() SettingValueType {
+	if o == nil {
+		var ret SettingValueType
+		return ret
+	}
+
+	return o.Value
+}
+
+// GetValueOk returns a tuple with the Value field value
+// and a boolean to check if the value has been set.
+func (o *ConfigSettingValueModel) GetValueOk() (*SettingValueType, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Value, true
+}
+
+// SetValue sets field value
+func (o *ConfigSettingValueModel) SetValue(v SettingValueType) {
+	o.Value = v
 }
 
 func (o ConfigSettingValueModel) MarshalJSON() ([]byte, error) {
@@ -390,34 +302,61 @@ func (o ConfigSettingValueModel) MarshalJSON() ([]byte, error) {
 
 func (o ConfigSettingValueModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.RolloutRules != nil {
-		toSerialize["rolloutRules"] = o.RolloutRules
-	}
-	if o.RolloutPercentageItems != nil {
-		toSerialize["rolloutPercentageItems"] = o.RolloutPercentageItems
-	}
-	if o.Value != nil {
-		toSerialize["value"] = o.Value
-	}
-	if !IsNil(o.Setting) {
-		toSerialize["setting"] = o.Setting
-	}
-	if o.UpdatedAt.IsSet() {
-		toSerialize["updatedAt"] = o.UpdatedAt.Get()
-	}
-	if o.LastUpdaterUserEmail.IsSet() {
-		toSerialize["lastUpdaterUserEmail"] = o.LastUpdaterUserEmail.Get()
-	}
-	if o.LastUpdaterUserFullName.IsSet() {
-		toSerialize["lastUpdaterUserFullName"] = o.LastUpdaterUserFullName.Get()
-	}
-	if o.IntegrationLinks != nil {
-		toSerialize["integrationLinks"] = o.IntegrationLinks
-	}
-	if o.SettingTags != nil {
-		toSerialize["settingTags"] = o.SettingTags
-	}
+	toSerialize["setting"] = o.Setting
+	toSerialize["updatedAt"] = o.UpdatedAt.Get()
+	toSerialize["lastUpdaterUserEmail"] = o.LastUpdaterUserEmail.Get()
+	toSerialize["lastUpdaterUserFullName"] = o.LastUpdaterUserFullName.Get()
+	toSerialize["integrationLinks"] = o.IntegrationLinks
+	toSerialize["settingTags"] = o.SettingTags
+	toSerialize["rolloutRules"] = o.RolloutRules
+	toSerialize["rolloutPercentageItems"] = o.RolloutPercentageItems
+	toSerialize["value"] = o.Value
 	return toSerialize, nil
+}
+
+func (o *ConfigSettingValueModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"setting",
+		"updatedAt",
+		"lastUpdaterUserEmail",
+		"lastUpdaterUserFullName",
+		"integrationLinks",
+		"settingTags",
+		"rolloutRules",
+		"rolloutPercentageItems",
+		"value",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varConfigSettingValueModel := _ConfigSettingValueModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varConfigSettingValueModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfigSettingValueModel(varConfigSettingValueModel)
+
+	return err
 }
 
 type NullableConfigSettingValueModel struct {

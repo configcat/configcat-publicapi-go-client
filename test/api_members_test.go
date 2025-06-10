@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-Testing MembersApiService
+Testing MembersAPIService
 
 */
 
@@ -14,63 +14,76 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
-func Test_configcatpublicapi_MembersApiService(t *testing.T) {
+func Test_configcatpublicapi_MembersAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test MembersApiService AddMemberToGroup", func(t *testing.T) {
+	t.Run("Test MembersAPIService AddMemberToGroup", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organizationId string
 		var userId string
 
-		httpRes, err := apiClient.MembersApi.AddMemberToGroup(context.Background(), organizationId, userId).Execute()
+		httpRes, err := apiClient.MembersAPI.AddMemberToGroup(context.Background(), organizationId, userId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test MembersApiService DeleteOrganizationMember", func(t *testing.T) {
+	t.Run("Test MembersAPIService DeleteInvitation", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var invitationId string
+
+		httpRes, err := apiClient.MembersAPI.DeleteInvitation(context.Background(), invitationId).Execute()
+
+		require.Nil(t, err)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MembersAPIService DeleteOrganizationMember", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organizationId string
 		var userId string
 
-		httpRes, err := apiClient.MembersApi.DeleteOrganizationMember(context.Background(), organizationId, userId).Execute()
+		httpRes, err := apiClient.MembersAPI.DeleteOrganizationMember(context.Background(), organizationId, userId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test MembersApiService DeleteProductMember", func(t *testing.T) {
+	t.Run("Test MembersAPIService DeleteProductMember", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var productId string
 		var userId string
 
-		httpRes, err := apiClient.MembersApi.DeleteProductMember(context.Background(), productId, userId).Execute()
+		httpRes, err := apiClient.MembersAPI.DeleteProductMember(context.Background(), productId, userId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test MembersApiService GetOrganizationMembers", func(t *testing.T) {
+	t.Run("Test MembersAPIService GetOrganizationMembers", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organizationId string
 
-		resp, httpRes, err := apiClient.MembersApi.GetOrganizationMembers(context.Background(), organizationId).Execute()
+		resp, httpRes, err := apiClient.MembersAPI.GetOrganizationMembers(context.Background(), organizationId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -78,13 +91,13 @@ func Test_configcatpublicapi_MembersApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test MembersApiService GetProductMembers", func(t *testing.T) {
+	t.Run("Test MembersAPIService GetOrganizationMembersV2", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var productId string
+		var organizationId string
 
-		resp, httpRes, err := apiClient.MembersApi.GetProductMembers(context.Background(), productId).Execute()
+		resp, httpRes, err := apiClient.MembersAPI.GetOrganizationMembersV2(context.Background(), organizationId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -92,13 +105,55 @@ func Test_configcatpublicapi_MembersApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test MembersApiService InviteMember", func(t *testing.T) {
+	t.Run("Test MembersAPIService GetPendingInvitations", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var productId string
 
-		httpRes, err := apiClient.MembersApi.InviteMember(context.Background(), productId).Execute()
+		resp, httpRes, err := apiClient.MembersAPI.GetPendingInvitations(context.Background(), productId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MembersAPIService GetPendingInvitationsOrg", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var organizationId string
+
+		resp, httpRes, err := apiClient.MembersAPI.GetPendingInvitationsOrg(context.Background(), organizationId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MembersAPIService GetProductMembers", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var productId string
+
+		resp, httpRes, err := apiClient.MembersAPI.GetProductMembers(context.Background(), productId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test MembersAPIService InviteMember", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var productId string
+
+		httpRes, err := apiClient.MembersAPI.InviteMember(context.Background(), productId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)

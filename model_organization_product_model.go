@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the OrganizationProductModel type satisfies the MappedNullable interface at compile time
@@ -21,17 +23,21 @@ var _ MappedNullable = &OrganizationProductModel{}
 // OrganizationProductModel Describes the Member's Product.
 type OrganizationProductModel struct {
 	// Identifier of the Member's Product.
-	ProductId *string `json:"productId,omitempty"`
+	ProductId string `json:"productId"`
 	// Name of the Member's Product.
-	Name NullableString `json:"name,omitempty"`
+	Name string `json:"name"`
 }
+
+type _OrganizationProductModel OrganizationProductModel
 
 // NewOrganizationProductModel instantiates a new OrganizationProductModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrganizationProductModel() *OrganizationProductModel {
+func NewOrganizationProductModel(productId string, name string) *OrganizationProductModel {
 	this := OrganizationProductModel{}
+	this.ProductId = productId
+	this.Name = name
 	return &this
 }
 
@@ -43,78 +49,52 @@ func NewOrganizationProductModelWithDefaults() *OrganizationProductModel {
 	return &this
 }
 
-// GetProductId returns the ProductId field value if set, zero value otherwise.
+// GetProductId returns the ProductId field value
 func (o *OrganizationProductModel) GetProductId() string {
-	if o == nil || IsNil(o.ProductId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ProductId
+
+	return o.ProductId
 }
 
-// GetProductIdOk returns a tuple with the ProductId field value if set, nil otherwise
+// GetProductIdOk returns a tuple with the ProductId field value
 // and a boolean to check if the value has been set.
 func (o *OrganizationProductModel) GetProductIdOk() (*string, bool) {
-	if o == nil || IsNil(o.ProductId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ProductId, true
+	return &o.ProductId, true
 }
 
-// HasProductId returns a boolean if a field has been set.
-func (o *OrganizationProductModel) HasProductId() bool {
-	if o != nil && !IsNil(o.ProductId) {
-		return true
-	}
-
-	return false
-}
-
-// SetProductId gets a reference to the given string and assigns it to the ProductId field.
+// SetProductId sets field value
 func (o *OrganizationProductModel) SetProductId(v string) {
-	o.ProductId = &v
+	o.ProductId = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetName returns the Name field value
 func (o *OrganizationProductModel) GetName() string {
-	if o == nil || IsNil(o.Name.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name.Get()
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OrganizationProductModel) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *OrganizationProductModel) HasName() bool {
-	if o != nil && o.Name.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given NullableString and assigns it to the Name field.
+// SetName sets field value
 func (o *OrganizationProductModel) SetName(v string) {
-	o.Name.Set(&v)
-}
-// SetNameNil sets the value for Name to be an explicit nil
-func (o *OrganizationProductModel) SetNameNil() {
-	o.Name.Set(nil)
-}
-
-// UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *OrganizationProductModel) UnsetName() {
-	o.Name.Unset()
+	o.Name = v
 }
 
 func (o OrganizationProductModel) MarshalJSON() ([]byte, error) {
@@ -127,13 +107,47 @@ func (o OrganizationProductModel) MarshalJSON() ([]byte, error) {
 
 func (o OrganizationProductModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ProductId) {
-		toSerialize["productId"] = o.ProductId
-	}
-	if o.Name.IsSet() {
-		toSerialize["name"] = o.Name.Get()
-	}
+	toSerialize["productId"] = o.ProductId
+	toSerialize["name"] = o.Name
 	return toSerialize, nil
+}
+
+func (o *OrganizationProductModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"productId",
+		"name",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOrganizationProductModel := _OrganizationProductModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOrganizationProductModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrganizationProductModel(varOrganizationProductModel)
+
+	return err
 }
 
 type NullableOrganizationProductModel struct {

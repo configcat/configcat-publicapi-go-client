@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the OrganizationModel type satisfies the MappedNullable interface at compile time
@@ -21,17 +23,21 @@ var _ MappedNullable = &OrganizationModel{}
 // OrganizationModel Details of the Organization.
 type OrganizationModel struct {
 	// Identifier of the Organization.
-	OrganizationId *string `json:"organizationId,omitempty"`
+	OrganizationId string `json:"organizationId"`
 	// Name of the Organization.
-	Name NullableString `json:"name,omitempty"`
+	Name string `json:"name"`
 }
+
+type _OrganizationModel OrganizationModel
 
 // NewOrganizationModel instantiates a new OrganizationModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrganizationModel() *OrganizationModel {
+func NewOrganizationModel(organizationId string, name string) *OrganizationModel {
 	this := OrganizationModel{}
+	this.OrganizationId = organizationId
+	this.Name = name
 	return &this
 }
 
@@ -43,78 +49,52 @@ func NewOrganizationModelWithDefaults() *OrganizationModel {
 	return &this
 }
 
-// GetOrganizationId returns the OrganizationId field value if set, zero value otherwise.
+// GetOrganizationId returns the OrganizationId field value
 func (o *OrganizationModel) GetOrganizationId() string {
-	if o == nil || IsNil(o.OrganizationId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.OrganizationId
+
+	return o.OrganizationId
 }
 
-// GetOrganizationIdOk returns a tuple with the OrganizationId field value if set, nil otherwise
+// GetOrganizationIdOk returns a tuple with the OrganizationId field value
 // and a boolean to check if the value has been set.
 func (o *OrganizationModel) GetOrganizationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.OrganizationId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.OrganizationId, true
+	return &o.OrganizationId, true
 }
 
-// HasOrganizationId returns a boolean if a field has been set.
-func (o *OrganizationModel) HasOrganizationId() bool {
-	if o != nil && !IsNil(o.OrganizationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrganizationId gets a reference to the given string and assigns it to the OrganizationId field.
+// SetOrganizationId sets field value
 func (o *OrganizationModel) SetOrganizationId(v string) {
-	o.OrganizationId = &v
+	o.OrganizationId = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetName returns the Name field value
 func (o *OrganizationModel) GetName() string {
-	if o == nil || IsNil(o.Name.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name.Get()
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OrganizationModel) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *OrganizationModel) HasName() bool {
-	if o != nil && o.Name.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given NullableString and assigns it to the Name field.
+// SetName sets field value
 func (o *OrganizationModel) SetName(v string) {
-	o.Name.Set(&v)
-}
-// SetNameNil sets the value for Name to be an explicit nil
-func (o *OrganizationModel) SetNameNil() {
-	o.Name.Set(nil)
-}
-
-// UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *OrganizationModel) UnsetName() {
-	o.Name.Unset()
+	o.Name = v
 }
 
 func (o OrganizationModel) MarshalJSON() ([]byte, error) {
@@ -127,13 +107,47 @@ func (o OrganizationModel) MarshalJSON() ([]byte, error) {
 
 func (o OrganizationModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.OrganizationId) {
-		toSerialize["organizationId"] = o.OrganizationId
-	}
-	if o.Name.IsSet() {
-		toSerialize["name"] = o.Name.Get()
-	}
+	toSerialize["organizationId"] = o.OrganizationId
+	toSerialize["name"] = o.Name
 	return toSerialize, nil
+}
+
+func (o *OrganizationModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"organizationId",
+		"name",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOrganizationModel := _OrganizationModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOrganizationModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrganizationModel(varOrganizationModel)
+
+	return err
 }
 
 type NullableOrganizationModel struct {

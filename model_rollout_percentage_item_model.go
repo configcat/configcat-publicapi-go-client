@@ -24,8 +24,8 @@ var _ MappedNullable = &RolloutPercentageItemModel{}
 type RolloutPercentageItemModel struct {
 	// The percentage value for the rule.
 	Percentage int64 `json:"percentage"`
-	// The value to serve when the user falls in the percentage rule. It must respect the setting type.
-	Value interface{} `json:"value,omitempty"`
+	// The value to serve when the user falls in the percentage rule. It must respect the setting type. In some generated clients for strictly typed languages you may use double/float properties to handle integer values.
+	Value SettingValueType `json:"value"`
 }
 
 type _RolloutPercentageItemModel RolloutPercentageItemModel
@@ -34,9 +34,10 @@ type _RolloutPercentageItemModel RolloutPercentageItemModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRolloutPercentageItemModel(percentage int64) *RolloutPercentageItemModel {
+func NewRolloutPercentageItemModel(percentage int64, value SettingValueType) *RolloutPercentageItemModel {
 	this := RolloutPercentageItemModel{}
 	this.Percentage = percentage
+	this.Value = value
 	return &this
 }
 
@@ -72,36 +73,27 @@ func (o *RolloutPercentageItemModel) SetPercentage(v int64) {
 	o.Percentage = v
 }
 
-// GetValue returns the Value field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *RolloutPercentageItemModel) GetValue() interface{} {
+// GetValue returns the Value field value
+func (o *RolloutPercentageItemModel) GetValue() SettingValueType {
 	if o == nil {
-		var ret interface{}
+		var ret SettingValueType
 		return ret
 	}
+
 	return o.Value
 }
 
-// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *RolloutPercentageItemModel) GetValueOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Value) {
+func (o *RolloutPercentageItemModel) GetValueOk() (*SettingValueType, bool) {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Value, true
 }
 
-// HasValue returns a boolean if a field has been set.
-func (o *RolloutPercentageItemModel) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
-		return true
-	}
-
-	return false
-}
-
-// SetValue gets a reference to the given interface{} and assigns it to the Value field.
-func (o *RolloutPercentageItemModel) SetValue(v interface{}) {
+// SetValue sets field value
+func (o *RolloutPercentageItemModel) SetValue(v SettingValueType) {
 	o.Value = v
 }
 
@@ -116,9 +108,7 @@ func (o RolloutPercentageItemModel) MarshalJSON() ([]byte, error) {
 func (o RolloutPercentageItemModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["percentage"] = o.Percentage
-	if o.Value != nil {
-		toSerialize["value"] = o.Value
-	}
+	toSerialize["value"] = o.Value
 	return toSerialize, nil
 }
 
@@ -128,6 +118,7 @@ func (o *RolloutPercentageItemModel) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"percentage",
+		"value",
 	}
 
 	allProperties := make(map[string]interface{})

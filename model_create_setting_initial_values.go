@@ -26,15 +26,17 @@ type CreateSettingInitialValues struct {
 	Hint NullableString `json:"hint,omitempty"`
 	// The IDs of the tags which are attached to the setting.
 	Tags []int64 `json:"tags,omitempty"`
-	// The order of the Setting represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers.
+	// The order of the Setting represented on the ConfigCat Dashboard. Determined from an ascending sequence of integers.
 	Order NullableInt32 `json:"order,omitempty"`
 	// The key of the Feature Flag or Setting.
 	Key string `json:"key"`
 	// The name of the Feature Flag or Setting.
 	Name string `json:"name"`
 	SettingType SettingType `json:"settingType"`
-	// Optional, initial value of the Feature Flag or Setting in the given Environments.
+	// Optional, initial value of the Feature Flag or Setting in the given Environments. Only one of the SettingIdToInitFrom or the InitialValues properties can be set.
 	InitialValues []InitialValue `json:"initialValues,omitempty"`
+	// Optional, the SettingId to initialize the values and tags of the Feature Flag or Setting from. Only can be set if you have at least ReadOnly access in all the Environments. Only one of the SettingIdToInitFrom or the InitialValues properties can be set.
+	SettingIdToInitFrom NullableInt32 `json:"settingIdToInitFrom,omitempty"`
 }
 
 type _CreateSettingInitialValues CreateSettingInitialValues
@@ -281,6 +283,48 @@ func (o *CreateSettingInitialValues) SetInitialValues(v []InitialValue) {
 	o.InitialValues = v
 }
 
+// GetSettingIdToInitFrom returns the SettingIdToInitFrom field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateSettingInitialValues) GetSettingIdToInitFrom() int32 {
+	if o == nil || IsNil(o.SettingIdToInitFrom.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.SettingIdToInitFrom.Get()
+}
+
+// GetSettingIdToInitFromOk returns a tuple with the SettingIdToInitFrom field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateSettingInitialValues) GetSettingIdToInitFromOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SettingIdToInitFrom.Get(), o.SettingIdToInitFrom.IsSet()
+}
+
+// HasSettingIdToInitFrom returns a boolean if a field has been set.
+func (o *CreateSettingInitialValues) HasSettingIdToInitFrom() bool {
+	if o != nil && o.SettingIdToInitFrom.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSettingIdToInitFrom gets a reference to the given NullableInt32 and assigns it to the SettingIdToInitFrom field.
+func (o *CreateSettingInitialValues) SetSettingIdToInitFrom(v int32) {
+	o.SettingIdToInitFrom.Set(&v)
+}
+// SetSettingIdToInitFromNil sets the value for SettingIdToInitFrom to be an explicit nil
+func (o *CreateSettingInitialValues) SetSettingIdToInitFromNil() {
+	o.SettingIdToInitFrom.Set(nil)
+}
+
+// UnsetSettingIdToInitFrom ensures that no value is present for SettingIdToInitFrom, not even an explicit nil
+func (o *CreateSettingInitialValues) UnsetSettingIdToInitFrom() {
+	o.SettingIdToInitFrom.Unset()
+}
+
 func (o CreateSettingInitialValues) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -305,6 +349,9 @@ func (o CreateSettingInitialValues) ToMap() (map[string]interface{}, error) {
 	toSerialize["settingType"] = o.SettingType
 	if o.InitialValues != nil {
 		toSerialize["initialValues"] = o.InitialValues
+	}
+	if o.SettingIdToInitFrom.IsSet() {
+		toSerialize["settingIdToInitFrom"] = o.SettingIdToInitFrom.Get()
 	}
 	return toSerialize, nil
 }

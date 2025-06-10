@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ValueModel type satisfies the MappedNullable interface at compile time
@@ -21,21 +23,27 @@ var _ MappedNullable = &ValueModel{}
 // ValueModel Represents the value of a Feature Flag or Setting.
 type ValueModel struct {
 	// The served value in case of a boolean Feature Flag.
-	BoolValue NullableBool `json:"boolValue,omitempty"`
+	BoolValue NullableBool `json:"boolValue"`
 	// The served value in case of a text Setting.
-	StringValue NullableString `json:"stringValue,omitempty"`
+	StringValue NullableString `json:"stringValue"`
 	// The served value in case of a whole number Setting.
-	IntValue NullableInt32 `json:"intValue,omitempty"`
+	IntValue NullableInt32 `json:"intValue"`
 	// The served value in case of a decimal number Setting.
-	DoubleValue NullableFloat64 `json:"doubleValue,omitempty"`
+	DoubleValue NullableFloat64 `json:"doubleValue"`
 }
+
+type _ValueModel ValueModel
 
 // NewValueModel instantiates a new ValueModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewValueModel() *ValueModel {
+func NewValueModel(boolValue NullableBool, stringValue NullableString, intValue NullableInt32, doubleValue NullableFloat64) *ValueModel {
 	this := ValueModel{}
+	this.BoolValue = boolValue
+	this.StringValue = stringValue
+	this.IntValue = intValue
+	this.DoubleValue = doubleValue
 	return &this
 }
 
@@ -47,16 +55,18 @@ func NewValueModelWithDefaults() *ValueModel {
 	return &this
 }
 
-// GetBoolValue returns the BoolValue field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetBoolValue returns the BoolValue field value
+// If the value is explicit nil, the zero value for bool will be returned
 func (o *ValueModel) GetBoolValue() bool {
-	if o == nil || IsNil(o.BoolValue.Get()) {
+	if o == nil || o.BoolValue.Get() == nil {
 		var ret bool
 		return ret
 	}
+
 	return *o.BoolValue.Get()
 }
 
-// GetBoolValueOk returns a tuple with the BoolValue field value if set, nil otherwise
+// GetBoolValueOk returns a tuple with the BoolValue field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ValueModel) GetBoolValueOk() (*bool, bool) {
@@ -66,39 +76,23 @@ func (o *ValueModel) GetBoolValueOk() (*bool, bool) {
 	return o.BoolValue.Get(), o.BoolValue.IsSet()
 }
 
-// HasBoolValue returns a boolean if a field has been set.
-func (o *ValueModel) HasBoolValue() bool {
-	if o != nil && o.BoolValue.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetBoolValue gets a reference to the given NullableBool and assigns it to the BoolValue field.
+// SetBoolValue sets field value
 func (o *ValueModel) SetBoolValue(v bool) {
 	o.BoolValue.Set(&v)
 }
-// SetBoolValueNil sets the value for BoolValue to be an explicit nil
-func (o *ValueModel) SetBoolValueNil() {
-	o.BoolValue.Set(nil)
-}
 
-// UnsetBoolValue ensures that no value is present for BoolValue, not even an explicit nil
-func (o *ValueModel) UnsetBoolValue() {
-	o.BoolValue.Unset()
-}
-
-// GetStringValue returns the StringValue field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetStringValue returns the StringValue field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ValueModel) GetStringValue() string {
-	if o == nil || IsNil(o.StringValue.Get()) {
+	if o == nil || o.StringValue.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.StringValue.Get()
 }
 
-// GetStringValueOk returns a tuple with the StringValue field value if set, nil otherwise
+// GetStringValueOk returns a tuple with the StringValue field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ValueModel) GetStringValueOk() (*string, bool) {
@@ -108,39 +102,23 @@ func (o *ValueModel) GetStringValueOk() (*string, bool) {
 	return o.StringValue.Get(), o.StringValue.IsSet()
 }
 
-// HasStringValue returns a boolean if a field has been set.
-func (o *ValueModel) HasStringValue() bool {
-	if o != nil && o.StringValue.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetStringValue gets a reference to the given NullableString and assigns it to the StringValue field.
+// SetStringValue sets field value
 func (o *ValueModel) SetStringValue(v string) {
 	o.StringValue.Set(&v)
 }
-// SetStringValueNil sets the value for StringValue to be an explicit nil
-func (o *ValueModel) SetStringValueNil() {
-	o.StringValue.Set(nil)
-}
 
-// UnsetStringValue ensures that no value is present for StringValue, not even an explicit nil
-func (o *ValueModel) UnsetStringValue() {
-	o.StringValue.Unset()
-}
-
-// GetIntValue returns the IntValue field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetIntValue returns the IntValue field value
+// If the value is explicit nil, the zero value for int32 will be returned
 func (o *ValueModel) GetIntValue() int32 {
-	if o == nil || IsNil(o.IntValue.Get()) {
+	if o == nil || o.IntValue.Get() == nil {
 		var ret int32
 		return ret
 	}
+
 	return *o.IntValue.Get()
 }
 
-// GetIntValueOk returns a tuple with the IntValue field value if set, nil otherwise
+// GetIntValueOk returns a tuple with the IntValue field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ValueModel) GetIntValueOk() (*int32, bool) {
@@ -150,39 +128,23 @@ func (o *ValueModel) GetIntValueOk() (*int32, bool) {
 	return o.IntValue.Get(), o.IntValue.IsSet()
 }
 
-// HasIntValue returns a boolean if a field has been set.
-func (o *ValueModel) HasIntValue() bool {
-	if o != nil && o.IntValue.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetIntValue gets a reference to the given NullableInt32 and assigns it to the IntValue field.
+// SetIntValue sets field value
 func (o *ValueModel) SetIntValue(v int32) {
 	o.IntValue.Set(&v)
 }
-// SetIntValueNil sets the value for IntValue to be an explicit nil
-func (o *ValueModel) SetIntValueNil() {
-	o.IntValue.Set(nil)
-}
 
-// UnsetIntValue ensures that no value is present for IntValue, not even an explicit nil
-func (o *ValueModel) UnsetIntValue() {
-	o.IntValue.Unset()
-}
-
-// GetDoubleValue returns the DoubleValue field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDoubleValue returns the DoubleValue field value
+// If the value is explicit nil, the zero value for float64 will be returned
 func (o *ValueModel) GetDoubleValue() float64 {
-	if o == nil || IsNil(o.DoubleValue.Get()) {
+	if o == nil || o.DoubleValue.Get() == nil {
 		var ret float64
 		return ret
 	}
+
 	return *o.DoubleValue.Get()
 }
 
-// GetDoubleValueOk returns a tuple with the DoubleValue field value if set, nil otherwise
+// GetDoubleValueOk returns a tuple with the DoubleValue field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ValueModel) GetDoubleValueOk() (*float64, bool) {
@@ -192,27 +154,9 @@ func (o *ValueModel) GetDoubleValueOk() (*float64, bool) {
 	return o.DoubleValue.Get(), o.DoubleValue.IsSet()
 }
 
-// HasDoubleValue returns a boolean if a field has been set.
-func (o *ValueModel) HasDoubleValue() bool {
-	if o != nil && o.DoubleValue.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDoubleValue gets a reference to the given NullableFloat64 and assigns it to the DoubleValue field.
+// SetDoubleValue sets field value
 func (o *ValueModel) SetDoubleValue(v float64) {
 	o.DoubleValue.Set(&v)
-}
-// SetDoubleValueNil sets the value for DoubleValue to be an explicit nil
-func (o *ValueModel) SetDoubleValueNil() {
-	o.DoubleValue.Set(nil)
-}
-
-// UnsetDoubleValue ensures that no value is present for DoubleValue, not even an explicit nil
-func (o *ValueModel) UnsetDoubleValue() {
-	o.DoubleValue.Unset()
 }
 
 func (o ValueModel) MarshalJSON() ([]byte, error) {
@@ -225,19 +169,51 @@ func (o ValueModel) MarshalJSON() ([]byte, error) {
 
 func (o ValueModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.BoolValue.IsSet() {
-		toSerialize["boolValue"] = o.BoolValue.Get()
-	}
-	if o.StringValue.IsSet() {
-		toSerialize["stringValue"] = o.StringValue.Get()
-	}
-	if o.IntValue.IsSet() {
-		toSerialize["intValue"] = o.IntValue.Get()
-	}
-	if o.DoubleValue.IsSet() {
-		toSerialize["doubleValue"] = o.DoubleValue.Get()
-	}
+	toSerialize["boolValue"] = o.BoolValue.Get()
+	toSerialize["stringValue"] = o.StringValue.Get()
+	toSerialize["intValue"] = o.IntValue.Get()
+	toSerialize["doubleValue"] = o.DoubleValue.Get()
 	return toSerialize, nil
+}
+
+func (o *ValueModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"boolValue",
+		"stringValue",
+		"intValue",
+		"doubleValue",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varValueModel := _ValueModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varValueModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ValueModel(varValueModel)
+
+	return err
 }
 
 type NullableValueModel struct {

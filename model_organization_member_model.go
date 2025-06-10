@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the OrganizationMemberModel type satisfies the MappedNullable interface at compile time
@@ -21,23 +23,30 @@ var _ MappedNullable = &OrganizationMemberModel{}
 // OrganizationMemberModel Describes an Organization Member.
 type OrganizationMemberModel struct {
 	// Identifier of the Organization Admin.
-	UserId NullableString `json:"userId,omitempty"`
+	UserId string `json:"userId"`
 	// Name of the Organization Admin.
-	FullName NullableString `json:"fullName,omitempty"`
+	FullName string `json:"fullName"`
 	// Email of the OrganizationAdmin.
-	Email NullableString `json:"email,omitempty"`
+	Email string `json:"email"`
 	// Determines whether 2FA is enabled for the Organization Admin.
-	TwoFactorEnabled *bool `json:"twoFactorEnabled,omitempty"`
+	TwoFactorEnabled bool `json:"twoFactorEnabled"`
 	// The permissions of the Member.
-	Permissions []OrganizationPermissionModel `json:"permissions,omitempty"`
+	Permissions []OrganizationPermissionModel `json:"permissions"`
 }
+
+type _OrganizationMemberModel OrganizationMemberModel
 
 // NewOrganizationMemberModel instantiates a new OrganizationMemberModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrganizationMemberModel() *OrganizationMemberModel {
+func NewOrganizationMemberModel(userId string, fullName string, email string, twoFactorEnabled bool, permissions []OrganizationPermissionModel) *OrganizationMemberModel {
 	this := OrganizationMemberModel{}
+	this.UserId = userId
+	this.FullName = fullName
+	this.Email = email
+	this.TwoFactorEnabled = twoFactorEnabled
+	this.Permissions = permissions
 	return &this
 }
 
@@ -49,193 +58,122 @@ func NewOrganizationMemberModelWithDefaults() *OrganizationMemberModel {
 	return &this
 }
 
-// GetUserId returns the UserId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetUserId returns the UserId field value
 func (o *OrganizationMemberModel) GetUserId() string {
-	if o == nil || IsNil(o.UserId.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.UserId.Get()
+
+	return o.UserId
 }
 
-// GetUserIdOk returns a tuple with the UserId field value if set, nil otherwise
+// GetUserIdOk returns a tuple with the UserId field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OrganizationMemberModel) GetUserIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.UserId.Get(), o.UserId.IsSet()
+	return &o.UserId, true
 }
 
-// HasUserId returns a boolean if a field has been set.
-func (o *OrganizationMemberModel) HasUserId() bool {
-	if o != nil && o.UserId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetUserId gets a reference to the given NullableString and assigns it to the UserId field.
+// SetUserId sets field value
 func (o *OrganizationMemberModel) SetUserId(v string) {
-	o.UserId.Set(&v)
-}
-// SetUserIdNil sets the value for UserId to be an explicit nil
-func (o *OrganizationMemberModel) SetUserIdNil() {
-	o.UserId.Set(nil)
+	o.UserId = v
 }
 
-// UnsetUserId ensures that no value is present for UserId, not even an explicit nil
-func (o *OrganizationMemberModel) UnsetUserId() {
-	o.UserId.Unset()
-}
-
-// GetFullName returns the FullName field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetFullName returns the FullName field value
 func (o *OrganizationMemberModel) GetFullName() string {
-	if o == nil || IsNil(o.FullName.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.FullName.Get()
+
+	return o.FullName
 }
 
-// GetFullNameOk returns a tuple with the FullName field value if set, nil otherwise
+// GetFullNameOk returns a tuple with the FullName field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OrganizationMemberModel) GetFullNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.FullName.Get(), o.FullName.IsSet()
+	return &o.FullName, true
 }
 
-// HasFullName returns a boolean if a field has been set.
-func (o *OrganizationMemberModel) HasFullName() bool {
-	if o != nil && o.FullName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetFullName gets a reference to the given NullableString and assigns it to the FullName field.
+// SetFullName sets field value
 func (o *OrganizationMemberModel) SetFullName(v string) {
-	o.FullName.Set(&v)
-}
-// SetFullNameNil sets the value for FullName to be an explicit nil
-func (o *OrganizationMemberModel) SetFullNameNil() {
-	o.FullName.Set(nil)
+	o.FullName = v
 }
 
-// UnsetFullName ensures that no value is present for FullName, not even an explicit nil
-func (o *OrganizationMemberModel) UnsetFullName() {
-	o.FullName.Unset()
-}
-
-// GetEmail returns the Email field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetEmail returns the Email field value
 func (o *OrganizationMemberModel) GetEmail() string {
-	if o == nil || IsNil(o.Email.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Email.Get()
+
+	return o.Email
 }
 
-// GetEmailOk returns a tuple with the Email field value if set, nil otherwise
+// GetEmailOk returns a tuple with the Email field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OrganizationMemberModel) GetEmailOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Email.Get(), o.Email.IsSet()
+	return &o.Email, true
 }
 
-// HasEmail returns a boolean if a field has been set.
-func (o *OrganizationMemberModel) HasEmail() bool {
-	if o != nil && o.Email.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetEmail gets a reference to the given NullableString and assigns it to the Email field.
+// SetEmail sets field value
 func (o *OrganizationMemberModel) SetEmail(v string) {
-	o.Email.Set(&v)
-}
-// SetEmailNil sets the value for Email to be an explicit nil
-func (o *OrganizationMemberModel) SetEmailNil() {
-	o.Email.Set(nil)
+	o.Email = v
 }
 
-// UnsetEmail ensures that no value is present for Email, not even an explicit nil
-func (o *OrganizationMemberModel) UnsetEmail() {
-	o.Email.Unset()
-}
-
-// GetTwoFactorEnabled returns the TwoFactorEnabled field value if set, zero value otherwise.
+// GetTwoFactorEnabled returns the TwoFactorEnabled field value
 func (o *OrganizationMemberModel) GetTwoFactorEnabled() bool {
-	if o == nil || IsNil(o.TwoFactorEnabled) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.TwoFactorEnabled
+
+	return o.TwoFactorEnabled
 }
 
-// GetTwoFactorEnabledOk returns a tuple with the TwoFactorEnabled field value if set, nil otherwise
+// GetTwoFactorEnabledOk returns a tuple with the TwoFactorEnabled field value
 // and a boolean to check if the value has been set.
 func (o *OrganizationMemberModel) GetTwoFactorEnabledOk() (*bool, bool) {
-	if o == nil || IsNil(o.TwoFactorEnabled) {
+	if o == nil {
 		return nil, false
 	}
-	return o.TwoFactorEnabled, true
+	return &o.TwoFactorEnabled, true
 }
 
-// HasTwoFactorEnabled returns a boolean if a field has been set.
-func (o *OrganizationMemberModel) HasTwoFactorEnabled() bool {
-	if o != nil && !IsNil(o.TwoFactorEnabled) {
-		return true
-	}
-
-	return false
-}
-
-// SetTwoFactorEnabled gets a reference to the given bool and assigns it to the TwoFactorEnabled field.
+// SetTwoFactorEnabled sets field value
 func (o *OrganizationMemberModel) SetTwoFactorEnabled(v bool) {
-	o.TwoFactorEnabled = &v
+	o.TwoFactorEnabled = v
 }
 
-// GetPermissions returns the Permissions field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetPermissions returns the Permissions field value
 func (o *OrganizationMemberModel) GetPermissions() []OrganizationPermissionModel {
 	if o == nil {
 		var ret []OrganizationPermissionModel
 		return ret
 	}
+
 	return o.Permissions
 }
 
-// GetPermissionsOk returns a tuple with the Permissions field value if set, nil otherwise
+// GetPermissionsOk returns a tuple with the Permissions field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OrganizationMemberModel) GetPermissionsOk() ([]OrganizationPermissionModel, bool) {
-	if o == nil || IsNil(o.Permissions) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Permissions, true
 }
 
-// HasPermissions returns a boolean if a field has been set.
-func (o *OrganizationMemberModel) HasPermissions() bool {
-	if o != nil && !IsNil(o.Permissions) {
-		return true
-	}
-
-	return false
-}
-
-// SetPermissions gets a reference to the given []OrganizationPermissionModel and assigns it to the Permissions field.
+// SetPermissions sets field value
 func (o *OrganizationMemberModel) SetPermissions(v []OrganizationPermissionModel) {
 	o.Permissions = v
 }
@@ -250,22 +188,53 @@ func (o OrganizationMemberModel) MarshalJSON() ([]byte, error) {
 
 func (o OrganizationMemberModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.UserId.IsSet() {
-		toSerialize["userId"] = o.UserId.Get()
-	}
-	if o.FullName.IsSet() {
-		toSerialize["fullName"] = o.FullName.Get()
-	}
-	if o.Email.IsSet() {
-		toSerialize["email"] = o.Email.Get()
-	}
-	if !IsNil(o.TwoFactorEnabled) {
-		toSerialize["twoFactorEnabled"] = o.TwoFactorEnabled
-	}
-	if o.Permissions != nil {
-		toSerialize["permissions"] = o.Permissions
-	}
+	toSerialize["userId"] = o.UserId
+	toSerialize["fullName"] = o.FullName
+	toSerialize["email"] = o.Email
+	toSerialize["twoFactorEnabled"] = o.TwoFactorEnabled
+	toSerialize["permissions"] = o.Permissions
 	return toSerialize, nil
+}
+
+func (o *OrganizationMemberModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"userId",
+		"fullName",
+		"email",
+		"twoFactorEnabled",
+		"permissions",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varOrganizationMemberModel := _OrganizationMemberModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varOrganizationMemberModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = OrganizationMemberModel(varOrganizationMemberModel)
+
+	return err
 }
 
 type NullableOrganizationMemberModel struct {

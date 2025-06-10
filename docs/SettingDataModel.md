@@ -4,22 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SettingId** | Pointer to **int32** | Identifier of the Feature Flag or Setting. | [optional] 
-**Key** | Pointer to **NullableString** | Key of the Feature Flag or Setting. | [optional] 
-**Name** | Pointer to **NullableString** | Name of the Feature Flag or Setting. | [optional] 
-**Hint** | Pointer to **NullableString** | Description of the Feature Flag or Setting. | [optional] 
-**SettingType** | Pointer to [**SettingType**](SettingType.md) |  | [optional] 
-**Order** | Pointer to **int32** | The order of the Feature Flag or Setting represented on the ConfigCat Dashboard. | [optional] 
-**CreatedAt** | Pointer to **NullableTime** | The creation time of the Feature Flag or Setting. | [optional] 
-**CreatorEmail** | Pointer to **NullableString** | The user&#39;s email address who created the Feature Flag or Setting. | [optional] 
-**CreatorFullName** | Pointer to **NullableString** | The user&#39;s name who created the Feature Flag or Setting. | [optional] 
-**IsWatching** | Pointer to **bool** |  | [optional] 
+**SettingId** | **int32** | Identifier of the Feature Flag or Setting. | 
+**Key** | **string** | Key of the Feature Flag or Setting. | 
+**Name** | **string** | Name of the Feature Flag or Setting. | 
+**Hint** | **NullableString** | Description of the Feature Flag or Setting. | 
+**SettingType** | [**SettingType**](SettingType.md) |  | 
+**Order** | **int32** | The order of the Feature Flag or Setting represented on the ConfigCat Dashboard. | 
+**CreatedAt** | **NullableTime** | The creation time of the Feature Flag or Setting. | 
+**CreatorEmail** | **NullableString** | The user&#39;s email address who created the Feature Flag or Setting. | 
+**CreatorFullName** | **NullableString** | The user&#39;s name who created the Feature Flag or Setting. | 
+**IsWatching** | **bool** |  | 
 
 ## Methods
 
 ### NewSettingDataModel
 
-`func NewSettingDataModel() *SettingDataModel`
+`func NewSettingDataModel(settingId int32, key string, name string, hint NullableString, settingType SettingType, order int32, createdAt NullableTime, creatorEmail NullableString, creatorFullName NullableString, isWatching bool, ) *SettingDataModel`
 
 NewSettingDataModel instantiates a new SettingDataModel object
 This constructor will assign default values to properties that have it defined,
@@ -53,11 +53,6 @@ and a boolean to check if the value has been set.
 
 SetSettingId sets SettingId field to given value.
 
-### HasSettingId
-
-`func (o *SettingDataModel) HasSettingId() bool`
-
-HasSettingId returns a boolean if a field has been set.
 
 ### GetKey
 
@@ -78,22 +73,7 @@ and a boolean to check if the value has been set.
 
 SetKey sets Key field to given value.
 
-### HasKey
 
-`func (o *SettingDataModel) HasKey() bool`
-
-HasKey returns a boolean if a field has been set.
-
-### SetKeyNil
-
-`func (o *SettingDataModel) SetKeyNil(b bool)`
-
- SetKeyNil sets the value for Key to be an explicit nil
-
-### UnsetKey
-`func (o *SettingDataModel) UnsetKey()`
-
-UnsetKey ensures that no value is present for Key, not even an explicit nil
 ### GetName
 
 `func (o *SettingDataModel) GetName() string`
@@ -113,22 +93,7 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
 
-`func (o *SettingDataModel) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### SetNameNil
-
-`func (o *SettingDataModel) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *SettingDataModel) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetHint
 
 `func (o *SettingDataModel) GetHint() string`
@@ -148,11 +113,6 @@ and a boolean to check if the value has been set.
 
 SetHint sets Hint field to given value.
 
-### HasHint
-
-`func (o *SettingDataModel) HasHint() bool`
-
-HasHint returns a boolean if a field has been set.
 
 ### SetHintNil
 
@@ -183,11 +143,6 @@ and a boolean to check if the value has been set.
 
 SetSettingType sets SettingType field to given value.
 
-### HasSettingType
-
-`func (o *SettingDataModel) HasSettingType() bool`
-
-HasSettingType returns a boolean if a field has been set.
 
 ### GetOrder
 
@@ -208,11 +163,6 @@ and a boolean to check if the value has been set.
 
 SetOrder sets Order field to given value.
 
-### HasOrder
-
-`func (o *SettingDataModel) HasOrder() bool`
-
-HasOrder returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -233,11 +183,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *SettingDataModel) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### SetCreatedAtNil
 
@@ -268,11 +213,6 @@ and a boolean to check if the value has been set.
 
 SetCreatorEmail sets CreatorEmail field to given value.
 
-### HasCreatorEmail
-
-`func (o *SettingDataModel) HasCreatorEmail() bool`
-
-HasCreatorEmail returns a boolean if a field has been set.
 
 ### SetCreatorEmailNil
 
@@ -303,11 +243,6 @@ and a boolean to check if the value has been set.
 
 SetCreatorFullName sets CreatorFullName field to given value.
 
-### HasCreatorFullName
-
-`func (o *SettingDataModel) HasCreatorFullName() bool`
-
-HasCreatorFullName returns a boolean if a field has been set.
 
 ### SetCreatorFullNameNil
 
@@ -338,11 +273,6 @@ and a boolean to check if the value has been set.
 
 SetIsWatching sets IsWatching field to given value.
 
-### HasIsWatching
-
-`func (o *SettingDataModel) HasIsWatching() bool`
-
-HasIsWatching returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

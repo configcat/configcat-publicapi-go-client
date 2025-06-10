@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UserId** | Pointer to **NullableString** | Identifier of the Member. | [optional] 
-**FullName** | Pointer to **NullableString** | Name of the Member. | [optional] 
-**Email** | Pointer to **NullableString** | Email of the Member. | [optional] 
-**TwoFactorEnabled** | Pointer to **bool** | Determines whether 2FA is enabled for the Member. | [optional] 
+**UserId** | **NullableString** | Identifier of the Member. | 
+**FullName** | **NullableString** | Name of the Member. | 
+**Email** | **NullableString** | Email of the Member. | 
+**TwoFactorEnabled** | **bool** | Determines whether 2FA is enabled for the Member. | 
 
 ## Methods
 
 ### NewUserModel
 
-`func NewUserModel() *UserModel`
+`func NewUserModel(userId NullableString, fullName NullableString, email NullableString, twoFactorEnabled bool, ) *UserModel`
 
 NewUserModel instantiates a new UserModel object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetUserId sets UserId field to given value.
 
-### HasUserId
-
-`func (o *UserModel) HasUserId() bool`
-
-HasUserId returns a boolean if a field has been set.
 
 ### SetUserIdNil
 
@@ -82,11 +77,6 @@ and a boolean to check if the value has been set.
 
 SetFullName sets FullName field to given value.
 
-### HasFullName
-
-`func (o *UserModel) HasFullName() bool`
-
-HasFullName returns a boolean if a field has been set.
 
 ### SetFullNameNil
 
@@ -117,11 +107,6 @@ and a boolean to check if the value has been set.
 
 SetEmail sets Email field to given value.
 
-### HasEmail
-
-`func (o *UserModel) HasEmail() bool`
-
-HasEmail returns a boolean if a field has been set.
 
 ### SetEmailNil
 
@@ -152,11 +137,6 @@ and a boolean to check if the value has been set.
 
 SetTwoFactorEnabled sets TwoFactorEnabled field to given value.
 
-### HasTwoFactorEnabled
-
-`func (o *UserModel) HasTwoFactorEnabled() bool`
-
-HasTwoFactorEnabled returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

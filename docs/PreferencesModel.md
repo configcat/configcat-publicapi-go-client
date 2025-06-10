@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ReasonRequired** | Pointer to **bool** | Indicates that a mandatory note required for saving and publishing. | [optional] 
-**KeyGenerationMode** | Pointer to [**KeyGenerationMode**](KeyGenerationMode.md) |  | [optional] 
-**ShowVariationId** | Pointer to **bool** | Indicates whether a variation ID&#39;s must be shown on the ConfigCat Dashboard. | [optional] 
-**ReasonRequiredEnvironments** | Pointer to [**[]ReasonRequiredEnvironmentModel**](ReasonRequiredEnvironmentModel.md) | List of Environments where mandatory note must be set before saving and publishing. | [optional] 
-**MandatorySettingHint** | Pointer to **bool** | Indicates whether Feature flags and Settings must have a hint. | [optional] 
+**ReasonRequired** | **bool** | Indicates that a mandatory note required for saving and publishing. | 
+**KeyGenerationMode** | [**KeyGenerationMode**](KeyGenerationMode.md) |  | 
+**ShowVariationId** | **bool** | Indicates whether a variation ID&#39;s must be shown on the ConfigCat Dashboard. | 
+**ReasonRequiredEnvironments** | [**[]ReasonRequiredEnvironmentModel**](ReasonRequiredEnvironmentModel.md) | List of Environments where mandatory note must be set before saving and publishing. | 
+**MandatorySettingHint** | **bool** | Indicates whether Feature flags and Settings must have a hint. | 
 
 ## Methods
 
 ### NewPreferencesModel
 
-`func NewPreferencesModel() *PreferencesModel`
+`func NewPreferencesModel(reasonRequired bool, keyGenerationMode KeyGenerationMode, showVariationId bool, reasonRequiredEnvironments []ReasonRequiredEnvironmentModel, mandatorySettingHint bool, ) *PreferencesModel`
 
 NewPreferencesModel instantiates a new PreferencesModel object
 This constructor will assign default values to properties that have it defined,
@@ -48,11 +48,6 @@ and a boolean to check if the value has been set.
 
 SetReasonRequired sets ReasonRequired field to given value.
 
-### HasReasonRequired
-
-`func (o *PreferencesModel) HasReasonRequired() bool`
-
-HasReasonRequired returns a boolean if a field has been set.
 
 ### GetKeyGenerationMode
 
@@ -73,11 +68,6 @@ and a boolean to check if the value has been set.
 
 SetKeyGenerationMode sets KeyGenerationMode field to given value.
 
-### HasKeyGenerationMode
-
-`func (o *PreferencesModel) HasKeyGenerationMode() bool`
-
-HasKeyGenerationMode returns a boolean if a field has been set.
 
 ### GetShowVariationId
 
@@ -98,11 +88,6 @@ and a boolean to check if the value has been set.
 
 SetShowVariationId sets ShowVariationId field to given value.
 
-### HasShowVariationId
-
-`func (o *PreferencesModel) HasShowVariationId() bool`
-
-HasShowVariationId returns a boolean if a field has been set.
 
 ### GetReasonRequiredEnvironments
 
@@ -123,11 +108,6 @@ and a boolean to check if the value has been set.
 
 SetReasonRequiredEnvironments sets ReasonRequiredEnvironments field to given value.
 
-### HasReasonRequiredEnvironments
-
-`func (o *PreferencesModel) HasReasonRequiredEnvironments() bool`
-
-HasReasonRequiredEnvironments returns a boolean if a field has been set.
 
 ### SetReasonRequiredEnvironmentsNil
 
@@ -158,11 +138,6 @@ and a boolean to check if the value has been set.
 
 SetMandatorySettingHint sets MandatorySettingHint field to given value.
 
-### HasMandatorySettingHint
-
-`func (o *PreferencesModel) HasMandatorySettingHint() bool`
-
-HasMandatorySettingHint returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

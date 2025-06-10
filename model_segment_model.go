@@ -14,6 +14,8 @@ package configcatpublicapi
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the SegmentModel type satisfies the MappedNullable interface at compile time
@@ -21,38 +23,53 @@ var _ MappedNullable = &SegmentModel{}
 
 // SegmentModel struct for SegmentModel
 type SegmentModel struct {
-	Product *ProductModel `json:"product,omitempty"`
+	Product ProductModel `json:"product"`
 	// Identifier of the Segment.
-	SegmentId *string `json:"segmentId,omitempty"`
+	SegmentId string `json:"segmentId"`
 	// Name of the Segment.
-	Name NullableString `json:"name,omitempty"`
+	Name string `json:"name"`
 	// Description of the Segment.
-	Description NullableString `json:"description,omitempty"`
+	Description NullableString `json:"description"`
 	// The email of the user who created the Segment.
-	CreatorEmail NullableString `json:"creatorEmail,omitempty"`
+	CreatorEmail NullableString `json:"creatorEmail"`
 	// The name of the user who created the Segment.
-	CreatorFullName NullableString `json:"creatorFullName,omitempty"`
+	CreatorFullName NullableString `json:"creatorFullName"`
 	// The date and time when the Segment was created.
-	CreatedAt *time.Time `json:"createdAt,omitempty"`
+	CreatedAt time.Time `json:"createdAt"`
 	// The email of the user who last updated the Segment.
-	LastUpdaterEmail NullableString `json:"lastUpdaterEmail,omitempty"`
+	LastUpdaterEmail NullableString `json:"lastUpdaterEmail"`
 	// The name of the user who last updated the Segment.
-	LastUpdaterFullName NullableString `json:"lastUpdaterFullName,omitempty"`
+	LastUpdaterFullName NullableString `json:"lastUpdaterFullName"`
 	// The date and time when the Segment was last updated.
-	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	UpdatedAt time.Time `json:"updatedAt"`
 	// The user's attribute the evaluation process must take into account.
-	ComparisonAttribute NullableString `json:"comparisonAttribute,omitempty"`
-	Comparator *RolloutRuleComparator `json:"comparator,omitempty"`
+	ComparisonAttribute string `json:"comparisonAttribute"`
+	Comparator RolloutRuleComparator `json:"comparator"`
 	// The value to compare with the given user attribute's value.
-	ComparisonValue NullableString `json:"comparisonValue,omitempty"`
+	ComparisonValue string `json:"comparisonValue"`
 }
+
+type _SegmentModel SegmentModel
 
 // NewSegmentModel instantiates a new SegmentModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSegmentModel() *SegmentModel {
+func NewSegmentModel(product ProductModel, segmentId string, name string, description NullableString, creatorEmail NullableString, creatorFullName NullableString, createdAt time.Time, lastUpdaterEmail NullableString, lastUpdaterFullName NullableString, updatedAt time.Time, comparisonAttribute string, comparator RolloutRuleComparator, comparisonValue string) *SegmentModel {
 	this := SegmentModel{}
+	this.Product = product
+	this.SegmentId = segmentId
+	this.Name = name
+	this.Description = description
+	this.CreatorEmail = creatorEmail
+	this.CreatorFullName = creatorFullName
+	this.CreatedAt = createdAt
+	this.LastUpdaterEmail = lastUpdaterEmail
+	this.LastUpdaterFullName = lastUpdaterFullName
+	this.UpdatedAt = updatedAt
+	this.ComparisonAttribute = comparisonAttribute
+	this.Comparator = comparator
+	this.ComparisonValue = comparisonValue
 	return &this
 }
 
@@ -64,122 +81,90 @@ func NewSegmentModelWithDefaults() *SegmentModel {
 	return &this
 }
 
-// GetProduct returns the Product field value if set, zero value otherwise.
+// GetProduct returns the Product field value
 func (o *SegmentModel) GetProduct() ProductModel {
-	if o == nil || IsNil(o.Product) {
+	if o == nil {
 		var ret ProductModel
 		return ret
 	}
-	return *o.Product
+
+	return o.Product
 }
 
-// GetProductOk returns a tuple with the Product field value if set, nil otherwise
+// GetProductOk returns a tuple with the Product field value
 // and a boolean to check if the value has been set.
 func (o *SegmentModel) GetProductOk() (*ProductModel, bool) {
-	if o == nil || IsNil(o.Product) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Product, true
+	return &o.Product, true
 }
 
-// HasProduct returns a boolean if a field has been set.
-func (o *SegmentModel) HasProduct() bool {
-	if o != nil && !IsNil(o.Product) {
-		return true
-	}
-
-	return false
-}
-
-// SetProduct gets a reference to the given ProductModel and assigns it to the Product field.
+// SetProduct sets field value
 func (o *SegmentModel) SetProduct(v ProductModel) {
-	o.Product = &v
+	o.Product = v
 }
 
-// GetSegmentId returns the SegmentId field value if set, zero value otherwise.
+// GetSegmentId returns the SegmentId field value
 func (o *SegmentModel) GetSegmentId() string {
-	if o == nil || IsNil(o.SegmentId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.SegmentId
+
+	return o.SegmentId
 }
 
-// GetSegmentIdOk returns a tuple with the SegmentId field value if set, nil otherwise
+// GetSegmentIdOk returns a tuple with the SegmentId field value
 // and a boolean to check if the value has been set.
 func (o *SegmentModel) GetSegmentIdOk() (*string, bool) {
-	if o == nil || IsNil(o.SegmentId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SegmentId, true
+	return &o.SegmentId, true
 }
 
-// HasSegmentId returns a boolean if a field has been set.
-func (o *SegmentModel) HasSegmentId() bool {
-	if o != nil && !IsNil(o.SegmentId) {
-		return true
-	}
-
-	return false
-}
-
-// SetSegmentId gets a reference to the given string and assigns it to the SegmentId field.
+// SetSegmentId sets field value
 func (o *SegmentModel) SetSegmentId(v string) {
-	o.SegmentId = &v
+	o.SegmentId = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetName returns the Name field value
 func (o *SegmentModel) GetName() string {
-	if o == nil || IsNil(o.Name.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name.Get()
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SegmentModel) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *SegmentModel) HasName() bool {
-	if o != nil && o.Name.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given NullableString and assigns it to the Name field.
+// SetName sets field value
 func (o *SegmentModel) SetName(v string) {
-	o.Name.Set(&v)
-}
-// SetNameNil sets the value for Name to be an explicit nil
-func (o *SegmentModel) SetNameNil() {
-	o.Name.Set(nil)
+	o.Name = v
 }
 
-// UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *SegmentModel) UnsetName() {
-	o.Name.Unset()
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDescription returns the Description field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *SegmentModel) GetDescription() string {
-	if o == nil || IsNil(o.Description.Get()) {
+	if o == nil || o.Description.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Description.Get()
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SegmentModel) GetDescriptionOk() (*string, bool) {
@@ -189,39 +174,23 @@ func (o *SegmentModel) GetDescriptionOk() (*string, bool) {
 	return o.Description.Get(), o.Description.IsSet()
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *SegmentModel) HasDescription() bool {
-	if o != nil && o.Description.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
+// SetDescription sets field value
 func (o *SegmentModel) SetDescription(v string) {
 	o.Description.Set(&v)
 }
-// SetDescriptionNil sets the value for Description to be an explicit nil
-func (o *SegmentModel) SetDescriptionNil() {
-	o.Description.Set(nil)
-}
 
-// UnsetDescription ensures that no value is present for Description, not even an explicit nil
-func (o *SegmentModel) UnsetDescription() {
-	o.Description.Unset()
-}
-
-// GetCreatorEmail returns the CreatorEmail field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetCreatorEmail returns the CreatorEmail field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *SegmentModel) GetCreatorEmail() string {
-	if o == nil || IsNil(o.CreatorEmail.Get()) {
+	if o == nil || o.CreatorEmail.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.CreatorEmail.Get()
 }
 
-// GetCreatorEmailOk returns a tuple with the CreatorEmail field value if set, nil otherwise
+// GetCreatorEmailOk returns a tuple with the CreatorEmail field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SegmentModel) GetCreatorEmailOk() (*string, bool) {
@@ -231,39 +200,23 @@ func (o *SegmentModel) GetCreatorEmailOk() (*string, bool) {
 	return o.CreatorEmail.Get(), o.CreatorEmail.IsSet()
 }
 
-// HasCreatorEmail returns a boolean if a field has been set.
-func (o *SegmentModel) HasCreatorEmail() bool {
-	if o != nil && o.CreatorEmail.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatorEmail gets a reference to the given NullableString and assigns it to the CreatorEmail field.
+// SetCreatorEmail sets field value
 func (o *SegmentModel) SetCreatorEmail(v string) {
 	o.CreatorEmail.Set(&v)
 }
-// SetCreatorEmailNil sets the value for CreatorEmail to be an explicit nil
-func (o *SegmentModel) SetCreatorEmailNil() {
-	o.CreatorEmail.Set(nil)
-}
 
-// UnsetCreatorEmail ensures that no value is present for CreatorEmail, not even an explicit nil
-func (o *SegmentModel) UnsetCreatorEmail() {
-	o.CreatorEmail.Unset()
-}
-
-// GetCreatorFullName returns the CreatorFullName field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetCreatorFullName returns the CreatorFullName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *SegmentModel) GetCreatorFullName() string {
-	if o == nil || IsNil(o.CreatorFullName.Get()) {
+	if o == nil || o.CreatorFullName.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.CreatorFullName.Get()
 }
 
-// GetCreatorFullNameOk returns a tuple with the CreatorFullName field value if set, nil otherwise
+// GetCreatorFullNameOk returns a tuple with the CreatorFullName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SegmentModel) GetCreatorFullNameOk() (*string, bool) {
@@ -273,71 +226,47 @@ func (o *SegmentModel) GetCreatorFullNameOk() (*string, bool) {
 	return o.CreatorFullName.Get(), o.CreatorFullName.IsSet()
 }
 
-// HasCreatorFullName returns a boolean if a field has been set.
-func (o *SegmentModel) HasCreatorFullName() bool {
-	if o != nil && o.CreatorFullName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatorFullName gets a reference to the given NullableString and assigns it to the CreatorFullName field.
+// SetCreatorFullName sets field value
 func (o *SegmentModel) SetCreatorFullName(v string) {
 	o.CreatorFullName.Set(&v)
 }
-// SetCreatorFullNameNil sets the value for CreatorFullName to be an explicit nil
-func (o *SegmentModel) SetCreatorFullNameNil() {
-	o.CreatorFullName.Set(nil)
-}
 
-// UnsetCreatorFullName ensures that no value is present for CreatorFullName, not even an explicit nil
-func (o *SegmentModel) UnsetCreatorFullName() {
-	o.CreatorFullName.Unset()
-}
-
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value
 func (o *SegmentModel) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *SegmentModel) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *SegmentModel) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *SegmentModel) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
-// GetLastUpdaterEmail returns the LastUpdaterEmail field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLastUpdaterEmail returns the LastUpdaterEmail field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *SegmentModel) GetLastUpdaterEmail() string {
-	if o == nil || IsNil(o.LastUpdaterEmail.Get()) {
+	if o == nil || o.LastUpdaterEmail.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.LastUpdaterEmail.Get()
 }
 
-// GetLastUpdaterEmailOk returns a tuple with the LastUpdaterEmail field value if set, nil otherwise
+// GetLastUpdaterEmailOk returns a tuple with the LastUpdaterEmail field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SegmentModel) GetLastUpdaterEmailOk() (*string, bool) {
@@ -347,39 +276,23 @@ func (o *SegmentModel) GetLastUpdaterEmailOk() (*string, bool) {
 	return o.LastUpdaterEmail.Get(), o.LastUpdaterEmail.IsSet()
 }
 
-// HasLastUpdaterEmail returns a boolean if a field has been set.
-func (o *SegmentModel) HasLastUpdaterEmail() bool {
-	if o != nil && o.LastUpdaterEmail.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLastUpdaterEmail gets a reference to the given NullableString and assigns it to the LastUpdaterEmail field.
+// SetLastUpdaterEmail sets field value
 func (o *SegmentModel) SetLastUpdaterEmail(v string) {
 	o.LastUpdaterEmail.Set(&v)
 }
-// SetLastUpdaterEmailNil sets the value for LastUpdaterEmail to be an explicit nil
-func (o *SegmentModel) SetLastUpdaterEmailNil() {
-	o.LastUpdaterEmail.Set(nil)
-}
 
-// UnsetLastUpdaterEmail ensures that no value is present for LastUpdaterEmail, not even an explicit nil
-func (o *SegmentModel) UnsetLastUpdaterEmail() {
-	o.LastUpdaterEmail.Unset()
-}
-
-// GetLastUpdaterFullName returns the LastUpdaterFullName field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetLastUpdaterFullName returns the LastUpdaterFullName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *SegmentModel) GetLastUpdaterFullName() string {
-	if o == nil || IsNil(o.LastUpdaterFullName.Get()) {
+	if o == nil || o.LastUpdaterFullName.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.LastUpdaterFullName.Get()
 }
 
-// GetLastUpdaterFullNameOk returns a tuple with the LastUpdaterFullName field value if set, nil otherwise
+// GetLastUpdaterFullNameOk returns a tuple with the LastUpdaterFullName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SegmentModel) GetLastUpdaterFullNameOk() (*string, bool) {
@@ -389,175 +302,105 @@ func (o *SegmentModel) GetLastUpdaterFullNameOk() (*string, bool) {
 	return o.LastUpdaterFullName.Get(), o.LastUpdaterFullName.IsSet()
 }
 
-// HasLastUpdaterFullName returns a boolean if a field has been set.
-func (o *SegmentModel) HasLastUpdaterFullName() bool {
-	if o != nil && o.LastUpdaterFullName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetLastUpdaterFullName gets a reference to the given NullableString and assigns it to the LastUpdaterFullName field.
+// SetLastUpdaterFullName sets field value
 func (o *SegmentModel) SetLastUpdaterFullName(v string) {
 	o.LastUpdaterFullName.Set(&v)
 }
-// SetLastUpdaterFullNameNil sets the value for LastUpdaterFullName to be an explicit nil
-func (o *SegmentModel) SetLastUpdaterFullNameNil() {
-	o.LastUpdaterFullName.Set(nil)
-}
 
-// UnsetLastUpdaterFullName ensures that no value is present for LastUpdaterFullName, not even an explicit nil
-func (o *SegmentModel) UnsetLastUpdaterFullName() {
-	o.LastUpdaterFullName.Unset()
-}
-
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+// GetUpdatedAt returns the UpdatedAt field value
 func (o *SegmentModel) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
+	if o == nil {
 		var ret time.Time
 		return ret
 	}
-	return *o.UpdatedAt
+
+	return o.UpdatedAt
 }
 
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value
 // and a boolean to check if the value has been set.
 func (o *SegmentModel) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.UpdatedAt, true
+	return &o.UpdatedAt, true
 }
 
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *SegmentModel) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
+// SetUpdatedAt sets field value
 func (o *SegmentModel) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
+	o.UpdatedAt = v
 }
 
-// GetComparisonAttribute returns the ComparisonAttribute field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetComparisonAttribute returns the ComparisonAttribute field value
 func (o *SegmentModel) GetComparisonAttribute() string {
-	if o == nil || IsNil(o.ComparisonAttribute.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ComparisonAttribute.Get()
+
+	return o.ComparisonAttribute
 }
 
-// GetComparisonAttributeOk returns a tuple with the ComparisonAttribute field value if set, nil otherwise
+// GetComparisonAttributeOk returns a tuple with the ComparisonAttribute field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SegmentModel) GetComparisonAttributeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.ComparisonAttribute.Get(), o.ComparisonAttribute.IsSet()
+	return &o.ComparisonAttribute, true
 }
 
-// HasComparisonAttribute returns a boolean if a field has been set.
-func (o *SegmentModel) HasComparisonAttribute() bool {
-	if o != nil && o.ComparisonAttribute.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetComparisonAttribute gets a reference to the given NullableString and assigns it to the ComparisonAttribute field.
+// SetComparisonAttribute sets field value
 func (o *SegmentModel) SetComparisonAttribute(v string) {
-	o.ComparisonAttribute.Set(&v)
-}
-// SetComparisonAttributeNil sets the value for ComparisonAttribute to be an explicit nil
-func (o *SegmentModel) SetComparisonAttributeNil() {
-	o.ComparisonAttribute.Set(nil)
+	o.ComparisonAttribute = v
 }
 
-// UnsetComparisonAttribute ensures that no value is present for ComparisonAttribute, not even an explicit nil
-func (o *SegmentModel) UnsetComparisonAttribute() {
-	o.ComparisonAttribute.Unset()
-}
-
-// GetComparator returns the Comparator field value if set, zero value otherwise.
+// GetComparator returns the Comparator field value
 func (o *SegmentModel) GetComparator() RolloutRuleComparator {
-	if o == nil || IsNil(o.Comparator) {
+	if o == nil {
 		var ret RolloutRuleComparator
 		return ret
 	}
-	return *o.Comparator
+
+	return o.Comparator
 }
 
-// GetComparatorOk returns a tuple with the Comparator field value if set, nil otherwise
+// GetComparatorOk returns a tuple with the Comparator field value
 // and a boolean to check if the value has been set.
 func (o *SegmentModel) GetComparatorOk() (*RolloutRuleComparator, bool) {
-	if o == nil || IsNil(o.Comparator) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Comparator, true
+	return &o.Comparator, true
 }
 
-// HasComparator returns a boolean if a field has been set.
-func (o *SegmentModel) HasComparator() bool {
-	if o != nil && !IsNil(o.Comparator) {
-		return true
-	}
-
-	return false
-}
-
-// SetComparator gets a reference to the given RolloutRuleComparator and assigns it to the Comparator field.
+// SetComparator sets field value
 func (o *SegmentModel) SetComparator(v RolloutRuleComparator) {
-	o.Comparator = &v
+	o.Comparator = v
 }
 
-// GetComparisonValue returns the ComparisonValue field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetComparisonValue returns the ComparisonValue field value
 func (o *SegmentModel) GetComparisonValue() string {
-	if o == nil || IsNil(o.ComparisonValue.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.ComparisonValue.Get()
+
+	return o.ComparisonValue
 }
 
-// GetComparisonValueOk returns a tuple with the ComparisonValue field value if set, nil otherwise
+// GetComparisonValueOk returns a tuple with the ComparisonValue field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SegmentModel) GetComparisonValueOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.ComparisonValue.Get(), o.ComparisonValue.IsSet()
+	return &o.ComparisonValue, true
 }
 
-// HasComparisonValue returns a boolean if a field has been set.
-func (o *SegmentModel) HasComparisonValue() bool {
-	if o != nil && o.ComparisonValue.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetComparisonValue gets a reference to the given NullableString and assigns it to the ComparisonValue field.
+// SetComparisonValue sets field value
 func (o *SegmentModel) SetComparisonValue(v string) {
-	o.ComparisonValue.Set(&v)
-}
-// SetComparisonValueNil sets the value for ComparisonValue to be an explicit nil
-func (o *SegmentModel) SetComparisonValueNil() {
-	o.ComparisonValue.Set(nil)
-}
-
-// UnsetComparisonValue ensures that no value is present for ComparisonValue, not even an explicit nil
-func (o *SegmentModel) UnsetComparisonValue() {
-	o.ComparisonValue.Unset()
+	o.ComparisonValue = v
 }
 
 func (o SegmentModel) MarshalJSON() ([]byte, error) {
@@ -570,46 +413,69 @@ func (o SegmentModel) MarshalJSON() ([]byte, error) {
 
 func (o SegmentModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Product) {
-		toSerialize["product"] = o.Product
-	}
-	if !IsNil(o.SegmentId) {
-		toSerialize["segmentId"] = o.SegmentId
-	}
-	if o.Name.IsSet() {
-		toSerialize["name"] = o.Name.Get()
-	}
-	if o.Description.IsSet() {
-		toSerialize["description"] = o.Description.Get()
-	}
-	if o.CreatorEmail.IsSet() {
-		toSerialize["creatorEmail"] = o.CreatorEmail.Get()
-	}
-	if o.CreatorFullName.IsSet() {
-		toSerialize["creatorFullName"] = o.CreatorFullName.Get()
-	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["createdAt"] = o.CreatedAt
-	}
-	if o.LastUpdaterEmail.IsSet() {
-		toSerialize["lastUpdaterEmail"] = o.LastUpdaterEmail.Get()
-	}
-	if o.LastUpdaterFullName.IsSet() {
-		toSerialize["lastUpdaterFullName"] = o.LastUpdaterFullName.Get()
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updatedAt"] = o.UpdatedAt
-	}
-	if o.ComparisonAttribute.IsSet() {
-		toSerialize["comparisonAttribute"] = o.ComparisonAttribute.Get()
-	}
-	if !IsNil(o.Comparator) {
-		toSerialize["comparator"] = o.Comparator
-	}
-	if o.ComparisonValue.IsSet() {
-		toSerialize["comparisonValue"] = o.ComparisonValue.Get()
-	}
+	toSerialize["product"] = o.Product
+	toSerialize["segmentId"] = o.SegmentId
+	toSerialize["name"] = o.Name
+	toSerialize["description"] = o.Description.Get()
+	toSerialize["creatorEmail"] = o.CreatorEmail.Get()
+	toSerialize["creatorFullName"] = o.CreatorFullName.Get()
+	toSerialize["createdAt"] = o.CreatedAt
+	toSerialize["lastUpdaterEmail"] = o.LastUpdaterEmail.Get()
+	toSerialize["lastUpdaterFullName"] = o.LastUpdaterFullName.Get()
+	toSerialize["updatedAt"] = o.UpdatedAt
+	toSerialize["comparisonAttribute"] = o.ComparisonAttribute
+	toSerialize["comparator"] = o.Comparator
+	toSerialize["comparisonValue"] = o.ComparisonValue
 	return toSerialize, nil
+}
+
+func (o *SegmentModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"product",
+		"segmentId",
+		"name",
+		"description",
+		"creatorEmail",
+		"creatorFullName",
+		"createdAt",
+		"lastUpdaterEmail",
+		"lastUpdaterFullName",
+		"updatedAt",
+		"comparisonAttribute",
+		"comparator",
+		"comparisonValue",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSegmentModel := _SegmentModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varSegmentModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SegmentModel(varSegmentModel)
+
+	return err
 }
 
 type NullableSegmentModel struct {

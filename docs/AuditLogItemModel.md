@@ -4,24 +4,24 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AuditLogId** | Pointer to **int64** |  | [optional] 
-**AuditLogDateTime** | Pointer to **time.Time** |  | [optional] 
-**AuditLogTypeEnum** | Pointer to [**AuditLogType**](AuditLogType.md) |  | [optional] 
-**ChangeSetId** | Pointer to **NullableString** |  | [optional] 
-**Truncated** | Pointer to **bool** |  | [optional] 
-**AuditLogType** | Pointer to **NullableString** |  | [optional] 
-**UserEmail** | Pointer to **NullableString** |  | [optional] 
-**UserName** | Pointer to **NullableString** |  | [optional] 
-**Where** | Pointer to **NullableString** |  | [optional] 
-**Why** | Pointer to **NullableString** |  | [optional] 
-**ActionTarget** | Pointer to **NullableString** |  | [optional] 
-**Details** | Pointer to **NullableString** |  | [optional] 
+**AuditLogId** | **int64** |  | 
+**AuditLogDateTime** | **time.Time** |  | 
+**AuditLogTypeEnum** | [**AuditLogType**](AuditLogType.md) |  | 
+**ChangeSetId** | **NullableString** |  | 
+**Truncated** | **bool** |  | 
+**AuditLogType** | **NullableString** |  | 
+**UserEmail** | **NullableString** |  | 
+**UserName** | **NullableString** |  | 
+**Where** | **NullableString** |  | 
+**Why** | **NullableString** |  | 
+**ActionTarget** | **NullableString** |  | 
+**Details** | **NullableString** |  | 
 
 ## Methods
 
 ### NewAuditLogItemModel
 
-`func NewAuditLogItemModel() *AuditLogItemModel`
+`func NewAuditLogItemModel(auditLogId int64, auditLogDateTime time.Time, auditLogTypeEnum AuditLogType, changeSetId NullableString, truncated bool, auditLogType NullableString, userEmail NullableString, userName NullableString, where NullableString, why NullableString, actionTarget NullableString, details NullableString, ) *AuditLogItemModel`
 
 NewAuditLogItemModel instantiates a new AuditLogItemModel object
 This constructor will assign default values to properties that have it defined,
@@ -55,11 +55,6 @@ and a boolean to check if the value has been set.
 
 SetAuditLogId sets AuditLogId field to given value.
 
-### HasAuditLogId
-
-`func (o *AuditLogItemModel) HasAuditLogId() bool`
-
-HasAuditLogId returns a boolean if a field has been set.
 
 ### GetAuditLogDateTime
 
@@ -80,11 +75,6 @@ and a boolean to check if the value has been set.
 
 SetAuditLogDateTime sets AuditLogDateTime field to given value.
 
-### HasAuditLogDateTime
-
-`func (o *AuditLogItemModel) HasAuditLogDateTime() bool`
-
-HasAuditLogDateTime returns a boolean if a field has been set.
 
 ### GetAuditLogTypeEnum
 
@@ -105,11 +95,6 @@ and a boolean to check if the value has been set.
 
 SetAuditLogTypeEnum sets AuditLogTypeEnum field to given value.
 
-### HasAuditLogTypeEnum
-
-`func (o *AuditLogItemModel) HasAuditLogTypeEnum() bool`
-
-HasAuditLogTypeEnum returns a boolean if a field has been set.
 
 ### GetChangeSetId
 
@@ -130,11 +115,6 @@ and a boolean to check if the value has been set.
 
 SetChangeSetId sets ChangeSetId field to given value.
 
-### HasChangeSetId
-
-`func (o *AuditLogItemModel) HasChangeSetId() bool`
-
-HasChangeSetId returns a boolean if a field has been set.
 
 ### SetChangeSetIdNil
 
@@ -165,11 +145,6 @@ and a boolean to check if the value has been set.
 
 SetTruncated sets Truncated field to given value.
 
-### HasTruncated
-
-`func (o *AuditLogItemModel) HasTruncated() bool`
-
-HasTruncated returns a boolean if a field has been set.
 
 ### GetAuditLogType
 
@@ -190,11 +165,6 @@ and a boolean to check if the value has been set.
 
 SetAuditLogType sets AuditLogType field to given value.
 
-### HasAuditLogType
-
-`func (o *AuditLogItemModel) HasAuditLogType() bool`
-
-HasAuditLogType returns a boolean if a field has been set.
 
 ### SetAuditLogTypeNil
 
@@ -225,11 +195,6 @@ and a boolean to check if the value has been set.
 
 SetUserEmail sets UserEmail field to given value.
 
-### HasUserEmail
-
-`func (o *AuditLogItemModel) HasUserEmail() bool`
-
-HasUserEmail returns a boolean if a field has been set.
 
 ### SetUserEmailNil
 
@@ -260,11 +225,6 @@ and a boolean to check if the value has been set.
 
 SetUserName sets UserName field to given value.
 
-### HasUserName
-
-`func (o *AuditLogItemModel) HasUserName() bool`
-
-HasUserName returns a boolean if a field has been set.
 
 ### SetUserNameNil
 
@@ -295,11 +255,6 @@ and a boolean to check if the value has been set.
 
 SetWhere sets Where field to given value.
 
-### HasWhere
-
-`func (o *AuditLogItemModel) HasWhere() bool`
-
-HasWhere returns a boolean if a field has been set.
 
 ### SetWhereNil
 
@@ -330,11 +285,6 @@ and a boolean to check if the value has been set.
 
 SetWhy sets Why field to given value.
 
-### HasWhy
-
-`func (o *AuditLogItemModel) HasWhy() bool`
-
-HasWhy returns a boolean if a field has been set.
 
 ### SetWhyNil
 
@@ -365,11 +315,6 @@ and a boolean to check if the value has been set.
 
 SetActionTarget sets ActionTarget field to given value.
 
-### HasActionTarget
-
-`func (o *AuditLogItemModel) HasActionTarget() bool`
-
-HasActionTarget returns a boolean if a field has been set.
 
 ### SetActionTargetNil
 
@@ -400,11 +345,6 @@ and a boolean to check if the value has been set.
 
 SetDetails sets Details field to given value.
 
-### HasDetails
-
-`func (o *AuditLogItemModel) HasDetails() bool`
-
-HasDetails returns a boolean if a field has been set.
 
 ### SetDetailsNil
 

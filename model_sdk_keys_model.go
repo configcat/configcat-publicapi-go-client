@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the SdkKeysModel type satisfies the MappedNullable interface at compile time
@@ -21,17 +23,21 @@ var _ MappedNullable = &SdkKeysModel{}
 // SdkKeysModel struct for SdkKeysModel
 type SdkKeysModel struct {
 	// The primary SDK key.
-	Primary NullableString `json:"primary,omitempty"`
+	Primary string `json:"primary"`
 	// The secondary SDK key.
-	Secondary NullableString `json:"secondary,omitempty"`
+	Secondary NullableString `json:"secondary"`
 }
+
+type _SdkKeysModel SdkKeysModel
 
 // NewSdkKeysModel instantiates a new SdkKeysModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSdkKeysModel() *SdkKeysModel {
+func NewSdkKeysModel(primary string, secondary NullableString) *SdkKeysModel {
 	this := SdkKeysModel{}
+	this.Primary = primary
+	this.Secondary = secondary
 	return &this
 }
 
@@ -43,58 +49,42 @@ func NewSdkKeysModelWithDefaults() *SdkKeysModel {
 	return &this
 }
 
-// GetPrimary returns the Primary field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetPrimary returns the Primary field value
 func (o *SdkKeysModel) GetPrimary() string {
-	if o == nil || IsNil(o.Primary.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Primary.Get()
+
+	return o.Primary
 }
 
-// GetPrimaryOk returns a tuple with the Primary field value if set, nil otherwise
+// GetPrimaryOk returns a tuple with the Primary field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SdkKeysModel) GetPrimaryOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Primary.Get(), o.Primary.IsSet()
+	return &o.Primary, true
 }
 
-// HasPrimary returns a boolean if a field has been set.
-func (o *SdkKeysModel) HasPrimary() bool {
-	if o != nil && o.Primary.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetPrimary gets a reference to the given NullableString and assigns it to the Primary field.
+// SetPrimary sets field value
 func (o *SdkKeysModel) SetPrimary(v string) {
-	o.Primary.Set(&v)
-}
-// SetPrimaryNil sets the value for Primary to be an explicit nil
-func (o *SdkKeysModel) SetPrimaryNil() {
-	o.Primary.Set(nil)
+	o.Primary = v
 }
 
-// UnsetPrimary ensures that no value is present for Primary, not even an explicit nil
-func (o *SdkKeysModel) UnsetPrimary() {
-	o.Primary.Unset()
-}
-
-// GetSecondary returns the Secondary field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSecondary returns the Secondary field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *SdkKeysModel) GetSecondary() string {
-	if o == nil || IsNil(o.Secondary.Get()) {
+	if o == nil || o.Secondary.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Secondary.Get()
 }
 
-// GetSecondaryOk returns a tuple with the Secondary field value if set, nil otherwise
+// GetSecondaryOk returns a tuple with the Secondary field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SdkKeysModel) GetSecondaryOk() (*string, bool) {
@@ -104,27 +94,9 @@ func (o *SdkKeysModel) GetSecondaryOk() (*string, bool) {
 	return o.Secondary.Get(), o.Secondary.IsSet()
 }
 
-// HasSecondary returns a boolean if a field has been set.
-func (o *SdkKeysModel) HasSecondary() bool {
-	if o != nil && o.Secondary.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetSecondary gets a reference to the given NullableString and assigns it to the Secondary field.
+// SetSecondary sets field value
 func (o *SdkKeysModel) SetSecondary(v string) {
 	o.Secondary.Set(&v)
-}
-// SetSecondaryNil sets the value for Secondary to be an explicit nil
-func (o *SdkKeysModel) SetSecondaryNil() {
-	o.Secondary.Set(nil)
-}
-
-// UnsetSecondary ensures that no value is present for Secondary, not even an explicit nil
-func (o *SdkKeysModel) UnsetSecondary() {
-	o.Secondary.Unset()
 }
 
 func (o SdkKeysModel) MarshalJSON() ([]byte, error) {
@@ -137,13 +109,47 @@ func (o SdkKeysModel) MarshalJSON() ([]byte, error) {
 
 func (o SdkKeysModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Primary.IsSet() {
-		toSerialize["primary"] = o.Primary.Get()
-	}
-	if o.Secondary.IsSet() {
-		toSerialize["secondary"] = o.Secondary.Get()
-	}
+	toSerialize["primary"] = o.Primary
+	toSerialize["secondary"] = o.Secondary.Get()
 	return toSerialize, nil
+}
+
+func (o *SdkKeysModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"primary",
+		"secondary",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSdkKeysModel := _SdkKeysModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varSdkKeysModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SdkKeysModel(varSdkKeysModel)
+
+	return err
 }
 
 type NullableSdkKeysModel struct {

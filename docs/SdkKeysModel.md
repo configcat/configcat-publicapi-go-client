@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Primary** | Pointer to **NullableString** | The primary SDK key. | [optional] 
-**Secondary** | Pointer to **NullableString** | The secondary SDK key. | [optional] 
+**Primary** | **string** | The primary SDK key. | 
+**Secondary** | **NullableString** | The secondary SDK key. | 
 
 ## Methods
 
 ### NewSdkKeysModel
 
-`func NewSdkKeysModel() *SdkKeysModel`
+`func NewSdkKeysModel(primary string, secondary NullableString, ) *SdkKeysModel`
 
 NewSdkKeysModel instantiates a new SdkKeysModel object
 This constructor will assign default values to properties that have it defined,
@@ -45,22 +45,7 @@ and a boolean to check if the value has been set.
 
 SetPrimary sets Primary field to given value.
 
-### HasPrimary
 
-`func (o *SdkKeysModel) HasPrimary() bool`
-
-HasPrimary returns a boolean if a field has been set.
-
-### SetPrimaryNil
-
-`func (o *SdkKeysModel) SetPrimaryNil(b bool)`
-
- SetPrimaryNil sets the value for Primary to be an explicit nil
-
-### UnsetPrimary
-`func (o *SdkKeysModel) UnsetPrimary()`
-
-UnsetPrimary ensures that no value is present for Primary, not even an explicit nil
 ### GetSecondary
 
 `func (o *SdkKeysModel) GetSecondary() string`
@@ -80,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetSecondary sets Secondary field to given value.
 
-### HasSecondary
-
-`func (o *SdkKeysModel) HasSecondary() bool`
-
-HasSecondary returns a boolean if a field has been set.
 
 ### SetSecondaryNil
 

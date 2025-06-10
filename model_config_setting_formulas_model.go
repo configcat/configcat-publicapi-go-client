@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the ConfigSettingFormulasModel type satisfies the MappedNullable interface at compile time
@@ -20,20 +22,27 @@ var _ MappedNullable = &ConfigSettingFormulasModel{}
 
 // ConfigSettingFormulasModel struct for ConfigSettingFormulasModel
 type ConfigSettingFormulasModel struct {
-	Config *ConfigModel `json:"config,omitempty"`
-	Environment *EnvironmentModel `json:"environment,omitempty"`
-	ReadOnly *bool `json:"readOnly,omitempty"`
+	Config ConfigModel `json:"config"`
+	Environment EnvironmentModel `json:"environment"`
+	ReadOnly bool `json:"readOnly"`
 	// Evaluation descriptors of each updated Feature Flag and Setting.
-	SettingFormulas []ConfigSettingFormulaModel `json:"settingFormulas,omitempty"`
-	FeatureFlagLimitations *FeatureFlagLimitations `json:"featureFlagLimitations,omitempty"`
+	SettingFormulas []ConfigSettingFormulaModel `json:"settingFormulas"`
+	FeatureFlagLimitations FeatureFlagLimitations `json:"featureFlagLimitations"`
 }
+
+type _ConfigSettingFormulasModel ConfigSettingFormulasModel
 
 // NewConfigSettingFormulasModel instantiates a new ConfigSettingFormulasModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfigSettingFormulasModel() *ConfigSettingFormulasModel {
+func NewConfigSettingFormulasModel(config ConfigModel, environment EnvironmentModel, readOnly bool, settingFormulas []ConfigSettingFormulaModel, featureFlagLimitations FeatureFlagLimitations) *ConfigSettingFormulasModel {
 	this := ConfigSettingFormulasModel{}
+	this.Config = config
+	this.Environment = environment
+	this.ReadOnly = readOnly
+	this.SettingFormulas = settingFormulas
+	this.FeatureFlagLimitations = featureFlagLimitations
 	return &this
 }
 
@@ -45,165 +54,124 @@ func NewConfigSettingFormulasModelWithDefaults() *ConfigSettingFormulasModel {
 	return &this
 }
 
-// GetConfig returns the Config field value if set, zero value otherwise.
+// GetConfig returns the Config field value
 func (o *ConfigSettingFormulasModel) GetConfig() ConfigModel {
-	if o == nil || IsNil(o.Config) {
+	if o == nil {
 		var ret ConfigModel
 		return ret
 	}
-	return *o.Config
+
+	return o.Config
 }
 
-// GetConfigOk returns a tuple with the Config field value if set, nil otherwise
+// GetConfigOk returns a tuple with the Config field value
 // and a boolean to check if the value has been set.
 func (o *ConfigSettingFormulasModel) GetConfigOk() (*ConfigModel, bool) {
-	if o == nil || IsNil(o.Config) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Config, true
+	return &o.Config, true
 }
 
-// HasConfig returns a boolean if a field has been set.
-func (o *ConfigSettingFormulasModel) HasConfig() bool {
-	if o != nil && !IsNil(o.Config) {
-		return true
-	}
-
-	return false
-}
-
-// SetConfig gets a reference to the given ConfigModel and assigns it to the Config field.
+// SetConfig sets field value
 func (o *ConfigSettingFormulasModel) SetConfig(v ConfigModel) {
-	o.Config = &v
+	o.Config = v
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
+// GetEnvironment returns the Environment field value
 func (o *ConfigSettingFormulasModel) GetEnvironment() EnvironmentModel {
-	if o == nil || IsNil(o.Environment) {
+	if o == nil {
 		var ret EnvironmentModel
 		return ret
 	}
-	return *o.Environment
+
+	return o.Environment
 }
 
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
+// GetEnvironmentOk returns a tuple with the Environment field value
 // and a boolean to check if the value has been set.
 func (o *ConfigSettingFormulasModel) GetEnvironmentOk() (*EnvironmentModel, bool) {
-	if o == nil || IsNil(o.Environment) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Environment, true
+	return &o.Environment, true
 }
 
-// HasEnvironment returns a boolean if a field has been set.
-func (o *ConfigSettingFormulasModel) HasEnvironment() bool {
-	if o != nil && !IsNil(o.Environment) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given EnvironmentModel and assigns it to the Environment field.
+// SetEnvironment sets field value
 func (o *ConfigSettingFormulasModel) SetEnvironment(v EnvironmentModel) {
-	o.Environment = &v
+	o.Environment = v
 }
 
-// GetReadOnly returns the ReadOnly field value if set, zero value otherwise.
+// GetReadOnly returns the ReadOnly field value
 func (o *ConfigSettingFormulasModel) GetReadOnly() bool {
-	if o == nil || IsNil(o.ReadOnly) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.ReadOnly
+
+	return o.ReadOnly
 }
 
-// GetReadOnlyOk returns a tuple with the ReadOnly field value if set, nil otherwise
+// GetReadOnlyOk returns a tuple with the ReadOnly field value
 // and a boolean to check if the value has been set.
 func (o *ConfigSettingFormulasModel) GetReadOnlyOk() (*bool, bool) {
-	if o == nil || IsNil(o.ReadOnly) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReadOnly, true
+	return &o.ReadOnly, true
 }
 
-// HasReadOnly returns a boolean if a field has been set.
-func (o *ConfigSettingFormulasModel) HasReadOnly() bool {
-	if o != nil && !IsNil(o.ReadOnly) {
-		return true
-	}
-
-	return false
-}
-
-// SetReadOnly gets a reference to the given bool and assigns it to the ReadOnly field.
+// SetReadOnly sets field value
 func (o *ConfigSettingFormulasModel) SetReadOnly(v bool) {
-	o.ReadOnly = &v
+	o.ReadOnly = v
 }
 
-// GetSettingFormulas returns the SettingFormulas field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetSettingFormulas returns the SettingFormulas field value
 func (o *ConfigSettingFormulasModel) GetSettingFormulas() []ConfigSettingFormulaModel {
 	if o == nil {
 		var ret []ConfigSettingFormulaModel
 		return ret
 	}
+
 	return o.SettingFormulas
 }
 
-// GetSettingFormulasOk returns a tuple with the SettingFormulas field value if set, nil otherwise
+// GetSettingFormulasOk returns a tuple with the SettingFormulas field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ConfigSettingFormulasModel) GetSettingFormulasOk() ([]ConfigSettingFormulaModel, bool) {
-	if o == nil || IsNil(o.SettingFormulas) {
+	if o == nil {
 		return nil, false
 	}
 	return o.SettingFormulas, true
 }
 
-// HasSettingFormulas returns a boolean if a field has been set.
-func (o *ConfigSettingFormulasModel) HasSettingFormulas() bool {
-	if o != nil && !IsNil(o.SettingFormulas) {
-		return true
-	}
-
-	return false
-}
-
-// SetSettingFormulas gets a reference to the given []ConfigSettingFormulaModel and assigns it to the SettingFormulas field.
+// SetSettingFormulas sets field value
 func (o *ConfigSettingFormulasModel) SetSettingFormulas(v []ConfigSettingFormulaModel) {
 	o.SettingFormulas = v
 }
 
-// GetFeatureFlagLimitations returns the FeatureFlagLimitations field value if set, zero value otherwise.
+// GetFeatureFlagLimitations returns the FeatureFlagLimitations field value
 func (o *ConfigSettingFormulasModel) GetFeatureFlagLimitations() FeatureFlagLimitations {
-	if o == nil || IsNil(o.FeatureFlagLimitations) {
+	if o == nil {
 		var ret FeatureFlagLimitations
 		return ret
 	}
-	return *o.FeatureFlagLimitations
+
+	return o.FeatureFlagLimitations
 }
 
-// GetFeatureFlagLimitationsOk returns a tuple with the FeatureFlagLimitations field value if set, nil otherwise
+// GetFeatureFlagLimitationsOk returns a tuple with the FeatureFlagLimitations field value
 // and a boolean to check if the value has been set.
 func (o *ConfigSettingFormulasModel) GetFeatureFlagLimitationsOk() (*FeatureFlagLimitations, bool) {
-	if o == nil || IsNil(o.FeatureFlagLimitations) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FeatureFlagLimitations, true
+	return &o.FeatureFlagLimitations, true
 }
 
-// HasFeatureFlagLimitations returns a boolean if a field has been set.
-func (o *ConfigSettingFormulasModel) HasFeatureFlagLimitations() bool {
-	if o != nil && !IsNil(o.FeatureFlagLimitations) {
-		return true
-	}
-
-	return false
-}
-
-// SetFeatureFlagLimitations gets a reference to the given FeatureFlagLimitations and assigns it to the FeatureFlagLimitations field.
+// SetFeatureFlagLimitations sets field value
 func (o *ConfigSettingFormulasModel) SetFeatureFlagLimitations(v FeatureFlagLimitations) {
-	o.FeatureFlagLimitations = &v
+	o.FeatureFlagLimitations = v
 }
 
 func (o ConfigSettingFormulasModel) MarshalJSON() ([]byte, error) {
@@ -216,22 +184,53 @@ func (o ConfigSettingFormulasModel) MarshalJSON() ([]byte, error) {
 
 func (o ConfigSettingFormulasModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Config) {
-		toSerialize["config"] = o.Config
-	}
-	if !IsNil(o.Environment) {
-		toSerialize["environment"] = o.Environment
-	}
-	if !IsNil(o.ReadOnly) {
-		toSerialize["readOnly"] = o.ReadOnly
-	}
-	if o.SettingFormulas != nil {
-		toSerialize["settingFormulas"] = o.SettingFormulas
-	}
-	if !IsNil(o.FeatureFlagLimitations) {
-		toSerialize["featureFlagLimitations"] = o.FeatureFlagLimitations
-	}
+	toSerialize["config"] = o.Config
+	toSerialize["environment"] = o.Environment
+	toSerialize["readOnly"] = o.ReadOnly
+	toSerialize["settingFormulas"] = o.SettingFormulas
+	toSerialize["featureFlagLimitations"] = o.FeatureFlagLimitations
 	return toSerialize, nil
+}
+
+func (o *ConfigSettingFormulasModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"config",
+		"environment",
+		"readOnly",
+		"settingFormulas",
+		"featureFlagLimitations",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varConfigSettingFormulasModel := _ConfigSettingFormulasModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varConfigSettingFormulasModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ConfigSettingFormulasModel(varConfigSettingFormulasModel)
+
+	return err
 }
 
 type NullableConfigSettingFormulasModel struct {

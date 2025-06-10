@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-Testing FeatureFlagSettingValuesV2ApiService
+Testing FeatureFlagSettingValuesV2APIService
 
 */
 
@@ -14,22 +14,22 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
-func Test_configcatpublicapi_FeatureFlagSettingValuesV2ApiService(t *testing.T) {
+func Test_configcatpublicapi_FeatureFlagSettingValuesV2APIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test FeatureFlagSettingValuesV2ApiService GetSettingValueV2", func(t *testing.T) {
+	t.Run("Test FeatureFlagSettingValuesV2APIService GetSettingValueV2", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var environmentId string
 		var settingId int32
 
-		resp, httpRes, err := apiClient.FeatureFlagSettingValuesV2Api.GetSettingValueV2(context.Background(), environmentId, settingId).Execute()
+		resp, httpRes, err := apiClient.FeatureFlagSettingValuesV2API.GetSettingValueV2(context.Background(), environmentId, settingId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -37,14 +37,14 @@ func Test_configcatpublicapi_FeatureFlagSettingValuesV2ApiService(t *testing.T) 
 
 	})
 
-	t.Run("Test FeatureFlagSettingValuesV2ApiService GetSettingValuesV2", func(t *testing.T) {
+	t.Run("Test FeatureFlagSettingValuesV2APIService GetSettingValuesV2", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var configId string
 		var environmentId string
 
-		resp, httpRes, err := apiClient.FeatureFlagSettingValuesV2Api.GetSettingValuesV2(context.Background(), configId, environmentId).Execute()
+		resp, httpRes, err := apiClient.FeatureFlagSettingValuesV2API.GetSettingValuesV2(context.Background(), configId, environmentId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -52,14 +52,14 @@ func Test_configcatpublicapi_FeatureFlagSettingValuesV2ApiService(t *testing.T) 
 
 	})
 
-	t.Run("Test FeatureFlagSettingValuesV2ApiService PostSettingValuesV2", func(t *testing.T) {
+	t.Run("Test FeatureFlagSettingValuesV2APIService PostSettingValuesV2", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var configId string
 		var environmentId string
 
-		resp, httpRes, err := apiClient.FeatureFlagSettingValuesV2Api.PostSettingValuesV2(context.Background(), configId, environmentId).Execute()
+		resp, httpRes, err := apiClient.FeatureFlagSettingValuesV2API.PostSettingValuesV2(context.Background(), configId, environmentId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -67,14 +67,14 @@ func Test_configcatpublicapi_FeatureFlagSettingValuesV2ApiService(t *testing.T) 
 
 	})
 
-	t.Run("Test FeatureFlagSettingValuesV2ApiService ReplaceSettingValueV2", func(t *testing.T) {
+	t.Run("Test FeatureFlagSettingValuesV2APIService ReplaceSettingValueV2", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var environmentId string
 		var settingId int32
 
-		resp, httpRes, err := apiClient.FeatureFlagSettingValuesV2Api.ReplaceSettingValueV2(context.Background(), environmentId, settingId).Execute()
+		resp, httpRes, err := apiClient.FeatureFlagSettingValuesV2API.ReplaceSettingValueV2(context.Background(), environmentId, settingId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -82,14 +82,14 @@ func Test_configcatpublicapi_FeatureFlagSettingValuesV2ApiService(t *testing.T) 
 
 	})
 
-	t.Run("Test FeatureFlagSettingValuesV2ApiService UpdateSettingValueV2", func(t *testing.T) {
+	t.Run("Test FeatureFlagSettingValuesV2APIService UpdateSettingValueV2", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var environmentId string
 		var settingId int32
 
-		resp, httpRes, err := apiClient.FeatureFlagSettingValuesV2Api.UpdateSettingValueV2(context.Background(), environmentId, settingId).Execute()
+		resp, httpRes, err := apiClient.FeatureFlagSettingValuesV2API.UpdateSettingValueV2(context.Background(), environmentId, settingId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Product** | Pointer to [**ProductModel**](ProductModel.md) |  | [optional] 
-**IntegrationId** | Pointer to **string** | Identifier of the Integration. | [optional] 
-**Name** | Pointer to **NullableString** | Name of the Integration. | [optional] 
-**IntegrationType** | Pointer to [**IntegrationType**](IntegrationType.md) |  | [optional] 
-**Parameters** | Pointer to **map[string]string** | Parameters of the Integration. | [optional] 
-**EnvironmentIds** | Pointer to **[]string** | List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected. | [optional] 
-**ConfigIds** | Pointer to **[]string** | List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected. | [optional] 
+**Product** | [**ProductModel**](ProductModel.md) |  | 
+**IntegrationId** | **string** | Identifier of the Integration. | 
+**Name** | **string** | Name of the Integration. | 
+**IntegrationType** | [**IntegrationType**](IntegrationType.md) |  | 
+**Parameters** | **map[string]string** | Parameters of the Integration. | 
+**EnvironmentIds** | **[]string** | List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected. | 
+**ConfigIds** | **[]string** | List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected. | 
 
 ## Methods
 
 ### NewIntegrationModel
 
-`func NewIntegrationModel() *IntegrationModel`
+`func NewIntegrationModel(product ProductModel, integrationId string, name string, integrationType IntegrationType, parameters map[string]string, environmentIds []string, configIds []string, ) *IntegrationModel`
 
 NewIntegrationModel instantiates a new IntegrationModel object
 This constructor will assign default values to properties that have it defined,
@@ -50,11 +50,6 @@ and a boolean to check if the value has been set.
 
 SetProduct sets Product field to given value.
 
-### HasProduct
-
-`func (o *IntegrationModel) HasProduct() bool`
-
-HasProduct returns a boolean if a field has been set.
 
 ### GetIntegrationId
 
@@ -75,11 +70,6 @@ and a boolean to check if the value has been set.
 
 SetIntegrationId sets IntegrationId field to given value.
 
-### HasIntegrationId
-
-`func (o *IntegrationModel) HasIntegrationId() bool`
-
-HasIntegrationId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -100,22 +90,7 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
 
-`func (o *IntegrationModel) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### SetNameNil
-
-`func (o *IntegrationModel) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *IntegrationModel) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetIntegrationType
 
 `func (o *IntegrationModel) GetIntegrationType() IntegrationType`
@@ -135,11 +110,6 @@ and a boolean to check if the value has been set.
 
 SetIntegrationType sets IntegrationType field to given value.
 
-### HasIntegrationType
-
-`func (o *IntegrationModel) HasIntegrationType() bool`
-
-HasIntegrationType returns a boolean if a field has been set.
 
 ### GetParameters
 
@@ -160,11 +130,6 @@ and a boolean to check if the value has been set.
 
 SetParameters sets Parameters field to given value.
 
-### HasParameters
-
-`func (o *IntegrationModel) HasParameters() bool`
-
-HasParameters returns a boolean if a field has been set.
 
 ### SetParametersNil
 
@@ -195,22 +160,7 @@ and a boolean to check if the value has been set.
 
 SetEnvironmentIds sets EnvironmentIds field to given value.
 
-### HasEnvironmentIds
 
-`func (o *IntegrationModel) HasEnvironmentIds() bool`
-
-HasEnvironmentIds returns a boolean if a field has been set.
-
-### SetEnvironmentIdsNil
-
-`func (o *IntegrationModel) SetEnvironmentIdsNil(b bool)`
-
- SetEnvironmentIdsNil sets the value for EnvironmentIds to be an explicit nil
-
-### UnsetEnvironmentIds
-`func (o *IntegrationModel) UnsetEnvironmentIds()`
-
-UnsetEnvironmentIds ensures that no value is present for EnvironmentIds, not even an explicit nil
 ### GetConfigIds
 
 `func (o *IntegrationModel) GetConfigIds() []string`
@@ -230,22 +180,7 @@ and a boolean to check if the value has been set.
 
 SetConfigIds sets ConfigIds field to given value.
 
-### HasConfigIds
 
-`func (o *IntegrationModel) HasConfigIds() bool`
-
-HasConfigIds returns a boolean if a field has been set.
-
-### SetConfigIdsNil
-
-`func (o *IntegrationModel) SetConfigIdsNil(b bool)`
-
- SetConfigIdsNil sets the value for ConfigIds to be an explicit nil
-
-### UnsetConfigIds
-`func (o *IntegrationModel) UnsetConfigIds()`
-
-UnsetConfigIds ensures that no value is present for ConfigIds, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-Testing FeatureFlagSettingValuesUsingSDKKeyV2ApiService
+Testing FeatureFlagSettingValuesUsingSDKKeyV2APIService
 
 */
 
@@ -14,21 +14,21 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
-func Test_configcatpublicapi_FeatureFlagSettingValuesUsingSDKKeyV2ApiService(t *testing.T) {
+func Test_configcatpublicapi_FeatureFlagSettingValuesUsingSDKKeyV2APIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test FeatureFlagSettingValuesUsingSDKKeyV2ApiService GetSettingValueBySdkkeyV2", func(t *testing.T) {
+	t.Run("Test FeatureFlagSettingValuesUsingSDKKeyV2APIService GetSettingValueBySdkkeyV2", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var settingKeyOrId string
 
-		resp, httpRes, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyV2Api.GetSettingValueBySdkkeyV2(context.Background(), settingKeyOrId).Execute()
+		resp, httpRes, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyV2API.GetSettingValueBySdkkeyV2(context.Background(), settingKeyOrId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,13 +36,13 @@ func Test_configcatpublicapi_FeatureFlagSettingValuesUsingSDKKeyV2ApiService(t *
 
 	})
 
-	t.Run("Test FeatureFlagSettingValuesUsingSDKKeyV2ApiService ReplaceSettingValueBySdkkeyV2", func(t *testing.T) {
+	t.Run("Test FeatureFlagSettingValuesUsingSDKKeyV2APIService ReplaceSettingValueBySdkkeyV2", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var settingKeyOrId string
 
-		resp, httpRes, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyV2Api.ReplaceSettingValueBySdkkeyV2(context.Background(), settingKeyOrId).Execute()
+		resp, httpRes, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyV2API.ReplaceSettingValueBySdkkeyV2(context.Background(), settingKeyOrId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -50,13 +50,13 @@ func Test_configcatpublicapi_FeatureFlagSettingValuesUsingSDKKeyV2ApiService(t *
 
 	})
 
-	t.Run("Test FeatureFlagSettingValuesUsingSDKKeyV2ApiService UpdateSettingValueBySdkkeyV2", func(t *testing.T) {
+	t.Run("Test FeatureFlagSettingValuesUsingSDKKeyV2APIService UpdateSettingValueBySdkkeyV2", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var settingKeyOrId string
 
-		resp, httpRes, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyV2Api.UpdateSettingValueBySdkkeyV2(context.Background(), settingKeyOrId).Execute()
+		resp, httpRes, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyV2API.UpdateSettingValueBySdkkeyV2(context.Background(), settingKeyOrId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

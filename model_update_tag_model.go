@@ -22,7 +22,7 @@ var _ MappedNullable = &UpdateTagModel{}
 type UpdateTagModel struct {
 	// Name of the Tag.
 	Name NullableString `json:"name,omitempty"`
-	// Color of the Tag.
+	// Color of the Tag. Possible values: `panther`, `whale`, `salmon`, `lizard`, `canary`, `koala`, or any HTML color code.
 	Color NullableString `json:"color,omitempty"`
 }
 

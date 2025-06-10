@@ -86,6 +86,7 @@ const (
 	AUDITLOGTYPE_SAML_IDP_CONFIGURATION_ADDED AuditLogType = "samlIdpConfigurationAdded"
 	AUDITLOGTYPE_SAML_IDP_CONFIGURATION_REMOVED AuditLogType = "samlIdpConfigurationRemoved"
 	AUDITLOGTYPE_SAML_IDP_CONFIGURATION_UPDATED AuditLogType = "samlIdpConfigurationUpdated"
+	AUDITLOGTYPE_AUTO_PROVISIONING_ENABLED_CHANGED AuditLogType = "autoProvisioningEnabledChanged"
 	AUDITLOGTYPE_ORGANIZATION_MEMBER_JOINED AuditLogType = "organizationMemberJoined"
 	AUDITLOGTYPE_ORGANIZATION_MEMBER_PRODUCT_JOIN_REQUESTED AuditLogType = "organizationMemberProductJoinRequested"
 	AUDITLOGTYPE_ORGANIZATION_MEMBER_PRODUCT_JOIN_REQUEST_REJECTED AuditLogType = "organizationMemberProductJoinRequestRejected"
@@ -99,6 +100,19 @@ const (
 	AUDITLOGTYPE_SEGMENT_DELETED AuditLogType = "segmentDeleted"
 	AUDITLOGTYPE_WEBHOOK_SIGNING_KEY_DELETED AuditLogType = "webhookSigningKeyDeleted"
 	AUDITLOGTYPE_WEBHOOK_SIGNING_KEY_CREATED AuditLogType = "webhookSigningKeyCreated"
+	AUDITLOGTYPE_USER_PROVISIONING_CONFIGURATION_CHANGED AuditLogType = "userProvisioningConfigurationChanged"
+	AUDITLOGTYPE_SYNC_GROUP_PROVISIONING_RULE_CHANGED AuditLogType = "syncGroupProvisioningRuleChanged"
+	AUDITLOGTYPE_SYNC_GROUPS_REORDERED AuditLogType = "syncGroupsReordered"
+	AUDITLOGTYPE_SYNC_USER_PROVISIONING_ENABLED AuditLogType = "syncUserProvisioningEnabled"
+	AUDITLOGTYPE_SYNC_USER_PROVISIONING_DISABLED AuditLogType = "syncUserProvisioningDisabled"
+	AUDITLOGTYPE_USER_EMAIL_CHANGED AuditLogType = "userEmailChanged"
+	AUDITLOGTYPE_USER_FULL_NAME_CHANGED AuditLogType = "userFullNameChanged"
+	AUDITLOGTYPE_USER_DISABLED AuditLogType = "userDisabled"
+	AUDITLOGTYPE_AWS_CONNECTED AuditLogType = "awsConnected"
+	AUDITLOGTYPE_AWS_DISCONNECTED AuditLogType = "awsDisconnected"
+	AUDITLOGTYPE_USER_ENABLED AuditLogType = "userEnabled"
+	AUDITLOGTYPE_SYNC_USER_DELETED AuditLogType = "syncUserDeleted"
+	AUDITLOGTYPE_SYNC_GROUP_DELETED AuditLogType = "syncGroupDeleted"
 )
 
 // All allowed values of AuditLogType enum
@@ -168,6 +182,7 @@ var AllowedAuditLogTypeEnumValues = []AuditLogType{
 	"samlIdpConfigurationAdded",
 	"samlIdpConfigurationRemoved",
 	"samlIdpConfigurationUpdated",
+	"autoProvisioningEnabledChanged",
 	"organizationMemberJoined",
 	"organizationMemberProductJoinRequested",
 	"organizationMemberProductJoinRequestRejected",
@@ -181,6 +196,19 @@ var AllowedAuditLogTypeEnumValues = []AuditLogType{
 	"segmentDeleted",
 	"webhookSigningKeyDeleted",
 	"webhookSigningKeyCreated",
+	"userProvisioningConfigurationChanged",
+	"syncGroupProvisioningRuleChanged",
+	"syncGroupsReordered",
+	"syncUserProvisioningEnabled",
+	"syncUserProvisioningDisabled",
+	"userEmailChanged",
+	"userFullNameChanged",
+	"userDisabled",
+	"awsConnected",
+	"awsDisconnected",
+	"userEnabled",
+	"syncUserDeleted",
+	"syncGroupDeleted",
 }
 
 func (v *AuditLogType) UnmarshalJSON(src []byte) error {

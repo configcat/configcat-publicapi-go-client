@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Config** | Pointer to [**ConfigModel**](ConfigModel.md) |  | [optional] 
-**Environment** | Pointer to [**EnvironmentModel**](EnvironmentModel.md) |  | [optional] 
-**ReadOnly** | Pointer to **bool** |  | [optional] 
-**SettingValues** | Pointer to [**[]ConfigSettingValueModel**](ConfigSettingValueModel.md) |  | [optional] 
-**FeatureFlagLimitations** | Pointer to [**FeatureFlagLimitations**](FeatureFlagLimitations.md) |  | [optional] 
+**Config** | [**ConfigModel**](ConfigModel.md) |  | 
+**Environment** | [**EnvironmentModel**](EnvironmentModel.md) |  | 
+**ReadOnly** | **bool** |  | 
+**SettingValues** | [**[]ConfigSettingValueModel**](ConfigSettingValueModel.md) |  | 
+**FeatureFlagLimitations** | [**FeatureFlagLimitations**](FeatureFlagLimitations.md) |  | 
 
 ## Methods
 
 ### NewConfigSettingValuesModel
 
-`func NewConfigSettingValuesModel() *ConfigSettingValuesModel`
+`func NewConfigSettingValuesModel(config ConfigModel, environment EnvironmentModel, readOnly bool, settingValues []ConfigSettingValueModel, featureFlagLimitations FeatureFlagLimitations, ) *ConfigSettingValuesModel`
 
 NewConfigSettingValuesModel instantiates a new ConfigSettingValuesModel object
 This constructor will assign default values to properties that have it defined,
@@ -48,11 +48,6 @@ and a boolean to check if the value has been set.
 
 SetConfig sets Config field to given value.
 
-### HasConfig
-
-`func (o *ConfigSettingValuesModel) HasConfig() bool`
-
-HasConfig returns a boolean if a field has been set.
 
 ### GetEnvironment
 
@@ -73,11 +68,6 @@ and a boolean to check if the value has been set.
 
 SetEnvironment sets Environment field to given value.
 
-### HasEnvironment
-
-`func (o *ConfigSettingValuesModel) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
 
 ### GetReadOnly
 
@@ -98,11 +88,6 @@ and a boolean to check if the value has been set.
 
 SetReadOnly sets ReadOnly field to given value.
 
-### HasReadOnly
-
-`func (o *ConfigSettingValuesModel) HasReadOnly() bool`
-
-HasReadOnly returns a boolean if a field has been set.
 
 ### GetSettingValues
 
@@ -123,22 +108,7 @@ and a boolean to check if the value has been set.
 
 SetSettingValues sets SettingValues field to given value.
 
-### HasSettingValues
 
-`func (o *ConfigSettingValuesModel) HasSettingValues() bool`
-
-HasSettingValues returns a boolean if a field has been set.
-
-### SetSettingValuesNil
-
-`func (o *ConfigSettingValuesModel) SetSettingValuesNil(b bool)`
-
- SetSettingValuesNil sets the value for SettingValues to be an explicit nil
-
-### UnsetSettingValues
-`func (o *ConfigSettingValuesModel) UnsetSettingValues()`
-
-UnsetSettingValues ensures that no value is present for SettingValues, not even an explicit nil
 ### GetFeatureFlagLimitations
 
 `func (o *ConfigSettingValuesModel) GetFeatureFlagLimitations() FeatureFlagLimitations`
@@ -158,11 +128,6 @@ and a boolean to check if the value has been set.
 
 SetFeatureFlagLimitations sets FeatureFlagLimitations field to given value.
 
-### HasFeatureFlagLimitations
-
-`func (o *ConfigSettingValuesModel) HasFeatureFlagLimitations() bool`
-
-HasFeatureFlagLimitations returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

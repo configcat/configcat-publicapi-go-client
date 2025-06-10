@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the EnvironmentModel type satisfies the MappedNullable interface at compile time
@@ -20,27 +22,36 @@ var _ MappedNullable = &EnvironmentModel{}
 
 // EnvironmentModel Details of the Environment.
 type EnvironmentModel struct {
-	Product *ProductModel `json:"product,omitempty"`
+	Product ProductModel `json:"product"`
 	// Identifier of the Environment.
-	EnvironmentId *string `json:"environmentId,omitempty"`
+	EnvironmentId string `json:"environmentId"`
 	// Name of the Environment.
-	Name NullableString `json:"name,omitempty"`
+	Name string `json:"name"`
 	// The configured color of the Environment.
-	Color NullableString `json:"color,omitempty"`
+	Color NullableString `json:"color"`
 	// Description of the Environment.
-	Description NullableString `json:"description,omitempty"`
+	Description NullableString `json:"description"`
 	// The order of the Environment represented on the ConfigCat Dashboard.
-	Order *int32 `json:"order,omitempty"`
+	Order int32 `json:"order"`
 	// Determines whether a mandatory reason must be given every time when the Feature Flags or Settings in the given Environment are saved.
-	ReasonRequired *bool `json:"reasonRequired,omitempty"`
+	ReasonRequired bool `json:"reasonRequired"`
 }
+
+type _EnvironmentModel EnvironmentModel
 
 // NewEnvironmentModel instantiates a new EnvironmentModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEnvironmentModel() *EnvironmentModel {
+func NewEnvironmentModel(product ProductModel, environmentId string, name string, color NullableString, description NullableString, order int32, reasonRequired bool) *EnvironmentModel {
 	this := EnvironmentModel{}
+	this.Product = product
+	this.EnvironmentId = environmentId
+	this.Name = name
+	this.Color = color
+	this.Description = description
+	this.Order = order
+	this.ReasonRequired = reasonRequired
 	return &this
 }
 
@@ -52,122 +63,90 @@ func NewEnvironmentModelWithDefaults() *EnvironmentModel {
 	return &this
 }
 
-// GetProduct returns the Product field value if set, zero value otherwise.
+// GetProduct returns the Product field value
 func (o *EnvironmentModel) GetProduct() ProductModel {
-	if o == nil || IsNil(o.Product) {
+	if o == nil {
 		var ret ProductModel
 		return ret
 	}
-	return *o.Product
+
+	return o.Product
 }
 
-// GetProductOk returns a tuple with the Product field value if set, nil otherwise
+// GetProductOk returns a tuple with the Product field value
 // and a boolean to check if the value has been set.
 func (o *EnvironmentModel) GetProductOk() (*ProductModel, bool) {
-	if o == nil || IsNil(o.Product) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Product, true
+	return &o.Product, true
 }
 
-// HasProduct returns a boolean if a field has been set.
-func (o *EnvironmentModel) HasProduct() bool {
-	if o != nil && !IsNil(o.Product) {
-		return true
-	}
-
-	return false
-}
-
-// SetProduct gets a reference to the given ProductModel and assigns it to the Product field.
+// SetProduct sets field value
 func (o *EnvironmentModel) SetProduct(v ProductModel) {
-	o.Product = &v
+	o.Product = v
 }
 
-// GetEnvironmentId returns the EnvironmentId field value if set, zero value otherwise.
+// GetEnvironmentId returns the EnvironmentId field value
 func (o *EnvironmentModel) GetEnvironmentId() string {
-	if o == nil || IsNil(o.EnvironmentId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.EnvironmentId
+
+	return o.EnvironmentId
 }
 
-// GetEnvironmentIdOk returns a tuple with the EnvironmentId field value if set, nil otherwise
+// GetEnvironmentIdOk returns a tuple with the EnvironmentId field value
 // and a boolean to check if the value has been set.
 func (o *EnvironmentModel) GetEnvironmentIdOk() (*string, bool) {
-	if o == nil || IsNil(o.EnvironmentId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.EnvironmentId, true
+	return &o.EnvironmentId, true
 }
 
-// HasEnvironmentId returns a boolean if a field has been set.
-func (o *EnvironmentModel) HasEnvironmentId() bool {
-	if o != nil && !IsNil(o.EnvironmentId) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironmentId gets a reference to the given string and assigns it to the EnvironmentId field.
+// SetEnvironmentId sets field value
 func (o *EnvironmentModel) SetEnvironmentId(v string) {
-	o.EnvironmentId = &v
+	o.EnvironmentId = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetName returns the Name field value
 func (o *EnvironmentModel) GetName() string {
-	if o == nil || IsNil(o.Name.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name.Get()
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EnvironmentModel) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *EnvironmentModel) HasName() bool {
-	if o != nil && o.Name.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given NullableString and assigns it to the Name field.
+// SetName sets field value
 func (o *EnvironmentModel) SetName(v string) {
-	o.Name.Set(&v)
-}
-// SetNameNil sets the value for Name to be an explicit nil
-func (o *EnvironmentModel) SetNameNil() {
-	o.Name.Set(nil)
+	o.Name = v
 }
 
-// UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *EnvironmentModel) UnsetName() {
-	o.Name.Unset()
-}
-
-// GetColor returns the Color field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetColor returns the Color field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *EnvironmentModel) GetColor() string {
-	if o == nil || IsNil(o.Color.Get()) {
+	if o == nil || o.Color.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Color.Get()
 }
 
-// GetColorOk returns a tuple with the Color field value if set, nil otherwise
+// GetColorOk returns a tuple with the Color field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EnvironmentModel) GetColorOk() (*string, bool) {
@@ -177,39 +156,23 @@ func (o *EnvironmentModel) GetColorOk() (*string, bool) {
 	return o.Color.Get(), o.Color.IsSet()
 }
 
-// HasColor returns a boolean if a field has been set.
-func (o *EnvironmentModel) HasColor() bool {
-	if o != nil && o.Color.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetColor gets a reference to the given NullableString and assigns it to the Color field.
+// SetColor sets field value
 func (o *EnvironmentModel) SetColor(v string) {
 	o.Color.Set(&v)
 }
-// SetColorNil sets the value for Color to be an explicit nil
-func (o *EnvironmentModel) SetColorNil() {
-	o.Color.Set(nil)
-}
 
-// UnsetColor ensures that no value is present for Color, not even an explicit nil
-func (o *EnvironmentModel) UnsetColor() {
-	o.Color.Unset()
-}
-
-// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDescription returns the Description field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *EnvironmentModel) GetDescription() string {
-	if o == nil || IsNil(o.Description.Get()) {
+	if o == nil || o.Description.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Description.Get()
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EnvironmentModel) GetDescriptionOk() (*string, bool) {
@@ -219,91 +182,57 @@ func (o *EnvironmentModel) GetDescriptionOk() (*string, bool) {
 	return o.Description.Get(), o.Description.IsSet()
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *EnvironmentModel) HasDescription() bool {
-	if o != nil && o.Description.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
+// SetDescription sets field value
 func (o *EnvironmentModel) SetDescription(v string) {
 	o.Description.Set(&v)
 }
-// SetDescriptionNil sets the value for Description to be an explicit nil
-func (o *EnvironmentModel) SetDescriptionNil() {
-	o.Description.Set(nil)
-}
 
-// UnsetDescription ensures that no value is present for Description, not even an explicit nil
-func (o *EnvironmentModel) UnsetDescription() {
-	o.Description.Unset()
-}
-
-// GetOrder returns the Order field value if set, zero value otherwise.
+// GetOrder returns the Order field value
 func (o *EnvironmentModel) GetOrder() int32 {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Order
+
+	return o.Order
 }
 
-// GetOrderOk returns a tuple with the Order field value if set, nil otherwise
+// GetOrderOk returns a tuple with the Order field value
 // and a boolean to check if the value has been set.
 func (o *EnvironmentModel) GetOrderOk() (*int32, bool) {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Order, true
+	return &o.Order, true
 }
 
-// HasOrder returns a boolean if a field has been set.
-func (o *EnvironmentModel) HasOrder() bool {
-	if o != nil && !IsNil(o.Order) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrder gets a reference to the given int32 and assigns it to the Order field.
+// SetOrder sets field value
 func (o *EnvironmentModel) SetOrder(v int32) {
-	o.Order = &v
+	o.Order = v
 }
 
-// GetReasonRequired returns the ReasonRequired field value if set, zero value otherwise.
+// GetReasonRequired returns the ReasonRequired field value
 func (o *EnvironmentModel) GetReasonRequired() bool {
-	if o == nil || IsNil(o.ReasonRequired) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.ReasonRequired
+
+	return o.ReasonRequired
 }
 
-// GetReasonRequiredOk returns a tuple with the ReasonRequired field value if set, nil otherwise
+// GetReasonRequiredOk returns a tuple with the ReasonRequired field value
 // and a boolean to check if the value has been set.
 func (o *EnvironmentModel) GetReasonRequiredOk() (*bool, bool) {
-	if o == nil || IsNil(o.ReasonRequired) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ReasonRequired, true
+	return &o.ReasonRequired, true
 }
 
-// HasReasonRequired returns a boolean if a field has been set.
-func (o *EnvironmentModel) HasReasonRequired() bool {
-	if o != nil && !IsNil(o.ReasonRequired) {
-		return true
-	}
-
-	return false
-}
-
-// SetReasonRequired gets a reference to the given bool and assigns it to the ReasonRequired field.
+// SetReasonRequired sets field value
 func (o *EnvironmentModel) SetReasonRequired(v bool) {
-	o.ReasonRequired = &v
+	o.ReasonRequired = v
 }
 
 func (o EnvironmentModel) MarshalJSON() ([]byte, error) {
@@ -316,28 +245,57 @@ func (o EnvironmentModel) MarshalJSON() ([]byte, error) {
 
 func (o EnvironmentModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Product) {
-		toSerialize["product"] = o.Product
-	}
-	if !IsNil(o.EnvironmentId) {
-		toSerialize["environmentId"] = o.EnvironmentId
-	}
-	if o.Name.IsSet() {
-		toSerialize["name"] = o.Name.Get()
-	}
-	if o.Color.IsSet() {
-		toSerialize["color"] = o.Color.Get()
-	}
-	if o.Description.IsSet() {
-		toSerialize["description"] = o.Description.Get()
-	}
-	if !IsNil(o.Order) {
-		toSerialize["order"] = o.Order
-	}
-	if !IsNil(o.ReasonRequired) {
-		toSerialize["reasonRequired"] = o.ReasonRequired
-	}
+	toSerialize["product"] = o.Product
+	toSerialize["environmentId"] = o.EnvironmentId
+	toSerialize["name"] = o.Name
+	toSerialize["color"] = o.Color.Get()
+	toSerialize["description"] = o.Description.Get()
+	toSerialize["order"] = o.Order
+	toSerialize["reasonRequired"] = o.ReasonRequired
 	return toSerialize, nil
+}
+
+func (o *EnvironmentModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"product",
+		"environmentId",
+		"name",
+		"color",
+		"description",
+		"order",
+		"reasonRequired",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varEnvironmentModel := _EnvironmentModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varEnvironmentModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = EnvironmentModel(varEnvironmentModel)
+
+	return err
 }
 
 type NullableEnvironmentModel struct {

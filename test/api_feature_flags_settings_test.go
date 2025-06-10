@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-Testing FeatureFlagsSettingsApiService
+Testing FeatureFlagsSettingsAPIService
 
 */
 
@@ -14,21 +14,21 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
-func Test_configcatpublicapi_FeatureFlagsSettingsApiService(t *testing.T) {
+func Test_configcatpublicapi_FeatureFlagsSettingsAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test FeatureFlagsSettingsApiService CreateSetting", func(t *testing.T) {
+	t.Run("Test FeatureFlagsSettingsAPIService CreateSetting", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var configId string
 
-		resp, httpRes, err := apiClient.FeatureFlagsSettingsApi.CreateSetting(context.Background(), configId).Execute()
+		resp, httpRes, err := apiClient.FeatureFlagsSettingsAPI.CreateSetting(context.Background(), configId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,26 +36,26 @@ func Test_configcatpublicapi_FeatureFlagsSettingsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test FeatureFlagsSettingsApiService DeleteSetting", func(t *testing.T) {
+	t.Run("Test FeatureFlagsSettingsAPIService DeleteSetting", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var settingId int32
 
-		httpRes, err := apiClient.FeatureFlagsSettingsApi.DeleteSetting(context.Background(), settingId).Execute()
+		httpRes, err := apiClient.FeatureFlagsSettingsAPI.DeleteSetting(context.Background(), settingId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test FeatureFlagsSettingsApiService GetSetting", func(t *testing.T) {
+	t.Run("Test FeatureFlagsSettingsAPIService GetSetting", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var settingId int32
 
-		resp, httpRes, err := apiClient.FeatureFlagsSettingsApi.GetSetting(context.Background(), settingId).Execute()
+		resp, httpRes, err := apiClient.FeatureFlagsSettingsAPI.GetSetting(context.Background(), settingId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -63,13 +63,13 @@ func Test_configcatpublicapi_FeatureFlagsSettingsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test FeatureFlagsSettingsApiService GetSettings", func(t *testing.T) {
+	t.Run("Test FeatureFlagsSettingsAPIService GetSettings", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var configId string
 
-		resp, httpRes, err := apiClient.FeatureFlagsSettingsApi.GetSettings(context.Background(), configId).Execute()
+		resp, httpRes, err := apiClient.FeatureFlagsSettingsAPI.GetSettings(context.Background(), configId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -77,13 +77,27 @@ func Test_configcatpublicapi_FeatureFlagsSettingsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test FeatureFlagsSettingsApiService UpdateSetting", func(t *testing.T) {
+	t.Run("Test FeatureFlagsSettingsAPIService ReplaceSetting", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var settingId int32
 
-		resp, httpRes, err := apiClient.FeatureFlagsSettingsApi.UpdateSetting(context.Background(), settingId).Execute()
+		resp, httpRes, err := apiClient.FeatureFlagsSettingsAPI.ReplaceSetting(context.Background(), settingId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test FeatureFlagsSettingsAPIService UpdateSetting", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var settingId int32
+
+		resp, httpRes, err := apiClient.FeatureFlagsSettingsAPI.UpdateSetting(context.Background(), settingId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

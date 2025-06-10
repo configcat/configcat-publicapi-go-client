@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the UpdateSettingValueWithSettingIdModel type satisfies the MappedNullable interface at compile time
@@ -21,21 +23,24 @@ var _ MappedNullable = &UpdateSettingValueWithSettingIdModel{}
 // UpdateSettingValueWithSettingIdModel struct for UpdateSettingValueWithSettingIdModel
 type UpdateSettingValueWithSettingIdModel struct {
 	// The targeting rule collection.
-	RolloutRules []RolloutRuleModel `json:"rolloutRules,omitempty"`
+	RolloutRules []UpdateRolloutRuleModel `json:"rolloutRules,omitempty"`
 	// The percentage rule collection.
-	RolloutPercentageItems []RolloutPercentageItemModel `json:"rolloutPercentageItems,omitempty"`
-	// The value to serve. It must respect the setting type.
-	Value interface{} `json:"value,omitempty"`
+	RolloutPercentageItems []UpdateRolloutPercentageItemModel `json:"rolloutPercentageItems,omitempty"`
+	// The value to serve. It must respect the setting type. In some generated clients for strictly typed languages you may use double/float properties to handle integer values.
+	Value SettingValueType `json:"value"`
 	// The id of the Setting.
 	SettingId *int32 `json:"settingId,omitempty"`
 }
+
+type _UpdateSettingValueWithSettingIdModel UpdateSettingValueWithSettingIdModel
 
 // NewUpdateSettingValueWithSettingIdModel instantiates a new UpdateSettingValueWithSettingIdModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateSettingValueWithSettingIdModel() *UpdateSettingValueWithSettingIdModel {
+func NewUpdateSettingValueWithSettingIdModel(value SettingValueType) *UpdateSettingValueWithSettingIdModel {
 	this := UpdateSettingValueWithSettingIdModel{}
+	this.Value = value
 	return &this
 }
 
@@ -47,10 +52,10 @@ func NewUpdateSettingValueWithSettingIdModelWithDefaults() *UpdateSettingValueWi
 	return &this
 }
 
-// GetRolloutRules returns the RolloutRules field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UpdateSettingValueWithSettingIdModel) GetRolloutRules() []RolloutRuleModel {
-	if o == nil {
-		var ret []RolloutRuleModel
+// GetRolloutRules returns the RolloutRules field value if set, zero value otherwise.
+func (o *UpdateSettingValueWithSettingIdModel) GetRolloutRules() []UpdateRolloutRuleModel {
+	if o == nil || IsNil(o.RolloutRules) {
+		var ret []UpdateRolloutRuleModel
 		return ret
 	}
 	return o.RolloutRules
@@ -58,8 +63,7 @@ func (o *UpdateSettingValueWithSettingIdModel) GetRolloutRules() []RolloutRuleMo
 
 // GetRolloutRulesOk returns a tuple with the RolloutRules field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpdateSettingValueWithSettingIdModel) GetRolloutRulesOk() ([]RolloutRuleModel, bool) {
+func (o *UpdateSettingValueWithSettingIdModel) GetRolloutRulesOk() ([]UpdateRolloutRuleModel, bool) {
 	if o == nil || IsNil(o.RolloutRules) {
 		return nil, false
 	}
@@ -75,15 +79,15 @@ func (o *UpdateSettingValueWithSettingIdModel) HasRolloutRules() bool {
 	return false
 }
 
-// SetRolloutRules gets a reference to the given []RolloutRuleModel and assigns it to the RolloutRules field.
-func (o *UpdateSettingValueWithSettingIdModel) SetRolloutRules(v []RolloutRuleModel) {
+// SetRolloutRules gets a reference to the given []UpdateRolloutRuleModel and assigns it to the RolloutRules field.
+func (o *UpdateSettingValueWithSettingIdModel) SetRolloutRules(v []UpdateRolloutRuleModel) {
 	o.RolloutRules = v
 }
 
-// GetRolloutPercentageItems returns the RolloutPercentageItems field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UpdateSettingValueWithSettingIdModel) GetRolloutPercentageItems() []RolloutPercentageItemModel {
-	if o == nil {
-		var ret []RolloutPercentageItemModel
+// GetRolloutPercentageItems returns the RolloutPercentageItems field value if set, zero value otherwise.
+func (o *UpdateSettingValueWithSettingIdModel) GetRolloutPercentageItems() []UpdateRolloutPercentageItemModel {
+	if o == nil || IsNil(o.RolloutPercentageItems) {
+		var ret []UpdateRolloutPercentageItemModel
 		return ret
 	}
 	return o.RolloutPercentageItems
@@ -91,8 +95,7 @@ func (o *UpdateSettingValueWithSettingIdModel) GetRolloutPercentageItems() []Rol
 
 // GetRolloutPercentageItemsOk returns a tuple with the RolloutPercentageItems field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpdateSettingValueWithSettingIdModel) GetRolloutPercentageItemsOk() ([]RolloutPercentageItemModel, bool) {
+func (o *UpdateSettingValueWithSettingIdModel) GetRolloutPercentageItemsOk() ([]UpdateRolloutPercentageItemModel, bool) {
 	if o == nil || IsNil(o.RolloutPercentageItems) {
 		return nil, false
 	}
@@ -108,41 +111,32 @@ func (o *UpdateSettingValueWithSettingIdModel) HasRolloutPercentageItems() bool 
 	return false
 }
 
-// SetRolloutPercentageItems gets a reference to the given []RolloutPercentageItemModel and assigns it to the RolloutPercentageItems field.
-func (o *UpdateSettingValueWithSettingIdModel) SetRolloutPercentageItems(v []RolloutPercentageItemModel) {
+// SetRolloutPercentageItems gets a reference to the given []UpdateRolloutPercentageItemModel and assigns it to the RolloutPercentageItems field.
+func (o *UpdateSettingValueWithSettingIdModel) SetRolloutPercentageItems(v []UpdateRolloutPercentageItemModel) {
 	o.RolloutPercentageItems = v
 }
 
-// GetValue returns the Value field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UpdateSettingValueWithSettingIdModel) GetValue() interface{} {
+// GetValue returns the Value field value
+func (o *UpdateSettingValueWithSettingIdModel) GetValue() SettingValueType {
 	if o == nil {
-		var ret interface{}
+		var ret SettingValueType
 		return ret
 	}
+
 	return o.Value
 }
 
-// GetValueOk returns a tuple with the Value field value if set, nil otherwise
+// GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpdateSettingValueWithSettingIdModel) GetValueOk() (*interface{}, bool) {
-	if o == nil || IsNil(o.Value) {
+func (o *UpdateSettingValueWithSettingIdModel) GetValueOk() (*SettingValueType, bool) {
+	if o == nil {
 		return nil, false
 	}
 	return &o.Value, true
 }
 
-// HasValue returns a boolean if a field has been set.
-func (o *UpdateSettingValueWithSettingIdModel) HasValue() bool {
-	if o != nil && !IsNil(o.Value) {
-		return true
-	}
-
-	return false
-}
-
-// SetValue gets a reference to the given interface{} and assigns it to the Value field.
-func (o *UpdateSettingValueWithSettingIdModel) SetValue(v interface{}) {
+// SetValue sets field value
+func (o *UpdateSettingValueWithSettingIdModel) SetValue(v SettingValueType) {
 	o.Value = v
 }
 
@@ -188,19 +182,54 @@ func (o UpdateSettingValueWithSettingIdModel) MarshalJSON() ([]byte, error) {
 
 func (o UpdateSettingValueWithSettingIdModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.RolloutRules != nil {
+	if !IsNil(o.RolloutRules) {
 		toSerialize["rolloutRules"] = o.RolloutRules
 	}
-	if o.RolloutPercentageItems != nil {
+	if !IsNil(o.RolloutPercentageItems) {
 		toSerialize["rolloutPercentageItems"] = o.RolloutPercentageItems
 	}
-	if o.Value != nil {
-		toSerialize["value"] = o.Value
-	}
+	toSerialize["value"] = o.Value
 	if !IsNil(o.SettingId) {
 		toSerialize["settingId"] = o.SettingId
 	}
 	return toSerialize, nil
+}
+
+func (o *UpdateSettingValueWithSettingIdModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"value",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varUpdateSettingValueWithSettingIdModel := _UpdateSettingValueWithSettingIdModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varUpdateSettingValueWithSettingIdModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = UpdateSettingValueWithSettingIdModel(varUpdateSettingValueWithSettingIdModel)
+
+	return err
 }
 
 type NullableUpdateSettingValueWithSettingIdModel struct {

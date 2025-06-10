@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | **string** | The name of the Environment. | 
 **Color** | Pointer to **NullableString** | The color of the Environment. RGB or HTML color codes are allowed. | [optional] 
 **Description** | Pointer to **NullableString** | The description of the Environment. | [optional] 
-**Order** | Pointer to **NullableInt32** | The order of the Environment represented on the ConfigCat Dashboard.  Determined from an ascending sequence of integers. | [optional] 
+**Order** | Pointer to **NullableInt32** | The order of the Environment represented on the ConfigCat Dashboard. Determined from an ascending sequence of integers. | [optional] 
 
 ## Methods
 

@@ -4,20 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**InvitationId** | Pointer to **string** | The identifier of the Invitation. | [optional] 
-**Email** | Pointer to **NullableString** | The invited user&#39;s email address. | [optional] 
-**ProductId** | Pointer to **string** | The identifier of the Product the user was invited to. | [optional] 
-**ProductName** | Pointer to **NullableString** | The name of the Product the user was invited to. | [optional] 
-**PermissionGroupId** | Pointer to **int64** | The identifier of the Permission Group the user was invited to. | [optional] 
-**CreatedAt** | Pointer to **time.Time** | Creation time of the Invitation. | [optional] 
-**Expired** | Pointer to **bool** | Determines whether the Invitation is expired. | [optional] 
-**Expires** | Pointer to **time.Time** | Expiration time of the Invitation. | [optional] 
+**InvitationId** | **string** | The identifier of the Invitation. | 
+**Email** | **NullableString** | The invited user&#39;s email address. | 
+**ProductId** | **string** | The identifier of the Product the user was invited to. | 
+**ProductName** | **NullableString** | The name of the Product the user was invited to. | 
+**PermissionGroupId** | **int64** | The identifier of the Permission Group the user was invited to. | 
+**CreatedAt** | **time.Time** | Creation time of the Invitation. | 
+**Expired** | **bool** | Determines whether the Invitation is expired. | 
+**Expires** | **time.Time** | Expiration time of the Invitation. | 
 
 ## Methods
 
 ### NewOrganizationInvitationModel
 
-`func NewOrganizationInvitationModel() *OrganizationInvitationModel`
+`func NewOrganizationInvitationModel(invitationId string, email NullableString, productId string, productName NullableString, permissionGroupId int64, createdAt time.Time, expired bool, expires time.Time, ) *OrganizationInvitationModel`
 
 NewOrganizationInvitationModel instantiates a new OrganizationInvitationModel object
 This constructor will assign default values to properties that have it defined,
@@ -51,11 +51,6 @@ and a boolean to check if the value has been set.
 
 SetInvitationId sets InvitationId field to given value.
 
-### HasInvitationId
-
-`func (o *OrganizationInvitationModel) HasInvitationId() bool`
-
-HasInvitationId returns a boolean if a field has been set.
 
 ### GetEmail
 
@@ -76,11 +71,6 @@ and a boolean to check if the value has been set.
 
 SetEmail sets Email field to given value.
 
-### HasEmail
-
-`func (o *OrganizationInvitationModel) HasEmail() bool`
-
-HasEmail returns a boolean if a field has been set.
 
 ### SetEmailNil
 
@@ -111,11 +101,6 @@ and a boolean to check if the value has been set.
 
 SetProductId sets ProductId field to given value.
 
-### HasProductId
-
-`func (o *OrganizationInvitationModel) HasProductId() bool`
-
-HasProductId returns a boolean if a field has been set.
 
 ### GetProductName
 
@@ -136,11 +121,6 @@ and a boolean to check if the value has been set.
 
 SetProductName sets ProductName field to given value.
 
-### HasProductName
-
-`func (o *OrganizationInvitationModel) HasProductName() bool`
-
-HasProductName returns a boolean if a field has been set.
 
 ### SetProductNameNil
 
@@ -171,11 +151,6 @@ and a boolean to check if the value has been set.
 
 SetPermissionGroupId sets PermissionGroupId field to given value.
 
-### HasPermissionGroupId
-
-`func (o *OrganizationInvitationModel) HasPermissionGroupId() bool`
-
-HasPermissionGroupId returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -196,11 +171,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *OrganizationInvitationModel) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetExpired
 
@@ -221,11 +191,6 @@ and a boolean to check if the value has been set.
 
 SetExpired sets Expired field to given value.
 
-### HasExpired
-
-`func (o *OrganizationInvitationModel) HasExpired() bool`
-
-HasExpired returns a boolean if a field has been set.
 
 ### GetExpires
 
@@ -246,11 +211,6 @@ and a boolean to check if the value has been set.
 
 SetExpires sets Expires field to given value.
 
-### HasExpires
-
-`func (o *OrganizationInvitationModel) HasExpires() bool`
-
-HasExpires returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

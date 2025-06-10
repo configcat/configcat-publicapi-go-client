@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-Testing TagsApiService
+Testing TagsAPIService
 
 */
 
@@ -14,21 +14,21 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
-func Test_configcatpublicapi_TagsApiService(t *testing.T) {
+func Test_configcatpublicapi_TagsAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test TagsApiService CreateTag", func(t *testing.T) {
+	t.Run("Test TagsAPIService CreateTag", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var productId string
 
-		resp, httpRes, err := apiClient.TagsApi.CreateTag(context.Background(), productId).Execute()
+		resp, httpRes, err := apiClient.TagsAPI.CreateTag(context.Background(), productId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,40 +36,26 @@ func Test_configcatpublicapi_TagsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test TagsApiService DeleteTag", func(t *testing.T) {
+	t.Run("Test TagsAPIService DeleteTag", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var tagId int64
 
-		httpRes, err := apiClient.TagsApi.DeleteTag(context.Background(), tagId).Execute()
+		httpRes, err := apiClient.TagsAPI.DeleteTag(context.Background(), tagId).Execute()
 
 		require.Nil(t, err)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})
 
-	t.Run("Test TagsApiService GetSettingsByTag", func(t *testing.T) {
+	t.Run("Test TagsAPIService GetSettingsByTag", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var tagId int64
 
-		resp, httpRes, err := apiClient.TagsApi.GetSettingsByTag(context.Background(), tagId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test TagsApiService GetTag", func(t *testing.T) {
-
-		t.Skip("skip test")  // remove to run test
-
-		var tagId int64
-
-		resp, httpRes, err := apiClient.TagsApi.GetTag(context.Background(), tagId).Execute()
+		resp, httpRes, err := apiClient.TagsAPI.GetSettingsByTag(context.Background(), tagId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -77,13 +63,27 @@ func Test_configcatpublicapi_TagsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test TagsApiService GetTags", func(t *testing.T) {
+	t.Run("Test TagsAPIService GetTag", func(t *testing.T) {
+
+		t.Skip("skip test")  // remove to run test
+
+		var tagId int64
+
+		resp, httpRes, err := apiClient.TagsAPI.GetTag(context.Background(), tagId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test TagsAPIService GetTags", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var productId string
 
-		resp, httpRes, err := apiClient.TagsApi.GetTags(context.Background(), productId).Execute()
+		resp, httpRes, err := apiClient.TagsAPI.GetTags(context.Background(), productId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -91,13 +91,13 @@ func Test_configcatpublicapi_TagsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test TagsApiService UpdateTag", func(t *testing.T) {
+	t.Run("Test TagsAPIService UpdateTag", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var tagId int64
 
-		resp, httpRes, err := apiClient.TagsApi.UpdateTag(context.Background(), tagId).Execute()
+		resp, httpRes, err := apiClient.TagsAPI.UpdateTag(context.Background(), tagId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

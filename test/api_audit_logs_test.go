@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-Testing AuditLogsApiService
+Testing AuditLogsAPIService
 
 */
 
@@ -14,21 +14,21 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/configcat/configcat-publicapi-go-client/v2"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
 )
 
-func Test_configcatpublicapi_AuditLogsApiService(t *testing.T) {
+func Test_configcatpublicapi_AuditLogsAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test AuditLogsApiService GetAuditlogs", func(t *testing.T) {
+	t.Run("Test AuditLogsAPIService GetAuditlogs", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var productId string
 
-		resp, httpRes, err := apiClient.AuditLogsApi.GetAuditlogs(context.Background(), productId).Execute()
+		resp, httpRes, err := apiClient.AuditLogsAPI.GetAuditlogs(context.Background(), productId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,13 +36,13 @@ func Test_configcatpublicapi_AuditLogsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test AuditLogsApiService GetDeletedSettings", func(t *testing.T) {
+	t.Run("Test AuditLogsAPIService GetDeletedSettings", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var configId string
 
-		resp, httpRes, err := apiClient.AuditLogsApi.GetDeletedSettings(context.Background(), configId).Execute()
+		resp, httpRes, err := apiClient.AuditLogsAPI.GetDeletedSettings(context.Background(), configId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -50,13 +50,13 @@ func Test_configcatpublicapi_AuditLogsApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test AuditLogsApiService GetOrganizationAuditlogs", func(t *testing.T) {
+	t.Run("Test AuditLogsAPIService GetOrganizationAuditlogs", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var organizationId string
 
-		resp, httpRes, err := apiClient.AuditLogsApi.GetOrganizationAuditlogs(context.Background(), organizationId).Execute()
+		resp, httpRes, err := apiClient.AuditLogsAPI.GetOrganizationAuditlogs(context.Background(), organizationId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

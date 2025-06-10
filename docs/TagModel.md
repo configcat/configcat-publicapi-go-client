@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Product** | Pointer to [**ProductModel**](ProductModel.md) |  | [optional] 
-**TagId** | Pointer to **int64** | Identifier of the Tag. | [optional] 
-**Name** | Pointer to **NullableString** | Name of the Tag. | [optional] 
-**Color** | Pointer to **NullableString** | The configured color of the Tag. | [optional] 
+**Product** | [**ProductModel**](ProductModel.md) |  | 
+**TagId** | **int64** | Identifier of the Tag. | 
+**Name** | **string** | Name of the Tag. | 
+**Color** | **NullableString** | The configured color of the Tag. | 
 
 ## Methods
 
 ### NewTagModel
 
-`func NewTagModel() *TagModel`
+`func NewTagModel(product ProductModel, tagId int64, name string, color NullableString, ) *TagModel`
 
 NewTagModel instantiates a new TagModel object
 This constructor will assign default values to properties that have it defined,
@@ -47,11 +47,6 @@ and a boolean to check if the value has been set.
 
 SetProduct sets Product field to given value.
 
-### HasProduct
-
-`func (o *TagModel) HasProduct() bool`
-
-HasProduct returns a boolean if a field has been set.
 
 ### GetTagId
 
@@ -72,11 +67,6 @@ and a boolean to check if the value has been set.
 
 SetTagId sets TagId field to given value.
 
-### HasTagId
-
-`func (o *TagModel) HasTagId() bool`
-
-HasTagId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -97,22 +87,7 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
 
-`func (o *TagModel) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### SetNameNil
-
-`func (o *TagModel) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *TagModel) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetColor
 
 `func (o *TagModel) GetColor() string`
@@ -132,11 +107,6 @@ and a boolean to check if the value has been set.
 
 SetColor sets Color field to given value.
 
-### HasColor
-
-`func (o *TagModel) HasColor() bool`
-
-HasColor returns a boolean if a field has been set.
 
 ### SetColorNil
 

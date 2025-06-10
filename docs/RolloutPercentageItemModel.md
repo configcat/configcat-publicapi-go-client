@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Percentage** | **int64** | The percentage value for the rule. | 
-**Value** | Pointer to **interface{}** | The value to serve when the user falls in the percentage rule. It must respect the setting type. | [optional] 
+**Value** | [**SettingValueType**](SettingValueType.md) | The value to serve when the user falls in the percentage rule. It must respect the setting type. In some generated clients for strictly typed languages you may use double/float properties to handle integer values. | 
 
 ## Methods
 
 ### NewRolloutPercentageItemModel
 
-`func NewRolloutPercentageItemModel(percentage int64, ) *RolloutPercentageItemModel`
+`func NewRolloutPercentageItemModel(percentage int64, value SettingValueType, ) *RolloutPercentageItemModel`
 
 NewRolloutPercentageItemModel instantiates a new RolloutPercentageItemModel object
 This constructor will assign default values to properties that have it defined,
@@ -48,39 +48,24 @@ SetPercentage sets Percentage field to given value.
 
 ### GetValue
 
-`func (o *RolloutPercentageItemModel) GetValue() interface{}`
+`func (o *RolloutPercentageItemModel) GetValue() SettingValueType`
 
 GetValue returns the Value field if non-nil, zero value otherwise.
 
 ### GetValueOk
 
-`func (o *RolloutPercentageItemModel) GetValueOk() (*interface{}, bool)`
+`func (o *RolloutPercentageItemModel) GetValueOk() (*SettingValueType, bool)`
 
 GetValueOk returns a tuple with the Value field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetValue
 
-`func (o *RolloutPercentageItemModel) SetValue(v interface{})`
+`func (o *RolloutPercentageItemModel) SetValue(v SettingValueType)`
 
 SetValue sets Value field to given value.
 
-### HasValue
 
-`func (o *RolloutPercentageItemModel) HasValue() bool`
-
-HasValue returns a boolean if a field has been set.
-
-### SetValueNil
-
-`func (o *RolloutPercentageItemModel) SetValueNil(b bool)`
-
- SetValueNil sets the value for Value to be an explicit nil
-
-### UnsetValue
-`func (o *RolloutPercentageItemModel) UnsetValue()`
-
-UnsetValue ensures that no value is present for Value, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

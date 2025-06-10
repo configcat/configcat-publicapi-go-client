@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ProductId** | Pointer to **string** | Identifier of the Member&#39;s Product. | [optional] 
-**Name** | Pointer to **NullableString** | Name of the Member&#39;s Product. | [optional] 
+**ProductId** | **string** | Identifier of the Member&#39;s Product. | 
+**Name** | **string** | Name of the Member&#39;s Product. | 
 
 ## Methods
 
 ### NewOrganizationProductModel
 
-`func NewOrganizationProductModel() *OrganizationProductModel`
+`func NewOrganizationProductModel(productId string, name string, ) *OrganizationProductModel`
 
 NewOrganizationProductModel instantiates a new OrganizationProductModel object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetProductId sets ProductId field to given value.
 
-### HasProductId
-
-`func (o *OrganizationProductModel) HasProductId() bool`
-
-HasProductId returns a boolean if a field has been set.
 
 ### GetName
 
@@ -70,22 +65,7 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
 
-`func (o *OrganizationProductModel) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### SetNameNil
-
-`func (o *OrganizationProductModel) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *OrganizationProductModel) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

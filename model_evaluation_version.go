@@ -16,7 +16,7 @@ import (
 	"fmt"
 )
 
-// EvaluationVersion Determines the evaluation version of a Config.  Using `v2` enables the new features of Config V2 (https://configcat.com/docs/advanced/config-v2).
+// EvaluationVersion Determines the evaluation version of a Config. Using `v2` enables the new features of Config V2 (https://configcat.com/docs/advanced/config-v2).
 type EvaluationVersion string
 
 // List of EvaluationVersion

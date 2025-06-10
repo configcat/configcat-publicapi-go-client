@@ -13,6 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"bytes"
+	"fmt"
 )
 
 // checks if the IntegrationModel type satisfies the MappedNullable interface at compile time
@@ -20,26 +22,35 @@ var _ MappedNullable = &IntegrationModel{}
 
 // IntegrationModel Details of the Integration.
 type IntegrationModel struct {
-	Product *ProductModel `json:"product,omitempty"`
+	Product ProductModel `json:"product"`
 	// Identifier of the Integration.
-	IntegrationId *string `json:"integrationId,omitempty"`
+	IntegrationId string `json:"integrationId"`
 	// Name of the Integration.
-	Name NullableString `json:"name,omitempty"`
-	IntegrationType *IntegrationType `json:"integrationType,omitempty"`
+	Name string `json:"name"`
+	IntegrationType IntegrationType `json:"integrationType"`
 	// Parameters of the Integration.
-	Parameters map[string]string `json:"parameters,omitempty"`
+	Parameters map[string]string `json:"parameters"`
 	// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
-	EnvironmentIds []string `json:"environmentIds,omitempty"`
+	EnvironmentIds []string `json:"environmentIds"`
 	// List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected.
-	ConfigIds []string `json:"configIds,omitempty"`
+	ConfigIds []string `json:"configIds"`
 }
+
+type _IntegrationModel IntegrationModel
 
 // NewIntegrationModel instantiates a new IntegrationModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewIntegrationModel() *IntegrationModel {
+func NewIntegrationModel(product ProductModel, integrationId string, name string, integrationType IntegrationType, parameters map[string]string, environmentIds []string, configIds []string) *IntegrationModel {
 	this := IntegrationModel{}
+	this.Product = product
+	this.IntegrationId = integrationId
+	this.Name = name
+	this.IntegrationType = integrationType
+	this.Parameters = parameters
+	this.EnvironmentIds = environmentIds
+	this.ConfigIds = configIds
 	return &this
 }
 
@@ -51,154 +62,114 @@ func NewIntegrationModelWithDefaults() *IntegrationModel {
 	return &this
 }
 
-// GetProduct returns the Product field value if set, zero value otherwise.
+// GetProduct returns the Product field value
 func (o *IntegrationModel) GetProduct() ProductModel {
-	if o == nil || IsNil(o.Product) {
+	if o == nil {
 		var ret ProductModel
 		return ret
 	}
-	return *o.Product
+
+	return o.Product
 }
 
-// GetProductOk returns a tuple with the Product field value if set, nil otherwise
+// GetProductOk returns a tuple with the Product field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationModel) GetProductOk() (*ProductModel, bool) {
-	if o == nil || IsNil(o.Product) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Product, true
+	return &o.Product, true
 }
 
-// HasProduct returns a boolean if a field has been set.
-func (o *IntegrationModel) HasProduct() bool {
-	if o != nil && !IsNil(o.Product) {
-		return true
-	}
-
-	return false
-}
-
-// SetProduct gets a reference to the given ProductModel and assigns it to the Product field.
+// SetProduct sets field value
 func (o *IntegrationModel) SetProduct(v ProductModel) {
-	o.Product = &v
+	o.Product = v
 }
 
-// GetIntegrationId returns the IntegrationId field value if set, zero value otherwise.
+// GetIntegrationId returns the IntegrationId field value
 func (o *IntegrationModel) GetIntegrationId() string {
-	if o == nil || IsNil(o.IntegrationId) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.IntegrationId
+
+	return o.IntegrationId
 }
 
-// GetIntegrationIdOk returns a tuple with the IntegrationId field value if set, nil otherwise
+// GetIntegrationIdOk returns a tuple with the IntegrationId field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationModel) GetIntegrationIdOk() (*string, bool) {
-	if o == nil || IsNil(o.IntegrationId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IntegrationId, true
+	return &o.IntegrationId, true
 }
 
-// HasIntegrationId returns a boolean if a field has been set.
-func (o *IntegrationModel) HasIntegrationId() bool {
-	if o != nil && !IsNil(o.IntegrationId) {
-		return true
-	}
-
-	return false
-}
-
-// SetIntegrationId gets a reference to the given string and assigns it to the IntegrationId field.
+// SetIntegrationId sets field value
 func (o *IntegrationModel) SetIntegrationId(v string) {
-	o.IntegrationId = &v
+	o.IntegrationId = v
 }
 
-// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetName returns the Name field value
 func (o *IntegrationModel) GetName() string {
-	if o == nil || IsNil(o.Name.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name.Get()
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IntegrationModel) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *IntegrationModel) HasName() bool {
-	if o != nil && o.Name.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given NullableString and assigns it to the Name field.
+// SetName sets field value
 func (o *IntegrationModel) SetName(v string) {
-	o.Name.Set(&v)
-}
-// SetNameNil sets the value for Name to be an explicit nil
-func (o *IntegrationModel) SetNameNil() {
-	o.Name.Set(nil)
+	o.Name = v
 }
 
-// UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *IntegrationModel) UnsetName() {
-	o.Name.Unset()
-}
-
-// GetIntegrationType returns the IntegrationType field value if set, zero value otherwise.
+// GetIntegrationType returns the IntegrationType field value
 func (o *IntegrationModel) GetIntegrationType() IntegrationType {
-	if o == nil || IsNil(o.IntegrationType) {
+	if o == nil {
 		var ret IntegrationType
 		return ret
 	}
-	return *o.IntegrationType
+
+	return o.IntegrationType
 }
 
-// GetIntegrationTypeOk returns a tuple with the IntegrationType field value if set, nil otherwise
+// GetIntegrationTypeOk returns a tuple with the IntegrationType field value
 // and a boolean to check if the value has been set.
 func (o *IntegrationModel) GetIntegrationTypeOk() (*IntegrationType, bool) {
-	if o == nil || IsNil(o.IntegrationType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IntegrationType, true
+	return &o.IntegrationType, true
 }
 
-// HasIntegrationType returns a boolean if a field has been set.
-func (o *IntegrationModel) HasIntegrationType() bool {
-	if o != nil && !IsNil(o.IntegrationType) {
-		return true
-	}
-
-	return false
-}
-
-// SetIntegrationType gets a reference to the given IntegrationType and assigns it to the IntegrationType field.
+// SetIntegrationType sets field value
 func (o *IntegrationModel) SetIntegrationType(v IntegrationType) {
-	o.IntegrationType = &v
+	o.IntegrationType = v
 }
 
-// GetParameters returns the Parameters field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetParameters returns the Parameters field value
+// If the value is explicit nil, the zero value for map[string]string will be returned
 func (o *IntegrationModel) GetParameters() map[string]string {
 	if o == nil {
 		var ret map[string]string
 		return ret
 	}
+
 	return o.Parameters
 }
 
-// GetParametersOk returns a tuple with the Parameters field value if set, nil otherwise
+// GetParametersOk returns a tuple with the Parameters field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IntegrationModel) GetParametersOk() (*map[string]string, bool) {
@@ -208,82 +179,55 @@ func (o *IntegrationModel) GetParametersOk() (*map[string]string, bool) {
 	return &o.Parameters, true
 }
 
-// HasParameters returns a boolean if a field has been set.
-func (o *IntegrationModel) HasParameters() bool {
-	if o != nil && !IsNil(o.Parameters) {
-		return true
-	}
-
-	return false
-}
-
-// SetParameters gets a reference to the given map[string]string and assigns it to the Parameters field.
+// SetParameters sets field value
 func (o *IntegrationModel) SetParameters(v map[string]string) {
 	o.Parameters = v
 }
 
-// GetEnvironmentIds returns the EnvironmentIds field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetEnvironmentIds returns the EnvironmentIds field value
 func (o *IntegrationModel) GetEnvironmentIds() []string {
 	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.EnvironmentIds
 }
 
-// GetEnvironmentIdsOk returns a tuple with the EnvironmentIds field value if set, nil otherwise
+// GetEnvironmentIdsOk returns a tuple with the EnvironmentIds field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IntegrationModel) GetEnvironmentIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.EnvironmentIds) {
+	if o == nil {
 		return nil, false
 	}
 	return o.EnvironmentIds, true
 }
 
-// HasEnvironmentIds returns a boolean if a field has been set.
-func (o *IntegrationModel) HasEnvironmentIds() bool {
-	if o != nil && !IsNil(o.EnvironmentIds) {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironmentIds gets a reference to the given []string and assigns it to the EnvironmentIds field.
+// SetEnvironmentIds sets field value
 func (o *IntegrationModel) SetEnvironmentIds(v []string) {
 	o.EnvironmentIds = v
 }
 
-// GetConfigIds returns the ConfigIds field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetConfigIds returns the ConfigIds field value
 func (o *IntegrationModel) GetConfigIds() []string {
 	if o == nil {
 		var ret []string
 		return ret
 	}
+
 	return o.ConfigIds
 }
 
-// GetConfigIdsOk returns a tuple with the ConfigIds field value if set, nil otherwise
+// GetConfigIdsOk returns a tuple with the ConfigIds field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IntegrationModel) GetConfigIdsOk() ([]string, bool) {
-	if o == nil || IsNil(o.ConfigIds) {
+	if o == nil {
 		return nil, false
 	}
 	return o.ConfigIds, true
 }
 
-// HasConfigIds returns a boolean if a field has been set.
-func (o *IntegrationModel) HasConfigIds() bool {
-	if o != nil && !IsNil(o.ConfigIds) {
-		return true
-	}
-
-	return false
-}
-
-// SetConfigIds gets a reference to the given []string and assigns it to the ConfigIds field.
+// SetConfigIds sets field value
 func (o *IntegrationModel) SetConfigIds(v []string) {
 	o.ConfigIds = v
 }
@@ -298,28 +242,59 @@ func (o IntegrationModel) MarshalJSON() ([]byte, error) {
 
 func (o IntegrationModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Product) {
-		toSerialize["product"] = o.Product
-	}
-	if !IsNil(o.IntegrationId) {
-		toSerialize["integrationId"] = o.IntegrationId
-	}
-	if o.Name.IsSet() {
-		toSerialize["name"] = o.Name.Get()
-	}
-	if !IsNil(o.IntegrationType) {
-		toSerialize["integrationType"] = o.IntegrationType
-	}
+	toSerialize["product"] = o.Product
+	toSerialize["integrationId"] = o.IntegrationId
+	toSerialize["name"] = o.Name
+	toSerialize["integrationType"] = o.IntegrationType
 	if o.Parameters != nil {
 		toSerialize["parameters"] = o.Parameters
 	}
-	if o.EnvironmentIds != nil {
-		toSerialize["environmentIds"] = o.EnvironmentIds
-	}
-	if o.ConfigIds != nil {
-		toSerialize["configIds"] = o.ConfigIds
-	}
+	toSerialize["environmentIds"] = o.EnvironmentIds
+	toSerialize["configIds"] = o.ConfigIds
 	return toSerialize, nil
+}
+
+func (o *IntegrationModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"product",
+		"integrationId",
+		"name",
+		"integrationType",
+		"parameters",
+		"environmentIds",
+		"configIds",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varIntegrationModel := _IntegrationModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varIntegrationModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = IntegrationModel(varIntegrationModel)
+
+	return err
 }
 
 type NullableIntegrationModel struct {

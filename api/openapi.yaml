@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.0.4
 info:
   contact:
     email: support@configcat.com
@@ -28,7 +28,7 @@ info:
     \ the current rate limit period resets.\t\t\t\t\t\t  |\n\nWhen the rate limit\
     \ is exceeded by a request, the API returns with a `HTTP 429 - Too many requests`\
     \ status along with a `Retry-After` HTTP header.\n"
-  termsOfService: https://configcat.com/termsofserviceagreement
+  termsOfService: https://configcat.com/policies
   title: ConfigCat Public Management API
   version: v1
   x-logo:
@@ -157,6 +157,8 @@ tags:
   name: Integration links
 - description: Access audit log entries.
   name: Audit logs
+- description: List Zombie (stale) flags
+  name: Zombie (stale) flags
 - description: Information about the current user.
   name: Me
 - description: |-
@@ -301,7 +303,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/WebhookModel'
+                  $ref: '#/components/schemas/WebhookResponseModel'
                 type: array
           description: ""
         "429":
@@ -801,7 +803,10 @@ paths:
   /v1/products/{productId}/auditlogs:
     get:
       description: "This endpoint returns the list of Audit log items for a given\
-        \ Product \nand the result can be optionally filtered by Config and/or Environment."
+        \ Product \nand the result can be optionally filtered by Config and/or Environment.\n\
+        \nIf neither `fromUtcDateTime` nor `toUtcDateTime` is set, the audit logs\
+        \ for the **last 7 days** will be returned.\n\nThe distance between `fromUtcDateTime`\
+        \ and `toUtcDateTime` cannot exceed **30 days**."
       operationId: get-auditlogs
       parameters:
       - description: The identifier of the Product.
@@ -878,6 +883,89 @@ paths:
       summary: List Audit log items for Product
       tags:
       - Audit logs
+  /v1/products/{productId}/staleflags:
+    get:
+      description: "This endpoint returns the list of Zombie (stale) flags for a given\
+        \ Product \nand the result can be optionally filtered by various parameters."
+      operationId: get-staleflags
+      parameters:
+      - description: The identifier of the Product.
+        explode: false
+        in: path
+        name: productId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The scope of the report.
+        explode: true
+        in: query
+        name: scope
+        required: false
+        schema:
+          $ref: '#/components/schemas/StaleFlagReminderScope'
+        style: form
+      - description: The inactivity in days after a feature flag should be considered
+          stale.
+        explode: true
+        in: query
+        name: staleFlagAgeDays
+        required: false
+        schema:
+          format: int32
+          maximum: 90
+          minimum: 7
+          type: integer
+        style: form
+      - description: Consider a feature flag as stale if the feature flag is stale
+          in all/any of the environments.
+        explode: true
+        in: query
+        name: staleFlagStaleInEnvironmentsType
+        required: false
+        schema:
+          $ref: '#/components/schemas/StaleFlagStaleInEnvironmentsType'
+        style: form
+      - description: Ignore environment identifiers from the report.
+        explode: true
+        in: query
+        name: ignoredEnvironmentIds
+        required: false
+        schema:
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - description: Ignore feature flags from the report based on their tag identifiers.
+        explode: true
+        in: query
+        name: ignoredTagIds
+        required: false
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StaleFlagProductModel'
+          description: ""
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: List Zombie (stale) flags for Product
+      tags:
+      - Zombie (stale) flags
   /v1/settings/{settingId}/code-references:
     get:
       description: ""
@@ -1032,7 +1120,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/SettingModel'
+                  $ref: '#/components/schemas/DeletedSettingModel'
                 type: array
           description: ""
         "400":
@@ -1479,7 +1567,10 @@ paths:
     get:
       description: "This endpoint returns the list of Audit log items for a given\
         \ Organization \nand the result can be optionally filtered by Product and/or\
-        \ Config and/or Environment."
+        \ Config and/or Environment.\n\nIf neither `fromUtcDateTime` nor `toUtcDateTime`\
+        \ is set, the audit logs for the **last 7 days** will be returned.\n\nThe\
+        \ distance between `fromUtcDateTime` and `toUtcDateTime` cannot exceed **30\
+        \ days**."
       operationId: get-organization-auditlogs
       parameters:
       - description: The identifier of the Organization.
@@ -4780,7 +4871,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhookModel'
+                $ref: '#/components/schemas/WebhookResponseModel'
           description: "When everything is ok, the webhook data is returned."
         "400":
           description: Bad request.
@@ -4846,7 +4937,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhookModel'
+                $ref: '#/components/schemas/WebhookResponseModel'
           description: When the update was successful.
         "400":
           description: Bad request.
@@ -4879,20 +4970,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/WebHookRequest'
+              $ref: '#/components/schemas/WebHookRequestModel'
           text/json:
             schema:
-              $ref: '#/components/schemas/WebHookRequest'
+              $ref: '#/components/schemas/WebHookRequestModel'
           application/*+json:
             schema:
-              $ref: '#/components/schemas/WebHookRequest'
+              $ref: '#/components/schemas/WebHookRequestModel'
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhookModel'
+                $ref: '#/components/schemas/WebhookResponseModel'
           description: When the replace was successful.
         "400":
           description: Bad request.
@@ -5214,20 +5305,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/WebHookRequest'
+              $ref: '#/components/schemas/WebHookRequestModel'
           text/json:
             schema:
-              $ref: '#/components/schemas/WebHookRequest'
+              $ref: '#/components/schemas/WebHookRequestModel'
           application/*+json:
             schema:
-              $ref: '#/components/schemas/WebHookRequest'
+              $ref: '#/components/schemas/WebHookRequestModel'
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhookModel'
+                $ref: '#/components/schemas/WebhookResponseModel'
           description: When the creation was successful.
         "400":
           description: Bad request.
@@ -5494,7 +5585,6 @@ components:
       - custom
       type: string
     AddOrUpdateIntegrationLinkModel:
-      additionalProperties: false
       example:
         description: description
         url: url
@@ -5509,7 +5599,6 @@ components:
           type: string
       type: object
     AddOrUpdateJiraIntegrationLinkModel:
-      additionalProperties: false
       example:
         jiraJwtToken: jiraJwtToken
         clientKey: clientKey
@@ -5539,7 +5628,6 @@ components:
       - jiraJwtToken
       type: object
     AuditLogItemModel:
-      additionalProperties: false
       example:
         auditLogTypeEnum: productCreated
         auditLogDateTime: 2000-01-23T04:56:07.000+00:00
@@ -5589,6 +5677,19 @@ components:
         details:
           nullable: true
           type: string
+      required:
+      - actionTarget
+      - auditLogDateTime
+      - auditLogId
+      - auditLogType
+      - auditLogTypeEnum
+      - changeSetId
+      - details
+      - truncated
+      - userEmail
+      - userName
+      - where
+      - why
       type: object
     AuditLogType:
       enum:
@@ -5657,6 +5758,7 @@ components:
       - samlIdpConfigurationAdded
       - samlIdpConfigurationRemoved
       - samlIdpConfigurationUpdated
+      - autoProvisioningEnabledChanged
       - organizationMemberJoined
       - organizationMemberProductJoinRequested
       - organizationMemberProductJoinRequestRejected
@@ -5670,9 +5772,21 @@ components:
       - segmentDeleted
       - webhookSigningKeyDeleted
       - webhookSigningKeyCreated
+      - userProvisioningConfigurationChanged
+      - syncGroupProvisioningRuleChanged
+      - syncGroupsReordered
+      - syncUserProvisioningEnabled
+      - syncUserProvisioningDisabled
+      - userEmailChanged
+      - userFullNameChanged
+      - userDisabled
+      - awsConnected
+      - awsDisconnected
+      - userEnabled
+      - syncUserDeleted
+      - syncGroupDeleted
       type: string
     CodeReferenceModel:
-      additionalProperties: false
       example:
         codeReferenceId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         references:
@@ -5721,7 +5835,7 @@ components:
         references:
           description: The actual references to the given Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/ReferenceLines'
+            $ref: '#/components/schemas/ReferenceLinesModel'
           nullable: true
           type: array
         commitUrl:
@@ -5748,74 +5862,82 @@ components:
           description: The code reference scanning tool's name.
           nullable: true
           type: string
+      required:
+      - branch
+      - codeReferenceId
+      - commitHash
+      - commitUrl
+      - references
+      - repository
+      - syncedAt
+      - uploader
       type: object
     CodeReferenceRequest:
-      additionalProperties: false
       example:
         flagReferences:
         - references:
           - file: file
             referenceLine:
               lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
             fileUrl: fileUrl
             postLines:
             - lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
             - lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
             preLines:
             - lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
             - lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
           - file: file
             referenceLine:
               lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
             fileUrl: fileUrl
             postLines:
             - lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
             - lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
             preLines:
             - lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
             - lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
           settingId: 0
         - references:
           - file: file
             referenceLine:
               lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
             fileUrl: fileUrl
             postLines:
             - lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
             - lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
             preLines:
             - lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
             - lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
           - file: file
             referenceLine:
               lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
             fileUrl: fileUrl
             postLines:
             - lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
             - lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
             preLines:
             - lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
             - lineText: lineText
-              lineNumber: 0
+              lineNumber: 6
           settingId: 0
         configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         commitUrl: commitUrl
@@ -5867,13 +5989,11 @@ components:
             deleted.
           items:
             type: string
-          nullable: true
           type: array
         flagReferences:
           description: The actual code reference collection.
           items:
             $ref: '#/components/schemas/FlagReference'
-          nullable: true
           type: array
       required:
       - branch
@@ -5881,14 +6001,9 @@ components:
       - repository
       type: object
     ComparisonValueListModel:
-      additionalProperties: false
-      example:
-        hint: hint
-        value: value
       properties:
         value:
           description: The actual comparison value.
-          minLength: 1
           type: string
         hint:
           description: An optional hint for the comparison value.
@@ -5900,16 +6015,7 @@ components:
       - value
       type: object
     ComparisonValueModel:
-      additionalProperties: false
       description: The value that the user object's attribute is compared to.
-      example:
-        listValue:
-        - hint: hint
-          value: value
-        - hint: hint
-          value: value
-        stringValue: stringValue
-        doubleValue: 1.4658129805029452
       properties:
         stringValue:
           description: The string representation of the comparison value.
@@ -5928,40 +6034,29 @@ components:
           type: array
       type: object
     ConditionModel:
-      additionalProperties: false
       example:
-        segmentCondition:
-          comparator: isIn
-          segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        userCondition:
-          comparator: isOneOf
-          comparisonValue:
-            listValue:
-            - hint: hint
-              value: value
-            - hint: hint
-              value: value
-            stringValue: stringValue
-            doubleValue: 1.4658129805029452
-          comparisonAttribute: comparisonAttribute
-        prerequisiteFlagCondition:
-          comparator: equals
-          prerequisiteComparisonValue:
-            stringValue: stringValue
-            intValue: 0
-            boolValue: true
-            doubleValue: 6.027456183070403
-          prerequisiteSettingId: 5
+        segmentCondition: ""
+        userCondition: ""
+        prerequisiteFlagCondition: ""
       properties:
         userCondition:
-          $ref: '#/components/schemas/UserConditionModel'
+          allOf:
+          - $ref: '#/components/schemas/UserConditionModel'
+          nullable: true
         segmentCondition:
-          $ref: '#/components/schemas/SegmentConditionModel'
+          allOf:
+          - $ref: '#/components/schemas/SegmentConditionModel'
+          nullable: true
         prerequisiteFlagCondition:
-          $ref: '#/components/schemas/PrerequisiteFlagConditionModel'
+          allOf:
+          - $ref: '#/components/schemas/PrerequisiteFlagConditionModel'
+          nullable: true
+      required:
+      - prerequisiteFlagCondition
+      - segmentCondition
+      - userCondition
       type: object
     ConfigModel:
-      additionalProperties: false
       description: Details of the Config.
       example:
         product:
@@ -5988,7 +6083,6 @@ components:
           type: string
         name:
           description: Name of the Config.
-          nullable: true
           type: string
         description:
           description: Description of the Config.
@@ -6004,138 +6098,61 @@ components:
           type: string
         evaluationVersion:
           $ref: '#/components/schemas/EvaluationVersion'
+      required:
+      - configId
+      - description
+      - evaluationVersion
+      - migratedConfigId
+      - name
+      - order
+      - product
       type: object
     ConfigSettingFormulaModel:
-      additionalProperties: false
       example:
         lastVersionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         targetingRules:
         - percentageOptions:
-          - percentage: 5
+          - percentage: 1
             value:
               stringValue: stringValue
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
-          - percentage: 5
+          - percentage: 1
             value:
               stringValue: stringValue
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
           conditions:
-          - segmentCondition:
-              comparator: isIn
-              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            userCondition:
-              comparator: isOneOf
-              comparisonValue:
-                listValue:
-                - hint: hint
-                  value: value
-                - hint: hint
-                  value: value
-                stringValue: stringValue
-                doubleValue: 1.4658129805029452
-              comparisonAttribute: comparisonAttribute
-            prerequisiteFlagCondition:
-              comparator: equals
-              prerequisiteComparisonValue:
-                stringValue: stringValue
-                intValue: 0
-                boolValue: true
-                doubleValue: 6.027456183070403
-              prerequisiteSettingId: 5
-          - segmentCondition:
-              comparator: isIn
-              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            userCondition:
-              comparator: isOneOf
-              comparisonValue:
-                listValue:
-                - hint: hint
-                  value: value
-                - hint: hint
-                  value: value
-                stringValue: stringValue
-                doubleValue: 1.4658129805029452
-              comparisonAttribute: comparisonAttribute
-            prerequisiteFlagCondition:
-              comparator: equals
-              prerequisiteComparisonValue:
-                stringValue: stringValue
-                intValue: 0
-                boolValue: true
-                doubleValue: 6.027456183070403
-              prerequisiteSettingId: 5
-          value:
-            stringValue: stringValue
-            intValue: 0
-            boolValue: true
-            doubleValue: 6.027456183070403
+          - segmentCondition: ""
+            userCondition: ""
+            prerequisiteFlagCondition: ""
+          - segmentCondition: ""
+            userCondition: ""
+            prerequisiteFlagCondition: ""
+          value: ""
         - percentageOptions:
-          - percentage: 5
+          - percentage: 1
             value:
               stringValue: stringValue
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
-          - percentage: 5
+          - percentage: 1
             value:
               stringValue: stringValue
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
           conditions:
-          - segmentCondition:
-              comparator: isIn
-              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            userCondition:
-              comparator: isOneOf
-              comparisonValue:
-                listValue:
-                - hint: hint
-                  value: value
-                - hint: hint
-                  value: value
-                stringValue: stringValue
-                doubleValue: 1.4658129805029452
-              comparisonAttribute: comparisonAttribute
-            prerequisiteFlagCondition:
-              comparator: equals
-              prerequisiteComparisonValue:
-                stringValue: stringValue
-                intValue: 0
-                boolValue: true
-                doubleValue: 6.027456183070403
-              prerequisiteSettingId: 5
-          - segmentCondition:
-              comparator: isIn
-              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            userCondition:
-              comparator: isOneOf
-              comparisonValue:
-                listValue:
-                - hint: hint
-                  value: value
-                - hint: hint
-                  value: value
-                stringValue: stringValue
-                doubleValue: 1.4658129805029452
-              comparisonAttribute: comparisonAttribute
-            prerequisiteFlagCondition:
-              comparator: equals
-              prerequisiteComparisonValue:
-                stringValue: stringValue
-                intValue: 0
-                boolValue: true
-                doubleValue: 6.027456183070403
-              prerequisiteSettingId: 5
-          value:
-            stringValue: stringValue
-            intValue: 0
-            boolValue: true
-            doubleValue: 6.027456183070403
+          - segmentCondition: ""
+            userCondition: ""
+            prerequisiteFlagCondition: ""
+          - segmentCondition: ""
+            userCondition: ""
+            prerequisiteFlagCondition: ""
+          value: ""
         percentageEvaluationAttribute: percentageEvaluationAttribute
         defaultValue:
           stringValue: stringValue
@@ -6157,13 +6174,13 @@ components:
           url: url
         settingTags:
         - color: color
-          tagId: 1
+          tagId: 6
           name: name
-          settingTagId: 6
+          settingTagId: 0
         - color: color
-          tagId: 1
+          tagId: 6
           name: name
-          settingTagId: 6
+          settingTagId: 0
         setting:
           createdAt: 2000-01-23T04:56:07.000+00:00
           creatorEmail: creatorEmail
@@ -6187,7 +6204,6 @@ components:
           description: The targeting rules of the Feature Flag or Setting.
           items:
             $ref: '#/components/schemas/TargetingRuleModel'
-          nullable: true
           type: array
         setting:
           $ref: '#/components/schemas/SettingDataModel'
@@ -6214,13 +6230,11 @@ components:
           description: The integration links attached to the Feature Flag or Setting.
           items:
             $ref: '#/components/schemas/IntegrationLinkModel'
-          nullable: true
           type: array
         settingTags:
           description: The tags attached to the Feature Flag or Setting.
           items:
             $ref: '#/components/schemas/SettingTagModel'
-          nullable: true
           type: array
         settingIdsWherePrerequisite:
           description: List of Feature Flag and Setting IDs where the actual Feature
@@ -6228,11 +6242,21 @@ components:
           items:
             format: int32
             type: integer
-          nullable: true
           type: array
+      required:
+      - defaultValue
+      - integrationLinks
+      - lastUpdaterUserEmail
+      - lastUpdaterUserFullName
+      - lastVersionId
+      - percentageEvaluationAttribute
+      - setting
+      - settingIdsWherePrerequisite
+      - settingTags
+      - targetingRules
+      - updatedAt
       type: object
     ConfigSettingFormulasModel:
-      additionalProperties: false
       example:
         environment:
           product:
@@ -6262,131 +6286,47 @@ components:
         - lastVersionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           targetingRules:
           - percentageOptions:
-            - percentage: 5
+            - percentage: 1
               value:
                 stringValue: stringValue
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
-            - percentage: 5
+            - percentage: 1
               value:
                 stringValue: stringValue
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
             conditions:
-            - segmentCondition:
-                comparator: isIn
-                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              userCondition:
-                comparator: isOneOf
-                comparisonValue:
-                  listValue:
-                  - hint: hint
-                    value: value
-                  - hint: hint
-                    value: value
-                  stringValue: stringValue
-                  doubleValue: 1.4658129805029452
-                comparisonAttribute: comparisonAttribute
-              prerequisiteFlagCondition:
-                comparator: equals
-                prerequisiteComparisonValue:
-                  stringValue: stringValue
-                  intValue: 0
-                  boolValue: true
-                  doubleValue: 6.027456183070403
-                prerequisiteSettingId: 5
-            - segmentCondition:
-                comparator: isIn
-                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              userCondition:
-                comparator: isOneOf
-                comparisonValue:
-                  listValue:
-                  - hint: hint
-                    value: value
-                  - hint: hint
-                    value: value
-                  stringValue: stringValue
-                  doubleValue: 1.4658129805029452
-                comparisonAttribute: comparisonAttribute
-              prerequisiteFlagCondition:
-                comparator: equals
-                prerequisiteComparisonValue:
-                  stringValue: stringValue
-                  intValue: 0
-                  boolValue: true
-                  doubleValue: 6.027456183070403
-                prerequisiteSettingId: 5
-            value:
-              stringValue: stringValue
-              intValue: 0
-              boolValue: true
-              doubleValue: 6.027456183070403
+            - segmentCondition: ""
+              userCondition: ""
+              prerequisiteFlagCondition: ""
+            - segmentCondition: ""
+              userCondition: ""
+              prerequisiteFlagCondition: ""
+            value: ""
           - percentageOptions:
-            - percentage: 5
+            - percentage: 1
               value:
                 stringValue: stringValue
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
-            - percentage: 5
+            - percentage: 1
               value:
                 stringValue: stringValue
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
             conditions:
-            - segmentCondition:
-                comparator: isIn
-                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              userCondition:
-                comparator: isOneOf
-                comparisonValue:
-                  listValue:
-                  - hint: hint
-                    value: value
-                  - hint: hint
-                    value: value
-                  stringValue: stringValue
-                  doubleValue: 1.4658129805029452
-                comparisonAttribute: comparisonAttribute
-              prerequisiteFlagCondition:
-                comparator: equals
-                prerequisiteComparisonValue:
-                  stringValue: stringValue
-                  intValue: 0
-                  boolValue: true
-                  doubleValue: 6.027456183070403
-                prerequisiteSettingId: 5
-            - segmentCondition:
-                comparator: isIn
-                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              userCondition:
-                comparator: isOneOf
-                comparisonValue:
-                  listValue:
-                  - hint: hint
-                    value: value
-                  - hint: hint
-                    value: value
-                  stringValue: stringValue
-                  doubleValue: 1.4658129805029452
-                comparisonAttribute: comparisonAttribute
-              prerequisiteFlagCondition:
-                comparator: equals
-                prerequisiteComparisonValue:
-                  stringValue: stringValue
-                  intValue: 0
-                  boolValue: true
-                  doubleValue: 6.027456183070403
-                prerequisiteSettingId: 5
-            value:
-              stringValue: stringValue
-              intValue: 0
-              boolValue: true
-              doubleValue: 6.027456183070403
+            - segmentCondition: ""
+              userCondition: ""
+              prerequisiteFlagCondition: ""
+            - segmentCondition: ""
+              userCondition: ""
+              prerequisiteFlagCondition: ""
+            value: ""
           percentageEvaluationAttribute: percentageEvaluationAttribute
           defaultValue:
             stringValue: stringValue
@@ -6408,13 +6348,13 @@ components:
             url: url
           settingTags:
           - color: color
-            tagId: 1
+            tagId: 6
             name: name
-            settingTagId: 6
+            settingTagId: 0
           - color: color
-            tagId: 1
+            tagId: 6
             name: name
-            settingTagId: 6
+            settingTagId: 0
           setting:
             createdAt: 2000-01-23T04:56:07.000+00:00
             creatorEmail: creatorEmail
@@ -6431,131 +6371,47 @@ components:
         - lastVersionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           targetingRules:
           - percentageOptions:
-            - percentage: 5
+            - percentage: 1
               value:
                 stringValue: stringValue
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
-            - percentage: 5
+            - percentage: 1
               value:
                 stringValue: stringValue
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
             conditions:
-            - segmentCondition:
-                comparator: isIn
-                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              userCondition:
-                comparator: isOneOf
-                comparisonValue:
-                  listValue:
-                  - hint: hint
-                    value: value
-                  - hint: hint
-                    value: value
-                  stringValue: stringValue
-                  doubleValue: 1.4658129805029452
-                comparisonAttribute: comparisonAttribute
-              prerequisiteFlagCondition:
-                comparator: equals
-                prerequisiteComparisonValue:
-                  stringValue: stringValue
-                  intValue: 0
-                  boolValue: true
-                  doubleValue: 6.027456183070403
-                prerequisiteSettingId: 5
-            - segmentCondition:
-                comparator: isIn
-                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              userCondition:
-                comparator: isOneOf
-                comparisonValue:
-                  listValue:
-                  - hint: hint
-                    value: value
-                  - hint: hint
-                    value: value
-                  stringValue: stringValue
-                  doubleValue: 1.4658129805029452
-                comparisonAttribute: comparisonAttribute
-              prerequisiteFlagCondition:
-                comparator: equals
-                prerequisiteComparisonValue:
-                  stringValue: stringValue
-                  intValue: 0
-                  boolValue: true
-                  doubleValue: 6.027456183070403
-                prerequisiteSettingId: 5
-            value:
-              stringValue: stringValue
-              intValue: 0
-              boolValue: true
-              doubleValue: 6.027456183070403
+            - segmentCondition: ""
+              userCondition: ""
+              prerequisiteFlagCondition: ""
+            - segmentCondition: ""
+              userCondition: ""
+              prerequisiteFlagCondition: ""
+            value: ""
           - percentageOptions:
-            - percentage: 5
+            - percentage: 1
               value:
                 stringValue: stringValue
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
-            - percentage: 5
+            - percentage: 1
               value:
                 stringValue: stringValue
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
             conditions:
-            - segmentCondition:
-                comparator: isIn
-                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              userCondition:
-                comparator: isOneOf
-                comparisonValue:
-                  listValue:
-                  - hint: hint
-                    value: value
-                  - hint: hint
-                    value: value
-                  stringValue: stringValue
-                  doubleValue: 1.4658129805029452
-                comparisonAttribute: comparisonAttribute
-              prerequisiteFlagCondition:
-                comparator: equals
-                prerequisiteComparisonValue:
-                  stringValue: stringValue
-                  intValue: 0
-                  boolValue: true
-                  doubleValue: 6.027456183070403
-                prerequisiteSettingId: 5
-            - segmentCondition:
-                comparator: isIn
-                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              userCondition:
-                comparator: isOneOf
-                comparisonValue:
-                  listValue:
-                  - hint: hint
-                    value: value
-                  - hint: hint
-                    value: value
-                  stringValue: stringValue
-                  doubleValue: 1.4658129805029452
-                comparisonAttribute: comparisonAttribute
-              prerequisiteFlagCondition:
-                comparator: equals
-                prerequisiteComparisonValue:
-                  stringValue: stringValue
-                  intValue: 0
-                  boolValue: true
-                  doubleValue: 6.027456183070403
-                prerequisiteSettingId: 5
-            value:
-              stringValue: stringValue
-              intValue: 0
-              boolValue: true
-              doubleValue: 6.027456183070403
+            - segmentCondition: ""
+              userCondition: ""
+              prerequisiteFlagCondition: ""
+            - segmentCondition: ""
+              userCondition: ""
+              prerequisiteFlagCondition: ""
+            value: ""
           percentageEvaluationAttribute: percentageEvaluationAttribute
           defaultValue:
             stringValue: stringValue
@@ -6577,13 +6433,13 @@ components:
             url: url
           settingTags:
           - color: color
-            tagId: 1
+            tagId: 6
             name: name
-            settingTagId: 6
+            settingTagId: 0
           - color: color
-            tagId: 1
+            tagId: 6
             name: name
-            settingTagId: 6
+            settingTagId: 0
           setting:
             createdAt: 2000-01-23T04:56:07.000+00:00
             creatorEmail: creatorEmail
@@ -6625,34 +6481,37 @@ components:
           description: Evaluation descriptors of each updated Feature Flag and Setting.
           items:
             $ref: '#/components/schemas/ConfigSettingFormulaModel'
-          nullable: true
           type: array
         featureFlagLimitations:
           $ref: '#/components/schemas/FeatureFlagLimitations'
+      required:
+      - config
+      - environment
+      - featureFlagLimitations
+      - readOnly
+      - settingFormulas
       type: object
     ConfigSettingValueModel:
-      additionalProperties: false
       example:
         rolloutRules:
-        - comparator: isOneOf
+        - comparator: ""
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: isIn
+          segmentComparator: ""
           value: ""
           comparisonAttribute: comparisonAttribute
-        - comparator: isOneOf
+        - comparator: ""
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: isIn
+          segmentComparator: ""
           value: ""
           comparisonAttribute: comparisonAttribute
         rolloutPercentageItems:
-        - percentage: 0
+        - percentage: 1
           value: ""
-        - percentage: 0
+        - percentage: 1
           value: ""
         lastUpdaterUserEmail: lastUpdaterUserEmail
-        value: ""
         integrationLinks:
         - integrationLinkType: trello
           description: description
@@ -6662,15 +6521,16 @@ components:
           description: description
           key: key
           url: url
+        value: ""
         settingTags:
         - color: color
-          tagId: 1
+          tagId: 6
           name: name
-          settingTagId: 6
+          settingTagId: 0
         - color: color
-          tagId: 1
+          tagId: 6
           name: name
-          settingTagId: 6
+          settingTagId: 0
         setting:
           createdAt: 2000-01-23T04:56:07.000+00:00
           creatorEmail: creatorEmail
@@ -6685,21 +6545,6 @@ components:
         updatedAt: 2000-01-23T04:56:07.000+00:00
         lastUpdaterUserFullName: lastUpdaterUserFullName
       properties:
-        rolloutRules:
-          description: The targeting rule collection.
-          items:
-            $ref: '#/components/schemas/RolloutRuleModel'
-          nullable: true
-          type: array
-        rolloutPercentageItems:
-          description: The percentage rule collection.
-          items:
-            $ref: '#/components/schemas/RolloutPercentageItemModel'
-          nullable: true
-          type: array
-        value:
-          description: The value to serve. It must respect the setting type.
-          nullable: true
         setting:
           $ref: '#/components/schemas/SettingDataModel'
         updatedAt:
@@ -6720,17 +6565,40 @@ components:
           description: The integration links attached to the Feature Flag or Setting.
           items:
             $ref: '#/components/schemas/IntegrationLinkModel'
-          nullable: true
           type: array
         settingTags:
           description: The tags attached to the Feature Flag or Setting.
           items:
             $ref: '#/components/schemas/SettingTagModel'
-          nullable: true
           type: array
+        rolloutRules:
+          description: The targeting rule collection.
+          items:
+            $ref: '#/components/schemas/RolloutRuleModel'
+          type: array
+        rolloutPercentageItems:
+          description: The percentage rule collection.
+          items:
+            $ref: '#/components/schemas/RolloutPercentageItemModel'
+          type: array
+        value:
+          allOf:
+          - $ref: '#/components/schemas/SettingValueType'
+          description: The value to serve. It must respect the setting type. In some
+            generated clients for strictly typed languages you may use double/float
+            properties to handle integer values.
+      required:
+      - integrationLinks
+      - lastUpdaterUserEmail
+      - lastUpdaterUserFullName
+      - rolloutPercentageItems
+      - rolloutRules
+      - setting
+      - settingTags
+      - updatedAt
+      - value
       type: object
     ConfigSettingValuesModel:
-      additionalProperties: false
       example:
         environment:
           product:
@@ -6759,25 +6627,24 @@ components:
         readOnly: true
         settingValues:
         - rolloutRules:
-          - comparator: isOneOf
+          - comparator: ""
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: isIn
+            segmentComparator: ""
             value: ""
             comparisonAttribute: comparisonAttribute
-          - comparator: isOneOf
+          - comparator: ""
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: isIn
+            segmentComparator: ""
             value: ""
             comparisonAttribute: comparisonAttribute
           rolloutPercentageItems:
-          - percentage: 0
+          - percentage: 1
             value: ""
-          - percentage: 0
+          - percentage: 1
             value: ""
           lastUpdaterUserEmail: lastUpdaterUserEmail
-          value: ""
           integrationLinks:
           - integrationLinkType: trello
             description: description
@@ -6787,15 +6654,16 @@ components:
             description: description
             key: key
             url: url
+          value: ""
           settingTags:
           - color: color
-            tagId: 1
+            tagId: 6
             name: name
-            settingTagId: 6
+            settingTagId: 0
           - color: color
-            tagId: 1
+            tagId: 6
             name: name
-            settingTagId: 6
+            settingTagId: 0
           setting:
             createdAt: 2000-01-23T04:56:07.000+00:00
             creatorEmail: creatorEmail
@@ -6810,25 +6678,24 @@ components:
           updatedAt: 2000-01-23T04:56:07.000+00:00
           lastUpdaterUserFullName: lastUpdaterUserFullName
         - rolloutRules:
-          - comparator: isOneOf
+          - comparator: ""
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: isIn
+            segmentComparator: ""
             value: ""
             comparisonAttribute: comparisonAttribute
-          - comparator: isOneOf
+          - comparator: ""
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: isIn
+            segmentComparator: ""
             value: ""
             comparisonAttribute: comparisonAttribute
           rolloutPercentageItems:
-          - percentage: 0
+          - percentage: 1
             value: ""
-          - percentage: 0
+          - percentage: 1
             value: ""
           lastUpdaterUserEmail: lastUpdaterUserEmail
-          value: ""
           integrationLinks:
           - integrationLinkType: trello
             description: description
@@ -6838,15 +6705,16 @@ components:
             description: description
             key: key
             url: url
+          value: ""
           settingTags:
           - color: color
-            tagId: 1
+            tagId: 6
             name: name
-            settingTagId: 6
+            settingTagId: 0
           - color: color
-            tagId: 1
+            tagId: 6
             name: name
-            settingTagId: 6
+            settingTagId: 0
           setting:
             createdAt: 2000-01-23T04:56:07.000+00:00
             creatorEmail: creatorEmail
@@ -6886,13 +6754,17 @@ components:
         settingValues:
           items:
             $ref: '#/components/schemas/ConfigSettingValueModel'
-          nullable: true
           type: array
         featureFlagLimitations:
           $ref: '#/components/schemas/FeatureFlagLimitations'
+      required:
+      - config
+      - environment
+      - featureFlagLimitations
+      - readOnly
+      - settingValues
       type: object
     ConnectRequest:
-      additionalProperties: false
       example:
         jiraJwtToken: jiraJwtToken
         clientKey: clientKey
@@ -6910,7 +6782,6 @@ components:
       - jiraJwtToken
       type: object
     CreateConfigRequest:
-      additionalProperties: false
       example:
         name: name
         description: description
@@ -6929,8 +6800,9 @@ components:
           nullable: true
           type: string
         order:
-          description: "The order of the Config represented on the ConfigCat Dashboard.\r\
-            \nDetermined from an ascending sequence of integers."
+          description: |-
+            The order of the Config represented on the ConfigCat Dashboard.
+            Determined from an ascending sequence of integers.
           format: int32
           nullable: true
           type: integer
@@ -6940,7 +6812,6 @@ components:
       - name
       type: object
     CreateEnvironmentModel:
-      additionalProperties: false
       example:
         color: color
         name: name
@@ -6965,8 +6836,9 @@ components:
           nullable: true
           type: string
         order:
-          description: "The order of the Environment represented on the ConfigCat\
-            \ Dashboard.\r\nDetermined from an ascending sequence of integers."
+          description: |-
+            The order of the Environment represented on the ConfigCat Dashboard.
+            Determined from an ascending sequence of integers.
           format: int32
           nullable: true
           type: integer
@@ -6974,7 +6846,6 @@ components:
       - name
       type: object
     CreateIntegrationModel:
-      additionalProperties: false
       example:
         integrationType: dataDog
         environmentIds:
@@ -7021,7 +6892,6 @@ components:
       - parameters
       type: object
     CreateOrUpdateEnvironmentAccessModel:
-      additionalProperties: false
       example:
         environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         environmentAccessType: null
@@ -7034,7 +6904,6 @@ components:
           $ref: '#/components/schemas/EnvironmentAccessType'
       type: object
     CreatePermissionGroupRequest:
-      additionalProperties: false
       example:
         canViewProductStatistics: true
         canDeleteTag: true
@@ -7149,7 +7018,6 @@ components:
       - name
       type: object
     CreateProductRequest:
-      additionalProperties: false
       example:
         name: name
         description: description
@@ -7167,8 +7035,9 @@ components:
           nullable: true
           type: string
         order:
-          description: "The order of the Product represented on the ConfigCat Dashboard.\r\
-            \nDetermined from an ascending sequence of integers."
+          description: |-
+            The order of the Product represented on the ConfigCat Dashboard.
+            Determined from an ascending sequence of integers.
           format: int32
           nullable: true
           type: integer
@@ -7176,7 +7045,6 @@ components:
       - name
       type: object
     CreateSegmentModel:
-      additionalProperties: false
       example:
         comparator: isOneOf
         comparisonValue: comparisonValue
@@ -7214,13 +7082,13 @@ components:
       - name
       type: object
     CreateSettingInitialValues:
-      additionalProperties: false
       example:
         initialValues:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           value: ""
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           value: ""
+        settingIdToInitFrom: 1
         hint: hint
         name: name
         settingType: boolean
@@ -7245,8 +7113,9 @@ components:
           nullable: true
           type: array
         order:
-          description: "The order of the Setting represented on the ConfigCat Dashboard.\r\
-            \nDetermined from an ascending sequence of integers."
+          description: |-
+            The order of the Setting represented on the ConfigCat Dashboard.
+            Determined from an ascending sequence of integers.
           format: int32
           nullable: true
           type: integer
@@ -7264,18 +7133,26 @@ components:
           $ref: '#/components/schemas/SettingType'
         initialValues:
           description: "Optional, initial value of the Feature Flag or Setting in\
-            \ the given Environments."
+            \ the given Environments. Only one of the SettingIdToInitFrom or the InitialValues\
+            \ properties can be set."
           items:
             $ref: '#/components/schemas/InitialValue'
           nullable: true
           type: array
+        settingIdToInitFrom:
+          description: "Optional, the SettingId to initialize the values and tags\
+            \ of the Feature Flag or Setting from. Only can be set if you have at\
+            \ least ReadOnly access in all the Environments. Only one of the SettingIdToInitFrom\
+            \ or the InitialValues properties can be set."
+          format: int32
+          nullable: true
+          type: integer
       required:
       - key
       - name
       - settingType
       type: object
     CreateTagModel:
-      additionalProperties: false
       example:
         color: color
         name: name
@@ -7286,7 +7163,8 @@ components:
           minLength: 1
           type: string
         color:
-          description: Color of the Tag.
+          description: "Color of the Tag. Possible values: `panther`, `whale`, `salmon`,\
+            \ `lizard`, `canary`, `koala`, or any HTML color code."
           maxLength: 255
           minLength: 0
           nullable: true
@@ -7295,15 +7173,15 @@ components:
       - name
       type: object
     DeleteIntegrationLinkModel:
-      additionalProperties: false
       example:
         hasRemainingIntegrationLink: true
       properties:
         hasRemainingIntegrationLink:
           type: boolean
+      required:
+      - hasRemainingIntegrationLink
       type: object
     DeleteRepositoryReportsRequest:
-      additionalProperties: false
       example:
         configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         repository: repository
@@ -7336,8 +7214,35 @@ components:
       - configId
       - repository
       type: object
+    DeletedSettingModel:
+      example:
+        hint: hint
+        name: name
+        settingType: boolean
+        key: key
+      properties:
+        key:
+          description: Key of the Feature Flag or Setting.
+          readOnly: true
+          type: string
+        name:
+          description: Name of the Feature Flag or Setting.
+          readOnly: true
+          type: string
+        hint:
+          description: Description of the Feature Flag or Setting.
+          nullable: true
+          readOnly: true
+          type: string
+        settingType:
+          $ref: '#/components/schemas/SettingType'
+      required:
+      - hint
+      - key
+      - name
+      - settingType
+      type: object
     EnvironmentAccessModel:
-      additionalProperties: false
       example:
         environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         color: color
@@ -7373,6 +7278,14 @@ components:
           type: boolean
         environmentAccessType:
           $ref: '#/components/schemas/EnvironmentAccessType'
+      required:
+      - color
+      - description
+      - environmentAccessType
+      - environmentId
+      - name
+      - order
+      - reasonRequired
       type: object
     EnvironmentAccessType:
       description: Represent the environment specific Feature Management permission.
@@ -7382,7 +7295,6 @@ components:
       - none
       type: string
     EnvironmentModel:
-      additionalProperties: false
       description: Details of the Environment.
       example:
         product:
@@ -7409,7 +7321,6 @@ components:
           type: string
         name:
           description: Name of the Environment.
-          nullable: true
           type: string
         color:
           description: The configured color of the Environment.
@@ -7427,16 +7338,24 @@ components:
           description: Determines whether a mandatory reason must be given every time
             when the Feature Flags or Settings in the given Environment are saved.
           type: boolean
+      required:
+      - color
+      - description
+      - environmentId
+      - name
+      - order
+      - product
+      - reasonRequired
       type: object
     EvaluationVersion:
-      description: "Determines the evaluation version of a Config.\r\nUsing `v2` enables\
-        \ the new features of Config V2 (https://configcat.com/docs/advanced/config-v2)."
+      description: |-
+        Determines the evaluation version of a Config.
+        Using `v2` enables the new features of Config V2 (https://configcat.com/docs/advanced/config-v2).
       enum:
       - v1
       - v2
       type: string
     FeatureFlagLimitations:
-      additionalProperties: false
       description: Subscription limitations regarding Feature flag or Setting values
         and targeting.
       example:
@@ -7479,41 +7398,48 @@ components:
             can have within a targeting rule.
           format: int32
           type: integer
+      required:
+      - maxComparisonValueLength
+      - maxComparisonValueListItemLength
+      - maxComparisonValueListLength
+      - maxConditionPerTargetingRuleCount
+      - maxPercentageOptionCount
+      - maxStringFlagValueLength
+      - maxTargetingRuleCount
       type: object
     FlagReference:
-      additionalProperties: false
       example:
         references:
         - file: file
           referenceLine:
             lineText: lineText
-            lineNumber: 0
+            lineNumber: 6
           fileUrl: fileUrl
           postLines:
           - lineText: lineText
-            lineNumber: 0
+            lineNumber: 6
           - lineText: lineText
-            lineNumber: 0
+            lineNumber: 6
           preLines:
           - lineText: lineText
-            lineNumber: 0
+            lineNumber: 6
           - lineText: lineText
-            lineNumber: 0
+            lineNumber: 6
         - file: file
           referenceLine:
             lineText: lineText
-            lineNumber: 0
+            lineNumber: 6
           fileUrl: fileUrl
           postLines:
           - lineText: lineText
-            lineNumber: 0
+            lineNumber: 6
           - lineText: lineText
-            lineNumber: 0
+            lineNumber: 6
           preLines:
           - lineText: lineText
-            lineNumber: 0
+            lineNumber: 6
           - lineText: lineText
-            lineNumber: 0
+            lineNumber: 6
         settingId: 0
       properties:
         settingId:
@@ -7524,14 +7450,13 @@ components:
         references:
           description: The actual references to the given Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/ReferenceLines'
+            $ref: '#/components/schemas/ReferenceLinesRequest'
           type: array
       required:
       - references
       - settingId
       type: object
     InitialValue:
-      additionalProperties: false
       example:
         environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         value: ""
@@ -7541,12 +7466,15 @@ components:
           format: uuid
           type: string
         value:
+          allOf:
+          - $ref: '#/components/schemas/SettingValueType'
           description: The initial value in the given Environment. It must respect
-            the setting type.
-          nullable: true
+            the setting type. In some generated clients for strictly typed languages
+            you may use double/float properties to handle integer values.
+      required:
+      - value
       type: object
     IntegrationLinkDetail:
-      additionalProperties: false
       example:
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -7614,11 +7542,16 @@ components:
         readOnly:
           type: boolean
         status:
-          nullable: true
           type: string
+      required:
+      - config
+      - environment
+      - product
+      - readOnly
+      - setting
+      - status
       type: object
     IntegrationLinkDetailsModel:
-      additionalProperties: false
       example:
         allIntegrationLinkCount: 1
         details:
@@ -7740,9 +7673,11 @@ components:
         allIntegrationLinkCount:
           format: int32
           type: integer
+      required:
+      - allIntegrationLinkCount
+      - details
       type: object
     IntegrationLinkModel:
-      additionalProperties: false
       example:
         integrationLinkType: trello
         description: description
@@ -7760,6 +7695,11 @@ components:
         url:
           nullable: true
           type: string
+      required:
+      - description
+      - integrationLinkType
+      - key
+      - url
       type: object
     IntegrationLinkType:
       enum:
@@ -7768,7 +7708,6 @@ components:
       - monday
       type: string
     IntegrationModel:
-      additionalProperties: false
       description: Details of the Integration.
       example:
         product:
@@ -7800,13 +7739,11 @@ components:
           type: string
         name:
           description: Name of the Integration.
-          nullable: true
           type: string
         integrationType:
           $ref: '#/components/schemas/IntegrationType'
         parameters:
           additionalProperties:
-            nullable: true
             type: string
           description: Parameters of the Integration.
           nullable: true
@@ -7817,7 +7754,6 @@ components:
           items:
             format: uuid
             type: string
-          nullable: true
           type: array
         configIds:
           description: "List of Config IDs that are connected with this Integration.\
@@ -7825,8 +7761,15 @@ components:
           items:
             format: uuid
             type: string
-          nullable: true
           type: array
+      required:
+      - configIds
+      - environmentIds
+      - integrationId
+      - integrationType
+      - name
+      - parameters
+      - product
       type: object
     IntegrationType:
       enum:
@@ -7838,7 +7781,6 @@ components:
       - pubNub
       type: string
     IntegrationsModel:
-      additionalProperties: false
       example:
         integrations:
         - product:
@@ -7888,9 +7830,10 @@ components:
             $ref: '#/components/schemas/IntegrationModel'
           nullable: true
           type: array
+      required:
+      - integrations
       type: object
     InvitationModel:
-      additionalProperties: false
       example:
         permissionGroupId: 0
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -7918,9 +7861,14 @@ components:
         expired:
           description: Determines whether the Invitation is expired.
           type: boolean
+      required:
+      - createdAt
+      - email
+      - expired
+      - invitationId
+      - permissionGroupId
       type: object
     InviteMembersRequest:
-      additionalProperties: false
       example:
         emails:
         - emails
@@ -7942,7 +7890,6 @@ components:
       - permissionGroupId
       type: object
     JsonPatchOperation:
-      additionalProperties: false
       example:
         op: unknown
         path: path
@@ -7976,22 +7923,21 @@ components:
       - kebabCase
       type: string
     MeModel:
-      additionalProperties: false
       example:
         fullName: fullName
         email: email
       properties:
         email:
-          nullable: true
           readOnly: true
           type: string
         fullName:
-          nullable: true
           readOnly: true
           type: string
+      required:
+      - email
+      - fullName
       type: object
     MemberModel:
-      additionalProperties: false
       example:
         permissionGroupId: 0
         productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -8019,9 +7965,14 @@ components:
           description: Email of the Member.
           nullable: true
           type: string
+      required:
+      - email
+      - fullName
+      - permissionGroupId
+      - productId
+      - userId
       type: object
     ModifyIntegrationRequest:
-      additionalProperties: false
       example:
         environmentIds:
         - 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -8074,7 +8025,6 @@ components:
       - test
       type: string
     OrganizationAdminModel:
-      additionalProperties: false
       description: Describes an Organization Admin.
       example:
         twoFactorEnabled: true
@@ -8084,22 +8034,23 @@ components:
       properties:
         userId:
           description: Identifier of the Organization Admin.
-          nullable: true
           type: string
         fullName:
           description: Name of the Organization Admin.
-          nullable: true
           type: string
         email:
           description: Email of the OrganizationAdmin.
-          nullable: true
           type: string
         twoFactorEnabled:
           description: Determines whether 2FA is enabled for the Organization Admin.
           type: boolean
+      required:
+      - email
+      - fullName
+      - twoFactorEnabled
+      - userId
       type: object
     OrganizationInvitationModel:
-      additionalProperties: false
       example:
         permissionGroupId: 0
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -8142,9 +8093,17 @@ components:
           description: Expiration time of the Invitation.
           format: date-time
           type: string
+      required:
+      - createdAt
+      - email
+      - expired
+      - expires
+      - invitationId
+      - permissionGroupId
+      - productId
+      - productName
       type: object
     OrganizationMemberModel:
-      additionalProperties: false
       description: Describes an Organization Member.
       example:
         twoFactorEnabled: true
@@ -8167,15 +8126,12 @@ components:
       properties:
         userId:
           description: Identifier of the Organization Admin.
-          nullable: true
           type: string
         fullName:
           description: Name of the Organization Admin.
-          nullable: true
           type: string
         email:
           description: Email of the OrganizationAdmin.
-          nullable: true
           type: string
         twoFactorEnabled:
           description: Determines whether 2FA is enabled for the Organization Admin.
@@ -8184,11 +8140,15 @@ components:
           description: The permissions of the Member.
           items:
             $ref: '#/components/schemas/OrganizationPermissionModel'
-          nullable: true
           type: array
+      required:
+      - email
+      - fullName
+      - permissions
+      - twoFactorEnabled
+      - userId
       type: object
     OrganizationMembersModel:
-      additionalProperties: false
       example:
         billingManagers:
         - twoFactorEnabled: true
@@ -8248,23 +8208,23 @@ components:
           description: List of Organization Admins.
           items:
             $ref: '#/components/schemas/OrganizationAdminModel'
-          nullable: true
           type: array
         billingManagers:
           description: List of Billing Managers.
           items:
             $ref: '#/components/schemas/OrganizationAdminModel'
-          nullable: true
           type: array
         members:
           description: List of Organization Members.
           items:
             $ref: '#/components/schemas/OrganizationMemberModel'
-          nullable: true
           type: array
+      required:
+      - admins
+      - billingManagers
+      - members
       type: object
     OrganizationModel:
-      additionalProperties: false
       description: Details of the Organization.
       example:
         organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -8276,11 +8236,12 @@ components:
           type: string
         name:
           description: Name of the Organization.
-          nullable: true
           type: string
+      required:
+      - name
+      - organizationId
       type: object
     OrganizationPermissionGroupModel:
-      additionalProperties: false
       description: Describes the Member's Permission Group within a Product.
       example:
         permissionGroupId: 0
@@ -8292,11 +8253,12 @@ components:
           type: integer
         name:
           description: Name of the Member's Permission Group.
-          nullable: true
           type: string
+      required:
+      - name
+      - permissionGroupId
       type: object
     OrganizationPermissionModel:
-      additionalProperties: false
       description: Describes the Member's permission.
       example:
         product:
@@ -8310,9 +8272,11 @@ components:
           $ref: '#/components/schemas/OrganizationProductModel'
         permissionGroup:
           $ref: '#/components/schemas/OrganizationPermissionGroupModel'
+      required:
+      - permissionGroup
+      - product
       type: object
     OrganizationProductModel:
-      additionalProperties: false
       description: Describes the Member's Product.
       example:
         productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -8324,13 +8288,14 @@ components:
           type: string
         name:
           description: Name of the Member's Product.
-          nullable: true
           type: string
+      required:
+      - name
+      - productId
       type: object
     PercentageOptionModel:
-      additionalProperties: false
       example:
-        percentage: 5
+        percentage: 1
         value:
           stringValue: stringValue
           intValue: 0
@@ -8349,7 +8314,6 @@ components:
       - value
       type: object
     PermissionGroupModel:
-      additionalProperties: false
       example:
         canViewProductStatistics: true
         canDeleteTag: true
@@ -8407,7 +8371,6 @@ components:
           type: integer
         name:
           description: Name of the Permission Group.
-          nullable: true
           type: string
         canManageMembers:
           description: Group members can manage team members.
@@ -8481,13 +8444,39 @@ components:
           description: List of environment specific permissions.
           items:
             $ref: '#/components/schemas/EnvironmentAccessModel'
-          nullable: true
           type: array
         product:
           $ref: '#/components/schemas/ProductModel'
+      required:
+      - accessType
+      - canCreateOrUpdateConfig
+      - canCreateOrUpdateEnvironment
+      - canCreateOrUpdateSegments
+      - canCreateOrUpdateSetting
+      - canCreateOrUpdateTag
+      - canDeleteConfig
+      - canDeleteEnvironment
+      - canDeleteSegments
+      - canDeleteSetting
+      - canDeleteTag
+      - canDisable2FA
+      - canManageIntegrations
+      - canManageMembers
+      - canManageProductPreferences
+      - canManageWebhook
+      - canRotateSdkKey
+      - canTagSetting
+      - canUseExportImport
+      - canViewProductAuditLog
+      - canViewProductStatistics
+      - canViewSdkKey
+      - environmentAccesses
+      - name
+      - newEnvironmentAccessType
+      - permissionGroupId
+      - product
       type: object
     PreferencesModel:
-      additionalProperties: false
       example:
         keyGenerationMode: camelCase
         showVariationId: true
@@ -8520,6 +8509,12 @@ components:
         mandatorySettingHint:
           description: Indicates whether Feature flags and Settings must have a hint.
           type: boolean
+      required:
+      - keyGenerationMode
+      - mandatorySettingHint
+      - reasonRequired
+      - reasonRequiredEnvironments
+      - showVariationId
       type: object
     PrerequisiteComparator:
       description: Prerequisite flag comparison operator used during the evaluation
@@ -8529,16 +8524,7 @@ components:
       - doesNotEqual
       type: string
     PrerequisiteFlagConditionModel:
-      additionalProperties: false
       description: Describes a condition that is based on a prerequisite flag.
-      example:
-        comparator: equals
-        prerequisiteComparisonValue:
-          stringValue: stringValue
-          intValue: 0
-          boolValue: true
-          doubleValue: 6.027456183070403
-        prerequisiteSettingId: 5
       properties:
         prerequisiteSettingId:
           description: The prerequisite flag's identifier.
@@ -8554,7 +8540,6 @@ components:
       - prerequisiteSettingId
       type: object
     ProductModel:
-      additionalProperties: false
       description: Details of the Product.
       example:
         productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -8574,24 +8559,30 @@ components:
           type: string
         name:
           description: Name of the Product.
-          nullable: true
           type: string
         description:
           description: Description of the Product.
           nullable: true
           type: string
         order:
-          description: "The order of the Product represented on the ConfigCat Dashboard.\r\
-            \nDetermined from an ascending sequence of integers."
+          description: |-
+            The order of the Product represented on the ConfigCat Dashboard.
+            Determined from an ascending sequence of integers.
           format: int32
           type: integer
         reasonRequired:
           description: Determines whether a mandatory reason must be given every time
             when the Feature Flags or Settings within a Product are saved.
           type: boolean
+      required:
+      - description
+      - name
+      - order
+      - organization
+      - productId
+      - reasonRequired
       type: object
     ReasonRequiredEnvironmentModel:
-      additionalProperties: false
       example:
         environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         environmentName: environmentName
@@ -8609,9 +8600,12 @@ components:
           description: Name of the Environment.
           nullable: true
           type: string
+      required:
+      - environmentId
+      - environmentName
+      - reasonRequired
       type: object
-    ReferenceLine:
-      additionalProperties: false
+    ReferenceLineModel:
       description: Determines a code reference line.
       example:
         lineText: lineText
@@ -8629,9 +8623,28 @@ components:
           type: integer
       required:
       - lineNumber
+      - lineText
       type: object
-    ReferenceLines:
-      additionalProperties: false
+    ReferenceLineRequest:
+      description: Determines a code reference line.
+      example:
+        lineText: lineText
+        lineNumber: 6
+      properties:
+        lineText:
+          description: The content of the reference line.
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+        lineNumber:
+          description: The line number.
+          format: int32
+          type: integer
+      required:
+      - lineNumber
+      type: object
+    ReferenceLinesModel:
       example:
         file: file
         referenceLine:
@@ -8665,23 +8678,70 @@ components:
         preLines:
           description: The lines before the actual reference line.
           items:
-            $ref: '#/components/schemas/ReferenceLine'
-          nullable: true
+            $ref: '#/components/schemas/ReferenceLineModel'
           type: array
         postLines:
           description: The lines after the actual reference line.
           items:
-            $ref: '#/components/schemas/ReferenceLine'
-          nullable: true
+            $ref: '#/components/schemas/ReferenceLineModel'
           type: array
         referenceLine:
-          $ref: '#/components/schemas/ReferenceLine'
+          $ref: '#/components/schemas/ReferenceLineModel'
+      required:
+      - file
+      - fileUrl
+      - postLines
+      - preLines
+      - referenceLine
+      type: object
+    ReferenceLinesRequest:
+      example:
+        file: file
+        referenceLine:
+          lineText: lineText
+          lineNumber: 6
+        fileUrl: fileUrl
+        postLines:
+        - lineText: lineText
+          lineNumber: 6
+        - lineText: lineText
+          lineNumber: 6
+        preLines:
+        - lineText: lineText
+          lineNumber: 6
+        - lineText: lineText
+          lineNumber: 6
+      properties:
+        file:
+          description: The file's name in where the code reference has been found.
+            (Appears on the ConfigCat Dashboard)
+          maxLength: 255
+          minLength: 1
+          type: string
+        fileUrl:
+          description: The file's url. (Used to point to the file on the repository's
+            website)
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+        preLines:
+          description: The lines before the actual reference line.
+          items:
+            $ref: '#/components/schemas/ReferenceLineRequest'
+          type: array
+        postLines:
+          description: The lines after the actual reference line.
+          items:
+            $ref: '#/components/schemas/ReferenceLineRequest'
+          type: array
+        referenceLine:
+          $ref: '#/components/schemas/ReferenceLineRequest'
       required:
       - file
       - referenceLine
       type: object
     ReplaceSettingModel:
-      additionalProperties: false
       example:
         hint: hint
         name: name
@@ -8705,8 +8765,9 @@ components:
           nullable: true
           type: array
         order:
-          description: "The order of the Setting represented on the ConfigCat Dashboard.\r\
-            \nDetermined from an ascending sequence of integers."
+          description: |-
+            The order of the Setting represented on the ConfigCat Dashboard.
+            Determined from an ascending sequence of integers.
           format: int32
           nullable: true
           type: integer
@@ -8714,14 +8775,12 @@ components:
           description: The name of the Feature Flag or Setting.
           maxLength: 255
           minLength: 1
+          nullable: true
           type: string
-      required:
-      - name
       type: object
     RolloutPercentageItemModel:
-      additionalProperties: false
       example:
-        percentage: 0
+        percentage: 1
         value: ""
       properties:
         percentage:
@@ -8729,11 +8788,15 @@ components:
           format: int64
           type: integer
         value:
+          allOf:
+          - $ref: '#/components/schemas/SettingValueType'
           description: The value to serve when the user falls in the percentage rule.
-            It must respect the setting type.
-          nullable: true
+            It must respect the setting type. In some generated clients for strictly
+            typed languages you may use double/float properties to handle integer
+            values.
       required:
       - percentage
+      - value
       type: object
     RolloutRuleComparator:
       description: The comparison operator the evaluation process must use when it
@@ -8759,12 +8822,11 @@ components:
       - sensitiveIsNotOneOf
       type: string
     RolloutRuleModel:
-      additionalProperties: false
       example:
-        comparator: isOneOf
+        comparator: ""
         comparisonValue: comparisonValue
         segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        segmentComparator: isIn
+        segmentComparator: ""
         value: ""
         comparisonAttribute: comparisonAttribute
       properties:
@@ -8775,37 +8837,51 @@ components:
           nullable: true
           type: string
         comparator:
-          $ref: '#/components/schemas/RolloutRuleComparator'
+          allOf:
+          - $ref: '#/components/schemas/RolloutRuleComparator'
+          nullable: true
         comparisonValue:
           description: The value to compare against.
           nullable: true
           type: string
         value:
+          allOf:
+          - $ref: '#/components/schemas/SettingValueType'
           description: The value to serve when the comparison matches. It must respect
-            the setting type.
-          nullable: true
+            the setting type. In some generated clients for strictly typed languages
+            you may use double/float properties to handle integer values.
         segmentComparator:
-          $ref: '#/components/schemas/SegmentComparator'
+          allOf:
+          - $ref: '#/components/schemas/SegmentComparator'
+          nullable: true
         segmentId:
           description: The segment to compare against.
           format: uuid
           nullable: true
           type: string
+      required:
+      - comparator
+      - comparisonAttribute
+      - comparisonValue
+      - segmentComparator
+      - segmentId
+      - value
       type: object
     SdkKeysModel:
-      additionalProperties: false
       example:
         secondary: secondary
         primary: primary
       properties:
         primary:
           description: The primary SDK key.
-          nullable: true
           type: string
         secondary:
           description: The secondary SDK key.
           nullable: true
           type: string
+      required:
+      - primary
+      - secondary
       type: object
     SegmentComparator:
       description: The segment comparison operator used during the evaluation process.
@@ -8814,11 +8890,7 @@ components:
       - isNotIn
       type: string
     SegmentConditionModel:
-      additionalProperties: false
       description: Describes a condition that is based on a segment.
-      example:
-        comparator: isIn
-        segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         segmentId:
           description: The segment's identifier.
@@ -8831,7 +8903,6 @@ components:
       - segmentId
       type: object
     SegmentListModel:
-      additionalProperties: false
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
         product:
@@ -8861,7 +8932,6 @@ components:
           type: string
         name:
           description: Name of the Segment.
-          nullable: true
           type: string
         description:
           description: Description of the Segment.
@@ -8896,9 +8966,20 @@ components:
             Segment.
           format: int32
           type: integer
+      required:
+      - createdAt
+      - creatorEmail
+      - creatorFullName
+      - description
+      - lastUpdaterEmail
+      - lastUpdaterFullName
+      - name
+      - product
+      - segmentId
+      - updatedAt
+      - usage
       type: object
     SegmentModel:
-      additionalProperties: false
       example:
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -8930,7 +9011,6 @@ components:
           type: string
         name:
           description: Name of the Segment.
-          nullable: true
           type: string
         description:
           description: Description of the Segment.
@@ -8963,17 +9043,28 @@ components:
         comparisonAttribute:
           description: The user's attribute the evaluation process must take into
             account.
-          nullable: true
           type: string
         comparator:
           $ref: '#/components/schemas/RolloutRuleComparator'
         comparisonValue:
           description: The value to compare with the given user attribute's value.
-          nullable: true
           type: string
+      required:
+      - comparator
+      - comparisonAttribute
+      - comparisonValue
+      - createdAt
+      - creatorEmail
+      - creatorFullName
+      - description
+      - lastUpdaterEmail
+      - lastUpdaterFullName
+      - name
+      - product
+      - segmentId
+      - updatedAt
       type: object
     SettingDataModel:
-      additionalProperties: false
       description: Metadata of a Feature Flag or Setting.
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
@@ -8993,11 +9084,9 @@ components:
           type: integer
         key:
           description: Key of the Feature Flag or Setting.
-          nullable: true
           type: string
         name:
           description: Name of the Feature Flag or Setting.
-          nullable: true
           type: string
         hint:
           description: Description of the Feature Flag or Setting.
@@ -9025,137 +9114,63 @@ components:
           type: string
         isWatching:
           type: boolean
+      required:
+      - createdAt
+      - creatorEmail
+      - creatorFullName
+      - hint
+      - isWatching
+      - key
+      - name
+      - order
+      - settingId
+      - settingType
       type: object
     SettingFormulaModel:
-      additionalProperties: false
       example:
         targetingRules:
         - percentageOptions:
-          - percentage: 5
+          - percentage: 1
             value:
               stringValue: stringValue
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
-          - percentage: 5
+          - percentage: 1
             value:
               stringValue: stringValue
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
           conditions:
-          - segmentCondition:
-              comparator: isIn
-              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            userCondition:
-              comparator: isOneOf
-              comparisonValue:
-                listValue:
-                - hint: hint
-                  value: value
-                - hint: hint
-                  value: value
-                stringValue: stringValue
-                doubleValue: 1.4658129805029452
-              comparisonAttribute: comparisonAttribute
-            prerequisiteFlagCondition:
-              comparator: equals
-              prerequisiteComparisonValue:
-                stringValue: stringValue
-                intValue: 0
-                boolValue: true
-                doubleValue: 6.027456183070403
-              prerequisiteSettingId: 5
-          - segmentCondition:
-              comparator: isIn
-              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            userCondition:
-              comparator: isOneOf
-              comparisonValue:
-                listValue:
-                - hint: hint
-                  value: value
-                - hint: hint
-                  value: value
-                stringValue: stringValue
-                doubleValue: 1.4658129805029452
-              comparisonAttribute: comparisonAttribute
-            prerequisiteFlagCondition:
-              comparator: equals
-              prerequisiteComparisonValue:
-                stringValue: stringValue
-                intValue: 0
-                boolValue: true
-                doubleValue: 6.027456183070403
-              prerequisiteSettingId: 5
-          value:
-            stringValue: stringValue
-            intValue: 0
-            boolValue: true
-            doubleValue: 6.027456183070403
+          - segmentCondition: ""
+            userCondition: ""
+            prerequisiteFlagCondition: ""
+          - segmentCondition: ""
+            userCondition: ""
+            prerequisiteFlagCondition: ""
+          value: ""
         - percentageOptions:
-          - percentage: 5
+          - percentage: 1
             value:
               stringValue: stringValue
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
-          - percentage: 5
+          - percentage: 1
             value:
               stringValue: stringValue
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
           conditions:
-          - segmentCondition:
-              comparator: isIn
-              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            userCondition:
-              comparator: isOneOf
-              comparisonValue:
-                listValue:
-                - hint: hint
-                  value: value
-                - hint: hint
-                  value: value
-                stringValue: stringValue
-                doubleValue: 1.4658129805029452
-              comparisonAttribute: comparisonAttribute
-            prerequisiteFlagCondition:
-              comparator: equals
-              prerequisiteComparisonValue:
-                stringValue: stringValue
-                intValue: 0
-                boolValue: true
-                doubleValue: 6.027456183070403
-              prerequisiteSettingId: 5
-          - segmentCondition:
-              comparator: isIn
-              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            userCondition:
-              comparator: isOneOf
-              comparisonValue:
-                listValue:
-                - hint: hint
-                  value: value
-                - hint: hint
-                  value: value
-                stringValue: stringValue
-                doubleValue: 1.4658129805029452
-              comparisonAttribute: comparisonAttribute
-            prerequisiteFlagCondition:
-              comparator: equals
-              prerequisiteComparisonValue:
-                stringValue: stringValue
-                intValue: 0
-                boolValue: true
-                doubleValue: 6.027456183070403
-              prerequisiteSettingId: 5
-          value:
-            stringValue: stringValue
-            intValue: 0
-            boolValue: true
-            doubleValue: 6.027456183070403
+          - segmentCondition: ""
+            userCondition: ""
+            prerequisiteFlagCondition: ""
+          - segmentCondition: ""
+            userCondition: ""
+            prerequisiteFlagCondition: ""
+          value: ""
         percentageEvaluationAttribute: percentageEvaluationAttribute
         defaultValue:
           stringValue: stringValue
@@ -9201,8 +9216,8 @@ components:
           maxStringFlagValueLength: 3
           maxTargetingRuleCount: 5
         settingIdsWherePrerequisite:
-        - 2
-        - 2
+        - 5
+        - 5
         integrationLinks:
         - integrationLinkType: trello
           description: description
@@ -9230,13 +9245,13 @@ components:
           order: 0
         settingTags:
         - color: color
-          tagId: 1
+          tagId: 6
           name: name
-          settingTagId: 6
+          settingTagId: 0
         - color: color
-          tagId: 1
+          tagId: 6
           name: name
-          settingTagId: 6
+          settingTagId: 0
         updatedAt: 2000-01-23T04:56:07.000+00:00
         lastUpdaterUserFullName: lastUpdaterUserFullName
       properties:
@@ -9249,7 +9264,6 @@ components:
           description: The targeting rules of the Feature Flag or Setting.
           items:
             $ref: '#/components/schemas/TargetingRuleModel'
-          nullable: true
           type: array
         setting:
           $ref: '#/components/schemas/SettingDataModel'
@@ -9276,13 +9290,11 @@ components:
           description: The integration links attached to the Feature Flag or Setting.
           items:
             $ref: '#/components/schemas/IntegrationLinkModel'
-          nullable: true
           type: array
         settingTags:
           description: The tags attached to the Feature Flag or Setting.
           items:
             $ref: '#/components/schemas/SettingTagModel'
-          nullable: true
           type: array
         settingIdsWherePrerequisite:
           description: List of Feature Flag and Setting IDs where the actual Feature
@@ -9290,7 +9302,6 @@ components:
           items:
             format: int32
             type: integer
-          nullable: true
           type: array
         config:
           $ref: '#/components/schemas/ConfigModel'
@@ -9300,12 +9311,28 @@ components:
           type: boolean
         featureFlagLimitations:
           $ref: '#/components/schemas/FeatureFlagLimitations'
+      required:
+      - config
+      - defaultValue
+      - environment
+      - featureFlagLimitations
+      - integrationLinks
+      - lastUpdaterUserEmail
+      - lastUpdaterUserFullName
+      - lastVersionId
+      - percentageEvaluationAttribute
+      - readOnly
+      - setting
+      - settingIdsWherePrerequisite
+      - settingTags
+      - targetingRules
+      - updatedAt
       type: object
     SettingModel:
-      additionalProperties: false
       description: Metadata of a Feature Flag or Setting.
       example:
         configName: configName
+        createdAt: 2000-01-23T04:56:07.000+00:00
         configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         hint: hint
         name: name
@@ -9345,11 +9372,9 @@ components:
           type: integer
         key:
           description: Key of the Feature Flag or Setting.
-          nullable: true
           type: string
         name:
           description: Name of the Feature Flag or Setting.
-          nullable: true
           type: string
         hint:
           description: Description of the Feature Flag or Setting.
@@ -9368,22 +9393,35 @@ components:
           type: string
         configName:
           description: Name of the Feature Flag's Config.
+          type: string
+        createdAt:
+          description: The creation time of the Feature Flag or Setting.
+          format: date-time
           nullable: true
           type: string
         tags:
           description: The tags attached to the Feature Flag or Setting.
           items:
             $ref: '#/components/schemas/TagModel'
-          nullable: true
           type: array
+      required:
+      - configId
+      - configName
+      - createdAt
+      - hint
+      - key
+      - name
+      - order
+      - settingId
+      - settingType
+      - tags
       type: object
     SettingTagModel:
-      additionalProperties: false
       example:
         color: color
-        tagId: 1
+        tagId: 6
         name: name
-        settingTagId: 6
+        settingTagId: 0
       properties:
         settingTagId:
           format: int64
@@ -9392,11 +9430,15 @@ components:
           format: int64
           type: integer
         name:
-          nullable: true
           type: string
         color:
           nullable: true
           type: string
+      required:
+      - color
+      - name
+      - settingTagId
+      - tagId
       type: object
     SettingType:
       description: The type of the Feature Flag or Setting.
@@ -9407,25 +9449,24 @@ components:
       - double
       type: string
     SettingValueModel:
-      additionalProperties: false
       example:
         rolloutRules:
-        - comparator: isOneOf
+        - comparator: ""
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: isIn
+          segmentComparator: ""
           value: ""
           comparisonAttribute: comparisonAttribute
-        - comparator: isOneOf
+        - comparator: ""
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: isIn
+          segmentComparator: ""
           value: ""
           comparisonAttribute: comparisonAttribute
         rolloutPercentageItems:
-        - percentage: 0
+        - percentage: 1
           value: ""
-        - percentage: 0
+        - percentage: 1
           value: ""
         lastUpdaterUserEmail: lastUpdaterUserEmail
         readOnly: true
@@ -9464,7 +9505,6 @@ components:
           maxComparisonValueLength: 2
           maxStringFlagValueLength: 3
           maxTargetingRuleCount: 5
-        value: ""
         integrationLinks:
         - integrationLinkType: trello
           description: description
@@ -9474,6 +9514,7 @@ components:
           description: description
           key: key
           url: url
+        value: ""
         config:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -9492,31 +9533,16 @@ components:
           order: 0
         settingTags:
         - color: color
-          tagId: 1
+          tagId: 6
           name: name
-          settingTagId: 6
+          settingTagId: 0
         - color: color
-          tagId: 1
+          tagId: 6
           name: name
-          settingTagId: 6
+          settingTagId: 0
         updatedAt: 2000-01-23T04:56:07.000+00:00
         lastUpdaterUserFullName: lastUpdaterUserFullName
       properties:
-        rolloutRules:
-          description: The targeting rule collection.
-          items:
-            $ref: '#/components/schemas/RolloutRuleModel'
-          nullable: true
-          type: array
-        rolloutPercentageItems:
-          description: The percentage rule collection.
-          items:
-            $ref: '#/components/schemas/RolloutPercentageItemModel'
-          nullable: true
-          type: array
-        value:
-          description: The value to serve. It must respect the setting type.
-          nullable: true
         setting:
           $ref: '#/components/schemas/SettingDataModel'
         updatedAt:
@@ -9537,14 +9563,28 @@ components:
           description: The integration links attached to the Feature Flag or Setting.
           items:
             $ref: '#/components/schemas/IntegrationLinkModel'
-          nullable: true
           type: array
         settingTags:
           description: The tags attached to the Feature Flag or Setting.
           items:
             $ref: '#/components/schemas/SettingTagModel'
-          nullable: true
           type: array
+        rolloutRules:
+          description: The targeting rule collection.
+          items:
+            $ref: '#/components/schemas/RolloutRuleModel'
+          type: array
+        rolloutPercentageItems:
+          description: The percentage rule collection.
+          items:
+            $ref: '#/components/schemas/RolloutPercentageItemModel'
+          type: array
+        value:
+          allOf:
+          - $ref: '#/components/schemas/SettingValueType'
+          description: The value to serve. It must respect the setting type. In some
+            generated clients for strictly typed languages you may use double/float
+            properties to handle integer values.
         config:
           $ref: '#/components/schemas/ConfigModel'
         environment:
@@ -9553,9 +9593,326 @@ components:
           $ref: '#/components/schemas/FeatureFlagLimitations'
         readOnly:
           type: boolean
+      required:
+      - config
+      - environment
+      - featureFlagLimitations
+      - integrationLinks
+      - lastUpdaterUserEmail
+      - lastUpdaterUserFullName
+      - readOnly
+      - rolloutPercentageItems
+      - rolloutRules
+      - setting
+      - settingTags
+      - updatedAt
+      - value
       type: object
+    SettingValueType:
+      oneOf:
+      - type: boolean
+      - type: string
+      - format: double
+        type: number
+    StaleFlagConfigModel:
+      example:
+        settings:
+        - hint: hint
+          name: name
+          settingValues:
+          - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            isStale: true
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            isStale: true
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          key: key
+          hasCodeReferences: true
+          settingId: 0
+          tags:
+          - tagId: 6
+            settingTagId: 1
+          - tagId: 6
+            settingTagId: 1
+        - hint: hint
+          name: name
+          settingValues:
+          - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            isStale: true
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            isStale: true
+            updatedAt: 2000-01-23T04:56:07.000+00:00
+          key: key
+          hasCodeReferences: true
+          settingId: 0
+          tags:
+          - tagId: 6
+            settingTagId: 1
+          - tagId: 6
+            settingTagId: 1
+        configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+        evaluationVersion: v1
+        hasCodeReferences: true
+      properties:
+        configId:
+          description: Identifier of the Config.
+          format: uuid
+          type: string
+        name:
+          description: Name of the Config.
+          type: string
+        evaluationVersion:
+          $ref: '#/components/schemas/EvaluationVersion'
+        hasCodeReferences:
+          description: Config has code references uploaded.
+          type: boolean
+        settings:
+          description: Stale feature flags.
+          items:
+            $ref: '#/components/schemas/StaleFlagSettingModel'
+          type: array
+      required:
+      - configId
+      - evaluationVersion
+      - hasCodeReferences
+      - name
+      - settings
+      type: object
+    StaleFlagEnvironmentModel:
+      example:
+        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+      properties:
+        environmentId:
+          description: Identifier of the Environment.
+          format: uuid
+          type: string
+        name:
+          description: Name of the Environment.
+          type: string
+      required:
+      - environmentId
+      - name
+      type: object
+    StaleFlagProductModel:
+      example:
+        configs:
+        - settings:
+          - hint: hint
+            name: name
+            settingValues:
+            - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              isStale: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              isStale: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            key: key
+            hasCodeReferences: true
+            settingId: 0
+            tags:
+            - tagId: 6
+              settingTagId: 1
+            - tagId: 6
+              settingTagId: 1
+          - hint: hint
+            name: name
+            settingValues:
+            - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              isStale: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              isStale: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            key: key
+            hasCodeReferences: true
+            settingId: 0
+            tags:
+            - tagId: 6
+              settingTagId: 1
+            - tagId: 6
+              settingTagId: 1
+          configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          evaluationVersion: v1
+          hasCodeReferences: true
+        - settings:
+          - hint: hint
+            name: name
+            settingValues:
+            - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              isStale: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              isStale: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            key: key
+            hasCodeReferences: true
+            settingId: 0
+            tags:
+            - tagId: 6
+              settingTagId: 1
+            - tagId: 6
+              settingTagId: 1
+          - hint: hint
+            name: name
+            settingValues:
+            - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              isStale: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              isStale: true
+              updatedAt: 2000-01-23T04:56:07.000+00:00
+            key: key
+            hasCodeReferences: true
+            settingId: 0
+            tags:
+            - tagId: 6
+              settingTagId: 1
+            - tagId: 6
+              settingTagId: 1
+          configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+          evaluationVersion: v1
+          hasCodeReferences: true
+        productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        environments:
+        - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+        - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+        name: name
+      properties:
+        productId:
+          description: Identifier of the Product.
+          format: uuid
+          type: string
+        name:
+          description: Name of the Product.
+          type: string
+        configs:
+          description: Configs that contain stale feature flags.
+          items:
+            $ref: '#/components/schemas/StaleFlagConfigModel'
+          type: array
+        environments:
+          description: Environment list.
+          items:
+            $ref: '#/components/schemas/StaleFlagEnvironmentModel'
+          type: array
+      required:
+      - configs
+      - environments
+      - name
+      - productId
+      type: object
+    StaleFlagReminderScope:
+      enum:
+      - all
+      - watchedByMe
+      type: string
+    StaleFlagSettingModel:
+      example:
+        hint: hint
+        name: name
+        settingValues:
+        - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          isStale: true
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          isStale: true
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        key: key
+        hasCodeReferences: true
+        settingId: 0
+        tags:
+        - tagId: 6
+          settingTagId: 1
+        - tagId: 6
+          settingTagId: 1
+      properties:
+        settingId:
+          description: Identifier of the Feature Flag or Setting.
+          format: int32
+          type: integer
+        name:
+          description: Name of the Feature Flag or Setting.
+          type: string
+        key:
+          description: Key of the Feature Flag or Setting.
+          type: string
+        hint:
+          description: Description of the Feature Flag or Setting.
+          nullable: true
+          type: string
+        hasCodeReferences:
+          description: Feature Flag or Setting has code references uploaded.
+          type: boolean
+        tags:
+          description: The tags' identifiers attached to the Feature Flag or Setting.
+          items:
+            $ref: '#/components/schemas/StaleFlagSettingTagModel'
+          type: array
+        settingValues:
+          description: Environment level feature flag stale data.
+          items:
+            $ref: '#/components/schemas/StaleFlagSettingValueModel'
+          type: array
+      required:
+      - hasCodeReferences
+      - hint
+      - key
+      - name
+      - settingId
+      - settingValues
+      - tags
+      type: object
+    StaleFlagSettingTagModel:
+      example:
+        tagId: 6
+        settingTagId: 1
+      properties:
+        tagId:
+          format: int64
+          type: integer
+        settingTagId:
+          format: int64
+          type: integer
+      required:
+      - settingTagId
+      - tagId
+      type: object
+    StaleFlagSettingValueModel:
+      example:
+        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        isStale: true
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        environmentId:
+          description: Identifier of the Environment.
+          format: uuid
+          type: string
+        updatedAt:
+          description: The last updated date and time when the Feature Flag or Setting.
+          format: date-time
+          nullable: true
+          type: string
+        isStale:
+          description: Is the feature flag considered stale in the environment.
+          type: boolean
+      required:
+      - environmentId
+      - isStale
+      - updatedAt
+      type: object
+    StaleFlagStaleInEnvironmentsType:
+      enum:
+      - staleInAnyEnvironments
+      - staleInAllEnvironments
+      type: string
     TagModel:
-      additionalProperties: false
       example:
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -9578,100 +9935,119 @@ components:
           type: integer
         name:
           description: Name of the Tag.
-          nullable: true
           type: string
         color:
           description: The configured color of the Tag.
           nullable: true
           type: string
+      required:
+      - color
+      - name
+      - product
+      - tagId
       type: object
     TargetingRuleModel:
-      additionalProperties: false
       example:
         percentageOptions:
-        - percentage: 5
+        - percentage: 1
           value:
             stringValue: stringValue
             intValue: 0
             boolValue: true
             doubleValue: 6.027456183070403
-        - percentage: 5
+        - percentage: 1
           value:
             stringValue: stringValue
             intValue: 0
             boolValue: true
             doubleValue: 6.027456183070403
         conditions:
-        - segmentCondition:
-            comparator: isIn
-            segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          userCondition:
-            comparator: isOneOf
-            comparisonValue:
-              listValue:
-              - hint: hint
-                value: value
-              - hint: hint
-                value: value
-              stringValue: stringValue
-              doubleValue: 1.4658129805029452
-            comparisonAttribute: comparisonAttribute
-          prerequisiteFlagCondition:
-            comparator: equals
-            prerequisiteComparisonValue:
-              stringValue: stringValue
-              intValue: 0
-              boolValue: true
-              doubleValue: 6.027456183070403
-            prerequisiteSettingId: 5
-        - segmentCondition:
-            comparator: isIn
-            segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          userCondition:
-            comparator: isOneOf
-            comparisonValue:
-              listValue:
-              - hint: hint
-                value: value
-              - hint: hint
-                value: value
-              stringValue: stringValue
-              doubleValue: 1.4658129805029452
-            comparisonAttribute: comparisonAttribute
-          prerequisiteFlagCondition:
-            comparator: equals
-            prerequisiteComparisonValue:
-              stringValue: stringValue
-              intValue: 0
-              boolValue: true
-              doubleValue: 6.027456183070403
-            prerequisiteSettingId: 5
-        value:
-          stringValue: stringValue
-          intValue: 0
-          boolValue: true
-          doubleValue: 6.027456183070403
+        - segmentCondition: ""
+          userCondition: ""
+          prerequisiteFlagCondition: ""
+        - segmentCondition: ""
+          userCondition: ""
+          prerequisiteFlagCondition: ""
+        value: ""
       properties:
         conditions:
-          description: "The list of conditions that are combined with logical AND\
-            \ operators.\r\nIt can be one of the following:\r\n- User condition\r\n\
-            - Segment condition\r\n- Prerequisite flag condition"
+          description: |-
+            The list of conditions that are combined with logical AND operators.
+            It can be one of the following:
+            - User condition
+            - Segment condition
+            - Prerequisite flag condition
           items:
             $ref: '#/components/schemas/ConditionModel'
-          nullable: true
           type: array
         percentageOptions:
           description: The percentage options from where the evaluation process will
             choose a value based on the flag's percentage evaluation attribute.
           items:
             $ref: '#/components/schemas/PercentageOptionModel'
-          nullable: true
           type: array
         value:
-          $ref: '#/components/schemas/ValueModel'
+          allOf:
+          - $ref: '#/components/schemas/ValueModel'
+          nullable: true
+      required:
+      - conditions
+      - percentageOptions
+      - value
+      type: object
+    UpdateComparisonValueListModel:
+      properties:
+        value:
+          description: The actual comparison value.
+          type: string
+        hint:
+          description: An optional hint for the comparison value.
+          maxLength: 1500
+          minLength: 0
+          nullable: true
+          type: string
+      required:
+      - value
+      type: object
+    UpdateComparisonValueModel:
+      description: The value that the user object's attribute is compared to.
+      properties:
+        stringValue:
+          description: The string representation of the comparison value.
+          nullable: true
+          type: string
+        doubleValue:
+          description: The number representation of the comparison value.
+          format: double
+          nullable: true
+          type: number
+        listValue:
+          description: The list representation of the comparison value.
+          items:
+            $ref: '#/components/schemas/UpdateComparisonValueListModel'
+          nullable: true
+          type: array
+      type: object
+    UpdateConditionModel:
+      example:
+        segmentCondition: ""
+        userCondition: ""
+        prerequisiteFlagCondition: ""
+      properties:
+        userCondition:
+          allOf:
+          - $ref: '#/components/schemas/UpdateUserConditionModel'
+          nullable: true
+        segmentCondition:
+          allOf:
+          - $ref: '#/components/schemas/UpdateSegmentConditionModel'
+          nullable: true
+        prerequisiteFlagCondition:
+          allOf:
+          - $ref: '#/components/schemas/UpdatePrerequisiteFlagConditionModel'
+          nullable: true
       type: object
     UpdateConfigRequest:
-      additionalProperties: false
       example:
         name: name
         description: description
@@ -9690,14 +10066,14 @@ components:
           nullable: true
           type: string
         order:
-          description: "The order of the Config represented on the ConfigCat Dashboard.\r\
-            \nDetermined from an ascending sequence of integers."
+          description: |-
+            The order of the Config represented on the ConfigCat Dashboard.
+            Determined from an ascending sequence of integers.
           format: int32
           nullable: true
           type: integer
       type: object
     UpdateEnvironmentModel:
-      additionalProperties: false
       example:
         color: color
         name: name
@@ -9723,142 +10099,58 @@ components:
           nullable: true
           type: string
         order:
-          description: "The order of the Environment represented on the ConfigCat\
-            \ Dashboard.\r\nDetermined from an ascending sequence of integers."
+          description: |-
+            The order of the Environment represented on the ConfigCat Dashboard.
+            Determined from an ascending sequence of integers.
           format: int32
           nullable: true
           type: integer
       type: object
     UpdateEvaluationFormulaModel:
-      additionalProperties: false
       example:
         targetingRules:
         - percentageOptions:
-          - percentage: 5
+          - percentage: 1
             value:
               stringValue: stringValue
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
-          - percentage: 5
+          - percentage: 1
             value:
               stringValue: stringValue
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
           conditions:
-          - segmentCondition:
-              comparator: isIn
-              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            userCondition:
-              comparator: isOneOf
-              comparisonValue:
-                listValue:
-                - hint: hint
-                  value: value
-                - hint: hint
-                  value: value
-                stringValue: stringValue
-                doubleValue: 1.4658129805029452
-              comparisonAttribute: comparisonAttribute
-            prerequisiteFlagCondition:
-              comparator: equals
-              prerequisiteComparisonValue:
-                stringValue: stringValue
-                intValue: 0
-                boolValue: true
-                doubleValue: 6.027456183070403
-              prerequisiteSettingId: 5
-          - segmentCondition:
-              comparator: isIn
-              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            userCondition:
-              comparator: isOneOf
-              comparisonValue:
-                listValue:
-                - hint: hint
-                  value: value
-                - hint: hint
-                  value: value
-                stringValue: stringValue
-                doubleValue: 1.4658129805029452
-              comparisonAttribute: comparisonAttribute
-            prerequisiteFlagCondition:
-              comparator: equals
-              prerequisiteComparisonValue:
-                stringValue: stringValue
-                intValue: 0
-                boolValue: true
-                doubleValue: 6.027456183070403
-              prerequisiteSettingId: 5
-          value:
-            stringValue: stringValue
-            intValue: 0
-            boolValue: true
-            doubleValue: 6.027456183070403
+          - segmentCondition: ""
+            userCondition: ""
+            prerequisiteFlagCondition: ""
+          - segmentCondition: ""
+            userCondition: ""
+            prerequisiteFlagCondition: ""
+          value: ""
         - percentageOptions:
-          - percentage: 5
+          - percentage: 1
             value:
               stringValue: stringValue
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
-          - percentage: 5
+          - percentage: 1
             value:
               stringValue: stringValue
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
           conditions:
-          - segmentCondition:
-              comparator: isIn
-              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            userCondition:
-              comparator: isOneOf
-              comparisonValue:
-                listValue:
-                - hint: hint
-                  value: value
-                - hint: hint
-                  value: value
-                stringValue: stringValue
-                doubleValue: 1.4658129805029452
-              comparisonAttribute: comparisonAttribute
-            prerequisiteFlagCondition:
-              comparator: equals
-              prerequisiteComparisonValue:
-                stringValue: stringValue
-                intValue: 0
-                boolValue: true
-                doubleValue: 6.027456183070403
-              prerequisiteSettingId: 5
-          - segmentCondition:
-              comparator: isIn
-              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            userCondition:
-              comparator: isOneOf
-              comparisonValue:
-                listValue:
-                - hint: hint
-                  value: value
-                - hint: hint
-                  value: value
-                stringValue: stringValue
-                doubleValue: 1.4658129805029452
-              comparisonAttribute: comparisonAttribute
-            prerequisiteFlagCondition:
-              comparator: equals
-              prerequisiteComparisonValue:
-                stringValue: stringValue
-                intValue: 0
-                boolValue: true
-                doubleValue: 6.027456183070403
-              prerequisiteSettingId: 5
-          value:
-            stringValue: stringValue
-            intValue: 0
-            boolValue: true
-            doubleValue: 6.027456183070403
+          - segmentCondition: ""
+            userCondition: ""
+            prerequisiteFlagCondition: ""
+          - segmentCondition: ""
+            userCondition: ""
+            prerequisiteFlagCondition: ""
+          value: ""
         percentageEvaluationAttribute: percentageEvaluationAttribute
         defaultValue:
           stringValue: stringValue
@@ -9867,11 +10159,11 @@ components:
           doubleValue: 6.027456183070403
       properties:
         defaultValue:
-          $ref: '#/components/schemas/ValueModel'
+          $ref: '#/components/schemas/UpdateValueModel'
         targetingRules:
           description: The targeting rules of the Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/TargetingRuleModel'
+            $ref: '#/components/schemas/UpdateTargetingRuleModel'
           nullable: true
           type: array
         percentageEvaluationAttribute:
@@ -9884,135 +10176,50 @@ components:
       - defaultValue
       type: object
     UpdateEvaluationFormulaWithIdModel:
-      additionalProperties: false
       example:
         targetingRules:
         - percentageOptions:
-          - percentage: 5
+          - percentage: 1
             value:
               stringValue: stringValue
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
-          - percentage: 5
+          - percentage: 1
             value:
               stringValue: stringValue
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
           conditions:
-          - segmentCondition:
-              comparator: isIn
-              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            userCondition:
-              comparator: isOneOf
-              comparisonValue:
-                listValue:
-                - hint: hint
-                  value: value
-                - hint: hint
-                  value: value
-                stringValue: stringValue
-                doubleValue: 1.4658129805029452
-              comparisonAttribute: comparisonAttribute
-            prerequisiteFlagCondition:
-              comparator: equals
-              prerequisiteComparisonValue:
-                stringValue: stringValue
-                intValue: 0
-                boolValue: true
-                doubleValue: 6.027456183070403
-              prerequisiteSettingId: 5
-          - segmentCondition:
-              comparator: isIn
-              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            userCondition:
-              comparator: isOneOf
-              comparisonValue:
-                listValue:
-                - hint: hint
-                  value: value
-                - hint: hint
-                  value: value
-                stringValue: stringValue
-                doubleValue: 1.4658129805029452
-              comparisonAttribute: comparisonAttribute
-            prerequisiteFlagCondition:
-              comparator: equals
-              prerequisiteComparisonValue:
-                stringValue: stringValue
-                intValue: 0
-                boolValue: true
-                doubleValue: 6.027456183070403
-              prerequisiteSettingId: 5
-          value:
-            stringValue: stringValue
-            intValue: 0
-            boolValue: true
-            doubleValue: 6.027456183070403
+          - segmentCondition: ""
+            userCondition: ""
+            prerequisiteFlagCondition: ""
+          - segmentCondition: ""
+            userCondition: ""
+            prerequisiteFlagCondition: ""
+          value: ""
         - percentageOptions:
-          - percentage: 5
+          - percentage: 1
             value:
               stringValue: stringValue
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
-          - percentage: 5
+          - percentage: 1
             value:
               stringValue: stringValue
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
           conditions:
-          - segmentCondition:
-              comparator: isIn
-              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            userCondition:
-              comparator: isOneOf
-              comparisonValue:
-                listValue:
-                - hint: hint
-                  value: value
-                - hint: hint
-                  value: value
-                stringValue: stringValue
-                doubleValue: 1.4658129805029452
-              comparisonAttribute: comparisonAttribute
-            prerequisiteFlagCondition:
-              comparator: equals
-              prerequisiteComparisonValue:
-                stringValue: stringValue
-                intValue: 0
-                boolValue: true
-                doubleValue: 6.027456183070403
-              prerequisiteSettingId: 5
-          - segmentCondition:
-              comparator: isIn
-              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            userCondition:
-              comparator: isOneOf
-              comparisonValue:
-                listValue:
-                - hint: hint
-                  value: value
-                - hint: hint
-                  value: value
-                stringValue: stringValue
-                doubleValue: 1.4658129805029452
-              comparisonAttribute: comparisonAttribute
-            prerequisiteFlagCondition:
-              comparator: equals
-              prerequisiteComparisonValue:
-                stringValue: stringValue
-                intValue: 0
-                boolValue: true
-                doubleValue: 6.027456183070403
-              prerequisiteSettingId: 5
-          value:
-            stringValue: stringValue
-            intValue: 0
-            boolValue: true
-            doubleValue: 6.027456183070403
+          - segmentCondition: ""
+            userCondition: ""
+            prerequisiteFlagCondition: ""
+          - segmentCondition: ""
+            userCondition: ""
+            prerequisiteFlagCondition: ""
+          value: ""
         percentageEvaluationAttribute: percentageEvaluationAttribute
         defaultValue:
           stringValue: stringValue
@@ -10022,11 +10229,11 @@ components:
         settingId: 0
       properties:
         defaultValue:
-          $ref: '#/components/schemas/ValueModel'
+          $ref: '#/components/schemas/UpdateValueModel'
         targetingRules:
           description: The targeting rules of the Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/TargetingRuleModel'
+            $ref: '#/components/schemas/UpdateTargetingRuleModel'
           nullable: true
           type: array
         percentageEvaluationAttribute:
@@ -10043,136 +10250,51 @@ components:
       - defaultValue
       type: object
     UpdateEvaluationFormulasModel:
-      additionalProperties: false
       example:
         updateFormulas:
         - targetingRules:
           - percentageOptions:
-            - percentage: 5
+            - percentage: 1
               value:
                 stringValue: stringValue
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
-            - percentage: 5
+            - percentage: 1
               value:
                 stringValue: stringValue
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
             conditions:
-            - segmentCondition:
-                comparator: isIn
-                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              userCondition:
-                comparator: isOneOf
-                comparisonValue:
-                  listValue:
-                  - hint: hint
-                    value: value
-                  - hint: hint
-                    value: value
-                  stringValue: stringValue
-                  doubleValue: 1.4658129805029452
-                comparisonAttribute: comparisonAttribute
-              prerequisiteFlagCondition:
-                comparator: equals
-                prerequisiteComparisonValue:
-                  stringValue: stringValue
-                  intValue: 0
-                  boolValue: true
-                  doubleValue: 6.027456183070403
-                prerequisiteSettingId: 5
-            - segmentCondition:
-                comparator: isIn
-                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              userCondition:
-                comparator: isOneOf
-                comparisonValue:
-                  listValue:
-                  - hint: hint
-                    value: value
-                  - hint: hint
-                    value: value
-                  stringValue: stringValue
-                  doubleValue: 1.4658129805029452
-                comparisonAttribute: comparisonAttribute
-              prerequisiteFlagCondition:
-                comparator: equals
-                prerequisiteComparisonValue:
-                  stringValue: stringValue
-                  intValue: 0
-                  boolValue: true
-                  doubleValue: 6.027456183070403
-                prerequisiteSettingId: 5
-            value:
-              stringValue: stringValue
-              intValue: 0
-              boolValue: true
-              doubleValue: 6.027456183070403
+            - segmentCondition: ""
+              userCondition: ""
+              prerequisiteFlagCondition: ""
+            - segmentCondition: ""
+              userCondition: ""
+              prerequisiteFlagCondition: ""
+            value: ""
           - percentageOptions:
-            - percentage: 5
+            - percentage: 1
               value:
                 stringValue: stringValue
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
-            - percentage: 5
+            - percentage: 1
               value:
                 stringValue: stringValue
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
             conditions:
-            - segmentCondition:
-                comparator: isIn
-                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              userCondition:
-                comparator: isOneOf
-                comparisonValue:
-                  listValue:
-                  - hint: hint
-                    value: value
-                  - hint: hint
-                    value: value
-                  stringValue: stringValue
-                  doubleValue: 1.4658129805029452
-                comparisonAttribute: comparisonAttribute
-              prerequisiteFlagCondition:
-                comparator: equals
-                prerequisiteComparisonValue:
-                  stringValue: stringValue
-                  intValue: 0
-                  boolValue: true
-                  doubleValue: 6.027456183070403
-                prerequisiteSettingId: 5
-            - segmentCondition:
-                comparator: isIn
-                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              userCondition:
-                comparator: isOneOf
-                comparisonValue:
-                  listValue:
-                  - hint: hint
-                    value: value
-                  - hint: hint
-                    value: value
-                  stringValue: stringValue
-                  doubleValue: 1.4658129805029452
-                comparisonAttribute: comparisonAttribute
-              prerequisiteFlagCondition:
-                comparator: equals
-                prerequisiteComparisonValue:
-                  stringValue: stringValue
-                  intValue: 0
-                  boolValue: true
-                  doubleValue: 6.027456183070403
-                prerequisiteSettingId: 5
-            value:
-              stringValue: stringValue
-              intValue: 0
-              boolValue: true
-              doubleValue: 6.027456183070403
+            - segmentCondition: ""
+              userCondition: ""
+              prerequisiteFlagCondition: ""
+            - segmentCondition: ""
+              userCondition: ""
+              prerequisiteFlagCondition: ""
+            value: ""
           percentageEvaluationAttribute: percentageEvaluationAttribute
           defaultValue:
             stringValue: stringValue
@@ -10182,131 +10304,47 @@ components:
           settingId: 0
         - targetingRules:
           - percentageOptions:
-            - percentage: 5
+            - percentage: 1
               value:
                 stringValue: stringValue
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
-            - percentage: 5
+            - percentage: 1
               value:
                 stringValue: stringValue
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
             conditions:
-            - segmentCondition:
-                comparator: isIn
-                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              userCondition:
-                comparator: isOneOf
-                comparisonValue:
-                  listValue:
-                  - hint: hint
-                    value: value
-                  - hint: hint
-                    value: value
-                  stringValue: stringValue
-                  doubleValue: 1.4658129805029452
-                comparisonAttribute: comparisonAttribute
-              prerequisiteFlagCondition:
-                comparator: equals
-                prerequisiteComparisonValue:
-                  stringValue: stringValue
-                  intValue: 0
-                  boolValue: true
-                  doubleValue: 6.027456183070403
-                prerequisiteSettingId: 5
-            - segmentCondition:
-                comparator: isIn
-                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              userCondition:
-                comparator: isOneOf
-                comparisonValue:
-                  listValue:
-                  - hint: hint
-                    value: value
-                  - hint: hint
-                    value: value
-                  stringValue: stringValue
-                  doubleValue: 1.4658129805029452
-                comparisonAttribute: comparisonAttribute
-              prerequisiteFlagCondition:
-                comparator: equals
-                prerequisiteComparisonValue:
-                  stringValue: stringValue
-                  intValue: 0
-                  boolValue: true
-                  doubleValue: 6.027456183070403
-                prerequisiteSettingId: 5
-            value:
-              stringValue: stringValue
-              intValue: 0
-              boolValue: true
-              doubleValue: 6.027456183070403
+            - segmentCondition: ""
+              userCondition: ""
+              prerequisiteFlagCondition: ""
+            - segmentCondition: ""
+              userCondition: ""
+              prerequisiteFlagCondition: ""
+            value: ""
           - percentageOptions:
-            - percentage: 5
+            - percentage: 1
               value:
                 stringValue: stringValue
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
-            - percentage: 5
+            - percentage: 1
               value:
                 stringValue: stringValue
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
             conditions:
-            - segmentCondition:
-                comparator: isIn
-                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              userCondition:
-                comparator: isOneOf
-                comparisonValue:
-                  listValue:
-                  - hint: hint
-                    value: value
-                  - hint: hint
-                    value: value
-                  stringValue: stringValue
-                  doubleValue: 1.4658129805029452
-                comparisonAttribute: comparisonAttribute
-              prerequisiteFlagCondition:
-                comparator: equals
-                prerequisiteComparisonValue:
-                  stringValue: stringValue
-                  intValue: 0
-                  boolValue: true
-                  doubleValue: 6.027456183070403
-                prerequisiteSettingId: 5
-            - segmentCondition:
-                comparator: isIn
-                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-              userCondition:
-                comparator: isOneOf
-                comparisonValue:
-                  listValue:
-                  - hint: hint
-                    value: value
-                  - hint: hint
-                    value: value
-                  stringValue: stringValue
-                  doubleValue: 1.4658129805029452
-                comparisonAttribute: comparisonAttribute
-              prerequisiteFlagCondition:
-                comparator: equals
-                prerequisiteComparisonValue:
-                  stringValue: stringValue
-                  intValue: 0
-                  boolValue: true
-                  doubleValue: 6.027456183070403
-                prerequisiteSettingId: 5
-            value:
-              stringValue: stringValue
-              intValue: 0
-              boolValue: true
-              doubleValue: 6.027456183070403
+            - segmentCondition: ""
+              userCondition: ""
+              prerequisiteFlagCondition: ""
+            - segmentCondition: ""
+              userCondition: ""
+              prerequisiteFlagCondition: ""
+            value: ""
           percentageEvaluationAttribute: percentageEvaluationAttribute
           defaultValue:
             stringValue: stringValue
@@ -10319,11 +10357,9 @@ components:
           description: Evaluation descriptors of each updated Feature Flag and Setting.
           items:
             $ref: '#/components/schemas/UpdateEvaluationFormulaWithIdModel'
-          nullable: true
           type: array
       type: object
     UpdateMemberPermissionsRequest:
-      additionalProperties: false
       example:
         removeFromPermissionGroupsWhereIdNotSet: true
         isBillingManager: true
@@ -10353,8 +10389,27 @@ components:
             \ Groups that are not listed in the `permissionGroupIds` field."
           type: boolean
       type: object
+    UpdatePercentageOptionModel:
+      example:
+        percentage: 1
+        value:
+          stringValue: stringValue
+          intValue: 0
+          boolValue: true
+          doubleValue: 6.027456183070403
+      properties:
+        percentage:
+          description: A number between 0 and 100 that represents a randomly allocated
+            fraction of the users.
+          format: int32
+          type: integer
+        value:
+          $ref: '#/components/schemas/UpdateValueModel'
+      required:
+      - percentage
+      - value
+      type: object
     UpdatePermissionGroupRequest:
-      additionalProperties: false
       example:
         canViewProductStatistics: true
         canDeleteTag: true
@@ -10366,7 +10421,7 @@ components:
         canManageProductPreferences: true
         canManageIntegrations: true
         canDeleteSegments: true
-        accessType: readOnly
+        accessType: ""
         canManageMembers: true
         canManageWebhook: true
         canUseExportImport: true
@@ -10384,7 +10439,7 @@ components:
         name: name
         canViewProductAuditLog: true
         canCreateOrUpdateTag: true
-        newEnvironmentAccessType: full
+        newEnvironmentAccessType: ""
       properties:
         name:
           description: Name of the Permission Group.
@@ -10478,9 +10533,13 @@ components:
           nullable: true
           type: boolean
         accessType:
-          $ref: '#/components/schemas/AccessType'
+          allOf:
+          - $ref: '#/components/schemas/AccessType'
+          nullable: true
         newEnvironmentAccessType:
-          $ref: '#/components/schemas/EnvironmentAccessType'
+          allOf:
+          - $ref: '#/components/schemas/EnvironmentAccessType'
+          nullable: true
         environmentAccesses:
           description: List of environment specific permissions.
           items:
@@ -10489,9 +10548,8 @@ components:
           type: array
       type: object
     UpdatePreferencesRequest:
-      additionalProperties: false
       example:
-        keyGenerationMode: camelCase
+        keyGenerationMode: ""
         showVariationId: true
         mandatorySettingHint: true
         reasonRequiredEnvironments:
@@ -10507,7 +10565,9 @@ components:
           nullable: true
           type: boolean
         keyGenerationMode:
-          $ref: '#/components/schemas/KeyGenerationMode'
+          allOf:
+          - $ref: '#/components/schemas/KeyGenerationMode'
+          nullable: true
         showVariationId:
           description: Indicates whether a variation ID's must be shown on the ConfigCat
             Dashboard.
@@ -10525,8 +10585,23 @@ components:
           nullable: true
           type: array
       type: object
+    UpdatePrerequisiteFlagConditionModel:
+      description: Describes a condition that is based on a prerequisite flag.
+      properties:
+        prerequisiteSettingId:
+          description: The prerequisite flag's identifier.
+          format: int32
+          type: integer
+        comparator:
+          $ref: '#/components/schemas/PrerequisiteComparator'
+        prerequisiteComparisonValue:
+          $ref: '#/components/schemas/UpdateValueModel'
+      required:
+      - comparator
+      - prerequisiteComparisonValue
+      - prerequisiteSettingId
+      type: object
     UpdateProductRequest:
-      additionalProperties: false
       example:
         name: name
         description: description
@@ -10545,14 +10620,14 @@ components:
           nullable: true
           type: string
         order:
-          description: "The order of the Product represented on the ConfigCat Dashboard.\r\
-            \nDetermined from an ascending sequence of integers."
+          description: |-
+            The order of the Product represented on the ConfigCat Dashboard.
+            Determined from an ascending sequence of integers.
           format: int32
           nullable: true
           type: integer
       type: object
     UpdateReasonRequiredEnvironmentModel:
-      additionalProperties: false
       example:
         environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         reasonRequired: true
@@ -10566,10 +10641,83 @@ components:
             for saving and publishing.
           type: boolean
       type: object
-    UpdateSegmentModel:
-      additionalProperties: false
+    UpdateRolloutPercentageItemModel:
       example:
-        comparator: isOneOf
+        percentage: 0
+        value: ""
+      properties:
+        percentage:
+          description: The percentage value for the rule.
+          format: int64
+          type: integer
+        value:
+          allOf:
+          - $ref: '#/components/schemas/SettingValueType'
+          description: The value to serve when the user falls in the percentage rule.
+            It must respect the setting type. In some generated clients for strictly
+            typed languages you may use double/float properties to handle integer
+            values.
+      required:
+      - percentage
+      - value
+      type: object
+    UpdateRolloutRuleModel:
+      example:
+        comparator: ""
+        comparisonValue: comparisonValue
+        segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        segmentComparator: ""
+        value: ""
+        comparisonAttribute: comparisonAttribute
+      properties:
+        comparisonAttribute:
+          description: The user attribute to compare.
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+        comparator:
+          allOf:
+          - $ref: '#/components/schemas/RolloutRuleComparator'
+          nullable: true
+        comparisonValue:
+          description: The value to compare against.
+          nullable: true
+          type: string
+        value:
+          allOf:
+          - $ref: '#/components/schemas/SettingValueType'
+          description: The value to serve when the comparison matches. It must respect
+            the setting type. In some generated clients for strictly typed languages
+            you may use double/float properties to handle integer values.
+        segmentComparator:
+          allOf:
+          - $ref: '#/components/schemas/SegmentComparator'
+          nullable: true
+        segmentId:
+          description: The segment to compare against.
+          format: uuid
+          nullable: true
+          type: string
+      required:
+      - value
+      type: object
+    UpdateSegmentConditionModel:
+      description: Describes a condition that is based on a segment.
+      properties:
+        segmentId:
+          description: The segment's identifier.
+          format: uuid
+          type: string
+        comparator:
+          $ref: '#/components/schemas/SegmentComparator'
+      required:
+      - comparator
+      - segmentId
+      type: object
+    UpdateSegmentModel:
+      example:
+        comparator: ""
         comparisonValue: comparisonValue
         name: name
         description: description
@@ -10591,25 +10739,26 @@ components:
           nullable: true
           type: string
         comparator:
-          $ref: '#/components/schemas/RolloutRuleComparator'
+          allOf:
+          - $ref: '#/components/schemas/RolloutRuleComparator'
+          nullable: true
         comparisonValue:
           nullable: true
           type: string
       type: object
     UpdateSettingValueModel:
-      additionalProperties: false
       example:
         rolloutRules:
-        - comparator: isOneOf
+        - comparator: ""
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: isIn
+          segmentComparator: ""
           value: ""
           comparisonAttribute: comparisonAttribute
-        - comparator: isOneOf
+        - comparator: ""
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: isIn
+          segmentComparator: ""
           value: ""
           comparisonAttribute: comparisonAttribute
         rolloutPercentageItems:
@@ -10622,33 +10771,35 @@ components:
         rolloutRules:
           description: The targeting rule collection.
           items:
-            $ref: '#/components/schemas/RolloutRuleModel'
-          nullable: true
+            $ref: '#/components/schemas/UpdateRolloutRuleModel'
           type: array
         rolloutPercentageItems:
           description: The percentage rule collection.
           items:
-            $ref: '#/components/schemas/RolloutPercentageItemModel'
-          nullable: true
+            $ref: '#/components/schemas/UpdateRolloutPercentageItemModel'
           type: array
         value:
-          description: The value to serve. It must respect the setting type.
-          nullable: true
+          allOf:
+          - $ref: '#/components/schemas/SettingValueType'
+          description: The value to serve. It must respect the setting type. In some
+            generated clients for strictly typed languages you may use double/float
+            properties to handle integer values.
+      required:
+      - value
       type: object
     UpdateSettingValueWithSettingIdModel:
-      additionalProperties: false
       example:
         rolloutRules:
-        - comparator: isOneOf
+        - comparator: ""
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: isIn
+          segmentComparator: ""
           value: ""
           comparisonAttribute: comparisonAttribute
-        - comparator: isOneOf
+        - comparator: ""
           comparisonValue: comparisonValue
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          segmentComparator: isIn
+          segmentComparator: ""
           value: ""
           comparisonAttribute: comparisonAttribute
         rolloutPercentageItems:
@@ -10662,38 +10813,40 @@ components:
         rolloutRules:
           description: The targeting rule collection.
           items:
-            $ref: '#/components/schemas/RolloutRuleModel'
-          nullable: true
+            $ref: '#/components/schemas/UpdateRolloutRuleModel'
           type: array
         rolloutPercentageItems:
           description: The percentage rule collection.
           items:
-            $ref: '#/components/schemas/RolloutPercentageItemModel'
-          nullable: true
+            $ref: '#/components/schemas/UpdateRolloutPercentageItemModel'
           type: array
         value:
-          description: The value to serve. It must respect the setting type.
-          nullable: true
+          allOf:
+          - $ref: '#/components/schemas/SettingValueType'
+          description: The value to serve. It must respect the setting type. In some
+            generated clients for strictly typed languages you may use double/float
+            properties to handle integer values.
         settingId:
           description: The id of the Setting.
           format: int32
           type: integer
+      required:
+      - value
       type: object
     UpdateSettingValuesWithIdModel:
-      additionalProperties: false
       example:
         settingValues:
         - rolloutRules:
-          - comparator: isOneOf
+          - comparator: ""
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: isIn
+            segmentComparator: ""
             value: ""
             comparisonAttribute: comparisonAttribute
-          - comparator: isOneOf
+          - comparator: ""
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: isIn
+            segmentComparator: ""
             value: ""
             comparisonAttribute: comparisonAttribute
           rolloutPercentageItems:
@@ -10704,16 +10857,16 @@ components:
           value: ""
           settingId: 0
         - rolloutRules:
-          - comparator: isOneOf
+          - comparator: ""
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: isIn
+            segmentComparator: ""
             value: ""
             comparisonAttribute: comparisonAttribute
-          - comparator: isOneOf
+          - comparator: ""
             comparisonValue: comparisonValue
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            segmentComparator: isIn
+            segmentComparator: ""
             value: ""
             comparisonAttribute: comparisonAttribute
           rolloutPercentageItems:
@@ -10728,11 +10881,9 @@ components:
           description: The values to update.
           items:
             $ref: '#/components/schemas/UpdateSettingValueWithSettingIdModel'
-          nullable: true
           type: array
       type: object
     UpdateTagModel:
-      additionalProperties: false
       example:
         color: color
         name: name
@@ -10744,11 +10895,104 @@ components:
           nullable: true
           type: string
         color:
-          description: Color of the Tag.
+          description: "Color of the Tag. Possible values: `panther`, `whale`, `salmon`,\
+            \ `lizard`, `canary`, `koala`, or any HTML color code."
           maxLength: 255
           minLength: 0
           nullable: true
           type: string
+      type: object
+    UpdateTargetingRuleModel:
+      example:
+        percentageOptions:
+        - percentage: 1
+          value:
+            stringValue: stringValue
+            intValue: 0
+            boolValue: true
+            doubleValue: 6.027456183070403
+        - percentage: 1
+          value:
+            stringValue: stringValue
+            intValue: 0
+            boolValue: true
+            doubleValue: 6.027456183070403
+        conditions:
+        - segmentCondition: ""
+          userCondition: ""
+          prerequisiteFlagCondition: ""
+        - segmentCondition: ""
+          userCondition: ""
+          prerequisiteFlagCondition: ""
+        value: ""
+      properties:
+        conditions:
+          description: |-
+            The list of conditions that are combined with logical AND operators.
+            It can be one of the following:
+            - User condition
+            - Segment condition
+            - Prerequisite flag condition
+          items:
+            $ref: '#/components/schemas/UpdateConditionModel'
+          nullable: true
+          type: array
+        percentageOptions:
+          description: The percentage options from where the evaluation process will
+            choose a value based on the flag's percentage evaluation attribute.
+          items:
+            $ref: '#/components/schemas/UpdatePercentageOptionModel'
+          nullable: true
+          type: array
+        value:
+          allOf:
+          - $ref: '#/components/schemas/UpdateValueModel'
+          nullable: true
+      type: object
+    UpdateUserConditionModel:
+      description: Describes a condition that is based on user attributes.
+      properties:
+        comparisonAttribute:
+          description: "The User Object attribute that the condition is based on.\
+            \ Can be \"User ID\", \"Email\", \"Country\" or any custom attribute."
+          maxLength: 1000
+          minLength: 1
+          type: string
+        comparator:
+          $ref: '#/components/schemas/UserComparator'
+        comparisonValue:
+          $ref: '#/components/schemas/UpdateComparisonValueModel'
+      required:
+      - comparator
+      - comparisonAttribute
+      - comparisonValue
+      type: object
+    UpdateValueModel:
+      description: Represents the value of a Feature Flag or Setting.
+      example:
+        stringValue: stringValue
+        intValue: 0
+        boolValue: true
+        doubleValue: 6.027456183070403
+      properties:
+        boolValue:
+          description: The served value in case of a boolean Feature Flag.
+          nullable: true
+          type: boolean
+        stringValue:
+          description: The served value in case of a text Setting.
+          nullable: true
+          type: string
+        intValue:
+          description: The served value in case of a whole number Setting.
+          format: int32
+          nullable: true
+          type: integer
+        doubleValue:
+          description: The served value in case of a decimal number Setting.
+          format: double
+          nullable: true
+          type: number
       type: object
     UserComparator:
       description: The comparison operator which defines the relation between the
@@ -10792,19 +11036,7 @@ components:
       - arrayDoesNotContainAnyOf
       type: string
     UserConditionModel:
-      additionalProperties: false
       description: Describes a condition that is based on user attributes.
-      example:
-        comparator: isOneOf
-        comparisonValue:
-          listValue:
-          - hint: hint
-            value: value
-          - hint: hint
-            value: value
-          stringValue: stringValue
-          doubleValue: 1.4658129805029452
-        comparisonAttribute: comparisonAttribute
       properties:
         comparisonAttribute:
           description: "The User Object attribute that the condition is based on.\
@@ -10822,7 +11054,6 @@ components:
       - comparisonValue
       type: object
     UserModel:
-      additionalProperties: false
       example:
         twoFactorEnabled: true
         fullName: fullName
@@ -10844,9 +11075,13 @@ components:
         twoFactorEnabled:
           description: Determines whether 2FA is enabled for the Member.
           type: boolean
+      required:
+      - email
+      - fullName
+      - twoFactorEnabled
+      - userId
       type: object
     ValueModel:
-      additionalProperties: false
       description: Represents the value of a Feature Flag or Setting.
       example:
         stringValue: stringValue
@@ -10872,14 +11107,18 @@ components:
           format: double
           nullable: true
           type: number
+      required:
+      - boolValue
+      - doubleValue
+      - intValue
+      - stringValue
       type: object
     WebHookHttpMethod:
       enum:
       - get
       - post
       type: string
-    WebHookRequest:
-      additionalProperties: false
+    WebHookRequestModel:
       example:
         webHookHeaders:
         - isSecure: true
@@ -10888,7 +11127,7 @@ components:
         - isSecure: true
           value: value
           key: key
-        httpMethod: get
+        httpMethod: ""
         url: url
         content: content
       properties:
@@ -10904,7 +11143,9 @@ components:
           nullable: true
           type: string
         httpMethod:
-          $ref: '#/components/schemas/WebHookHttpMethod'
+          allOf:
+          - $ref: '#/components/schemas/WebHookHttpMethod'
+          nullable: true
         webHookHeaders:
           description: List of HTTP headers.
           items:
@@ -10915,7 +11156,6 @@ components:
       - url
       type: object
     WebhookConfig:
-      additionalProperties: false
       description: The Config where the applied changes will invoke the Webhook.
       example:
         configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -10923,15 +11163,16 @@ components:
       properties:
         name:
           description: The Config's name.
-          nullable: true
           type: string
         configId:
           description: The Config's identifier.
           format: uuid
           type: string
+      required:
+      - configId
+      - name
       type: object
     WebhookEnvironment:
-      additionalProperties: false
       description: The Environment where the applied changes will invoke the Webhook.
       example:
         environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -10939,15 +11180,16 @@ components:
       properties:
         name:
           description: The Environment's name.
-          nullable: true
           type: string
         environmentId:
           description: The Environment's identifier.
           format: uuid
           type: string
+      required:
+      - environmentId
+      - name
       type: object
     WebhookHeaderModel:
-      additionalProperties: false
       example:
         isSecure: true
         value: value
@@ -10970,8 +11212,27 @@ components:
       - key
       - value
       type: object
-    WebhookModel:
-      additionalProperties: false
+    WebhookHeaderResponseModel:
+      example:
+        isSecure: true
+        value: value
+        key: key
+      properties:
+        key:
+          description: The HTTP header key.
+          type: string
+        value:
+          description: The HTTP header value.
+          type: string
+        isSecure:
+          description: Indicates whether the header value is sensitive.
+          type: boolean
+      required:
+      - isSecure
+      - key
+      - value
+      type: object
+    WebhookResponseModel:
       example:
         webHookHeaders:
         - isSecure: true
@@ -10997,7 +11258,6 @@ components:
           type: integer
         url:
           description: The URL of the Webhook.
-          nullable: true
           type: string
         httpMethod:
           $ref: '#/components/schemas/WebHookHttpMethod'
@@ -11008,16 +11268,22 @@ components:
         webHookHeaders:
           description: List of HTTP headers that the Webhook must send.
           items:
-            $ref: '#/components/schemas/WebhookHeaderModel'
-          nullable: true
+            $ref: '#/components/schemas/WebhookHeaderResponseModel'
           type: array
         config:
           $ref: '#/components/schemas/WebhookConfig'
         environment:
           $ref: '#/components/schemas/WebhookEnvironment'
+      required:
+      - config
+      - content
+      - environment
+      - httpMethod
+      - url
+      - webHookHeaders
+      - webhookId
       type: object
     WebhookSigningKeysModel:
-      additionalProperties: false
       example:
         key1: key1
         key2: key2
@@ -11030,6 +11296,9 @@ components:
           description: The second signing key.
           nullable: true
           type: string
+      required:
+      - key1
+      - key2
       type: object
   securitySchemes:
     Basic:
@@ -11070,4 +11339,5 @@ x-tagGroups:
 - name: Diagnostics
   tags:
   - Audit logs
+  - Zombie (stale) flags
   - Me

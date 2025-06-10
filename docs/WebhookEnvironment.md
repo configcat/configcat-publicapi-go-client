@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **NullableString** | The Environment&#39;s name. | [optional] 
-**EnvironmentId** | Pointer to **string** | The Environment&#39;s identifier. | [optional] 
+**Name** | **string** | The Environment&#39;s name. | 
+**EnvironmentId** | **string** | The Environment&#39;s identifier. | 
 
 ## Methods
 
 ### NewWebhookEnvironment
 
-`func NewWebhookEnvironment() *WebhookEnvironment`
+`func NewWebhookEnvironment(name string, environmentId string, ) *WebhookEnvironment`
 
 NewWebhookEnvironment instantiates a new WebhookEnvironment object
 This constructor will assign default values to properties that have it defined,
@@ -45,22 +45,7 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
 
-`func (o *WebhookEnvironment) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### SetNameNil
-
-`func (o *WebhookEnvironment) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *WebhookEnvironment) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetEnvironmentId
 
 `func (o *WebhookEnvironment) GetEnvironmentId() string`
@@ -80,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetEnvironmentId sets EnvironmentId field to given value.
 
-### HasEnvironmentId
-
-`func (o *WebhookEnvironment) HasEnvironmentId() bool`
-
-HasEnvironmentId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

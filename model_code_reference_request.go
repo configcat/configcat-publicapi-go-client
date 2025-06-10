@@ -260,9 +260,9 @@ func (o *CodeReferenceRequest) UnsetUploader() {
 	o.Uploader.Unset()
 }
 
-// GetActiveBranches returns the ActiveBranches field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetActiveBranches returns the ActiveBranches field value if set, zero value otherwise.
 func (o *CodeReferenceRequest) GetActiveBranches() []string {
-	if o == nil {
+	if o == nil || IsNil(o.ActiveBranches) {
 		var ret []string
 		return ret
 	}
@@ -271,7 +271,6 @@ func (o *CodeReferenceRequest) GetActiveBranches() []string {
 
 // GetActiveBranchesOk returns a tuple with the ActiveBranches field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CodeReferenceRequest) GetActiveBranchesOk() ([]string, bool) {
 	if o == nil || IsNil(o.ActiveBranches) {
 		return nil, false
@@ -293,9 +292,9 @@ func (o *CodeReferenceRequest) SetActiveBranches(v []string) {
 	o.ActiveBranches = v
 }
 
-// GetFlagReferences returns the FlagReferences field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetFlagReferences returns the FlagReferences field value if set, zero value otherwise.
 func (o *CodeReferenceRequest) GetFlagReferences() []FlagReference {
-	if o == nil {
+	if o == nil || IsNil(o.FlagReferences) {
 		var ret []FlagReference
 		return ret
 	}
@@ -304,7 +303,6 @@ func (o *CodeReferenceRequest) GetFlagReferences() []FlagReference {
 
 // GetFlagReferencesOk returns a tuple with the FlagReferences field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CodeReferenceRequest) GetFlagReferencesOk() ([]FlagReference, bool) {
 	if o == nil || IsNil(o.FlagReferences) {
 		return nil, false
@@ -348,10 +346,10 @@ func (o CodeReferenceRequest) ToMap() (map[string]interface{}, error) {
 	if o.Uploader.IsSet() {
 		toSerialize["uploader"] = o.Uploader.Get()
 	}
-	if o.ActiveBranches != nil {
+	if !IsNil(o.ActiveBranches) {
 		toSerialize["activeBranches"] = o.ActiveBranches
 	}
-	if o.FlagReferences != nil {
+	if !IsNil(o.FlagReferences) {
 		toSerialize["flagReferences"] = o.FlagReferences
 	}
 	return toSerialize, nil

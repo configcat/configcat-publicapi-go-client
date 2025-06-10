@@ -50,16 +50,6 @@ SetUpdateFormulas sets UpdateFormulas field to given value.
 
 HasUpdateFormulas returns a boolean if a field has been set.
 
-### SetUpdateFormulasNil
-
-`func (o *UpdateEvaluationFormulasModel) SetUpdateFormulasNil(b bool)`
-
- SetUpdateFormulasNil sets the value for UpdateFormulas to be an explicit nil
-
-### UnsetUpdateFormulas
-`func (o *UpdateEvaluationFormulasModel) UnsetUpdateFormulas()`
-
-UnsetUpdateFormulas ensures that no value is present for UpdateFormulas, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

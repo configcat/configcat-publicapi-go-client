@@ -4,21 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SettingId** | Pointer to **int32** | Identifier of the Feature Flag or Setting. | [optional] 
-**Key** | Pointer to **NullableString** | Key of the Feature Flag or Setting. | [optional] 
-**Name** | Pointer to **NullableString** | Name of the Feature Flag or Setting. | [optional] 
-**Hint** | Pointer to **NullableString** | Description of the Feature Flag or Setting. | [optional] 
-**Order** | Pointer to **int32** | The order of the Feature Flag or Setting represented on the ConfigCat Dashboard. | [optional] 
-**SettingType** | Pointer to [**SettingType**](SettingType.md) |  | [optional] 
-**ConfigId** | Pointer to **string** | Identifier of the Feature Flag&#39;s Config. | [optional] 
-**ConfigName** | Pointer to **NullableString** | Name of the Feature Flag&#39;s Config. | [optional] 
-**Tags** | Pointer to [**[]TagModel**](TagModel.md) | The tags attached to the Feature Flag or Setting. | [optional] 
+**SettingId** | **int32** | Identifier of the Feature Flag or Setting. | 
+**Key** | **string** | Key of the Feature Flag or Setting. | 
+**Name** | **string** | Name of the Feature Flag or Setting. | 
+**Hint** | **NullableString** | Description of the Feature Flag or Setting. | 
+**Order** | **int32** | The order of the Feature Flag or Setting represented on the ConfigCat Dashboard. | 
+**SettingType** | [**SettingType**](SettingType.md) |  | 
+**ConfigId** | **string** | Identifier of the Feature Flag&#39;s Config. | 
+**ConfigName** | **string** | Name of the Feature Flag&#39;s Config. | 
+**CreatedAt** | **NullableTime** | The creation time of the Feature Flag or Setting. | 
+**Tags** | [**[]TagModel**](TagModel.md) | The tags attached to the Feature Flag or Setting. | 
 
 ## Methods
 
 ### NewSettingModel
 
-`func NewSettingModel() *SettingModel`
+`func NewSettingModel(settingId int32, key string, name string, hint NullableString, order int32, settingType SettingType, configId string, configName string, createdAt NullableTime, tags []TagModel, ) *SettingModel`
 
 NewSettingModel instantiates a new SettingModel object
 This constructor will assign default values to properties that have it defined,
@@ -52,11 +53,6 @@ and a boolean to check if the value has been set.
 
 SetSettingId sets SettingId field to given value.
 
-### HasSettingId
-
-`func (o *SettingModel) HasSettingId() bool`
-
-HasSettingId returns a boolean if a field has been set.
 
 ### GetKey
 
@@ -77,22 +73,7 @@ and a boolean to check if the value has been set.
 
 SetKey sets Key field to given value.
 
-### HasKey
 
-`func (o *SettingModel) HasKey() bool`
-
-HasKey returns a boolean if a field has been set.
-
-### SetKeyNil
-
-`func (o *SettingModel) SetKeyNil(b bool)`
-
- SetKeyNil sets the value for Key to be an explicit nil
-
-### UnsetKey
-`func (o *SettingModel) UnsetKey()`
-
-UnsetKey ensures that no value is present for Key, not even an explicit nil
 ### GetName
 
 `func (o *SettingModel) GetName() string`
@@ -112,22 +93,7 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
 
-`func (o *SettingModel) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### SetNameNil
-
-`func (o *SettingModel) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *SettingModel) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetHint
 
 `func (o *SettingModel) GetHint() string`
@@ -147,11 +113,6 @@ and a boolean to check if the value has been set.
 
 SetHint sets Hint field to given value.
 
-### HasHint
-
-`func (o *SettingModel) HasHint() bool`
-
-HasHint returns a boolean if a field has been set.
 
 ### SetHintNil
 
@@ -182,11 +143,6 @@ and a boolean to check if the value has been set.
 
 SetOrder sets Order field to given value.
 
-### HasOrder
-
-`func (o *SettingModel) HasOrder() bool`
-
-HasOrder returns a boolean if a field has been set.
 
 ### GetSettingType
 
@@ -207,11 +163,6 @@ and a boolean to check if the value has been set.
 
 SetSettingType sets SettingType field to given value.
 
-### HasSettingType
-
-`func (o *SettingModel) HasSettingType() bool`
-
-HasSettingType returns a boolean if a field has been set.
 
 ### GetConfigId
 
@@ -232,11 +183,6 @@ and a boolean to check if the value has been set.
 
 SetConfigId sets ConfigId field to given value.
 
-### HasConfigId
-
-`func (o *SettingModel) HasConfigId() bool`
-
-HasConfigId returns a boolean if a field has been set.
 
 ### GetConfigName
 
@@ -257,22 +203,37 @@ and a boolean to check if the value has been set.
 
 SetConfigName sets ConfigName field to given value.
 
-### HasConfigName
 
-`func (o *SettingModel) HasConfigName() bool`
+### GetCreatedAt
 
-HasConfigName returns a boolean if a field has been set.
+`func (o *SettingModel) GetCreatedAt() time.Time`
 
-### SetConfigNameNil
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
-`func (o *SettingModel) SetConfigNameNil(b bool)`
+### GetCreatedAtOk
 
- SetConfigNameNil sets the value for ConfigName to be an explicit nil
+`func (o *SettingModel) GetCreatedAtOk() (*time.Time, bool)`
 
-### UnsetConfigName
-`func (o *SettingModel) UnsetConfigName()`
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
 
-UnsetConfigName ensures that no value is present for ConfigName, not even an explicit nil
+### SetCreatedAt
+
+`func (o *SettingModel) SetCreatedAt(v time.Time)`
+
+SetCreatedAt sets CreatedAt field to given value.
+
+
+### SetCreatedAtNil
+
+`func (o *SettingModel) SetCreatedAtNil(b bool)`
+
+ SetCreatedAtNil sets the value for CreatedAt to be an explicit nil
+
+### UnsetCreatedAt
+`func (o *SettingModel) UnsetCreatedAt()`
+
+UnsetCreatedAt ensures that no value is present for CreatedAt, not even an explicit nil
 ### GetTags
 
 `func (o *SettingModel) GetTags() []TagModel`
@@ -292,22 +253,7 @@ and a boolean to check if the value has been set.
 
 SetTags sets Tags field to given value.
 
-### HasTags
 
-`func (o *SettingModel) HasTags() bool`
-
-HasTags returns a boolean if a field has been set.
-
-### SetTagsNil
-
-`func (o *SettingModel) SetTagsNil(b bool)`
-
- SetTagsNil sets the value for Tags to be an explicit nil
-
-### UnsetTags
-`func (o *SettingModel) UnsetTags()`
-
-UnsetTags ensures that no value is present for Tags, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

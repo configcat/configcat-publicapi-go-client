@@ -1,0 +1,72 @@
+# UpdatePercentageOptionModel
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Percentage** | **int32** | A number between 0 and 100 that represents a randomly allocated fraction of the users. | 
+**Value** | [**UpdateValueModel**](UpdateValueModel.md) |  | 
+
+## Methods
+
+### NewUpdatePercentageOptionModel
+
+`func NewUpdatePercentageOptionModel(percentage int32, value UpdateValueModel, ) *UpdatePercentageOptionModel`
+
+NewUpdatePercentageOptionModel instantiates a new UpdatePercentageOptionModel object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewUpdatePercentageOptionModelWithDefaults
+
+`func NewUpdatePercentageOptionModelWithDefaults() *UpdatePercentageOptionModel`
+
+NewUpdatePercentageOptionModelWithDefaults instantiates a new UpdatePercentageOptionModel object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetPercentage
+
+`func (o *UpdatePercentageOptionModel) GetPercentage() int32`
+
+GetPercentage returns the Percentage field if non-nil, zero value otherwise.
+
+### GetPercentageOk
+
+`func (o *UpdatePercentageOptionModel) GetPercentageOk() (*int32, bool)`
+
+GetPercentageOk returns a tuple with the Percentage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPercentage
+
+`func (o *UpdatePercentageOptionModel) SetPercentage(v int32)`
+
+SetPercentage sets Percentage field to given value.
+
+
+### GetValue
+
+`func (o *UpdatePercentageOptionModel) GetValue() UpdateValueModel`
+
+GetValue returns the Value field if non-nil, zero value otherwise.
+
+### GetValueOk
+
+`func (o *UpdatePercentageOptionModel) GetValueOk() (*UpdateValueModel, bool)`
+
+GetValueOk returns a tuple with the Value field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValue
+
+`func (o *UpdatePercentageOptionModel) SetValue(v UpdateValueModel)`
+
+SetValue sets Value field to given value.
+
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

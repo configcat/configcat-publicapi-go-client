@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Email** | Pointer to **NullableString** |  | [optional] [readonly] 
-**FullName** | Pointer to **NullableString** |  | [optional] [readonly] 
+**Email** | **string** |  | [readonly] 
+**FullName** | **string** |  | [readonly] 
 
 ## Methods
 
 ### NewMeModel
 
-`func NewMeModel() *MeModel`
+`func NewMeModel(email string, fullName string, ) *MeModel`
 
 NewMeModel instantiates a new MeModel object
 This constructor will assign default values to properties that have it defined,
@@ -45,22 +45,7 @@ and a boolean to check if the value has been set.
 
 SetEmail sets Email field to given value.
 
-### HasEmail
 
-`func (o *MeModel) HasEmail() bool`
-
-HasEmail returns a boolean if a field has been set.
-
-### SetEmailNil
-
-`func (o *MeModel) SetEmailNil(b bool)`
-
- SetEmailNil sets the value for Email to be an explicit nil
-
-### UnsetEmail
-`func (o *MeModel) UnsetEmail()`
-
-UnsetEmail ensures that no value is present for Email, not even an explicit nil
 ### GetFullName
 
 `func (o *MeModel) GetFullName() string`
@@ -80,22 +65,7 @@ and a boolean to check if the value has been set.
 
 SetFullName sets FullName field to given value.
 
-### HasFullName
 
-`func (o *MeModel) HasFullName() bool`
-
-HasFullName returns a boolean if a field has been set.
-
-### SetFullNameNil
-
-`func (o *MeModel) SetFullNameNil(b bool)`
-
- SetFullNameNil sets the value for FullName to be an explicit nil
-
-### UnsetFullName
-`func (o *MeModel) UnsetFullName()`
-
-UnsetFullName ensures that no value is present for FullName, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

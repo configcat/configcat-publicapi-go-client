@@ -14,6 +14,8 @@ package configcatpublicapi
 import (
 	"encoding/json"
 	"time"
+	"bytes"
+	"fmt"
 )
 
 // checks if the SettingDataModel type satisfies the MappedNullable interface at compile time
@@ -22,31 +24,43 @@ var _ MappedNullable = &SettingDataModel{}
 // SettingDataModel Metadata of a Feature Flag or Setting.
 type SettingDataModel struct {
 	// Identifier of the Feature Flag or Setting.
-	SettingId *int32 `json:"settingId,omitempty"`
+	SettingId int32 `json:"settingId"`
 	// Key of the Feature Flag or Setting.
-	Key NullableString `json:"key,omitempty"`
+	Key string `json:"key"`
 	// Name of the Feature Flag or Setting.
-	Name NullableString `json:"name,omitempty"`
+	Name string `json:"name"`
 	// Description of the Feature Flag or Setting.
-	Hint NullableString `json:"hint,omitempty"`
-	SettingType *SettingType `json:"settingType,omitempty"`
+	Hint NullableString `json:"hint"`
+	SettingType SettingType `json:"settingType"`
 	// The order of the Feature Flag or Setting represented on the ConfigCat Dashboard.
-	Order *int32 `json:"order,omitempty"`
+	Order int32 `json:"order"`
 	// The creation time of the Feature Flag or Setting.
-	CreatedAt NullableTime `json:"createdAt,omitempty"`
+	CreatedAt NullableTime `json:"createdAt"`
 	// The user's email address who created the Feature Flag or Setting.
-	CreatorEmail NullableString `json:"creatorEmail,omitempty"`
+	CreatorEmail NullableString `json:"creatorEmail"`
 	// The user's name who created the Feature Flag or Setting.
-	CreatorFullName NullableString `json:"creatorFullName,omitempty"`
-	IsWatching *bool `json:"isWatching,omitempty"`
+	CreatorFullName NullableString `json:"creatorFullName"`
+	IsWatching bool `json:"isWatching"`
 }
+
+type _SettingDataModel SettingDataModel
 
 // NewSettingDataModel instantiates a new SettingDataModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSettingDataModel() *SettingDataModel {
+func NewSettingDataModel(settingId int32, key string, name string, hint NullableString, settingType SettingType, order int32, createdAt NullableTime, creatorEmail NullableString, creatorFullName NullableString, isWatching bool) *SettingDataModel {
 	this := SettingDataModel{}
+	this.SettingId = settingId
+	this.Key = key
+	this.Name = name
+	this.Hint = hint
+	this.SettingType = settingType
+	this.Order = order
+	this.CreatedAt = createdAt
+	this.CreatorEmail = creatorEmail
+	this.CreatorFullName = creatorFullName
+	this.IsWatching = isWatching
 	return &this
 }
 
@@ -58,132 +72,90 @@ func NewSettingDataModelWithDefaults() *SettingDataModel {
 	return &this
 }
 
-// GetSettingId returns the SettingId field value if set, zero value otherwise.
+// GetSettingId returns the SettingId field value
 func (o *SettingDataModel) GetSettingId() int32 {
-	if o == nil || IsNil(o.SettingId) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.SettingId
+
+	return o.SettingId
 }
 
-// GetSettingIdOk returns a tuple with the SettingId field value if set, nil otherwise
+// GetSettingIdOk returns a tuple with the SettingId field value
 // and a boolean to check if the value has been set.
 func (o *SettingDataModel) GetSettingIdOk() (*int32, bool) {
-	if o == nil || IsNil(o.SettingId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SettingId, true
+	return &o.SettingId, true
 }
 
-// HasSettingId returns a boolean if a field has been set.
-func (o *SettingDataModel) HasSettingId() bool {
-	if o != nil && !IsNil(o.SettingId) {
-		return true
-	}
-
-	return false
-}
-
-// SetSettingId gets a reference to the given int32 and assigns it to the SettingId field.
+// SetSettingId sets field value
 func (o *SettingDataModel) SetSettingId(v int32) {
-	o.SettingId = &v
+	o.SettingId = v
 }
 
-// GetKey returns the Key field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetKey returns the Key field value
 func (o *SettingDataModel) GetKey() string {
-	if o == nil || IsNil(o.Key.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Key.Get()
+
+	return o.Key
 }
 
-// GetKeyOk returns a tuple with the Key field value if set, nil otherwise
+// GetKeyOk returns a tuple with the Key field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingDataModel) GetKeyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Key.Get(), o.Key.IsSet()
+	return &o.Key, true
 }
 
-// HasKey returns a boolean if a field has been set.
-func (o *SettingDataModel) HasKey() bool {
-	if o != nil && o.Key.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetKey gets a reference to the given NullableString and assigns it to the Key field.
+// SetKey sets field value
 func (o *SettingDataModel) SetKey(v string) {
-	o.Key.Set(&v)
-}
-// SetKeyNil sets the value for Key to be an explicit nil
-func (o *SettingDataModel) SetKeyNil() {
-	o.Key.Set(nil)
+	o.Key = v
 }
 
-// UnsetKey ensures that no value is present for Key, not even an explicit nil
-func (o *SettingDataModel) UnsetKey() {
-	o.Key.Unset()
-}
-
-// GetName returns the Name field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetName returns the Name field value
 func (o *SettingDataModel) GetName() string {
-	if o == nil || IsNil(o.Name.Get()) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Name.Get()
+
+	return o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingDataModel) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return &o.Name, true
 }
 
-// HasName returns a boolean if a field has been set.
-func (o *SettingDataModel) HasName() bool {
-	if o != nil && o.Name.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given NullableString and assigns it to the Name field.
+// SetName sets field value
 func (o *SettingDataModel) SetName(v string) {
-	o.Name.Set(&v)
-}
-// SetNameNil sets the value for Name to be an explicit nil
-func (o *SettingDataModel) SetNameNil() {
-	o.Name.Set(nil)
+	o.Name = v
 }
 
-// UnsetName ensures that no value is present for Name, not even an explicit nil
-func (o *SettingDataModel) UnsetName() {
-	o.Name.Unset()
-}
-
-// GetHint returns the Hint field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetHint returns the Hint field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *SettingDataModel) GetHint() string {
-	if o == nil || IsNil(o.Hint.Get()) {
+	if o == nil || o.Hint.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Hint.Get()
 }
 
-// GetHintOk returns a tuple with the Hint field value if set, nil otherwise
+// GetHintOk returns a tuple with the Hint field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingDataModel) GetHintOk() (*string, bool) {
@@ -193,103 +165,71 @@ func (o *SettingDataModel) GetHintOk() (*string, bool) {
 	return o.Hint.Get(), o.Hint.IsSet()
 }
 
-// HasHint returns a boolean if a field has been set.
-func (o *SettingDataModel) HasHint() bool {
-	if o != nil && o.Hint.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetHint gets a reference to the given NullableString and assigns it to the Hint field.
+// SetHint sets field value
 func (o *SettingDataModel) SetHint(v string) {
 	o.Hint.Set(&v)
 }
-// SetHintNil sets the value for Hint to be an explicit nil
-func (o *SettingDataModel) SetHintNil() {
-	o.Hint.Set(nil)
-}
 
-// UnsetHint ensures that no value is present for Hint, not even an explicit nil
-func (o *SettingDataModel) UnsetHint() {
-	o.Hint.Unset()
-}
-
-// GetSettingType returns the SettingType field value if set, zero value otherwise.
+// GetSettingType returns the SettingType field value
 func (o *SettingDataModel) GetSettingType() SettingType {
-	if o == nil || IsNil(o.SettingType) {
+	if o == nil {
 		var ret SettingType
 		return ret
 	}
-	return *o.SettingType
+
+	return o.SettingType
 }
 
-// GetSettingTypeOk returns a tuple with the SettingType field value if set, nil otherwise
+// GetSettingTypeOk returns a tuple with the SettingType field value
 // and a boolean to check if the value has been set.
 func (o *SettingDataModel) GetSettingTypeOk() (*SettingType, bool) {
-	if o == nil || IsNil(o.SettingType) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SettingType, true
+	return &o.SettingType, true
 }
 
-// HasSettingType returns a boolean if a field has been set.
-func (o *SettingDataModel) HasSettingType() bool {
-	if o != nil && !IsNil(o.SettingType) {
-		return true
-	}
-
-	return false
-}
-
-// SetSettingType gets a reference to the given SettingType and assigns it to the SettingType field.
+// SetSettingType sets field value
 func (o *SettingDataModel) SetSettingType(v SettingType) {
-	o.SettingType = &v
+	o.SettingType = v
 }
 
-// GetOrder returns the Order field value if set, zero value otherwise.
+// GetOrder returns the Order field value
 func (o *SettingDataModel) GetOrder() int32 {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.Order
+
+	return o.Order
 }
 
-// GetOrderOk returns a tuple with the Order field value if set, nil otherwise
+// GetOrderOk returns a tuple with the Order field value
 // and a boolean to check if the value has been set.
 func (o *SettingDataModel) GetOrderOk() (*int32, bool) {
-	if o == nil || IsNil(o.Order) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Order, true
+	return &o.Order, true
 }
 
-// HasOrder returns a boolean if a field has been set.
-func (o *SettingDataModel) HasOrder() bool {
-	if o != nil && !IsNil(o.Order) {
-		return true
-	}
-
-	return false
-}
-
-// SetOrder gets a reference to the given int32 and assigns it to the Order field.
+// SetOrder sets field value
 func (o *SettingDataModel) SetOrder(v int32) {
-	o.Order = &v
+	o.Order = v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetCreatedAt returns the CreatedAt field value
+// If the value is explicit nil, the zero value for time.Time will be returned
 func (o *SettingDataModel) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt.Get()) {
+	if o == nil || o.CreatedAt.Get() == nil {
 		var ret time.Time
 		return ret
 	}
+
 	return *o.CreatedAt.Get()
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingDataModel) GetCreatedAtOk() (*time.Time, bool) {
@@ -299,39 +239,23 @@ func (o *SettingDataModel) GetCreatedAtOk() (*time.Time, bool) {
 	return o.CreatedAt.Get(), o.CreatedAt.IsSet()
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *SettingDataModel) HasCreatedAt() bool {
-	if o != nil && o.CreatedAt.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given NullableTime and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *SettingDataModel) SetCreatedAt(v time.Time) {
 	o.CreatedAt.Set(&v)
 }
-// SetCreatedAtNil sets the value for CreatedAt to be an explicit nil
-func (o *SettingDataModel) SetCreatedAtNil() {
-	o.CreatedAt.Set(nil)
-}
 
-// UnsetCreatedAt ensures that no value is present for CreatedAt, not even an explicit nil
-func (o *SettingDataModel) UnsetCreatedAt() {
-	o.CreatedAt.Unset()
-}
-
-// GetCreatorEmail returns the CreatorEmail field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetCreatorEmail returns the CreatorEmail field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *SettingDataModel) GetCreatorEmail() string {
-	if o == nil || IsNil(o.CreatorEmail.Get()) {
+	if o == nil || o.CreatorEmail.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.CreatorEmail.Get()
 }
 
-// GetCreatorEmailOk returns a tuple with the CreatorEmail field value if set, nil otherwise
+// GetCreatorEmailOk returns a tuple with the CreatorEmail field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingDataModel) GetCreatorEmailOk() (*string, bool) {
@@ -341,39 +265,23 @@ func (o *SettingDataModel) GetCreatorEmailOk() (*string, bool) {
 	return o.CreatorEmail.Get(), o.CreatorEmail.IsSet()
 }
 
-// HasCreatorEmail returns a boolean if a field has been set.
-func (o *SettingDataModel) HasCreatorEmail() bool {
-	if o != nil && o.CreatorEmail.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatorEmail gets a reference to the given NullableString and assigns it to the CreatorEmail field.
+// SetCreatorEmail sets field value
 func (o *SettingDataModel) SetCreatorEmail(v string) {
 	o.CreatorEmail.Set(&v)
 }
-// SetCreatorEmailNil sets the value for CreatorEmail to be an explicit nil
-func (o *SettingDataModel) SetCreatorEmailNil() {
-	o.CreatorEmail.Set(nil)
-}
 
-// UnsetCreatorEmail ensures that no value is present for CreatorEmail, not even an explicit nil
-func (o *SettingDataModel) UnsetCreatorEmail() {
-	o.CreatorEmail.Unset()
-}
-
-// GetCreatorFullName returns the CreatorFullName field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetCreatorFullName returns the CreatorFullName field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *SettingDataModel) GetCreatorFullName() string {
-	if o == nil || IsNil(o.CreatorFullName.Get()) {
+	if o == nil || o.CreatorFullName.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.CreatorFullName.Get()
 }
 
-// GetCreatorFullNameOk returns a tuple with the CreatorFullName field value if set, nil otherwise
+// GetCreatorFullNameOk returns a tuple with the CreatorFullName field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SettingDataModel) GetCreatorFullNameOk() (*string, bool) {
@@ -383,59 +291,33 @@ func (o *SettingDataModel) GetCreatorFullNameOk() (*string, bool) {
 	return o.CreatorFullName.Get(), o.CreatorFullName.IsSet()
 }
 
-// HasCreatorFullName returns a boolean if a field has been set.
-func (o *SettingDataModel) HasCreatorFullName() bool {
-	if o != nil && o.CreatorFullName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatorFullName gets a reference to the given NullableString and assigns it to the CreatorFullName field.
+// SetCreatorFullName sets field value
 func (o *SettingDataModel) SetCreatorFullName(v string) {
 	o.CreatorFullName.Set(&v)
 }
-// SetCreatorFullNameNil sets the value for CreatorFullName to be an explicit nil
-func (o *SettingDataModel) SetCreatorFullNameNil() {
-	o.CreatorFullName.Set(nil)
-}
 
-// UnsetCreatorFullName ensures that no value is present for CreatorFullName, not even an explicit nil
-func (o *SettingDataModel) UnsetCreatorFullName() {
-	o.CreatorFullName.Unset()
-}
-
-// GetIsWatching returns the IsWatching field value if set, zero value otherwise.
+// GetIsWatching returns the IsWatching field value
 func (o *SettingDataModel) GetIsWatching() bool {
-	if o == nil || IsNil(o.IsWatching) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.IsWatching
+
+	return o.IsWatching
 }
 
-// GetIsWatchingOk returns a tuple with the IsWatching field value if set, nil otherwise
+// GetIsWatchingOk returns a tuple with the IsWatching field value
 // and a boolean to check if the value has been set.
 func (o *SettingDataModel) GetIsWatchingOk() (*bool, bool) {
-	if o == nil || IsNil(o.IsWatching) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IsWatching, true
+	return &o.IsWatching, true
 }
 
-// HasIsWatching returns a boolean if a field has been set.
-func (o *SettingDataModel) HasIsWatching() bool {
-	if o != nil && !IsNil(o.IsWatching) {
-		return true
-	}
-
-	return false
-}
-
-// SetIsWatching gets a reference to the given bool and assigns it to the IsWatching field.
+// SetIsWatching sets field value
 func (o *SettingDataModel) SetIsWatching(v bool) {
-	o.IsWatching = &v
+	o.IsWatching = v
 }
 
 func (o SettingDataModel) MarshalJSON() ([]byte, error) {
@@ -448,37 +330,63 @@ func (o SettingDataModel) MarshalJSON() ([]byte, error) {
 
 func (o SettingDataModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.SettingId) {
-		toSerialize["settingId"] = o.SettingId
-	}
-	if o.Key.IsSet() {
-		toSerialize["key"] = o.Key.Get()
-	}
-	if o.Name.IsSet() {
-		toSerialize["name"] = o.Name.Get()
-	}
-	if o.Hint.IsSet() {
-		toSerialize["hint"] = o.Hint.Get()
-	}
-	if !IsNil(o.SettingType) {
-		toSerialize["settingType"] = o.SettingType
-	}
-	if !IsNil(o.Order) {
-		toSerialize["order"] = o.Order
-	}
-	if o.CreatedAt.IsSet() {
-		toSerialize["createdAt"] = o.CreatedAt.Get()
-	}
-	if o.CreatorEmail.IsSet() {
-		toSerialize["creatorEmail"] = o.CreatorEmail.Get()
-	}
-	if o.CreatorFullName.IsSet() {
-		toSerialize["creatorFullName"] = o.CreatorFullName.Get()
-	}
-	if !IsNil(o.IsWatching) {
-		toSerialize["isWatching"] = o.IsWatching
-	}
+	toSerialize["settingId"] = o.SettingId
+	toSerialize["key"] = o.Key
+	toSerialize["name"] = o.Name
+	toSerialize["hint"] = o.Hint.Get()
+	toSerialize["settingType"] = o.SettingType
+	toSerialize["order"] = o.Order
+	toSerialize["createdAt"] = o.CreatedAt.Get()
+	toSerialize["creatorEmail"] = o.CreatorEmail.Get()
+	toSerialize["creatorFullName"] = o.CreatorFullName.Get()
+	toSerialize["isWatching"] = o.IsWatching
 	return toSerialize, nil
+}
+
+func (o *SettingDataModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"settingId",
+		"key",
+		"name",
+		"hint",
+		"settingType",
+		"order",
+		"createdAt",
+		"creatorEmail",
+		"creatorFullName",
+		"isWatching",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varSettingDataModel := _SettingDataModel{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varSettingDataModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = SettingDataModel(varSettingDataModel)
+
+	return err
 }
 
 type NullableSettingDataModel struct {

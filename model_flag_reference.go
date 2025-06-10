@@ -25,7 +25,7 @@ type FlagReference struct {
 	// The identifier of the Feature Flag or Setting the code reference belongs to.
 	SettingId int32 `json:"settingId"`
 	// The actual references to the given Feature Flag or Setting.
-	References []ReferenceLines `json:"references"`
+	References []ReferenceLinesRequest `json:"references"`
 }
 
 type _FlagReference FlagReference
@@ -34,7 +34,7 @@ type _FlagReference FlagReference
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFlagReference(settingId int32, references []ReferenceLines) *FlagReference {
+func NewFlagReference(settingId int32, references []ReferenceLinesRequest) *FlagReference {
 	this := FlagReference{}
 	this.SettingId = settingId
 	this.References = references
@@ -74,9 +74,9 @@ func (o *FlagReference) SetSettingId(v int32) {
 }
 
 // GetReferences returns the References field value
-func (o *FlagReference) GetReferences() []ReferenceLines {
+func (o *FlagReference) GetReferences() []ReferenceLinesRequest {
 	if o == nil {
-		var ret []ReferenceLines
+		var ret []ReferenceLinesRequest
 		return ret
 	}
 
@@ -85,7 +85,7 @@ func (o *FlagReference) GetReferences() []ReferenceLines {
 
 // GetReferencesOk returns a tuple with the References field value
 // and a boolean to check if the value has been set.
-func (o *FlagReference) GetReferencesOk() ([]ReferenceLines, bool) {
+func (o *FlagReference) GetReferencesOk() ([]ReferenceLinesRequest, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -93,7 +93,7 @@ func (o *FlagReference) GetReferencesOk() ([]ReferenceLines, bool) {
 }
 
 // SetReferences sets field value
-func (o *FlagReference) SetReferences(v []ReferenceLines) {
+func (o *FlagReference) SetReferences(v []ReferenceLinesRequest) {
 	o.References = v
 }
 

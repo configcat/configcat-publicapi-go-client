@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | Pointer to **NullableString** | The Config&#39;s name. | [optional] 
-**ConfigId** | Pointer to **string** | The Config&#39;s identifier. | [optional] 
+**Name** | **string** | The Config&#39;s name. | 
+**ConfigId** | **string** | The Config&#39;s identifier. | 
 
 ## Methods
 
 ### NewWebhookConfig
 
-`func NewWebhookConfig() *WebhookConfig`
+`func NewWebhookConfig(name string, configId string, ) *WebhookConfig`
 
 NewWebhookConfig instantiates a new WebhookConfig object
 This constructor will assign default values to properties that have it defined,
@@ -45,22 +45,7 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
-### HasName
 
-`func (o *WebhookConfig) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### SetNameNil
-
-`func (o *WebhookConfig) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *WebhookConfig) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetConfigId
 
 `func (o *WebhookConfig) GetConfigId() string`
@@ -80,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetConfigId sets ConfigId field to given value.
 
-### HasConfigId
-
-`func (o *WebhookConfig) HasConfigId() bool`
-
-HasConfigId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
