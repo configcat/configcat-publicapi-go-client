@@ -1,6 +1,6 @@
 # \FeatureFlagsSettingsAPI
 
-All URIs are relative to *https://test-api.configcat.com*
+All URIs are relative to *https://api.configcat.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**GetSetting**](FeatureFlagsSettingsAPI.md#GetSetting) | **Get** /v1/settings/{settingId} | Get Flag
 [**GetSettings**](FeatureFlagsSettingsAPI.md#GetSettings) | **Get** /v1/configs/{configId}/settings | List Flags
 [**ReplaceSetting**](FeatureFlagsSettingsAPI.md#ReplaceSetting) | **Put** /v1/settings/{settingId} | Replace Flag
+[**UpdatePredefinedVariations**](FeatureFlagsSettingsAPI.md#UpdatePredefinedVariations) | **Put** /v1/settings/{settingId}/predefined-variations | Update predefined variations (Beta)
 [**UpdateSetting**](FeatureFlagsSettingsAPI.md#UpdateSetting) | **Patch** /v1/settings/{settingId} | Update Flag
 
 
@@ -35,7 +36,7 @@ import (
 
 func main() {
 	configId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | The identifier of the Config.
-	createSettingInitialValues := *openapiclient.NewCreateSettingInitialValues("Key_example", "Name_example", openapiclient.SettingType("boolean")) // CreateSettingInitialValues | 
+	createSettingInitialValues := *openapiclient.NewCreateSettingInitialValues("Name_example", "Key_example", openapiclient.SettingType("boolean")) // CreateSettingInitialValues | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -315,7 +316,7 @@ import (
 
 func main() {
 	settingId := int32(56) // int32 | The identifier of the Setting.
-	replaceSettingModel := *openapiclient.NewReplaceSettingModel() // ReplaceSettingModel | 
+	replaceSettingModel := *openapiclient.NewReplaceSettingModel("Name_example") // ReplaceSettingModel | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -346,6 +347,78 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **replaceSettingModel** | [**ReplaceSettingModel**](ReplaceSettingModel.md) |  | 
+
+### Return type
+
+[**SettingModel**](SettingModel.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, text/json, application/*+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdatePredefinedVariations
+
+> SettingModel UpdatePredefinedVariations(ctx, settingId).UpdatePredefinedVariationsRequest(updatePredefinedVariationsRequest).Execute()
+
+Update predefined variations (Beta)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
+)
+
+func main() {
+	settingId := int32(56) // int32 | The identifier of the Setting.
+	updatePredefinedVariationsRequest := *openapiclient.NewUpdatePredefinedVariationsRequest([]openapiclient.UpdatePredefinedVariationModel{*openapiclient.NewUpdatePredefinedVariationModel(*openapiclient.NewUpdatePredefinedVariationValueModel())}) // UpdatePredefinedVariationsRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FeatureFlagsSettingsAPI.UpdatePredefinedVariations(context.Background(), settingId).UpdatePredefinedVariationsRequest(updatePredefinedVariationsRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsAPI.UpdatePredefinedVariations``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdatePredefinedVariations`: SettingModel
+	fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsAPI.UpdatePredefinedVariations`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settingId** | **int32** | The identifier of the Setting. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdatePredefinedVariationsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **updatePredefinedVariationsRequest** | [**UpdatePredefinedVariationsRequest**](UpdatePredefinedVariationsRequest.md) |  | 
 
 ### Return type
 

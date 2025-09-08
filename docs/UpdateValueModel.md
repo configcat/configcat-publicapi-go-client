@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **StringValue** | Pointer to **NullableString** | The served value in case of a text Setting. | [optional] 
 **IntValue** | Pointer to **NullableInt32** | The served value in case of a whole number Setting. | [optional] 
 **DoubleValue** | Pointer to **NullableFloat64** | The served value in case of a decimal number Setting. | [optional] 
+**PredefinedVariationId** | Pointer to **NullableString** | The served Variation&#39;s identifier. | [optional] 
 
 ## Methods
 
@@ -168,6 +169,41 @@ HasDoubleValue returns a boolean if a field has been set.
 `func (o *UpdateValueModel) UnsetDoubleValue()`
 
 UnsetDoubleValue ensures that no value is present for DoubleValue, not even an explicit nil
+### GetPredefinedVariationId
+
+`func (o *UpdateValueModel) GetPredefinedVariationId() string`
+
+GetPredefinedVariationId returns the PredefinedVariationId field if non-nil, zero value otherwise.
+
+### GetPredefinedVariationIdOk
+
+`func (o *UpdateValueModel) GetPredefinedVariationIdOk() (*string, bool)`
+
+GetPredefinedVariationIdOk returns a tuple with the PredefinedVariationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPredefinedVariationId
+
+`func (o *UpdateValueModel) SetPredefinedVariationId(v string)`
+
+SetPredefinedVariationId sets PredefinedVariationId field to given value.
+
+### HasPredefinedVariationId
+
+`func (o *UpdateValueModel) HasPredefinedVariationId() bool`
+
+HasPredefinedVariationId returns a boolean if a field has been set.
+
+### SetPredefinedVariationIdNil
+
+`func (o *UpdateValueModel) SetPredefinedVariationIdNil(b bool)`
+
+ SetPredefinedVariationIdNil sets the value for PredefinedVariationId to be an explicit nil
+
+### UnsetPredefinedVariationId
+`func (o *UpdateValueModel) UnsetPredefinedVariationId()`
+
+UnsetPredefinedVariationId ensures that no value is present for PredefinedVariationId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

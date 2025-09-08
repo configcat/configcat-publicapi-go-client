@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -13,7 +13,6 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,6 +21,8 @@ var _ MappedNullable = &CreateSettingInitialValues{}
 
 // CreateSettingInitialValues struct for CreateSettingInitialValues
 type CreateSettingInitialValues struct {
+	// The name of the Feature Flag or Setting.
+	Name string `json:"name"`
 	// A short description for the setting, shown on the Dashboard UI.
 	Hint NullableString `json:"hint,omitempty"`
 	// The IDs of the tags which are attached to the setting.
@@ -30,13 +31,14 @@ type CreateSettingInitialValues struct {
 	Order NullableInt32 `json:"order,omitempty"`
 	// The key of the Feature Flag or Setting.
 	Key string `json:"key"`
-	// The name of the Feature Flag or Setting.
-	Name string `json:"name"`
 	SettingType SettingType `json:"settingType"`
+	// The Feature Flag or Setting's Variations.
+	PredefinedVariations []CreatePredefinedVariationModel `json:"predefinedVariations,omitempty"`
 	// Optional, initial value of the Feature Flag or Setting in the given Environments. Only one of the SettingIdToInitFrom or the InitialValues properties can be set.
 	InitialValues []InitialValue `json:"initialValues,omitempty"`
 	// Optional, the SettingId to initialize the values and tags of the Feature Flag or Setting from. Only can be set if you have at least ReadOnly access in all the Environments. Only one of the SettingIdToInitFrom or the InitialValues properties can be set.
 	SettingIdToInitFrom NullableInt32 `json:"settingIdToInitFrom,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CreateSettingInitialValues CreateSettingInitialValues
@@ -45,10 +47,10 @@ type _CreateSettingInitialValues CreateSettingInitialValues
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateSettingInitialValues(key string, name string, settingType SettingType) *CreateSettingInitialValues {
+func NewCreateSettingInitialValues(name string, key string, settingType SettingType) *CreateSettingInitialValues {
 	this := CreateSettingInitialValues{}
-	this.Key = key
 	this.Name = name
+	this.Key = key
 	this.SettingType = settingType
 	return &this
 }
@@ -59,6 +61,30 @@ func NewCreateSettingInitialValues(key string, name string, settingType SettingT
 func NewCreateSettingInitialValuesWithDefaults() *CreateSettingInitialValues {
 	this := CreateSettingInitialValues{}
 	return &this
+}
+
+// GetName returns the Name field value
+func (o *CreateSettingInitialValues) GetName() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value
+// and a boolean to check if the value has been set.
+func (o *CreateSettingInitialValues) GetNameOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Name, true
+}
+
+// SetName sets field value
+func (o *CreateSettingInitialValues) SetName(v string) {
+	o.Name = v
 }
 
 // GetHint returns the Hint field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -202,30 +228,6 @@ func (o *CreateSettingInitialValues) SetKey(v string) {
 	o.Key = v
 }
 
-// GetName returns the Name field value
-func (o *CreateSettingInitialValues) GetName() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Name
-}
-
-// GetNameOk returns a tuple with the Name field value
-// and a boolean to check if the value has been set.
-func (o *CreateSettingInitialValues) GetNameOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Name, true
-}
-
-// SetName sets field value
-func (o *CreateSettingInitialValues) SetName(v string) {
-	o.Name = v
-}
-
 // GetSettingType returns the SettingType field value
 func (o *CreateSettingInitialValues) GetSettingType() SettingType {
 	if o == nil {
@@ -248,6 +250,39 @@ func (o *CreateSettingInitialValues) GetSettingTypeOk() (*SettingType, bool) {
 // SetSettingType sets field value
 func (o *CreateSettingInitialValues) SetSettingType(v SettingType) {
 	o.SettingType = v
+}
+
+// GetPredefinedVariations returns the PredefinedVariations field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateSettingInitialValues) GetPredefinedVariations() []CreatePredefinedVariationModel {
+	if o == nil {
+		var ret []CreatePredefinedVariationModel
+		return ret
+	}
+	return o.PredefinedVariations
+}
+
+// GetPredefinedVariationsOk returns a tuple with the PredefinedVariations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateSettingInitialValues) GetPredefinedVariationsOk() ([]CreatePredefinedVariationModel, bool) {
+	if o == nil || IsNil(o.PredefinedVariations) {
+		return nil, false
+	}
+	return o.PredefinedVariations, true
+}
+
+// HasPredefinedVariations returns a boolean if a field has been set.
+func (o *CreateSettingInitialValues) HasPredefinedVariations() bool {
+	if o != nil && !IsNil(o.PredefinedVariations) {
+		return true
+	}
+
+	return false
+}
+
+// SetPredefinedVariations gets a reference to the given []CreatePredefinedVariationModel and assigns it to the PredefinedVariations field.
+func (o *CreateSettingInitialValues) SetPredefinedVariations(v []CreatePredefinedVariationModel) {
+	o.PredefinedVariations = v
 }
 
 // GetInitialValues returns the InitialValues field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -335,6 +370,7 @@ func (o CreateSettingInitialValues) MarshalJSON() ([]byte, error) {
 
 func (o CreateSettingInitialValues) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	toSerialize["name"] = o.Name
 	if o.Hint.IsSet() {
 		toSerialize["hint"] = o.Hint.Get()
 	}
@@ -345,14 +381,21 @@ func (o CreateSettingInitialValues) ToMap() (map[string]interface{}, error) {
 		toSerialize["order"] = o.Order.Get()
 	}
 	toSerialize["key"] = o.Key
-	toSerialize["name"] = o.Name
 	toSerialize["settingType"] = o.SettingType
+	if o.PredefinedVariations != nil {
+		toSerialize["predefinedVariations"] = o.PredefinedVariations
+	}
 	if o.InitialValues != nil {
 		toSerialize["initialValues"] = o.InitialValues
 	}
 	if o.SettingIdToInitFrom.IsSet() {
 		toSerialize["settingIdToInitFrom"] = o.SettingIdToInitFrom.Get()
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -361,8 +404,8 @@ func (o *CreateSettingInitialValues) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"key",
 		"name",
+		"key",
 		"settingType",
 	}
 
@@ -382,15 +425,28 @@ func (o *CreateSettingInitialValues) UnmarshalJSON(data []byte) (err error) {
 
 	varCreateSettingInitialValues := _CreateSettingInitialValues{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateSettingInitialValues)
+	err = json.Unmarshal(data, &varCreateSettingInitialValues)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CreateSettingInitialValues(varCreateSettingInitialValues)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "hint")
+		delete(additionalProperties, "tags")
+		delete(additionalProperties, "order")
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "settingType")
+		delete(additionalProperties, "predefinedVariations")
+		delete(additionalProperties, "initialValues")
+		delete(additionalProperties, "settingIdToInitFrom")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

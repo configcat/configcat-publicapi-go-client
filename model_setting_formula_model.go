@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -14,7 +14,6 @@ package configcatpublicapi
 import (
 	"encoding/json"
 	"time"
-	"bytes"
 	"fmt"
 )
 
@@ -27,7 +26,7 @@ type SettingFormulaModel struct {
 	DefaultValue ValueModel `json:"defaultValue"`
 	// The targeting rules of the Feature Flag or Setting.
 	TargetingRules []TargetingRuleModel `json:"targetingRules"`
-	Setting SettingDataModel `json:"setting"`
+	Setting SettingDataV2Model `json:"setting"`
 	// The last updated date and time when the Feature Flag or Setting.
 	UpdatedAt NullableTime `json:"updatedAt"`
 	// The user attribute used for percentage evaluation. If not set, it defaults to the `Identifier` user object attribute.
@@ -46,6 +45,7 @@ type SettingFormulaModel struct {
 	Environment EnvironmentModel `json:"environment"`
 	ReadOnly bool `json:"readOnly"`
 	FeatureFlagLimitations FeatureFlagLimitations `json:"featureFlagLimitations"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SettingFormulaModel SettingFormulaModel
@@ -54,7 +54,7 @@ type _SettingFormulaModel SettingFormulaModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targetingRules []TargetingRuleModel, setting SettingDataModel, updatedAt NullableTime, percentageEvaluationAttribute NullableString, lastUpdaterUserEmail NullableString, lastUpdaterUserFullName NullableString, integrationLinks []IntegrationLinkModel, settingTags []SettingTagModel, settingIdsWherePrerequisite []int32, config ConfigModel, environment EnvironmentModel, readOnly bool, featureFlagLimitations FeatureFlagLimitations) *SettingFormulaModel {
+func NewSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targetingRules []TargetingRuleModel, setting SettingDataV2Model, updatedAt NullableTime, percentageEvaluationAttribute NullableString, lastUpdaterUserEmail NullableString, lastUpdaterUserFullName NullableString, integrationLinks []IntegrationLinkModel, settingTags []SettingTagModel, settingIdsWherePrerequisite []int32, config ConfigModel, environment EnvironmentModel, readOnly bool, featureFlagLimitations FeatureFlagLimitations) *SettingFormulaModel {
 	this := SettingFormulaModel{}
 	this.LastVersionId = lastVersionId
 	this.DefaultValue = defaultValue
@@ -155,9 +155,9 @@ func (o *SettingFormulaModel) SetTargetingRules(v []TargetingRuleModel) {
 }
 
 // GetSetting returns the Setting field value
-func (o *SettingFormulaModel) GetSetting() SettingDataModel {
+func (o *SettingFormulaModel) GetSetting() SettingDataV2Model {
 	if o == nil {
-		var ret SettingDataModel
+		var ret SettingDataV2Model
 		return ret
 	}
 
@@ -166,7 +166,7 @@ func (o *SettingFormulaModel) GetSetting() SettingDataModel {
 
 // GetSettingOk returns a tuple with the Setting field value
 // and a boolean to check if the value has been set.
-func (o *SettingFormulaModel) GetSettingOk() (*SettingDataModel, bool) {
+func (o *SettingFormulaModel) GetSettingOk() (*SettingDataV2Model, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -174,7 +174,7 @@ func (o *SettingFormulaModel) GetSettingOk() (*SettingDataModel, bool) {
 }
 
 // SetSetting sets field value
-func (o *SettingFormulaModel) SetSetting(v SettingDataModel) {
+func (o *SettingFormulaModel) SetSetting(v SettingDataV2Model) {
 	o.Setting = v
 }
 
@@ -475,6 +475,11 @@ func (o SettingFormulaModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["environment"] = o.Environment
 	toSerialize["readOnly"] = o.ReadOnly
 	toSerialize["featureFlagLimitations"] = o.FeatureFlagLimitations
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -516,15 +521,34 @@ func (o *SettingFormulaModel) UnmarshalJSON(data []byte) (err error) {
 
 	varSettingFormulaModel := _SettingFormulaModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSettingFormulaModel)
+	err = json.Unmarshal(data, &varSettingFormulaModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SettingFormulaModel(varSettingFormulaModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "lastVersionId")
+		delete(additionalProperties, "defaultValue")
+		delete(additionalProperties, "targetingRules")
+		delete(additionalProperties, "setting")
+		delete(additionalProperties, "updatedAt")
+		delete(additionalProperties, "percentageEvaluationAttribute")
+		delete(additionalProperties, "lastUpdaterUserEmail")
+		delete(additionalProperties, "lastUpdaterUserFullName")
+		delete(additionalProperties, "integrationLinks")
+		delete(additionalProperties, "settingTags")
+		delete(additionalProperties, "settingIdsWherePrerequisite")
+		delete(additionalProperties, "config")
+		delete(additionalProperties, "environment")
+		delete(additionalProperties, "readOnly")
+		delete(additionalProperties, "featureFlagLimitations")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

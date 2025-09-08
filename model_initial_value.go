@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -13,8 +13,6 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
-	"bytes"
-	"fmt"
 )
 
 // checks if the InitialValue type satisfies the MappedNullable interface at compile time
@@ -24,8 +22,11 @@ var _ MappedNullable = &InitialValue{}
 type InitialValue struct {
 	// The ID of the Environment where the initial value must be set.
 	EnvironmentId *string `json:"environmentId,omitempty"`
-	// The initial value in the given Environment. It must respect the setting type. In some generated clients for strictly typed languages you may use double/float properties to handle integer values.
-	Value SettingValueType `json:"value"`
+	// The initial value in the given Environment. It must respect the setting type. In some generated clients for strictly typed languages, you may use double/float properties to handle integer values. Only one of the Value or the PredefinedVariationIndex properties can be set.
+	Value NullableSettingValueType `json:"value,omitempty"`
+	// The initial Predefined Variation in the given Environment. The zero-based index of the Variation in the Variations list. Only one of the Value or the PredefinedVariationIndex properties can be set.
+	PredefinedVariationIndex NullableInt32 `json:"predefinedVariationIndex,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _InitialValue InitialValue
@@ -34,9 +35,8 @@ type _InitialValue InitialValue
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewInitialValue(value SettingValueType) *InitialValue {
+func NewInitialValue() *InitialValue {
 	this := InitialValue{}
-	this.Value = value
 	return &this
 }
 
@@ -80,28 +80,88 @@ func (o *InitialValue) SetEnvironmentId(v string) {
 	o.EnvironmentId = &v
 }
 
-// GetValue returns the Value field value
+// GetValue returns the Value field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *InitialValue) GetValue() SettingValueType {
-	if o == nil {
+	if o == nil || IsNil(o.Value.Get()) {
 		var ret SettingValueType
 		return ret
 	}
-
-	return o.Value
+	return *o.Value.Get()
 }
 
-// GetValueOk returns a tuple with the Value field value
+// GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *InitialValue) GetValueOk() (*SettingValueType, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Value, true
+	return o.Value.Get(), o.Value.IsSet()
 }
 
-// SetValue sets field value
+// HasValue returns a boolean if a field has been set.
+func (o *InitialValue) HasValue() bool {
+	if o != nil && o.Value.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetValue gets a reference to the given NullableSettingValueType and assigns it to the Value field.
 func (o *InitialValue) SetValue(v SettingValueType) {
-	o.Value = v
+	o.Value.Set(&v)
+}
+// SetValueNil sets the value for Value to be an explicit nil
+func (o *InitialValue) SetValueNil() {
+	o.Value.Set(nil)
+}
+
+// UnsetValue ensures that no value is present for Value, not even an explicit nil
+func (o *InitialValue) UnsetValue() {
+	o.Value.Unset()
+}
+
+// GetPredefinedVariationIndex returns the PredefinedVariationIndex field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *InitialValue) GetPredefinedVariationIndex() int32 {
+	if o == nil || IsNil(o.PredefinedVariationIndex.Get()) {
+		var ret int32
+		return ret
+	}
+	return *o.PredefinedVariationIndex.Get()
+}
+
+// GetPredefinedVariationIndexOk returns a tuple with the PredefinedVariationIndex field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *InitialValue) GetPredefinedVariationIndexOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PredefinedVariationIndex.Get(), o.PredefinedVariationIndex.IsSet()
+}
+
+// HasPredefinedVariationIndex returns a boolean if a field has been set.
+func (o *InitialValue) HasPredefinedVariationIndex() bool {
+	if o != nil && o.PredefinedVariationIndex.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPredefinedVariationIndex gets a reference to the given NullableInt32 and assigns it to the PredefinedVariationIndex field.
+func (o *InitialValue) SetPredefinedVariationIndex(v int32) {
+	o.PredefinedVariationIndex.Set(&v)
+}
+// SetPredefinedVariationIndexNil sets the value for PredefinedVariationIndex to be an explicit nil
+func (o *InitialValue) SetPredefinedVariationIndexNil() {
+	o.PredefinedVariationIndex.Set(nil)
+}
+
+// UnsetPredefinedVariationIndex ensures that no value is present for PredefinedVariationIndex, not even an explicit nil
+func (o *InitialValue) UnsetPredefinedVariationIndex() {
+	o.PredefinedVariationIndex.Unset()
 }
 
 func (o InitialValue) MarshalJSON() ([]byte, error) {
@@ -117,43 +177,39 @@ func (o InitialValue) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.EnvironmentId) {
 		toSerialize["environmentId"] = o.EnvironmentId
 	}
-	toSerialize["value"] = o.Value
+	if o.Value.IsSet() {
+		toSerialize["value"] = o.Value.Get()
+	}
+	if o.PredefinedVariationIndex.IsSet() {
+		toSerialize["predefinedVariationIndex"] = o.PredefinedVariationIndex.Get()
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
 func (o *InitialValue) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"value",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
 	varInitialValue := _InitialValue{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varInitialValue)
+	err = json.Unmarshal(data, &varInitialValue)
 
 	if err != nil {
 		return err
 	}
 
 	*o = InitialValue(varInitialValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "environmentId")
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "predefinedVariationIndex")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

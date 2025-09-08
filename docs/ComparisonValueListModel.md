@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Value** | **string** | The actual comparison value. | 
-**Hint** | Pointer to **NullableString** | An optional hint for the comparison value. | [optional] 
+**Hint** | **NullableString** | An optional hint for the comparison value. | 
 
 ## Methods
 
 ### NewComparisonValueListModel
 
-`func NewComparisonValueListModel(value string, ) *ComparisonValueListModel`
+`func NewComparisonValueListModel(value string, hint NullableString, ) *ComparisonValueListModel`
 
 NewComparisonValueListModel instantiates a new ComparisonValueListModel object
 This constructor will assign default values to properties that have it defined,
@@ -65,11 +65,6 @@ and a boolean to check if the value has been set.
 
 SetHint sets Hint field to given value.
 
-### HasHint
-
-`func (o *ComparisonValueListModel) HasHint() bool`
-
-HasHint returns a boolean if a field has been set.
 
 ### SetHintNil
 

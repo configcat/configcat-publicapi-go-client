@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**StringValue** | Pointer to **NullableString** | The string representation of the comparison value. | [optional] 
-**DoubleValue** | Pointer to **NullableFloat64** | The number representation of the comparison value. | [optional] 
-**ListValue** | Pointer to [**[]ComparisonValueListModel**](ComparisonValueListModel.md) | The list representation of the comparison value. | [optional] 
+**StringValue** | **NullableString** | The string representation of the comparison value. | 
+**DoubleValue** | **NullableFloat64** | The number representation of the comparison value. | 
+**ListValue** | [**[]ComparisonValueListModel**](ComparisonValueListModel.md) | The list representation of the comparison value. | 
 
 ## Methods
 
 ### NewComparisonValueModel
 
-`func NewComparisonValueModel() *ComparisonValueModel`
+`func NewComparisonValueModel(stringValue NullableString, doubleValue NullableFloat64, listValue []ComparisonValueListModel, ) *ComparisonValueModel`
 
 NewComparisonValueModel instantiates a new ComparisonValueModel object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetStringValue sets StringValue field to given value.
 
-### HasStringValue
-
-`func (o *ComparisonValueModel) HasStringValue() bool`
-
-HasStringValue returns a boolean if a field has been set.
 
 ### SetStringValueNil
 
@@ -81,11 +76,6 @@ and a boolean to check if the value has been set.
 
 SetDoubleValue sets DoubleValue field to given value.
 
-### HasDoubleValue
-
-`func (o *ComparisonValueModel) HasDoubleValue() bool`
-
-HasDoubleValue returns a boolean if a field has been set.
 
 ### SetDoubleValueNil
 
@@ -116,11 +106,6 @@ and a boolean to check if the value has been set.
 
 SetListValue sets ListValue field to given value.
 
-### HasListValue
-
-`func (o *ComparisonValueModel) HasListValue() bool`
-
-HasListValue returns a boolean if a field has been set.
 
 ### SetListValueNil
 

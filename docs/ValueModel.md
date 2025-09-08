@@ -8,12 +8,13 @@ Name | Type | Description | Notes
 **StringValue** | **NullableString** | The served value in case of a text Setting. | 
 **IntValue** | **NullableInt32** | The served value in case of a whole number Setting. | 
 **DoubleValue** | **NullableFloat64** | The served value in case of a decimal number Setting. | 
+**PredefinedVariationId** | **NullableString** | The served Variation&#39;s identifier. | 
 
 ## Methods
 
 ### NewValueModel
 
-`func NewValueModel(boolValue NullableBool, stringValue NullableString, intValue NullableInt32, doubleValue NullableFloat64, ) *ValueModel`
+`func NewValueModel(boolValue NullableBool, stringValue NullableString, intValue NullableInt32, doubleValue NullableFloat64, predefinedVariationId NullableString, ) *ValueModel`
 
 NewValueModel instantiates a new ValueModel object
 This constructor will assign default values to properties that have it defined,
@@ -148,6 +149,36 @@ SetDoubleValue sets DoubleValue field to given value.
 `func (o *ValueModel) UnsetDoubleValue()`
 
 UnsetDoubleValue ensures that no value is present for DoubleValue, not even an explicit nil
+### GetPredefinedVariationId
+
+`func (o *ValueModel) GetPredefinedVariationId() string`
+
+GetPredefinedVariationId returns the PredefinedVariationId field if non-nil, zero value otherwise.
+
+### GetPredefinedVariationIdOk
+
+`func (o *ValueModel) GetPredefinedVariationIdOk() (*string, bool)`
+
+GetPredefinedVariationIdOk returns a tuple with the PredefinedVariationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPredefinedVariationId
+
+`func (o *ValueModel) SetPredefinedVariationId(v string)`
+
+SetPredefinedVariationId sets PredefinedVariationId field to given value.
+
+
+### SetPredefinedVariationIdNil
+
+`func (o *ValueModel) SetPredefinedVariationIdNil(b bool)`
+
+ SetPredefinedVariationIdNil sets the value for PredefinedVariationId to be an explicit nil
+
+### UnsetPredefinedVariationId
+`func (o *ValueModel) UnsetPredefinedVariationId()`
+
+UnsetPredefinedVariationId ensures that no value is present for PredefinedVariationId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -49,6 +49,8 @@ docs/CreateEnvironmentModel.md
 docs/CreateIntegrationModel.md
 docs/CreateOrUpdateEnvironmentAccessModel.md
 docs/CreatePermissionGroupRequest.md
+docs/CreatePredefinedVariationModel.md
+docs/CreatePredefinedVariationValueModel.md
 docs/CreateProductRequest.md
 docs/CreateSegmentModel.md
 docs/CreateSettingInitialValues.md
@@ -100,6 +102,8 @@ docs/OrganizationsAPI.md
 docs/PercentageOptionModel.md
 docs/PermissionGroupModel.md
 docs/PermissionGroupsAPI.md
+docs/PredefinedVariationModel.md
+docs/PredefinedVariationValueModel.md
 docs/PreferencesModel.md
 docs/PrerequisiteComparator.md
 docs/PrerequisiteFlagConditionModel.md
@@ -122,6 +126,7 @@ docs/SegmentListModel.md
 docs/SegmentModel.md
 docs/SegmentsAPI.md
 docs/SettingDataModel.md
+docs/SettingDataV2Model.md
 docs/SettingFormulaModel.md
 docs/SettingModel.md
 docs/SettingTagModel.md
@@ -150,6 +155,9 @@ docs/UpdateEvaluationFormulasModel.md
 docs/UpdateMemberPermissionsRequest.md
 docs/UpdatePercentageOptionModel.md
 docs/UpdatePermissionGroupRequest.md
+docs/UpdatePredefinedVariationModel.md
+docs/UpdatePredefinedVariationValueModel.md
+docs/UpdatePredefinedVariationsRequest.md
 docs/UpdatePreferencesRequest.md
 docs/UpdatePrerequisiteFlagConditionModel.md
 docs/UpdateProductRequest.md
@@ -203,6 +211,8 @@ model_create_environment_model.go
 model_create_integration_model.go
 model_create_or_update_environment_access_model.go
 model_create_permission_group_request.go
+model_create_predefined_variation_model.go
+model_create_predefined_variation_value_model.go
 model_create_product_request.go
 model_create_segment_model.go
 model_create_setting_initial_values.go
@@ -242,6 +252,8 @@ model_organization_permission_model.go
 model_organization_product_model.go
 model_percentage_option_model.go
 model_permission_group_model.go
+model_predefined_variation_model.go
+model_predefined_variation_value_model.go
 model_preferences_model.go
 model_prerequisite_comparator.go
 model_prerequisite_flag_condition_model.go
@@ -261,6 +273,7 @@ model_segment_condition_model.go
 model_segment_list_model.go
 model_segment_model.go
 model_setting_data_model.go
+model_setting_data_v2_model.go
 model_setting_formula_model.go
 model_setting_model.go
 model_setting_tag_model.go
@@ -288,6 +301,9 @@ model_update_evaluation_formulas_model.go
 model_update_member_permissions_request.go
 model_update_percentage_option_model.go
 model_update_permission_group_request.go
+model_update_predefined_variation_model.go
+model_update_predefined_variation_value_model.go
+model_update_predefined_variations_request.go
 model_update_preferences_request.go
 model_update_prerequisite_flag_condition_model.go
 model_update_product_request.go
@@ -316,25 +332,4 @@ model_webhook_header_response_model.go
 model_webhook_response_model.go
 model_webhook_signing_keys_model.go
 response.go
-test/api_audit_logs_test.go
-test/api_code_references_test.go
-test/api_configs_test.go
-test/api_environments_test.go
-test/api_feature_flag_setting_values_test.go
-test/api_feature_flag_setting_values_using_sdk_key_test.go
-test/api_feature_flag_setting_values_using_sdk_key_v2_test.go
-test/api_feature_flag_setting_values_v2_test.go
-test/api_feature_flags_settings_test.go
-test/api_integration_links_test.go
-test/api_integrations_test.go
-test/api_me_test.go
-test/api_members_test.go
-test/api_organizations_test.go
-test/api_permission_groups_test.go
-test/api_products_test.go
-test/api_sdk_keys_test.go
-test/api_segments_test.go
-test/api_tags_test.go
-test/api_webhooks_test.go
-test/api_zombie_stale_flags_test.go
 utils.go

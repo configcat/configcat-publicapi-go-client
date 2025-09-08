@@ -14,12 +14,13 @@ Name | Type | Description | Notes
 **ConfigName** | **string** | Name of the Feature Flag&#39;s Config. | 
 **CreatedAt** | **NullableTime** | The creation time of the Feature Flag or Setting. | 
 **Tags** | [**[]TagModel**](TagModel.md) | The tags attached to the Feature Flag or Setting. | 
+**PredefinedVariations** | [**[]PredefinedVariationModel**](PredefinedVariationModel.md) | The Feature Flag or Setting&#39;s Variations. | 
 
 ## Methods
 
 ### NewSettingModel
 
-`func NewSettingModel(settingId int32, key string, name string, hint NullableString, order int32, settingType SettingType, configId string, configName string, createdAt NullableTime, tags []TagModel, ) *SettingModel`
+`func NewSettingModel(settingId int32, key string, name string, hint NullableString, order int32, settingType SettingType, configId string, configName string, createdAt NullableTime, tags []TagModel, predefinedVariations []PredefinedVariationModel, ) *SettingModel`
 
 NewSettingModel instantiates a new SettingModel object
 This constructor will assign default values to properties that have it defined,
@@ -252,6 +253,26 @@ and a boolean to check if the value has been set.
 `func (o *SettingModel) SetTags(v []TagModel)`
 
 SetTags sets Tags field to given value.
+
+
+### GetPredefinedVariations
+
+`func (o *SettingModel) GetPredefinedVariations() []PredefinedVariationModel`
+
+GetPredefinedVariations returns the PredefinedVariations field if non-nil, zero value otherwise.
+
+### GetPredefinedVariationsOk
+
+`func (o *SettingModel) GetPredefinedVariationsOk() (*[]PredefinedVariationModel, bool)`
+
+GetPredefinedVariationsOk returns a tuple with the PredefinedVariations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPredefinedVariations
+
+`func (o *SettingModel) SetPredefinedVariations(v []PredefinedVariationModel)`
+
+SetPredefinedVariations sets PredefinedVariations field to given value.
 
 
 

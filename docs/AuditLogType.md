@@ -55,6 +55,8 @@
 
 * `SETTINGS_REORDERED` (value: `"settingsReordered"`)
 
+* `PREDEFINED_VARIATIONS_CHANGED` (value: `"predefinedVariationsChanged"`)
+
 * `SETTING_VALUE_CHANGED` (value: `"settingValueChanged"`)
 
 * `WEB_HOOK_CREATED` (value: `"webHookCreated"`)
@@ -186,6 +188,22 @@
 * `SYNC_USER_DELETED` (value: `"syncUserDeleted"`)
 
 * `SYNC_GROUP_DELETED` (value: `"syncGroupDeleted"`)
+
+* `PROXY_CONFIGURATION_CREATED` (value: `"proxyConfigurationCreated"`)
+
+* `PROXY_CONFIGURATION_CHANGED` (value: `"proxyConfigurationChanged"`)
+
+* `PROXY_CONFIGURATION_DELETED` (value: `"proxyConfigurationDeleted"`)
+
+* `PROXY_CONFIGURATION_SECRET_REGENERATED` (value: `"proxyConfigurationSecretRegenerated"`)
+
+* `PROXY_NOTIFICATION_SETTINGS_UPDATED` (value: `"proxyNotificationSettingsUpdated"`)
+
+* `PROXY_NOTIFICATION_SETTINGS_DELETED` (value: `"proxyNotificationSettingsDeleted"`)
+
+* `PROXY_NOTIFICATION_SIGNING_KEY_ADDED` (value: `"proxyNotificationSigningKeyAdded"`)
+
+* `PROXY_NOTIFICATION_SIGNING_KEY_DELETED` (value: `"proxyNotificationSigningKeyDeleted"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

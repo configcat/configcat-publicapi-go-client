@@ -7,16 +7,16 @@ info:
   description: "The purpose of this API is to access the ConfigCat platform programmatically.\n\
     You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature\
     \ Flags, Configs, Environments** or **Products** within ConfigCat.\n\n**Base API\
-    \ URL**: https://test-api.configcat.com\n\nIf you prefer the swagger documentation,\
-    \ you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).\n\
-    \nThe API is based on HTTP REST, uses resource-oriented URLs, status codes and\
-    \ supports JSON \nformat. \n\n**Important:** Do not use this API for accessing\
-    \ and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview)\
+    \ URL**: https://api.configcat.com\n\nIf you prefer the swagger documentation,\
+    \ you can find it here: [Swagger UI](https://api.configcat.com/swagger).\n\nThe\
+    \ API is based on HTTP REST, uses resource-oriented URLs, status codes and supports\
+    \ JSON \nformat. \n\n**Important:** Do not use this API for accessing and evaluating\
+    \ feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview)\
     \ or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/)\
     \ instead.\n\n# OpenAPI Specification\n\nThe complete specification is publicly\
-    \ available in the following formats: \n- [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json)\n\
-    - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)\n\nYou\
-    \ can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator)\
+    \ available in the following formats: \n- [OpenAPI v3](https://api.configcat.com/docs/v1/swagger.json)\n\
+    - [Swagger v2](https://api.configcat.com/docs/v1/swagger.v2.json)\n\nYou can use\
+    \ it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator)\
     \ or\n[Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact\
     \ with this API.\n\n# Authentication\nThis API uses the [Basic HTTP Authentication\
     \ Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication). \n\n<!--\
@@ -32,9 +32,9 @@ info:
   title: ConfigCat Public Management API
   version: v1
   x-logo:
-    url: https://test-api.configcat.com/resources/configcat-logo-horiz.svg
+    url: https://api.configcat.com/resources/configcat-logo-horiz.svg
 servers:
-- url: https://test-api.configcat.com
+- url: https://api.configcat.com
 security:
 - Basic: []
 tags:
@@ -5511,6 +5511,54 @@ paths:
       summary: Update Member Permissions
       tags:
       - Members
+  /v1/settings/{settingId}/predefined-variations:
+    put:
+      description: |-
+        This endpoint updates the predefined variations for a Feature Flag or Setting identified by the `settingId` parameter.
+
+        **Important:** You can only update a predefined variation's value if it is not used anywhere in your feature flags.
+
+        **Beta feature:** The feature is currently in closed beta state and cannot be used.
+      operationId: update-predefined-variations
+      parameters:
+      - description: The identifier of the Setting.
+        explode: false
+        in: path
+        name: settingId
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePredefinedVariationsRequest'
+          text/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePredefinedVariationsRequest'
+          application/*+json:
+            schema:
+              $ref: '#/components/schemas/UpdatePredefinedVariationsRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SettingModel'
+          description: When the update was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Update predefined variations (Beta)
+      tags:
+      - Feature Flags & Settings
   /v1/invitations/{invitationId}:
     delete:
       description: This endpoint removes an Invitation identified by the `invitationId`
@@ -5719,6 +5767,7 @@ components:
       - settingChanged
       - settingDeleted
       - settingsReordered
+      - predefinedVariationsChanged
       - settingValueChanged
       - webHookCreated
       - webHookChanged
@@ -5785,6 +5834,14 @@ components:
       - userEnabled
       - syncUserDeleted
       - syncGroupDeleted
+      - proxyConfigurationCreated
+      - proxyConfigurationChanged
+      - proxyConfigurationDeleted
+      - proxyConfigurationSecretRegenerated
+      - proxyNotificationSettingsUpdated
+      - proxyNotificationSettingsDeleted
+      - proxyNotificationSigningKeyAdded
+      - proxyNotificationSigningKeyDeleted
       type: string
     CodeReferenceModel:
       example:
@@ -6012,6 +6069,7 @@ components:
           nullable: true
           type: string
       required:
+      - hint
       - value
       type: object
     ComparisonValueModel:
@@ -6032,6 +6090,10 @@ components:
             $ref: '#/components/schemas/ComparisonValueListModel'
           nullable: true
           type: array
+      required:
+      - doubleValue
+      - listValue
+      - stringValue
       type: object
     ConditionModel:
       example:
@@ -6115,12 +6177,14 @@ components:
           - percentage: 1
             value:
               stringValue: stringValue
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
           - percentage: 1
             value:
               stringValue: stringValue
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
@@ -6136,12 +6200,14 @@ components:
           - percentage: 1
             value:
               stringValue: stringValue
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
           - percentage: 1
             value:
               stringValue: stringValue
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
@@ -6156,6 +6222,7 @@ components:
         percentageEvaluationAttribute: percentageEvaluationAttribute
         defaultValue:
           stringValue: stringValue
+          predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           intValue: 0
           boolValue: true
           doubleValue: 6.027456183070403
@@ -6190,8 +6257,25 @@ components:
           isWatching: true
           settingType: boolean
           key: key
-          settingId: 0
-          order: 6
+          predefinedVariations:
+          - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            hint: hint
+            name: name
+            value:
+              stringValue: stringValue
+              intValue: 1
+              boolValue: true
+              doubleValue: 5.962133916683182
+          - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            hint: hint
+            name: name
+            value:
+              stringValue: stringValue
+              intValue: 1
+              boolValue: true
+              doubleValue: 5.962133916683182
+          settingId: 5
+          order: 5
         updatedAt: 2000-01-23T04:56:07.000+00:00
         lastUpdaterUserFullName: lastUpdaterUserFullName
       properties:
@@ -6206,7 +6290,7 @@ components:
             $ref: '#/components/schemas/TargetingRuleModel'
           type: array
         setting:
-          $ref: '#/components/schemas/SettingDataModel'
+          $ref: '#/components/schemas/SettingDataV2Model'
         updatedAt:
           description: The last updated date and time when the Feature Flag or Setting.
           format: date-time
@@ -6289,12 +6373,14 @@ components:
             - percentage: 1
               value:
                 stringValue: stringValue
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
             - percentage: 1
               value:
                 stringValue: stringValue
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
@@ -6310,12 +6396,14 @@ components:
             - percentage: 1
               value:
                 stringValue: stringValue
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
             - percentage: 1
               value:
                 stringValue: stringValue
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
@@ -6330,6 +6418,7 @@ components:
           percentageEvaluationAttribute: percentageEvaluationAttribute
           defaultValue:
             stringValue: stringValue
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             intValue: 0
             boolValue: true
             doubleValue: 6.027456183070403
@@ -6364,8 +6453,25 @@ components:
             isWatching: true
             settingType: boolean
             key: key
-            settingId: 0
-            order: 6
+            predefinedVariations:
+            - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              hint: hint
+              name: name
+              value:
+                stringValue: stringValue
+                intValue: 1
+                boolValue: true
+                doubleValue: 5.962133916683182
+            - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              hint: hint
+              name: name
+              value:
+                stringValue: stringValue
+                intValue: 1
+                boolValue: true
+                doubleValue: 5.962133916683182
+            settingId: 5
+            order: 5
           updatedAt: 2000-01-23T04:56:07.000+00:00
           lastUpdaterUserFullName: lastUpdaterUserFullName
         - lastVersionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -6374,12 +6480,14 @@ components:
             - percentage: 1
               value:
                 stringValue: stringValue
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
             - percentage: 1
               value:
                 stringValue: stringValue
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
@@ -6395,12 +6503,14 @@ components:
             - percentage: 1
               value:
                 stringValue: stringValue
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
             - percentage: 1
               value:
                 stringValue: stringValue
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
@@ -6415,6 +6525,7 @@ components:
           percentageEvaluationAttribute: percentageEvaluationAttribute
           defaultValue:
             stringValue: stringValue
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             intValue: 0
             boolValue: true
             doubleValue: 6.027456183070403
@@ -6449,8 +6560,25 @@ components:
             isWatching: true
             settingType: boolean
             key: key
-            settingId: 0
-            order: 6
+            predefinedVariations:
+            - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              hint: hint
+              name: name
+              value:
+                stringValue: stringValue
+                intValue: 1
+                boolValue: true
+                doubleValue: 5.962133916683182
+            - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              hint: hint
+              name: name
+              value:
+                stringValue: stringValue
+                intValue: 1
+                boolValue: true
+                doubleValue: 5.962133916683182
+            settingId: 5
+            order: 5
           updatedAt: 2000-01-23T04:56:07.000+00:00
           lastUpdaterUserFullName: lastUpdaterUserFullName
         readOnly: true
@@ -7017,6 +7145,63 @@ components:
       required:
       - name
       type: object
+    CreatePredefinedVariationModel:
+      description: A Feature Flag or Predefined Variation.
+      example:
+        hint: hint
+        name: name
+        value:
+          stringValue: stringValue
+          intValue: 1
+          boolValue: true
+          doubleValue: 5.962133916683182
+      properties:
+        value:
+          $ref: '#/components/schemas/CreatePredefinedVariationValueModel'
+        name:
+          description: "The name of the Feature Flag or Predefined Variation, shown\
+            \ on the Dashboard UI. If not set, the Value will be shown."
+          maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+        hint:
+          description: "The name of the Feature Flag or Predefined Variation, shown\
+            \ on the Dashboard UI. If not set, the Value will be shown."
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+      required:
+      - value
+      type: object
+    CreatePredefinedVariationValueModel:
+      description: Represents the value of a Feature Flag or Predefined Variation.
+      example:
+        stringValue: stringValue
+        intValue: 1
+        boolValue: true
+        doubleValue: 5.962133916683182
+      properties:
+        boolValue:
+          description: The served value in case of a boolean Feature Flag.
+          nullable: true
+          type: boolean
+        stringValue:
+          description: The served value in case of a text Setting.
+          nullable: true
+          type: string
+        intValue:
+          description: The served value in case of a whole number Setting.
+          format: int32
+          nullable: true
+          type: integer
+        doubleValue:
+          description: The served value in case of a decimal number Setting.
+          format: double
+          nullable: true
+          type: number
+      type: object
     CreateProductRequest:
       example:
         name: name
@@ -7086,18 +7271,40 @@ components:
         initialValues:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           value: ""
+          predefinedVariationIndex: 5
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           value: ""
-        settingIdToInitFrom: 1
+          predefinedVariationIndex: 5
+        settingIdToInitFrom: 2
         hint: hint
         name: name
         settingType: boolean
         key: key
+        predefinedVariations:
+        - hint: hint
+          name: name
+          value:
+            stringValue: stringValue
+            intValue: 1
+            boolValue: true
+            doubleValue: 5.962133916683182
+        - hint: hint
+          name: name
+          value:
+            stringValue: stringValue
+            intValue: 1
+            boolValue: true
+            doubleValue: 5.962133916683182
         tags:
         - 0
         - 0
         order: 6
       properties:
+        name:
+          description: The name of the Feature Flag or Setting.
+          maxLength: 255
+          minLength: 1
+          type: string
         hint:
           description: "A short description for the setting, shown on the Dashboard\
             \ UI."
@@ -7124,13 +7331,14 @@ components:
           maxLength: 255
           minLength: 1
           type: string
-        name:
-          description: The name of the Feature Flag or Setting.
-          maxLength: 255
-          minLength: 1
-          type: string
         settingType:
           $ref: '#/components/schemas/SettingType'
+        predefinedVariations:
+          description: The Feature Flag or Setting's Variations.
+          items:
+            $ref: '#/components/schemas/CreatePredefinedVariationModel'
+          nullable: true
+          type: array
         initialValues:
           description: "Optional, initial value of the Feature Flag or Setting in\
             \ the given Environments. Only one of the SettingIdToInitFrom or the InitialValues\
@@ -7460,6 +7668,7 @@ components:
       example:
         environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         value: ""
+        predefinedVariationIndex: 5
       properties:
         environmentId:
           description: The ID of the Environment where the initial value must be set.
@@ -7468,11 +7677,18 @@ components:
         value:
           allOf:
           - $ref: '#/components/schemas/SettingValueType'
-          description: The initial value in the given Environment. It must respect
-            the setting type. In some generated clients for strictly typed languages
-            you may use double/float properties to handle integer values.
-      required:
-      - value
+          description: "The initial value in the given Environment. It must respect\
+            \ the setting type. In some generated clients for strictly typed languages,\
+            \ you may use double/float properties to handle integer values. Only one\
+            \ of the Value or the PredefinedVariationIndex properties can be set."
+          nullable: true
+        predefinedVariationIndex:
+          description: The initial Predefined Variation in the given Environment.
+            The zero-based index of the Variation in the Variations list. Only one
+            of the Value or the PredefinedVariationIndex properties can be set.
+          format: int32
+          nullable: true
+          type: integer
       type: object
     IntegrationLinkDetail:
       example:
@@ -8298,6 +8514,7 @@ components:
         percentage: 1
         value:
           stringValue: stringValue
+          predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           intValue: 0
           boolValue: true
           doubleValue: 6.027456183070403
@@ -8475,6 +8692,76 @@ components:
       - newEnvironmentAccessType
       - permissionGroupId
       - product
+      type: object
+    PredefinedVariationModel:
+      description: A Feature Flag or Predefined Variation.
+      example:
+        predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        hint: hint
+        name: name
+        value:
+          stringValue: stringValue
+          intValue: 1
+          boolValue: true
+          doubleValue: 5.962133916683182
+      properties:
+        value:
+          $ref: '#/components/schemas/PredefinedVariationValueModel'
+        name:
+          description: "The name of the Feature Flag or Predefined Variation, shown\
+            \ on the Dashboard UI. If not set, the Value will be shown."
+          maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+        hint:
+          description: "The name of the Feature Flag or Predefined Variation, shown\
+            \ on the Dashboard UI. If not set, the Value will be shown."
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+        predefinedVariationId:
+          description: The Feature Flag or Predefined Variation's identifier.
+          format: uuid
+          type: string
+      required:
+      - hint
+      - name
+      - predefinedVariationId
+      - value
+      type: object
+    PredefinedVariationValueModel:
+      description: Represents the value of a Feature Flag or Predefined Variation.
+      example:
+        stringValue: stringValue
+        intValue: 1
+        boolValue: true
+        doubleValue: 5.962133916683182
+      properties:
+        boolValue:
+          description: The served value in case of a boolean Feature Flag.
+          nullable: true
+          type: boolean
+        stringValue:
+          description: The served value in case of a text Setting.
+          nullable: true
+          type: string
+        intValue:
+          description: The served value in case of a whole number Setting.
+          format: int32
+          nullable: true
+          type: integer
+        doubleValue:
+          description: The served value in case of a decimal number Setting.
+          format: double
+          nullable: true
+          type: number
+      required:
+      - boolValue
+      - doubleValue
+      - intValue
+      - stringValue
       type: object
     PreferencesModel:
       example:
@@ -8750,6 +9037,11 @@ components:
         - 0
         order: 6
       properties:
+        name:
+          description: The name of the Feature Flag or Setting.
+          maxLength: 255
+          minLength: 1
+          type: string
         hint:
           description: "A short description for the setting, shown on the Dashboard\
             \ UI."
@@ -8771,12 +9063,8 @@ components:
           format: int32
           nullable: true
           type: integer
-        name:
-          description: The name of the Feature Flag or Setting.
-          maxLength: 255
-          minLength: 1
-          nullable: true
-          type: string
+      required:
+      - name
       type: object
     RolloutPercentageItemModel:
       example:
@@ -9126,6 +9414,91 @@ components:
       - settingId
       - settingType
       type: object
+    SettingDataV2Model:
+      description: Metadata of a Feature Flag or Setting.
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        creatorEmail: creatorEmail
+        hint: hint
+        name: name
+        creatorFullName: creatorFullName
+        isWatching: true
+        settingType: boolean
+        key: key
+        predefinedVariations:
+        - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hint: hint
+          name: name
+          value:
+            stringValue: stringValue
+            intValue: 1
+            boolValue: true
+            doubleValue: 5.962133916683182
+        - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hint: hint
+          name: name
+          value:
+            stringValue: stringValue
+            intValue: 1
+            boolValue: true
+            doubleValue: 5.962133916683182
+        settingId: 5
+        order: 5
+      properties:
+        settingId:
+          description: Identifier of the Feature Flag or Setting.
+          format: int32
+          type: integer
+        key:
+          description: Key of the Feature Flag or Setting.
+          type: string
+        name:
+          description: Name of the Feature Flag or Setting.
+          type: string
+        hint:
+          description: Description of the Feature Flag or Setting.
+          nullable: true
+          type: string
+        settingType:
+          $ref: '#/components/schemas/SettingType'
+        order:
+          description: The order of the Feature Flag or Setting represented on the
+            ConfigCat Dashboard.
+          format: int32
+          type: integer
+        createdAt:
+          description: The creation time of the Feature Flag or Setting.
+          format: date-time
+          nullable: true
+          type: string
+        creatorEmail:
+          description: The user's email address who created the Feature Flag or Setting.
+          nullable: true
+          type: string
+        creatorFullName:
+          description: The user's name who created the Feature Flag or Setting.
+          nullable: true
+          type: string
+        predefinedVariations:
+          description: A collection of Variations for a Feature Flag or Setting.
+          items:
+            $ref: '#/components/schemas/PredefinedVariationModel'
+          type: array
+        isWatching:
+          type: boolean
+      required:
+      - createdAt
+      - creatorEmail
+      - creatorFullName
+      - hint
+      - isWatching
+      - key
+      - name
+      - order
+      - predefinedVariations
+      - settingId
+      - settingType
+      type: object
     SettingFormulaModel:
       example:
         targetingRules:
@@ -9133,12 +9506,14 @@ components:
           - percentage: 1
             value:
               stringValue: stringValue
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
           - percentage: 1
             value:
               stringValue: stringValue
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
@@ -9154,12 +9529,14 @@ components:
           - percentage: 1
             value:
               stringValue: stringValue
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
           - percentage: 1
             value:
               stringValue: stringValue
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
@@ -9174,6 +9551,7 @@ components:
         percentageEvaluationAttribute: percentageEvaluationAttribute
         defaultValue:
           stringValue: stringValue
+          predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           intValue: 0
           boolValue: true
           doubleValue: 6.027456183070403
@@ -9188,8 +9566,25 @@ components:
           isWatching: true
           settingType: boolean
           key: key
-          settingId: 0
-          order: 6
+          predefinedVariations:
+          - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            hint: hint
+            name: name
+            value:
+              stringValue: stringValue
+              intValue: 1
+              boolValue: true
+              doubleValue: 5.962133916683182
+          - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            hint: hint
+            name: name
+            value:
+              stringValue: stringValue
+              intValue: 1
+              boolValue: true
+              doubleValue: 5.962133916683182
+          settingId: 5
+          order: 5
         lastVersionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         environment:
           product:
@@ -9216,8 +9611,8 @@ components:
           maxStringFlagValueLength: 3
           maxTargetingRuleCount: 5
         settingIdsWherePrerequisite:
-        - 5
-        - 5
+        - 2
+        - 2
         integrationLinks:
         - integrationLinkType: trello
           description: description
@@ -9266,7 +9661,7 @@ components:
             $ref: '#/components/schemas/TargetingRuleModel'
           type: array
         setting:
-          $ref: '#/components/schemas/SettingDataModel'
+          $ref: '#/components/schemas/SettingDataV2Model'
         updatedAt:
           description: The last updated date and time when the Feature Flag or Setting.
           format: date-time
@@ -9338,6 +9733,23 @@ components:
         name: name
         settingType: boolean
         key: key
+        predefinedVariations:
+        - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hint: hint
+          name: name
+          value:
+            stringValue: stringValue
+            intValue: 1
+            boolValue: true
+            doubleValue: 5.962133916683182
+        - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hint: hint
+          name: name
+          value:
+            stringValue: stringValue
+            intValue: 1
+            boolValue: true
+            doubleValue: 5.962133916683182
         settingId: 0
         order: 6
         tags:
@@ -9404,6 +9816,11 @@ components:
           items:
             $ref: '#/components/schemas/TagModel'
           type: array
+        predefinedVariations:
+          description: The Feature Flag or Setting's Variations.
+          items:
+            $ref: '#/components/schemas/PredefinedVariationModel'
+          type: array
       required:
       - configId
       - configName
@@ -9412,6 +9829,7 @@ components:
       - key
       - name
       - order
+      - predefinedVariations
       - settingId
       - settingType
       - tags
@@ -9952,12 +10370,14 @@ components:
         - percentage: 1
           value:
             stringValue: stringValue
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             intValue: 0
             boolValue: true
             doubleValue: 6.027456183070403
         - percentage: 1
           value:
             stringValue: stringValue
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             intValue: 0
             boolValue: true
             doubleValue: 6.027456183070403
@@ -10113,12 +10533,14 @@ components:
           - percentage: 1
             value:
               stringValue: stringValue
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
           - percentage: 1
             value:
               stringValue: stringValue
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
@@ -10134,12 +10556,14 @@ components:
           - percentage: 1
             value:
               stringValue: stringValue
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
           - percentage: 1
             value:
               stringValue: stringValue
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
@@ -10154,6 +10578,7 @@ components:
         percentageEvaluationAttribute: percentageEvaluationAttribute
         defaultValue:
           stringValue: stringValue
+          predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           intValue: 0
           boolValue: true
           doubleValue: 6.027456183070403
@@ -10182,12 +10607,14 @@ components:
           - percentage: 1
             value:
               stringValue: stringValue
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
           - percentage: 1
             value:
               stringValue: stringValue
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
@@ -10203,12 +10630,14 @@ components:
           - percentage: 1
             value:
               stringValue: stringValue
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
           - percentage: 1
             value:
               stringValue: stringValue
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               intValue: 0
               boolValue: true
               doubleValue: 6.027456183070403
@@ -10223,6 +10652,7 @@ components:
         percentageEvaluationAttribute: percentageEvaluationAttribute
         defaultValue:
           stringValue: stringValue
+          predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           intValue: 0
           boolValue: true
           doubleValue: 6.027456183070403
@@ -10257,12 +10687,14 @@ components:
             - percentage: 1
               value:
                 stringValue: stringValue
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
             - percentage: 1
               value:
                 stringValue: stringValue
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
@@ -10278,12 +10710,14 @@ components:
             - percentage: 1
               value:
                 stringValue: stringValue
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
             - percentage: 1
               value:
                 stringValue: stringValue
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
@@ -10298,6 +10732,7 @@ components:
           percentageEvaluationAttribute: percentageEvaluationAttribute
           defaultValue:
             stringValue: stringValue
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             intValue: 0
             boolValue: true
             doubleValue: 6.027456183070403
@@ -10307,12 +10742,14 @@ components:
             - percentage: 1
               value:
                 stringValue: stringValue
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
             - percentage: 1
               value:
                 stringValue: stringValue
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
@@ -10328,12 +10765,14 @@ components:
             - percentage: 1
               value:
                 stringValue: stringValue
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
             - percentage: 1
               value:
                 stringValue: stringValue
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 intValue: 0
                 boolValue: true
                 doubleValue: 6.027456183070403
@@ -10348,6 +10787,7 @@ components:
           percentageEvaluationAttribute: percentageEvaluationAttribute
           defaultValue:
             stringValue: stringValue
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             intValue: 0
             boolValue: true
             doubleValue: 6.027456183070403
@@ -10394,6 +10834,7 @@ components:
         percentage: 1
         value:
           stringValue: stringValue
+          predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           intValue: 0
           boolValue: true
           doubleValue: 6.027456183070403
@@ -10546,6 +10987,98 @@ components:
             $ref: '#/components/schemas/CreateOrUpdateEnvironmentAccessModel'
           nullable: true
           type: array
+      type: object
+    UpdatePredefinedVariationModel:
+      description: A Feature Flag or Predefined Variation.
+      example:
+        predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        hint: hint
+        name: name
+        value:
+          stringValue: stringValue
+          intValue: 0
+          boolValue: true
+          doubleValue: 6.027456183070403
+      properties:
+        value:
+          $ref: '#/components/schemas/UpdatePredefinedVariationValueModel'
+        name:
+          description: "The name of the Feature Flag or Predefined Variation, shown\
+            \ on the Dashboard UI. If not set, the Value will be shown."
+          maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+        hint:
+          description: "The name of the Feature Flag or Predefined Variation, shown\
+            \ on the Dashboard UI. If not set, the Value will be shown."
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+        predefinedVariationId:
+          description: The Feature Flag or Predefined Variation's identifier to update.
+            Omit the value if you want to add a new predefined variation.
+          format: uuid
+          nullable: true
+          type: string
+      required:
+      - value
+      type: object
+    UpdatePredefinedVariationValueModel:
+      description: Represents the value of a Feature Flag or Predefined Variation.
+      example:
+        stringValue: stringValue
+        intValue: 0
+        boolValue: true
+        doubleValue: 6.027456183070403
+      properties:
+        boolValue:
+          description: The served value in case of a boolean Feature Flag.
+          nullable: true
+          type: boolean
+        stringValue:
+          description: The served value in case of a text Setting.
+          nullable: true
+          type: string
+        intValue:
+          description: The served value in case of a whole number Setting.
+          format: int32
+          nullable: true
+          type: integer
+        doubleValue:
+          description: The served value in case of a decimal number Setting.
+          format: double
+          nullable: true
+          type: number
+      type: object
+    UpdatePredefinedVariationsRequest:
+      example:
+        predefinedVariations:
+        - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hint: hint
+          name: name
+          value:
+            stringValue: stringValue
+            intValue: 0
+            boolValue: true
+            doubleValue: 6.027456183070403
+        - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hint: hint
+          name: name
+          value:
+            stringValue: stringValue
+            intValue: 0
+            boolValue: true
+            doubleValue: 6.027456183070403
+      properties:
+        predefinedVariations:
+          description: A collection of Feature Flag or Predefined Variations.
+          items:
+            $ref: '#/components/schemas/UpdatePredefinedVariationModel'
+          type: array
+      required:
+      - predefinedVariations
       type: object
     UpdatePreferencesRequest:
       example:
@@ -10908,12 +11441,14 @@ components:
         - percentage: 1
           value:
             stringValue: stringValue
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             intValue: 0
             boolValue: true
             doubleValue: 6.027456183070403
         - percentage: 1
           value:
             stringValue: stringValue
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             intValue: 0
             boolValue: true
             doubleValue: 6.027456183070403
@@ -10971,6 +11506,7 @@ components:
       description: Represents the value of a Feature Flag or Setting.
       example:
         stringValue: stringValue
+        predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         intValue: 0
         boolValue: true
         doubleValue: 6.027456183070403
@@ -10993,6 +11529,11 @@ components:
           format: double
           nullable: true
           type: number
+        predefinedVariationId:
+          description: The served Variation's identifier.
+          format: uuid
+          nullable: true
+          type: string
       type: object
     UserComparator:
       description: The comparison operator which defines the relation between the
@@ -11085,6 +11626,7 @@ components:
       description: Represents the value of a Feature Flag or Setting.
       example:
         stringValue: stringValue
+        predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         intValue: 0
         boolValue: true
         doubleValue: 6.027456183070403
@@ -11107,10 +11649,16 @@ components:
           format: double
           nullable: true
           type: number
+        predefinedVariationId:
+          description: The served Variation's identifier.
+          format: uuid
+          nullable: true
+          type: string
       required:
       - boolValue
       - doubleValue
       - intValue
+      - predefinedVariationId
       - stringValue
       type: object
     WebHookHttpMethod:
@@ -11305,7 +11853,7 @@ components:
       description: |-
         To authenticate with the API you have to fill the `Authorization` HTTP request header with your Public API credentials.
 
-        You can create your credentials on the <a target="_blank" href="https://test-app.configcat.com/my-account/public-api-credentials">Public API credentials management page</a>.
+        You can create your credentials on the <a target="_blank" href="https://app.configcat.com/my-account/public-api-credentials">Public API credentials management page</a>.
       scheme: basic
       type: http
 x-tagGroups:
