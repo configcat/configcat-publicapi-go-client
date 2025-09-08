@@ -13,8 +13,8 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
-	"gopkg.in/validator.v2"
 	"fmt"
+	"gopkg.in/validator.v2"
 )
 
 // SettingValueType - struct for SettingValueType
@@ -147,6 +147,24 @@ func (obj *SettingValueType) GetActualInstance() (interface{}) {
 
 	if obj.String != nil {
 		return obj.String
+	}
+
+	// all schemas are nil
+	return nil
+}
+
+// Get the actual instance value
+func (obj SettingValueType) GetActualInstanceValue() (interface{}) {
+	if obj.Bool != nil {
+		return *obj.Bool
+	}
+
+	if obj.Float64 != nil {
+		return *obj.Float64
+	}
+
+	if obj.String != nil {
+		return *obj.String
 	}
 
 	// all schemas are nil

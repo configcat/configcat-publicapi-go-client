@@ -178,7 +178,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/OrganizationModel'
+                  $ref: "#/components/schemas/OrganizationModel"
                 type: array
           description: ""
         "429":
@@ -198,7 +198,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ProductModel'
+                  $ref: "#/components/schemas/ProductModel"
                 type: array
           description: ""
         "429":
@@ -228,7 +228,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/TagModel'
+                  $ref: "#/components/schemas/TagModel"
                 type: array
           description: ""
         "429":
@@ -256,20 +256,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateTagModel'
+              $ref: "#/components/schemas/CreateTagModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/CreateTagModel'
+              $ref: "#/components/schemas/CreateTagModel"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/CreateTagModel'
+              $ref: "#/components/schemas/CreateTagModel"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TagModel'
+                $ref: "#/components/schemas/TagModel"
           description: When the creation was successful.
         "400":
           description: Bad request.
@@ -303,7 +303,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/WebhookResponseModel'
+                  $ref: "#/components/schemas/WebhookResponseModel"
                 type: array
           description: ""
         "429":
@@ -334,7 +334,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/ConfigModel'
+                  $ref: "#/components/schemas/ConfigModel"
                 type: array
           description: ""
         "400":
@@ -366,20 +366,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateConfigRequest'
+              $ref: "#/components/schemas/CreateConfigRequest"
           text/json:
             schema:
-              $ref: '#/components/schemas/CreateConfigRequest'
+              $ref: "#/components/schemas/CreateConfigRequest"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/CreateConfigRequest'
+              $ref: "#/components/schemas/CreateConfigRequest"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConfigModel'
+                $ref: "#/components/schemas/ConfigModel"
           description: When the creation was successful.
         "400":
           description: Bad request.
@@ -413,7 +413,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/EnvironmentModel'
+                  $ref: "#/components/schemas/EnvironmentModel"
                 type: array
           description: ""
         "400":
@@ -445,20 +445,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateEnvironmentModel'
+              $ref: "#/components/schemas/CreateEnvironmentModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/CreateEnvironmentModel'
+              $ref: "#/components/schemas/CreateEnvironmentModel"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/CreateEnvironmentModel'
+              $ref: "#/components/schemas/CreateEnvironmentModel"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EnvironmentModel'
+                $ref: "#/components/schemas/EnvironmentModel"
           description: When the creation was successful.
         "400":
           description: Bad request.
@@ -492,7 +492,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/PermissionGroupModel'
+                  $ref: "#/components/schemas/PermissionGroupModel"
                 type: array
           description: ""
         "400":
@@ -524,20 +524,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreatePermissionGroupRequest'
+              $ref: "#/components/schemas/CreatePermissionGroupRequest"
           text/json:
             schema:
-              $ref: '#/components/schemas/CreatePermissionGroupRequest'
+              $ref: "#/components/schemas/CreatePermissionGroupRequest"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/CreatePermissionGroupRequest'
+              $ref: "#/components/schemas/CreatePermissionGroupRequest"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PermissionGroupModel'
+                $ref: "#/components/schemas/PermissionGroupModel"
           description: When the creation was successful.
         "400":
           description: Bad request.
@@ -570,7 +570,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IntegrationsModel'
+                $ref: "#/components/schemas/IntegrationsModel"
           description: ""
         "400":
           description: Bad request.
@@ -616,20 +616,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateIntegrationModel'
+              $ref: "#/components/schemas/CreateIntegrationModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/CreateIntegrationModel'
+              $ref: "#/components/schemas/CreateIntegrationModel"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/CreateIntegrationModel'
+              $ref: "#/components/schemas/CreateIntegrationModel"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IntegrationModel'
+                $ref: "#/components/schemas/IntegrationModel"
           description: When the creation was successful.
         "400":
           description: Bad request.
@@ -663,7 +663,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/SegmentListModel'
+                  $ref: "#/components/schemas/SegmentListModel"
                 type: array
           description: ""
         "400":
@@ -695,20 +695,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateSegmentModel'
+              $ref: "#/components/schemas/CreateSegmentModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/CreateSegmentModel'
+              $ref: "#/components/schemas/CreateSegmentModel"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/CreateSegmentModel'
+              $ref: "#/components/schemas/CreateSegmentModel"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SegmentModel'
+                $ref: "#/components/schemas/SegmentModel"
           description: When the creation was successful.
         "400":
           description: Bad request.
@@ -741,7 +741,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/SettingModel'
+                  $ref: "#/components/schemas/SettingModel"
                 type: array
           description: ""
         "400":
@@ -775,20 +775,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateSettingInitialValues'
+              $ref: "#/components/schemas/CreateSettingInitialValues"
           text/json:
             schema:
-              $ref: '#/components/schemas/CreateSettingInitialValues'
+              $ref: "#/components/schemas/CreateSettingInitialValues"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/CreateSettingInitialValues'
+              $ref: "#/components/schemas/CreateSettingInitialValues"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingModel'
+                $ref: "#/components/schemas/SettingModel"
           description: When the creation was successful.
         "400":
           description: Bad request.
@@ -843,7 +843,7 @@ paths:
         required: false
         schema:
           allOf:
-          - $ref: '#/components/schemas/AuditLogType'
+          - $ref: "#/components/schemas/AuditLogType"
           nullable: true
         style: form
       - description: Filter Audit logs by starting UTC date.
@@ -870,7 +870,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AuditLogItemModel'
+                  $ref: "#/components/schemas/AuditLogItemModel"
                 type: array
           description: ""
         "400":
@@ -904,7 +904,7 @@ paths:
         name: scope
         required: false
         schema:
-          $ref: '#/components/schemas/StaleFlagReminderScope'
+          $ref: "#/components/schemas/StaleFlagReminderScope"
         style: form
       - description: The inactivity in days after a feature flag should be considered
           stale.
@@ -925,7 +925,7 @@ paths:
         name: staleFlagStaleInEnvironmentsType
         required: false
         schema:
-          $ref: '#/components/schemas/StaleFlagStaleInEnvironmentsType'
+          $ref: "#/components/schemas/StaleFlagStaleInEnvironmentsType"
         style: form
       - description: Ignore environment identifiers from the report.
         explode: true
@@ -954,7 +954,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/StaleFlagProductModel'
+                $ref: "#/components/schemas/StaleFlagProductModel"
           description: ""
         "400":
           description: Bad request.
@@ -985,7 +985,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/CodeReferenceModel'
+                  $ref: "#/components/schemas/CodeReferenceModel"
                 type: array
           description: ""
         "400":
@@ -1045,7 +1045,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConfigModel'
+                $ref: "#/components/schemas/ConfigModel"
           description: "When everything is ok, the config data returned."
         "400":
           description: Bad request.
@@ -1074,20 +1074,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateConfigRequest'
+              $ref: "#/components/schemas/UpdateConfigRequest"
           text/json:
             schema:
-              $ref: '#/components/schemas/UpdateConfigRequest'
+              $ref: "#/components/schemas/UpdateConfigRequest"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/UpdateConfigRequest'
+              $ref: "#/components/schemas/UpdateConfigRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConfigModel'
+                $ref: "#/components/schemas/ConfigModel"
           description: ""
         "400":
           description: Bad request.
@@ -1120,7 +1120,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/DeletedSettingModel'
+                  $ref: "#/components/schemas/DeletedSettingModel"
                 type: array
           description: ""
         "400":
@@ -1191,7 +1191,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EnvironmentModel'
+                $ref: "#/components/schemas/EnvironmentModel"
           description: "When everything is ok, the environment data returned."
         "400":
           description: Bad request.
@@ -1221,20 +1221,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateEnvironmentModel'
+              $ref: "#/components/schemas/UpdateEnvironmentModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/UpdateEnvironmentModel'
+              $ref: "#/components/schemas/UpdateEnvironmentModel"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/UpdateEnvironmentModel'
+              $ref: "#/components/schemas/UpdateEnvironmentModel"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EnvironmentModel'
+                $ref: "#/components/schemas/EnvironmentModel"
           description: ""
         "400":
           description: Bad request.
@@ -1293,7 +1293,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PermissionGroupModel'
+                $ref: "#/components/schemas/PermissionGroupModel"
           description: "When everything is ok, the permission group data returned."
         "400":
           description: Bad request.
@@ -1323,20 +1323,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdatePermissionGroupRequest'
+              $ref: "#/components/schemas/UpdatePermissionGroupRequest"
           text/json:
             schema:
-              $ref: '#/components/schemas/UpdatePermissionGroupRequest'
+              $ref: "#/components/schemas/UpdatePermissionGroupRequest"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/UpdatePermissionGroupRequest'
+              $ref: "#/components/schemas/UpdatePermissionGroupRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PermissionGroupModel'
+                $ref: "#/components/schemas/PermissionGroupModel"
           description: ""
         "400":
           description: Bad request.
@@ -1396,7 +1396,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IntegrationModel'
+                $ref: "#/components/schemas/IntegrationModel"
           description: "When everything is ok, the integration data returned."
         "400":
           description: Bad request.
@@ -1441,20 +1441,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ModifyIntegrationRequest'
+              $ref: "#/components/schemas/ModifyIntegrationRequest"
           text/json:
             schema:
-              $ref: '#/components/schemas/ModifyIntegrationRequest'
+              $ref: "#/components/schemas/ModifyIntegrationRequest"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/ModifyIntegrationRequest'
+              $ref: "#/components/schemas/ModifyIntegrationRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IntegrationModel'
+                $ref: "#/components/schemas/IntegrationModel"
           description: ""
         "400":
           description: Bad request.
@@ -1477,7 +1477,7 @@ paths:
         name: integrationLinkType
         required: true
         schema:
-          $ref: '#/components/schemas/IntegrationLinkType'
+          $ref: "#/components/schemas/IntegrationLinkType"
         style: simple
       - description: The key of the integration link.
         explode: false
@@ -1492,7 +1492,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IntegrationLinkDetailsModel'
+                $ref: "#/components/schemas/IntegrationLinkDetailsModel"
           description: "When everything is ok, the details for the integration link\
             \ returned."
         "400":
@@ -1534,7 +1534,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SdkKeysModel'
+                $ref: "#/components/schemas/SdkKeysModel"
           description: ""
         "400":
           description: Bad request.
@@ -1555,7 +1555,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/MeModel'
+                $ref: "#/components/schemas/MeModel"
           description: ""
         "429":
           description: Too many requests. In case of the request rate exceeds the
@@ -1616,7 +1616,7 @@ paths:
         required: false
         schema:
           allOf:
-          - $ref: '#/components/schemas/AuditLogType'
+          - $ref: "#/components/schemas/AuditLogType"
           nullable: true
         style: form
       - description: Filter Audit logs by starting UTC date.
@@ -1643,7 +1643,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/AuditLogItemModel'
+                  $ref: "#/components/schemas/AuditLogItemModel"
                 type: array
           description: ""
         "400":
@@ -1684,7 +1684,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/UserModel'
+                  $ref: "#/components/schemas/UserModel"
                 type: array
           description: ""
         "400":
@@ -1723,7 +1723,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OrganizationMembersModel'
+                $ref: "#/components/schemas/OrganizationMembersModel"
           description: ""
         "400":
           description: Bad request.
@@ -1757,7 +1757,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/OrganizationInvitationModel'
+                  $ref: "#/components/schemas/OrganizationInvitationModel"
                 type: array
           description: ""
         "400":
@@ -1792,7 +1792,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/InvitationModel'
+                  $ref: "#/components/schemas/InvitationModel"
                 type: array
           description: ""
         "400":
@@ -1851,7 +1851,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProductModel'
+                $ref: "#/components/schemas/ProductModel"
           description: "When everything is ok, the product data is returned."
         "400":
           description: Bad request.
@@ -1880,20 +1880,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateProductRequest'
+              $ref: "#/components/schemas/UpdateProductRequest"
           text/json:
             schema:
-              $ref: '#/components/schemas/UpdateProductRequest'
+              $ref: "#/components/schemas/UpdateProductRequest"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/UpdateProductRequest'
+              $ref: "#/components/schemas/UpdateProductRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProductModel'
+                $ref: "#/components/schemas/ProductModel"
           description: ""
         "400":
           description: Bad request.
@@ -1926,7 +1926,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/MemberModel'
+                  $ref: "#/components/schemas/MemberModel"
                 type: array
           description: ""
         "400":
@@ -1959,7 +1959,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PreferencesModel'
+                $ref: "#/components/schemas/PreferencesModel"
           description: "When everything is ok, the product preferences data is returned."
         "400":
           description: Bad request.
@@ -1989,20 +1989,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdatePreferencesRequest'
+              $ref: "#/components/schemas/UpdatePreferencesRequest"
           text/json:
             schema:
-              $ref: '#/components/schemas/UpdatePreferencesRequest'
+              $ref: "#/components/schemas/UpdatePreferencesRequest"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/UpdatePreferencesRequest'
+              $ref: "#/components/schemas/UpdatePreferencesRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PreferencesModel'
+                $ref: "#/components/schemas/PreferencesModel"
           description: When the update was successful.
         "400":
           description: Bad request.
@@ -2061,7 +2061,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SegmentModel'
+                $ref: "#/components/schemas/SegmentModel"
           description: "When everything is ok, the config data returned."
         "400":
           description: Bad request.
@@ -2090,20 +2090,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateSegmentModel'
+              $ref: "#/components/schemas/UpdateSegmentModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/UpdateSegmentModel'
+              $ref: "#/components/schemas/UpdateSegmentModel"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/UpdateSegmentModel'
+              $ref: "#/components/schemas/UpdateSegmentModel"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SegmentModel'
+                $ref: "#/components/schemas/SegmentModel"
           description: ""
         "400":
           description: Bad request.
@@ -2162,7 +2162,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingModel'
+                $ref: "#/components/schemas/SettingModel"
           description: "When everything is ok, the setting data returned."
         "400":
           description: Bad request.
@@ -2216,17 +2216,17 @@ paths:
           application/json:
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
           text/json:
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
           application/*+json:
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
         required: true
       responses:
@@ -2234,7 +2234,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingModel'
+                $ref: "#/components/schemas/SettingModel"
           description: When the update was successful.
         "400":
           description: Bad request.
@@ -2267,20 +2267,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ReplaceSettingModel'
+              $ref: "#/components/schemas/ReplaceSettingModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/ReplaceSettingModel'
+              $ref: "#/components/schemas/ReplaceSettingModel"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/ReplaceSettingModel'
+              $ref: "#/components/schemas/ReplaceSettingModel"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingModel'
+                $ref: "#/components/schemas/SettingModel"
           description: When the replace was successful.
         "400":
           description: Bad request.
@@ -2313,7 +2313,7 @@ paths:
             application/json:
               schema:
                 items:
-                  $ref: '#/components/schemas/SettingModel'
+                  $ref: "#/components/schemas/SettingModel"
                 type: array
           description: "When everything is ok, the settings data returned."
         "400":
@@ -2364,7 +2364,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel'
+                $ref: "#/components/schemas/SettingValueModel"
           description: ""
         "400":
           description: Bad request.
@@ -2494,7 +2494,7 @@ paths:
                   from: /rolloutRules/0
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
           text/json:
             examples:
@@ -2563,7 +2563,7 @@ paths:
                   from: /rolloutRules/0
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
           application/*+json:
             examples:
@@ -2632,7 +2632,7 @@ paths:
                   from: /rolloutRules/0
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
         required: true
       responses:
@@ -2640,7 +2640,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel'
+                $ref: "#/components/schemas/SettingValueModel"
           description: ""
         "204":
           description: When no change applied on the resource.
@@ -2717,7 +2717,7 @@ paths:
                   - percentage: 70
                     value: false
             schema:
-              $ref: '#/components/schemas/UpdateSettingValueModel'
+              $ref: "#/components/schemas/UpdateSettingValueModel"
           text/json:
             examples:
               simple:
@@ -2735,7 +2735,7 @@ paths:
                   - percentage: 70
                     value: false
             schema:
-              $ref: '#/components/schemas/UpdateSettingValueModel'
+              $ref: "#/components/schemas/UpdateSettingValueModel"
           application/*+json:
             examples:
               simple:
@@ -2753,14 +2753,14 @@ paths:
                   - percentage: 70
                     value: false
             schema:
-              $ref: '#/components/schemas/UpdateSettingValueModel'
+              $ref: "#/components/schemas/UpdateSettingValueModel"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel'
+                $ref: "#/components/schemas/SettingValueModel"
           description: ""
         "400":
           description: Bad request.
@@ -2810,7 +2810,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel'
+                $ref: "#/components/schemas/SettingValueModel"
           description: "When everything is ok, the setting value data returned."
         "400":
           description: Bad request.
@@ -2945,7 +2945,7 @@ paths:
                   from: /rolloutRules/0
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
           text/json:
             examples:
@@ -3014,7 +3014,7 @@ paths:
                   from: /rolloutRules/0
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
           application/*+json:
             examples:
@@ -3083,7 +3083,7 @@ paths:
                   from: /rolloutRules/0
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
         required: true
       responses:
@@ -3091,7 +3091,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel'
+                $ref: "#/components/schemas/SettingValueModel"
           description: When the patch was successful.
         "204":
           description: When no change applied on the resource.
@@ -3172,7 +3172,7 @@ paths:
                   - percentage: 70
                     value: false
             schema:
-              $ref: '#/components/schemas/UpdateSettingValueModel'
+              $ref: "#/components/schemas/UpdateSettingValueModel"
           text/json:
             examples:
               simple:
@@ -3190,7 +3190,7 @@ paths:
                   - percentage: 70
                     value: false
             schema:
-              $ref: '#/components/schemas/UpdateSettingValueModel'
+              $ref: "#/components/schemas/UpdateSettingValueModel"
           application/*+json:
             examples:
               simple:
@@ -3208,14 +3208,14 @@ paths:
                   - percentage: 70
                     value: false
             schema:
-              $ref: '#/components/schemas/UpdateSettingValueModel'
+              $ref: "#/components/schemas/UpdateSettingValueModel"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingValueModel'
+                $ref: "#/components/schemas/SettingValueModel"
           description: ""
         "400":
           description: Bad request.
@@ -3266,7 +3266,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingFormulaModel'
+                $ref: "#/components/schemas/SettingFormulaModel"
           description: ""
         "400":
           description: Bad request.
@@ -3463,7 +3463,7 @@ paths:
                   from: /targetingRules/0/conditions/0
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
           text/json:
             examples:
@@ -3544,7 +3544,7 @@ paths:
                   from: /targetingRules/0/conditions/0
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
           application/*+json:
             examples:
@@ -3625,7 +3625,7 @@ paths:
                   from: /targetingRules/0/conditions/0
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
         required: true
       responses:
@@ -3633,7 +3633,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingFormulaModel'
+                $ref: "#/components/schemas/SettingFormulaModel"
           description: ""
         "204":
           description: When no change applied on the resource.
@@ -3759,7 +3759,7 @@ paths:
                     value:
                       boolValue: false
             schema:
-              $ref: '#/components/schemas/UpdateEvaluationFormulaModel'
+              $ref: "#/components/schemas/UpdateEvaluationFormulaModel"
           text/json:
             examples:
               simple:
@@ -3788,7 +3788,7 @@ paths:
                     value:
                       boolValue: false
             schema:
-              $ref: '#/components/schemas/UpdateEvaluationFormulaModel'
+              $ref: "#/components/schemas/UpdateEvaluationFormulaModel"
           application/*+json:
             examples:
               simple:
@@ -3817,14 +3817,14 @@ paths:
                     value:
                       boolValue: false
             schema:
-              $ref: '#/components/schemas/UpdateEvaluationFormulaModel'
+              $ref: "#/components/schemas/UpdateEvaluationFormulaModel"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingFormulaModel'
+                $ref: "#/components/schemas/SettingFormulaModel"
           description: ""
         "400":
           description: Bad request.
@@ -3877,7 +3877,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingFormulaModel'
+                $ref: "#/components/schemas/SettingFormulaModel"
           description: "When everything is ok, the setting value data returned."
         "400":
           description: Bad request.
@@ -4076,7 +4076,7 @@ paths:
                   from: /targetingRules/0/conditions/0
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
           text/json:
             examples:
@@ -4157,7 +4157,7 @@ paths:
                   from: /targetingRules/0/conditions/0
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
           application/*+json:
             examples:
@@ -4238,7 +4238,7 @@ paths:
                   from: /targetingRules/0/conditions/0
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
         required: true
       responses:
@@ -4246,7 +4246,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingFormulaModel'
+                $ref: "#/components/schemas/SettingFormulaModel"
           description: When the patch was successful.
         "204":
           description: When no change applied on the resource.
@@ -4374,7 +4374,7 @@ paths:
                     value:
                       boolValue: false
             schema:
-              $ref: '#/components/schemas/UpdateEvaluationFormulaModel'
+              $ref: "#/components/schemas/UpdateEvaluationFormulaModel"
           text/json:
             examples:
               simple:
@@ -4403,7 +4403,7 @@ paths:
                     value:
                       boolValue: false
             schema:
-              $ref: '#/components/schemas/UpdateEvaluationFormulaModel'
+              $ref: "#/components/schemas/UpdateEvaluationFormulaModel"
           application/*+json:
             examples:
               simple:
@@ -4432,14 +4432,14 @@ paths:
                     value:
                       boolValue: false
             schema:
-              $ref: '#/components/schemas/UpdateEvaluationFormulaModel'
+              $ref: "#/components/schemas/UpdateEvaluationFormulaModel"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingFormulaModel'
+                $ref: "#/components/schemas/SettingFormulaModel"
           description: ""
         "400":
           description: Bad request.
@@ -4490,7 +4490,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConfigSettingValuesModel'
+                $ref: "#/components/schemas/ConfigSettingValuesModel"
           description: "When everything is ok, the setting values returned."
         "400":
           description: Bad request.
@@ -4560,20 +4560,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateSettingValuesWithIdModel'
+              $ref: "#/components/schemas/UpdateSettingValuesWithIdModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/UpdateSettingValuesWithIdModel'
+              $ref: "#/components/schemas/UpdateSettingValuesWithIdModel"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/UpdateSettingValuesWithIdModel'
+              $ref: "#/components/schemas/UpdateSettingValuesWithIdModel"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConfigSettingValuesModel'
+                $ref: "#/components/schemas/ConfigSettingValuesModel"
           description: "When everything is ok, the updated setting values returned."
         "400":
           description: Bad request.
@@ -4626,7 +4626,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConfigSettingFormulasModel'
+                $ref: "#/components/schemas/ConfigSettingFormulasModel"
           description: "When everything is ok, the setting values returned."
         "400":
           description: Bad request.
@@ -4698,20 +4698,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateEvaluationFormulasModel'
+              $ref: "#/components/schemas/UpdateEvaluationFormulasModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/UpdateEvaluationFormulasModel'
+              $ref: "#/components/schemas/UpdateEvaluationFormulasModel"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/UpdateEvaluationFormulasModel'
+              $ref: "#/components/schemas/UpdateEvaluationFormulasModel"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ConfigSettingFormulasModel'
+                $ref: "#/components/schemas/ConfigSettingFormulasModel"
           description: "When everything is ok, the updated setting values returned."
         "400":
           description: Bad request.
@@ -4771,7 +4771,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TagModel'
+                $ref: "#/components/schemas/TagModel"
           description: "When everything is ok, the tag data returned."
         "400":
           description: Bad request.
@@ -4800,20 +4800,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateTagModel'
+              $ref: "#/components/schemas/UpdateTagModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/UpdateTagModel'
+              $ref: "#/components/schemas/UpdateTagModel"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/UpdateTagModel'
+              $ref: "#/components/schemas/UpdateTagModel"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TagModel'
+                $ref: "#/components/schemas/TagModel"
           description: ""
         "400":
           description: Bad request.
@@ -4871,7 +4871,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhookResponseModel'
+                $ref: "#/components/schemas/WebhookResponseModel"
           description: "When everything is ok, the webhook data is returned."
         "400":
           description: Bad request.
@@ -4919,17 +4919,17 @@ paths:
           application/json:
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
           text/json:
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
           application/*+json:
             schema:
               items:
-                $ref: '#/components/schemas/JsonPatchOperation'
+                $ref: "#/components/schemas/JsonPatchOperation"
               type: array
         required: true
       responses:
@@ -4937,7 +4937,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhookResponseModel'
+                $ref: "#/components/schemas/WebhookResponseModel"
           description: When the update was successful.
         "400":
           description: Bad request.
@@ -4970,20 +4970,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/WebHookRequestModel'
+              $ref: "#/components/schemas/WebHookRequestModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/WebHookRequestModel'
+              $ref: "#/components/schemas/WebHookRequestModel"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/WebHookRequestModel'
+              $ref: "#/components/schemas/WebHookRequestModel"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhookResponseModel'
+                $ref: "#/components/schemas/WebhookResponseModel"
           description: When the replace was successful.
         "400":
           description: Bad request.
@@ -5018,7 +5018,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhookSigningKeysModel'
+                $ref: "#/components/schemas/WebhookSigningKeysModel"
           description: "When everything is ok, the webhook signing keys are returned."
         "400":
           description: Bad request.
@@ -5059,7 +5059,7 @@ paths:
         name: integrationLinkType
         required: true
         schema:
-          $ref: '#/components/schemas/IntegrationLinkType'
+          $ref: "#/components/schemas/IntegrationLinkType"
         style: simple
       - description: The key of the integration link.
         explode: false
@@ -5074,7 +5074,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DeleteIntegrationLinkModel'
+                $ref: "#/components/schemas/DeleteIntegrationLinkModel"
           description: When everything is ok.
         "400":
           description: Bad request.
@@ -5114,7 +5114,7 @@ paths:
         name: integrationLinkType
         required: true
         schema:
-          $ref: '#/components/schemas/IntegrationLinkType'
+          $ref: "#/components/schemas/IntegrationLinkType"
         style: simple
       - description: The key of the integration link.
         explode: false
@@ -5128,19 +5128,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddOrUpdateIntegrationLinkModel'
+              $ref: "#/components/schemas/AddOrUpdateIntegrationLinkModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/AddOrUpdateIntegrationLinkModel'
+              $ref: "#/components/schemas/AddOrUpdateIntegrationLinkModel"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/AddOrUpdateIntegrationLinkModel'
+              $ref: "#/components/schemas/AddOrUpdateIntegrationLinkModel"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IntegrationLinkModel'
+                $ref: "#/components/schemas/IntegrationLinkModel"
           description: "When everything is ok, the integration link data returned."
         "400":
           description: Bad request.
@@ -5186,19 +5186,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddOrUpdateJiraIntegrationLinkModel'
+              $ref: "#/components/schemas/AddOrUpdateJiraIntegrationLinkModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/AddOrUpdateJiraIntegrationLinkModel'
+              $ref: "#/components/schemas/AddOrUpdateJiraIntegrationLinkModel"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/AddOrUpdateJiraIntegrationLinkModel'
+              $ref: "#/components/schemas/AddOrUpdateJiraIntegrationLinkModel"
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/IntegrationLinkModel'
+                $ref: "#/components/schemas/IntegrationLinkModel"
           description: "When everything is ok, the integration link data returned."
         "400":
           description: Bad request.
@@ -5216,13 +5216,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ConnectRequest'
+              $ref: "#/components/schemas/ConnectRequest"
           text/json:
             schema:
-              $ref: '#/components/schemas/ConnectRequest'
+              $ref: "#/components/schemas/ConnectRequest"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/ConnectRequest'
+              $ref: "#/components/schemas/ConnectRequest"
       responses:
         "200":
           description: OK
@@ -5251,20 +5251,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateProductRequest'
+              $ref: "#/components/schemas/CreateProductRequest"
           text/json:
             schema:
-              $ref: '#/components/schemas/CreateProductRequest'
+              $ref: "#/components/schemas/CreateProductRequest"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/CreateProductRequest'
+              $ref: "#/components/schemas/CreateProductRequest"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProductModel'
+                $ref: "#/components/schemas/ProductModel"
           description: When the creation was successful.
         "400":
           description: Bad request.
@@ -5305,20 +5305,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/WebHookRequestModel'
+              $ref: "#/components/schemas/WebHookRequestModel"
           text/json:
             schema:
-              $ref: '#/components/schemas/WebHookRequestModel'
+              $ref: "#/components/schemas/WebHookRequestModel"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/WebHookRequestModel'
+              $ref: "#/components/schemas/WebHookRequestModel"
         required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/WebhookResponseModel'
+                $ref: "#/components/schemas/WebhookResponseModel"
           description: When the creation was successful.
         "400":
           description: Bad request.
@@ -5337,13 +5337,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DeleteRepositoryReportsRequest'
+              $ref: "#/components/schemas/DeleteRepositoryReportsRequest"
           text/json:
             schema:
-              $ref: '#/components/schemas/DeleteRepositoryReportsRequest'
+              $ref: "#/components/schemas/DeleteRepositoryReportsRequest"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/DeleteRepositoryReportsRequest'
+              $ref: "#/components/schemas/DeleteRepositoryReportsRequest"
         required: true
       responses:
         "200":
@@ -5377,13 +5377,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InviteMembersRequest'
+              $ref: "#/components/schemas/InviteMembersRequest"
           text/json:
             schema:
-              $ref: '#/components/schemas/InviteMembersRequest'
+              $ref: "#/components/schemas/InviteMembersRequest"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/InviteMembersRequest'
+              $ref: "#/components/schemas/InviteMembersRequest"
         required: true
       responses:
         "200":
@@ -5405,13 +5405,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CodeReferenceRequest'
+              $ref: "#/components/schemas/CodeReferenceRequest"
           text/json:
             schema:
-              $ref: '#/components/schemas/CodeReferenceRequest'
+              $ref: "#/components/schemas/CodeReferenceRequest"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/CodeReferenceRequest'
+              $ref: "#/components/schemas/CodeReferenceRequest"
         required: true
       responses:
         "200":
@@ -5490,13 +5490,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateMemberPermissionsRequest'
+              $ref: "#/components/schemas/UpdateMemberPermissionsRequest"
           text/json:
             schema:
-              $ref: '#/components/schemas/UpdateMemberPermissionsRequest'
+              $ref: "#/components/schemas/UpdateMemberPermissionsRequest"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/UpdateMemberPermissionsRequest'
+              $ref: "#/components/schemas/UpdateMemberPermissionsRequest"
         required: true
       responses:
         "200":
@@ -5534,20 +5534,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdatePredefinedVariationsRequest'
+              $ref: "#/components/schemas/UpdatePredefinedVariationsRequest"
           text/json:
             schema:
-              $ref: '#/components/schemas/UpdatePredefinedVariationsRequest'
+              $ref: "#/components/schemas/UpdatePredefinedVariationsRequest"
           application/*+json:
             schema:
-              $ref: '#/components/schemas/UpdatePredefinedVariationsRequest'
+              $ref: "#/components/schemas/UpdatePredefinedVariationsRequest"
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SettingModel'
+                $ref: "#/components/schemas/SettingModel"
           description: When the update was successful.
         "400":
           description: Bad request.
@@ -5697,7 +5697,7 @@ components:
           format: date-time
           type: string
         auditLogTypeEnum:
-          $ref: '#/components/schemas/AuditLogType'
+          $ref: "#/components/schemas/AuditLogType"
         changeSetId:
           format: uuid
           nullable: true
@@ -5892,7 +5892,7 @@ components:
         references:
           description: The actual references to the given Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/ReferenceLinesModel'
+            $ref: "#/components/schemas/ReferenceLinesModel"
           nullable: true
           type: array
         commitUrl:
@@ -6050,7 +6050,7 @@ components:
         flagReferences:
           description: The actual code reference collection.
           items:
-            $ref: '#/components/schemas/FlagReference'
+            $ref: "#/components/schemas/FlagReference"
           type: array
       required:
       - branch
@@ -6087,7 +6087,7 @@ components:
         listValue:
           description: The list representation of the comparison value.
           items:
-            $ref: '#/components/schemas/ComparisonValueListModel'
+            $ref: "#/components/schemas/ComparisonValueListModel"
           nullable: true
           type: array
       required:
@@ -6103,15 +6103,15 @@ components:
       properties:
         userCondition:
           allOf:
-          - $ref: '#/components/schemas/UserConditionModel'
+          - $ref: "#/components/schemas/UserConditionModel"
           nullable: true
         segmentCondition:
           allOf:
-          - $ref: '#/components/schemas/SegmentConditionModel'
+          - $ref: "#/components/schemas/SegmentConditionModel"
           nullable: true
         prerequisiteFlagCondition:
           allOf:
-          - $ref: '#/components/schemas/PrerequisiteFlagConditionModel'
+          - $ref: "#/components/schemas/PrerequisiteFlagConditionModel"
           nullable: true
       required:
       - prerequisiteFlagCondition
@@ -6138,7 +6138,7 @@ components:
         order: 0
       properties:
         product:
-          $ref: '#/components/schemas/ProductModel'
+          $ref: "#/components/schemas/ProductModel"
         configId:
           description: Identifier of the Config.
           format: uuid
@@ -6159,7 +6159,7 @@ components:
           nullable: true
           type: string
         evaluationVersion:
-          $ref: '#/components/schemas/EvaluationVersion'
+          $ref: "#/components/schemas/EvaluationVersion"
       required:
       - configId
       - description
@@ -6283,14 +6283,14 @@ components:
           format: uuid
           type: string
         defaultValue:
-          $ref: '#/components/schemas/ValueModel'
+          $ref: "#/components/schemas/ValueModel"
         targetingRules:
           description: The targeting rules of the Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/TargetingRuleModel'
+            $ref: "#/components/schemas/TargetingRuleModel"
           type: array
         setting:
-          $ref: '#/components/schemas/SettingDataV2Model'
+          $ref: "#/components/schemas/SettingDataV2Model"
         updatedAt:
           description: The last updated date and time when the Feature Flag or Setting.
           format: date-time
@@ -6313,12 +6313,12 @@ components:
         integrationLinks:
           description: The integration links attached to the Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/IntegrationLinkModel'
+            $ref: "#/components/schemas/IntegrationLinkModel"
           type: array
         settingTags:
           description: The tags attached to the Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/SettingTagModel'
+            $ref: "#/components/schemas/SettingTagModel"
           type: array
         settingIdsWherePrerequisite:
           description: List of Feature Flag and Setting IDs where the actual Feature
@@ -6600,18 +6600,18 @@ components:
           order: 0
       properties:
         config:
-          $ref: '#/components/schemas/ConfigModel'
+          $ref: "#/components/schemas/ConfigModel"
         environment:
-          $ref: '#/components/schemas/EnvironmentModel'
+          $ref: "#/components/schemas/EnvironmentModel"
         readOnly:
           type: boolean
         settingFormulas:
           description: Evaluation descriptors of each updated Feature Flag and Setting.
           items:
-            $ref: '#/components/schemas/ConfigSettingFormulaModel'
+            $ref: "#/components/schemas/ConfigSettingFormulaModel"
           type: array
         featureFlagLimitations:
-          $ref: '#/components/schemas/FeatureFlagLimitations'
+          $ref: "#/components/schemas/FeatureFlagLimitations"
       required:
       - config
       - environment
@@ -6674,7 +6674,7 @@ components:
         lastUpdaterUserFullName: lastUpdaterUserFullName
       properties:
         setting:
-          $ref: '#/components/schemas/SettingDataModel'
+          $ref: "#/components/schemas/SettingDataModel"
         updatedAt:
           description: The last updated date and time when the Feature Flag or Setting.
           format: date-time
@@ -6692,26 +6692,26 @@ components:
         integrationLinks:
           description: The integration links attached to the Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/IntegrationLinkModel'
+            $ref: "#/components/schemas/IntegrationLinkModel"
           type: array
         settingTags:
           description: The tags attached to the Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/SettingTagModel'
+            $ref: "#/components/schemas/SettingTagModel"
           type: array
         rolloutRules:
           description: The targeting rule collection.
           items:
-            $ref: '#/components/schemas/RolloutRuleModel'
+            $ref: "#/components/schemas/RolloutRuleModel"
           type: array
         rolloutPercentageItems:
           description: The percentage rule collection.
           items:
-            $ref: '#/components/schemas/RolloutPercentageItemModel'
+            $ref: "#/components/schemas/RolloutPercentageItemModel"
           type: array
         value:
           allOf:
-          - $ref: '#/components/schemas/SettingValueType'
+          - $ref: "#/components/schemas/SettingValueType"
           description: The value to serve. It must respect the setting type. In some
             generated clients for strictly typed languages you may use double/float
             properties to handle integer values.
@@ -6874,17 +6874,17 @@ components:
           order: 0
       properties:
         config:
-          $ref: '#/components/schemas/ConfigModel'
+          $ref: "#/components/schemas/ConfigModel"
         environment:
-          $ref: '#/components/schemas/EnvironmentModel'
+          $ref: "#/components/schemas/EnvironmentModel"
         readOnly:
           type: boolean
         settingValues:
           items:
-            $ref: '#/components/schemas/ConfigSettingValueModel'
+            $ref: "#/components/schemas/ConfigSettingValueModel"
           type: array
         featureFlagLimitations:
-          $ref: '#/components/schemas/FeatureFlagLimitations'
+          $ref: "#/components/schemas/FeatureFlagLimitations"
       required:
       - config
       - environment
@@ -6935,7 +6935,7 @@ components:
           nullable: true
           type: integer
         evaluationVersion:
-          $ref: '#/components/schemas/EvaluationVersion'
+          $ref: "#/components/schemas/EvaluationVersion"
       required:
       - name
       type: object
@@ -6987,7 +6987,7 @@ components:
           key: parameters
       properties:
         integrationType:
-          $ref: '#/components/schemas/IntegrationType'
+          $ref: "#/components/schemas/IntegrationType"
         name:
           description: Name of the Integration.
           minLength: 1
@@ -7029,7 +7029,7 @@ components:
           format: uuid
           type: string
         environmentAccessType:
-          $ref: '#/components/schemas/EnvironmentAccessType'
+          $ref: "#/components/schemas/EnvironmentAccessType"
       type: object
     CreatePermissionGroupRequest:
       example:
@@ -7129,13 +7129,13 @@ components:
           description: Group members has access to product statistics.
           type: boolean
         accessType:
-          $ref: '#/components/schemas/AccessType'
+          $ref: "#/components/schemas/AccessType"
         newEnvironmentAccessType:
-          $ref: '#/components/schemas/EnvironmentAccessType'
+          $ref: "#/components/schemas/EnvironmentAccessType"
         environmentAccesses:
           description: List of environment specific permissions.
           items:
-            $ref: '#/components/schemas/CreateOrUpdateEnvironmentAccessModel'
+            $ref: "#/components/schemas/CreateOrUpdateEnvironmentAccessModel"
           nullable: true
           type: array
         canDisable2FA:
@@ -7157,7 +7157,7 @@ components:
           doubleValue: 5.962133916683182
       properties:
         value:
-          $ref: '#/components/schemas/CreatePredefinedVariationValueModel'
+          $ref: "#/components/schemas/CreatePredefinedVariationValueModel"
         name:
           description: "The name of the Feature Flag or Predefined Variation, shown\
             \ on the Dashboard UI. If not set, the Value will be shown."
@@ -7255,7 +7255,7 @@ components:
           minLength: 1
           type: string
         comparator:
-          $ref: '#/components/schemas/RolloutRuleComparator'
+          $ref: "#/components/schemas/RolloutRuleComparator"
         comparisonValue:
           description: The value to compare with the given user attribute's value.
           minLength: 1
@@ -7332,11 +7332,11 @@ components:
           minLength: 1
           type: string
         settingType:
-          $ref: '#/components/schemas/SettingType'
+          $ref: "#/components/schemas/SettingType"
         predefinedVariations:
           description: The Feature Flag or Setting's Variations.
           items:
-            $ref: '#/components/schemas/CreatePredefinedVariationModel'
+            $ref: "#/components/schemas/CreatePredefinedVariationModel"
           nullable: true
           type: array
         initialValues:
@@ -7344,7 +7344,7 @@ components:
             \ the given Environments. Only one of the SettingIdToInitFrom or the InitialValues\
             \ properties can be set."
           items:
-            $ref: '#/components/schemas/InitialValue'
+            $ref: "#/components/schemas/InitialValue"
           nullable: true
           type: array
         settingIdToInitFrom:
@@ -7443,7 +7443,7 @@ components:
           readOnly: true
           type: string
         settingType:
-          $ref: '#/components/schemas/SettingType'
+          $ref: "#/components/schemas/SettingType"
       required:
       - hint
       - key
@@ -7485,7 +7485,7 @@ components:
             when the Feature Flags or Settings in the given Environment are saved.
           type: boolean
         environmentAccessType:
-          $ref: '#/components/schemas/EnvironmentAccessType'
+          $ref: "#/components/schemas/EnvironmentAccessType"
       required:
       - color
       - description
@@ -7522,7 +7522,7 @@ components:
         reasonRequired: true
       properties:
         product:
-          $ref: '#/components/schemas/ProductModel'
+          $ref: "#/components/schemas/ProductModel"
         environmentId:
           description: Identifier of the Environment.
           format: uuid
@@ -7658,7 +7658,7 @@ components:
         references:
           description: The actual references to the given Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/ReferenceLinesRequest'
+            $ref: "#/components/schemas/ReferenceLinesRequest"
           type: array
       required:
       - references
@@ -7676,7 +7676,7 @@ components:
           type: string
         value:
           allOf:
-          - $ref: '#/components/schemas/SettingValueType'
+          - $ref: "#/components/schemas/SettingValueType"
           description: "The initial value in the given Environment. It must respect\
             \ the setting type. In some generated clients for strictly typed languages,\
             \ you may use double/float properties to handle integer values. Only one\
@@ -7748,13 +7748,13 @@ components:
         status: status
       properties:
         product:
-          $ref: '#/components/schemas/ProductModel'
+          $ref: "#/components/schemas/ProductModel"
         config:
-          $ref: '#/components/schemas/ConfigModel'
+          $ref: "#/components/schemas/ConfigModel"
         environment:
-          $ref: '#/components/schemas/EnvironmentModel'
+          $ref: "#/components/schemas/EnvironmentModel"
         setting:
-          $ref: '#/components/schemas/SettingDataModel'
+          $ref: "#/components/schemas/SettingDataModel"
         readOnly:
           type: boolean
         status:
@@ -7882,7 +7882,7 @@ components:
       properties:
         details:
           items:
-            $ref: '#/components/schemas/IntegrationLinkDetail'
+            $ref: "#/components/schemas/IntegrationLinkDetail"
           nullable: true
           readOnly: true
           type: array
@@ -7907,7 +7907,7 @@ components:
           nullable: true
           type: string
         integrationLinkType:
-          $ref: '#/components/schemas/IntegrationLinkType'
+          $ref: "#/components/schemas/IntegrationLinkType"
         url:
           nullable: true
           type: string
@@ -7948,7 +7948,7 @@ components:
           key: parameters
       properties:
         product:
-          $ref: '#/components/schemas/ProductModel'
+          $ref: "#/components/schemas/ProductModel"
         integrationId:
           description: Identifier of the Integration.
           format: uuid
@@ -7957,7 +7957,7 @@ components:
           description: Name of the Integration.
           type: string
         integrationType:
-          $ref: '#/components/schemas/IntegrationType'
+          $ref: "#/components/schemas/IntegrationType"
         parameters:
           additionalProperties:
             type: string
@@ -8043,7 +8043,7 @@ components:
         integrations:
           description: The Integrations of the Product.
           items:
-            $ref: '#/components/schemas/IntegrationModel'
+            $ref: "#/components/schemas/IntegrationModel"
           nullable: true
           type: array
       required:
@@ -8113,7 +8113,7 @@ components:
         value: ""
       properties:
         op:
-          $ref: '#/components/schemas/OperationType'
+          $ref: "#/components/schemas/OperationType"
         path:
           description: The source path.
           minLength: 1
@@ -8355,7 +8355,7 @@ components:
         permissions:
           description: The permissions of the Member.
           items:
-            $ref: '#/components/schemas/OrganizationPermissionModel'
+            $ref: "#/components/schemas/OrganizationPermissionModel"
           type: array
       required:
       - email
@@ -8423,17 +8423,17 @@ components:
         admins:
           description: List of Organization Admins.
           items:
-            $ref: '#/components/schemas/OrganizationAdminModel'
+            $ref: "#/components/schemas/OrganizationAdminModel"
           type: array
         billingManagers:
           description: List of Billing Managers.
           items:
-            $ref: '#/components/schemas/OrganizationAdminModel'
+            $ref: "#/components/schemas/OrganizationAdminModel"
           type: array
         members:
           description: List of Organization Members.
           items:
-            $ref: '#/components/schemas/OrganizationMemberModel'
+            $ref: "#/components/schemas/OrganizationMemberModel"
           type: array
       required:
       - admins
@@ -8485,9 +8485,9 @@ components:
           name: name
       properties:
         product:
-          $ref: '#/components/schemas/OrganizationProductModel'
+          $ref: "#/components/schemas/OrganizationProductModel"
         permissionGroup:
-          $ref: '#/components/schemas/OrganizationPermissionGroupModel'
+          $ref: "#/components/schemas/OrganizationPermissionGroupModel"
       required:
       - permissionGroup
       - product
@@ -8525,7 +8525,7 @@ components:
           format: int32
           type: integer
         value:
-          $ref: '#/components/schemas/ValueModel'
+          $ref: "#/components/schemas/ValueModel"
       required:
       - percentage
       - value
@@ -8654,16 +8654,16 @@ components:
             members.
           type: boolean
         accessType:
-          $ref: '#/components/schemas/AccessType'
+          $ref: "#/components/schemas/AccessType"
         newEnvironmentAccessType:
-          $ref: '#/components/schemas/EnvironmentAccessType'
+          $ref: "#/components/schemas/EnvironmentAccessType"
         environmentAccesses:
           description: List of environment specific permissions.
           items:
-            $ref: '#/components/schemas/EnvironmentAccessModel'
+            $ref: "#/components/schemas/EnvironmentAccessModel"
           type: array
         product:
-          $ref: '#/components/schemas/ProductModel'
+          $ref: "#/components/schemas/ProductModel"
       required:
       - accessType
       - canCreateOrUpdateConfig
@@ -8706,7 +8706,7 @@ components:
           doubleValue: 5.962133916683182
       properties:
         value:
-          $ref: '#/components/schemas/PredefinedVariationValueModel'
+          $ref: "#/components/schemas/PredefinedVariationValueModel"
         name:
           description: "The name of the Feature Flag or Predefined Variation, shown\
             \ on the Dashboard UI. If not set, the Value will be shown."
@@ -8781,7 +8781,7 @@ components:
           description: Indicates that a mandatory note required for saving and publishing.
           type: boolean
         keyGenerationMode:
-          $ref: '#/components/schemas/KeyGenerationMode'
+          $ref: "#/components/schemas/KeyGenerationMode"
         showVariationId:
           description: Indicates whether a variation ID's must be shown on the ConfigCat
             Dashboard.
@@ -8790,7 +8790,7 @@ components:
           description: List of Environments where mandatory note must be set before
             saving and publishing.
           items:
-            $ref: '#/components/schemas/ReasonRequiredEnvironmentModel'
+            $ref: "#/components/schemas/ReasonRequiredEnvironmentModel"
           nullable: true
           type: array
         mandatorySettingHint:
@@ -8818,9 +8818,9 @@ components:
           format: int32
           type: integer
         comparator:
-          $ref: '#/components/schemas/PrerequisiteComparator'
+          $ref: "#/components/schemas/PrerequisiteComparator"
         prerequisiteComparisonValue:
-          $ref: '#/components/schemas/ValueModel'
+          $ref: "#/components/schemas/ValueModel"
       required:
       - comparator
       - prerequisiteComparisonValue
@@ -8839,7 +8839,7 @@ components:
         reasonRequired: true
       properties:
         organization:
-          $ref: '#/components/schemas/OrganizationModel'
+          $ref: "#/components/schemas/OrganizationModel"
         productId:
           description: Identifier of the Product.
           format: uuid
@@ -8965,15 +8965,15 @@ components:
         preLines:
           description: The lines before the actual reference line.
           items:
-            $ref: '#/components/schemas/ReferenceLineModel'
+            $ref: "#/components/schemas/ReferenceLineModel"
           type: array
         postLines:
           description: The lines after the actual reference line.
           items:
-            $ref: '#/components/schemas/ReferenceLineModel'
+            $ref: "#/components/schemas/ReferenceLineModel"
           type: array
         referenceLine:
-          $ref: '#/components/schemas/ReferenceLineModel'
+          $ref: "#/components/schemas/ReferenceLineModel"
       required:
       - file
       - fileUrl
@@ -9015,15 +9015,15 @@ components:
         preLines:
           description: The lines before the actual reference line.
           items:
-            $ref: '#/components/schemas/ReferenceLineRequest'
+            $ref: "#/components/schemas/ReferenceLineRequest"
           type: array
         postLines:
           description: The lines after the actual reference line.
           items:
-            $ref: '#/components/schemas/ReferenceLineRequest'
+            $ref: "#/components/schemas/ReferenceLineRequest"
           type: array
         referenceLine:
-          $ref: '#/components/schemas/ReferenceLineRequest'
+          $ref: "#/components/schemas/ReferenceLineRequest"
       required:
       - file
       - referenceLine
@@ -9077,7 +9077,7 @@ components:
           type: integer
         value:
           allOf:
-          - $ref: '#/components/schemas/SettingValueType'
+          - $ref: "#/components/schemas/SettingValueType"
           description: The value to serve when the user falls in the percentage rule.
             It must respect the setting type. In some generated clients for strictly
             typed languages you may use double/float properties to handle integer
@@ -9126,7 +9126,7 @@ components:
           type: string
         comparator:
           allOf:
-          - $ref: '#/components/schemas/RolloutRuleComparator'
+          - $ref: "#/components/schemas/RolloutRuleComparator"
           nullable: true
         comparisonValue:
           description: The value to compare against.
@@ -9134,13 +9134,13 @@ components:
           type: string
         value:
           allOf:
-          - $ref: '#/components/schemas/SettingValueType'
+          - $ref: "#/components/schemas/SettingValueType"
           description: The value to serve when the comparison matches. It must respect
             the setting type. In some generated clients for strictly typed languages
             you may use double/float properties to handle integer values.
         segmentComparator:
           allOf:
-          - $ref: '#/components/schemas/SegmentComparator'
+          - $ref: "#/components/schemas/SegmentComparator"
           nullable: true
         segmentId:
           description: The segment to compare against.
@@ -9185,7 +9185,7 @@ components:
           format: uuid
           type: string
         comparator:
-          $ref: '#/components/schemas/SegmentComparator'
+          $ref: "#/components/schemas/SegmentComparator"
       required:
       - comparator
       - segmentId
@@ -9213,7 +9213,7 @@ components:
         updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         product:
-          $ref: '#/components/schemas/ProductModel'
+          $ref: "#/components/schemas/ProductModel"
         segmentId:
           description: Identifier of the Segment.
           format: uuid
@@ -9292,7 +9292,7 @@ components:
         updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         product:
-          $ref: '#/components/schemas/ProductModel'
+          $ref: "#/components/schemas/ProductModel"
         segmentId:
           description: Identifier of the Segment.
           format: uuid
@@ -9333,7 +9333,7 @@ components:
             account.
           type: string
         comparator:
-          $ref: '#/components/schemas/RolloutRuleComparator'
+          $ref: "#/components/schemas/RolloutRuleComparator"
         comparisonValue:
           description: The value to compare with the given user attribute's value.
           type: string
@@ -9381,7 +9381,7 @@ components:
           nullable: true
           type: string
         settingType:
-          $ref: '#/components/schemas/SettingType'
+          $ref: "#/components/schemas/SettingType"
         order:
           description: The order of the Feature Flag or Setting represented on the
             ConfigCat Dashboard.
@@ -9460,7 +9460,7 @@ components:
           nullable: true
           type: string
         settingType:
-          $ref: '#/components/schemas/SettingType'
+          $ref: "#/components/schemas/SettingType"
         order:
           description: The order of the Feature Flag or Setting represented on the
             ConfigCat Dashboard.
@@ -9482,7 +9482,7 @@ components:
         predefinedVariations:
           description: A collection of Variations for a Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/PredefinedVariationModel'
+            $ref: "#/components/schemas/PredefinedVariationModel"
           type: array
         isWatching:
           type: boolean
@@ -9654,14 +9654,14 @@ components:
           format: uuid
           type: string
         defaultValue:
-          $ref: '#/components/schemas/ValueModel'
+          $ref: "#/components/schemas/ValueModel"
         targetingRules:
           description: The targeting rules of the Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/TargetingRuleModel'
+            $ref: "#/components/schemas/TargetingRuleModel"
           type: array
         setting:
-          $ref: '#/components/schemas/SettingDataV2Model'
+          $ref: "#/components/schemas/SettingDataV2Model"
         updatedAt:
           description: The last updated date and time when the Feature Flag or Setting.
           format: date-time
@@ -9684,12 +9684,12 @@ components:
         integrationLinks:
           description: The integration links attached to the Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/IntegrationLinkModel'
+            $ref: "#/components/schemas/IntegrationLinkModel"
           type: array
         settingTags:
           description: The tags attached to the Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/SettingTagModel'
+            $ref: "#/components/schemas/SettingTagModel"
           type: array
         settingIdsWherePrerequisite:
           description: List of Feature Flag and Setting IDs where the actual Feature
@@ -9699,13 +9699,13 @@ components:
             type: integer
           type: array
         config:
-          $ref: '#/components/schemas/ConfigModel'
+          $ref: "#/components/schemas/ConfigModel"
         environment:
-          $ref: '#/components/schemas/EnvironmentModel'
+          $ref: "#/components/schemas/EnvironmentModel"
         readOnly:
           type: boolean
         featureFlagLimitations:
-          $ref: '#/components/schemas/FeatureFlagLimitations'
+          $ref: "#/components/schemas/FeatureFlagLimitations"
       required:
       - config
       - defaultValue
@@ -9798,7 +9798,7 @@ components:
           format: int32
           type: integer
         settingType:
-          $ref: '#/components/schemas/SettingType'
+          $ref: "#/components/schemas/SettingType"
         configId:
           description: Identifier of the Feature Flag's Config.
           format: uuid
@@ -9814,12 +9814,12 @@ components:
         tags:
           description: The tags attached to the Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/TagModel'
+            $ref: "#/components/schemas/TagModel"
           type: array
         predefinedVariations:
           description: The Feature Flag or Setting's Variations.
           items:
-            $ref: '#/components/schemas/PredefinedVariationModel'
+            $ref: "#/components/schemas/PredefinedVariationModel"
           type: array
       required:
       - configId
@@ -9962,7 +9962,7 @@ components:
         lastUpdaterUserFullName: lastUpdaterUserFullName
       properties:
         setting:
-          $ref: '#/components/schemas/SettingDataModel'
+          $ref: "#/components/schemas/SettingDataModel"
         updatedAt:
           description: The last updated date and time when the Feature Flag or Setting.
           format: date-time
@@ -9980,35 +9980,35 @@ components:
         integrationLinks:
           description: The integration links attached to the Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/IntegrationLinkModel'
+            $ref: "#/components/schemas/IntegrationLinkModel"
           type: array
         settingTags:
           description: The tags attached to the Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/SettingTagModel'
+            $ref: "#/components/schemas/SettingTagModel"
           type: array
         rolloutRules:
           description: The targeting rule collection.
           items:
-            $ref: '#/components/schemas/RolloutRuleModel'
+            $ref: "#/components/schemas/RolloutRuleModel"
           type: array
         rolloutPercentageItems:
           description: The percentage rule collection.
           items:
-            $ref: '#/components/schemas/RolloutPercentageItemModel'
+            $ref: "#/components/schemas/RolloutPercentageItemModel"
           type: array
         value:
           allOf:
-          - $ref: '#/components/schemas/SettingValueType'
+          - $ref: "#/components/schemas/SettingValueType"
           description: The value to serve. It must respect the setting type. In some
             generated clients for strictly typed languages you may use double/float
             properties to handle integer values.
         config:
-          $ref: '#/components/schemas/ConfigModel'
+          $ref: "#/components/schemas/ConfigModel"
         environment:
-          $ref: '#/components/schemas/EnvironmentModel'
+          $ref: "#/components/schemas/EnvironmentModel"
         featureFlagLimitations:
-          $ref: '#/components/schemas/FeatureFlagLimitations'
+          $ref: "#/components/schemas/FeatureFlagLimitations"
         readOnly:
           type: boolean
       required:
@@ -10082,14 +10082,14 @@ components:
           description: Name of the Config.
           type: string
         evaluationVersion:
-          $ref: '#/components/schemas/EvaluationVersion'
+          $ref: "#/components/schemas/EvaluationVersion"
         hasCodeReferences:
           description: Config has code references uploaded.
           type: boolean
         settings:
           description: Stale feature flags.
           items:
-            $ref: '#/components/schemas/StaleFlagSettingModel'
+            $ref: "#/components/schemas/StaleFlagSettingModel"
           type: array
       required:
       - configId
@@ -10213,12 +10213,12 @@ components:
         configs:
           description: Configs that contain stale feature flags.
           items:
-            $ref: '#/components/schemas/StaleFlagConfigModel'
+            $ref: "#/components/schemas/StaleFlagConfigModel"
           type: array
         environments:
           description: Environment list.
           items:
-            $ref: '#/components/schemas/StaleFlagEnvironmentModel'
+            $ref: "#/components/schemas/StaleFlagEnvironmentModel"
           type: array
       required:
       - configs
@@ -10271,12 +10271,12 @@ components:
         tags:
           description: The tags' identifiers attached to the Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/StaleFlagSettingTagModel'
+            $ref: "#/components/schemas/StaleFlagSettingTagModel"
           type: array
         settingValues:
           description: Environment level feature flag stale data.
           items:
-            $ref: '#/components/schemas/StaleFlagSettingValueModel'
+            $ref: "#/components/schemas/StaleFlagSettingValueModel"
           type: array
       required:
       - hasCodeReferences
@@ -10346,7 +10346,7 @@ components:
         name: name
       properties:
         product:
-          $ref: '#/components/schemas/ProductModel'
+          $ref: "#/components/schemas/ProductModel"
         tagId:
           description: Identifier of the Tag.
           format: int64
@@ -10398,17 +10398,17 @@ components:
             - Segment condition
             - Prerequisite flag condition
           items:
-            $ref: '#/components/schemas/ConditionModel'
+            $ref: "#/components/schemas/ConditionModel"
           type: array
         percentageOptions:
           description: The percentage options from where the evaluation process will
             choose a value based on the flag's percentage evaluation attribute.
           items:
-            $ref: '#/components/schemas/PercentageOptionModel'
+            $ref: "#/components/schemas/PercentageOptionModel"
           type: array
         value:
           allOf:
-          - $ref: '#/components/schemas/ValueModel'
+          - $ref: "#/components/schemas/ValueModel"
           nullable: true
       required:
       - conditions
@@ -10444,7 +10444,7 @@ components:
         listValue:
           description: The list representation of the comparison value.
           items:
-            $ref: '#/components/schemas/UpdateComparisonValueListModel'
+            $ref: "#/components/schemas/UpdateComparisonValueListModel"
           nullable: true
           type: array
       type: object
@@ -10456,15 +10456,15 @@ components:
       properties:
         userCondition:
           allOf:
-          - $ref: '#/components/schemas/UpdateUserConditionModel'
+          - $ref: "#/components/schemas/UpdateUserConditionModel"
           nullable: true
         segmentCondition:
           allOf:
-          - $ref: '#/components/schemas/UpdateSegmentConditionModel'
+          - $ref: "#/components/schemas/UpdateSegmentConditionModel"
           nullable: true
         prerequisiteFlagCondition:
           allOf:
-          - $ref: '#/components/schemas/UpdatePrerequisiteFlagConditionModel'
+          - $ref: "#/components/schemas/UpdatePrerequisiteFlagConditionModel"
           nullable: true
       type: object
     UpdateConfigRequest:
@@ -10584,11 +10584,11 @@ components:
           doubleValue: 6.027456183070403
       properties:
         defaultValue:
-          $ref: '#/components/schemas/UpdateValueModel'
+          $ref: "#/components/schemas/UpdateValueModel"
         targetingRules:
           description: The targeting rules of the Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/UpdateTargetingRuleModel'
+            $ref: "#/components/schemas/UpdateTargetingRuleModel"
           nullable: true
           type: array
         percentageEvaluationAttribute:
@@ -10659,11 +10659,11 @@ components:
         settingId: 0
       properties:
         defaultValue:
-          $ref: '#/components/schemas/UpdateValueModel'
+          $ref: "#/components/schemas/UpdateValueModel"
         targetingRules:
           description: The targeting rules of the Feature Flag or Setting.
           items:
-            $ref: '#/components/schemas/UpdateTargetingRuleModel'
+            $ref: "#/components/schemas/UpdateTargetingRuleModel"
           nullable: true
           type: array
         percentageEvaluationAttribute:
@@ -10796,7 +10796,7 @@ components:
         updateFormulas:
           description: Evaluation descriptors of each updated Feature Flag and Setting.
           items:
-            $ref: '#/components/schemas/UpdateEvaluationFormulaWithIdModel'
+            $ref: "#/components/schemas/UpdateEvaluationFormulaWithIdModel"
           type: array
       type: object
     UpdateMemberPermissionsRequest:
@@ -10845,7 +10845,7 @@ components:
           format: int32
           type: integer
         value:
-          $ref: '#/components/schemas/UpdateValueModel'
+          $ref: "#/components/schemas/UpdateValueModel"
       required:
       - percentage
       - value
@@ -10975,16 +10975,16 @@ components:
           type: boolean
         accessType:
           allOf:
-          - $ref: '#/components/schemas/AccessType'
+          - $ref: "#/components/schemas/AccessType"
           nullable: true
         newEnvironmentAccessType:
           allOf:
-          - $ref: '#/components/schemas/EnvironmentAccessType'
+          - $ref: "#/components/schemas/EnvironmentAccessType"
           nullable: true
         environmentAccesses:
           description: List of environment specific permissions.
           items:
-            $ref: '#/components/schemas/CreateOrUpdateEnvironmentAccessModel'
+            $ref: "#/components/schemas/CreateOrUpdateEnvironmentAccessModel"
           nullable: true
           type: array
       type: object
@@ -11001,7 +11001,7 @@ components:
           doubleValue: 6.027456183070403
       properties:
         value:
-          $ref: '#/components/schemas/UpdatePredefinedVariationValueModel'
+          $ref: "#/components/schemas/UpdatePredefinedVariationValueModel"
         name:
           description: "The name of the Feature Flag or Predefined Variation, shown\
             \ on the Dashboard UI. If not set, the Value will be shown."
@@ -11075,7 +11075,7 @@ components:
         predefinedVariations:
           description: A collection of Feature Flag or Predefined Variations.
           items:
-            $ref: '#/components/schemas/UpdatePredefinedVariationModel'
+            $ref: "#/components/schemas/UpdatePredefinedVariationModel"
           type: array
       required:
       - predefinedVariations
@@ -11099,7 +11099,7 @@ components:
           type: boolean
         keyGenerationMode:
           allOf:
-          - $ref: '#/components/schemas/KeyGenerationMode'
+          - $ref: "#/components/schemas/KeyGenerationMode"
           nullable: true
         showVariationId:
           description: Indicates whether a variation ID's must be shown on the ConfigCat
@@ -11114,7 +11114,7 @@ components:
           description: List of Environments where mandatory note must be set before
             saving and publishing.
           items:
-            $ref: '#/components/schemas/UpdateReasonRequiredEnvironmentModel'
+            $ref: "#/components/schemas/UpdateReasonRequiredEnvironmentModel"
           nullable: true
           type: array
       type: object
@@ -11126,9 +11126,9 @@ components:
           format: int32
           type: integer
         comparator:
-          $ref: '#/components/schemas/PrerequisiteComparator'
+          $ref: "#/components/schemas/PrerequisiteComparator"
         prerequisiteComparisonValue:
-          $ref: '#/components/schemas/UpdateValueModel'
+          $ref: "#/components/schemas/UpdateValueModel"
       required:
       - comparator
       - prerequisiteComparisonValue
@@ -11185,7 +11185,7 @@ components:
           type: integer
         value:
           allOf:
-          - $ref: '#/components/schemas/SettingValueType'
+          - $ref: "#/components/schemas/SettingValueType"
           description: The value to serve when the user falls in the percentage rule.
             It must respect the setting type. In some generated clients for strictly
             typed languages you may use double/float properties to handle integer
@@ -11211,7 +11211,7 @@ components:
           type: string
         comparator:
           allOf:
-          - $ref: '#/components/schemas/RolloutRuleComparator'
+          - $ref: "#/components/schemas/RolloutRuleComparator"
           nullable: true
         comparisonValue:
           description: The value to compare against.
@@ -11219,13 +11219,13 @@ components:
           type: string
         value:
           allOf:
-          - $ref: '#/components/schemas/SettingValueType'
+          - $ref: "#/components/schemas/SettingValueType"
           description: The value to serve when the comparison matches. It must respect
             the setting type. In some generated clients for strictly typed languages
             you may use double/float properties to handle integer values.
         segmentComparator:
           allOf:
-          - $ref: '#/components/schemas/SegmentComparator'
+          - $ref: "#/components/schemas/SegmentComparator"
           nullable: true
         segmentId:
           description: The segment to compare against.
@@ -11243,7 +11243,7 @@ components:
           format: uuid
           type: string
         comparator:
-          $ref: '#/components/schemas/SegmentComparator'
+          $ref: "#/components/schemas/SegmentComparator"
       required:
       - comparator
       - segmentId
@@ -11273,7 +11273,7 @@ components:
           type: string
         comparator:
           allOf:
-          - $ref: '#/components/schemas/RolloutRuleComparator'
+          - $ref: "#/components/schemas/RolloutRuleComparator"
           nullable: true
         comparisonValue:
           nullable: true
@@ -11304,16 +11304,16 @@ components:
         rolloutRules:
           description: The targeting rule collection.
           items:
-            $ref: '#/components/schemas/UpdateRolloutRuleModel'
+            $ref: "#/components/schemas/UpdateRolloutRuleModel"
           type: array
         rolloutPercentageItems:
           description: The percentage rule collection.
           items:
-            $ref: '#/components/schemas/UpdateRolloutPercentageItemModel'
+            $ref: "#/components/schemas/UpdateRolloutPercentageItemModel"
           type: array
         value:
           allOf:
-          - $ref: '#/components/schemas/SettingValueType'
+          - $ref: "#/components/schemas/SettingValueType"
           description: The value to serve. It must respect the setting type. In some
             generated clients for strictly typed languages you may use double/float
             properties to handle integer values.
@@ -11346,16 +11346,16 @@ components:
         rolloutRules:
           description: The targeting rule collection.
           items:
-            $ref: '#/components/schemas/UpdateRolloutRuleModel'
+            $ref: "#/components/schemas/UpdateRolloutRuleModel"
           type: array
         rolloutPercentageItems:
           description: The percentage rule collection.
           items:
-            $ref: '#/components/schemas/UpdateRolloutPercentageItemModel'
+            $ref: "#/components/schemas/UpdateRolloutPercentageItemModel"
           type: array
         value:
           allOf:
-          - $ref: '#/components/schemas/SettingValueType'
+          - $ref: "#/components/schemas/SettingValueType"
           description: The value to serve. It must respect the setting type. In some
             generated clients for strictly typed languages you may use double/float
             properties to handle integer values.
@@ -11413,7 +11413,7 @@ components:
         settingValues:
           description: The values to update.
           items:
-            $ref: '#/components/schemas/UpdateSettingValueWithSettingIdModel'
+            $ref: "#/components/schemas/UpdateSettingValueWithSettingIdModel"
           type: array
       type: object
     UpdateTagModel:
@@ -11469,19 +11469,19 @@ components:
             - Segment condition
             - Prerequisite flag condition
           items:
-            $ref: '#/components/schemas/UpdateConditionModel'
+            $ref: "#/components/schemas/UpdateConditionModel"
           nullable: true
           type: array
         percentageOptions:
           description: The percentage options from where the evaluation process will
             choose a value based on the flag's percentage evaluation attribute.
           items:
-            $ref: '#/components/schemas/UpdatePercentageOptionModel'
+            $ref: "#/components/schemas/UpdatePercentageOptionModel"
           nullable: true
           type: array
         value:
           allOf:
-          - $ref: '#/components/schemas/UpdateValueModel'
+          - $ref: "#/components/schemas/UpdateValueModel"
           nullable: true
       type: object
     UpdateUserConditionModel:
@@ -11494,9 +11494,9 @@ components:
           minLength: 1
           type: string
         comparator:
-          $ref: '#/components/schemas/UserComparator'
+          $ref: "#/components/schemas/UserComparator"
         comparisonValue:
-          $ref: '#/components/schemas/UpdateComparisonValueModel'
+          $ref: "#/components/schemas/UpdateComparisonValueModel"
       required:
       - comparator
       - comparisonAttribute
@@ -11586,9 +11586,9 @@ components:
           minLength: 1
           type: string
         comparator:
-          $ref: '#/components/schemas/UserComparator'
+          $ref: "#/components/schemas/UserComparator"
         comparisonValue:
-          $ref: '#/components/schemas/ComparisonValueModel'
+          $ref: "#/components/schemas/ComparisonValueModel"
       required:
       - comparator
       - comparisonAttribute
@@ -11692,12 +11692,12 @@ components:
           type: string
         httpMethod:
           allOf:
-          - $ref: '#/components/schemas/WebHookHttpMethod'
+          - $ref: "#/components/schemas/WebHookHttpMethod"
           nullable: true
         webHookHeaders:
           description: List of HTTP headers.
           items:
-            $ref: '#/components/schemas/WebhookHeaderModel'
+            $ref: "#/components/schemas/WebhookHeaderModel"
           nullable: true
           type: array
       required:
@@ -11808,7 +11808,7 @@ components:
           description: The URL of the Webhook.
           type: string
         httpMethod:
-          $ref: '#/components/schemas/WebHookHttpMethod'
+          $ref: "#/components/schemas/WebHookHttpMethod"
         content:
           description: The HTTP body content.
           nullable: true
@@ -11816,12 +11816,12 @@ components:
         webHookHeaders:
           description: List of HTTP headers that the Webhook must send.
           items:
-            $ref: '#/components/schemas/WebhookHeaderResponseModel'
+            $ref: "#/components/schemas/WebhookHeaderResponseModel"
           type: array
         config:
-          $ref: '#/components/schemas/WebhookConfig'
+          $ref: "#/components/schemas/WebhookConfig"
         environment:
-          $ref: '#/components/schemas/WebhookEnvironment'
+          $ref: "#/components/schemas/WebhookEnvironment"
       required:
       - config
       - content
