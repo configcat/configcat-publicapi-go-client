@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -13,7 +13,6 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,7 +24,8 @@ type ComparisonValueListModel struct {
 	// The actual comparison value.
 	Value string `json:"value"`
 	// An optional hint for the comparison value.
-	Hint NullableString `json:"hint,omitempty"`
+	Hint NullableString `json:"hint"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ComparisonValueListModel ComparisonValueListModel
@@ -34,9 +34,10 @@ type _ComparisonValueListModel ComparisonValueListModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewComparisonValueListModel(value string) *ComparisonValueListModel {
+func NewComparisonValueListModel(value string, hint NullableString) *ComparisonValueListModel {
 	this := ComparisonValueListModel{}
 	this.Value = value
+	this.Hint = hint
 	return &this
 }
 
@@ -72,16 +73,18 @@ func (o *ComparisonValueListModel) SetValue(v string) {
 	o.Value = v
 }
 
-// GetHint returns the Hint field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetHint returns the Hint field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ComparisonValueListModel) GetHint() string {
-	if o == nil || IsNil(o.Hint.Get()) {
+	if o == nil || o.Hint.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.Hint.Get()
 }
 
-// GetHintOk returns a tuple with the Hint field value if set, nil otherwise
+// GetHintOk returns a tuple with the Hint field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComparisonValueListModel) GetHintOk() (*string, bool) {
@@ -91,27 +94,9 @@ func (o *ComparisonValueListModel) GetHintOk() (*string, bool) {
 	return o.Hint.Get(), o.Hint.IsSet()
 }
 
-// HasHint returns a boolean if a field has been set.
-func (o *ComparisonValueListModel) HasHint() bool {
-	if o != nil && o.Hint.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetHint gets a reference to the given NullableString and assigns it to the Hint field.
+// SetHint sets field value
 func (o *ComparisonValueListModel) SetHint(v string) {
 	o.Hint.Set(&v)
-}
-// SetHintNil sets the value for Hint to be an explicit nil
-func (o *ComparisonValueListModel) SetHintNil() {
-	o.Hint.Set(nil)
-}
-
-// UnsetHint ensures that no value is present for Hint, not even an explicit nil
-func (o *ComparisonValueListModel) UnsetHint() {
-	o.Hint.Unset()
 }
 
 func (o ComparisonValueListModel) MarshalJSON() ([]byte, error) {
@@ -125,9 +110,12 @@ func (o ComparisonValueListModel) MarshalJSON() ([]byte, error) {
 func (o ComparisonValueListModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["value"] = o.Value
-	if o.Hint.IsSet() {
-		toSerialize["hint"] = o.Hint.Get()
+	toSerialize["hint"] = o.Hint.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
 	}
+
 	return toSerialize, nil
 }
 
@@ -137,6 +125,7 @@ func (o *ComparisonValueListModel) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"value",
+		"hint",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -155,15 +144,21 @@ func (o *ComparisonValueListModel) UnmarshalJSON(data []byte) (err error) {
 
 	varComparisonValueListModel := _ComparisonValueListModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varComparisonValueListModel)
+	err = json.Unmarshal(data, &varComparisonValueListModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ComparisonValueListModel(varComparisonValueListModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "value")
+		delete(additionalProperties, "hint")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

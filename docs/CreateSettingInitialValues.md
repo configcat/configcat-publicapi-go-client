@@ -4,12 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Name** | **string** | The name of the Feature Flag or Setting. | 
 **Hint** | Pointer to **NullableString** | A short description for the setting, shown on the Dashboard UI. | [optional] 
 **Tags** | Pointer to **[]int64** | The IDs of the tags which are attached to the setting. | [optional] 
 **Order** | Pointer to **NullableInt32** | The order of the Setting represented on the ConfigCat Dashboard. Determined from an ascending sequence of integers. | [optional] 
 **Key** | **string** | The key of the Feature Flag or Setting. | 
-**Name** | **string** | The name of the Feature Flag or Setting. | 
 **SettingType** | [**SettingType**](SettingType.md) |  | 
+**PredefinedVariations** | Pointer to [**[]CreatePredefinedVariationModel**](CreatePredefinedVariationModel.md) | The Feature Flag or Setting&#39;s Variations. | [optional] 
 **InitialValues** | Pointer to [**[]InitialValue**](InitialValue.md) | Optional, initial value of the Feature Flag or Setting in the given Environments. Only one of the SettingIdToInitFrom or the InitialValues properties can be set. | [optional] 
 **SettingIdToInitFrom** | Pointer to **NullableInt32** | Optional, the SettingId to initialize the values and tags of the Feature Flag or Setting from. Only can be set if you have at least ReadOnly access in all the Environments. Only one of the SettingIdToInitFrom or the InitialValues properties can be set. | [optional] 
 
@@ -17,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewCreateSettingInitialValues
 
-`func NewCreateSettingInitialValues(key string, name string, settingType SettingType, ) *CreateSettingInitialValues`
+`func NewCreateSettingInitialValues(name string, key string, settingType SettingType, ) *CreateSettingInitialValues`
 
 NewCreateSettingInitialValues instantiates a new CreateSettingInitialValues object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +32,26 @@ will change when the set of required properties is changed
 NewCreateSettingInitialValuesWithDefaults instantiates a new CreateSettingInitialValues object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetName
+
+`func (o *CreateSettingInitialValues) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *CreateSettingInitialValues) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *CreateSettingInitialValues) SetName(v string)`
+
+SetName sets Name field to given value.
+
 
 ### GetHint
 
@@ -157,26 +178,6 @@ and a boolean to check if the value has been set.
 SetKey sets Key field to given value.
 
 
-### GetName
-
-`func (o *CreateSettingInitialValues) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *CreateSettingInitialValues) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *CreateSettingInitialValues) SetName(v string)`
-
-SetName sets Name field to given value.
-
-
 ### GetSettingType
 
 `func (o *CreateSettingInitialValues) GetSettingType() SettingType`
@@ -197,6 +198,41 @@ and a boolean to check if the value has been set.
 SetSettingType sets SettingType field to given value.
 
 
+### GetPredefinedVariations
+
+`func (o *CreateSettingInitialValues) GetPredefinedVariations() []CreatePredefinedVariationModel`
+
+GetPredefinedVariations returns the PredefinedVariations field if non-nil, zero value otherwise.
+
+### GetPredefinedVariationsOk
+
+`func (o *CreateSettingInitialValues) GetPredefinedVariationsOk() (*[]CreatePredefinedVariationModel, bool)`
+
+GetPredefinedVariationsOk returns a tuple with the PredefinedVariations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPredefinedVariations
+
+`func (o *CreateSettingInitialValues) SetPredefinedVariations(v []CreatePredefinedVariationModel)`
+
+SetPredefinedVariations sets PredefinedVariations field to given value.
+
+### HasPredefinedVariations
+
+`func (o *CreateSettingInitialValues) HasPredefinedVariations() bool`
+
+HasPredefinedVariations returns a boolean if a field has been set.
+
+### SetPredefinedVariationsNil
+
+`func (o *CreateSettingInitialValues) SetPredefinedVariationsNil(b bool)`
+
+ SetPredefinedVariationsNil sets the value for PredefinedVariations to be an explicit nil
+
+### UnsetPredefinedVariations
+`func (o *CreateSettingInitialValues) UnsetPredefinedVariations()`
+
+UnsetPredefinedVariations ensures that no value is present for PredefinedVariations, not even an explicit nil
 ### GetInitialValues
 
 `func (o *CreateSettingInitialValues) GetInitialValues() []InitialValue`

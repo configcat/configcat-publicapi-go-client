@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -13,6 +13,7 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the ComparisonValueModel type satisfies the MappedNullable interface at compile time
@@ -21,19 +22,25 @@ var _ MappedNullable = &ComparisonValueModel{}
 // ComparisonValueModel The value that the user object's attribute is compared to.
 type ComparisonValueModel struct {
 	// The string representation of the comparison value.
-	StringValue NullableString `json:"stringValue,omitempty"`
+	StringValue NullableString `json:"stringValue"`
 	// The number representation of the comparison value.
-	DoubleValue NullableFloat64 `json:"doubleValue,omitempty"`
+	DoubleValue NullableFloat64 `json:"doubleValue"`
 	// The list representation of the comparison value.
-	ListValue []ComparisonValueListModel `json:"listValue,omitempty"`
+	ListValue []ComparisonValueListModel `json:"listValue"`
+	AdditionalProperties map[string]interface{}
 }
+
+type _ComparisonValueModel ComparisonValueModel
 
 // NewComparisonValueModel instantiates a new ComparisonValueModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewComparisonValueModel() *ComparisonValueModel {
+func NewComparisonValueModel(stringValue NullableString, doubleValue NullableFloat64, listValue []ComparisonValueListModel) *ComparisonValueModel {
 	this := ComparisonValueModel{}
+	this.StringValue = stringValue
+	this.DoubleValue = doubleValue
+	this.ListValue = listValue
 	return &this
 }
 
@@ -45,16 +52,18 @@ func NewComparisonValueModelWithDefaults() *ComparisonValueModel {
 	return &this
 }
 
-// GetStringValue returns the StringValue field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetStringValue returns the StringValue field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ComparisonValueModel) GetStringValue() string {
-	if o == nil || IsNil(o.StringValue.Get()) {
+	if o == nil || o.StringValue.Get() == nil {
 		var ret string
 		return ret
 	}
+
 	return *o.StringValue.Get()
 }
 
-// GetStringValueOk returns a tuple with the StringValue field value if set, nil otherwise
+// GetStringValueOk returns a tuple with the StringValue field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComparisonValueModel) GetStringValueOk() (*string, bool) {
@@ -64,39 +73,23 @@ func (o *ComparisonValueModel) GetStringValueOk() (*string, bool) {
 	return o.StringValue.Get(), o.StringValue.IsSet()
 }
 
-// HasStringValue returns a boolean if a field has been set.
-func (o *ComparisonValueModel) HasStringValue() bool {
-	if o != nil && o.StringValue.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetStringValue gets a reference to the given NullableString and assigns it to the StringValue field.
+// SetStringValue sets field value
 func (o *ComparisonValueModel) SetStringValue(v string) {
 	o.StringValue.Set(&v)
 }
-// SetStringValueNil sets the value for StringValue to be an explicit nil
-func (o *ComparisonValueModel) SetStringValueNil() {
-	o.StringValue.Set(nil)
-}
 
-// UnsetStringValue ensures that no value is present for StringValue, not even an explicit nil
-func (o *ComparisonValueModel) UnsetStringValue() {
-	o.StringValue.Unset()
-}
-
-// GetDoubleValue returns the DoubleValue field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDoubleValue returns the DoubleValue field value
+// If the value is explicit nil, the zero value for float64 will be returned
 func (o *ComparisonValueModel) GetDoubleValue() float64 {
-	if o == nil || IsNil(o.DoubleValue.Get()) {
+	if o == nil || o.DoubleValue.Get() == nil {
 		var ret float64
 		return ret
 	}
+
 	return *o.DoubleValue.Get()
 }
 
-// GetDoubleValueOk returns a tuple with the DoubleValue field value if set, nil otherwise
+// GetDoubleValueOk returns a tuple with the DoubleValue field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComparisonValueModel) GetDoubleValueOk() (*float64, bool) {
@@ -106,39 +99,23 @@ func (o *ComparisonValueModel) GetDoubleValueOk() (*float64, bool) {
 	return o.DoubleValue.Get(), o.DoubleValue.IsSet()
 }
 
-// HasDoubleValue returns a boolean if a field has been set.
-func (o *ComparisonValueModel) HasDoubleValue() bool {
-	if o != nil && o.DoubleValue.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDoubleValue gets a reference to the given NullableFloat64 and assigns it to the DoubleValue field.
+// SetDoubleValue sets field value
 func (o *ComparisonValueModel) SetDoubleValue(v float64) {
 	o.DoubleValue.Set(&v)
 }
-// SetDoubleValueNil sets the value for DoubleValue to be an explicit nil
-func (o *ComparisonValueModel) SetDoubleValueNil() {
-	o.DoubleValue.Set(nil)
-}
 
-// UnsetDoubleValue ensures that no value is present for DoubleValue, not even an explicit nil
-func (o *ComparisonValueModel) UnsetDoubleValue() {
-	o.DoubleValue.Unset()
-}
-
-// GetListValue returns the ListValue field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetListValue returns the ListValue field value
+// If the value is explicit nil, the zero value for []ComparisonValueListModel will be returned
 func (o *ComparisonValueModel) GetListValue() []ComparisonValueListModel {
 	if o == nil {
 		var ret []ComparisonValueListModel
 		return ret
 	}
+
 	return o.ListValue
 }
 
-// GetListValueOk returns a tuple with the ListValue field value if set, nil otherwise
+// GetListValueOk returns a tuple with the ListValue field value
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ComparisonValueModel) GetListValueOk() ([]ComparisonValueListModel, bool) {
@@ -148,16 +125,7 @@ func (o *ComparisonValueModel) GetListValueOk() ([]ComparisonValueListModel, boo
 	return o.ListValue, true
 }
 
-// HasListValue returns a boolean if a field has been set.
-func (o *ComparisonValueModel) HasListValue() bool {
-	if o != nil && !IsNil(o.ListValue) {
-		return true
-	}
-
-	return false
-}
-
-// SetListValue gets a reference to the given []ComparisonValueListModel and assigns it to the ListValue field.
+// SetListValue sets field value
 func (o *ComparisonValueModel) SetListValue(v []ComparisonValueListModel) {
 	o.ListValue = v
 }
@@ -172,16 +140,63 @@ func (o ComparisonValueModel) MarshalJSON() ([]byte, error) {
 
 func (o ComparisonValueModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.StringValue.IsSet() {
-		toSerialize["stringValue"] = o.StringValue.Get()
-	}
-	if o.DoubleValue.IsSet() {
-		toSerialize["doubleValue"] = o.DoubleValue.Get()
-	}
+	toSerialize["stringValue"] = o.StringValue.Get()
+	toSerialize["doubleValue"] = o.DoubleValue.Get()
 	if o.ListValue != nil {
 		toSerialize["listValue"] = o.ListValue
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
+}
+
+func (o *ComparisonValueModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"stringValue",
+		"doubleValue",
+		"listValue",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varComparisonValueModel := _ComparisonValueModel{}
+
+	err = json.Unmarshal(data, &varComparisonValueModel)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ComparisonValueModel(varComparisonValueModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "stringValue")
+		delete(additionalProperties, "doubleValue")
+		delete(additionalProperties, "listValue")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
 }
 
 type NullableComparisonValueModel struct {

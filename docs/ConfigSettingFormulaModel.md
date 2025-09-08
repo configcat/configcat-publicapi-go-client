@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **LastVersionId** | **string** |  | 
 **DefaultValue** | [**ValueModel**](ValueModel.md) |  | 
 **TargetingRules** | [**[]TargetingRuleModel**](TargetingRuleModel.md) | The targeting rules of the Feature Flag or Setting. | 
-**Setting** | [**SettingDataModel**](SettingDataModel.md) |  | 
+**Setting** | [**SettingDataV2Model**](SettingDataV2Model.md) |  | 
 **UpdatedAt** | **NullableTime** | The last updated date and time when the Feature Flag or Setting. | 
 **PercentageEvaluationAttribute** | **NullableString** | The user attribute used for percentage evaluation. If not set, it defaults to the &#x60;Identifier&#x60; user object attribute. | 
 **LastUpdaterUserEmail** | **NullableString** | The email of the user who last updated the Feature Flag or Setting. | 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewConfigSettingFormulaModel
 
-`func NewConfigSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targetingRules []TargetingRuleModel, setting SettingDataModel, updatedAt NullableTime, percentageEvaluationAttribute NullableString, lastUpdaterUserEmail NullableString, lastUpdaterUserFullName NullableString, integrationLinks []IntegrationLinkModel, settingTags []SettingTagModel, settingIdsWherePrerequisite []int32, ) *ConfigSettingFormulaModel`
+`func NewConfigSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targetingRules []TargetingRuleModel, setting SettingDataV2Model, updatedAt NullableTime, percentageEvaluationAttribute NullableString, lastUpdaterUserEmail NullableString, lastUpdaterUserFullName NullableString, integrationLinks []IntegrationLinkModel, settingTags []SettingTagModel, settingIdsWherePrerequisite []int32, ) *ConfigSettingFormulaModel`
 
 NewConfigSettingFormulaModel instantiates a new ConfigSettingFormulaModel object
 This constructor will assign default values to properties that have it defined,
@@ -97,20 +97,20 @@ SetTargetingRules sets TargetingRules field to given value.
 
 ### GetSetting
 
-`func (o *ConfigSettingFormulaModel) GetSetting() SettingDataModel`
+`func (o *ConfigSettingFormulaModel) GetSetting() SettingDataV2Model`
 
 GetSetting returns the Setting field if non-nil, zero value otherwise.
 
 ### GetSettingOk
 
-`func (o *ConfigSettingFormulaModel) GetSettingOk() (*SettingDataModel, bool)`
+`func (o *ConfigSettingFormulaModel) GetSettingOk() (*SettingDataV2Model, bool)`
 
 GetSettingOk returns a tuple with the Setting field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSetting
 
-`func (o *ConfigSettingFormulaModel) SetSetting(v SettingDataModel)`
+`func (o *ConfigSettingFormulaModel) SetSetting(v SettingDataV2Model)`
 
 SetSetting sets Setting field to given value.
 

@@ -1,7 +1,7 @@
 /*
 ConfigCat Public Management API
 
-The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://test-api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://test-api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://test-api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://test-api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
+The purpose of this API is to access the ConfigCat platform programmatically. You can **Create**, **Read**, **Update** and **Delete** any entities like **Feature Flags, Configs, Environments** or **Products** within ConfigCat.  **Base API URL**: https://api.configcat.com  If you prefer the swagger documentation, you can find it here: [Swagger UI](https://api.configcat.com/swagger).  The API is based on HTTP REST, uses resource-oriented URLs, status codes and supports JSON  format.   **Important:** Do not use this API for accessing and evaluating feature flag values. Use the [SDKs](https://configcat.com/docs/sdk-reference/overview) or the [ConfigCat Proxy](https://configcat.com/docs/advanced/proxy/proxy-overview/) instead.  # OpenAPI Specification  The complete specification is publicly available in the following formats:  - [OpenAPI v3](https://api.configcat.com/docs/v1/swagger.json) - [Swagger v2](https://api.configcat.com/docs/v1/swagger.v2.json)  You can use it to generate client libraries in various languages with [OpenAPI Generator](https://github.com/OpenAPITools/openapi-generator) or [Swagger Codegen](https://swagger.io/tools/swagger-codegen/) to interact with this API.  # Authentication This API uses the [Basic HTTP Authentication Scheme](https://en.wikipedia.org/wiki/Basic_access_authentication).   <!-- ReDoc-Inject: <security-definitions> -->  # Throttling and rate limits All the rate limited API calls are returning information about the current rate limit period in the following HTTP headers:  | Header | Description | | :- | :- | | X-Rate-Limit-Remaining | The maximum number of requests remaining in the current rate limit period. | | X-Rate-Limit-Reset     | The time when the current rate limit period resets.        |  When the rate limit is exceeded by a request, the API returns with a `HTTP 429 - Too many requests` status along with a `Retry-After` HTTP header. 
 
 API version: v1
 Contact: support@configcat.com
@@ -13,7 +13,6 @@ package configcatpublicapi
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -30,6 +29,9 @@ type ValueModel struct {
 	IntValue NullableInt32 `json:"intValue"`
 	// The served value in case of a decimal number Setting.
 	DoubleValue NullableFloat64 `json:"doubleValue"`
+	// The served Variation's identifier.
+	PredefinedVariationId NullableString `json:"predefinedVariationId"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ValueModel ValueModel
@@ -38,12 +40,13 @@ type _ValueModel ValueModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewValueModel(boolValue NullableBool, stringValue NullableString, intValue NullableInt32, doubleValue NullableFloat64) *ValueModel {
+func NewValueModel(boolValue NullableBool, stringValue NullableString, intValue NullableInt32, doubleValue NullableFloat64, predefinedVariationId NullableString) *ValueModel {
 	this := ValueModel{}
 	this.BoolValue = boolValue
 	this.StringValue = stringValue
 	this.IntValue = intValue
 	this.DoubleValue = doubleValue
+	this.PredefinedVariationId = predefinedVariationId
 	return &this
 }
 
@@ -159,6 +162,32 @@ func (o *ValueModel) SetDoubleValue(v float64) {
 	o.DoubleValue.Set(&v)
 }
 
+// GetPredefinedVariationId returns the PredefinedVariationId field value
+// If the value is explicit nil, the zero value for string will be returned
+func (o *ValueModel) GetPredefinedVariationId() string {
+	if o == nil || o.PredefinedVariationId.Get() == nil {
+		var ret string
+		return ret
+	}
+
+	return *o.PredefinedVariationId.Get()
+}
+
+// GetPredefinedVariationIdOk returns a tuple with the PredefinedVariationId field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ValueModel) GetPredefinedVariationIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PredefinedVariationId.Get(), o.PredefinedVariationId.IsSet()
+}
+
+// SetPredefinedVariationId sets field value
+func (o *ValueModel) SetPredefinedVariationId(v string) {
+	o.PredefinedVariationId.Set(&v)
+}
+
 func (o ValueModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -173,6 +202,12 @@ func (o ValueModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["stringValue"] = o.StringValue.Get()
 	toSerialize["intValue"] = o.IntValue.Get()
 	toSerialize["doubleValue"] = o.DoubleValue.Get()
+	toSerialize["predefinedVariationId"] = o.PredefinedVariationId.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -185,6 +220,7 @@ func (o *ValueModel) UnmarshalJSON(data []byte) (err error) {
 		"stringValue",
 		"intValue",
 		"doubleValue",
+		"predefinedVariationId",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -203,15 +239,24 @@ func (o *ValueModel) UnmarshalJSON(data []byte) (err error) {
 
 	varValueModel := _ValueModel{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varValueModel)
+	err = json.Unmarshal(data, &varValueModel)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ValueModel(varValueModel)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "boolValue")
+		delete(additionalProperties, "stringValue")
+		delete(additionalProperties, "intValue")
+		delete(additionalProperties, "doubleValue")
+		delete(additionalProperties, "predefinedVariationId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
