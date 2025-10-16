@@ -5768,6 +5768,8 @@ components:
       - settingDeleted
       - settingsReordered
       - predefinedVariationsChanged
+      - settingConvertedToPredefinedVariations
+      - settingConvertedToCustomValues
       - settingValueChanged
       - webHookCreated
       - webHookChanged
@@ -7271,11 +7273,9 @@ components:
         initialValues:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           value: ""
-          predefinedVariationIndex: 5
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           value: ""
-          predefinedVariationIndex: 5
-        settingIdToInitFrom: 2
+        settingIdToInitFrom: 5
         hint: hint
         name: name
         settingType: boolean
@@ -7668,7 +7668,6 @@ components:
       example:
         environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         value: ""
-        predefinedVariationIndex: 5
       properties:
         environmentId:
           description: The ID of the Environment where the initial value must be set.
@@ -7679,16 +7678,11 @@ components:
           - $ref: "#/components/schemas/SettingValueType"
           description: "The initial value in the given Environment. It must respect\
             \ the setting type. In some generated clients for strictly typed languages,\
-            \ you may use double/float properties to handle integer values. Only one\
-            \ of the Value or the PredefinedVariationIndex properties can be set."
-          nullable: true
-        predefinedVariationIndex:
-          description: The initial Predefined Variation in the given Environment.
-            The zero-based index of the Variation in the Variations list. Only one
-            of the Value or the PredefinedVariationIndex properties can be set.
-          format: int32
-          nullable: true
-          type: integer
+            \ you may use double/float properties to handle integer values. In case\
+            \ of a Feature Flag with predefined variations, the value must match one\
+            \ of the predefined variations' value."
+      required:
+      - value
       type: object
     IntegrationLinkDetail:
       example:

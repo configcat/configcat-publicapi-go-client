@@ -5,14 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EnvironmentId** | Pointer to **string** | The ID of the Environment where the initial value must be set. | [optional] 
-**Value** | Pointer to [**NullableSettingValueType**](SettingValueType.md) | The initial value in the given Environment. It must respect the setting type. In some generated clients for strictly typed languages, you may use double/float properties to handle integer values. Only one of the Value or the PredefinedVariationIndex properties can be set. | [optional] 
-**PredefinedVariationIndex** | Pointer to **NullableInt32** | The initial Predefined Variation in the given Environment. The zero-based index of the Variation in the Variations list. Only one of the Value or the PredefinedVariationIndex properties can be set. | [optional] 
+**Value** | [**SettingValueType**](SettingValueType.md) | The initial value in the given Environment. It must respect the setting type. In some generated clients for strictly typed languages, you may use double/float properties to handle integer values. In case of a Feature Flag with predefined variations, the value must match one of the predefined variations&#39; value. | 
 
 ## Methods
 
 ### NewInitialValue
 
-`func NewInitialValue() *InitialValue`
+`func NewInitialValue(value SettingValueType, ) *InitialValue`
 
 NewInitialValue instantiates a new InitialValue object
 This constructor will assign default values to properties that have it defined,
@@ -71,57 +70,7 @@ and a boolean to check if the value has been set.
 
 SetValue sets Value field to given value.
 
-### HasValue
 
-`func (o *InitialValue) HasValue() bool`
-
-HasValue returns a boolean if a field has been set.
-
-### SetValueNil
-
-`func (o *InitialValue) SetValueNil(b bool)`
-
- SetValueNil sets the value for Value to be an explicit nil
-
-### UnsetValue
-`func (o *InitialValue) UnsetValue()`
-
-UnsetValue ensures that no value is present for Value, not even an explicit nil
-### GetPredefinedVariationIndex
-
-`func (o *InitialValue) GetPredefinedVariationIndex() int32`
-
-GetPredefinedVariationIndex returns the PredefinedVariationIndex field if non-nil, zero value otherwise.
-
-### GetPredefinedVariationIndexOk
-
-`func (o *InitialValue) GetPredefinedVariationIndexOk() (*int32, bool)`
-
-GetPredefinedVariationIndexOk returns a tuple with the PredefinedVariationIndex field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPredefinedVariationIndex
-
-`func (o *InitialValue) SetPredefinedVariationIndex(v int32)`
-
-SetPredefinedVariationIndex sets PredefinedVariationIndex field to given value.
-
-### HasPredefinedVariationIndex
-
-`func (o *InitialValue) HasPredefinedVariationIndex() bool`
-
-HasPredefinedVariationIndex returns a boolean if a field has been set.
-
-### SetPredefinedVariationIndexNil
-
-`func (o *InitialValue) SetPredefinedVariationIndexNil(b bool)`
-
- SetPredefinedVariationIndexNil sets the value for PredefinedVariationIndex to be an explicit nil
-
-### UnsetPredefinedVariationIndex
-`func (o *InitialValue) UnsetPredefinedVariationIndex()`
-
-UnsetPredefinedVariationIndex ensures that no value is present for PredefinedVariationIndex, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

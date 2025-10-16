@@ -57,6 +57,10 @@
 
 * `PREDEFINED_VARIATIONS_CHANGED` (value: `"predefinedVariationsChanged"`)
 
+* `SETTING_CONVERTED_TO_PREDEFINED_VARIATIONS` (value: `"settingConvertedToPredefinedVariations"`)
+
+* `SETTING_CONVERTED_TO_CUSTOM_VALUES` (value: `"settingConvertedToCustomValues"`)
+
 * `SETTING_VALUE_CHANGED` (value: `"settingValueChanged"`)
 
 * `WEB_HOOK_CREATED` (value: `"webHookCreated"`)
