@@ -109,6 +109,7 @@ docs/PermissionGroupModel.md
 docs/PermissionGroupsAPI.md
 docs/PredefinedVariationModel.md
 docs/PredefinedVariationValueModel.md
+docs/PredefinedVariationsModel.md
 docs/PreferencesModel.md
 docs/PrerequisiteComparator.md
 docs/PrerequisiteFlagConditionModel.md
@@ -275,6 +276,7 @@ model_percentage_option_model.go
 model_permission_group_model.go
 model_predefined_variation_model.go
 model_predefined_variation_value_model.go
+model_predefined_variations_model.go
 model_preferences_model.go
 model_prerequisite_comparator.go
 model_prerequisite_flag_condition_model.go
@@ -364,5 +366,4 @@ model_webhook_notification.go
 model_webhook_response_model.go
 model_webhook_signing_keys_model.go
 response.go
-test/api_proxy_profiles_test.go
 utils.go

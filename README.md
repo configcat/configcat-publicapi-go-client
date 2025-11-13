@@ -289,6 +289,7 @@ Class | Method | HTTP request | Description
  - [PermissionGroupModel](docs/PermissionGroupModel.md)
  - [PredefinedVariationModel](docs/PredefinedVariationModel.md)
  - [PredefinedVariationValueModel](docs/PredefinedVariationValueModel.md)
+ - [PredefinedVariationsModel](docs/PredefinedVariationsModel.md)
  - [PreferencesModel](docs/PreferencesModel.md)
  - [PrerequisiteComparator](docs/PrerequisiteComparator.md)
  - [PrerequisiteFlagConditionModel](docs/PrerequisiteFlagConditionModel.md)

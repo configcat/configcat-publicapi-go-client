@@ -6045,7 +6045,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SettingModel"
+                $ref: "#/components/schemas/PredefinedVariationsModel"
           description: When the update was successful.
         "400":
           description: Bad request.
@@ -9349,6 +9349,41 @@ components:
       - doubleValue
       - intValue
       - stringValue
+      type: object
+    PredefinedVariationsModel:
+      example:
+        maxPredefinedVariations: 0
+        predefinedVariations:
+        - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hint: hint
+          name: name
+          value:
+            stringValue: stringValue
+            intValue: 1
+            boolValue: true
+            doubleValue: 5.962133916683182
+        - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hint: hint
+          name: name
+          value:
+            stringValue: stringValue
+            intValue: 1
+            boolValue: true
+            doubleValue: 5.962133916683182
+      properties:
+        predefinedVariations:
+          description: The Feature Flag or Setting's Variations.
+          items:
+            $ref: "#/components/schemas/PredefinedVariationModel"
+          type: array
+        maxPredefinedVariations:
+          description: The maximum number of predefined variations allowed for the
+            Feature Flag or Setting.
+          format: int32
+          type: integer
+      required:
+      - maxPredefinedVariations
+      - predefinedVariations
       type: object
     PreferencesModel:
       example:
