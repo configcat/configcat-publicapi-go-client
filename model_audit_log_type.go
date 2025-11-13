@@ -49,7 +49,7 @@ const (
 	AUDITLOGTYPE_SETTINGS_REORDERED AuditLogType = "settingsReordered"
 	AUDITLOGTYPE_PREDEFINED_VARIATIONS_CHANGED AuditLogType = "predefinedVariationsChanged"
 	AUDITLOGTYPE_SETTING_CONVERTED_TO_PREDEFINED_VARIATIONS AuditLogType = "settingConvertedToPredefinedVariations"
-	AUDITLOGTYPE_SETTING_CONVERTED_TO_CUSTOM_VALUES AuditLogType = "settingConvertedToCustomValues"
+	AUDITLOGTYPE_SETTING_CONVERTED_TO_FREE_FORM_VALUES AuditLogType = "settingConvertedToFreeFormValues"
 	AUDITLOGTYPE_SETTING_VALUE_CHANGED AuditLogType = "settingValueChanged"
 	AUDITLOGTYPE_WEB_HOOK_CREATED AuditLogType = "webHookCreated"
 	AUDITLOGTYPE_WEB_HOOK_CHANGED AuditLogType = "webHookChanged"
@@ -156,7 +156,7 @@ var AllowedAuditLogTypeEnumValues = []AuditLogType{
 	"settingsReordered",
 	"predefinedVariationsChanged",
 	"settingConvertedToPredefinedVariations",
-	"settingConvertedToCustomValues",
+	"settingConvertedToFreeFormValues",
 	"settingValueChanged",
 	"webHookCreated",
 	"webHookChanged",

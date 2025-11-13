@@ -368,7 +368,7 @@ Name | Type | Description  | Notes
 
 ## UpdatePredefinedVariations
 
-> SettingModel UpdatePredefinedVariations(ctx, settingId).UpdatePredefinedVariationsRequest(updatePredefinedVariationsRequest).Execute()
+> PredefinedVariationsModel UpdatePredefinedVariations(ctx, settingId).UpdatePredefinedVariationsRequest(updatePredefinedVariationsRequest).Execute()
 
 Update predefined variations (Beta)
 
@@ -397,7 +397,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsAPI.UpdatePredefinedVariations``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `UpdatePredefinedVariations`: SettingModel
+	// response from `UpdatePredefinedVariations`: PredefinedVariationsModel
 	fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsAPI.UpdatePredefinedVariations`: %v\n", resp)
 }
 ```
@@ -422,7 +422,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SettingModel**](SettingModel.md)
+[**PredefinedVariationsModel**](PredefinedVariationsModel.md)
 
 ### Authorization
 

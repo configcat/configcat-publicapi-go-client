@@ -166,7 +166,271 @@ tags:
 
     <a href="https://configcat.com/docs/advanced/code-references/overview/" target="_blank" rel="noopener noreferrer">Here</a> you can read more about the concept of Code References.
   name: Code References
+- description: |-
+    With these endpoints you can manage your Organization's Proxy Profiles.
+
+    <a href="https://configcat.com/docs/advanced/proxy/proxy-overview/#1-automatic-configuration-with-proxy-profiles" target="_blank" rel="noopener noreferrer">Here</a> you can read more about Proxy Profiles.
+  name: Proxy Profiles
 paths:
+  /v1/proxy-profiles/{proxyProfileId}:
+    delete:
+      description: This endpoint removes a Proxy Profile identified by the `proxyProfileId`
+        parameter.
+      operationId: delete-proxy-profile
+      parameters:
+      - description: The identifier of the Proxy Profile.
+        explode: false
+        in: path
+        name: proxyProfileId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: When the delete was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Delete Proxy Profile
+      tags:
+      - Proxy Profiles
+    get:
+      description: "This endpoint returns a Proxy Profile \nidentified by the `proxyProfileId`."
+      operationId: get-proxy-profile
+      parameters:
+      - description: The identifier of the Proxy Profile.
+        explode: false
+        in: path
+        name: proxyProfileId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProxyProfileModel"
+          description: "When everything is ok, the Proxy Profile is returned."
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Get Proxy Profile
+      tags:
+      - Proxy Profiles
+    patch:
+      description: "This endpoint updates a Proxy Profile identified by the `proxyProfileId`\
+        \ parameter with a collection of [JSON Patch](https://jsonpatch.com) operations.\n\
+        \nThe advantage of using JSON Patch is that you can describe individual update\
+        \ operations on a resource without touching attributes that you don't want\
+        \ to change.\n\nFor example: We have the following resource.\n```json\n{\n\
+        \  \"proxyProfileId\": \"4ebe288d-6415-44a8-85c8-7b9f78316a86\",\n  \"name\"\
+        : \"production\",\n  \"description\": \"profile for production environments\"\
+        ,\n  \"lastAccessedAt\": \"2019-08-24T14:15:22Z\",\n  \"connectionPreferences\"\
+        : {\n    \"sdkPollInterval\": 60,\n    \"webhookNotification\": null\n  },\n\
+        \  \"sdkKeySelectionRules\": []\n}\n```\nIf we send an update request body\
+        \ as below (it changes the `sdkPollInterval` field and adds a new Proxy Webhook\
+        \ URL):\n```json\n[\n  {\n    \"op\": \"replace\", \n    \"path\": \"/connectionPreferences/sdkPollInterval\"\
+        , \n    \"value\": 120\n  }, \n  {\n    \"op\": \"add\",\n    \"path\": \"\
+        /connectionPreferences/webhookNotification\",\n    \"value\": {\n      \"\
+        webhookProxyUrl\": \"https://my-proxy-url.com\"\n    }\n  }\n]\n```\nOnly\
+        \ the `sdkPollInterval` and `webhookProxyUrl` are updated and all the other\
+        \ attributes remain unchanged.\nSo we get a response like this:\n```json\n\
+        {\n  \"proxyProfileId\": \"4ebe288d-6415-44a8-85c8-7b9f78316a86\",\n  \"name\"\
+        : \"production\",\n  \"description\": \"profile for production environments\"\
+        ,\n  \"lastAccessedAt\": \"2019-08-24T14:15:22Z\",\n  \"connectionPreferences\"\
+        : {\n    \"sdkPollInterval\": 120,\n    \"webhookNotification\": {\n     \
+        \ \"webhookProxyUrl\": \"https://my-proxy-url.com\",\n      \"signingKey1\"\
+        : \"<generated-signing-key>\",\n      \"signingKey2\": null\n    }\n  },\n\
+        \  \"sdkKeySelectionRules\": []\n}\n```"
+      operationId: update-proxy-profile
+      parameters:
+      - description: The identifier of the Proxy Profile.
+        explode: false
+        in: path
+        name: proxyProfileId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              add SDK key selection rule:
+                description: This example adds a selection rule to your proxy profile
+                  that includes all current and future environments that has `Prod`
+                  in its name.
+                value:
+                - op: add
+                  path: /sdkKeySelectionRules/-
+                  value:
+                    environmentNameMatchFilter: '*Prod*'
+              change the SDK poll interval:
+                description: This example changes the SDK poll interval to 120 seconds.
+                value:
+                - op: replace
+                  path: /connectionPreferences/sdkPollInterval
+                  value: 120
+              set webhook url:
+                description: This example sets the Proxy webhook URL.
+                value:
+                - op: add
+                  path: /connectionPreferences/webhookNotification
+                  value:
+                    webhookProxyUrl: https://my-proxy-url.com
+              disconnect Proxy from receiving notifications:
+                description: This example disconnects a Proxy from receiving notifications.
+                value:
+                - op: remove
+                  path: /connectionPreferences/webhookNotification
+            schema:
+              items:
+                $ref: "#/components/schemas/JsonPatchOperation"
+              type: array
+          text/json:
+            examples:
+              add SDK key selection rule:
+                description: This example adds a selection rule to your proxy profile
+                  that includes all current and future environments that has `Prod`
+                  in its name.
+                value:
+                - op: add
+                  path: /sdkKeySelectionRules/-
+                  value:
+                    environmentNameMatchFilter: '*Prod*'
+              change the SDK poll interval:
+                description: This example changes the SDK poll interval to 120 seconds.
+                value:
+                - op: replace
+                  path: /connectionPreferences/sdkPollInterval
+                  value: 120
+              set webhook url:
+                description: This example sets the Proxy webhook URL.
+                value:
+                - op: add
+                  path: /connectionPreferences/webhookNotification
+                  value:
+                    webhookProxyUrl: https://my-proxy-url.com
+              disconnect Proxy from receiving notifications:
+                description: This example disconnects a Proxy from receiving notifications.
+                value:
+                - op: remove
+                  path: /connectionPreferences/webhookNotification
+            schema:
+              items:
+                $ref: "#/components/schemas/JsonPatchOperation"
+              type: array
+          application/*+json:
+            examples:
+              add SDK key selection rule:
+                description: This example adds a selection rule to your proxy profile
+                  that includes all current and future environments that has `Prod`
+                  in its name.
+                value:
+                - op: add
+                  path: /sdkKeySelectionRules/-
+                  value:
+                    environmentNameMatchFilter: '*Prod*'
+              change the SDK poll interval:
+                description: This example changes the SDK poll interval to 120 seconds.
+                value:
+                - op: replace
+                  path: /connectionPreferences/sdkPollInterval
+                  value: 120
+              set webhook url:
+                description: This example sets the Proxy webhook URL.
+                value:
+                - op: add
+                  path: /connectionPreferences/webhookNotification
+                  value:
+                    webhookProxyUrl: https://my-proxy-url.com
+              disconnect Proxy from receiving notifications:
+                description: This example disconnects a Proxy from receiving notifications.
+                value:
+                - op: remove
+                  path: /connectionPreferences/webhookNotification
+            schema:
+              items:
+                $ref: "#/components/schemas/JsonPatchOperation"
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProxyProfileModel"
+          description: When the update was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Update Proxy Profile
+      tags:
+      - Proxy Profiles
+    put:
+      description: |-
+        This endpoint replaces a Proxy Profile identified by the `proxyProfileId` parameter.
+
+        **Important:** As this endpoint is doing a complete replace, it's important to set every other attribute that you don't
+        want to change in its original state. Not listing one means it will reset.
+      operationId: replace-proxy-profile
+      parameters:
+      - description: The identifier of the Proxy Profile.
+        explode: false
+        in: path
+        name: proxyProfileId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdateProxyProfileRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdateProxyProfileRequest"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdateProxyProfileRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProxyProfileModel"
+          description: When the replace was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Replace Proxy Profile
+      tags:
+      - Proxy Profiles
   /v1/organizations:
     get:
       description: This endpoint returns the list of the Organizations that belongs
@@ -207,6 +471,82 @@ paths:
       summary: List Products
       tags:
       - Products
+  /v1/organizations/{organizationId}/proxy-profiles:
+    get:
+      description: This endpoint returns the list of Proxy profiles for the given
+        Organization identified by the `organizationId` parameter.
+      operationId: get-proxy-profiles
+      parameters:
+      - description: The identifier of the Organization.
+        explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProxyProfileListModel"
+          description: ""
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: List Proxy Profiles
+      tags:
+      - Proxy Profiles
+    post:
+      description: |-
+        This endpoint creates a new Proxy Profile in the given Organization
+        identified by the `organizationId` parameter, which can be obtained from the [List Organizations](#operation/get-organizations) endpoint.
+      operationId: create-proxy-profile
+      parameters:
+      - description: The identifier of the Organization.
+        explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdateProxyProfileRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdateProxyProfileRequest"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateOrUpdateProxyProfileRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProxyProfileModel"
+          description: When the creation was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Create Proxy Profile
+      tags:
+      - Proxy Profiles
   /v1/products/{productId}/tags:
     get:
       description: "This endpoint returns the list of the Tags in a \nspecified Product,\
@@ -5030,6 +5370,39 @@ paths:
       summary: Get Webhook Signing Keys
       tags:
       - Webhooks
+  /v1/proxy-profiles/{proxyProfileId}/sdk-keys:
+    get:
+      description: "This endpoint returns the list of SDK keys selected for a Proxy\
+        \ Profile \nidentified by the `proxyProfileId`."
+      operationId: get-proxy-profile-sdk-keys
+      parameters:
+      - description: The identifier of the Proxy Profile.
+        explode: false
+        in: path
+        name: proxyProfileId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProxyProfileSdkKeysListModel"
+          description: "When everything is ok, the SDK keys selected for the Proxy\
+            \ Profile are returned."
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Get selected SDK keys
+      tags:
+      - Proxy Profiles
   /v1/environments/{environmentId}/settings/{settingId}/integrationLinks/{integrationLinkType}/{key}:
     delete:
       description: ""
@@ -5358,6 +5731,85 @@ paths:
       summary: Delete Reference reports
       tags:
       - Code References
+  /v1/proxy-profiles/{proxyProfileId}/sdk-keys/deselect:
+    post:
+      description: |-
+        This endpoint removes the given list of Config / Environment pairs' SDK Keys from a Proxy Profile
+        identified by the `proxyProfileId`.
+      operationId: deselect-proxy-profile-sdk-keys
+      parameters:
+      - description: The identifier of the Proxy Profile.
+        explode: false
+        in: path
+        name: proxyProfileId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProxyProfileSdkKeysRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ProxyProfileSdkKeysRequest"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ProxyProfileSdkKeysRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProxyProfileSdkKeysListModel"
+          description: When the deselection was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "403":
+          description: Forbidden. When selection rules are applied to the Proxy Profile.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Deselect SDK keys
+      tags:
+      - Proxy Profiles
+  /v1/proxy-profiles/{proxyProfileId}/secret:
+    post:
+      description: This endpoint (re)generates a secret token for a Proxy Profile
+        identified by the `proxyProfileId` parameter.
+      operationId: generate-proxy-profile-secret
+      parameters:
+      - description: The identifier of the Proxy Profile.
+        explode: false
+        in: path
+        name: proxyProfileId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProxyProfileSecretModel"
+          description: When the generation was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Generate Secret
+      tags:
+      - Proxy Profiles
   /v1/products/{productId}/members/invite:
     post:
       description: This endpoint invites a Member into the given Product identified
@@ -5426,6 +5878,52 @@ paths:
       summary: Upload References
       tags:
       - Code References
+  /v1/proxy-profiles/{proxyProfileId}/sdk-keys/select:
+    post:
+      description: "This endpoint adds the given list of Config / Environment pairs'\
+        \ SDK Keys to a Proxy Profile \nidentified by the `proxyProfileId`."
+      operationId: select-proxy-profile-sdk-keys
+      parameters:
+      - description: The identifier of the Proxy Profile.
+        explode: false
+        in: path
+        name: proxyProfileId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProxyProfileSdkKeysRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ProxyProfileSdkKeysRequest"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ProxyProfileSdkKeysRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProxyProfileSdkKeysListModel"
+          description: When the selection was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "403":
+          description: Forbidden. When selection rules are applied to the Proxy Profile.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Select SDK keys
+      tags:
+      - Proxy Profiles
   /v1/organizations/{organizationId}/members/{userId}:
     delete:
       description: "This endpoint removes a Member identified by the `userId` from\
@@ -5547,7 +6045,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SettingModel"
+                $ref: "#/components/schemas/PredefinedVariationsModel"
           description: When the update was successful.
         "400":
           description: Bad request.
@@ -5769,7 +6267,7 @@ components:
       - settingsReordered
       - predefinedVariationsChanged
       - settingConvertedToPredefinedVariations
-      - settingConvertedToCustomValues
+      - settingConvertedToFreeFormValues
       - settingValueChanged
       - webHookCreated
       - webHookChanged
@@ -6911,6 +7409,26 @@ components:
       - clientKey
       - jiraJwtToken
       type: object
+    ConnectionPreferences:
+      description: "The connection preferences for the proxy profile, including SDK\
+        \ poll interval and webhook proxy URL."
+      example:
+        webhookNotification: ""
+        sdkPollInterval: 0
+      properties:
+        sdkPollInterval:
+          description: The SDK poll interval in seconds that determines how often
+            SDKs should fetch config JSON updates.
+          format: int32
+          type: integer
+        webhookNotification:
+          allOf:
+          - $ref: "#/components/schemas/WebhookNotification"
+          nullable: true
+      required:
+      - sdkPollInterval
+      - webhookNotification
+      type: object
     CreateConfigRequest:
       example:
         name: name
@@ -7021,6 +7539,23 @@ components:
       - name
       - parameters
       type: object
+    CreateOrUpdateConnectionPreferences:
+      description: "The preferences related to a connection, including polling intervals\
+        \ and webhook proxy configurations."
+      properties:
+        sdkPollInterval:
+          description: "The SDK poll interval in seconds. If not specified, a default\
+            \ value (60) will be used."
+          format: int32
+          maximum: 2147483647
+          minimum: 30
+          nullable: true
+          type: integer
+        webhookNotification:
+          allOf:
+          - $ref: "#/components/schemas/CreateOrUpdateWebhookNotification"
+          nullable: true
+      type: object
     CreateOrUpdateEnvironmentAccessModel:
       example:
         environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -7032,6 +7567,64 @@ components:
           type: string
         environmentAccessType:
           $ref: "#/components/schemas/EnvironmentAccessType"
+      type: object
+    CreateOrUpdateProxyProfileRequest:
+      example:
+        name: name
+        connectionPreferences: ""
+        description: description
+        sdkKeySelectionRules:
+        - environmentIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          configNameMatchFilter: configNameMatchFilter
+          kind: include
+          configIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          productIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          environmentNameMatchFilter: environmentNameMatchFilter
+          productNameMatchFilter: productNameMatchFilter
+        - environmentIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          configNameMatchFilter: configNameMatchFilter
+          kind: include
+          configIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          productIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          environmentNameMatchFilter: environmentNameMatchFilter
+          productNameMatchFilter: productNameMatchFilter
+      properties:
+        name:
+          description: The name of the proxy profile.
+          maxLength: 255
+          minLength: 0
+          type: string
+        description:
+          description: The description of the proxy profile.
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+        connectionPreferences:
+          allOf:
+          - $ref: "#/components/schemas/CreateOrUpdateConnectionPreferences"
+          nullable: true
+        sdkKeySelectionRules:
+          description: A collection of selection rules that determine the SDK keys
+            applicable for a proxy profile.
+          items:
+            $ref: "#/components/schemas/UpdateProxyProfileSelectionRule"
+          nullable: true
+          type: array
+      required:
+      - name
+      type: object
+    CreateOrUpdateWebhookNotification:
+      description: "The preferences related to a connection, including polling intervals\
+        \ and webhook proxy configurations."
+      properties:
+        webhookProxyUrl:
+          description: The webhook proxy URL for receiving config JSON change notifications.
+          maxLength: 1000
+          minLength: 7
+          type: string
+      required:
+      - webhookProxyUrl
       type: object
     CreatePermissionGroupRequest:
       example:
@@ -8757,6 +9350,41 @@ components:
       - intValue
       - stringValue
       type: object
+    PredefinedVariationsModel:
+      example:
+        maxPredefinedVariations: 0
+        predefinedVariations:
+        - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hint: hint
+          name: name
+          value:
+            stringValue: stringValue
+            intValue: 1
+            boolValue: true
+            doubleValue: 5.962133916683182
+        - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hint: hint
+          name: name
+          value:
+            stringValue: stringValue
+            intValue: 1
+            boolValue: true
+            doubleValue: 5.962133916683182
+      properties:
+        predefinedVariations:
+          description: The Feature Flag or Setting's Variations.
+          items:
+            $ref: "#/components/schemas/PredefinedVariationModel"
+          type: array
+        maxPredefinedVariations:
+          description: The maximum number of predefined variations allowed for the
+            Feature Flag or Setting.
+          format: int32
+          type: integer
+      required:
+      - maxPredefinedVariations
+      - predefinedVariations
+      type: object
     PreferencesModel:
       example:
         keyGenerationMode: camelCase
@@ -8862,6 +9490,273 @@ components:
       - organization
       - productId
       - reasonRequired
+      type: object
+    ProxyProfileListModel:
+      example:
+        profiles:
+        - proxyProfileId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          lastAccessedAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          connectionPreferences:
+            webhookNotification: ""
+            sdkPollInterval: 0
+          description: description
+          sdkKeySelectionRules:
+          - environmentIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            configNameMatchFilter: configNameMatchFilter
+            kind: include
+            configIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            productIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            environmentNameMatchFilter: environmentNameMatchFilter
+            productNameMatchFilter: productNameMatchFilter
+          - environmentIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            configNameMatchFilter: configNameMatchFilter
+            kind: include
+            configIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            productIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            environmentNameMatchFilter: environmentNameMatchFilter
+            productNameMatchFilter: productNameMatchFilter
+        - proxyProfileId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          lastAccessedAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          connectionPreferences:
+            webhookNotification: ""
+            sdkPollInterval: 0
+          description: description
+          sdkKeySelectionRules:
+          - environmentIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            configNameMatchFilter: configNameMatchFilter
+            kind: include
+            configIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            productIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            environmentNameMatchFilter: environmentNameMatchFilter
+            productNameMatchFilter: productNameMatchFilter
+          - environmentIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            configNameMatchFilter: configNameMatchFilter
+            kind: include
+            configIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            productIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            environmentNameMatchFilter: environmentNameMatchFilter
+            productNameMatchFilter: productNameMatchFilter
+      properties:
+        profiles:
+          description: The list of proxy profiles.
+          items:
+            $ref: "#/components/schemas/ProxyProfileModel"
+          type: array
+      required:
+      - profiles
+      type: object
+    ProxyProfileModel:
+      example:
+        proxyProfileId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        lastAccessedAt: 2000-01-23T04:56:07.000+00:00
+        name: name
+        connectionPreferences:
+          webhookNotification: ""
+          sdkPollInterval: 0
+        description: description
+        sdkKeySelectionRules:
+        - environmentIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          configNameMatchFilter: configNameMatchFilter
+          kind: include
+          configIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          productIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          environmentNameMatchFilter: environmentNameMatchFilter
+          productNameMatchFilter: productNameMatchFilter
+        - environmentIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          configNameMatchFilter: configNameMatchFilter
+          kind: include
+          configIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          productIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          environmentNameMatchFilter: environmentNameMatchFilter
+          productNameMatchFilter: productNameMatchFilter
+      properties:
+        proxyProfileId:
+          description: The unique identifier of the proxy profile.
+          format: uuid
+          type: string
+        name:
+          description: The name of the proxy profile.
+          type: string
+        description:
+          description: The description of the proxy profile.
+          nullable: true
+          type: string
+        lastAccessedAt:
+          description: The date and time when the proxy profile was last accessed.
+          format: date-time
+          nullable: true
+          type: string
+        connectionPreferences:
+          $ref: "#/components/schemas/ConnectionPreferences"
+        sdkKeySelectionRules:
+          items:
+            $ref: "#/components/schemas/ProxyProfileSelectionRule"
+          type: array
+      required:
+      - connectionPreferences
+      - description
+      - lastAccessedAt
+      - name
+      - proxyProfileId
+      - sdkKeySelectionRules
+      type: object
+    ProxyProfileSdkKeyItem:
+      example:
+        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        sdkId: sdkId
+        configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        secondarySdkKey: secondarySdkKey
+        primarySdkKey: primarySdkKey
+      properties:
+        primarySdkKey:
+          description: The primary SDK Key of the Config / Environment pair selected
+            for the Proxy Profile.
+          type: string
+        secondarySdkKey:
+          description: The secondary SDK Key of the Config / Environment pair selected
+            for the Proxy Profile.
+          nullable: true
+          type: string
+        sdkId:
+          description: The SDK ID identifying the Config / Environment pair selected
+            for the Proxy Profile.
+          type: string
+        configId:
+          description: The identifier of the Config associated with the SDK key.
+          format: uuid
+          type: string
+        environmentId:
+          description: The identifier of the Environment associated with the SDK key.
+          format: uuid
+          type: string
+      required:
+      - configId
+      - environmentId
+      - primarySdkKey
+      - sdkId
+      - secondarySdkKey
+      type: object
+    ProxyProfileSdkKeyRequestItem:
+      example:
+        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        configId:
+          description: The identifier of the Config.
+          format: uuid
+          nullable: true
+          type: string
+        environmentId:
+          description: The identifier of the Environment.
+          format: uuid
+          nullable: true
+          type: string
+      type: object
+    ProxyProfileSdkKeysListModel:
+      example:
+        items:
+        - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          sdkId: sdkId
+          configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          secondarySdkKey: secondarySdkKey
+          primarySdkKey: primarySdkKey
+        - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          sdkId: sdkId
+          configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          secondarySdkKey: secondarySdkKey
+          primarySdkKey: primarySdkKey
+      properties:
+        items:
+          description: The list of SDK keys (with additional metadata) selected for
+            the Proxy Profile.
+          items:
+            $ref: "#/components/schemas/ProxyProfileSdkKeyItem"
+          type: array
+      required:
+      - items
+      type: object
+    ProxyProfileSdkKeysRequest:
+      example:
+        items:
+        - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        items:
+          description: "The list of Config / Environment pairs. By only setting a\
+            \ `configId` means all Environments of that Config will be included. Similarly,\
+            \ by only setting an `environmentId` means all Configs with that Environment\
+            \ will be included."
+          items:
+            $ref: "#/components/schemas/ProxyProfileSdkKeyRequestItem"
+          type: array
+      required:
+      - items
+      type: object
+    ProxyProfileSecretModel:
+      example:
+        secretToken: secretToken
+      properties:
+        secretToken:
+          description: The secret token associated with the proxy profile.
+          type: string
+      required:
+      - secretToken
+      type: object
+    ProxyProfileSelectionRule:
+      example:
+        environmentIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        configNameMatchFilter: configNameMatchFilter
+        kind: include
+        configIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        productIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        environmentNameMatchFilter: environmentNameMatchFilter
+        productNameMatchFilter: productNameMatchFilter
+      properties:
+        kind:
+          $ref: "#/components/schemas/SelectionRuleKind"
+        productIdFilter:
+          description: Defines the filter for matching Products by their unique identifier.
+          format: uuid
+          nullable: true
+          type: string
+        configIdFilter:
+          description: Defines the filter for matching Configs by their unique identifier.
+          format: uuid
+          nullable: true
+          type: string
+        environmentIdFilter:
+          description: Defines the filter for matching Environments by their unique
+            identifier.
+          format: uuid
+          nullable: true
+          type: string
+        productNameMatchFilter:
+          description: Specifies a filter to match Product names in the proxy profile
+            selection rule. It accepts wildcards (*).
+          nullable: true
+          type: string
+        configNameMatchFilter:
+          description: Specifies a filter to match Config names in the proxy profile
+            selection rule. It accepts wildcards (*).
+          nullable: true
+          type: string
+        environmentNameMatchFilter:
+          description: Specifies a filter to match Environment names in the proxy
+            profile selection rule. It accepts wildcards (*).
+          nullable: true
+          type: string
+      required:
+      - configIdFilter
+      - configNameMatchFilter
+      - environmentIdFilter
+      - environmentNameMatchFilter
+      - kind
+      - productIdFilter
+      - productNameMatchFilter
       type: object
     ReasonRequiredEnvironmentModel:
       example:
@@ -9346,6 +10241,13 @@ components:
       - segmentId
       - updatedAt
       type: object
+    SelectionRuleKind:
+      description: Defines the types of SDK selection rules that can be applied to
+        proxy profiles.
+      enum:
+      - include
+      - exclude
+      type: string
     SettingDataModel:
       description: Metadata of a Feature Flag or Setting.
       example:
@@ -11154,6 +12056,56 @@ components:
           nullable: true
           type: integer
       type: object
+    UpdateProxyProfileSelectionRule:
+      example:
+        environmentIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        configNameMatchFilter: configNameMatchFilter
+        kind: include
+        configIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        productIdFilter: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        environmentNameMatchFilter: environmentNameMatchFilter
+        productNameMatchFilter: productNameMatchFilter
+      properties:
+        kind:
+          $ref: "#/components/schemas/SelectionRuleKind"
+        productIdFilter:
+          description: Defines the filter for matching Products by their unique identifier.
+          format: uuid
+          nullable: true
+          type: string
+        configIdFilter:
+          description: Defines the filter for matching Configs by their unique identifier.
+          format: uuid
+          nullable: true
+          type: string
+        environmentIdFilter:
+          description: Defines the filter for matching Environments by their unique
+            identifier.
+          format: uuid
+          nullable: true
+          type: string
+        productNameMatchFilter:
+          description: Specifies a filter to match Product names in the proxy profile
+            selection rule. It accepts wildcards (*).
+          maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+        configNameMatchFilter:
+          description: Specifies a filter to match Config names in the proxy profile
+            selection rule. It accepts wildcards (*).
+          maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+        environmentNameMatchFilter:
+          description: Specifies a filter to match Environment names in the proxy
+            profile selection rule. It accepts wildcards (*).
+          maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+      type: object
     UpdateReasonRequiredEnvironmentModel:
       example:
         environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -11774,6 +12726,27 @@ components:
       - key
       - value
       type: object
+    WebhookNotification:
+      description: "The webhook notification settings, including the proxy URL and\
+        \ signing keys."
+      properties:
+        webhookProxyUrl:
+          description: The webhook proxy URL for receiving config JSON change notifications.
+          type: string
+        signingKey1:
+          description: The primary signing key used for verifying the authenticity
+            of webhook requests.
+          type: string
+        signingKey2:
+          description: The secondary signing key used for verifying the authenticity
+            of webhook requests.
+          nullable: true
+          type: string
+      required:
+      - signingKey1
+      - signingKey2
+      - webhookProxyUrl
+      type: object
     WebhookResponseModel:
       example:
         webHookHeaders:
@@ -11873,6 +12846,7 @@ x-tagGroups:
   - Webhooks
   - Integrations
   - Code References
+  - Proxy Profiles
 - name: Membership
   tags:
   - Organizations

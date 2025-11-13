@@ -82,6 +82,8 @@ type APIClient struct {
 
 	ProductsAPI *ProductsAPIService
 
+	ProxyProfilesAPI *ProxyProfilesAPIService
+
 	SDKKeysAPI *SDKKeysAPIService
 
 	SegmentsAPI *SegmentsAPIService
@@ -125,6 +127,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.OrganizationsAPI = (*OrganizationsAPIService)(&c.common)
 	c.PermissionGroupsAPI = (*PermissionGroupsAPIService)(&c.common)
 	c.ProductsAPI = (*ProductsAPIService)(&c.common)
+	c.ProxyProfilesAPI = (*ProxyProfilesAPIService)(&c.common)
 	c.SDKKeysAPI = (*SDKKeysAPIService)(&c.common)
 	c.SegmentsAPI = (*SegmentsAPIService)(&c.common)
 	c.TagsAPI = (*TagsAPIService)(&c.common)

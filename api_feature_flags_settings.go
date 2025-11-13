@@ -572,7 +572,7 @@ func (r FeatureFlagsSettingsAPIUpdatePredefinedVariationsRequest) UpdatePredefin
 	return r
 }
 
-func (r FeatureFlagsSettingsAPIUpdatePredefinedVariationsRequest) Execute() (*SettingModel, *http.Response, error) {
+func (r FeatureFlagsSettingsAPIUpdatePredefinedVariationsRequest) Execute() (*PredefinedVariationsModel, *http.Response, error) {
 	return r.ApiService.UpdatePredefinedVariationsExecute(r)
 }
 
@@ -598,13 +598,13 @@ func (a *FeatureFlagsSettingsAPIService) UpdatePredefinedVariations(ctx context.
 }
 
 // Execute executes the request
-//  @return SettingModel
-func (a *FeatureFlagsSettingsAPIService) UpdatePredefinedVariationsExecute(r FeatureFlagsSettingsAPIUpdatePredefinedVariationsRequest) (*SettingModel, *http.Response, error) {
+//  @return PredefinedVariationsModel
+func (a *FeatureFlagsSettingsAPIService) UpdatePredefinedVariationsExecute(r FeatureFlagsSettingsAPIUpdatePredefinedVariationsRequest) (*PredefinedVariationsModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPut
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *SettingModel
+		localVarReturnValue  *PredefinedVariationsModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FeatureFlagsSettingsAPIService.UpdatePredefinedVariations")
