@@ -59,7 +59,7 @@
 
 * `SETTING_CONVERTED_TO_PREDEFINED_VARIATIONS` (value: `"settingConvertedToPredefinedVariations"`)
 
-* `SETTING_CONVERTED_TO_CUSTOM_VALUES` (value: `"settingConvertedToCustomValues"`)
+* `SETTING_CONVERTED_TO_FREE_FORM_VALUES` (value: `"settingConvertedToFreeFormValues"`)
 
 * `SETTING_VALUE_CHANGED` (value: `"settingValueChanged"`)
 

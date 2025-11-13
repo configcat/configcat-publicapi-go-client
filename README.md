@@ -187,6 +187,16 @@ Class | Method | HTTP request | Description
 *ProductsAPI* | [**GetProducts**](docs/ProductsAPI.md#getproducts) | **Get** /v1/products | List Products
 *ProductsAPI* | [**UpdateProduct**](docs/ProductsAPI.md#updateproduct) | **Put** /v1/products/{productId} | Update Product
 *ProductsAPI* | [**UpdateProductPreferences**](docs/ProductsAPI.md#updateproductpreferences) | **Post** /v1/products/{productId}/preferences | Update Product Preferences
+*ProxyProfilesAPI* | [**CreateProxyProfile**](docs/ProxyProfilesAPI.md#createproxyprofile) | **Post** /v1/organizations/{organizationId}/proxy-profiles | Create Proxy Profile
+*ProxyProfilesAPI* | [**DeleteProxyProfile**](docs/ProxyProfilesAPI.md#deleteproxyprofile) | **Delete** /v1/proxy-profiles/{proxyProfileId} | Delete Proxy Profile
+*ProxyProfilesAPI* | [**DeselectProxyProfileSdkKeys**](docs/ProxyProfilesAPI.md#deselectproxyprofilesdkkeys) | **Post** /v1/proxy-profiles/{proxyProfileId}/sdk-keys/deselect | Deselect SDK keys
+*ProxyProfilesAPI* | [**GenerateProxyProfileSecret**](docs/ProxyProfilesAPI.md#generateproxyprofilesecret) | **Post** /v1/proxy-profiles/{proxyProfileId}/secret | Generate Secret
+*ProxyProfilesAPI* | [**GetProxyProfile**](docs/ProxyProfilesAPI.md#getproxyprofile) | **Get** /v1/proxy-profiles/{proxyProfileId} | Get Proxy Profile
+*ProxyProfilesAPI* | [**GetProxyProfileSdkKeys**](docs/ProxyProfilesAPI.md#getproxyprofilesdkkeys) | **Get** /v1/proxy-profiles/{proxyProfileId}/sdk-keys | Get selected SDK keys
+*ProxyProfilesAPI* | [**GetProxyProfiles**](docs/ProxyProfilesAPI.md#getproxyprofiles) | **Get** /v1/organizations/{organizationId}/proxy-profiles | List Proxy Profiles
+*ProxyProfilesAPI* | [**ReplaceProxyProfile**](docs/ProxyProfilesAPI.md#replaceproxyprofile) | **Put** /v1/proxy-profiles/{proxyProfileId} | Replace Proxy Profile
+*ProxyProfilesAPI* | [**SelectProxyProfileSdkKeys**](docs/ProxyProfilesAPI.md#selectproxyprofilesdkkeys) | **Post** /v1/proxy-profiles/{proxyProfileId}/sdk-keys/select | Select SDK keys
+*ProxyProfilesAPI* | [**UpdateProxyProfile**](docs/ProxyProfilesAPI.md#updateproxyprofile) | **Patch** /v1/proxy-profiles/{proxyProfileId} | Update Proxy Profile
 *SDKKeysAPI* | [**GetSdkKeys**](docs/SDKKeysAPI.md#getsdkkeys) | **Get** /v1/configs/{configId}/environments/{environmentId} | Get SDK Key
 *SegmentsAPI* | [**CreateSegment**](docs/SegmentsAPI.md#createsegment) | **Post** /v1/products/{productId}/segments | Create Segment
 *SegmentsAPI* | [**DeleteSegment**](docs/SegmentsAPI.md#deletesegment) | **Delete** /v1/segments/{segmentId} | Delete Segment
@@ -227,10 +237,14 @@ Class | Method | HTTP request | Description
  - [ConfigSettingValueModel](docs/ConfigSettingValueModel.md)
  - [ConfigSettingValuesModel](docs/ConfigSettingValuesModel.md)
  - [ConnectRequest](docs/ConnectRequest.md)
+ - [ConnectionPreferences](docs/ConnectionPreferences.md)
  - [CreateConfigRequest](docs/CreateConfigRequest.md)
  - [CreateEnvironmentModel](docs/CreateEnvironmentModel.md)
  - [CreateIntegrationModel](docs/CreateIntegrationModel.md)
+ - [CreateOrUpdateConnectionPreferences](docs/CreateOrUpdateConnectionPreferences.md)
  - [CreateOrUpdateEnvironmentAccessModel](docs/CreateOrUpdateEnvironmentAccessModel.md)
+ - [CreateOrUpdateProxyProfileRequest](docs/CreateOrUpdateProxyProfileRequest.md)
+ - [CreateOrUpdateWebhookNotification](docs/CreateOrUpdateWebhookNotification.md)
  - [CreatePermissionGroupRequest](docs/CreatePermissionGroupRequest.md)
  - [CreatePredefinedVariationModel](docs/CreatePredefinedVariationModel.md)
  - [CreatePredefinedVariationValueModel](docs/CreatePredefinedVariationValueModel.md)
@@ -279,6 +293,14 @@ Class | Method | HTTP request | Description
  - [PrerequisiteComparator](docs/PrerequisiteComparator.md)
  - [PrerequisiteFlagConditionModel](docs/PrerequisiteFlagConditionModel.md)
  - [ProductModel](docs/ProductModel.md)
+ - [ProxyProfileListModel](docs/ProxyProfileListModel.md)
+ - [ProxyProfileModel](docs/ProxyProfileModel.md)
+ - [ProxyProfileSdkKeyItem](docs/ProxyProfileSdkKeyItem.md)
+ - [ProxyProfileSdkKeyRequestItem](docs/ProxyProfileSdkKeyRequestItem.md)
+ - [ProxyProfileSdkKeysListModel](docs/ProxyProfileSdkKeysListModel.md)
+ - [ProxyProfileSdkKeysRequest](docs/ProxyProfileSdkKeysRequest.md)
+ - [ProxyProfileSecretModel](docs/ProxyProfileSecretModel.md)
+ - [ProxyProfileSelectionRule](docs/ProxyProfileSelectionRule.md)
  - [ReasonRequiredEnvironmentModel](docs/ReasonRequiredEnvironmentModel.md)
  - [ReferenceLineModel](docs/ReferenceLineModel.md)
  - [ReferenceLineRequest](docs/ReferenceLineRequest.md)
@@ -293,6 +315,7 @@ Class | Method | HTTP request | Description
  - [SegmentConditionModel](docs/SegmentConditionModel.md)
  - [SegmentListModel](docs/SegmentListModel.md)
  - [SegmentModel](docs/SegmentModel.md)
+ - [SelectionRuleKind](docs/SelectionRuleKind.md)
  - [SettingDataModel](docs/SettingDataModel.md)
  - [SettingDataV2Model](docs/SettingDataV2Model.md)
  - [SettingFormulaModel](docs/SettingFormulaModel.md)
@@ -328,6 +351,7 @@ Class | Method | HTTP request | Description
  - [UpdatePreferencesRequest](docs/UpdatePreferencesRequest.md)
  - [UpdatePrerequisiteFlagConditionModel](docs/UpdatePrerequisiteFlagConditionModel.md)
  - [UpdateProductRequest](docs/UpdateProductRequest.md)
+ - [UpdateProxyProfileSelectionRule](docs/UpdateProxyProfileSelectionRule.md)
  - [UpdateReasonRequiredEnvironmentModel](docs/UpdateReasonRequiredEnvironmentModel.md)
  - [UpdateRolloutPercentageItemModel](docs/UpdateRolloutPercentageItemModel.md)
  - [UpdateRolloutRuleModel](docs/UpdateRolloutRuleModel.md)
@@ -350,6 +374,7 @@ Class | Method | HTTP request | Description
  - [WebhookEnvironment](docs/WebhookEnvironment.md)
  - [WebhookHeaderModel](docs/WebhookHeaderModel.md)
  - [WebhookHeaderResponseModel](docs/WebhookHeaderResponseModel.md)
+ - [WebhookNotification](docs/WebhookNotification.md)
  - [WebhookResponseModel](docs/WebhookResponseModel.md)
  - [WebhookSigningKeysModel](docs/WebhookSigningKeysModel.md)
 
