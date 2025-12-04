@@ -97,6 +97,7 @@ docs/ModifyIntegrationRequest.md
 docs/OperationType.md
 docs/OrganizationAdminModel.md
 docs/OrganizationInvitationModel.md
+docs/OrganizationLimitations.md
 docs/OrganizationMemberModel.md
 docs/OrganizationMembersModel.md
 docs/OrganizationModel.md
@@ -107,9 +108,13 @@ docs/OrganizationsAPI.md
 docs/PercentageOptionModel.md
 docs/PermissionGroupModel.md
 docs/PermissionGroupsAPI.md
+docs/PredefinedVariationEnvironmentModel.md
 docs/PredefinedVariationModel.md
+docs/PredefinedVariationUsageModel.md
 docs/PredefinedVariationValueModel.md
+docs/PredefinedVariationWithUsagesModel.md
 docs/PredefinedVariationsModel.md
+docs/PredefinedVariationsWithUsagesModel.md
 docs/PreferencesModel.md
 docs/PrerequisiteComparator.md
 docs/PrerequisiteFlagConditionModel.md
@@ -266,6 +271,7 @@ model_modify_integration_request.go
 model_operation_type.go
 model_organization_admin_model.go
 model_organization_invitation_model.go
+model_organization_limitations.go
 model_organization_member_model.go
 model_organization_members_model.go
 model_organization_model.go
@@ -274,9 +280,13 @@ model_organization_permission_model.go
 model_organization_product_model.go
 model_percentage_option_model.go
 model_permission_group_model.go
+model_predefined_variation_environment_model.go
 model_predefined_variation_model.go
+model_predefined_variation_usage_model.go
 model_predefined_variation_value_model.go
+model_predefined_variation_with_usages_model.go
 model_predefined_variations_model.go
+model_predefined_variations_with_usages_model.go
 model_preferences_model.go
 model_prerequisite_comparator.go
 model_prerequisite_flag_condition_model.go

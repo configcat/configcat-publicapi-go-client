@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **EnvironmentId** | **string** | Identifier of the Environment. | 
-**Name** | **NullableString** | Name of the Environment. | 
+**Name** | **string** | Name of the Environment. | 
 **Color** | **NullableString** | Color of the Environment. | 
 **Description** | **NullableString** | Description of the Environment. | 
 **Order** | **int32** | The order of the Environment represented on the ConfigCat Dashboard. | 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewEnvironmentAccessModel
 
-`func NewEnvironmentAccessModel(environmentId string, name NullableString, color NullableString, description NullableString, order int32, reasonRequired bool, environmentAccessType EnvironmentAccessType, ) *EnvironmentAccessModel`
+`func NewEnvironmentAccessModel(environmentId string, name string, color NullableString, description NullableString, order int32, reasonRequired bool, environmentAccessType EnvironmentAccessType, ) *EnvironmentAccessModel`
 
 NewEnvironmentAccessModel instantiates a new EnvironmentAccessModel object
 This constructor will assign default values to properties that have it defined,
@@ -71,16 +71,6 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
-### SetNameNil
-
-`func (o *EnvironmentAccessModel) SetNameNil(b bool)`
-
- SetNameNil sets the value for Name to be an explicit nil
-
-### UnsetName
-`func (o *EnvironmentAccessModel) UnsetName()`
-
-UnsetName ensures that no value is present for Name, not even an explicit nil
 ### GetColor
 
 `func (o *EnvironmentAccessModel) GetColor() string`
