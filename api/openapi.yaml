@@ -1996,6 +1996,34 @@ paths:
       summary: List Audit log items for Organization
       tags:
       - Audit logs
+  /v1/organizations/{organizationId}/organization-limitations:
+    get:
+      description: This endpoint returns the limitations of an Organization identified
+        by the `organizationId`.
+      operationId: get-organization-limitations
+      parameters:
+      - description: The identifier of the Organization.
+        explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrganizationLimitations"
+          description: ""
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Get Organization limitations
+      tags:
+      - Organizations
   /v1/organizations/{organizationId}/members:
     get:
       deprecated: true
@@ -2145,6 +2173,87 @@ paths:
       summary: List Pending Invitations in Product
       tags:
       - Members
+  /v1/settings/{settingId}/predefined-variations:
+    get:
+      description: |-
+        This endpoint returns the predefined variations along with their usages in the Environments for a Feature Flag or Setting identified by the `settingId` parameter.
+
+        **Beta feature:** The feature is currently in closed beta state and cannot be used.
+      operationId: get-predefined-variations
+      parameters:
+      - description: The identifier of the Setting.
+        explode: false
+        in: path
+        name: settingId
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PredefinedVariationsWithUsagesModel"
+          description: When the update was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Get predefined variations (Beta)
+      tags:
+      - Feature Flags & Settings
+    put:
+      description: |-
+        This endpoint updates the predefined variations for a Feature Flag or Setting identified by the `settingId` parameter.
+
+        **Important:** You can only update a predefined variation's value if it is not used anywhere in your feature flags.
+
+        **Beta feature:** The feature is currently in closed beta state and cannot be used.
+      operationId: update-predefined-variations
+      parameters:
+      - description: The identifier of the Setting.
+        explode: false
+        in: path
+        name: settingId
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePredefinedVariationsRequest"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePredefinedVariationsRequest"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdatePredefinedVariationsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PredefinedVariationsModel"
+          description: When the update was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Update predefined variations (Beta)
+      tags:
+      - Feature Flags & Settings
   /v1/products/{productId}:
     delete:
       description: This endpoint removes a Product identified by the `productId` parameter.
@@ -3732,6 +3841,13 @@ paths:
                 - op: replace
                   path: /defaultValue/boolValue
                   value: true
+              change the default value to a predefined variation:
+                description: This example changes a feature flag's default value with
+                  predefined variations.
+                value:
+                - op: replace
+                  path: /defaultValue/predefinedVariationId
+                  value: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               add targeting rules:
                 description: This example adds an evaluation rule with two conditions
                   to the Flag's targeting rules.
@@ -3758,6 +3874,13 @@ paths:
                 - op: replace
                   path: /targetingRules/0/value/boolValue
                   value: "true"
+              modify targeting rule with predefined variations:
+                description: This example modifies a targeting rule's value for a
+                  setting that is using predefined variations.
+                value:
+                - op: replace
+                  path: /targetingRules/0/value/predefinedVariationId
+                  value: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               modify targeting rule's condition:
                 description: This example modifies a condition's comparison attribute
                   within a targeting rule.
@@ -3783,10 +3906,22 @@ paths:
                   path: /targetingRules/0/conditions/-
                   value:
                     prerequisiteFlagCondition:
-                      prerequisiteSettingId: isIn
-                      comparator: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
+                      prerequisiteSettingId: 123
+                      comparator: isIn
                       prerequisiteComparisonValue:
                         boolValue: true
+              add prerequisite flag condition with predefined variations:
+                description: This example adds a prerequisite flag condition to a
+                  targeting rule for a setting that is using predefined variations.
+                value:
+                - op: add
+                  path: /targetingRules/0/conditions/-
+                  value:
+                    prerequisiteFlagCondition:
+                      prerequisiteSettingId: 123
+                      comparator: isIn
+                      prerequisiteComparisonValue:
+                        predefinedVariationId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               reorder targeting rules:
                 description: This example swaps the first and the second targeting
                   rule.
@@ -3813,6 +3948,13 @@ paths:
                 - op: replace
                   path: /defaultValue/boolValue
                   value: true
+              change the default value to a predefined variation:
+                description: This example changes a feature flag's default value with
+                  predefined variations.
+                value:
+                - op: replace
+                  path: /defaultValue/predefinedVariationId
+                  value: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               add targeting rules:
                 description: This example adds an evaluation rule with two conditions
                   to the Flag's targeting rules.
@@ -3839,6 +3981,13 @@ paths:
                 - op: replace
                   path: /targetingRules/0/value/boolValue
                   value: "true"
+              modify targeting rule with predefined variations:
+                description: This example modifies a targeting rule's value for a
+                  setting that is using predefined variations.
+                value:
+                - op: replace
+                  path: /targetingRules/0/value/predefinedVariationId
+                  value: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               modify targeting rule's condition:
                 description: This example modifies a condition's comparison attribute
                   within a targeting rule.
@@ -3864,10 +4013,22 @@ paths:
                   path: /targetingRules/0/conditions/-
                   value:
                     prerequisiteFlagCondition:
-                      prerequisiteSettingId: isIn
-                      comparator: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
+                      prerequisiteSettingId: 123
+                      comparator: isIn
                       prerequisiteComparisonValue:
                         boolValue: true
+              add prerequisite flag condition with predefined variations:
+                description: This example adds a prerequisite flag condition to a
+                  targeting rule for a setting that is using predefined variations.
+                value:
+                - op: add
+                  path: /targetingRules/0/conditions/-
+                  value:
+                    prerequisiteFlagCondition:
+                      prerequisiteSettingId: 123
+                      comparator: isIn
+                      prerequisiteComparisonValue:
+                        predefinedVariationId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               reorder targeting rules:
                 description: This example swaps the first and the second targeting
                   rule.
@@ -3894,6 +4055,13 @@ paths:
                 - op: replace
                   path: /defaultValue/boolValue
                   value: true
+              change the default value to a predefined variation:
+                description: This example changes a feature flag's default value with
+                  predefined variations.
+                value:
+                - op: replace
+                  path: /defaultValue/predefinedVariationId
+                  value: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               add targeting rules:
                 description: This example adds an evaluation rule with two conditions
                   to the Flag's targeting rules.
@@ -3920,6 +4088,13 @@ paths:
                 - op: replace
                   path: /targetingRules/0/value/boolValue
                   value: "true"
+              modify targeting rule with predefined variations:
+                description: This example modifies a targeting rule's value for a
+                  setting that is using predefined variations.
+                value:
+                - op: replace
+                  path: /targetingRules/0/value/predefinedVariationId
+                  value: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               modify targeting rule's condition:
                 description: This example modifies a condition's comparison attribute
                   within a targeting rule.
@@ -3945,10 +4120,22 @@ paths:
                   path: /targetingRules/0/conditions/-
                   value:
                     prerequisiteFlagCondition:
-                      prerequisiteSettingId: isIn
-                      comparator: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
+                      prerequisiteSettingId: 123
+                      comparator: isIn
                       prerequisiteComparisonValue:
                         boolValue: true
+              add prerequisite flag condition with predefined variations:
+                description: This example adds a prerequisite flag condition to a
+                  targeting rule for a setting that is using predefined variations.
+                value:
+                - op: add
+                  path: /targetingRules/0/conditions/-
+                  value:
+                    prerequisiteFlagCondition:
+                      prerequisiteSettingId: 123
+                      comparator: isIn
+                      prerequisiteComparisonValue:
+                        predefinedVariationId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               reorder targeting rules:
                 description: This example swaps the first and the second targeting
                   rule.
@@ -4345,6 +4532,13 @@ paths:
                 - op: replace
                   path: /defaultValue/boolValue
                   value: true
+              change the default value to a predefined variation:
+                description: This example changes a feature flag's default value with
+                  predefined variations.
+                value:
+                - op: replace
+                  path: /defaultValue/predefinedVariationId
+                  value: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               add targeting rules:
                 description: This example adds an evaluation rule with two conditions
                   to the Flag's targeting rules.
@@ -4371,6 +4565,13 @@ paths:
                 - op: replace
                   path: /targetingRules/0/value/boolValue
                   value: "true"
+              modify targeting rule with predefined variations:
+                description: This example modifies a targeting rule's value for a
+                  setting that is using predefined variations.
+                value:
+                - op: replace
+                  path: /targetingRules/0/value/predefinedVariationId
+                  value: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               modify targeting rule's condition:
                 description: This example modifies a condition's comparison attribute
                   within a targeting rule.
@@ -4396,10 +4597,22 @@ paths:
                   path: /targetingRules/0/conditions/-
                   value:
                     prerequisiteFlagCondition:
-                      prerequisiteSettingId: isIn
-                      comparator: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
+                      prerequisiteSettingId: 123
+                      comparator: isIn
                       prerequisiteComparisonValue:
                         boolValue: true
+              add prerequisite flag condition with predefined variations:
+                description: This example adds a prerequisite flag condition to a
+                  targeting rule for a setting that is using predefined variations.
+                value:
+                - op: add
+                  path: /targetingRules/0/conditions/-
+                  value:
+                    prerequisiteFlagCondition:
+                      prerequisiteSettingId: 123
+                      comparator: isIn
+                      prerequisiteComparisonValue:
+                        predefinedVariationId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               reorder targeting rules:
                 description: This example swaps the first and the second targeting
                   rule.
@@ -4426,6 +4639,13 @@ paths:
                 - op: replace
                   path: /defaultValue/boolValue
                   value: true
+              change the default value to a predefined variation:
+                description: This example changes a feature flag's default value with
+                  predefined variations.
+                value:
+                - op: replace
+                  path: /defaultValue/predefinedVariationId
+                  value: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               add targeting rules:
                 description: This example adds an evaluation rule with two conditions
                   to the Flag's targeting rules.
@@ -4452,6 +4672,13 @@ paths:
                 - op: replace
                   path: /targetingRules/0/value/boolValue
                   value: "true"
+              modify targeting rule with predefined variations:
+                description: This example modifies a targeting rule's value for a
+                  setting that is using predefined variations.
+                value:
+                - op: replace
+                  path: /targetingRules/0/value/predefinedVariationId
+                  value: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               modify targeting rule's condition:
                 description: This example modifies a condition's comparison attribute
                   within a targeting rule.
@@ -4477,10 +4704,22 @@ paths:
                   path: /targetingRules/0/conditions/-
                   value:
                     prerequisiteFlagCondition:
-                      prerequisiteSettingId: isIn
-                      comparator: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
+                      prerequisiteSettingId: 123
+                      comparator: isIn
                       prerequisiteComparisonValue:
                         boolValue: true
+              add prerequisite flag condition with predefined variations:
+                description: This example adds a prerequisite flag condition to a
+                  targeting rule for a setting that is using predefined variations.
+                value:
+                - op: add
+                  path: /targetingRules/0/conditions/-
+                  value:
+                    prerequisiteFlagCondition:
+                      prerequisiteSettingId: 123
+                      comparator: isIn
+                      prerequisiteComparisonValue:
+                        predefinedVariationId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               reorder targeting rules:
                 description: This example swaps the first and the second targeting
                   rule.
@@ -4507,6 +4746,13 @@ paths:
                 - op: replace
                   path: /defaultValue/boolValue
                   value: true
+              change the default value to a predefined variation:
+                description: This example changes a feature flag's default value with
+                  predefined variations.
+                value:
+                - op: replace
+                  path: /defaultValue/predefinedVariationId
+                  value: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               add targeting rules:
                 description: This example adds an evaluation rule with two conditions
                   to the Flag's targeting rules.
@@ -4533,6 +4779,13 @@ paths:
                 - op: replace
                   path: /targetingRules/0/value/boolValue
                   value: "true"
+              modify targeting rule with predefined variations:
+                description: This example modifies a targeting rule's value for a
+                  setting that is using predefined variations.
+                value:
+                - op: replace
+                  path: /targetingRules/0/value/predefinedVariationId
+                  value: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               modify targeting rule's condition:
                 description: This example modifies a condition's comparison attribute
                   within a targeting rule.
@@ -4558,10 +4811,22 @@ paths:
                   path: /targetingRules/0/conditions/-
                   value:
                     prerequisiteFlagCondition:
-                      prerequisiteSettingId: isIn
-                      comparator: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
+                      prerequisiteSettingId: 123
+                      comparator: isIn
                       prerequisiteComparisonValue:
                         boolValue: true
+              add prerequisite flag condition with predefined variations:
+                description: This example adds a prerequisite flag condition to a
+                  targeting rule for a setting that is using predefined variations.
+                value:
+                - op: add
+                  path: /targetingRules/0/conditions/-
+                  value:
+                    prerequisiteFlagCondition:
+                      prerequisiteSettingId: 123
+                      comparator: isIn
+                      prerequisiteComparisonValue:
+                        predefinedVariationId: 008a1fd6-8245-4ea8-90dc-a1dc36c1b4ff
               reorder targeting rules:
                 description: This example swaps the first and the second targeting
                   rule.
@@ -6009,54 +6274,6 @@ paths:
       summary: Update Member Permissions
       tags:
       - Members
-  /v1/settings/{settingId}/predefined-variations:
-    put:
-      description: |-
-        This endpoint updates the predefined variations for a Feature Flag or Setting identified by the `settingId` parameter.
-
-        **Important:** You can only update a predefined variation's value if it is not used anywhere in your feature flags.
-
-        **Beta feature:** The feature is currently in closed beta state and cannot be used.
-      operationId: update-predefined-variations
-      parameters:
-      - description: The identifier of the Setting.
-        explode: false
-        in: path
-        name: settingId
-        required: true
-        schema:
-          format: int32
-          type: integer
-        style: simple
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdatePredefinedVariationsRequest"
-          text/json:
-            schema:
-              $ref: "#/components/schemas/UpdatePredefinedVariationsRequest"
-          application/*+json:
-            schema:
-              $ref: "#/components/schemas/UpdatePredefinedVariationsRequest"
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PredefinedVariationsModel"
-          description: When the update was successful.
-        "400":
-          description: Bad request.
-        "404":
-          description: Not found.
-        "429":
-          description: Too many requests. In case of the request rate exceeds the
-            rate limits.
-      summary: Update predefined variations (Beta)
-      tags:
-      - Feature Flags & Settings
   /v1/invitations/{invitationId}:
     delete:
       description: This endpoint removes an Invitation identified by the `invitationId`
@@ -8059,7 +8276,6 @@ components:
           type: string
         name:
           description: Name of the Environment.
-          nullable: true
           type: string
         color:
           description: Color of the Environment.
@@ -8906,6 +9122,63 @@ components:
       - productId
       - productName
       type: object
+    OrganizationLimitations:
+      example:
+        maxPredefinedVariations: 9
+        maxComparisonValueListItemLength: 5
+        maxComparisonValueListLength: 5
+        maxPercentageOptionCount: 0
+        maxConditionPerTargetingRuleCount: 7
+        maxComparisonValueLength: 1
+        maxStringFlagValueLength: 2
+        maxTargetingRuleCount: 6
+      properties:
+        maxPercentageOptionCount:
+          description: Maximum number of percentage options a Feature Flag or Setting
+            can have within a targeting rule.
+          format: int32
+          type: integer
+        maxTargetingRuleCount:
+          description: Maximum number of targeting rules a Feature Flag or Setting
+            can have.
+          format: int32
+          type: integer
+        maxComparisonValueLength:
+          description: Maximum length of a text comparison value.
+          format: int32
+          type: integer
+        maxComparisonValueListLength:
+          description: Maximum item count of a list comparison value.
+          format: int32
+          type: integer
+        maxComparisonValueListItemLength:
+          description: Maximum length of a list comparison value's item.
+          format: int32
+          type: integer
+        maxStringFlagValueLength:
+          description: Maximum length of a text Setting's value.
+          format: int32
+          type: integer
+        maxConditionPerTargetingRuleCount:
+          description: Maximum number of `AND` conditions a Feature Flag or Setting
+            can have within a targeting rule.
+          format: int32
+          type: integer
+        maxPredefinedVariations:
+          description: The maximum number of predefined variations allowed for a Feature
+            Flag or Setting.
+          format: int32
+          type: integer
+      required:
+      - maxComparisonValueLength
+      - maxComparisonValueListItemLength
+      - maxComparisonValueListLength
+      - maxConditionPerTargetingRuleCount
+      - maxPercentageOptionCount
+      - maxPredefinedVariations
+      - maxStringFlagValueLength
+      - maxTargetingRuleCount
+      type: object
     OrganizationMemberModel:
       description: Describes an Organization Member.
       example:
@@ -9280,6 +9553,26 @@ components:
       - permissionGroupId
       - product
       type: object
+    PredefinedVariationEnvironmentModel:
+      example:
+        accessType: full
+        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        name: name
+      properties:
+        environmentId:
+          description: The identifier of the Environment.
+          format: uuid
+          type: string
+        name:
+          description: The name of the Environment.
+          type: string
+        accessType:
+          $ref: "#/components/schemas/EnvironmentAccessType"
+      required:
+      - accessType
+      - environmentId
+      - name
+      type: object
     PredefinedVariationModel:
       description: A Feature Flag or Predefined Variation.
       example:
@@ -9318,6 +9611,21 @@ components:
       - predefinedVariationId
       - value
       type: object
+    PredefinedVariationUsageModel:
+      example:
+        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        settingId: 0
+      properties:
+        settingId:
+          format: int32
+          type: integer
+        environmentId:
+          format: uuid
+          type: string
+      required:
+      - environmentId
+      - settingId
+      type: object
     PredefinedVariationValueModel:
       description: Represents the value of a Feature Flag or Predefined Variation.
       example:
@@ -9349,6 +9657,62 @@ components:
       - doubleValue
       - intValue
       - stringValue
+      type: object
+    PredefinedVariationWithUsagesModel:
+      example:
+        predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        hint: hint
+        name: name
+        usagesInOtherEnvironments: 6
+        usages:
+        - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          settingId: 0
+        - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          settingId: 0
+        value:
+          stringValue: stringValue
+          intValue: 1
+          boolValue: true
+          doubleValue: 5.962133916683182
+      properties:
+        value:
+          $ref: "#/components/schemas/PredefinedVariationValueModel"
+        name:
+          description: "The name of the Feature Flag or Predefined Variation, shown\
+            \ on the Dashboard UI. If not set, the Value will be shown."
+          maxLength: 255
+          minLength: 0
+          nullable: true
+          type: string
+        hint:
+          description: "The name of the Feature Flag or Predefined Variation, shown\
+            \ on the Dashboard UI. If not set, the Value will be shown."
+          maxLength: 1000
+          minLength: 0
+          nullable: true
+          type: string
+        predefinedVariationId:
+          description: The Feature Flag or Predefined Variation's identifier.
+          format: uuid
+          type: string
+        usages:
+          description: The Feature Flag or Setting Variation's usages in the given
+            Environments.
+          items:
+            $ref: "#/components/schemas/PredefinedVariationUsageModel"
+          type: array
+        usagesInOtherEnvironments:
+          description: The Feature Flag or Setting Variation's usages in the Environments
+            you don't have access to.
+          format: int32
+          type: integer
+      required:
+      - hint
+      - name
+      - predefinedVariationId
+      - usages
+      - usagesInOtherEnvironments
+      - value
       type: object
     PredefinedVariationsModel:
       example:
@@ -9384,6 +9748,75 @@ components:
       required:
       - maxPredefinedVariations
       - predefinedVariations
+      type: object
+    PredefinedVariationsWithUsagesModel:
+      example:
+        maxPredefinedVariations: 1
+        environments:
+        - accessType: full
+          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+        - accessType: full
+          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          name: name
+        settingKey: settingKey
+        settingType: boolean
+        predefinedVariations:
+        - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hint: hint
+          name: name
+          usagesInOtherEnvironments: 6
+          usages:
+          - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            settingId: 0
+          - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            settingId: 0
+          value:
+            stringValue: stringValue
+            intValue: 1
+            boolValue: true
+            doubleValue: 5.962133916683182
+        - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          hint: hint
+          name: name
+          usagesInOtherEnvironments: 6
+          usages:
+          - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            settingId: 0
+          - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            settingId: 0
+          value:
+            stringValue: stringValue
+            intValue: 1
+            boolValue: true
+            doubleValue: 5.962133916683182
+      properties:
+        settingKey:
+          description: Key of the Feature Flag or Setting.
+          type: string
+        settingType:
+          $ref: "#/components/schemas/SettingType"
+        predefinedVariations:
+          description: The Feature Flag or Setting's Variations.
+          items:
+            $ref: "#/components/schemas/PredefinedVariationWithUsagesModel"
+          type: array
+        environments:
+          description: The Environment descriptors for the Variations' usages.
+          items:
+            $ref: "#/components/schemas/PredefinedVariationEnvironmentModel"
+          type: array
+        maxPredefinedVariations:
+          description: The maximum number of predefined variations allowed for the
+            Feature Flag or Setting.
+          format: int32
+          type: integer
+      required:
+      - environments
+      - maxPredefinedVariations
+      - predefinedVariations
+      - settingKey
+      - settingType
       type: object
     PreferencesModel:
       example:

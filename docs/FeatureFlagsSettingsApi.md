@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateSetting**](FeatureFlagsSettingsAPI.md#CreateSetting) | **Post** /v1/configs/{configId}/settings | Create Flag
 [**DeleteSetting**](FeatureFlagsSettingsAPI.md#DeleteSetting) | **Delete** /v1/settings/{settingId} | Delete Flag
+[**GetPredefinedVariations**](FeatureFlagsSettingsAPI.md#GetPredefinedVariations) | **Get** /v1/settings/{settingId}/predefined-variations | Get predefined variations (Beta)
 [**GetSetting**](FeatureFlagsSettingsAPI.md#GetSetting) | **Get** /v1/settings/{settingId} | Get Flag
 [**GetSettings**](FeatureFlagsSettingsAPI.md#GetSettings) | **Get** /v1/configs/{configId}/settings | List Flags
 [**ReplaceSetting**](FeatureFlagsSettingsAPI.md#ReplaceSetting) | **Put** /v1/settings/{settingId} | Replace Flag
@@ -148,6 +149,76 @@ Name | Type | Description  | Notes
 
 - **Content-Type**: Not defined
 - **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetPredefinedVariations
+
+> PredefinedVariationsWithUsagesModel GetPredefinedVariations(ctx, settingId).Execute()
+
+Get predefined variations (Beta)
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/configcat/configcat-publicapi-go-client/v3"
+)
+
+func main() {
+	settingId := int32(56) // int32 | The identifier of the Setting.
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.FeatureFlagsSettingsAPI.GetPredefinedVariations(context.Background(), settingId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagsSettingsAPI.GetPredefinedVariations``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetPredefinedVariations`: PredefinedVariationsWithUsagesModel
+	fmt.Fprintf(os.Stdout, "Response from `FeatureFlagsSettingsAPI.GetPredefinedVariations`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**settingId** | **int32** | The identifier of the Setting. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPredefinedVariationsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**PredefinedVariationsWithUsagesModel**](PredefinedVariationsWithUsagesModel.md)
+
+### Authorization
+
+[Basic](../README.md#Basic)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

@@ -24,7 +24,7 @@ type EnvironmentAccessModel struct {
 	// Identifier of the Environment.
 	EnvironmentId string `json:"environmentId"`
 	// Name of the Environment.
-	Name NullableString `json:"name"`
+	Name string `json:"name"`
 	// Color of the Environment.
 	Color NullableString `json:"color"`
 	// Description of the Environment.
@@ -43,7 +43,7 @@ type _EnvironmentAccessModel EnvironmentAccessModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEnvironmentAccessModel(environmentId string, name NullableString, color NullableString, description NullableString, order int32, reasonRequired bool, environmentAccessType EnvironmentAccessType) *EnvironmentAccessModel {
+func NewEnvironmentAccessModel(environmentId string, name string, color NullableString, description NullableString, order int32, reasonRequired bool, environmentAccessType EnvironmentAccessType) *EnvironmentAccessModel {
 	this := EnvironmentAccessModel{}
 	this.EnvironmentId = environmentId
 	this.Name = name
@@ -88,29 +88,27 @@ func (o *EnvironmentAccessModel) SetEnvironmentId(v string) {
 }
 
 // GetName returns the Name field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *EnvironmentAccessModel) GetName() string {
-	if o == nil || o.Name.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Name.Get()
+	return o.Name
 }
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *EnvironmentAccessModel) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Name.Get(), o.Name.IsSet()
+	return &o.Name, true
 }
 
 // SetName sets field value
 func (o *EnvironmentAccessModel) SetName(v string) {
-	o.Name.Set(&v)
+	o.Name = v
 }
 
 // GetColor returns the Color field value
@@ -248,7 +246,7 @@ func (o EnvironmentAccessModel) MarshalJSON() ([]byte, error) {
 func (o EnvironmentAccessModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["environmentId"] = o.EnvironmentId
-	toSerialize["name"] = o.Name.Get()
+	toSerialize["name"] = o.Name
 	toSerialize["color"] = o.Color.Get()
 	toSerialize["description"] = o.Description.Get()
 	toSerialize["order"] = o.Order
