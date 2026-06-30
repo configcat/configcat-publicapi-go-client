@@ -45,16 +45,6 @@ and a boolean to check if the value has been set.
 SetIntegrations sets Integrations field to given value.
 
 
-### SetIntegrationsNil
-
-`func (o *IntegrationsModel) SetIntegrationsNil(b bool)`
-
- SetIntegrationsNil sets the value for Integrations to be an explicit nil
-
-### UnsetIntegrations
-`func (o *IntegrationsModel) UnsetIntegrations()`
-
-UnsetIntegrations ensures that no value is present for Integrations, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

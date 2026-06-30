@@ -21,7 +21,7 @@ var _ MappedNullable = &UpdatePredefinedVariationsRequest{}
 
 // UpdatePredefinedVariationsRequest struct for UpdatePredefinedVariationsRequest
 type UpdatePredefinedVariationsRequest struct {
-	// A collection of Feature Flag or Predefined Variations.
+	// A collection of Predefined Variations.
 	PredefinedVariations []UpdatePredefinedVariationModel `json:"predefinedVariations"`
 	AdditionalProperties map[string]interface{}
 }

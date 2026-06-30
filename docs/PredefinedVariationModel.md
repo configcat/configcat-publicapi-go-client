@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Value** | [**PredefinedVariationValueModel**](PredefinedVariationValueModel.md) |  | 
-**Name** | **NullableString** | The name of the Feature Flag or Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown. | 
-**Hint** | **NullableString** | The name of the Feature Flag or Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown. | 
-**PredefinedVariationId** | **string** | The Feature Flag or Predefined Variation&#39;s identifier. | 
+**Name** | **NullableString** | The name of the Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown. | 
+**Hint** | **NullableString** | The name of the Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown. | 
+**PredefinedVariationId** | **string** | The Predefined Variation&#39;s identifier. | 
 
 ## Methods
 

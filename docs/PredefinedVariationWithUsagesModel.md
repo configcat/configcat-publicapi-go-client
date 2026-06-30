@@ -5,17 +5,19 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Value** | [**PredefinedVariationValueModel**](PredefinedVariationValueModel.md) |  | 
-**Name** | **NullableString** | The name of the Feature Flag or Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown. | 
-**Hint** | **NullableString** | The name of the Feature Flag or Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown. | 
-**PredefinedVariationId** | **string** | The Feature Flag or Predefined Variation&#39;s identifier. | 
+**Name** | **NullableString** | The name of the Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown. | 
+**Hint** | **NullableString** | The name of the Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown. | 
+**PredefinedVariationId** | **string** | The Predefined Variation&#39;s identifier. | 
 **Usages** | [**[]PredefinedVariationUsageModel**](PredefinedVariationUsageModel.md) | The Feature Flag or Setting Variation&#39;s usages in the given Environments. | 
 **UsagesInOtherEnvironments** | **int32** | The Feature Flag or Setting Variation&#39;s usages in the Environments you don&#39;t have access to. | 
+**ChangeRequestUsages** | [**[]PredefinedVariationChangeRequestUsageModel**](PredefinedVariationChangeRequestUsageModel.md) | The Feature Flag or Setting Variation&#39;s usages in the given Change Requests. | 
+**ChangeRequestUsagesInOtherEnvironments** | **int32** | The Feature Flag or Setting Variation&#39;s usages in the Change Requests you don&#39;t have access to. | 
 
 ## Methods
 
 ### NewPredefinedVariationWithUsagesModel
 
-`func NewPredefinedVariationWithUsagesModel(value PredefinedVariationValueModel, name NullableString, hint NullableString, predefinedVariationId string, usages []PredefinedVariationUsageModel, usagesInOtherEnvironments int32, ) *PredefinedVariationWithUsagesModel`
+`func NewPredefinedVariationWithUsagesModel(value PredefinedVariationValueModel, name NullableString, hint NullableString, predefinedVariationId string, usages []PredefinedVariationUsageModel, usagesInOtherEnvironments int32, changeRequestUsages []PredefinedVariationChangeRequestUsageModel, changeRequestUsagesInOtherEnvironments int32, ) *PredefinedVariationWithUsagesModel`
 
 NewPredefinedVariationWithUsagesModel instantiates a new PredefinedVariationWithUsagesModel object
 This constructor will assign default values to properties that have it defined,
@@ -168,6 +170,46 @@ and a boolean to check if the value has been set.
 `func (o *PredefinedVariationWithUsagesModel) SetUsagesInOtherEnvironments(v int32)`
 
 SetUsagesInOtherEnvironments sets UsagesInOtherEnvironments field to given value.
+
+
+### GetChangeRequestUsages
+
+`func (o *PredefinedVariationWithUsagesModel) GetChangeRequestUsages() []PredefinedVariationChangeRequestUsageModel`
+
+GetChangeRequestUsages returns the ChangeRequestUsages field if non-nil, zero value otherwise.
+
+### GetChangeRequestUsagesOk
+
+`func (o *PredefinedVariationWithUsagesModel) GetChangeRequestUsagesOk() (*[]PredefinedVariationChangeRequestUsageModel, bool)`
+
+GetChangeRequestUsagesOk returns a tuple with the ChangeRequestUsages field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChangeRequestUsages
+
+`func (o *PredefinedVariationWithUsagesModel) SetChangeRequestUsages(v []PredefinedVariationChangeRequestUsageModel)`
+
+SetChangeRequestUsages sets ChangeRequestUsages field to given value.
+
+
+### GetChangeRequestUsagesInOtherEnvironments
+
+`func (o *PredefinedVariationWithUsagesModel) GetChangeRequestUsagesInOtherEnvironments() int32`
+
+GetChangeRequestUsagesInOtherEnvironments returns the ChangeRequestUsagesInOtherEnvironments field if non-nil, zero value otherwise.
+
+### GetChangeRequestUsagesInOtherEnvironmentsOk
+
+`func (o *PredefinedVariationWithUsagesModel) GetChangeRequestUsagesInOtherEnvironmentsOk() (*int32, bool)`
+
+GetChangeRequestUsagesInOtherEnvironmentsOk returns a tuple with the ChangeRequestUsagesInOtherEnvironments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChangeRequestUsagesInOtherEnvironments
+
+`func (o *PredefinedVariationWithUsagesModel) SetChangeRequestUsagesInOtherEnvironments(v int32)`
+
+SetChangeRequestUsagesInOtherEnvironments sets ChangeRequestUsagesInOtherEnvironments field to given value.
 
 
 

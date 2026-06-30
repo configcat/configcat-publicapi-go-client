@@ -18,7 +18,7 @@ import (
 // checks if the UpdatePredefinedVariationValueModel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdatePredefinedVariationValueModel{}
 
-// UpdatePredefinedVariationValueModel Represents the value of a Feature Flag or Predefined Variation.
+// UpdatePredefinedVariationValueModel Represents the value of a Predefined Variation.
 type UpdatePredefinedVariationValueModel struct {
 	// The served value in case of a boolean Feature Flag.
 	BoolValue NullableBool `json:"boolValue,omitempty"`

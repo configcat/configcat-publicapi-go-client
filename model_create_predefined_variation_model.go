@@ -19,12 +19,12 @@ import (
 // checks if the CreatePredefinedVariationModel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CreatePredefinedVariationModel{}
 
-// CreatePredefinedVariationModel A Feature Flag or Predefined Variation.
+// CreatePredefinedVariationModel A Predefined Variation.
 type CreatePredefinedVariationModel struct {
 	Value CreatePredefinedVariationValueModel `json:"value"`
-	// The name of the Feature Flag or Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown.
+	// The name of the Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown.
 	Name NullableString `json:"name,omitempty"`
-	// The name of the Feature Flag or Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown.
+	// The name of the Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown.
 	Hint NullableString `json:"hint,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

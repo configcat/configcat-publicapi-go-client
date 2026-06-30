@@ -68,6 +68,10 @@ type UpdatePermissionGroupRequest struct {
 	NewEnvironmentAccessType NullableEnvironmentAccessType `json:"newEnvironmentAccessType,omitempty"`
 	// List of environment specific permissions.
 	EnvironmentAccesses []CreateOrUpdateEnvironmentAccessModel `json:"environmentAccesses,omitempty"`
+	ApprovalPermissionType NullableApprovalPermissionType `json:"approvalPermissionType,omitempty"`
+	NewEnvironmentApprovalPermissionType NullableEnvironmentApprovalPermissionType `json:"newEnvironmentApprovalPermissionType,omitempty"`
+	// List of environment specific change request approval permissions.
+	EnvironmentApprovalPermissions []CreateOrUpdateEnvironmentApprovalPermissionModel `json:"environmentApprovalPermissions,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -1131,6 +1135,123 @@ func (o *UpdatePermissionGroupRequest) SetEnvironmentAccesses(v []CreateOrUpdate
 	o.EnvironmentAccesses = v
 }
 
+// GetApprovalPermissionType returns the ApprovalPermissionType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdatePermissionGroupRequest) GetApprovalPermissionType() ApprovalPermissionType {
+	if o == nil || IsNil(o.ApprovalPermissionType.Get()) {
+		var ret ApprovalPermissionType
+		return ret
+	}
+	return *o.ApprovalPermissionType.Get()
+}
+
+// GetApprovalPermissionTypeOk returns a tuple with the ApprovalPermissionType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdatePermissionGroupRequest) GetApprovalPermissionTypeOk() (*ApprovalPermissionType, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ApprovalPermissionType.Get(), o.ApprovalPermissionType.IsSet()
+}
+
+// HasApprovalPermissionType returns a boolean if a field has been set.
+func (o *UpdatePermissionGroupRequest) HasApprovalPermissionType() bool {
+	if o != nil && o.ApprovalPermissionType.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetApprovalPermissionType gets a reference to the given NullableApprovalPermissionType and assigns it to the ApprovalPermissionType field.
+func (o *UpdatePermissionGroupRequest) SetApprovalPermissionType(v ApprovalPermissionType) {
+	o.ApprovalPermissionType.Set(&v)
+}
+// SetApprovalPermissionTypeNil sets the value for ApprovalPermissionType to be an explicit nil
+func (o *UpdatePermissionGroupRequest) SetApprovalPermissionTypeNil() {
+	o.ApprovalPermissionType.Set(nil)
+}
+
+// UnsetApprovalPermissionType ensures that no value is present for ApprovalPermissionType, not even an explicit nil
+func (o *UpdatePermissionGroupRequest) UnsetApprovalPermissionType() {
+	o.ApprovalPermissionType.Unset()
+}
+
+// GetNewEnvironmentApprovalPermissionType returns the NewEnvironmentApprovalPermissionType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdatePermissionGroupRequest) GetNewEnvironmentApprovalPermissionType() EnvironmentApprovalPermissionType {
+	if o == nil || IsNil(o.NewEnvironmentApprovalPermissionType.Get()) {
+		var ret EnvironmentApprovalPermissionType
+		return ret
+	}
+	return *o.NewEnvironmentApprovalPermissionType.Get()
+}
+
+// GetNewEnvironmentApprovalPermissionTypeOk returns a tuple with the NewEnvironmentApprovalPermissionType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdatePermissionGroupRequest) GetNewEnvironmentApprovalPermissionTypeOk() (*EnvironmentApprovalPermissionType, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.NewEnvironmentApprovalPermissionType.Get(), o.NewEnvironmentApprovalPermissionType.IsSet()
+}
+
+// HasNewEnvironmentApprovalPermissionType returns a boolean if a field has been set.
+func (o *UpdatePermissionGroupRequest) HasNewEnvironmentApprovalPermissionType() bool {
+	if o != nil && o.NewEnvironmentApprovalPermissionType.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetNewEnvironmentApprovalPermissionType gets a reference to the given NullableEnvironmentApprovalPermissionType and assigns it to the NewEnvironmentApprovalPermissionType field.
+func (o *UpdatePermissionGroupRequest) SetNewEnvironmentApprovalPermissionType(v EnvironmentApprovalPermissionType) {
+	o.NewEnvironmentApprovalPermissionType.Set(&v)
+}
+// SetNewEnvironmentApprovalPermissionTypeNil sets the value for NewEnvironmentApprovalPermissionType to be an explicit nil
+func (o *UpdatePermissionGroupRequest) SetNewEnvironmentApprovalPermissionTypeNil() {
+	o.NewEnvironmentApprovalPermissionType.Set(nil)
+}
+
+// UnsetNewEnvironmentApprovalPermissionType ensures that no value is present for NewEnvironmentApprovalPermissionType, not even an explicit nil
+func (o *UpdatePermissionGroupRequest) UnsetNewEnvironmentApprovalPermissionType() {
+	o.NewEnvironmentApprovalPermissionType.Unset()
+}
+
+// GetEnvironmentApprovalPermissions returns the EnvironmentApprovalPermissions field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdatePermissionGroupRequest) GetEnvironmentApprovalPermissions() []CreateOrUpdateEnvironmentApprovalPermissionModel {
+	if o == nil {
+		var ret []CreateOrUpdateEnvironmentApprovalPermissionModel
+		return ret
+	}
+	return o.EnvironmentApprovalPermissions
+}
+
+// GetEnvironmentApprovalPermissionsOk returns a tuple with the EnvironmentApprovalPermissions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdatePermissionGroupRequest) GetEnvironmentApprovalPermissionsOk() ([]CreateOrUpdateEnvironmentApprovalPermissionModel, bool) {
+	if o == nil || IsNil(o.EnvironmentApprovalPermissions) {
+		return nil, false
+	}
+	return o.EnvironmentApprovalPermissions, true
+}
+
+// HasEnvironmentApprovalPermissions returns a boolean if a field has been set.
+func (o *UpdatePermissionGroupRequest) HasEnvironmentApprovalPermissions() bool {
+	if o != nil && !IsNil(o.EnvironmentApprovalPermissions) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvironmentApprovalPermissions gets a reference to the given []CreateOrUpdateEnvironmentApprovalPermissionModel and assigns it to the EnvironmentApprovalPermissions field.
+func (o *UpdatePermissionGroupRequest) SetEnvironmentApprovalPermissions(v []CreateOrUpdateEnvironmentApprovalPermissionModel) {
+	o.EnvironmentApprovalPermissions = v
+}
+
 func (o UpdatePermissionGroupRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -1216,6 +1337,15 @@ func (o UpdatePermissionGroupRequest) ToMap() (map[string]interface{}, error) {
 	if o.EnvironmentAccesses != nil {
 		toSerialize["environmentAccesses"] = o.EnvironmentAccesses
 	}
+	if o.ApprovalPermissionType.IsSet() {
+		toSerialize["approvalPermissionType"] = o.ApprovalPermissionType.Get()
+	}
+	if o.NewEnvironmentApprovalPermissionType.IsSet() {
+		toSerialize["newEnvironmentApprovalPermissionType"] = o.NewEnvironmentApprovalPermissionType.Get()
+	}
+	if o.EnvironmentApprovalPermissions != nil {
+		toSerialize["environmentApprovalPermissions"] = o.EnvironmentApprovalPermissions
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -1263,6 +1393,9 @@ func (o *UpdatePermissionGroupRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "accessType")
 		delete(additionalProperties, "newEnvironmentAccessType")
 		delete(additionalProperties, "environmentAccesses")
+		delete(additionalProperties, "approvalPermissionType")
+		delete(additionalProperties, "newEnvironmentApprovalPermissionType")
+		delete(additionalProperties, "environmentApprovalPermissions")
 		o.AdditionalProperties = additionalProperties
 	}
 

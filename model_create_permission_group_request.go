@@ -67,6 +67,10 @@ type CreatePermissionGroupRequest struct {
 	NewEnvironmentAccessType *EnvironmentAccessType `json:"newEnvironmentAccessType,omitempty"`
 	// List of environment specific permissions.
 	EnvironmentAccesses []CreateOrUpdateEnvironmentAccessModel `json:"environmentAccesses,omitempty"`
+	ApprovalPermissionType *ApprovalPermissionType `json:"approvalPermissionType,omitempty"`
+	NewEnvironmentApprovalPermissionType *EnvironmentApprovalPermissionType `json:"newEnvironmentApprovalPermissionType,omitempty"`
+	// List of environment specific change request approval permissions.
+	EnvironmentApprovalPermissions []CreateOrUpdateEnvironmentApprovalPermissionModel `json:"environmentApprovalPermissions,omitempty"`
 	// Group members can disable two-factor authentication for other members.
 	CanDisable2FA *bool `json:"canDisable2FA,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -853,6 +857,103 @@ func (o *CreatePermissionGroupRequest) SetEnvironmentAccesses(v []CreateOrUpdate
 	o.EnvironmentAccesses = v
 }
 
+// GetApprovalPermissionType returns the ApprovalPermissionType field value if set, zero value otherwise.
+func (o *CreatePermissionGroupRequest) GetApprovalPermissionType() ApprovalPermissionType {
+	if o == nil || IsNil(o.ApprovalPermissionType) {
+		var ret ApprovalPermissionType
+		return ret
+	}
+	return *o.ApprovalPermissionType
+}
+
+// GetApprovalPermissionTypeOk returns a tuple with the ApprovalPermissionType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreatePermissionGroupRequest) GetApprovalPermissionTypeOk() (*ApprovalPermissionType, bool) {
+	if o == nil || IsNil(o.ApprovalPermissionType) {
+		return nil, false
+	}
+	return o.ApprovalPermissionType, true
+}
+
+// HasApprovalPermissionType returns a boolean if a field has been set.
+func (o *CreatePermissionGroupRequest) HasApprovalPermissionType() bool {
+	if o != nil && !IsNil(o.ApprovalPermissionType) {
+		return true
+	}
+
+	return false
+}
+
+// SetApprovalPermissionType gets a reference to the given ApprovalPermissionType and assigns it to the ApprovalPermissionType field.
+func (o *CreatePermissionGroupRequest) SetApprovalPermissionType(v ApprovalPermissionType) {
+	o.ApprovalPermissionType = &v
+}
+
+// GetNewEnvironmentApprovalPermissionType returns the NewEnvironmentApprovalPermissionType field value if set, zero value otherwise.
+func (o *CreatePermissionGroupRequest) GetNewEnvironmentApprovalPermissionType() EnvironmentApprovalPermissionType {
+	if o == nil || IsNil(o.NewEnvironmentApprovalPermissionType) {
+		var ret EnvironmentApprovalPermissionType
+		return ret
+	}
+	return *o.NewEnvironmentApprovalPermissionType
+}
+
+// GetNewEnvironmentApprovalPermissionTypeOk returns a tuple with the NewEnvironmentApprovalPermissionType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreatePermissionGroupRequest) GetNewEnvironmentApprovalPermissionTypeOk() (*EnvironmentApprovalPermissionType, bool) {
+	if o == nil || IsNil(o.NewEnvironmentApprovalPermissionType) {
+		return nil, false
+	}
+	return o.NewEnvironmentApprovalPermissionType, true
+}
+
+// HasNewEnvironmentApprovalPermissionType returns a boolean if a field has been set.
+func (o *CreatePermissionGroupRequest) HasNewEnvironmentApprovalPermissionType() bool {
+	if o != nil && !IsNil(o.NewEnvironmentApprovalPermissionType) {
+		return true
+	}
+
+	return false
+}
+
+// SetNewEnvironmentApprovalPermissionType gets a reference to the given EnvironmentApprovalPermissionType and assigns it to the NewEnvironmentApprovalPermissionType field.
+func (o *CreatePermissionGroupRequest) SetNewEnvironmentApprovalPermissionType(v EnvironmentApprovalPermissionType) {
+	o.NewEnvironmentApprovalPermissionType = &v
+}
+
+// GetEnvironmentApprovalPermissions returns the EnvironmentApprovalPermissions field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreatePermissionGroupRequest) GetEnvironmentApprovalPermissions() []CreateOrUpdateEnvironmentApprovalPermissionModel {
+	if o == nil {
+		var ret []CreateOrUpdateEnvironmentApprovalPermissionModel
+		return ret
+	}
+	return o.EnvironmentApprovalPermissions
+}
+
+// GetEnvironmentApprovalPermissionsOk returns a tuple with the EnvironmentApprovalPermissions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreatePermissionGroupRequest) GetEnvironmentApprovalPermissionsOk() ([]CreateOrUpdateEnvironmentApprovalPermissionModel, bool) {
+	if o == nil || IsNil(o.EnvironmentApprovalPermissions) {
+		return nil, false
+	}
+	return o.EnvironmentApprovalPermissions, true
+}
+
+// HasEnvironmentApprovalPermissions returns a boolean if a field has been set.
+func (o *CreatePermissionGroupRequest) HasEnvironmentApprovalPermissions() bool {
+	if o != nil && !IsNil(o.EnvironmentApprovalPermissions) {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvironmentApprovalPermissions gets a reference to the given []CreateOrUpdateEnvironmentApprovalPermissionModel and assigns it to the EnvironmentApprovalPermissions field.
+func (o *CreatePermissionGroupRequest) SetEnvironmentApprovalPermissions(v []CreateOrUpdateEnvironmentApprovalPermissionModel) {
+	o.EnvironmentApprovalPermissions = v
+}
+
 // GetCanDisable2FA returns the CanDisable2FA field value if set, zero value otherwise.
 func (o *CreatePermissionGroupRequest) GetCanDisable2FA() bool {
 	if o == nil || IsNil(o.CanDisable2FA) {
@@ -965,6 +1066,15 @@ func (o CreatePermissionGroupRequest) ToMap() (map[string]interface{}, error) {
 	if o.EnvironmentAccesses != nil {
 		toSerialize["environmentAccesses"] = o.EnvironmentAccesses
 	}
+	if !IsNil(o.ApprovalPermissionType) {
+		toSerialize["approvalPermissionType"] = o.ApprovalPermissionType
+	}
+	if !IsNil(o.NewEnvironmentApprovalPermissionType) {
+		toSerialize["newEnvironmentApprovalPermissionType"] = o.NewEnvironmentApprovalPermissionType
+	}
+	if o.EnvironmentApprovalPermissions != nil {
+		toSerialize["environmentApprovalPermissions"] = o.EnvironmentApprovalPermissions
+	}
 	if !IsNil(o.CanDisable2FA) {
 		toSerialize["canDisable2FA"] = o.CanDisable2FA
 	}
@@ -1035,6 +1145,9 @@ func (o *CreatePermissionGroupRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "accessType")
 		delete(additionalProperties, "newEnvironmentAccessType")
 		delete(additionalProperties, "environmentAccesses")
+		delete(additionalProperties, "approvalPermissionType")
+		delete(additionalProperties, "newEnvironmentApprovalPermissionType")
+		delete(additionalProperties, "environmentApprovalPermissions")
 		delete(additionalProperties, "canDisable2FA")
 		o.AdditionalProperties = additionalProperties
 	}

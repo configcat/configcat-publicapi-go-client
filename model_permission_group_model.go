@@ -70,8 +70,12 @@ type PermissionGroupModel struct {
 	AccessType AccessType `json:"accessType"`
 	NewEnvironmentAccessType EnvironmentAccessType `json:"newEnvironmentAccessType"`
 	// List of environment specific permissions.
-	EnvironmentAccesses []EnvironmentAccessModel `json:"environmentAccesses"`
+	EnvironmentAccesses []PermissionGroupEnvironmentAccessModel `json:"environmentAccesses"`
 	Product ProductModel `json:"product"`
+	ApprovalPermissionType ApprovalPermissionType `json:"approvalPermissionType"`
+	NewEnvironmentApprovalPermissionType EnvironmentApprovalPermissionType `json:"newEnvironmentApprovalPermissionType"`
+	// List of environment specific approval permissions.
+	EnvironmentApprovalPermissions []PermissionGroupEnvironmentApprovalPermissionModel `json:"environmentApprovalPermissions"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -81,7 +85,7 @@ type _PermissionGroupModel PermissionGroupModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPermissionGroupModel(permissionGroupId int64, name string, canManageMembers bool, canCreateOrUpdateConfig bool, canDeleteConfig bool, canCreateOrUpdateEnvironment bool, canDeleteEnvironment bool, canCreateOrUpdateSetting bool, canTagSetting bool, canDeleteSetting bool, canCreateOrUpdateTag bool, canDeleteTag bool, canManageWebhook bool, canUseExportImport bool, canManageProductPreferences bool, canManageIntegrations bool, canViewSdkKey bool, canRotateSdkKey bool, canCreateOrUpdateSegments bool, canDeleteSegments bool, canViewProductAuditLog bool, canViewProductStatistics bool, canDisable2FA bool, accessType AccessType, newEnvironmentAccessType EnvironmentAccessType, environmentAccesses []EnvironmentAccessModel, product ProductModel) *PermissionGroupModel {
+func NewPermissionGroupModel(permissionGroupId int64, name string, canManageMembers bool, canCreateOrUpdateConfig bool, canDeleteConfig bool, canCreateOrUpdateEnvironment bool, canDeleteEnvironment bool, canCreateOrUpdateSetting bool, canTagSetting bool, canDeleteSetting bool, canCreateOrUpdateTag bool, canDeleteTag bool, canManageWebhook bool, canUseExportImport bool, canManageProductPreferences bool, canManageIntegrations bool, canViewSdkKey bool, canRotateSdkKey bool, canCreateOrUpdateSegments bool, canDeleteSegments bool, canViewProductAuditLog bool, canViewProductStatistics bool, canDisable2FA bool, accessType AccessType, newEnvironmentAccessType EnvironmentAccessType, environmentAccesses []PermissionGroupEnvironmentAccessModel, product ProductModel, approvalPermissionType ApprovalPermissionType, newEnvironmentApprovalPermissionType EnvironmentApprovalPermissionType, environmentApprovalPermissions []PermissionGroupEnvironmentApprovalPermissionModel) *PermissionGroupModel {
 	this := PermissionGroupModel{}
 	this.PermissionGroupId = permissionGroupId
 	this.Name = name
@@ -110,6 +114,9 @@ func NewPermissionGroupModel(permissionGroupId int64, name string, canManageMemb
 	this.NewEnvironmentAccessType = newEnvironmentAccessType
 	this.EnvironmentAccesses = environmentAccesses
 	this.Product = product
+	this.ApprovalPermissionType = approvalPermissionType
+	this.NewEnvironmentApprovalPermissionType = newEnvironmentApprovalPermissionType
+	this.EnvironmentApprovalPermissions = environmentApprovalPermissions
 	return &this
 }
 
@@ -722,9 +729,9 @@ func (o *PermissionGroupModel) SetNewEnvironmentAccessType(v EnvironmentAccessTy
 }
 
 // GetEnvironmentAccesses returns the EnvironmentAccesses field value
-func (o *PermissionGroupModel) GetEnvironmentAccesses() []EnvironmentAccessModel {
+func (o *PermissionGroupModel) GetEnvironmentAccesses() []PermissionGroupEnvironmentAccessModel {
 	if o == nil {
-		var ret []EnvironmentAccessModel
+		var ret []PermissionGroupEnvironmentAccessModel
 		return ret
 	}
 
@@ -733,7 +740,7 @@ func (o *PermissionGroupModel) GetEnvironmentAccesses() []EnvironmentAccessModel
 
 // GetEnvironmentAccessesOk returns a tuple with the EnvironmentAccesses field value
 // and a boolean to check if the value has been set.
-func (o *PermissionGroupModel) GetEnvironmentAccessesOk() ([]EnvironmentAccessModel, bool) {
+func (o *PermissionGroupModel) GetEnvironmentAccessesOk() ([]PermissionGroupEnvironmentAccessModel, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -741,7 +748,7 @@ func (o *PermissionGroupModel) GetEnvironmentAccessesOk() ([]EnvironmentAccessMo
 }
 
 // SetEnvironmentAccesses sets field value
-func (o *PermissionGroupModel) SetEnvironmentAccesses(v []EnvironmentAccessModel) {
+func (o *PermissionGroupModel) SetEnvironmentAccesses(v []PermissionGroupEnvironmentAccessModel) {
 	o.EnvironmentAccesses = v
 }
 
@@ -767,6 +774,78 @@ func (o *PermissionGroupModel) GetProductOk() (*ProductModel, bool) {
 // SetProduct sets field value
 func (o *PermissionGroupModel) SetProduct(v ProductModel) {
 	o.Product = v
+}
+
+// GetApprovalPermissionType returns the ApprovalPermissionType field value
+func (o *PermissionGroupModel) GetApprovalPermissionType() ApprovalPermissionType {
+	if o == nil {
+		var ret ApprovalPermissionType
+		return ret
+	}
+
+	return o.ApprovalPermissionType
+}
+
+// GetApprovalPermissionTypeOk returns a tuple with the ApprovalPermissionType field value
+// and a boolean to check if the value has been set.
+func (o *PermissionGroupModel) GetApprovalPermissionTypeOk() (*ApprovalPermissionType, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ApprovalPermissionType, true
+}
+
+// SetApprovalPermissionType sets field value
+func (o *PermissionGroupModel) SetApprovalPermissionType(v ApprovalPermissionType) {
+	o.ApprovalPermissionType = v
+}
+
+// GetNewEnvironmentApprovalPermissionType returns the NewEnvironmentApprovalPermissionType field value
+func (o *PermissionGroupModel) GetNewEnvironmentApprovalPermissionType() EnvironmentApprovalPermissionType {
+	if o == nil {
+		var ret EnvironmentApprovalPermissionType
+		return ret
+	}
+
+	return o.NewEnvironmentApprovalPermissionType
+}
+
+// GetNewEnvironmentApprovalPermissionTypeOk returns a tuple with the NewEnvironmentApprovalPermissionType field value
+// and a boolean to check if the value has been set.
+func (o *PermissionGroupModel) GetNewEnvironmentApprovalPermissionTypeOk() (*EnvironmentApprovalPermissionType, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.NewEnvironmentApprovalPermissionType, true
+}
+
+// SetNewEnvironmentApprovalPermissionType sets field value
+func (o *PermissionGroupModel) SetNewEnvironmentApprovalPermissionType(v EnvironmentApprovalPermissionType) {
+	o.NewEnvironmentApprovalPermissionType = v
+}
+
+// GetEnvironmentApprovalPermissions returns the EnvironmentApprovalPermissions field value
+func (o *PermissionGroupModel) GetEnvironmentApprovalPermissions() []PermissionGroupEnvironmentApprovalPermissionModel {
+	if o == nil {
+		var ret []PermissionGroupEnvironmentApprovalPermissionModel
+		return ret
+	}
+
+	return o.EnvironmentApprovalPermissions
+}
+
+// GetEnvironmentApprovalPermissionsOk returns a tuple with the EnvironmentApprovalPermissions field value
+// and a boolean to check if the value has been set.
+func (o *PermissionGroupModel) GetEnvironmentApprovalPermissionsOk() ([]PermissionGroupEnvironmentApprovalPermissionModel, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.EnvironmentApprovalPermissions, true
+}
+
+// SetEnvironmentApprovalPermissions sets field value
+func (o *PermissionGroupModel) SetEnvironmentApprovalPermissions(v []PermissionGroupEnvironmentApprovalPermissionModel) {
+	o.EnvironmentApprovalPermissions = v
 }
 
 func (o PermissionGroupModel) MarshalJSON() ([]byte, error) {
@@ -806,6 +885,9 @@ func (o PermissionGroupModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["newEnvironmentAccessType"] = o.NewEnvironmentAccessType
 	toSerialize["environmentAccesses"] = o.EnvironmentAccesses
 	toSerialize["product"] = o.Product
+	toSerialize["approvalPermissionType"] = o.ApprovalPermissionType
+	toSerialize["newEnvironmentApprovalPermissionType"] = o.NewEnvironmentApprovalPermissionType
+	toSerialize["environmentApprovalPermissions"] = o.EnvironmentApprovalPermissions
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -846,6 +928,9 @@ func (o *PermissionGroupModel) UnmarshalJSON(data []byte) (err error) {
 		"newEnvironmentAccessType",
 		"environmentAccesses",
 		"product",
+		"approvalPermissionType",
+		"newEnvironmentApprovalPermissionType",
+		"environmentApprovalPermissions",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -902,6 +987,9 @@ func (o *PermissionGroupModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "newEnvironmentAccessType")
 		delete(additionalProperties, "environmentAccesses")
 		delete(additionalProperties, "product")
+		delete(additionalProperties, "approvalPermissionType")
+		delete(additionalProperties, "newEnvironmentApprovalPermissionType")
+		delete(additionalProperties, "environmentApprovalPermissions")
 		o.AdditionalProperties = additionalProperties
 	}
 

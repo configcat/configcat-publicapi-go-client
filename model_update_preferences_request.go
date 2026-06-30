@@ -29,6 +29,10 @@ type UpdatePreferencesRequest struct {
 	MandatorySettingHint NullableBool `json:"mandatorySettingHint,omitempty"`
 	// List of Environments where mandatory note must be set before saving and publishing.
 	ReasonRequiredEnvironments []UpdateReasonRequiredEnvironmentModel `json:"reasonRequiredEnvironments,omitempty"`
+	// Indicates that a mandatory approval is required before changes are applied.
+	ApproveRequired NullableBool `json:"approveRequired,omitempty"`
+	// List of Environments where mandatory approval must be given before changes are applied.
+	ApproveRequiredEnvironments []UpdateApproveRequiredEnvironmentModel `json:"approveRequiredEnvironments,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -252,6 +256,81 @@ func (o *UpdatePreferencesRequest) SetReasonRequiredEnvironments(v []UpdateReaso
 	o.ReasonRequiredEnvironments = v
 }
 
+// GetApproveRequired returns the ApproveRequired field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdatePreferencesRequest) GetApproveRequired() bool {
+	if o == nil || IsNil(o.ApproveRequired.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.ApproveRequired.Get()
+}
+
+// GetApproveRequiredOk returns a tuple with the ApproveRequired field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdatePreferencesRequest) GetApproveRequiredOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ApproveRequired.Get(), o.ApproveRequired.IsSet()
+}
+
+// HasApproveRequired returns a boolean if a field has been set.
+func (o *UpdatePreferencesRequest) HasApproveRequired() bool {
+	if o != nil && o.ApproveRequired.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetApproveRequired gets a reference to the given NullableBool and assigns it to the ApproveRequired field.
+func (o *UpdatePreferencesRequest) SetApproveRequired(v bool) {
+	o.ApproveRequired.Set(&v)
+}
+// SetApproveRequiredNil sets the value for ApproveRequired to be an explicit nil
+func (o *UpdatePreferencesRequest) SetApproveRequiredNil() {
+	o.ApproveRequired.Set(nil)
+}
+
+// UnsetApproveRequired ensures that no value is present for ApproveRequired, not even an explicit nil
+func (o *UpdatePreferencesRequest) UnsetApproveRequired() {
+	o.ApproveRequired.Unset()
+}
+
+// GetApproveRequiredEnvironments returns the ApproveRequiredEnvironments field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdatePreferencesRequest) GetApproveRequiredEnvironments() []UpdateApproveRequiredEnvironmentModel {
+	if o == nil {
+		var ret []UpdateApproveRequiredEnvironmentModel
+		return ret
+	}
+	return o.ApproveRequiredEnvironments
+}
+
+// GetApproveRequiredEnvironmentsOk returns a tuple with the ApproveRequiredEnvironments field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdatePreferencesRequest) GetApproveRequiredEnvironmentsOk() ([]UpdateApproveRequiredEnvironmentModel, bool) {
+	if o == nil || IsNil(o.ApproveRequiredEnvironments) {
+		return nil, false
+	}
+	return o.ApproveRequiredEnvironments, true
+}
+
+// HasApproveRequiredEnvironments returns a boolean if a field has been set.
+func (o *UpdatePreferencesRequest) HasApproveRequiredEnvironments() bool {
+	if o != nil && !IsNil(o.ApproveRequiredEnvironments) {
+		return true
+	}
+
+	return false
+}
+
+// SetApproveRequiredEnvironments gets a reference to the given []UpdateApproveRequiredEnvironmentModel and assigns it to the ApproveRequiredEnvironments field.
+func (o *UpdatePreferencesRequest) SetApproveRequiredEnvironments(v []UpdateApproveRequiredEnvironmentModel) {
+	o.ApproveRequiredEnvironments = v
+}
+
 func (o UpdatePreferencesRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -276,6 +355,12 @@ func (o UpdatePreferencesRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if o.ReasonRequiredEnvironments != nil {
 		toSerialize["reasonRequiredEnvironments"] = o.ReasonRequiredEnvironments
+	}
+	if o.ApproveRequired.IsSet() {
+		toSerialize["approveRequired"] = o.ApproveRequired.Get()
+	}
+	if o.ApproveRequiredEnvironments != nil {
+		toSerialize["approveRequiredEnvironments"] = o.ApproveRequiredEnvironments
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -304,6 +389,8 @@ func (o *UpdatePreferencesRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "showVariationId")
 		delete(additionalProperties, "mandatorySettingHint")
 		delete(additionalProperties, "reasonRequiredEnvironments")
+		delete(additionalProperties, "approveRequired")
+		delete(additionalProperties, "approveRequiredEnvironments")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -53,6 +53,7 @@ The Parameters dictionary differs for each IntegrationType:
 - Slack  
 	Connecting the Slack integration through the Public Management API will not post messages with the ConfigCat Feature Flags Slack app but with an incoming webhook.
 	- `incoming_webhook.url`: Required. The [incoming webhook URL](https://api.slack.com/messaging/webhooks) where the integration should post messages.
+    - `includeSensitiveData`: Set to "true" to include [sensitive (hashed) comparison values](https://configcat.com/docs/targeting/targeting-rule/user-condition/#confidential-text-comparators). By default, the integration will mask these values in the posted messages. We recommend hiding sensitive comparison values for shared or public Slack channels.
 - Amplitude
 	- `apiKey`: Required. Amplitude API Key.
 	- `secretKey`: Required. Amplitude Secret Key.
@@ -487,6 +488,7 @@ The Parameters dictionary differs for each IntegrationType:
 - Slack  
 	Connecting the Slack integration through the Public Management API will not post messages with the ConfigCat Feature Flags Slack app but with an incoming webhook.
 	- `incoming_webhook.url`: Required. The [incoming webhook URL](https://api.slack.com/messaging/webhooks) where the integration should post messages.
+	- `includeSensitiveData`: Set to "true" to include [sensitive (hashed) comparison values](https://configcat.com/docs/targeting/targeting-rule/user-condition/#confidential-text-comparators). By default, the integration will mask these values in the posted messages. We recommend hiding sensitive comparison values for shared or public Slack channels.
 - Amplitude
 	- `apiKey`: Required. Amplitude API Key.
 	- `secretKey`: Required. Amplitude Secret Key.

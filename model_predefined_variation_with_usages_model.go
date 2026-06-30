@@ -22,16 +22,20 @@ var _ MappedNullable = &PredefinedVariationWithUsagesModel{}
 // PredefinedVariationWithUsagesModel struct for PredefinedVariationWithUsagesModel
 type PredefinedVariationWithUsagesModel struct {
 	Value PredefinedVariationValueModel `json:"value"`
-	// The name of the Feature Flag or Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown.
+	// The name of the Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown.
 	Name NullableString `json:"name"`
-	// The name of the Feature Flag or Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown.
+	// The name of the Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown.
 	Hint NullableString `json:"hint"`
-	// The Feature Flag or Predefined Variation's identifier.
+	// The Predefined Variation's identifier.
 	PredefinedVariationId string `json:"predefinedVariationId"`
 	// The Feature Flag or Setting Variation's usages in the given Environments.
 	Usages []PredefinedVariationUsageModel `json:"usages"`
 	// The Feature Flag or Setting Variation's usages in the Environments you don't have access to.
 	UsagesInOtherEnvironments int32 `json:"usagesInOtherEnvironments"`
+	// The Feature Flag or Setting Variation's usages in the given Change Requests.
+	ChangeRequestUsages []PredefinedVariationChangeRequestUsageModel `json:"changeRequestUsages"`
+	// The Feature Flag or Setting Variation's usages in the Change Requests you don't have access to.
+	ChangeRequestUsagesInOtherEnvironments int32 `json:"changeRequestUsagesInOtherEnvironments"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -41,7 +45,7 @@ type _PredefinedVariationWithUsagesModel PredefinedVariationWithUsagesModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPredefinedVariationWithUsagesModel(value PredefinedVariationValueModel, name NullableString, hint NullableString, predefinedVariationId string, usages []PredefinedVariationUsageModel, usagesInOtherEnvironments int32) *PredefinedVariationWithUsagesModel {
+func NewPredefinedVariationWithUsagesModel(value PredefinedVariationValueModel, name NullableString, hint NullableString, predefinedVariationId string, usages []PredefinedVariationUsageModel, usagesInOtherEnvironments int32, changeRequestUsages []PredefinedVariationChangeRequestUsageModel, changeRequestUsagesInOtherEnvironments int32) *PredefinedVariationWithUsagesModel {
 	this := PredefinedVariationWithUsagesModel{}
 	this.Value = value
 	this.Name = name
@@ -49,6 +53,8 @@ func NewPredefinedVariationWithUsagesModel(value PredefinedVariationValueModel, 
 	this.PredefinedVariationId = predefinedVariationId
 	this.Usages = usages
 	this.UsagesInOtherEnvironments = usagesInOtherEnvironments
+	this.ChangeRequestUsages = changeRequestUsages
+	this.ChangeRequestUsagesInOtherEnvironments = changeRequestUsagesInOtherEnvironments
 	return &this
 }
 
@@ -208,6 +214,54 @@ func (o *PredefinedVariationWithUsagesModel) SetUsagesInOtherEnvironments(v int3
 	o.UsagesInOtherEnvironments = v
 }
 
+// GetChangeRequestUsages returns the ChangeRequestUsages field value
+func (o *PredefinedVariationWithUsagesModel) GetChangeRequestUsages() []PredefinedVariationChangeRequestUsageModel {
+	if o == nil {
+		var ret []PredefinedVariationChangeRequestUsageModel
+		return ret
+	}
+
+	return o.ChangeRequestUsages
+}
+
+// GetChangeRequestUsagesOk returns a tuple with the ChangeRequestUsages field value
+// and a boolean to check if the value has been set.
+func (o *PredefinedVariationWithUsagesModel) GetChangeRequestUsagesOk() ([]PredefinedVariationChangeRequestUsageModel, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ChangeRequestUsages, true
+}
+
+// SetChangeRequestUsages sets field value
+func (o *PredefinedVariationWithUsagesModel) SetChangeRequestUsages(v []PredefinedVariationChangeRequestUsageModel) {
+	o.ChangeRequestUsages = v
+}
+
+// GetChangeRequestUsagesInOtherEnvironments returns the ChangeRequestUsagesInOtherEnvironments field value
+func (o *PredefinedVariationWithUsagesModel) GetChangeRequestUsagesInOtherEnvironments() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.ChangeRequestUsagesInOtherEnvironments
+}
+
+// GetChangeRequestUsagesInOtherEnvironmentsOk returns a tuple with the ChangeRequestUsagesInOtherEnvironments field value
+// and a boolean to check if the value has been set.
+func (o *PredefinedVariationWithUsagesModel) GetChangeRequestUsagesInOtherEnvironmentsOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ChangeRequestUsagesInOtherEnvironments, true
+}
+
+// SetChangeRequestUsagesInOtherEnvironments sets field value
+func (o *PredefinedVariationWithUsagesModel) SetChangeRequestUsagesInOtherEnvironments(v int32) {
+	o.ChangeRequestUsagesInOtherEnvironments = v
+}
+
 func (o PredefinedVariationWithUsagesModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -224,6 +278,8 @@ func (o PredefinedVariationWithUsagesModel) ToMap() (map[string]interface{}, err
 	toSerialize["predefinedVariationId"] = o.PredefinedVariationId
 	toSerialize["usages"] = o.Usages
 	toSerialize["usagesInOtherEnvironments"] = o.UsagesInOtherEnvironments
+	toSerialize["changeRequestUsages"] = o.ChangeRequestUsages
+	toSerialize["changeRequestUsagesInOtherEnvironments"] = o.ChangeRequestUsagesInOtherEnvironments
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -243,6 +299,8 @@ func (o *PredefinedVariationWithUsagesModel) UnmarshalJSON(data []byte) (err err
 		"predefinedVariationId",
 		"usages",
 		"usagesInOtherEnvironments",
+		"changeRequestUsages",
+		"changeRequestUsagesInOtherEnvironments",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -278,6 +336,8 @@ func (o *PredefinedVariationWithUsagesModel) UnmarshalJSON(data []byte) (err err
 		delete(additionalProperties, "predefinedVariationId")
 		delete(additionalProperties, "usages")
 		delete(additionalProperties, "usagesInOtherEnvironments")
+		delete(additionalProperties, "changeRequestUsages")
+		delete(additionalProperties, "changeRequestUsagesInOtherEnvironments")
 		o.AdditionalProperties = additionalProperties
 	}
 

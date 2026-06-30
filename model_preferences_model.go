@@ -30,6 +30,10 @@ type PreferencesModel struct {
 	ReasonRequiredEnvironments []ReasonRequiredEnvironmentModel `json:"reasonRequiredEnvironments"`
 	// Indicates whether Feature flags and Settings must have a hint.
 	MandatorySettingHint bool `json:"mandatorySettingHint"`
+	// Indicates that a mandatory approval is required for saving and publishing.
+	ApproveRequired bool `json:"approveRequired"`
+	// List of Environments where mandatory approval must be given before changes are applied.
+	ApproveRequiredEnvironments []ApproveRequiredEnvironmentModel `json:"approveRequiredEnvironments"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -39,13 +43,15 @@ type _PreferencesModel PreferencesModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPreferencesModel(reasonRequired bool, keyGenerationMode KeyGenerationMode, showVariationId bool, reasonRequiredEnvironments []ReasonRequiredEnvironmentModel, mandatorySettingHint bool) *PreferencesModel {
+func NewPreferencesModel(reasonRequired bool, keyGenerationMode KeyGenerationMode, showVariationId bool, reasonRequiredEnvironments []ReasonRequiredEnvironmentModel, mandatorySettingHint bool, approveRequired bool, approveRequiredEnvironments []ApproveRequiredEnvironmentModel) *PreferencesModel {
 	this := PreferencesModel{}
 	this.ReasonRequired = reasonRequired
 	this.KeyGenerationMode = keyGenerationMode
 	this.ShowVariationId = showVariationId
 	this.ReasonRequiredEnvironments = reasonRequiredEnvironments
 	this.MandatorySettingHint = mandatorySettingHint
+	this.ApproveRequired = approveRequired
+	this.ApproveRequiredEnvironments = approveRequiredEnvironments
 	return &this
 }
 
@@ -179,6 +185,56 @@ func (o *PreferencesModel) SetMandatorySettingHint(v bool) {
 	o.MandatorySettingHint = v
 }
 
+// GetApproveRequired returns the ApproveRequired field value
+func (o *PreferencesModel) GetApproveRequired() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.ApproveRequired
+}
+
+// GetApproveRequiredOk returns a tuple with the ApproveRequired field value
+// and a boolean to check if the value has been set.
+func (o *PreferencesModel) GetApproveRequiredOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ApproveRequired, true
+}
+
+// SetApproveRequired sets field value
+func (o *PreferencesModel) SetApproveRequired(v bool) {
+	o.ApproveRequired = v
+}
+
+// GetApproveRequiredEnvironments returns the ApproveRequiredEnvironments field value
+// If the value is explicit nil, the zero value for []ApproveRequiredEnvironmentModel will be returned
+func (o *PreferencesModel) GetApproveRequiredEnvironments() []ApproveRequiredEnvironmentModel {
+	if o == nil {
+		var ret []ApproveRequiredEnvironmentModel
+		return ret
+	}
+
+	return o.ApproveRequiredEnvironments
+}
+
+// GetApproveRequiredEnvironmentsOk returns a tuple with the ApproveRequiredEnvironments field value
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PreferencesModel) GetApproveRequiredEnvironmentsOk() ([]ApproveRequiredEnvironmentModel, bool) {
+	if o == nil || IsNil(o.ApproveRequiredEnvironments) {
+		return nil, false
+	}
+	return o.ApproveRequiredEnvironments, true
+}
+
+// SetApproveRequiredEnvironments sets field value
+func (o *PreferencesModel) SetApproveRequiredEnvironments(v []ApproveRequiredEnvironmentModel) {
+	o.ApproveRequiredEnvironments = v
+}
+
 func (o PreferencesModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -196,6 +252,10 @@ func (o PreferencesModel) ToMap() (map[string]interface{}, error) {
 		toSerialize["reasonRequiredEnvironments"] = o.ReasonRequiredEnvironments
 	}
 	toSerialize["mandatorySettingHint"] = o.MandatorySettingHint
+	toSerialize["approveRequired"] = o.ApproveRequired
+	if o.ApproveRequiredEnvironments != nil {
+		toSerialize["approveRequiredEnvironments"] = o.ApproveRequiredEnvironments
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -214,6 +274,8 @@ func (o *PreferencesModel) UnmarshalJSON(data []byte) (err error) {
 		"showVariationId",
 		"reasonRequiredEnvironments",
 		"mandatorySettingHint",
+		"approveRequired",
+		"approveRequiredEnvironments",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -248,6 +310,8 @@ func (o *PreferencesModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "showVariationId")
 		delete(additionalProperties, "reasonRequiredEnvironments")
 		delete(additionalProperties, "mandatorySettingHint")
+		delete(additionalProperties, "approveRequired")
+		delete(additionalProperties, "approveRequiredEnvironments")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -155,6 +155,7 @@ type FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Reques
 	settingKeyOrId string
 	updateEvaluationFormulaModel *UpdateEvaluationFormulaModel
 	reason *string
+	bypassApproval *bool
 	xCONFIGCATSDKKEY *string
 }
 
@@ -166,6 +167,12 @@ func (r FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Req
 // The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on.
 func (r FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request) Reason(reason string) FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request {
 	r.reason = &reason
+	return r
+}
+
+// Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission.
+func (r FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request) BypassApproval(bypassApproval bool) FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request {
+	r.bypassApproval = &bypassApproval
 	return r
 }
 
@@ -276,6 +283,9 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyV2APIService) ReplaceSettingValueByS
 	if r.reason != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "form", "")
 	}
+	if r.bypassApproval != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "bypassApproval", r.bypassApproval, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}
 
@@ -341,6 +351,7 @@ type FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request
 	settingKeyOrId string
 	jsonPatchOperation *[]JsonPatchOperation
 	reason *string
+	bypassApproval *bool
 	xCONFIGCATSDKKEY *string
 }
 
@@ -352,6 +363,12 @@ func (r FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Requ
 // The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on.
 func (r FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request) Reason(reason string) FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request {
 	r.reason = &reason
+	return r
+}
+
+// Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission.
+func (r FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request) BypassApproval(bypassApproval bool) FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request {
+	r.bypassApproval = &bypassApproval
 	return r
 }
 
@@ -483,6 +500,9 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyV2APIService) UpdateSettingValueBySd
 
 	if r.reason != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "form", "")
+	}
+	if r.bypassApproval != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "bypassApproval", r.bypassApproval, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}

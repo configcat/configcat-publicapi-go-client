@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Name** | **string** | Name of the Feature Flag or Setting. | 
 **Hint** | **NullableString** | Description of the Feature Flag or Setting. | 
 **SettingType** | [**SettingType**](SettingType.md) |  | 
+**IsJson** | **bool** | Indicates whether this setting should validate string values as JSON values. | 
 **Order** | **int32** | The order of the Feature Flag or Setting represented on the ConfigCat Dashboard. | 
 **CreatedAt** | **NullableTime** | The creation time of the Feature Flag or Setting. | 
 **CreatorEmail** | **NullableString** | The user&#39;s email address who created the Feature Flag or Setting. | 
@@ -20,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewSettingDataV2Model
 
-`func NewSettingDataV2Model(settingId int32, key string, name string, hint NullableString, settingType SettingType, order int32, createdAt NullableTime, creatorEmail NullableString, creatorFullName NullableString, predefinedVariations []PredefinedVariationModel, isWatching bool, ) *SettingDataV2Model`
+`func NewSettingDataV2Model(settingId int32, key string, name string, hint NullableString, settingType SettingType, isJson bool, order int32, createdAt NullableTime, creatorEmail NullableString, creatorFullName NullableString, predefinedVariations []PredefinedVariationModel, isWatching bool, ) *SettingDataV2Model`
 
 NewSettingDataV2Model instantiates a new SettingDataV2Model object
 This constructor will assign default values to properties that have it defined,
@@ -143,6 +144,26 @@ and a boolean to check if the value has been set.
 `func (o *SettingDataV2Model) SetSettingType(v SettingType)`
 
 SetSettingType sets SettingType field to given value.
+
+
+### GetIsJson
+
+`func (o *SettingDataV2Model) GetIsJson() bool`
+
+GetIsJson returns the IsJson field if non-nil, zero value otherwise.
+
+### GetIsJsonOk
+
+`func (o *SettingDataV2Model) GetIsJsonOk() (*bool, bool)`
+
+GetIsJsonOk returns a tuple with the IsJson field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsJson
+
+`func (o *SettingDataV2Model) SetIsJson(v bool)`
+
+SetIsJson sets IsJson field to given value.
 
 
 ### GetOrder

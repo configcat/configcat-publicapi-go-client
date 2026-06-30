@@ -29,14 +29,17 @@ Name | Type | Description | Notes
 **CanDisable2FA** | **bool** | Group members can disable two-factor authentication for other members. | 
 **AccessType** | [**AccessType**](AccessType.md) |  | 
 **NewEnvironmentAccessType** | [**EnvironmentAccessType**](EnvironmentAccessType.md) |  | 
-**EnvironmentAccesses** | [**[]EnvironmentAccessModel**](EnvironmentAccessModel.md) | List of environment specific permissions. | 
+**EnvironmentAccesses** | [**[]PermissionGroupEnvironmentAccessModel**](PermissionGroupEnvironmentAccessModel.md) | List of environment specific permissions. | 
 **Product** | [**ProductModel**](ProductModel.md) |  | 
+**ApprovalPermissionType** | [**ApprovalPermissionType**](ApprovalPermissionType.md) |  | 
+**NewEnvironmentApprovalPermissionType** | [**EnvironmentApprovalPermissionType**](EnvironmentApprovalPermissionType.md) |  | 
+**EnvironmentApprovalPermissions** | [**[]PermissionGroupEnvironmentApprovalPermissionModel**](PermissionGroupEnvironmentApprovalPermissionModel.md) | List of environment specific approval permissions. | 
 
 ## Methods
 
 ### NewPermissionGroupModel
 
-`func NewPermissionGroupModel(permissionGroupId int64, name string, canManageMembers bool, canCreateOrUpdateConfig bool, canDeleteConfig bool, canCreateOrUpdateEnvironment bool, canDeleteEnvironment bool, canCreateOrUpdateSetting bool, canTagSetting bool, canDeleteSetting bool, canCreateOrUpdateTag bool, canDeleteTag bool, canManageWebhook bool, canUseExportImport bool, canManageProductPreferences bool, canManageIntegrations bool, canViewSdkKey bool, canRotateSdkKey bool, canCreateOrUpdateSegments bool, canDeleteSegments bool, canViewProductAuditLog bool, canViewProductStatistics bool, canDisable2FA bool, accessType AccessType, newEnvironmentAccessType EnvironmentAccessType, environmentAccesses []EnvironmentAccessModel, product ProductModel, ) *PermissionGroupModel`
+`func NewPermissionGroupModel(permissionGroupId int64, name string, canManageMembers bool, canCreateOrUpdateConfig bool, canDeleteConfig bool, canCreateOrUpdateEnvironment bool, canDeleteEnvironment bool, canCreateOrUpdateSetting bool, canTagSetting bool, canDeleteSetting bool, canCreateOrUpdateTag bool, canDeleteTag bool, canManageWebhook bool, canUseExportImport bool, canManageProductPreferences bool, canManageIntegrations bool, canViewSdkKey bool, canRotateSdkKey bool, canCreateOrUpdateSegments bool, canDeleteSegments bool, canViewProductAuditLog bool, canViewProductStatistics bool, canDisable2FA bool, accessType AccessType, newEnvironmentAccessType EnvironmentAccessType, environmentAccesses []PermissionGroupEnvironmentAccessModel, product ProductModel, approvalPermissionType ApprovalPermissionType, newEnvironmentApprovalPermissionType EnvironmentApprovalPermissionType, environmentApprovalPermissions []PermissionGroupEnvironmentApprovalPermissionModel, ) *PermissionGroupModel`
 
 NewPermissionGroupModel instantiates a new PermissionGroupModel object
 This constructor will assign default values to properties that have it defined,
@@ -553,20 +556,20 @@ SetNewEnvironmentAccessType sets NewEnvironmentAccessType field to given value.
 
 ### GetEnvironmentAccesses
 
-`func (o *PermissionGroupModel) GetEnvironmentAccesses() []EnvironmentAccessModel`
+`func (o *PermissionGroupModel) GetEnvironmentAccesses() []PermissionGroupEnvironmentAccessModel`
 
 GetEnvironmentAccesses returns the EnvironmentAccesses field if non-nil, zero value otherwise.
 
 ### GetEnvironmentAccessesOk
 
-`func (o *PermissionGroupModel) GetEnvironmentAccessesOk() (*[]EnvironmentAccessModel, bool)`
+`func (o *PermissionGroupModel) GetEnvironmentAccessesOk() (*[]PermissionGroupEnvironmentAccessModel, bool)`
 
 GetEnvironmentAccessesOk returns a tuple with the EnvironmentAccesses field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetEnvironmentAccesses
 
-`func (o *PermissionGroupModel) SetEnvironmentAccesses(v []EnvironmentAccessModel)`
+`func (o *PermissionGroupModel) SetEnvironmentAccesses(v []PermissionGroupEnvironmentAccessModel)`
 
 SetEnvironmentAccesses sets EnvironmentAccesses field to given value.
 
@@ -589,6 +592,66 @@ and a boolean to check if the value has been set.
 `func (o *PermissionGroupModel) SetProduct(v ProductModel)`
 
 SetProduct sets Product field to given value.
+
+
+### GetApprovalPermissionType
+
+`func (o *PermissionGroupModel) GetApprovalPermissionType() ApprovalPermissionType`
+
+GetApprovalPermissionType returns the ApprovalPermissionType field if non-nil, zero value otherwise.
+
+### GetApprovalPermissionTypeOk
+
+`func (o *PermissionGroupModel) GetApprovalPermissionTypeOk() (*ApprovalPermissionType, bool)`
+
+GetApprovalPermissionTypeOk returns a tuple with the ApprovalPermissionType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApprovalPermissionType
+
+`func (o *PermissionGroupModel) SetApprovalPermissionType(v ApprovalPermissionType)`
+
+SetApprovalPermissionType sets ApprovalPermissionType field to given value.
+
+
+### GetNewEnvironmentApprovalPermissionType
+
+`func (o *PermissionGroupModel) GetNewEnvironmentApprovalPermissionType() EnvironmentApprovalPermissionType`
+
+GetNewEnvironmentApprovalPermissionType returns the NewEnvironmentApprovalPermissionType field if non-nil, zero value otherwise.
+
+### GetNewEnvironmentApprovalPermissionTypeOk
+
+`func (o *PermissionGroupModel) GetNewEnvironmentApprovalPermissionTypeOk() (*EnvironmentApprovalPermissionType, bool)`
+
+GetNewEnvironmentApprovalPermissionTypeOk returns a tuple with the NewEnvironmentApprovalPermissionType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNewEnvironmentApprovalPermissionType
+
+`func (o *PermissionGroupModel) SetNewEnvironmentApprovalPermissionType(v EnvironmentApprovalPermissionType)`
+
+SetNewEnvironmentApprovalPermissionType sets NewEnvironmentApprovalPermissionType field to given value.
+
+
+### GetEnvironmentApprovalPermissions
+
+`func (o *PermissionGroupModel) GetEnvironmentApprovalPermissions() []PermissionGroupEnvironmentApprovalPermissionModel`
+
+GetEnvironmentApprovalPermissions returns the EnvironmentApprovalPermissions field if non-nil, zero value otherwise.
+
+### GetEnvironmentApprovalPermissionsOk
+
+`func (o *PermissionGroupModel) GetEnvironmentApprovalPermissionsOk() (*[]PermissionGroupEnvironmentApprovalPermissionModel, bool)`
+
+GetEnvironmentApprovalPermissionsOk returns a tuple with the EnvironmentApprovalPermissions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnvironmentApprovalPermissions
+
+`func (o *PermissionGroupModel) SetEnvironmentApprovalPermissions(v []PermissionGroupEnvironmentApprovalPermissionModel)`
+
+SetEnvironmentApprovalPermissions sets EnvironmentApprovalPermissions field to given value.
 
 
 

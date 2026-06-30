@@ -28,6 +28,9 @@ Name | Type | Description | Notes
 **AccessType** | Pointer to [**AccessType**](AccessType.md) |  | [optional] 
 **NewEnvironmentAccessType** | Pointer to [**EnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] 
 **EnvironmentAccesses** | Pointer to [**[]CreateOrUpdateEnvironmentAccessModel**](CreateOrUpdateEnvironmentAccessModel.md) | List of environment specific permissions. | [optional] 
+**ApprovalPermissionType** | Pointer to [**ApprovalPermissionType**](ApprovalPermissionType.md) |  | [optional] 
+**NewEnvironmentApprovalPermissionType** | Pointer to [**EnvironmentApprovalPermissionType**](EnvironmentApprovalPermissionType.md) |  | [optional] 
+**EnvironmentApprovalPermissions** | Pointer to [**[]CreateOrUpdateEnvironmentApprovalPermissionModel**](CreateOrUpdateEnvironmentApprovalPermissionModel.md) | List of environment specific change request approval permissions. | [optional] 
 **CanDisable2FA** | Pointer to **bool** | Group members can disable two-factor authentication for other members. | [optional] 
 
 ## Methods
@@ -654,6 +657,91 @@ HasEnvironmentAccesses returns a boolean if a field has been set.
 `func (o *CreatePermissionGroupRequest) UnsetEnvironmentAccesses()`
 
 UnsetEnvironmentAccesses ensures that no value is present for EnvironmentAccesses, not even an explicit nil
+### GetApprovalPermissionType
+
+`func (o *CreatePermissionGroupRequest) GetApprovalPermissionType() ApprovalPermissionType`
+
+GetApprovalPermissionType returns the ApprovalPermissionType field if non-nil, zero value otherwise.
+
+### GetApprovalPermissionTypeOk
+
+`func (o *CreatePermissionGroupRequest) GetApprovalPermissionTypeOk() (*ApprovalPermissionType, bool)`
+
+GetApprovalPermissionTypeOk returns a tuple with the ApprovalPermissionType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApprovalPermissionType
+
+`func (o *CreatePermissionGroupRequest) SetApprovalPermissionType(v ApprovalPermissionType)`
+
+SetApprovalPermissionType sets ApprovalPermissionType field to given value.
+
+### HasApprovalPermissionType
+
+`func (o *CreatePermissionGroupRequest) HasApprovalPermissionType() bool`
+
+HasApprovalPermissionType returns a boolean if a field has been set.
+
+### GetNewEnvironmentApprovalPermissionType
+
+`func (o *CreatePermissionGroupRequest) GetNewEnvironmentApprovalPermissionType() EnvironmentApprovalPermissionType`
+
+GetNewEnvironmentApprovalPermissionType returns the NewEnvironmentApprovalPermissionType field if non-nil, zero value otherwise.
+
+### GetNewEnvironmentApprovalPermissionTypeOk
+
+`func (o *CreatePermissionGroupRequest) GetNewEnvironmentApprovalPermissionTypeOk() (*EnvironmentApprovalPermissionType, bool)`
+
+GetNewEnvironmentApprovalPermissionTypeOk returns a tuple with the NewEnvironmentApprovalPermissionType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNewEnvironmentApprovalPermissionType
+
+`func (o *CreatePermissionGroupRequest) SetNewEnvironmentApprovalPermissionType(v EnvironmentApprovalPermissionType)`
+
+SetNewEnvironmentApprovalPermissionType sets NewEnvironmentApprovalPermissionType field to given value.
+
+### HasNewEnvironmentApprovalPermissionType
+
+`func (o *CreatePermissionGroupRequest) HasNewEnvironmentApprovalPermissionType() bool`
+
+HasNewEnvironmentApprovalPermissionType returns a boolean if a field has been set.
+
+### GetEnvironmentApprovalPermissions
+
+`func (o *CreatePermissionGroupRequest) GetEnvironmentApprovalPermissions() []CreateOrUpdateEnvironmentApprovalPermissionModel`
+
+GetEnvironmentApprovalPermissions returns the EnvironmentApprovalPermissions field if non-nil, zero value otherwise.
+
+### GetEnvironmentApprovalPermissionsOk
+
+`func (o *CreatePermissionGroupRequest) GetEnvironmentApprovalPermissionsOk() (*[]CreateOrUpdateEnvironmentApprovalPermissionModel, bool)`
+
+GetEnvironmentApprovalPermissionsOk returns a tuple with the EnvironmentApprovalPermissions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnvironmentApprovalPermissions
+
+`func (o *CreatePermissionGroupRequest) SetEnvironmentApprovalPermissions(v []CreateOrUpdateEnvironmentApprovalPermissionModel)`
+
+SetEnvironmentApprovalPermissions sets EnvironmentApprovalPermissions field to given value.
+
+### HasEnvironmentApprovalPermissions
+
+`func (o *CreatePermissionGroupRequest) HasEnvironmentApprovalPermissions() bool`
+
+HasEnvironmentApprovalPermissions returns a boolean if a field has been set.
+
+### SetEnvironmentApprovalPermissionsNil
+
+`func (o *CreatePermissionGroupRequest) SetEnvironmentApprovalPermissionsNil(b bool)`
+
+ SetEnvironmentApprovalPermissionsNil sets the value for EnvironmentApprovalPermissions to be an explicit nil
+
+### UnsetEnvironmentApprovalPermissions
+`func (o *CreatePermissionGroupRequest) UnsetEnvironmentApprovalPermissions()`
+
+UnsetEnvironmentApprovalPermissions ensures that no value is present for EnvironmentApprovalPermissions, not even an explicit nil
 ### GetCanDisable2FA
 
 `func (o *CreatePermissionGroupRequest) GetCanDisable2FA() bool`

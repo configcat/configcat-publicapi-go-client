@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Hint** | **NullableString** | Description of the Feature Flag or Setting. | 
 **Order** | **int32** | The order of the Feature Flag or Setting represented on the ConfigCat Dashboard. | 
 **SettingType** | [**SettingType**](SettingType.md) |  | 
+**IsJson** | **bool** |  | 
 **ConfigId** | **string** | Identifier of the Feature Flag&#39;s Config. | 
 **ConfigName** | **string** | Name of the Feature Flag&#39;s Config. | 
 **CreatedAt** | **NullableTime** | The creation time of the Feature Flag or Setting. | 
@@ -20,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewSettingModel
 
-`func NewSettingModel(settingId int32, key string, name string, hint NullableString, order int32, settingType SettingType, configId string, configName string, createdAt NullableTime, tags []TagModel, predefinedVariations []PredefinedVariationModel, ) *SettingModel`
+`func NewSettingModel(settingId int32, key string, name string, hint NullableString, order int32, settingType SettingType, isJson bool, configId string, configName string, createdAt NullableTime, tags []TagModel, predefinedVariations []PredefinedVariationModel, ) *SettingModel`
 
 NewSettingModel instantiates a new SettingModel object
 This constructor will assign default values to properties that have it defined,
@@ -163,6 +164,26 @@ and a boolean to check if the value has been set.
 `func (o *SettingModel) SetSettingType(v SettingType)`
 
 SetSettingType sets SettingType field to given value.
+
+
+### GetIsJson
+
+`func (o *SettingModel) GetIsJson() bool`
+
+GetIsJson returns the IsJson field if non-nil, zero value otherwise.
+
+### GetIsJsonOk
+
+`func (o *SettingModel) GetIsJsonOk() (*bool, bool)`
+
+GetIsJsonOk returns a tuple with the IsJson field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsJson
+
+`func (o *SettingModel) SetIsJson(v bool)`
+
+SetIsJson sets IsJson field to given value.
 
 
 ### GetConfigId

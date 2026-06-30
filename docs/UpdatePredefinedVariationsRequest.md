@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PredefinedVariations** | [**[]UpdatePredefinedVariationModel**](UpdatePredefinedVariationModel.md) | A collection of Feature Flag or Predefined Variations. | 
+**PredefinedVariations** | [**[]UpdatePredefinedVariationModel**](UpdatePredefinedVariationModel.md) | A collection of Predefined Variations. | 
 
 ## Methods
 

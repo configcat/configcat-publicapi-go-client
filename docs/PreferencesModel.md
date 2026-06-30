@@ -9,12 +9,14 @@ Name | Type | Description | Notes
 **ShowVariationId** | **bool** | Indicates whether a variation ID&#39;s must be shown on the ConfigCat Dashboard. | 
 **ReasonRequiredEnvironments** | [**[]ReasonRequiredEnvironmentModel**](ReasonRequiredEnvironmentModel.md) | List of Environments where mandatory note must be set before saving and publishing. | 
 **MandatorySettingHint** | **bool** | Indicates whether Feature flags and Settings must have a hint. | 
+**ApproveRequired** | **bool** | Indicates that a mandatory approval is required for saving and publishing. | 
+**ApproveRequiredEnvironments** | [**[]ApproveRequiredEnvironmentModel**](ApproveRequiredEnvironmentModel.md) | List of Environments where mandatory approval must be given before changes are applied. | 
 
 ## Methods
 
 ### NewPreferencesModel
 
-`func NewPreferencesModel(reasonRequired bool, keyGenerationMode KeyGenerationMode, showVariationId bool, reasonRequiredEnvironments []ReasonRequiredEnvironmentModel, mandatorySettingHint bool, ) *PreferencesModel`
+`func NewPreferencesModel(reasonRequired bool, keyGenerationMode KeyGenerationMode, showVariationId bool, reasonRequiredEnvironments []ReasonRequiredEnvironmentModel, mandatorySettingHint bool, approveRequired bool, approveRequiredEnvironments []ApproveRequiredEnvironmentModel, ) *PreferencesModel`
 
 NewPreferencesModel instantiates a new PreferencesModel object
 This constructor will assign default values to properties that have it defined,
@@ -139,6 +141,56 @@ and a boolean to check if the value has been set.
 SetMandatorySettingHint sets MandatorySettingHint field to given value.
 
 
+### GetApproveRequired
+
+`func (o *PreferencesModel) GetApproveRequired() bool`
+
+GetApproveRequired returns the ApproveRequired field if non-nil, zero value otherwise.
+
+### GetApproveRequiredOk
+
+`func (o *PreferencesModel) GetApproveRequiredOk() (*bool, bool)`
+
+GetApproveRequiredOk returns a tuple with the ApproveRequired field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApproveRequired
+
+`func (o *PreferencesModel) SetApproveRequired(v bool)`
+
+SetApproveRequired sets ApproveRequired field to given value.
+
+
+### GetApproveRequiredEnvironments
+
+`func (o *PreferencesModel) GetApproveRequiredEnvironments() []ApproveRequiredEnvironmentModel`
+
+GetApproveRequiredEnvironments returns the ApproveRequiredEnvironments field if non-nil, zero value otherwise.
+
+### GetApproveRequiredEnvironmentsOk
+
+`func (o *PreferencesModel) GetApproveRequiredEnvironmentsOk() (*[]ApproveRequiredEnvironmentModel, bool)`
+
+GetApproveRequiredEnvironmentsOk returns a tuple with the ApproveRequiredEnvironments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApproveRequiredEnvironments
+
+`func (o *PreferencesModel) SetApproveRequiredEnvironments(v []ApproveRequiredEnvironmentModel)`
+
+SetApproveRequiredEnvironments sets ApproveRequiredEnvironments field to given value.
+
+
+### SetApproveRequiredEnvironmentsNil
+
+`func (o *PreferencesModel) SetApproveRequiredEnvironmentsNil(b bool)`
+
+ SetApproveRequiredEnvironmentsNil sets the value for ApproveRequiredEnvironments to be an explicit nil
+
+### UnsetApproveRequiredEnvironments
+`func (o *PreferencesModel) UnsetApproveRequiredEnvironments()`
+
+UnsetApproveRequiredEnvironments ensures that no value is present for ApproveRequiredEnvironments, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

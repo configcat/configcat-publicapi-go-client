@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Hint** | Pointer to **NullableString** | A short description for the setting, shown on the Dashboard UI. | [optional] 
 **Tags** | Pointer to **[]int64** | The IDs of the tags which are attached to the setting. | [optional] 
 **Order** | Pointer to **NullableInt32** | The order of the Setting represented on the ConfigCat Dashboard. Determined from an ascending sequence of integers. | [optional] 
+**IsJson** | Pointer to **NullableBool** | Indicates whether this setting should validate string values as JSON values. | [optional] 
 
 ## Methods
 
@@ -153,6 +154,41 @@ HasOrder returns a boolean if a field has been set.
 `func (o *ReplaceSettingModel) UnsetOrder()`
 
 UnsetOrder ensures that no value is present for Order, not even an explicit nil
+### GetIsJson
+
+`func (o *ReplaceSettingModel) GetIsJson() bool`
+
+GetIsJson returns the IsJson field if non-nil, zero value otherwise.
+
+### GetIsJsonOk
+
+`func (o *ReplaceSettingModel) GetIsJsonOk() (*bool, bool)`
+
+GetIsJsonOk returns a tuple with the IsJson field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsJson
+
+`func (o *ReplaceSettingModel) SetIsJson(v bool)`
+
+SetIsJson sets IsJson field to given value.
+
+### HasIsJson
+
+`func (o *ReplaceSettingModel) HasIsJson() bool`
+
+HasIsJson returns a boolean if a field has been set.
+
+### SetIsJsonNil
+
+`func (o *ReplaceSettingModel) SetIsJsonNil(b bool)`
+
+ SetIsJsonNil sets the value for IsJson to be an explicit nil
+
+### UnsetIsJson
+`func (o *ReplaceSettingModel) UnsetIsJson()`
+
+UnsetIsJson ensures that no value is present for IsJson, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

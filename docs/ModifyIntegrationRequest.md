@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Name of the Integration. | 
 **Parameters** | **map[string]string** | Parameters of the Integration. | 
-**EnvironmentIds** | **[]string** | List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected. | 
-**ConfigIds** | **[]string** | List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected. | 
+**EnvironmentIds** | **[]string** | List of Environment IDs that are connected with this Integration. If the list is empty, all the Environments are connected. | 
+**ConfigIds** | **[]string** | List of Config IDs that are connected with this Integration. If the list is empty, all the Configs are connected. | 
 
 ## Methods
 

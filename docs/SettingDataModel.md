@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Name** | **string** | Name of the Feature Flag or Setting. | 
 **Hint** | **NullableString** | Description of the Feature Flag or Setting. | 
 **SettingType** | [**SettingType**](SettingType.md) |  | 
+**IsJson** | **bool** | Indicates whether this setting should validate string values as JSON values. | 
 **Order** | **int32** | The order of the Feature Flag or Setting represented on the ConfigCat Dashboard. | 
 **CreatedAt** | **NullableTime** | The creation time of the Feature Flag or Setting. | 
 **CreatorEmail** | **NullableString** | The user&#39;s email address who created the Feature Flag or Setting. | 
@@ -19,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewSettingDataModel
 
-`func NewSettingDataModel(settingId int32, key string, name string, hint NullableString, settingType SettingType, order int32, createdAt NullableTime, creatorEmail NullableString, creatorFullName NullableString, isWatching bool, ) *SettingDataModel`
+`func NewSettingDataModel(settingId int32, key string, name string, hint NullableString, settingType SettingType, isJson bool, order int32, createdAt NullableTime, creatorEmail NullableString, creatorFullName NullableString, isWatching bool, ) *SettingDataModel`
 
 NewSettingDataModel instantiates a new SettingDataModel object
 This constructor will assign default values to properties that have it defined,
@@ -142,6 +143,26 @@ and a boolean to check if the value has been set.
 `func (o *SettingDataModel) SetSettingType(v SettingType)`
 
 SetSettingType sets SettingType field to given value.
+
+
+### GetIsJson
+
+`func (o *SettingDataModel) GetIsJson() bool`
+
+GetIsJson returns the IsJson field if non-nil, zero value otherwise.
+
+### GetIsJsonOk
+
+`func (o *SettingDataModel) GetIsJsonOk() (*bool, bool)`
+
+GetIsJsonOk returns a tuple with the IsJson field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsJson
+
+`func (o *SettingDataModel) SetIsJson(v bool)`
+
+SetIsJson sets IsJson field to given value.
 
 
 ### GetOrder

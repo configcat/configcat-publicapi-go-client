@@ -47,7 +47,6 @@ func NewIntegrationsModelWithDefaults() *IntegrationsModel {
 }
 
 // GetIntegrations returns the Integrations field value
-// If the value is explicit nil, the zero value for []IntegrationModel will be returned
 func (o *IntegrationsModel) GetIntegrations() []IntegrationModel {
 	if o == nil {
 		var ret []IntegrationModel
@@ -59,9 +58,8 @@ func (o *IntegrationsModel) GetIntegrations() []IntegrationModel {
 
 // GetIntegrationsOk returns a tuple with the Integrations field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *IntegrationsModel) GetIntegrationsOk() ([]IntegrationModel, bool) {
-	if o == nil || IsNil(o.Integrations) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Integrations, true
@@ -82,9 +80,7 @@ func (o IntegrationsModel) MarshalJSON() ([]byte, error) {
 
 func (o IntegrationsModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Integrations != nil {
-		toSerialize["integrations"] = o.Integrations
-	}
+	toSerialize["integrations"] = o.Integrations
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value

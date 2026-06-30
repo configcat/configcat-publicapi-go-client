@@ -29,7 +29,10 @@ configuration.go
 docs/AccessType.md
 docs/AddOrUpdateIntegrationLinkModel.md
 docs/AddOrUpdateJiraIntegrationLinkModel.md
+docs/ApprovalPermissionType.md
+docs/ApproveRequiredEnvironmentModel.md
 docs/AuditLogItemModel.md
+docs/AuditLogItemModelPagedList.md
 docs/AuditLogType.md
 docs/AuditLogsAPI.md
 docs/CodeReferenceModel.md
@@ -51,6 +54,7 @@ docs/CreateEnvironmentModel.md
 docs/CreateIntegrationModel.md
 docs/CreateOrUpdateConnectionPreferences.md
 docs/CreateOrUpdateEnvironmentAccessModel.md
+docs/CreateOrUpdateEnvironmentApprovalPermissionModel.md
 docs/CreateOrUpdateProxyProfileRequest.md
 docs/CreateOrUpdateWebhookNotification.md
 docs/CreatePermissionGroupRequest.md
@@ -63,8 +67,8 @@ docs/CreateTagModel.md
 docs/DeleteIntegrationLinkModel.md
 docs/DeleteRepositoryReportsRequest.md
 docs/DeletedSettingModel.md
-docs/EnvironmentAccessModel.md
 docs/EnvironmentAccessType.md
+docs/EnvironmentApprovalPermissionType.md
 docs/EnvironmentModel.md
 docs/EnvironmentsAPI.md
 docs/EvaluationVersion.md
@@ -105,9 +109,13 @@ docs/OrganizationPermissionGroupModel.md
 docs/OrganizationPermissionModel.md
 docs/OrganizationProductModel.md
 docs/OrganizationsAPI.md
+docs/PagingResponseInfo.md
 docs/PercentageOptionModel.md
+docs/PermissionGroupEnvironmentAccessModel.md
+docs/PermissionGroupEnvironmentApprovalPermissionModel.md
 docs/PermissionGroupModel.md
 docs/PermissionGroupsAPI.md
+docs/PredefinedVariationChangeRequestUsageModel.md
 docs/PredefinedVariationEnvironmentModel.md
 docs/PredefinedVariationModel.md
 docs/PredefinedVariationUsageModel.md
@@ -165,6 +173,7 @@ docs/StaleFlagStaleInEnvironmentsType.md
 docs/TagModel.md
 docs/TagsAPI.md
 docs/TargetingRuleModel.md
+docs/UpdateApproveRequiredEnvironmentModel.md
 docs/UpdateComparisonValueListModel.md
 docs/UpdateComparisonValueModel.md
 docs/UpdateConditionModel.md
@@ -216,7 +225,10 @@ go.sum
 model_access_type.go
 model_add_or_update_integration_link_model.go
 model_add_or_update_jira_integration_link_model.go
+model_approval_permission_type.go
+model_approve_required_environment_model.go
 model_audit_log_item_model.go
+model_audit_log_item_model_paged_list.go
 model_audit_log_type.go
 model_code_reference_model.go
 model_code_reference_request.go
@@ -235,6 +247,7 @@ model_create_environment_model.go
 model_create_integration_model.go
 model_create_or_update_connection_preferences.go
 model_create_or_update_environment_access_model.go
+model_create_or_update_environment_approval_permission_model.go
 model_create_or_update_proxy_profile_request.go
 model_create_or_update_webhook_notification.go
 model_create_permission_group_request.go
@@ -247,8 +260,8 @@ model_create_tag_model.go
 model_delete_integration_link_model.go
 model_delete_repository_reports_request.go
 model_deleted_setting_model.go
-model_environment_access_model.go
 model_environment_access_type.go
+model_environment_approval_permission_type.go
 model_environment_model.go
 model_evaluation_version.go
 model_feature_flag_limitations.go
@@ -278,8 +291,12 @@ model_organization_model.go
 model_organization_permission_group_model.go
 model_organization_permission_model.go
 model_organization_product_model.go
+model_paging_response_info.go
 model_percentage_option_model.go
+model_permission_group_environment_access_model.go
+model_permission_group_environment_approval_permission_model.go
 model_permission_group_model.go
+model_predefined_variation_change_request_usage_model.go
 model_predefined_variation_environment_model.go
 model_predefined_variation_model.go
 model_predefined_variation_usage_model.go
@@ -332,6 +349,7 @@ model_stale_flag_setting_value_model.go
 model_stale_flag_stale_in_environments_type.go
 model_tag_model.go
 model_targeting_rule_model.go
+model_update_approve_required_environment_model.go
 model_update_comparison_value_list_model.go
 model_update_comparison_value_model.go
 model_update_condition_model.go

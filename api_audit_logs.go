@@ -73,16 +73,20 @@ func (r AuditLogsAPIGetAuditlogsRequest) Execute() ([]AuditLogItemModel, *http.R
 /*
 GetAuditlogs List Audit log items for Product
 
-This endpoint returns the list of Audit log items for a given Product 
+This endpoint returns the list of Audit log items for a given Product
 and the result can be optionally filtered by Config and/or Environment.
 
 If neither `fromUtcDateTime` nor `toUtcDateTime` is set, the audit logs for the **last 7 days** will be returned.
 
 The distance between `fromUtcDateTime` and `toUtcDateTime` cannot exceed **30 days**.
 
+**Important:** This endpoint is deprecated. Use the **List Audit log items for Product (V2)** endpoint instead. In the future, this endpoint will be redirected to the V2 version with default pagination parameters.
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param productId The identifier of the Product.
  @return AuditLogsAPIGetAuditlogsRequest
+
+Deprecated
 */
 func (a *AuditLogsAPIService) GetAuditlogs(ctx context.Context, productId string) AuditLogsAPIGetAuditlogsRequest {
 	return AuditLogsAPIGetAuditlogsRequest{
@@ -94,6 +98,7 @@ func (a *AuditLogsAPIService) GetAuditlogs(ctx context.Context, productId string
 
 // Execute executes the request
 //  @return []AuditLogItemModel
+// Deprecated
 func (a *AuditLogsAPIService) GetAuditlogsExecute(r AuditLogsAPIGetAuditlogsRequest) ([]AuditLogItemModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -128,6 +133,188 @@ func (a *AuditLogsAPIService) GetAuditlogsExecute(r AuditLogsAPIGetAuditlogsRequ
 	}
 	if r.toUtcDateTime != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "toUtcDateTime", r.toUtcDateTime, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type AuditLogsAPIGetAuditlogsV2Request struct {
+	ctx context.Context
+	ApiService *AuditLogsAPIService
+	productId string
+	configId *string
+	environmentId *string
+	auditLogType *AuditLogType
+	fromUtcDateTime *time.Time
+	toUtcDateTime *time.Time
+	pageNumber *int32
+	pageSize *int32
+}
+
+// The identifier of the Config.
+func (r AuditLogsAPIGetAuditlogsV2Request) ConfigId(configId string) AuditLogsAPIGetAuditlogsV2Request {
+	r.configId = &configId
+	return r
+}
+
+// The identifier of the Environment.
+func (r AuditLogsAPIGetAuditlogsV2Request) EnvironmentId(environmentId string) AuditLogsAPIGetAuditlogsV2Request {
+	r.environmentId = &environmentId
+	return r
+}
+
+// Filter Audit logs by Audit log type.
+func (r AuditLogsAPIGetAuditlogsV2Request) AuditLogType(auditLogType AuditLogType) AuditLogsAPIGetAuditlogsV2Request {
+	r.auditLogType = &auditLogType
+	return r
+}
+
+// Filter Audit logs by starting UTC date.
+func (r AuditLogsAPIGetAuditlogsV2Request) FromUtcDateTime(fromUtcDateTime time.Time) AuditLogsAPIGetAuditlogsV2Request {
+	r.fromUtcDateTime = &fromUtcDateTime
+	return r
+}
+
+// Filter Audit logs by ending UTC date.
+func (r AuditLogsAPIGetAuditlogsV2Request) ToUtcDateTime(toUtcDateTime time.Time) AuditLogsAPIGetAuditlogsV2Request {
+	r.toUtcDateTime = &toUtcDateTime
+	return r
+}
+
+// Page number (min: 1).
+func (r AuditLogsAPIGetAuditlogsV2Request) PageNumber(pageNumber int32) AuditLogsAPIGetAuditlogsV2Request {
+	r.pageNumber = &pageNumber
+	return r
+}
+
+// Page size (min: 1, max: 100).
+func (r AuditLogsAPIGetAuditlogsV2Request) PageSize(pageSize int32) AuditLogsAPIGetAuditlogsV2Request {
+	r.pageSize = &pageSize
+	return r
+}
+
+func (r AuditLogsAPIGetAuditlogsV2Request) Execute() (*AuditLogItemModelPagedList, *http.Response, error) {
+	return r.ApiService.GetAuditlogsV2Execute(r)
+}
+
+/*
+GetAuditlogsV2 List Audit log items for Product (V2)
+
+This endpoint returns the list of Audit log items for a given Product
+and the result can be optionally filtered by Config and/or Environment.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param productId The identifier of the Product.
+ @return AuditLogsAPIGetAuditlogsV2Request
+*/
+func (a *AuditLogsAPIService) GetAuditlogsV2(ctx context.Context, productId string) AuditLogsAPIGetAuditlogsV2Request {
+	return AuditLogsAPIGetAuditlogsV2Request{
+		ApiService: a,
+		ctx: ctx,
+		productId: productId,
+	}
+}
+
+// Execute executes the request
+//  @return AuditLogItemModelPagedList
+func (a *AuditLogsAPIService) GetAuditlogsV2Execute(r AuditLogsAPIGetAuditlogsV2Request) (*AuditLogItemModelPagedList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AuditLogItemModelPagedList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditLogsAPIService.GetAuditlogsV2")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/products/{productId}/auditlogs"
+	localVarPath = strings.Replace(localVarPath, "{"+"productId"+"}", url.PathEscape(parameterValueToString(r.productId, "productId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.configId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "configId", r.configId, "form", "")
+	}
+	if r.environmentId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "environmentId", r.environmentId, "form", "")
+	}
+	if r.auditLogType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "auditLogType", r.auditLogType, "form", "")
+	}
+	if r.fromUtcDateTime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromUtcDateTime", r.fromUtcDateTime, "form", "")
+	}
+	if r.toUtcDateTime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toUtcDateTime", r.toUtcDateTime, "form", "")
+	}
+	if r.pageNumber != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageNumber", r.pageNumber, "form", "")
+	} else {
+		var defaultValue int32 = 1
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageNumber", defaultValue, "form", "")
+		r.pageNumber = &defaultValue
+	}
+	if r.pageSize != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
+	} else {
+		var defaultValue int32 = 100
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", defaultValue, "form", "")
+		r.pageSize = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -341,16 +528,20 @@ func (r AuditLogsAPIGetOrganizationAuditlogsRequest) Execute() ([]AuditLogItemMo
 /*
 GetOrganizationAuditlogs List Audit log items for Organization
 
-This endpoint returns the list of Audit log items for a given Organization 
+This endpoint returns the list of Audit log items for a given Organization
 and the result can be optionally filtered by Product and/or Config and/or Environment.
 
 If neither `fromUtcDateTime` nor `toUtcDateTime` is set, the audit logs for the **last 7 days** will be returned.
 
 The distance between `fromUtcDateTime` and `toUtcDateTime` cannot exceed **30 days**.
 
+**Important:** This endpoint is deprecated. Use the **List Audit log items for Organization (V2)** endpoint instead. In the future, this endpoint will be redirected to the V2 version with default pagination parameters.
+
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param organizationId The identifier of the Organization.
  @return AuditLogsAPIGetOrganizationAuditlogsRequest
+
+Deprecated
 */
 func (a *AuditLogsAPIService) GetOrganizationAuditlogs(ctx context.Context, organizationId string) AuditLogsAPIGetOrganizationAuditlogsRequest {
 	return AuditLogsAPIGetOrganizationAuditlogsRequest{
@@ -362,6 +553,7 @@ func (a *AuditLogsAPIService) GetOrganizationAuditlogs(ctx context.Context, orga
 
 // Execute executes the request
 //  @return []AuditLogItemModel
+// Deprecated
 func (a *AuditLogsAPIService) GetOrganizationAuditlogsExecute(r AuditLogsAPIGetOrganizationAuditlogsRequest) ([]AuditLogItemModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
@@ -399,6 +591,198 @@ func (a *AuditLogsAPIService) GetOrganizationAuditlogsExecute(r AuditLogsAPIGetO
 	}
 	if r.toUtcDateTime != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "toUtcDateTime", r.toUtcDateTime, "form", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type AuditLogsAPIGetOrganizationAuditlogsV2Request struct {
+	ctx context.Context
+	ApiService *AuditLogsAPIService
+	organizationId string
+	productId *string
+	configId *string
+	environmentId *string
+	auditLogType *AuditLogType
+	fromUtcDateTime *time.Time
+	toUtcDateTime *time.Time
+	pageNumber *int32
+	pageSize *int32
+}
+
+// The identifier of the Product.
+func (r AuditLogsAPIGetOrganizationAuditlogsV2Request) ProductId(productId string) AuditLogsAPIGetOrganizationAuditlogsV2Request {
+	r.productId = &productId
+	return r
+}
+
+// The identifier of the Config.
+func (r AuditLogsAPIGetOrganizationAuditlogsV2Request) ConfigId(configId string) AuditLogsAPIGetOrganizationAuditlogsV2Request {
+	r.configId = &configId
+	return r
+}
+
+// The identifier of the Environment.
+func (r AuditLogsAPIGetOrganizationAuditlogsV2Request) EnvironmentId(environmentId string) AuditLogsAPIGetOrganizationAuditlogsV2Request {
+	r.environmentId = &environmentId
+	return r
+}
+
+// Filter Audit logs by Audit log type.
+func (r AuditLogsAPIGetOrganizationAuditlogsV2Request) AuditLogType(auditLogType AuditLogType) AuditLogsAPIGetOrganizationAuditlogsV2Request {
+	r.auditLogType = &auditLogType
+	return r
+}
+
+// Filter Audit logs by starting UTC date.
+func (r AuditLogsAPIGetOrganizationAuditlogsV2Request) FromUtcDateTime(fromUtcDateTime time.Time) AuditLogsAPIGetOrganizationAuditlogsV2Request {
+	r.fromUtcDateTime = &fromUtcDateTime
+	return r
+}
+
+// Filter Audit logs by ending UTC date.
+func (r AuditLogsAPIGetOrganizationAuditlogsV2Request) ToUtcDateTime(toUtcDateTime time.Time) AuditLogsAPIGetOrganizationAuditlogsV2Request {
+	r.toUtcDateTime = &toUtcDateTime
+	return r
+}
+
+// Page number (min: 1).
+func (r AuditLogsAPIGetOrganizationAuditlogsV2Request) PageNumber(pageNumber int32) AuditLogsAPIGetOrganizationAuditlogsV2Request {
+	r.pageNumber = &pageNumber
+	return r
+}
+
+// Page size (min: 1, max: 100).
+func (r AuditLogsAPIGetOrganizationAuditlogsV2Request) PageSize(pageSize int32) AuditLogsAPIGetOrganizationAuditlogsV2Request {
+	r.pageSize = &pageSize
+	return r
+}
+
+func (r AuditLogsAPIGetOrganizationAuditlogsV2Request) Execute() (*AuditLogItemModelPagedList, *http.Response, error) {
+	return r.ApiService.GetOrganizationAuditlogsV2Execute(r)
+}
+
+/*
+GetOrganizationAuditlogsV2 List Audit log items for Organization (V2)
+
+This endpoint returns the list of Audit log items for a given Organization
+and the result can be optionally filtered by Product and/or Config and/or Environment.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param organizationId The identifier of the Organization.
+ @return AuditLogsAPIGetOrganizationAuditlogsV2Request
+*/
+func (a *AuditLogsAPIService) GetOrganizationAuditlogsV2(ctx context.Context, organizationId string) AuditLogsAPIGetOrganizationAuditlogsV2Request {
+	return AuditLogsAPIGetOrganizationAuditlogsV2Request{
+		ApiService: a,
+		ctx: ctx,
+		organizationId: organizationId,
+	}
+}
+
+// Execute executes the request
+//  @return AuditLogItemModelPagedList
+func (a *AuditLogsAPIService) GetOrganizationAuditlogsV2Execute(r AuditLogsAPIGetOrganizationAuditlogsV2Request) (*AuditLogItemModelPagedList, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *AuditLogItemModelPagedList
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuditLogsAPIService.GetOrganizationAuditlogsV2")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/organizations/{organizationId}/auditlogs"
+	localVarPath = strings.Replace(localVarPath, "{"+"organizationId"+"}", url.PathEscape(parameterValueToString(r.organizationId, "organizationId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.productId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "productId", r.productId, "form", "")
+	}
+	if r.configId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "configId", r.configId, "form", "")
+	}
+	if r.environmentId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "environmentId", r.environmentId, "form", "")
+	}
+	if r.auditLogType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "auditLogType", r.auditLogType, "form", "")
+	}
+	if r.fromUtcDateTime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromUtcDateTime", r.fromUtcDateTime, "form", "")
+	}
+	if r.toUtcDateTime != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toUtcDateTime", r.toUtcDateTime, "form", "")
+	}
+	if r.pageNumber != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageNumber", r.pageNumber, "form", "")
+	} else {
+		var defaultValue int32 = 1
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageNumber", defaultValue, "form", "")
+		r.pageNumber = &defaultValue
+	}
+	if r.pageSize != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
+	} else {
+		var defaultValue int32 = 100
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", defaultValue, "form", "")
+		r.pageSize = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

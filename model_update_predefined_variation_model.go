@@ -19,14 +19,14 @@ import (
 // checks if the UpdatePredefinedVariationModel type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdatePredefinedVariationModel{}
 
-// UpdatePredefinedVariationModel A Feature Flag or Predefined Variation.
+// UpdatePredefinedVariationModel A Predefined Variation.
 type UpdatePredefinedVariationModel struct {
 	Value UpdatePredefinedVariationValueModel `json:"value"`
-	// The name of the Feature Flag or Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown.
+	// The name of the Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown.
 	Name NullableString `json:"name,omitempty"`
-	// The name of the Feature Flag or Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown.
+	// The name of the Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown.
 	Hint NullableString `json:"hint,omitempty"`
-	// The Feature Flag or Predefined Variation's identifier to update. Omit the value if you want to add a new predefined variation.
+	// The Predefined Variation's identifier to update. Omit the value if you want to add a new predefined variation.
 	PredefinedVariationId NullableString `json:"predefinedVariationId,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

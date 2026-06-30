@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Value** | [**CreatePredefinedVariationValueModel**](CreatePredefinedVariationValueModel.md) |  | 
-**Name** | Pointer to **NullableString** | The name of the Feature Flag or Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown. | [optional] 
-**Hint** | Pointer to **NullableString** | The name of the Feature Flag or Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown. | [optional] 
+**Name** | Pointer to **NullableString** | The name of the Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown. | [optional] 
+**Hint** | Pointer to **NullableString** | The name of the Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown. | [optional] 
 
 ## Methods
 

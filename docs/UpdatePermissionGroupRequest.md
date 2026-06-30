@@ -29,6 +29,9 @@ Name | Type | Description | Notes
 **AccessType** | Pointer to [**NullableAccessType**](AccessType.md) |  | [optional] 
 **NewEnvironmentAccessType** | Pointer to [**NullableEnvironmentAccessType**](EnvironmentAccessType.md) |  | [optional] 
 **EnvironmentAccesses** | Pointer to [**[]CreateOrUpdateEnvironmentAccessModel**](CreateOrUpdateEnvironmentAccessModel.md) | List of environment specific permissions. | [optional] 
+**ApprovalPermissionType** | Pointer to [**NullableApprovalPermissionType**](ApprovalPermissionType.md) |  | [optional] 
+**NewEnvironmentApprovalPermissionType** | Pointer to [**NullableEnvironmentApprovalPermissionType**](EnvironmentApprovalPermissionType.md) |  | [optional] 
+**EnvironmentApprovalPermissions** | Pointer to [**[]CreateOrUpdateEnvironmentApprovalPermissionModel**](CreateOrUpdateEnvironmentApprovalPermissionModel.md) | List of environment specific change request approval permissions. | [optional] 
 
 ## Methods
 
@@ -924,6 +927,111 @@ HasEnvironmentAccesses returns a boolean if a field has been set.
 `func (o *UpdatePermissionGroupRequest) UnsetEnvironmentAccesses()`
 
 UnsetEnvironmentAccesses ensures that no value is present for EnvironmentAccesses, not even an explicit nil
+### GetApprovalPermissionType
+
+`func (o *UpdatePermissionGroupRequest) GetApprovalPermissionType() ApprovalPermissionType`
+
+GetApprovalPermissionType returns the ApprovalPermissionType field if non-nil, zero value otherwise.
+
+### GetApprovalPermissionTypeOk
+
+`func (o *UpdatePermissionGroupRequest) GetApprovalPermissionTypeOk() (*ApprovalPermissionType, bool)`
+
+GetApprovalPermissionTypeOk returns a tuple with the ApprovalPermissionType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApprovalPermissionType
+
+`func (o *UpdatePermissionGroupRequest) SetApprovalPermissionType(v ApprovalPermissionType)`
+
+SetApprovalPermissionType sets ApprovalPermissionType field to given value.
+
+### HasApprovalPermissionType
+
+`func (o *UpdatePermissionGroupRequest) HasApprovalPermissionType() bool`
+
+HasApprovalPermissionType returns a boolean if a field has been set.
+
+### SetApprovalPermissionTypeNil
+
+`func (o *UpdatePermissionGroupRequest) SetApprovalPermissionTypeNil(b bool)`
+
+ SetApprovalPermissionTypeNil sets the value for ApprovalPermissionType to be an explicit nil
+
+### UnsetApprovalPermissionType
+`func (o *UpdatePermissionGroupRequest) UnsetApprovalPermissionType()`
+
+UnsetApprovalPermissionType ensures that no value is present for ApprovalPermissionType, not even an explicit nil
+### GetNewEnvironmentApprovalPermissionType
+
+`func (o *UpdatePermissionGroupRequest) GetNewEnvironmentApprovalPermissionType() EnvironmentApprovalPermissionType`
+
+GetNewEnvironmentApprovalPermissionType returns the NewEnvironmentApprovalPermissionType field if non-nil, zero value otherwise.
+
+### GetNewEnvironmentApprovalPermissionTypeOk
+
+`func (o *UpdatePermissionGroupRequest) GetNewEnvironmentApprovalPermissionTypeOk() (*EnvironmentApprovalPermissionType, bool)`
+
+GetNewEnvironmentApprovalPermissionTypeOk returns a tuple with the NewEnvironmentApprovalPermissionType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNewEnvironmentApprovalPermissionType
+
+`func (o *UpdatePermissionGroupRequest) SetNewEnvironmentApprovalPermissionType(v EnvironmentApprovalPermissionType)`
+
+SetNewEnvironmentApprovalPermissionType sets NewEnvironmentApprovalPermissionType field to given value.
+
+### HasNewEnvironmentApprovalPermissionType
+
+`func (o *UpdatePermissionGroupRequest) HasNewEnvironmentApprovalPermissionType() bool`
+
+HasNewEnvironmentApprovalPermissionType returns a boolean if a field has been set.
+
+### SetNewEnvironmentApprovalPermissionTypeNil
+
+`func (o *UpdatePermissionGroupRequest) SetNewEnvironmentApprovalPermissionTypeNil(b bool)`
+
+ SetNewEnvironmentApprovalPermissionTypeNil sets the value for NewEnvironmentApprovalPermissionType to be an explicit nil
+
+### UnsetNewEnvironmentApprovalPermissionType
+`func (o *UpdatePermissionGroupRequest) UnsetNewEnvironmentApprovalPermissionType()`
+
+UnsetNewEnvironmentApprovalPermissionType ensures that no value is present for NewEnvironmentApprovalPermissionType, not even an explicit nil
+### GetEnvironmentApprovalPermissions
+
+`func (o *UpdatePermissionGroupRequest) GetEnvironmentApprovalPermissions() []CreateOrUpdateEnvironmentApprovalPermissionModel`
+
+GetEnvironmentApprovalPermissions returns the EnvironmentApprovalPermissions field if non-nil, zero value otherwise.
+
+### GetEnvironmentApprovalPermissionsOk
+
+`func (o *UpdatePermissionGroupRequest) GetEnvironmentApprovalPermissionsOk() (*[]CreateOrUpdateEnvironmentApprovalPermissionModel, bool)`
+
+GetEnvironmentApprovalPermissionsOk returns a tuple with the EnvironmentApprovalPermissions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnvironmentApprovalPermissions
+
+`func (o *UpdatePermissionGroupRequest) SetEnvironmentApprovalPermissions(v []CreateOrUpdateEnvironmentApprovalPermissionModel)`
+
+SetEnvironmentApprovalPermissions sets EnvironmentApprovalPermissions field to given value.
+
+### HasEnvironmentApprovalPermissions
+
+`func (o *UpdatePermissionGroupRequest) HasEnvironmentApprovalPermissions() bool`
+
+HasEnvironmentApprovalPermissions returns a boolean if a field has been set.
+
+### SetEnvironmentApprovalPermissionsNil
+
+`func (o *UpdatePermissionGroupRequest) SetEnvironmentApprovalPermissionsNil(b bool)`
+
+ SetEnvironmentApprovalPermissionsNil sets the value for EnvironmentApprovalPermissions to be an explicit nil
+
+### UnsetEnvironmentApprovalPermissions
+`func (o *UpdatePermissionGroupRequest) UnsetEnvironmentApprovalPermissions()`
+
+UnsetEnvironmentApprovalPermissions ensures that no value is present for EnvironmentApprovalPermissions, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
