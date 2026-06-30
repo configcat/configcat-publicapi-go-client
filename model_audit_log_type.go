@@ -23,9 +23,9 @@ type AuditLogType string
 const (
 	AUDITLOGTYPE_PRODUCT_CREATED AuditLogType = "productCreated"
 	AUDITLOGTYPE_PRODUCT_CHANGED AuditLogType = "productChanged"
-	AUDITLOGTYPE_PRODUCT_OWNERSHIP_TRANSFERRED AuditLogType = "productOwnershipTransferred"
 	AUDITLOGTYPE_PRODUCT_DELETED AuditLogType = "productDeleted"
 	AUDITLOGTYPE_PRODUCTS_REORDERED AuditLogType = "productsReordered"
+	AUDITLOGTYPE_PRODUCT_PREFERENCES_UPDATED AuditLogType = "productPreferencesUpdated"
 	AUDITLOGTYPE_TEAM_MEMBER_INVITED AuditLogType = "teamMemberInvited"
 	AUDITLOGTYPE_TEAM_MEMBER_INVITATION_REVOKED AuditLogType = "teamMemberInvitationRevoked"
 	AUDITLOGTYPE_TEAM_MEMBER_JOINED AuditLogType = "teamMemberJoined"
@@ -35,6 +35,7 @@ const (
 	AUDITLOGTYPE_TEAM_MEMBER_INVITATION_CHANGED AuditLogType = "teamMemberInvitationChanged"
 	AUDITLOGTYPE_TEAM_MEMBER_INVITATION_RESENT AuditLogType = "teamMemberInvitationResent"
 	AUDITLOGTYPE_TEAM_MEMBER_INVITATION_REJECTED AuditLogType = "teamMemberInvitationRejected"
+	AUDITLOGTYPE_TEAM_MEMBER_ADDED_TO_PRODUCT AuditLogType = "teamMemberAddedToProduct"
 	AUDITLOGTYPE_CONFIG_CREATED AuditLogType = "configCreated"
 	AUDITLOGTYPE_CONFIG_CHANGED AuditLogType = "configChanged"
 	AUDITLOGTYPE_CONFIG_DELETED AuditLogType = "configDeleted"
@@ -67,7 +68,6 @@ const (
 	AUDITLOGTYPE_INTEGRATION_LINK_ADDED AuditLogType = "integrationLinkAdded"
 	AUDITLOGTYPE_INTEGRATION_LINK_REMOVED AuditLogType = "integrationLinkRemoved"
 	AUDITLOGTYPE_ORGANIZATION_ADDED AuditLogType = "organizationAdded"
-	AUDITLOGTYPE_ORGANIZATION_REMOVED AuditLogType = "organizationRemoved"
 	AUDITLOGTYPE_ORGANIZATION_CHANGED AuditLogType = "organizationChanged"
 	AUDITLOGTYPE_ORGANIZATION_SUBSCRIPTION_TYPE_CHANGED AuditLogType = "organizationSubscriptionTypeChanged"
 	AUDITLOGTYPE_ORGANIZATION_ADMIN_CHANGED AuditLogType = "organizationAdminChanged"
@@ -83,8 +83,6 @@ const (
 	AUDITLOGTYPE_DOMAIN_ADDED AuditLogType = "domainAdded"
 	AUDITLOGTYPE_DOMAIN_VERIFIED AuditLogType = "domainVerified"
 	AUDITLOGTYPE_DOMAIN_REMOVED AuditLogType = "domainRemoved"
-	AUDITLOGTYPE_DOMAIN_SAML_CONFIGURED AuditLogType = "domainSamlConfigured"
-	AUDITLOGTYPE_DOMAIN_SAML_DELETED AuditLogType = "domainSamlDeleted"
 	AUDITLOGTYPE_AUTO_PROVISIONING_CONFIGURATION_CHANGED AuditLogType = "autoProvisioningConfigurationChanged"
 	AUDITLOGTYPE_SAML_IDP_CONFIGURATION_ADDED AuditLogType = "samlIdpConfigurationAdded"
 	AUDITLOGTYPE_SAML_IDP_CONFIGURATION_REMOVED AuditLogType = "samlIdpConfigurationRemoved"
@@ -124,15 +122,30 @@ const (
 	AUDITLOGTYPE_PROXY_NOTIFICATION_SETTINGS_DELETED AuditLogType = "proxyNotificationSettingsDeleted"
 	AUDITLOGTYPE_PROXY_NOTIFICATION_SIGNING_KEY_ADDED AuditLogType = "proxyNotificationSigningKeyAdded"
 	AUDITLOGTYPE_PROXY_NOTIFICATION_SIGNING_KEY_DELETED AuditLogType = "proxyNotificationSigningKeyDeleted"
+	AUDITLOGTYPE_CHANGE_REQUEST_CREATED AuditLogType = "changeRequestCreated"
+	AUDITLOGTYPE_CHANGE_REQUEST_UPDATED AuditLogType = "changeRequestUpdated"
+	AUDITLOGTYPE_CHANGE_REQUEST_SETTING_VALUES_UPDATED AuditLogType = "changeRequestSettingValuesUpdated"
+	AUDITLOGTYPE_CHANGE_REQUEST_SETTING_VALUE_REBASED AuditLogType = "changeRequestSettingValueRebased"
+	AUDITLOGTYPE_CHANGE_REQUEST_APPROVED AuditLogType = "changeRequestApproved"
+	AUDITLOGTYPE_CHANGE_REQUEST_APPROVAL_DISMISSED AuditLogType = "changeRequestApprovalDismissed"
+	AUDITLOGTYPE_CHANGE_REQUEST_APPLIED AuditLogType = "changeRequestApplied"
+	AUDITLOGTYPE_CHANGE_REQUEST_APPLIED_ON_SCHEDULE AuditLogType = "changeRequestAppliedOnSchedule"
+	AUDITLOGTYPE_CHANGE_REQUEST_CLOSED AuditLogType = "changeRequestClosed"
+	AUDITLOGTYPE_CHANGE_REQUEST_NEEDS_ATTENTION AuditLogType = "changeRequestNeedsAttention"
+	AUDITLOGTYPE_CHANGE_REQUEST_COMMENT_ADDED AuditLogType = "changeRequestCommentAdded"
+	AUDITLOGTYPE_CHANGE_REQUEST_COMMENT_EDITED AuditLogType = "changeRequestCommentEdited"
+	AUDITLOGTYPE_CHANGE_REQUEST_COMMENT_DELETED AuditLogType = "changeRequestCommentDeleted"
+	AUDITLOGTYPE_CHANGE_REQUEST_SETTING_DELETED AuditLogType = "changeRequestSettingDeleted"
+	AUDITLOGTYPE_CHANGE_REQUEST_NEEDS_ATTENTION_FIXED AuditLogType = "changeRequestNeedsAttentionFixed"
 )
 
 // All allowed values of AuditLogType enum
 var AllowedAuditLogTypeEnumValues = []AuditLogType{
 	"productCreated",
 	"productChanged",
-	"productOwnershipTransferred",
 	"productDeleted",
 	"productsReordered",
+	"productPreferencesUpdated",
 	"teamMemberInvited",
 	"teamMemberInvitationRevoked",
 	"teamMemberJoined",
@@ -142,6 +155,7 @@ var AllowedAuditLogTypeEnumValues = []AuditLogType{
 	"teamMemberInvitationChanged",
 	"teamMemberInvitationResent",
 	"teamMemberInvitationRejected",
+	"teamMemberAddedToProduct",
 	"configCreated",
 	"configChanged",
 	"configDeleted",
@@ -174,7 +188,6 @@ var AllowedAuditLogTypeEnumValues = []AuditLogType{
 	"integrationLinkAdded",
 	"integrationLinkRemoved",
 	"organizationAdded",
-	"organizationRemoved",
 	"organizationChanged",
 	"organizationSubscriptionTypeChanged",
 	"organizationAdminChanged",
@@ -190,8 +203,6 @@ var AllowedAuditLogTypeEnumValues = []AuditLogType{
 	"domainAdded",
 	"domainVerified",
 	"domainRemoved",
-	"domainSamlConfigured",
-	"domainSamlDeleted",
 	"autoProvisioningConfigurationChanged",
 	"samlIdpConfigurationAdded",
 	"samlIdpConfigurationRemoved",
@@ -231,6 +242,21 @@ var AllowedAuditLogTypeEnumValues = []AuditLogType{
 	"proxyNotificationSettingsDeleted",
 	"proxyNotificationSigningKeyAdded",
 	"proxyNotificationSigningKeyDeleted",
+	"changeRequestCreated",
+	"changeRequestUpdated",
+	"changeRequestSettingValuesUpdated",
+	"changeRequestSettingValueRebased",
+	"changeRequestApproved",
+	"changeRequestApprovalDismissed",
+	"changeRequestApplied",
+	"changeRequestAppliedOnSchedule",
+	"changeRequestClosed",
+	"changeRequestNeedsAttention",
+	"changeRequestCommentAdded",
+	"changeRequestCommentEdited",
+	"changeRequestCommentDeleted",
+	"changeRequestSettingDeleted",
+	"changeRequestNeedsAttentionFixed",
 }
 
 func (v *AuditLogType) UnmarshalJSON(src []byte) error {

@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Value** | [**UpdatePredefinedVariationValueModel**](UpdatePredefinedVariationValueModel.md) |  | 
-**Name** | Pointer to **NullableString** | The name of the Feature Flag or Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown. | [optional] 
-**Hint** | Pointer to **NullableString** | The name of the Feature Flag or Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown. | [optional] 
-**PredefinedVariationId** | Pointer to **NullableString** | The Feature Flag or Predefined Variation&#39;s identifier to update. Omit the value if you want to add a new predefined variation. | [optional] 
+**Name** | Pointer to **NullableString** | The name of the Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown. | [optional] 
+**Hint** | Pointer to **NullableString** | The name of the Predefined Variation, shown on the Dashboard UI. If not set, the Value will be shown. | [optional] 
+**PredefinedVariationId** | Pointer to **NullableString** | The Predefined Variation&#39;s identifier to update. Omit the value if you want to add a new predefined variation. | [optional] 
 
 ## Methods
 

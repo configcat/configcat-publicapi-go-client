@@ -33,6 +33,7 @@ type SettingModel struct {
 	// The order of the Feature Flag or Setting represented on the ConfigCat Dashboard.
 	Order int32 `json:"order"`
 	SettingType SettingType `json:"settingType"`
+	IsJson bool `json:"isJson"`
 	// Identifier of the Feature Flag's Config.
 	ConfigId string `json:"configId"`
 	// Name of the Feature Flag's Config.
@@ -52,7 +53,7 @@ type _SettingModel SettingModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSettingModel(settingId int32, key string, name string, hint NullableString, order int32, settingType SettingType, configId string, configName string, createdAt NullableTime, tags []TagModel, predefinedVariations []PredefinedVariationModel) *SettingModel {
+func NewSettingModel(settingId int32, key string, name string, hint NullableString, order int32, settingType SettingType, isJson bool, configId string, configName string, createdAt NullableTime, tags []TagModel, predefinedVariations []PredefinedVariationModel) *SettingModel {
 	this := SettingModel{}
 	this.SettingId = settingId
 	this.Key = key
@@ -60,6 +61,7 @@ func NewSettingModel(settingId int32, key string, name string, hint NullableStri
 	this.Hint = hint
 	this.Order = order
 	this.SettingType = settingType
+	this.IsJson = isJson
 	this.ConfigId = configId
 	this.ConfigName = configName
 	this.CreatedAt = createdAt
@@ -222,6 +224,30 @@ func (o *SettingModel) SetSettingType(v SettingType) {
 	o.SettingType = v
 }
 
+// GetIsJson returns the IsJson field value
+func (o *SettingModel) GetIsJson() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsJson
+}
+
+// GetIsJsonOk returns a tuple with the IsJson field value
+// and a boolean to check if the value has been set.
+func (o *SettingModel) GetIsJsonOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsJson, true
+}
+
+// SetIsJson sets field value
+func (o *SettingModel) SetIsJson(v bool) {
+	o.IsJson = v
+}
+
 // GetConfigId returns the ConfigId field value
 func (o *SettingModel) GetConfigId() string {
 	if o == nil {
@@ -360,6 +386,7 @@ func (o SettingModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["hint"] = o.Hint.Get()
 	toSerialize["order"] = o.Order
 	toSerialize["settingType"] = o.SettingType
+	toSerialize["isJson"] = o.IsJson
 	toSerialize["configId"] = o.ConfigId
 	toSerialize["configName"] = o.ConfigName
 	toSerialize["createdAt"] = o.CreatedAt.Get()
@@ -384,6 +411,7 @@ func (o *SettingModel) UnmarshalJSON(data []byte) (err error) {
 		"hint",
 		"order",
 		"settingType",
+		"isJson",
 		"configId",
 		"configName",
 		"createdAt",
@@ -424,6 +452,7 @@ func (o *SettingModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "hint")
 		delete(additionalProperties, "order")
 		delete(additionalProperties, "settingType")
+		delete(additionalProperties, "isJson")
 		delete(additionalProperties, "configId")
 		delete(additionalProperties, "configName")
 		delete(additionalProperties, "createdAt")

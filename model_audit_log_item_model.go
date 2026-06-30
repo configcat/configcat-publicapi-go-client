@@ -25,15 +25,15 @@ type AuditLogItemModel struct {
 	AuditLogId int64 `json:"auditLogId"`
 	AuditLogDateTime time.Time `json:"auditLogDateTime"`
 	AuditLogTypeEnum AuditLogType `json:"auditLogTypeEnum"`
-	ChangeSetId NullableString `json:"changeSetId"`
 	Truncated bool `json:"truncated"`
-	AuditLogType NullableString `json:"auditLogType"`
+	ModelVersion int32 `json:"modelVersion"`
+	AuditLogType string `json:"auditLogType"`
 	UserEmail NullableString `json:"userEmail"`
-	UserName NullableString `json:"userName"`
-	Where NullableString `json:"where"`
+	UserName string `json:"userName"`
+	Where string `json:"where"`
 	Why NullableString `json:"why"`
-	ActionTarget NullableString `json:"actionTarget"`
-	Details NullableString `json:"details"`
+	ActionTarget string `json:"actionTarget"`
+	Details string `json:"details"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,13 +43,13 @@ type _AuditLogItemModel AuditLogItemModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAuditLogItemModel(auditLogId int64, auditLogDateTime time.Time, auditLogTypeEnum AuditLogType, changeSetId NullableString, truncated bool, auditLogType NullableString, userEmail NullableString, userName NullableString, where NullableString, why NullableString, actionTarget NullableString, details NullableString) *AuditLogItemModel {
+func NewAuditLogItemModel(auditLogId int64, auditLogDateTime time.Time, auditLogTypeEnum AuditLogType, truncated bool, modelVersion int32, auditLogType string, userEmail NullableString, userName string, where string, why NullableString, actionTarget string, details string) *AuditLogItemModel {
 	this := AuditLogItemModel{}
 	this.AuditLogId = auditLogId
 	this.AuditLogDateTime = auditLogDateTime
 	this.AuditLogTypeEnum = auditLogTypeEnum
-	this.ChangeSetId = changeSetId
 	this.Truncated = truncated
+	this.ModelVersion = modelVersion
 	this.AuditLogType = auditLogType
 	this.UserEmail = userEmail
 	this.UserName = userName
@@ -140,32 +140,6 @@ func (o *AuditLogItemModel) SetAuditLogTypeEnum(v AuditLogType) {
 	o.AuditLogTypeEnum = v
 }
 
-// GetChangeSetId returns the ChangeSetId field value
-// If the value is explicit nil, the zero value for string will be returned
-func (o *AuditLogItemModel) GetChangeSetId() string {
-	if o == nil || o.ChangeSetId.Get() == nil {
-		var ret string
-		return ret
-	}
-
-	return *o.ChangeSetId.Get()
-}
-
-// GetChangeSetIdOk returns a tuple with the ChangeSetId field value
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AuditLogItemModel) GetChangeSetIdOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.ChangeSetId.Get(), o.ChangeSetId.IsSet()
-}
-
-// SetChangeSetId sets field value
-func (o *AuditLogItemModel) SetChangeSetId(v string) {
-	o.ChangeSetId.Set(&v)
-}
-
 // GetTruncated returns the Truncated field value
 func (o *AuditLogItemModel) GetTruncated() bool {
 	if o == nil {
@@ -190,30 +164,52 @@ func (o *AuditLogItemModel) SetTruncated(v bool) {
 	o.Truncated = v
 }
 
+// GetModelVersion returns the ModelVersion field value
+func (o *AuditLogItemModel) GetModelVersion() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.ModelVersion
+}
+
+// GetModelVersionOk returns a tuple with the ModelVersion field value
+// and a boolean to check if the value has been set.
+func (o *AuditLogItemModel) GetModelVersionOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ModelVersion, true
+}
+
+// SetModelVersion sets field value
+func (o *AuditLogItemModel) SetModelVersion(v int32) {
+	o.ModelVersion = v
+}
+
 // GetAuditLogType returns the AuditLogType field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *AuditLogItemModel) GetAuditLogType() string {
-	if o == nil || o.AuditLogType.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.AuditLogType.Get()
+	return o.AuditLogType
 }
 
 // GetAuditLogTypeOk returns a tuple with the AuditLogType field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AuditLogItemModel) GetAuditLogTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.AuditLogType.Get(), o.AuditLogType.IsSet()
+	return &o.AuditLogType, true
 }
 
 // SetAuditLogType sets field value
 func (o *AuditLogItemModel) SetAuditLogType(v string) {
-	o.AuditLogType.Set(&v)
+	o.AuditLogType = v
 }
 
 // GetUserEmail returns the UserEmail field value
@@ -243,55 +239,51 @@ func (o *AuditLogItemModel) SetUserEmail(v string) {
 }
 
 // GetUserName returns the UserName field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *AuditLogItemModel) GetUserName() string {
-	if o == nil || o.UserName.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.UserName.Get()
+	return o.UserName
 }
 
 // GetUserNameOk returns a tuple with the UserName field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AuditLogItemModel) GetUserNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.UserName.Get(), o.UserName.IsSet()
+	return &o.UserName, true
 }
 
 // SetUserName sets field value
 func (o *AuditLogItemModel) SetUserName(v string) {
-	o.UserName.Set(&v)
+	o.UserName = v
 }
 
 // GetWhere returns the Where field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *AuditLogItemModel) GetWhere() string {
-	if o == nil || o.Where.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Where.Get()
+	return o.Where
 }
 
 // GetWhereOk returns a tuple with the Where field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AuditLogItemModel) GetWhereOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Where.Get(), o.Where.IsSet()
+	return &o.Where, true
 }
 
 // SetWhere sets field value
 func (o *AuditLogItemModel) SetWhere(v string) {
-	o.Where.Set(&v)
+	o.Where = v
 }
 
 // GetWhy returns the Why field value
@@ -321,55 +313,51 @@ func (o *AuditLogItemModel) SetWhy(v string) {
 }
 
 // GetActionTarget returns the ActionTarget field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *AuditLogItemModel) GetActionTarget() string {
-	if o == nil || o.ActionTarget.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.ActionTarget.Get()
+	return o.ActionTarget
 }
 
 // GetActionTargetOk returns a tuple with the ActionTarget field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AuditLogItemModel) GetActionTargetOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.ActionTarget.Get(), o.ActionTarget.IsSet()
+	return &o.ActionTarget, true
 }
 
 // SetActionTarget sets field value
 func (o *AuditLogItemModel) SetActionTarget(v string) {
-	o.ActionTarget.Set(&v)
+	o.ActionTarget = v
 }
 
 // GetDetails returns the Details field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *AuditLogItemModel) GetDetails() string {
-	if o == nil || o.Details.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Details.Get()
+	return o.Details
 }
 
 // GetDetailsOk returns a tuple with the Details field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AuditLogItemModel) GetDetailsOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Details.Get(), o.Details.IsSet()
+	return &o.Details, true
 }
 
 // SetDetails sets field value
 func (o *AuditLogItemModel) SetDetails(v string) {
-	o.Details.Set(&v)
+	o.Details = v
 }
 
 func (o AuditLogItemModel) MarshalJSON() ([]byte, error) {
@@ -385,15 +373,15 @@ func (o AuditLogItemModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["auditLogId"] = o.AuditLogId
 	toSerialize["auditLogDateTime"] = o.AuditLogDateTime
 	toSerialize["auditLogTypeEnum"] = o.AuditLogTypeEnum
-	toSerialize["changeSetId"] = o.ChangeSetId.Get()
 	toSerialize["truncated"] = o.Truncated
-	toSerialize["auditLogType"] = o.AuditLogType.Get()
+	toSerialize["modelVersion"] = o.ModelVersion
+	toSerialize["auditLogType"] = o.AuditLogType
 	toSerialize["userEmail"] = o.UserEmail.Get()
-	toSerialize["userName"] = o.UserName.Get()
-	toSerialize["where"] = o.Where.Get()
+	toSerialize["userName"] = o.UserName
+	toSerialize["where"] = o.Where
 	toSerialize["why"] = o.Why.Get()
-	toSerialize["actionTarget"] = o.ActionTarget.Get()
-	toSerialize["details"] = o.Details.Get()
+	toSerialize["actionTarget"] = o.ActionTarget
+	toSerialize["details"] = o.Details
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -410,8 +398,8 @@ func (o *AuditLogItemModel) UnmarshalJSON(data []byte) (err error) {
 		"auditLogId",
 		"auditLogDateTime",
 		"auditLogTypeEnum",
-		"changeSetId",
 		"truncated",
+		"modelVersion",
 		"auditLogType",
 		"userEmail",
 		"userName",
@@ -451,8 +439,8 @@ func (o *AuditLogItemModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "auditLogId")
 		delete(additionalProperties, "auditLogDateTime")
 		delete(additionalProperties, "auditLogTypeEnum")
-		delete(additionalProperties, "changeSetId")
 		delete(additionalProperties, "truncated")
+		delete(additionalProperties, "modelVersion")
 		delete(additionalProperties, "auditLogType")
 		delete(additionalProperties, "userEmail")
 		delete(additionalProperties, "userName")

@@ -245,11 +245,9 @@ func (r FeatureFlagsSettingsAPIGetPredefinedVariationsRequest) Execute() (*Prede
 }
 
 /*
-GetPredefinedVariations Get predefined variations (Beta)
+GetPredefinedVariations Get predefined variations
 
 This endpoint returns the predefined variations along with their usages in the Environments for a Feature Flag or Setting identified by the `settingId` parameter.
-
-**Beta feature:** The feature is currently in closed beta state and cannot be used.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param settingId The identifier of the Setting.
@@ -682,13 +680,11 @@ func (r FeatureFlagsSettingsAPIUpdatePredefinedVariationsRequest) Execute() (*Pr
 }
 
 /*
-UpdatePredefinedVariations Update predefined variations (Beta)
+UpdatePredefinedVariations Update predefined variations
 
 This endpoint updates the predefined variations for a Feature Flag or Setting identified by the `settingId` parameter.
 
 **Important:** You can only update a predefined variation's value if it is not used anywhere in your feature flags.
-
-**Beta feature:** The feature is currently in closed beta state and cannot be used.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param settingId The identifier of the Setting.

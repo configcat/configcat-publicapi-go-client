@@ -269,6 +269,7 @@ type FeatureFlagSettingValuesV2APIPostSettingValuesV2Request struct {
 	environmentId string
 	updateEvaluationFormulasModel *UpdateEvaluationFormulasModel
 	reason *string
+	bypassApproval *bool
 }
 
 func (r FeatureFlagSettingValuesV2APIPostSettingValuesV2Request) UpdateEvaluationFormulasModel(updateEvaluationFormulasModel UpdateEvaluationFormulasModel) FeatureFlagSettingValuesV2APIPostSettingValuesV2Request {
@@ -279,6 +280,12 @@ func (r FeatureFlagSettingValuesV2APIPostSettingValuesV2Request) UpdateEvaluatio
 // The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on.
 func (r FeatureFlagSettingValuesV2APIPostSettingValuesV2Request) Reason(reason string) FeatureFlagSettingValuesV2APIPostSettingValuesV2Request {
 	r.reason = &reason
+	return r
+}
+
+// Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission.
+func (r FeatureFlagSettingValuesV2APIPostSettingValuesV2Request) BypassApproval(bypassApproval bool) FeatureFlagSettingValuesV2APIPostSettingValuesV2Request {
+	r.bypassApproval = &bypassApproval
 	return r
 }
 
@@ -404,6 +411,9 @@ func (a *FeatureFlagSettingValuesV2APIService) PostSettingValuesV2Execute(r Feat
 	if r.reason != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "form", "")
 	}
+	if r.bypassApproval != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "bypassApproval", r.bypassApproval, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}
 
@@ -467,6 +477,7 @@ type FeatureFlagSettingValuesV2APIReplaceSettingValueV2Request struct {
 	settingId int32
 	updateEvaluationFormulaModel *UpdateEvaluationFormulaModel
 	reason *string
+	bypassApproval *bool
 }
 
 func (r FeatureFlagSettingValuesV2APIReplaceSettingValueV2Request) UpdateEvaluationFormulaModel(updateEvaluationFormulaModel UpdateEvaluationFormulaModel) FeatureFlagSettingValuesV2APIReplaceSettingValueV2Request {
@@ -477,6 +488,12 @@ func (r FeatureFlagSettingValuesV2APIReplaceSettingValueV2Request) UpdateEvaluat
 // The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on.
 func (r FeatureFlagSettingValuesV2APIReplaceSettingValueV2Request) Reason(reason string) FeatureFlagSettingValuesV2APIReplaceSettingValueV2Request {
 	r.reason = &reason
+	return r
+}
+
+// Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission.
+func (r FeatureFlagSettingValuesV2APIReplaceSettingValueV2Request) BypassApproval(bypassApproval bool) FeatureFlagSettingValuesV2APIReplaceSettingValueV2Request {
+	r.bypassApproval = &bypassApproval
 	return r
 }
 
@@ -584,6 +601,9 @@ func (a *FeatureFlagSettingValuesV2APIService) ReplaceSettingValueV2Execute(r Fe
 	if r.reason != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "form", "")
 	}
+	if r.bypassApproval != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "bypassApproval", r.bypassApproval, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}
 
@@ -647,6 +667,7 @@ type FeatureFlagSettingValuesV2APIUpdateSettingValueV2Request struct {
 	settingId int32
 	jsonPatchOperation *[]JsonPatchOperation
 	reason *string
+	bypassApproval *bool
 }
 
 func (r FeatureFlagSettingValuesV2APIUpdateSettingValueV2Request) JsonPatchOperation(jsonPatchOperation []JsonPatchOperation) FeatureFlagSettingValuesV2APIUpdateSettingValueV2Request {
@@ -657,6 +678,12 @@ func (r FeatureFlagSettingValuesV2APIUpdateSettingValueV2Request) JsonPatchOpera
 // The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on.
 func (r FeatureFlagSettingValuesV2APIUpdateSettingValueV2Request) Reason(reason string) FeatureFlagSettingValuesV2APIUpdateSettingValueV2Request {
 	r.reason = &reason
+	return r
+}
+
+// Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission.
+func (r FeatureFlagSettingValuesV2APIUpdateSettingValueV2Request) BypassApproval(bypassApproval bool) FeatureFlagSettingValuesV2APIUpdateSettingValueV2Request {
+	r.bypassApproval = &bypassApproval
 	return r
 }
 
@@ -785,6 +812,9 @@ func (a *FeatureFlagSettingValuesV2APIService) UpdateSettingValueV2Execute(r Fea
 
 	if r.reason != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "reason", r.reason, "form", "")
+	}
+	if r.bypassApproval != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "bypassApproval", r.bypassApproval, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}

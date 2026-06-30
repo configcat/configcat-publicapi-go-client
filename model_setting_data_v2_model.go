@@ -31,6 +31,8 @@ type SettingDataV2Model struct {
 	// Description of the Feature Flag or Setting.
 	Hint NullableString `json:"hint"`
 	SettingType SettingType `json:"settingType"`
+	// Indicates whether this setting should validate string values as JSON values.
+	IsJson bool `json:"isJson"`
 	// The order of the Feature Flag or Setting represented on the ConfigCat Dashboard.
 	Order int32 `json:"order"`
 	// The creation time of the Feature Flag or Setting.
@@ -51,13 +53,14 @@ type _SettingDataV2Model SettingDataV2Model
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSettingDataV2Model(settingId int32, key string, name string, hint NullableString, settingType SettingType, order int32, createdAt NullableTime, creatorEmail NullableString, creatorFullName NullableString, predefinedVariations []PredefinedVariationModel, isWatching bool) *SettingDataV2Model {
+func NewSettingDataV2Model(settingId int32, key string, name string, hint NullableString, settingType SettingType, isJson bool, order int32, createdAt NullableTime, creatorEmail NullableString, creatorFullName NullableString, predefinedVariations []PredefinedVariationModel, isWatching bool) *SettingDataV2Model {
 	this := SettingDataV2Model{}
 	this.SettingId = settingId
 	this.Key = key
 	this.Name = name
 	this.Hint = hint
 	this.SettingType = settingType
+	this.IsJson = isJson
 	this.Order = order
 	this.CreatedAt = createdAt
 	this.CreatorEmail = creatorEmail
@@ -195,6 +198,30 @@ func (o *SettingDataV2Model) GetSettingTypeOk() (*SettingType, bool) {
 // SetSettingType sets field value
 func (o *SettingDataV2Model) SetSettingType(v SettingType) {
 	o.SettingType = v
+}
+
+// GetIsJson returns the IsJson field value
+func (o *SettingDataV2Model) GetIsJson() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsJson
+}
+
+// GetIsJsonOk returns a tuple with the IsJson field value
+// and a boolean to check if the value has been set.
+func (o *SettingDataV2Model) GetIsJsonOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsJson, true
+}
+
+// SetIsJson sets field value
+func (o *SettingDataV2Model) SetIsJson(v bool) {
+	o.IsJson = v
 }
 
 // GetOrder returns the Order field value
@@ -362,6 +389,7 @@ func (o SettingDataV2Model) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["hint"] = o.Hint.Get()
 	toSerialize["settingType"] = o.SettingType
+	toSerialize["isJson"] = o.IsJson
 	toSerialize["order"] = o.Order
 	toSerialize["createdAt"] = o.CreatedAt.Get()
 	toSerialize["creatorEmail"] = o.CreatorEmail.Get()
@@ -386,6 +414,7 @@ func (o *SettingDataV2Model) UnmarshalJSON(data []byte) (err error) {
 		"name",
 		"hint",
 		"settingType",
+		"isJson",
 		"order",
 		"createdAt",
 		"creatorEmail",
@@ -426,6 +455,7 @@ func (o *SettingDataV2Model) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "hint")
 		delete(additionalProperties, "settingType")
+		delete(additionalProperties, "isJson")
 		delete(additionalProperties, "order")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "creatorEmail")

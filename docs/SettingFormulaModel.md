@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **IntegrationLinks** | [**[]IntegrationLinkModel**](IntegrationLinkModel.md) | The integration links attached to the Feature Flag or Setting. | 
 **SettingTags** | [**[]SettingTagModel**](SettingTagModel.md) | The tags attached to the Feature Flag or Setting. | 
 **SettingIdsWherePrerequisite** | **[]int32** | List of Feature Flag and Setting IDs where the actual Feature Flag or Setting is prerequisite. | 
+**ChangeRequestCount** | **int32** | The number of change requests for the Feature Flag or Setting. | 
 **Config** | [**ConfigModel**](ConfigModel.md) |  | 
 **Environment** | [**EnvironmentModel**](EnvironmentModel.md) |  | 
 **ReadOnly** | **bool** |  | 
@@ -24,7 +25,7 @@ Name | Type | Description | Notes
 
 ### NewSettingFormulaModel
 
-`func NewSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targetingRules []TargetingRuleModel, setting SettingDataV2Model, updatedAt NullableTime, percentageEvaluationAttribute NullableString, lastUpdaterUserEmail NullableString, lastUpdaterUserFullName NullableString, integrationLinks []IntegrationLinkModel, settingTags []SettingTagModel, settingIdsWherePrerequisite []int32, config ConfigModel, environment EnvironmentModel, readOnly bool, featureFlagLimitations FeatureFlagLimitations, ) *SettingFormulaModel`
+`func NewSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targetingRules []TargetingRuleModel, setting SettingDataV2Model, updatedAt NullableTime, percentageEvaluationAttribute NullableString, lastUpdaterUserEmail NullableString, lastUpdaterUserFullName NullableString, integrationLinks []IntegrationLinkModel, settingTags []SettingTagModel, settingIdsWherePrerequisite []int32, changeRequestCount int32, config ConfigModel, environment EnvironmentModel, readOnly bool, featureFlagLimitations FeatureFlagLimitations, ) *SettingFormulaModel`
 
 NewSettingFormulaModel instantiates a new SettingFormulaModel object
 This constructor will assign default values to properties that have it defined,
@@ -297,6 +298,26 @@ and a boolean to check if the value has been set.
 `func (o *SettingFormulaModel) SetSettingIdsWherePrerequisite(v []int32)`
 
 SetSettingIdsWherePrerequisite sets SettingIdsWherePrerequisite field to given value.
+
+
+### GetChangeRequestCount
+
+`func (o *SettingFormulaModel) GetChangeRequestCount() int32`
+
+GetChangeRequestCount returns the ChangeRequestCount field if non-nil, zero value otherwise.
+
+### GetChangeRequestCountOk
+
+`func (o *SettingFormulaModel) GetChangeRequestCountOk() (*int32, bool)`
+
+GetChangeRequestCountOk returns a tuple with the ChangeRequestCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChangeRequestCount
+
+`func (o *SettingFormulaModel) SetChangeRequestCount(v int32)`
+
+SetChangeRequestCount sets ChangeRequestCount field to given value.
 
 
 ### GetConfig

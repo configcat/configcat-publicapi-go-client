@@ -6,11 +6,11 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateSetting**](FeatureFlagsSettingsAPI.md#CreateSetting) | **Post** /v1/configs/{configId}/settings | Create Flag
 [**DeleteSetting**](FeatureFlagsSettingsAPI.md#DeleteSetting) | **Delete** /v1/settings/{settingId} | Delete Flag
-[**GetPredefinedVariations**](FeatureFlagsSettingsAPI.md#GetPredefinedVariations) | **Get** /v1/settings/{settingId}/predefined-variations | Get predefined variations (Beta)
+[**GetPredefinedVariations**](FeatureFlagsSettingsAPI.md#GetPredefinedVariations) | **Get** /v1/settings/{settingId}/predefined-variations | Get predefined variations
 [**GetSetting**](FeatureFlagsSettingsAPI.md#GetSetting) | **Get** /v1/settings/{settingId} | Get Flag
 [**GetSettings**](FeatureFlagsSettingsAPI.md#GetSettings) | **Get** /v1/configs/{configId}/settings | List Flags
 [**ReplaceSetting**](FeatureFlagsSettingsAPI.md#ReplaceSetting) | **Put** /v1/settings/{settingId} | Replace Flag
-[**UpdatePredefinedVariations**](FeatureFlagsSettingsAPI.md#UpdatePredefinedVariations) | **Put** /v1/settings/{settingId}/predefined-variations | Update predefined variations (Beta)
+[**UpdatePredefinedVariations**](FeatureFlagsSettingsAPI.md#UpdatePredefinedVariations) | **Put** /v1/settings/{settingId}/predefined-variations | Update predefined variations
 [**UpdateSetting**](FeatureFlagsSettingsAPI.md#UpdateSetting) | **Patch** /v1/settings/{settingId} | Update Flag
 
 
@@ -159,7 +159,7 @@ Name | Type | Description  | Notes
 
 > PredefinedVariationsWithUsagesModel GetPredefinedVariations(ctx, settingId).Execute()
 
-Get predefined variations (Beta)
+Get predefined variations
 
 
 
@@ -441,7 +441,7 @@ Name | Type | Description  | Notes
 
 > PredefinedVariationsModel UpdatePredefinedVariations(ctx, settingId).UpdatePredefinedVariationsRequest(updatePredefinedVariationsRequest).Execute()
 
-Update predefined variations (Beta)
+Update predefined variations
 
 
 

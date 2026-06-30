@@ -34,6 +34,8 @@ type EnvironmentModel struct {
 	Order int32 `json:"order"`
 	// Determines whether a mandatory reason must be given every time when the Feature Flags or Settings in the given Environment are saved.
 	ReasonRequired bool `json:"reasonRequired"`
+	// Determines whether changes must be approved before they are applied in the given Environment.
+	ApproveRequired bool `json:"approveRequired"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -43,7 +45,7 @@ type _EnvironmentModel EnvironmentModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEnvironmentModel(product ProductModel, environmentId string, name string, color NullableString, description NullableString, order int32, reasonRequired bool) *EnvironmentModel {
+func NewEnvironmentModel(product ProductModel, environmentId string, name string, color NullableString, description NullableString, order int32, reasonRequired bool, approveRequired bool) *EnvironmentModel {
 	this := EnvironmentModel{}
 	this.Product = product
 	this.EnvironmentId = environmentId
@@ -52,6 +54,7 @@ func NewEnvironmentModel(product ProductModel, environmentId string, name string
 	this.Description = description
 	this.Order = order
 	this.ReasonRequired = reasonRequired
+	this.ApproveRequired = approveRequired
 	return &this
 }
 
@@ -235,6 +238,30 @@ func (o *EnvironmentModel) SetReasonRequired(v bool) {
 	o.ReasonRequired = v
 }
 
+// GetApproveRequired returns the ApproveRequired field value
+func (o *EnvironmentModel) GetApproveRequired() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.ApproveRequired
+}
+
+// GetApproveRequiredOk returns a tuple with the ApproveRequired field value
+// and a boolean to check if the value has been set.
+func (o *EnvironmentModel) GetApproveRequiredOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ApproveRequired, true
+}
+
+// SetApproveRequired sets field value
+func (o *EnvironmentModel) SetApproveRequired(v bool) {
+	o.ApproveRequired = v
+}
+
 func (o EnvironmentModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -252,6 +279,7 @@ func (o EnvironmentModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["description"] = o.Description.Get()
 	toSerialize["order"] = o.Order
 	toSerialize["reasonRequired"] = o.ReasonRequired
+	toSerialize["approveRequired"] = o.ApproveRequired
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -272,6 +300,7 @@ func (o *EnvironmentModel) UnmarshalJSON(data []byte) (err error) {
 		"description",
 		"order",
 		"reasonRequired",
+		"approveRequired",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -308,6 +337,7 @@ func (o *EnvironmentModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "order")
 		delete(additionalProperties, "reasonRequired")
+		delete(additionalProperties, "approveRequired")
 		o.AdditionalProperties = additionalProperties
 	}
 

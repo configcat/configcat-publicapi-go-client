@@ -41,6 +41,8 @@ type SettingFormulaModel struct {
 	SettingTags []SettingTagModel `json:"settingTags"`
 	// List of Feature Flag and Setting IDs where the actual Feature Flag or Setting is prerequisite.
 	SettingIdsWherePrerequisite []int32 `json:"settingIdsWherePrerequisite"`
+	// The number of change requests for the Feature Flag or Setting.
+	ChangeRequestCount int32 `json:"changeRequestCount"`
 	Config ConfigModel `json:"config"`
 	Environment EnvironmentModel `json:"environment"`
 	ReadOnly bool `json:"readOnly"`
@@ -54,7 +56,7 @@ type _SettingFormulaModel SettingFormulaModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targetingRules []TargetingRuleModel, setting SettingDataV2Model, updatedAt NullableTime, percentageEvaluationAttribute NullableString, lastUpdaterUserEmail NullableString, lastUpdaterUserFullName NullableString, integrationLinks []IntegrationLinkModel, settingTags []SettingTagModel, settingIdsWherePrerequisite []int32, config ConfigModel, environment EnvironmentModel, readOnly bool, featureFlagLimitations FeatureFlagLimitations) *SettingFormulaModel {
+func NewSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targetingRules []TargetingRuleModel, setting SettingDataV2Model, updatedAt NullableTime, percentageEvaluationAttribute NullableString, lastUpdaterUserEmail NullableString, lastUpdaterUserFullName NullableString, integrationLinks []IntegrationLinkModel, settingTags []SettingTagModel, settingIdsWherePrerequisite []int32, changeRequestCount int32, config ConfigModel, environment EnvironmentModel, readOnly bool, featureFlagLimitations FeatureFlagLimitations) *SettingFormulaModel {
 	this := SettingFormulaModel{}
 	this.LastVersionId = lastVersionId
 	this.DefaultValue = defaultValue
@@ -67,6 +69,7 @@ func NewSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targe
 	this.IntegrationLinks = integrationLinks
 	this.SettingTags = settingTags
 	this.SettingIdsWherePrerequisite = settingIdsWherePrerequisite
+	this.ChangeRequestCount = changeRequestCount
 	this.Config = config
 	this.Environment = environment
 	this.ReadOnly = readOnly
@@ -354,6 +357,30 @@ func (o *SettingFormulaModel) SetSettingIdsWherePrerequisite(v []int32) {
 	o.SettingIdsWherePrerequisite = v
 }
 
+// GetChangeRequestCount returns the ChangeRequestCount field value
+func (o *SettingFormulaModel) GetChangeRequestCount() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.ChangeRequestCount
+}
+
+// GetChangeRequestCountOk returns a tuple with the ChangeRequestCount field value
+// and a boolean to check if the value has been set.
+func (o *SettingFormulaModel) GetChangeRequestCountOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ChangeRequestCount, true
+}
+
+// SetChangeRequestCount sets field value
+func (o *SettingFormulaModel) SetChangeRequestCount(v int32) {
+	o.ChangeRequestCount = v
+}
+
 // GetConfig returns the Config field value
 func (o *SettingFormulaModel) GetConfig() ConfigModel {
 	if o == nil {
@@ -471,6 +498,7 @@ func (o SettingFormulaModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["integrationLinks"] = o.IntegrationLinks
 	toSerialize["settingTags"] = o.SettingTags
 	toSerialize["settingIdsWherePrerequisite"] = o.SettingIdsWherePrerequisite
+	toSerialize["changeRequestCount"] = o.ChangeRequestCount
 	toSerialize["config"] = o.Config
 	toSerialize["environment"] = o.Environment
 	toSerialize["readOnly"] = o.ReadOnly
@@ -499,6 +527,7 @@ func (o *SettingFormulaModel) UnmarshalJSON(data []byte) (err error) {
 		"integrationLinks",
 		"settingTags",
 		"settingIdsWherePrerequisite",
+		"changeRequestCount",
 		"config",
 		"environment",
 		"readOnly",
@@ -543,6 +572,7 @@ func (o *SettingFormulaModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "integrationLinks")
 		delete(additionalProperties, "settingTags")
 		delete(additionalProperties, "settingIdsWherePrerequisite")
+		delete(additionalProperties, "changeRequestCount")
 		delete(additionalProperties, "config")
 		delete(additionalProperties, "environment")
 		delete(additionalProperties, "readOnly")

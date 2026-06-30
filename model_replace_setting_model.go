@@ -29,6 +29,8 @@ type ReplaceSettingModel struct {
 	Tags []int64 `json:"tags,omitempty"`
 	// The order of the Setting represented on the ConfigCat Dashboard. Determined from an ascending sequence of integers.
 	Order NullableInt32 `json:"order,omitempty"`
+	// Indicates whether this setting should validate string values as JSON values.
+	IsJson NullableBool `json:"isJson,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -193,6 +195,48 @@ func (o *ReplaceSettingModel) UnsetOrder() {
 	o.Order.Unset()
 }
 
+// GetIsJson returns the IsJson field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ReplaceSettingModel) GetIsJson() bool {
+	if o == nil || IsNil(o.IsJson.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.IsJson.Get()
+}
+
+// GetIsJsonOk returns a tuple with the IsJson field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ReplaceSettingModel) GetIsJsonOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.IsJson.Get(), o.IsJson.IsSet()
+}
+
+// HasIsJson returns a boolean if a field has been set.
+func (o *ReplaceSettingModel) HasIsJson() bool {
+	if o != nil && o.IsJson.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetIsJson gets a reference to the given NullableBool and assigns it to the IsJson field.
+func (o *ReplaceSettingModel) SetIsJson(v bool) {
+	o.IsJson.Set(&v)
+}
+// SetIsJsonNil sets the value for IsJson to be an explicit nil
+func (o *ReplaceSettingModel) SetIsJsonNil() {
+	o.IsJson.Set(nil)
+}
+
+// UnsetIsJson ensures that no value is present for IsJson, not even an explicit nil
+func (o *ReplaceSettingModel) UnsetIsJson() {
+	o.IsJson.Unset()
+}
+
 func (o ReplaceSettingModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -212,6 +256,9 @@ func (o ReplaceSettingModel) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Order.IsSet() {
 		toSerialize["order"] = o.Order.Get()
+	}
+	if o.IsJson.IsSet() {
+		toSerialize["isJson"] = o.IsJson.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -260,6 +307,7 @@ func (o *ReplaceSettingModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "hint")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "order")
+		delete(additionalProperties, "isJson")
 		o.AdditionalProperties = additionalProperties
 	}
 

@@ -32,6 +32,8 @@ type ProductModel struct {
 	Order int32 `json:"order"`
 	// Determines whether a mandatory reason must be given every time when the Feature Flags or Settings within a Product are saved.
 	ReasonRequired bool `json:"reasonRequired"`
+	// Determines whether changes must be approved before they are applied within a Product.
+	ApproveRequired bool `json:"approveRequired"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -41,7 +43,7 @@ type _ProductModel ProductModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProductModel(organization OrganizationModel, productId string, name string, description NullableString, order int32, reasonRequired bool) *ProductModel {
+func NewProductModel(organization OrganizationModel, productId string, name string, description NullableString, order int32, reasonRequired bool, approveRequired bool) *ProductModel {
 	this := ProductModel{}
 	this.Organization = organization
 	this.ProductId = productId
@@ -49,6 +51,7 @@ func NewProductModel(organization OrganizationModel, productId string, name stri
 	this.Description = description
 	this.Order = order
 	this.ReasonRequired = reasonRequired
+	this.ApproveRequired = approveRequired
 	return &this
 }
 
@@ -206,6 +209,30 @@ func (o *ProductModel) SetReasonRequired(v bool) {
 	o.ReasonRequired = v
 }
 
+// GetApproveRequired returns the ApproveRequired field value
+func (o *ProductModel) GetApproveRequired() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.ApproveRequired
+}
+
+// GetApproveRequiredOk returns a tuple with the ApproveRequired field value
+// and a boolean to check if the value has been set.
+func (o *ProductModel) GetApproveRequiredOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ApproveRequired, true
+}
+
+// SetApproveRequired sets field value
+func (o *ProductModel) SetApproveRequired(v bool) {
+	o.ApproveRequired = v
+}
+
 func (o ProductModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -222,6 +249,7 @@ func (o ProductModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["description"] = o.Description.Get()
 	toSerialize["order"] = o.Order
 	toSerialize["reasonRequired"] = o.ReasonRequired
+	toSerialize["approveRequired"] = o.ApproveRequired
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -241,6 +269,7 @@ func (o *ProductModel) UnmarshalJSON(data []byte) (err error) {
 		"description",
 		"order",
 		"reasonRequired",
+		"approveRequired",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -276,6 +305,7 @@ func (o *ProductModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "order")
 		delete(additionalProperties, "reasonRequired")
+		delete(additionalProperties, "approveRequired")
 		o.AdditionalProperties = additionalProperties
 	}
 

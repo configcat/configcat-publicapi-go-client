@@ -932,15 +932,18 @@ paths:
         \ through the Public Management API will not post messages with the ConfigCat\
         \ Feature Flags Slack app but with an incoming webhook.\n\t- `incoming_webhook.url`:\
         \ Required. The [incoming webhook URL](https://api.slack.com/messaging/webhooks)\
-        \ where the integration should post messages.\n- Amplitude\n\t- `apiKey`:\
-        \ Required. Amplitude API Key.\n\t- `secretKey`: Required. Amplitude Secret\
-        \ Key.\n- Mixpanel\n\t- `serviceAccountUserName`: Required. Mixpanel Service\
-        \ Account Username.\n\t- `serviceAccountSecret`: Required. Mixpanel Service\
-        \ Account Secret.\n\t- `projectId`: Required. Mixpanel Project ID.\n\t- `server`:\
-        \ Mixpanel Server. Available values: `StandardServer`, `EUResidencyServer`.\
-        \ Default: `StandardServer`.\n- Twilio Segment\n\t- `writeKey`: Required.\
-        \ Twilio Segment Write Key.\n\t- `server`: Twilio Segment Server. Available\
-        \ values: `Us`, `Eu`. Default: `Us`.\n- PubNub (work in progress)"
+        \ where the integration should post messages.\n    - `includeSensitiveData`:\
+        \ Set to \"true\" to include [sensitive (hashed) comparison values](https://configcat.com/docs/targeting/targeting-rule/user-condition/#confidential-text-comparators).\
+        \ By default, the integration will mask these values in the posted messages.\
+        \ We recommend hiding sensitive comparison values for shared or public Slack\
+        \ channels.\n- Amplitude\n\t- `apiKey`: Required. Amplitude API Key.\n\t-\
+        \ `secretKey`: Required. Amplitude Secret Key.\n- Mixpanel\n\t- `serviceAccountUserName`:\
+        \ Required. Mixpanel Service Account Username.\n\t- `serviceAccountSecret`:\
+        \ Required. Mixpanel Service Account Secret.\n\t- `projectId`: Required. Mixpanel\
+        \ Project ID.\n\t- `server`: Mixpanel Server. Available values: `StandardServer`,\
+        \ `EUResidencyServer`. Default: `StandardServer`.\n- Twilio Segment\n\t- `writeKey`:\
+        \ Required. Twilio Segment Write Key.\n\t- `server`: Twilio Segment Server.\
+        \ Available values: `Us`, `Eu`. Default: `Us`.\n- PubNub (work in progress)"
       operationId: create-integration
       parameters:
       - description: The identifier of the Product.
@@ -1142,11 +1145,16 @@ paths:
       - Feature Flags & Settings
   /v1/products/{productId}/auditlogs:
     get:
-      description: "This endpoint returns the list of Audit log items for a given\
-        \ Product \nand the result can be optionally filtered by Config and/or Environment.\n\
-        \nIf neither `fromUtcDateTime` nor `toUtcDateTime` is set, the audit logs\
-        \ for the **last 7 days** will be returned.\n\nThe distance between `fromUtcDateTime`\
-        \ and `toUtcDateTime` cannot exceed **30 days**."
+      deprecated: true
+      description: |-
+        This endpoint returns the list of Audit log items for a given Product
+        and the result can be optionally filtered by Config and/or Environment.
+
+        If neither `fromUtcDateTime` nor `toUtcDateTime` is set, the audit logs for the **last 7 days** will be returned.
+
+        The distance between `fromUtcDateTime` and `toUtcDateTime` cannot exceed **30 days**.
+
+        **Important:** This endpoint is deprecated. Use the **List Audit log items for Product (V2)** endpoint instead. In the future, this endpoint will be redirected to the V2 version with default pagination parameters.
       operationId: get-auditlogs
       parameters:
       - description: The identifier of the Product.
@@ -1306,6 +1314,109 @@ paths:
       summary: List Zombie (stale) flags for Product
       tags:
       - Zombie (stale) flags
+  /v2/products/{productId}/auditlogs:
+    get:
+      description: |-
+        This endpoint returns the list of Audit log items for a given Product
+        and the result can be optionally filtered by Config and/or Environment.
+      operationId: get-auditlogs-v2
+      parameters:
+      - description: The identifier of the Product.
+        explode: false
+        in: path
+        name: productId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The identifier of the Config.
+        explode: true
+        in: query
+        name: configId
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: The identifier of the Environment.
+        explode: true
+        in: query
+        name: environmentId
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: Filter Audit logs by Audit log type.
+        explode: true
+        in: query
+        name: auditLogType
+        required: false
+        schema:
+          allOf:
+          - $ref: "#/components/schemas/AuditLogType"
+          nullable: true
+        style: form
+      - description: Filter Audit logs by starting UTC date.
+        explode: true
+        in: query
+        name: fromUtcDateTime
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: Filter Audit logs by ending UTC date.
+        explode: true
+        in: query
+        name: toUtcDateTime
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: "Page number (min: 1)."
+        explode: true
+        in: query
+        name: pageNumber
+        required: false
+        schema:
+          default: 1
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        style: form
+      - description: "Page size (min: 1, max: 100)."
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 100
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditLogItemModelPagedList"
+          description: ""
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: List Audit log items for Product (V2)
+      tags:
+      - Audit logs
   /v1/settings/{settingId}/code-references:
     get:
       description: ""
@@ -1757,15 +1868,18 @@ paths:
         \ API will not post messages with the ConfigCat Feature Flags Slack app but\
         \ with an incoming webhook.\n\t- `incoming_webhook.url`: Required. The [incoming\
         \ webhook URL](https://api.slack.com/messaging/webhooks) where the integration\
-        \ should post messages.\n- Amplitude\n\t- `apiKey`: Required. Amplitude API\
-        \ Key.\n\t- `secretKey`: Required. Amplitude Secret Key.\n- Mixpanel\n\t-\
-        \ `serviceAccountUserName`: Required. Mixpanel Service Account Username.\n\
-        \t- `serviceAccountSecret`: Required. Mixpanel Service Account Secret.\n\t\
-        - `projectId`: Required. Mixpanel Project ID.\n\t- `server`: Mixpanel Server.\
-        \ Available values: `StandardServer`, `EUResidencyServer`. Default: `StandardServer`.\n\
-        - Twilio Segment\n\t- `writeKey`: Required. Twilio Segment Write Key.\n\t\
-        - `server`: Twilio Segment Server. Available values: `Us`, `Eu`. Default:\
-        \ `Us`.\n- PubNub (work in progress)"
+        \ should post messages.\n\t- `includeSensitiveData`: Set to \"true\" to include\
+        \ [sensitive (hashed) comparison values](https://configcat.com/docs/targeting/targeting-rule/user-condition/#confidential-text-comparators).\
+        \ By default, the integration will mask these values in the posted messages.\
+        \ We recommend hiding sensitive comparison values for shared or public Slack\
+        \ channels.\n- Amplitude\n\t- `apiKey`: Required. Amplitude API Key.\n\t-\
+        \ `secretKey`: Required. Amplitude Secret Key.\n- Mixpanel\n\t- `serviceAccountUserName`:\
+        \ Required. Mixpanel Service Account Username.\n\t- `serviceAccountSecret`:\
+        \ Required. Mixpanel Service Account Secret.\n\t- `projectId`: Required. Mixpanel\
+        \ Project ID.\n\t- `server`: Mixpanel Server. Available values: `StandardServer`,\
+        \ `EUResidencyServer`. Default: `StandardServer`.\n- Twilio Segment\n\t- `writeKey`:\
+        \ Required. Twilio Segment Write Key.\n\t- `server`: Twilio Segment Server.\
+        \ Available values: `Us`, `Eu`. Default: `Us`.\n- PubNub (work in progress)"
       operationId: update-integration
       parameters:
       - description: The identifier of the Integration.
@@ -1905,12 +2019,16 @@ paths:
       - Me
   /v1/organizations/{organizationId}/auditlogs:
     get:
-      description: "This endpoint returns the list of Audit log items for a given\
-        \ Organization \nand the result can be optionally filtered by Product and/or\
-        \ Config and/or Environment.\n\nIf neither `fromUtcDateTime` nor `toUtcDateTime`\
-        \ is set, the audit logs for the **last 7 days** will be returned.\n\nThe\
-        \ distance between `fromUtcDateTime` and `toUtcDateTime` cannot exceed **30\
-        \ days**."
+      deprecated: true
+      description: |-
+        This endpoint returns the list of Audit log items for a given Organization
+        and the result can be optionally filtered by Product and/or Config and/or Environment.
+
+        If neither `fromUtcDateTime` nor `toUtcDateTime` is set, the audit logs for the **last 7 days** will be returned.
+
+        The distance between `fromUtcDateTime` and `toUtcDateTime` cannot exceed **30 days**.
+
+        **Important:** This endpoint is deprecated. Use the **List Audit log items for Organization (V2)** endpoint instead. In the future, this endpoint will be redirected to the V2 version with default pagination parameters.
       operationId: get-organization-auditlogs
       parameters:
       - description: The identifier of the Organization.
@@ -1994,6 +2112,118 @@ paths:
           description: Too many requests. In case of the request rate exceeds the
             rate limits.
       summary: List Audit log items for Organization
+      tags:
+      - Audit logs
+  /v2/organizations/{organizationId}/auditlogs:
+    get:
+      description: |-
+        This endpoint returns the list of Audit log items for a given Organization
+        and the result can be optionally filtered by Product and/or Config and/or Environment.
+      operationId: get-organization-auditlogs-v2
+      parameters:
+      - description: The identifier of the Organization.
+        explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The identifier of the Product.
+        explode: true
+        in: query
+        name: productId
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: The identifier of the Config.
+        explode: true
+        in: query
+        name: configId
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: The identifier of the Environment.
+        explode: true
+        in: query
+        name: environmentId
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: Filter Audit logs by Audit log type.
+        explode: true
+        in: query
+        name: auditLogType
+        required: false
+        schema:
+          allOf:
+          - $ref: "#/components/schemas/AuditLogType"
+          nullable: true
+        style: form
+      - description: Filter Audit logs by starting UTC date.
+        explode: true
+        in: query
+        name: fromUtcDateTime
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: Filter Audit logs by ending UTC date.
+        explode: true
+        in: query
+        name: toUtcDateTime
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: "Page number (min: 1)."
+        explode: true
+        in: query
+        name: pageNumber
+        required: false
+        schema:
+          default: 1
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        style: form
+      - description: "Page size (min: 1, max: 100)."
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 100
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuditLogItemModelPagedList"
+          description: ""
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: List Audit log items for Organization (V2)
       tags:
       - Audit logs
   /v1/organizations/{organizationId}/organization-limitations:
@@ -2175,10 +2405,9 @@ paths:
       - Members
   /v1/settings/{settingId}/predefined-variations:
     get:
-      description: |-
-        This endpoint returns the predefined variations along with their usages in the Environments for a Feature Flag or Setting identified by the `settingId` parameter.
-
-        **Beta feature:** The feature is currently in closed beta state and cannot be used.
+      description: This endpoint returns the predefined variations along with their
+        usages in the Environments for a Feature Flag or Setting identified by the
+        `settingId` parameter.
       operationId: get-predefined-variations
       parameters:
       - description: The identifier of the Setting.
@@ -2204,7 +2433,7 @@ paths:
         "429":
           description: Too many requests. In case of the request rate exceeds the
             rate limits.
-      summary: Get predefined variations (Beta)
+      summary: Get predefined variations
       tags:
       - Feature Flags & Settings
     put:
@@ -2212,8 +2441,6 @@ paths:
         This endpoint updates the predefined variations for a Feature Flag or Setting identified by the `settingId` parameter.
 
         **Important:** You can only update a predefined variation's value if it is not used anywhere in your feature flags.
-
-        **Beta feature:** The feature is currently in closed beta state and cannot be used.
       operationId: update-predefined-variations
       parameters:
       - description: The identifier of the Setting.
@@ -2251,7 +2478,7 @@ paths:
         "429":
           description: Too many requests. In case of the request rate exceeds the
             rate limits.
-      summary: Update predefined variations (Beta)
+      summary: Update predefined variations
       tags:
       - Feature Flags & Settings
   /v1/products/{productId}:
@@ -3823,6 +4050,15 @@ paths:
         schema:
           type: string
         style: form
+      - description: Whether to bypass the approval process and directly apply the
+          change. This is only applicable for users with bypass approval permission.
+        explode: true
+        in: query
+        name: bypassApproval
+        required: false
+        schema:
+          type: boolean
+        style: form
       - description: The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)
         explode: false
         in: header
@@ -4248,6 +4484,15 @@ paths:
         schema:
           type: string
         style: form
+      - description: Whether to bypass the approval process and directly apply the
+          change. This is only applicable for users with bypass approval permission.
+        explode: true
+        in: query
+        name: bypassApproval
+        required: false
+        schema:
+          type: boolean
+        style: form
       - description: The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)
         explode: false
         in: header
@@ -4521,6 +4766,15 @@ paths:
         required: false
         schema:
           type: string
+        style: form
+      - description: Whether to bypass the approval process and directly apply the
+          change. This is only applicable for users with bypass approval permission.
+        explode: true
+        in: query
+        name: bypassApproval
+        required: false
+        schema:
+          type: boolean
         style: form
       requestBody:
         content:
@@ -4949,6 +5203,15 @@ paths:
         schema:
           type: string
         style: form
+      - description: Whether to bypass the approval process and directly apply the
+          change. This is only applicable for users with bypass approval permission.
+        explode: true
+        in: query
+        name: bypassApproval
+        required: false
+        schema:
+          type: boolean
+        style: form
       requestBody:
         content:
           application/json:
@@ -5298,6 +5561,15 @@ paths:
         required: false
         schema:
           type: string
+        style: form
+      - description: Whether to bypass the approval process and directly apply the
+          change. This is only applicable for users with bypass approval permission.
+        explode: true
+        in: query
+        name: bypassApproval
+        required: false
+        schema:
+          type: boolean
         style: form
       requestBody:
         content:
@@ -6390,11 +6662,43 @@ components:
       - clientKey
       - jiraJwtToken
       type: object
+    ApprovalPermissionType:
+      description: Represents the permission group level change request approval permission.
+      enum:
+      - cannotApprove
+      - canApproveOthers
+      - canBypassApproves
+      - custom
+      type: string
+    ApproveRequiredEnvironmentModel:
+      example:
+        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        approveRequired: true
+        environmentName: environmentName
+      properties:
+        environmentId:
+          description: Identifier of the Environment.
+          format: uuid
+          type: string
+        approveRequired:
+          description: Indicates that a mandatory approval is required in this Environment
+            before changes are applied.
+          type: boolean
+        environmentName:
+          description: Name of the Environment.
+          nullable: true
+          type: string
+      required:
+      - approveRequired
+      - environmentId
+      - environmentName
+      type: object
     AuditLogItemModel:
       example:
         auditLogTypeEnum: productCreated
         auditLogDateTime: 2000-01-23T04:56:07.000+00:00
         auditLogType: auditLogType
+        modelVersion: 6
         auditLogId: 0
         truncated: true
         why: why
@@ -6403,7 +6707,6 @@ components:
         details: details
         actionTarget: actionTarget
         userName: userName
-        changeSetId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         auditLogId:
           format: int64
@@ -6413,32 +6716,26 @@ components:
           type: string
         auditLogTypeEnum:
           $ref: "#/components/schemas/AuditLogType"
-        changeSetId:
-          format: uuid
-          nullable: true
-          type: string
         truncated:
           type: boolean
+        modelVersion:
+          format: int32
+          type: integer
         auditLogType:
-          nullable: true
           type: string
         userEmail:
           nullable: true
           type: string
         userName:
-          nullable: true
           type: string
         where:
-          nullable: true
           type: string
         why:
           nullable: true
           type: string
         actionTarget:
-          nullable: true
           type: string
         details:
-          nullable: true
           type: string
       required:
       - actionTarget
@@ -6446,21 +6743,63 @@ components:
       - auditLogId
       - auditLogType
       - auditLogTypeEnum
-      - changeSetId
       - details
+      - modelVersion
       - truncated
       - userEmail
       - userName
       - where
       - why
       type: object
+    AuditLogItemModelPagedList:
+      example:
+        data:
+        - auditLogTypeEnum: productCreated
+          auditLogDateTime: 2000-01-23T04:56:07.000+00:00
+          auditLogType: auditLogType
+          modelVersion: 6
+          auditLogId: 0
+          truncated: true
+          why: why
+          userEmail: userEmail
+          where: where
+          details: details
+          actionTarget: actionTarget
+          userName: userName
+        - auditLogTypeEnum: productCreated
+          auditLogDateTime: 2000-01-23T04:56:07.000+00:00
+          auditLogType: auditLogType
+          modelVersion: 6
+          auditLogId: 0
+          truncated: true
+          why: why
+          userEmail: userEmail
+          where: where
+          details: details
+          actionTarget: actionTarget
+          userName: userName
+        paging: ""
+      properties:
+        paging:
+          allOf:
+          - $ref: "#/components/schemas/PagingResponseInfo"
+          nullable: true
+        data:
+          items:
+            $ref: "#/components/schemas/AuditLogItemModel"
+          nullable: true
+          type: array
+      required:
+      - data
+      - paging
+      type: object
     AuditLogType:
       enum:
       - productCreated
       - productChanged
-      - productOwnershipTransferred
       - productDeleted
       - productsReordered
+      - productPreferencesUpdated
       - teamMemberInvited
       - teamMemberInvitationRevoked
       - teamMemberJoined
@@ -6470,6 +6809,7 @@ components:
       - teamMemberInvitationChanged
       - teamMemberInvitationResent
       - teamMemberInvitationRejected
+      - teamMemberAddedToProduct
       - configCreated
       - configChanged
       - configDeleted
@@ -6502,7 +6842,6 @@ components:
       - integrationLinkAdded
       - integrationLinkRemoved
       - organizationAdded
-      - organizationRemoved
       - organizationChanged
       - organizationSubscriptionTypeChanged
       - organizationAdminChanged
@@ -6518,8 +6857,6 @@ components:
       - domainAdded
       - domainVerified
       - domainRemoved
-      - domainSamlConfigured
-      - domainSamlDeleted
       - autoProvisioningConfigurationChanged
       - samlIdpConfigurationAdded
       - samlIdpConfigurationRemoved
@@ -6559,6 +6896,21 @@ components:
       - proxyNotificationSettingsDeleted
       - proxyNotificationSigningKeyAdded
       - proxyNotificationSigningKeyDeleted
+      - changeRequestCreated
+      - changeRequestUpdated
+      - changeRequestSettingValuesUpdated
+      - changeRequestSettingValueRebased
+      - changeRequestApproved
+      - changeRequestApprovalDismissed
+      - changeRequestApplied
+      - changeRequestAppliedOnSchedule
+      - changeRequestClosed
+      - changeRequestNeedsAttention
+      - changeRequestCommentAdded
+      - changeRequestCommentEdited
+      - changeRequestCommentDeleted
+      - changeRequestSettingDeleted
+      - changeRequestNeedsAttentionFixed
       type: string
     CodeReferenceModel:
       example:
@@ -6840,6 +7192,7 @@ components:
       example:
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          approveRequired: true
           organization:
             organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             name: name
@@ -6936,6 +7289,7 @@ components:
             userCondition: ""
             prerequisiteFlagCondition: ""
           value: ""
+        changeRequestCount: 6
         percentageEvaluationAttribute: percentageEvaluationAttribute
         defaultValue:
           stringValue: stringValue
@@ -6967,6 +7321,7 @@ components:
           settingTagId: 0
         setting:
           createdAt: 2000-01-23T04:56:07.000+00:00
+          isJson: true
           creatorEmail: creatorEmail
           hint: hint
           name: name
@@ -7044,7 +7399,12 @@ components:
             format: int32
             type: integer
           type: array
+        changeRequestCount:
+          description: The number of change requests for the Feature Flag or Setting.
+          format: int32
+          type: integer
       required:
+      - changeRequestCount
       - defaultValue
       - integrationLinks
       - lastUpdaterUserEmail
@@ -7062,6 +7422,7 @@ components:
         environment:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            approveRequired: true
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
@@ -7071,6 +7432,7 @@ components:
             reasonRequired: true
           environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           color: color
+          approveRequired: true
           name: name
           description: description
           order: 0
@@ -7132,6 +7494,7 @@ components:
               userCondition: ""
               prerequisiteFlagCondition: ""
             value: ""
+          changeRequestCount: 6
           percentageEvaluationAttribute: percentageEvaluationAttribute
           defaultValue:
             stringValue: stringValue
@@ -7163,6 +7526,7 @@ components:
             settingTagId: 0
           setting:
             createdAt: 2000-01-23T04:56:07.000+00:00
+            isJson: true
             creatorEmail: creatorEmail
             hint: hint
             name: name
@@ -7239,6 +7603,7 @@ components:
               userCondition: ""
               prerequisiteFlagCondition: ""
             value: ""
+          changeRequestCount: 6
           percentageEvaluationAttribute: percentageEvaluationAttribute
           defaultValue:
             stringValue: stringValue
@@ -7270,6 +7635,7 @@ components:
             settingTagId: 0
           setting:
             createdAt: 2000-01-23T04:56:07.000+00:00
+            isJson: true
             creatorEmail: creatorEmail
             hint: hint
             name: name
@@ -7302,6 +7668,7 @@ components:
         config:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            approveRequired: true
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
@@ -7378,6 +7745,7 @@ components:
           settingTagId: 0
         setting:
           createdAt: 2000-01-23T04:56:07.000+00:00
+          isJson: true
           creatorEmail: creatorEmail
           hint: hint
           name: name
@@ -7448,6 +7816,7 @@ components:
         environment:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            approveRequired: true
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
@@ -7457,6 +7826,7 @@ components:
             reasonRequired: true
           environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           color: color
+          approveRequired: true
           name: name
           description: description
           order: 0
@@ -7511,6 +7881,7 @@ components:
             settingTagId: 0
           setting:
             createdAt: 2000-01-23T04:56:07.000+00:00
+            isJson: true
             creatorEmail: creatorEmail
             hint: hint
             name: name
@@ -7562,6 +7933,7 @@ components:
             settingTagId: 0
           setting:
             createdAt: 2000-01-23T04:56:07.000+00:00
+            isJson: true
             creatorEmail: creatorEmail
             hint: hint
             name: name
@@ -7576,6 +7948,7 @@ components:
         config:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            approveRequired: true
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
@@ -7727,24 +8100,24 @@ components:
           $ref: "#/components/schemas/IntegrationType"
         name:
           description: Name of the Integration.
+          maxLength: 255
           minLength: 1
           type: string
         parameters:
           additionalProperties:
-            nullable: true
             type: string
           description: Parameters of the Integration.
           type: object
         environmentIds:
           description: "List of Environment IDs that are connected with this Integration.\
-            \ If the list is empty, all of the Environments are connected."
+            \ If the list is empty, all the Environments are connected."
           items:
             format: uuid
             type: string
           type: array
         configIds:
           description: "List of Config IDs that are connected with this Integration.\
-            \ If the list is empty, all of the Configs are connected."
+            \ If the list is empty, all the Configs are connected."
           items:
             format: uuid
             type: string
@@ -7784,6 +8157,18 @@ components:
           type: string
         environmentAccessType:
           $ref: "#/components/schemas/EnvironmentAccessType"
+      type: object
+    CreateOrUpdateEnvironmentApprovalPermissionModel:
+      example:
+        environmentApprovalPermissionType: null
+        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        environmentId:
+          description: Identifier of the Environment.
+          format: uuid
+          type: string
+        environmentApprovalPermissionType:
+          $ref: "#/components/schemas/EnvironmentApprovalPermissionType"
       type: object
     CreateOrUpdateProxyProfileRequest:
       example:
@@ -7846,7 +8231,13 @@ components:
     CreatePermissionGroupRequest:
       example:
         canViewProductStatistics: true
+        environmentApprovalPermissions:
+        - environmentApprovalPermissionType: null
+          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - environmentApprovalPermissionType: null
+          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         canDeleteTag: true
+        newEnvironmentApprovalPermissionType: cannotApprove
         environmentAccesses:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           environmentAccessType: null
@@ -7873,6 +8264,7 @@ components:
         name: name
         canViewProductAuditLog: true
         canCreateOrUpdateTag: true
+        approvalPermissionType: cannotApprove
         newEnvironmentAccessType: full
       properties:
         name:
@@ -7950,6 +8342,16 @@ components:
             $ref: "#/components/schemas/CreateOrUpdateEnvironmentAccessModel"
           nullable: true
           type: array
+        approvalPermissionType:
+          $ref: "#/components/schemas/ApprovalPermissionType"
+        newEnvironmentApprovalPermissionType:
+          $ref: "#/components/schemas/EnvironmentApprovalPermissionType"
+        environmentApprovalPermissions:
+          description: List of environment specific change request approval permissions.
+          items:
+            $ref: "#/components/schemas/CreateOrUpdateEnvironmentApprovalPermissionModel"
+          nullable: true
+          type: array
         canDisable2FA:
           description: Group members can disable two-factor authentication for other
             members.
@@ -7958,7 +8360,7 @@ components:
       - name
       type: object
     CreatePredefinedVariationModel:
-      description: A Feature Flag or Predefined Variation.
+      description: A Predefined Variation.
       example:
         hint: hint
         name: name
@@ -7971,15 +8373,15 @@ components:
         value:
           $ref: "#/components/schemas/CreatePredefinedVariationValueModel"
         name:
-          description: "The name of the Feature Flag or Predefined Variation, shown\
-            \ on the Dashboard UI. If not set, the Value will be shown."
+          description: "The name of the Predefined Variation, shown on the Dashboard\
+            \ UI. If not set, the Value will be shown."
           maxLength: 255
           minLength: 0
           nullable: true
           type: string
         hint:
-          description: "The name of the Feature Flag or Predefined Variation, shown\
-            \ on the Dashboard UI. If not set, the Value will be shown."
+          description: "The name of the Predefined Variation, shown on the Dashboard\
+            \ UI. If not set, the Value will be shown."
           maxLength: 1000
           minLength: 0
           nullable: true
@@ -7988,7 +8390,7 @@ components:
       - value
       type: object
     CreatePredefinedVariationValueModel:
-      description: Represents the value of a Feature Flag or Predefined Variation.
+      description: Represents the value of a Predefined Variation.
       example:
         stringValue: stringValue
         intValue: 1
@@ -8086,6 +8488,7 @@ components:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           value: ""
         settingIdToInitFrom: 5
+        isJson: true
         hint: hint
         name: name
         settingType: boolean
@@ -8136,6 +8539,11 @@ components:
           format: int32
           nullable: true
           type: integer
+        isJson:
+          description: Indicates whether this setting should validate string values
+            as JSON values.
+          nullable: true
+          type: boolean
         key:
           description: The key of the Feature Flag or Setting.
           maxLength: 255
@@ -8260,50 +8668,6 @@ components:
       - name
       - settingType
       type: object
-    EnvironmentAccessModel:
-      example:
-        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        color: color
-        environmentAccessType: null
-        name: name
-        description: description
-        order: 6
-        reasonRequired: true
-      properties:
-        environmentId:
-          description: Identifier of the Environment.
-          format: uuid
-          type: string
-        name:
-          description: Name of the Environment.
-          type: string
-        color:
-          description: Color of the Environment.
-          nullable: true
-          type: string
-        description:
-          description: Description of the Environment.
-          nullable: true
-          type: string
-        order:
-          description: The order of the Environment represented on the ConfigCat Dashboard.
-          format: int32
-          type: integer
-        reasonRequired:
-          description: Determines whether a mandatory reason must be given every time
-            when the Feature Flags or Settings in the given Environment are saved.
-          type: boolean
-        environmentAccessType:
-          $ref: "#/components/schemas/EnvironmentAccessType"
-      required:
-      - color
-      - description
-      - environmentAccessType
-      - environmentId
-      - name
-      - order
-      - reasonRequired
-      type: object
     EnvironmentAccessType:
       description: Represent the environment specific Feature Management permission.
       enum:
@@ -8311,11 +8675,19 @@ components:
       - readOnly
       - none
       type: string
+    EnvironmentApprovalPermissionType:
+      description: Represents the environment specific change request approval permission.
+      enum:
+      - cannotApprove
+      - canApproveOthers
+      - canBypassApproves
+      type: string
     EnvironmentModel:
       description: Details of the Environment.
       example:
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          approveRequired: true
           organization:
             organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             name: name
@@ -8325,6 +8697,7 @@ components:
           reasonRequired: true
         environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         color: color
+        approveRequired: true
         name: name
         description: description
         order: 0
@@ -8355,7 +8728,12 @@ components:
           description: Determines whether a mandatory reason must be given every time
             when the Feature Flags or Settings in the given Environment are saved.
           type: boolean
+        approveRequired:
+          description: Determines whether changes must be approved before they are
+            applied in the given Environment.
+          type: boolean
       required:
+      - approveRequired
       - color
       - description
       - environmentId
@@ -8497,6 +8875,7 @@ components:
       example:
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          approveRequired: true
           organization:
             organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             name: name
@@ -8507,6 +8886,7 @@ components:
         environment:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            approveRequired: true
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
@@ -8516,6 +8896,7 @@ components:
             reasonRequired: true
           environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           color: color
+          approveRequired: true
           name: name
           description: description
           order: 0
@@ -8524,6 +8905,7 @@ components:
         config:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            approveRequired: true
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
@@ -8539,6 +8921,7 @@ components:
           order: 0
         setting:
           createdAt: 2000-01-23T04:56:07.000+00:00
+          isJson: true
           creatorEmail: creatorEmail
           hint: hint
           name: name
@@ -8576,6 +8959,7 @@ components:
         details:
         - product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            approveRequired: true
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
@@ -8586,6 +8970,7 @@ components:
           environment:
             product:
               productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              approveRequired: true
               organization:
                 organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 name: name
@@ -8595,6 +8980,7 @@ components:
               reasonRequired: true
             environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             color: color
+            approveRequired: true
             name: name
             description: description
             order: 0
@@ -8603,6 +8989,7 @@ components:
           config:
             product:
               productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              approveRequired: true
               organization:
                 organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 name: name
@@ -8618,6 +9005,7 @@ components:
             order: 0
           setting:
             createdAt: 2000-01-23T04:56:07.000+00:00
+            isJson: true
             creatorEmail: creatorEmail
             hint: hint
             name: name
@@ -8630,6 +9018,7 @@ components:
           status: status
         - product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            approveRequired: true
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
@@ -8640,6 +9029,7 @@ components:
           environment:
             product:
               productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              approveRequired: true
               organization:
                 organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 name: name
@@ -8649,6 +9039,7 @@ components:
               reasonRequired: true
             environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             color: color
+            approveRequired: true
             name: name
             description: description
             order: 0
@@ -8657,6 +9048,7 @@ components:
           config:
             product:
               productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              approveRequired: true
               organization:
                 organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
                 name: name
@@ -8672,6 +9064,7 @@ components:
             order: 0
           setting:
             createdAt: 2000-01-23T04:56:07.000+00:00
+            isJson: true
             creatorEmail: creatorEmail
             hint: hint
             name: name
@@ -8731,6 +9124,7 @@ components:
       example:
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          approveRequired: true
           organization:
             organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             name: name
@@ -8804,6 +9198,7 @@ components:
         integrations:
         - product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            approveRequired: true
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
@@ -8824,6 +9219,7 @@ components:
             key: parameters
         - product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            approveRequired: true
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
@@ -8847,7 +9243,6 @@ components:
           description: The Integrations of the Product.
           items:
             $ref: "#/components/schemas/IntegrationModel"
-          nullable: true
           type: array
       required:
       - integrations
@@ -9005,24 +9400,24 @@ components:
       properties:
         name:
           description: Name of the Integration.
+          maxLength: 255
           minLength: 1
           type: string
         parameters:
           additionalProperties:
-            nullable: true
             type: string
           description: Parameters of the Integration.
           type: object
         environmentIds:
           description: "List of Environment IDs that are connected with this Integration.\
-            \ If the list is empty, all of the Environments are connected."
+            \ If the list is empty, all the Environments are connected."
           items:
             format: uuid
             type: string
           type: array
         configIds:
           description: "List of Config IDs that are connected with this Integration.\
-            \ If the list is empty, all of the Configs are connected."
+            \ If the list is empty, all the Configs are connected."
           items:
             format: uuid
             type: string
@@ -9369,6 +9764,34 @@ components:
       - name
       - productId
       type: object
+    PagingResponseInfo:
+      properties:
+        currentPage:
+          format: int32
+          type: integer
+        totalPages:
+          format: int32
+          type: integer
+        pageSize:
+          format: int32
+          type: integer
+        totalCount:
+          format: int32
+          type: integer
+        hasPrevious:
+          readOnly: true
+          type: boolean
+        hasNext:
+          readOnly: true
+          type: boolean
+      required:
+      - currentPage
+      - hasNext
+      - hasPrevious
+      - pageSize
+      - totalCount
+      - totalPages
+      type: object
     PercentageOptionModel:
       example:
         percentage: 1
@@ -9390,13 +9813,85 @@ components:
       - percentage
       - value
       type: object
+    PermissionGroupEnvironmentAccessModel:
+      example:
+        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        color: color
+        approveRequired: true
+        environmentAccessType: null
+        name: name
+        description: description
+        order: 6
+        reasonRequired: true
+      properties:
+        environmentId:
+          description: Identifier of the Environment.
+          format: uuid
+          type: string
+        name:
+          description: Name of the Environment.
+          type: string
+        color:
+          description: Color of the Environment.
+          nullable: true
+          type: string
+        description:
+          description: Description of the Environment.
+          nullable: true
+          type: string
+        order:
+          description: The order of the Environment represented on the ConfigCat Dashboard.
+          format: int32
+          type: integer
+        reasonRequired:
+          description: Determines whether a mandatory reason must be given every time
+            when the Feature Flags or Settings in the given Environment are saved.
+          type: boolean
+        approveRequired:
+          description: Determines whether changes must be approved before they are
+            applied in the given Environment.
+          type: boolean
+        environmentAccessType:
+          $ref: "#/components/schemas/EnvironmentAccessType"
+      required:
+      - approveRequired
+      - color
+      - description
+      - environmentAccessType
+      - environmentId
+      - name
+      - order
+      - reasonRequired
+      type: object
+    PermissionGroupEnvironmentApprovalPermissionModel:
+      example:
+        environmentApprovalPermissionType: null
+        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        environmentId:
+          description: Identifier of the Environment.
+          format: uuid
+          type: string
+        environmentApprovalPermissionType:
+          $ref: "#/components/schemas/EnvironmentApprovalPermissionType"
+      required:
+      - environmentApprovalPermissionType
+      - environmentId
+      type: object
     PermissionGroupModel:
       example:
         canViewProductStatistics: true
+        environmentApprovalPermissions:
+        - environmentApprovalPermissionType: null
+          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - environmentApprovalPermissionType: null
+          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         canDeleteTag: true
+        newEnvironmentApprovalPermissionType: cannotApprove
         environmentAccesses:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           color: color
+          approveRequired: true
           environmentAccessType: null
           name: name
           description: description
@@ -9404,6 +9899,7 @@ components:
           reasonRequired: true
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           color: color
+          approveRequired: true
           environmentAccessType: null
           name: name
           description: description
@@ -9424,6 +9920,7 @@ components:
         permissionGroupId: 0
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          approveRequired: true
           organization:
             organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             name: name
@@ -9440,6 +9937,7 @@ components:
         name: name
         canViewProductAuditLog: true
         canCreateOrUpdateTag: true
+        approvalPermissionType: cannotApprove
         newEnvironmentAccessType: full
       properties:
         permissionGroupId:
@@ -9520,12 +10018,22 @@ components:
         environmentAccesses:
           description: List of environment specific permissions.
           items:
-            $ref: "#/components/schemas/EnvironmentAccessModel"
+            $ref: "#/components/schemas/PermissionGroupEnvironmentAccessModel"
           type: array
         product:
           $ref: "#/components/schemas/ProductModel"
+        approvalPermissionType:
+          $ref: "#/components/schemas/ApprovalPermissionType"
+        newEnvironmentApprovalPermissionType:
+          $ref: "#/components/schemas/EnvironmentApprovalPermissionType"
+        environmentApprovalPermissions:
+          description: List of environment specific approval permissions.
+          items:
+            $ref: "#/components/schemas/PermissionGroupEnvironmentApprovalPermissionModel"
+          type: array
       required:
       - accessType
+      - approvalPermissionType
       - canCreateOrUpdateConfig
       - canCreateOrUpdateEnvironment
       - canCreateOrUpdateSegments
@@ -9548,10 +10056,36 @@ components:
       - canViewProductStatistics
       - canViewSdkKey
       - environmentAccesses
+      - environmentApprovalPermissions
       - name
       - newEnvironmentAccessType
+      - newEnvironmentApprovalPermissionType
       - permissionGroupId
       - product
+      type: object
+    PredefinedVariationChangeRequestUsageModel:
+      example:
+        changeRequestId: 1
+        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        changeRequestTitle: changeRequestTitle
+        settingId: 5
+      properties:
+        changeRequestId:
+          format: int64
+          type: integer
+        changeRequestTitle:
+          type: string
+        settingId:
+          format: int32
+          type: integer
+        environmentId:
+          format: uuid
+          type: string
+      required:
+      - changeRequestId
+      - changeRequestTitle
+      - environmentId
+      - settingId
       type: object
     PredefinedVariationEnvironmentModel:
       example:
@@ -9574,7 +10108,7 @@ components:
       - name
       type: object
     PredefinedVariationModel:
-      description: A Feature Flag or Predefined Variation.
+      description: A Predefined Variation.
       example:
         predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         hint: hint
@@ -9588,21 +10122,21 @@ components:
         value:
           $ref: "#/components/schemas/PredefinedVariationValueModel"
         name:
-          description: "The name of the Feature Flag or Predefined Variation, shown\
-            \ on the Dashboard UI. If not set, the Value will be shown."
+          description: "The name of the Predefined Variation, shown on the Dashboard\
+            \ UI. If not set, the Value will be shown."
           maxLength: 255
           minLength: 0
           nullable: true
           type: string
         hint:
-          description: "The name of the Feature Flag or Predefined Variation, shown\
-            \ on the Dashboard UI. If not set, the Value will be shown."
+          description: "The name of the Predefined Variation, shown on the Dashboard\
+            \ UI. If not set, the Value will be shown."
           maxLength: 1000
           minLength: 0
           nullable: true
           type: string
         predefinedVariationId:
-          description: The Feature Flag or Predefined Variation's identifier.
+          description: The Predefined Variation's identifier.
           format: uuid
           type: string
       required:
@@ -9627,7 +10161,7 @@ components:
       - settingId
       type: object
     PredefinedVariationValueModel:
-      description: Represents the value of a Feature Flag or Predefined Variation.
+      description: Represents the value of a Predefined Variation.
       example:
         stringValue: stringValue
         intValue: 1
@@ -9661,6 +10195,15 @@ components:
     PredefinedVariationWithUsagesModel:
       example:
         predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        changeRequestUsages:
+        - changeRequestId: 1
+          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          changeRequestTitle: changeRequestTitle
+          settingId: 5
+        - changeRequestId: 1
+          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          changeRequestTitle: changeRequestTitle
+          settingId: 5
         hint: hint
         name: name
         usagesInOtherEnvironments: 6
@@ -9674,25 +10217,26 @@ components:
           intValue: 1
           boolValue: true
           doubleValue: 5.962133916683182
+        changeRequestUsagesInOtherEnvironments: 5
       properties:
         value:
           $ref: "#/components/schemas/PredefinedVariationValueModel"
         name:
-          description: "The name of the Feature Flag or Predefined Variation, shown\
-            \ on the Dashboard UI. If not set, the Value will be shown."
+          description: "The name of the Predefined Variation, shown on the Dashboard\
+            \ UI. If not set, the Value will be shown."
           maxLength: 255
           minLength: 0
           nullable: true
           type: string
         hint:
-          description: "The name of the Feature Flag or Predefined Variation, shown\
-            \ on the Dashboard UI. If not set, the Value will be shown."
+          description: "The name of the Predefined Variation, shown on the Dashboard\
+            \ UI. If not set, the Value will be shown."
           maxLength: 1000
           minLength: 0
           nullable: true
           type: string
         predefinedVariationId:
-          description: The Feature Flag or Predefined Variation's identifier.
+          description: The Predefined Variation's identifier.
           format: uuid
           type: string
         usages:
@@ -9706,7 +10250,20 @@ components:
             you don't have access to.
           format: int32
           type: integer
+        changeRequestUsages:
+          description: The Feature Flag or Setting Variation's usages in the given
+            Change Requests.
+          items:
+            $ref: "#/components/schemas/PredefinedVariationChangeRequestUsageModel"
+          type: array
+        changeRequestUsagesInOtherEnvironments:
+          description: The Feature Flag or Setting Variation's usages in the Change
+            Requests you don't have access to.
+          format: int32
+          type: integer
       required:
+      - changeRequestUsages
+      - changeRequestUsagesInOtherEnvironments
       - hint
       - name
       - predefinedVariationId
@@ -9751,7 +10308,7 @@ components:
       type: object
     PredefinedVariationsWithUsagesModel:
       example:
-        maxPredefinedVariations: 1
+        maxPredefinedVariations: 2
         environments:
         - accessType: full
           environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -9763,6 +10320,15 @@ components:
         settingType: boolean
         predefinedVariations:
         - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          changeRequestUsages:
+          - changeRequestId: 1
+            environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            changeRequestTitle: changeRequestTitle
+            settingId: 5
+          - changeRequestId: 1
+            environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            changeRequestTitle: changeRequestTitle
+            settingId: 5
           hint: hint
           name: name
           usagesInOtherEnvironments: 6
@@ -9776,7 +10342,17 @@ components:
             intValue: 1
             boolValue: true
             doubleValue: 5.962133916683182
+          changeRequestUsagesInOtherEnvironments: 5
         - predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          changeRequestUsages:
+          - changeRequestId: 1
+            environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            changeRequestTitle: changeRequestTitle
+            settingId: 5
+          - changeRequestId: 1
+            environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            changeRequestTitle: changeRequestTitle
+            settingId: 5
           hint: hint
           name: name
           usagesInOtherEnvironments: 6
@@ -9790,6 +10366,7 @@ components:
             intValue: 1
             boolValue: true
             doubleValue: 5.962133916683182
+          changeRequestUsagesInOtherEnvironments: 5
       properties:
         settingKey:
           description: Key of the Feature Flag or Setting.
@@ -9820,8 +10397,16 @@ components:
       type: object
     PreferencesModel:
       example:
+        approveRequiredEnvironments:
+        - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          approveRequired: true
+          environmentName: environmentName
+        - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          approveRequired: true
+          environmentName: environmentName
         keyGenerationMode: camelCase
         showVariationId: true
+        approveRequired: true
         mandatorySettingHint: true
         reasonRequiredEnvironments:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -9851,7 +10436,20 @@ components:
         mandatorySettingHint:
           description: Indicates whether Feature flags and Settings must have a hint.
           type: boolean
+        approveRequired:
+          description: Indicates that a mandatory approval is required for saving
+            and publishing.
+          type: boolean
+        approveRequiredEnvironments:
+          description: List of Environments where mandatory approval must be given
+            before changes are applied.
+          items:
+            $ref: "#/components/schemas/ApproveRequiredEnvironmentModel"
+          nullable: true
+          type: array
       required:
+      - approveRequired
+      - approveRequiredEnvironments
       - keyGenerationMode
       - mandatorySettingHint
       - reasonRequired
@@ -9885,6 +10483,7 @@ components:
       description: Details of the Product.
       example:
         productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        approveRequired: true
         organization:
           organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           name: name
@@ -9916,7 +10515,12 @@ components:
           description: Determines whether a mandatory reason must be given every time
             when the Feature Flags or Settings within a Product are saved.
           type: boolean
+        approveRequired:
+          description: Determines whether changes must be approved before they are
+            applied within a Product.
+          type: boolean
       required:
+      - approveRequired
       - description
       - name
       - order
@@ -10352,6 +10956,7 @@ components:
       type: object
     ReplaceSettingModel:
       example:
+        isJson: true
         hint: hint
         name: name
         tags:
@@ -10385,6 +10990,11 @@ components:
           format: int32
           nullable: true
           type: integer
+        isJson:
+          description: Indicates whether this setting should validate string values
+            as JSON values.
+          nullable: true
+          type: boolean
       required:
       - name
       type: object
@@ -10517,6 +11127,7 @@ components:
         createdAt: 2000-01-23T04:56:07.000+00:00
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          approveRequired: true
           organization:
             organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             name: name
@@ -10593,6 +11204,7 @@ components:
       example:
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          approveRequired: true
           organization:
             organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             name: name
@@ -10685,6 +11297,7 @@ components:
       description: Metadata of a Feature Flag or Setting.
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
+        isJson: true
         creatorEmail: creatorEmail
         hint: hint
         name: name
@@ -10711,6 +11324,10 @@ components:
           type: string
         settingType:
           $ref: "#/components/schemas/SettingType"
+        isJson:
+          description: Indicates whether this setting should validate string values
+            as JSON values.
+          type: boolean
         order:
           description: The order of the Feature Flag or Setting represented on the
             ConfigCat Dashboard.
@@ -10736,6 +11353,7 @@ components:
       - creatorEmail
       - creatorFullName
       - hint
+      - isJson
       - isWatching
       - key
       - name
@@ -10747,6 +11365,7 @@ components:
       description: Metadata of a Feature Flag or Setting.
       example:
         createdAt: 2000-01-23T04:56:07.000+00:00
+        isJson: true
         creatorEmail: creatorEmail
         hint: hint
         name: name
@@ -10790,6 +11409,10 @@ components:
           type: string
         settingType:
           $ref: "#/components/schemas/SettingType"
+        isJson:
+          description: Indicates whether this setting should validate string values
+            as JSON values.
+          type: boolean
         order:
           description: The order of the Feature Flag or Setting represented on the
             ConfigCat Dashboard.
@@ -10820,6 +11443,7 @@ components:
       - creatorEmail
       - creatorFullName
       - hint
+      - isJson
       - isWatching
       - key
       - name
@@ -10877,6 +11501,7 @@ components:
             userCondition: ""
             prerequisiteFlagCondition: ""
           value: ""
+        changeRequestCount: 7
         percentageEvaluationAttribute: percentageEvaluationAttribute
         defaultValue:
           stringValue: stringValue
@@ -10888,6 +11513,7 @@ components:
         readOnly: true
         setting:
           createdAt: 2000-01-23T04:56:07.000+00:00
+          isJson: true
           creatorEmail: creatorEmail
           hint: hint
           name: name
@@ -10918,6 +11544,7 @@ components:
         environment:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            approveRequired: true
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
@@ -10927,6 +11554,7 @@ components:
             reasonRequired: true
           environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           color: color
+          approveRequired: true
           name: name
           description: description
           order: 0
@@ -10954,6 +11582,7 @@ components:
         config:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            approveRequired: true
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
@@ -11027,6 +11656,10 @@ components:
             format: int32
             type: integer
           type: array
+        changeRequestCount:
+          description: The number of change requests for the Feature Flag or Setting.
+          format: int32
+          type: integer
         config:
           $ref: "#/components/schemas/ConfigModel"
         environment:
@@ -11036,6 +11669,7 @@ components:
         featureFlagLimitations:
           $ref: "#/components/schemas/FeatureFlagLimitations"
       required:
+      - changeRequestCount
       - config
       - defaultValue
       - environment
@@ -11057,6 +11691,7 @@ components:
       example:
         configName: configName
         createdAt: 2000-01-23T04:56:07.000+00:00
+        isJson: true
         configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         hint: hint
         name: name
@@ -11084,6 +11719,7 @@ components:
         tags:
         - product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            approveRequired: true
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
@@ -11096,6 +11732,7 @@ components:
           name: name
         - product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            approveRequired: true
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
@@ -11128,6 +11765,8 @@ components:
           type: integer
         settingType:
           $ref: "#/components/schemas/SettingType"
+        isJson:
+          type: boolean
         configId:
           description: Identifier of the Feature Flag's Config.
           format: uuid
@@ -11155,6 +11794,7 @@ components:
       - configName
       - createdAt
       - hint
+      - isJson
       - key
       - name
       - order
@@ -11219,6 +11859,7 @@ components:
         readOnly: true
         setting:
           createdAt: 2000-01-23T04:56:07.000+00:00
+          isJson: true
           creatorEmail: creatorEmail
           hint: hint
           name: name
@@ -11231,6 +11872,7 @@ components:
         environment:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            approveRequired: true
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
@@ -11240,6 +11882,7 @@ components:
             reasonRequired: true
           environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           color: color
+          approveRequired: true
           name: name
           description: description
           order: 0
@@ -11265,6 +11908,7 @@ components:
         config:
           product:
             productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            approveRequired: true
             organization:
               organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
               name: name
@@ -11663,6 +12307,7 @@ components:
       example:
         product:
           productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          approveRequired: true
           organization:
             organizationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             name: name
@@ -11743,6 +12388,20 @@ components:
       - conditions
       - percentageOptions
       - value
+      type: object
+    UpdateApproveRequiredEnvironmentModel:
+      example:
+        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        approveRequired: true
+      properties:
+        environmentId:
+          description: Identifier of the Environment.
+          format: uuid
+          type: string
+        approveRequired:
+          description: Indicates that a mandatory approval is required in this Environment
+            before changes are applied.
+          type: boolean
       type: object
     UpdateComparisonValueListModel:
       properties:
@@ -12182,7 +12841,13 @@ components:
     UpdatePermissionGroupRequest:
       example:
         canViewProductStatistics: true
+        environmentApprovalPermissions:
+        - environmentApprovalPermissionType: null
+          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - environmentApprovalPermissionType: null
+          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         canDeleteTag: true
+        newEnvironmentApprovalPermissionType: ""
         environmentAccesses:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           environmentAccessType: null
@@ -12209,6 +12874,7 @@ components:
         name: name
         canViewProductAuditLog: true
         canCreateOrUpdateTag: true
+        approvalPermissionType: ""
         newEnvironmentAccessType: ""
       properties:
         name:
@@ -12316,9 +12982,23 @@ components:
             $ref: "#/components/schemas/CreateOrUpdateEnvironmentAccessModel"
           nullable: true
           type: array
+        approvalPermissionType:
+          allOf:
+          - $ref: "#/components/schemas/ApprovalPermissionType"
+          nullable: true
+        newEnvironmentApprovalPermissionType:
+          allOf:
+          - $ref: "#/components/schemas/EnvironmentApprovalPermissionType"
+          nullable: true
+        environmentApprovalPermissions:
+          description: List of environment specific change request approval permissions.
+          items:
+            $ref: "#/components/schemas/CreateOrUpdateEnvironmentApprovalPermissionModel"
+          nullable: true
+          type: array
       type: object
     UpdatePredefinedVariationModel:
-      description: A Feature Flag or Predefined Variation.
+      description: A Predefined Variation.
       example:
         predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         hint: hint
@@ -12332,22 +13012,22 @@ components:
         value:
           $ref: "#/components/schemas/UpdatePredefinedVariationValueModel"
         name:
-          description: "The name of the Feature Flag or Predefined Variation, shown\
-            \ on the Dashboard UI. If not set, the Value will be shown."
+          description: "The name of the Predefined Variation, shown on the Dashboard\
+            \ UI. If not set, the Value will be shown."
           maxLength: 255
           minLength: 0
           nullable: true
           type: string
         hint:
-          description: "The name of the Feature Flag or Predefined Variation, shown\
-            \ on the Dashboard UI. If not set, the Value will be shown."
+          description: "The name of the Predefined Variation, shown on the Dashboard\
+            \ UI. If not set, the Value will be shown."
           maxLength: 1000
           minLength: 0
           nullable: true
           type: string
         predefinedVariationId:
-          description: The Feature Flag or Predefined Variation's identifier to update.
-            Omit the value if you want to add a new predefined variation.
+          description: The Predefined Variation's identifier to update. Omit the value
+            if you want to add a new predefined variation.
           format: uuid
           nullable: true
           type: string
@@ -12355,7 +13035,7 @@ components:
       - value
       type: object
     UpdatePredefinedVariationValueModel:
-      description: Represents the value of a Feature Flag or Predefined Variation.
+      description: Represents the value of a Predefined Variation.
       example:
         stringValue: stringValue
         intValue: 0
@@ -12402,7 +13082,7 @@ components:
             doubleValue: 6.027456183070403
       properties:
         predefinedVariations:
-          description: A collection of Feature Flag or Predefined Variations.
+          description: A collection of Predefined Variations.
           items:
             $ref: "#/components/schemas/UpdatePredefinedVariationModel"
           type: array
@@ -12411,8 +13091,14 @@ components:
       type: object
     UpdatePreferencesRequest:
       example:
+        approveRequiredEnvironments:
+        - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          approveRequired: true
+        - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          approveRequired: true
         keyGenerationMode: ""
         showVariationId: true
+        approveRequired: true
         mandatorySettingHint: true
         reasonRequiredEnvironments:
         - environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
@@ -12444,6 +13130,18 @@ components:
             saving and publishing.
           items:
             $ref: "#/components/schemas/UpdateReasonRequiredEnvironmentModel"
+          nullable: true
+          type: array
+        approveRequired:
+          description: Indicates that a mandatory approval is required before changes
+            are applied.
+          nullable: true
+          type: boolean
+        approveRequiredEnvironments:
+          description: List of Environments where mandatory approval must be given
+            before changes are applied.
+          items:
+            $ref: "#/components/schemas/UpdateApproveRequiredEnvironmentModel"
           nullable: true
           type: array
       type: object

@@ -41,6 +41,8 @@ type ConfigSettingFormulaModel struct {
 	SettingTags []SettingTagModel `json:"settingTags"`
 	// List of Feature Flag and Setting IDs where the actual Feature Flag or Setting is prerequisite.
 	SettingIdsWherePrerequisite []int32 `json:"settingIdsWherePrerequisite"`
+	// The number of change requests for the Feature Flag or Setting.
+	ChangeRequestCount int32 `json:"changeRequestCount"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -50,7 +52,7 @@ type _ConfigSettingFormulaModel ConfigSettingFormulaModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfigSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targetingRules []TargetingRuleModel, setting SettingDataV2Model, updatedAt NullableTime, percentageEvaluationAttribute NullableString, lastUpdaterUserEmail NullableString, lastUpdaterUserFullName NullableString, integrationLinks []IntegrationLinkModel, settingTags []SettingTagModel, settingIdsWherePrerequisite []int32) *ConfigSettingFormulaModel {
+func NewConfigSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targetingRules []TargetingRuleModel, setting SettingDataV2Model, updatedAt NullableTime, percentageEvaluationAttribute NullableString, lastUpdaterUserEmail NullableString, lastUpdaterUserFullName NullableString, integrationLinks []IntegrationLinkModel, settingTags []SettingTagModel, settingIdsWherePrerequisite []int32, changeRequestCount int32) *ConfigSettingFormulaModel {
 	this := ConfigSettingFormulaModel{}
 	this.LastVersionId = lastVersionId
 	this.DefaultValue = defaultValue
@@ -63,6 +65,7 @@ func NewConfigSettingFormulaModel(lastVersionId string, defaultValue ValueModel,
 	this.IntegrationLinks = integrationLinks
 	this.SettingTags = settingTags
 	this.SettingIdsWherePrerequisite = settingIdsWherePrerequisite
+	this.ChangeRequestCount = changeRequestCount
 	return &this
 }
 
@@ -346,6 +349,30 @@ func (o *ConfigSettingFormulaModel) SetSettingIdsWherePrerequisite(v []int32) {
 	o.SettingIdsWherePrerequisite = v
 }
 
+// GetChangeRequestCount returns the ChangeRequestCount field value
+func (o *ConfigSettingFormulaModel) GetChangeRequestCount() int32 {
+	if o == nil {
+		var ret int32
+		return ret
+	}
+
+	return o.ChangeRequestCount
+}
+
+// GetChangeRequestCountOk returns a tuple with the ChangeRequestCount field value
+// and a boolean to check if the value has been set.
+func (o *ConfigSettingFormulaModel) GetChangeRequestCountOk() (*int32, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ChangeRequestCount, true
+}
+
+// SetChangeRequestCount sets field value
+func (o *ConfigSettingFormulaModel) SetChangeRequestCount(v int32) {
+	o.ChangeRequestCount = v
+}
+
 func (o ConfigSettingFormulaModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -367,6 +394,7 @@ func (o ConfigSettingFormulaModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["integrationLinks"] = o.IntegrationLinks
 	toSerialize["settingTags"] = o.SettingTags
 	toSerialize["settingIdsWherePrerequisite"] = o.SettingIdsWherePrerequisite
+	toSerialize["changeRequestCount"] = o.ChangeRequestCount
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -391,6 +419,7 @@ func (o *ConfigSettingFormulaModel) UnmarshalJSON(data []byte) (err error) {
 		"integrationLinks",
 		"settingTags",
 		"settingIdsWherePrerequisite",
+		"changeRequestCount",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -431,6 +460,7 @@ func (o *ConfigSettingFormulaModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "integrationLinks")
 		delete(additionalProperties, "settingTags")
 		delete(additionalProperties, "settingIdsWherePrerequisite")
+		delete(additionalProperties, "changeRequestCount")
 		o.AdditionalProperties = additionalProperties
 	}
 

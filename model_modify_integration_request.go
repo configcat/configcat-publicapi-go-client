@@ -25,9 +25,9 @@ type ModifyIntegrationRequest struct {
 	Name string `json:"name"`
 	// Parameters of the Integration.
 	Parameters map[string]string `json:"parameters"`
-	// List of Environment IDs that are connected with this Integration. If the list is empty, all of the Environments are connected.
+	// List of Environment IDs that are connected with this Integration. If the list is empty, all the Environments are connected.
 	EnvironmentIds []string `json:"environmentIds"`
-	// List of Config IDs that are connected with this Integration. If the list is empty, all of the Configs are connected.
+	// List of Config IDs that are connected with this Integration. If the list is empty, all the Configs are connected.
 	ConfigIds []string `json:"configIds"`
 	AdditionalProperties map[string]interface{}
 }

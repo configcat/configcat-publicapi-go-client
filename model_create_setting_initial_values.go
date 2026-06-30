@@ -29,6 +29,8 @@ type CreateSettingInitialValues struct {
 	Tags []int64 `json:"tags,omitempty"`
 	// The order of the Setting represented on the ConfigCat Dashboard. Determined from an ascending sequence of integers.
 	Order NullableInt32 `json:"order,omitempty"`
+	// Indicates whether this setting should validate string values as JSON values.
+	IsJson NullableBool `json:"isJson,omitempty"`
 	// The key of the Feature Flag or Setting.
 	Key string `json:"key"`
 	SettingType SettingType `json:"settingType"`
@@ -202,6 +204,48 @@ func (o *CreateSettingInitialValues) SetOrderNil() {
 // UnsetOrder ensures that no value is present for Order, not even an explicit nil
 func (o *CreateSettingInitialValues) UnsetOrder() {
 	o.Order.Unset()
+}
+
+// GetIsJson returns the IsJson field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CreateSettingInitialValues) GetIsJson() bool {
+	if o == nil || IsNil(o.IsJson.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.IsJson.Get()
+}
+
+// GetIsJsonOk returns a tuple with the IsJson field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CreateSettingInitialValues) GetIsJsonOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.IsJson.Get(), o.IsJson.IsSet()
+}
+
+// HasIsJson returns a boolean if a field has been set.
+func (o *CreateSettingInitialValues) HasIsJson() bool {
+	if o != nil && o.IsJson.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetIsJson gets a reference to the given NullableBool and assigns it to the IsJson field.
+func (o *CreateSettingInitialValues) SetIsJson(v bool) {
+	o.IsJson.Set(&v)
+}
+// SetIsJsonNil sets the value for IsJson to be an explicit nil
+func (o *CreateSettingInitialValues) SetIsJsonNil() {
+	o.IsJson.Set(nil)
+}
+
+// UnsetIsJson ensures that no value is present for IsJson, not even an explicit nil
+func (o *CreateSettingInitialValues) UnsetIsJson() {
+	o.IsJson.Unset()
 }
 
 // GetKey returns the Key field value
@@ -380,6 +424,9 @@ func (o CreateSettingInitialValues) ToMap() (map[string]interface{}, error) {
 	if o.Order.IsSet() {
 		toSerialize["order"] = o.Order.Get()
 	}
+	if o.IsJson.IsSet() {
+		toSerialize["isJson"] = o.IsJson.Get()
+	}
 	toSerialize["key"] = o.Key
 	toSerialize["settingType"] = o.SettingType
 	if o.PredefinedVariations != nil {
@@ -440,6 +487,7 @@ func (o *CreateSettingInitialValues) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "hint")
 		delete(additionalProperties, "tags")
 		delete(additionalProperties, "order")
+		delete(additionalProperties, "isJson")
 		delete(additionalProperties, "key")
 		delete(additionalProperties, "settingType")
 		delete(additionalProperties, "predefinedVariations")

@@ -10,12 +10,13 @@ Name | Type | Description | Notes
 **Description** | **NullableString** | Description of the Product. | 
 **Order** | **int32** | The order of the Product represented on the ConfigCat Dashboard. Determined from an ascending sequence of integers. | 
 **ReasonRequired** | **bool** | Determines whether a mandatory reason must be given every time when the Feature Flags or Settings within a Product are saved. | 
+**ApproveRequired** | **bool** | Determines whether changes must be approved before they are applied within a Product. | 
 
 ## Methods
 
 ### NewProductModel
 
-`func NewProductModel(organization OrganizationModel, productId string, name string, description NullableString, order int32, reasonRequired bool, ) *ProductModel`
+`func NewProductModel(organization OrganizationModel, productId string, name string, description NullableString, order int32, reasonRequired bool, approveRequired bool, ) *ProductModel`
 
 NewProductModel instantiates a new ProductModel object
 This constructor will assign default values to properties that have it defined,
@@ -158,6 +159,26 @@ and a boolean to check if the value has been set.
 `func (o *ProductModel) SetReasonRequired(v bool)`
 
 SetReasonRequired sets ReasonRequired field to given value.
+
+
+### GetApproveRequired
+
+`func (o *ProductModel) GetApproveRequired() bool`
+
+GetApproveRequired returns the ApproveRequired field if non-nil, zero value otherwise.
+
+### GetApproveRequiredOk
+
+`func (o *ProductModel) GetApproveRequiredOk() (*bool, bool)`
+
+GetApproveRequiredOk returns a tuple with the ApproveRequired field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApproveRequired
+
+`func (o *ProductModel) SetApproveRequired(v bool)`
+
+SetApproveRequired sets ApproveRequired field to given value.
 
 
 

@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **ShowVariationId** | Pointer to **NullableBool** | Indicates whether a variation ID&#39;s must be shown on the ConfigCat Dashboard. | [optional] 
 **MandatorySettingHint** | Pointer to **NullableBool** | Indicates whether Feature flags and Settings must have a hint. | [optional] 
 **ReasonRequiredEnvironments** | Pointer to [**[]UpdateReasonRequiredEnvironmentModel**](UpdateReasonRequiredEnvironmentModel.md) | List of Environments where mandatory note must be set before saving and publishing. | [optional] 
+**ApproveRequired** | Pointer to **NullableBool** | Indicates that a mandatory approval is required before changes are applied. | [optional] 
+**ApproveRequiredEnvironments** | Pointer to [**[]UpdateApproveRequiredEnvironmentModel**](UpdateApproveRequiredEnvironmentModel.md) | List of Environments where mandatory approval must be given before changes are applied. | [optional] 
 
 ## Methods
 
@@ -204,6 +206,76 @@ HasReasonRequiredEnvironments returns a boolean if a field has been set.
 `func (o *UpdatePreferencesRequest) UnsetReasonRequiredEnvironments()`
 
 UnsetReasonRequiredEnvironments ensures that no value is present for ReasonRequiredEnvironments, not even an explicit nil
+### GetApproveRequired
+
+`func (o *UpdatePreferencesRequest) GetApproveRequired() bool`
+
+GetApproveRequired returns the ApproveRequired field if non-nil, zero value otherwise.
+
+### GetApproveRequiredOk
+
+`func (o *UpdatePreferencesRequest) GetApproveRequiredOk() (*bool, bool)`
+
+GetApproveRequiredOk returns a tuple with the ApproveRequired field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApproveRequired
+
+`func (o *UpdatePreferencesRequest) SetApproveRequired(v bool)`
+
+SetApproveRequired sets ApproveRequired field to given value.
+
+### HasApproveRequired
+
+`func (o *UpdatePreferencesRequest) HasApproveRequired() bool`
+
+HasApproveRequired returns a boolean if a field has been set.
+
+### SetApproveRequiredNil
+
+`func (o *UpdatePreferencesRequest) SetApproveRequiredNil(b bool)`
+
+ SetApproveRequiredNil sets the value for ApproveRequired to be an explicit nil
+
+### UnsetApproveRequired
+`func (o *UpdatePreferencesRequest) UnsetApproveRequired()`
+
+UnsetApproveRequired ensures that no value is present for ApproveRequired, not even an explicit nil
+### GetApproveRequiredEnvironments
+
+`func (o *UpdatePreferencesRequest) GetApproveRequiredEnvironments() []UpdateApproveRequiredEnvironmentModel`
+
+GetApproveRequiredEnvironments returns the ApproveRequiredEnvironments field if non-nil, zero value otherwise.
+
+### GetApproveRequiredEnvironmentsOk
+
+`func (o *UpdatePreferencesRequest) GetApproveRequiredEnvironmentsOk() (*[]UpdateApproveRequiredEnvironmentModel, bool)`
+
+GetApproveRequiredEnvironmentsOk returns a tuple with the ApproveRequiredEnvironments field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApproveRequiredEnvironments
+
+`func (o *UpdatePreferencesRequest) SetApproveRequiredEnvironments(v []UpdateApproveRequiredEnvironmentModel)`
+
+SetApproveRequiredEnvironments sets ApproveRequiredEnvironments field to given value.
+
+### HasApproveRequiredEnvironments
+
+`func (o *UpdatePreferencesRequest) HasApproveRequiredEnvironments() bool`
+
+HasApproveRequiredEnvironments returns a boolean if a field has been set.
+
+### SetApproveRequiredEnvironmentsNil
+
+`func (o *UpdatePreferencesRequest) SetApproveRequiredEnvironmentsNil(b bool)`
+
+ SetApproveRequiredEnvironmentsNil sets the value for ApproveRequiredEnvironments to be an explicit nil
+
+### UnsetApproveRequiredEnvironments
+`func (o *UpdatePreferencesRequest) UnsetApproveRequiredEnvironments()`
+
+UnsetApproveRequiredEnvironments ensures that no value is present for ApproveRequiredEnvironments, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

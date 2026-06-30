@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 ## ReplaceSettingValueBySdkkeyV2
 
-> SettingFormulaModel ReplaceSettingValueBySdkkeyV2(ctx, settingKeyOrId).UpdateEvaluationFormulaModel(updateEvaluationFormulaModel).Reason(reason).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
+> SettingFormulaModel ReplaceSettingValueBySdkkeyV2(ctx, settingKeyOrId).UpdateEvaluationFormulaModel(updateEvaluationFormulaModel).Reason(reason).BypassApproval(bypassApproval).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
 
 Replace value
 
@@ -106,11 +106,12 @@ func main() {
 	settingKeyOrId := "settingKeyOrId_example" // string | The key or id of the Setting.
 	updateEvaluationFormulaModel := *openapiclient.NewUpdateEvaluationFormulaModel(*openapiclient.NewUpdateValueModel()) // UpdateEvaluationFormulaModel | 
 	reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
+	bypassApproval := true // bool | Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission. (optional)
 	xCONFIGCATSDKKEY := "xCONFIGCATSDKKEY_example" // string | The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyV2API.ReplaceSettingValueBySdkkeyV2(context.Background(), settingKeyOrId).UpdateEvaluationFormulaModel(updateEvaluationFormulaModel).Reason(reason).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
+	resp, r, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyV2API.ReplaceSettingValueBySdkkeyV2(context.Background(), settingKeyOrId).UpdateEvaluationFormulaModel(updateEvaluationFormulaModel).Reason(reason).BypassApproval(bypassApproval).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesUsingSDKKeyV2API.ReplaceSettingValueBySdkkeyV2``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -138,6 +139,7 @@ Name | Type | Description  | Notes
 
  **updateEvaluationFormulaModel** | [**UpdateEvaluationFormulaModel**](UpdateEvaluationFormulaModel.md) |  | 
  **reason** | **string** | The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
+ **bypassApproval** | **bool** | Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission. | 
  **xCONFIGCATSDKKEY** | **string** | The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) | 
 
 ### Return type
@@ -160,7 +162,7 @@ Name | Type | Description  | Notes
 
 ## UpdateSettingValueBySdkkeyV2
 
-> SettingFormulaModel UpdateSettingValueBySdkkeyV2(ctx, settingKeyOrId).JsonPatchOperation(jsonPatchOperation).Reason(reason).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
+> SettingFormulaModel UpdateSettingValueBySdkkeyV2(ctx, settingKeyOrId).JsonPatchOperation(jsonPatchOperation).Reason(reason).BypassApproval(bypassApproval).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
 
 Update value
 
@@ -182,11 +184,12 @@ func main() {
 	settingKeyOrId := "settingKeyOrId_example" // string | The key or id of the Setting.
 	jsonPatchOperation := []openapiclient.JsonPatchOperation{*openapiclient.NewJsonPatchOperation(openapiclient.OperationType("unknown"), "Path_example")} // []JsonPatchOperation | 
 	reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
+	bypassApproval := true // bool | Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission. (optional)
 	xCONFIGCATSDKKEY := "xCONFIGCATSDKKEY_example" // string | The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyV2API.UpdateSettingValueBySdkkeyV2(context.Background(), settingKeyOrId).JsonPatchOperation(jsonPatchOperation).Reason(reason).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
+	resp, r, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyV2API.UpdateSettingValueBySdkkeyV2(context.Background(), settingKeyOrId).JsonPatchOperation(jsonPatchOperation).Reason(reason).BypassApproval(bypassApproval).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesUsingSDKKeyV2API.UpdateSettingValueBySdkkeyV2``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -214,6 +217,7 @@ Name | Type | Description  | Notes
 
  **jsonPatchOperation** | [**[]JsonPatchOperation**](JsonPatchOperation.md) |  | 
  **reason** | **string** | The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
+ **bypassApproval** | **bool** | Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission. | 
  **xCONFIGCATSDKKEY** | **string** | The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) | 
 
 ### Return type

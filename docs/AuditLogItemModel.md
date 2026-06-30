@@ -7,21 +7,21 @@ Name | Type | Description | Notes
 **AuditLogId** | **int64** |  | 
 **AuditLogDateTime** | **time.Time** |  | 
 **AuditLogTypeEnum** | [**AuditLogType**](AuditLogType.md) |  | 
-**ChangeSetId** | **NullableString** |  | 
 **Truncated** | **bool** |  | 
-**AuditLogType** | **NullableString** |  | 
+**ModelVersion** | **int32** |  | 
+**AuditLogType** | **string** |  | 
 **UserEmail** | **NullableString** |  | 
-**UserName** | **NullableString** |  | 
-**Where** | **NullableString** |  | 
+**UserName** | **string** |  | 
+**Where** | **string** |  | 
 **Why** | **NullableString** |  | 
-**ActionTarget** | **NullableString** |  | 
-**Details** | **NullableString** |  | 
+**ActionTarget** | **string** |  | 
+**Details** | **string** |  | 
 
 ## Methods
 
 ### NewAuditLogItemModel
 
-`func NewAuditLogItemModel(auditLogId int64, auditLogDateTime time.Time, auditLogTypeEnum AuditLogType, changeSetId NullableString, truncated bool, auditLogType NullableString, userEmail NullableString, userName NullableString, where NullableString, why NullableString, actionTarget NullableString, details NullableString, ) *AuditLogItemModel`
+`func NewAuditLogItemModel(auditLogId int64, auditLogDateTime time.Time, auditLogTypeEnum AuditLogType, truncated bool, modelVersion int32, auditLogType string, userEmail NullableString, userName string, where string, why NullableString, actionTarget string, details string, ) *AuditLogItemModel`
 
 NewAuditLogItemModel instantiates a new AuditLogItemModel object
 This constructor will assign default values to properties that have it defined,
@@ -96,36 +96,6 @@ and a boolean to check if the value has been set.
 SetAuditLogTypeEnum sets AuditLogTypeEnum field to given value.
 
 
-### GetChangeSetId
-
-`func (o *AuditLogItemModel) GetChangeSetId() string`
-
-GetChangeSetId returns the ChangeSetId field if non-nil, zero value otherwise.
-
-### GetChangeSetIdOk
-
-`func (o *AuditLogItemModel) GetChangeSetIdOk() (*string, bool)`
-
-GetChangeSetIdOk returns a tuple with the ChangeSetId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetChangeSetId
-
-`func (o *AuditLogItemModel) SetChangeSetId(v string)`
-
-SetChangeSetId sets ChangeSetId field to given value.
-
-
-### SetChangeSetIdNil
-
-`func (o *AuditLogItemModel) SetChangeSetIdNil(b bool)`
-
- SetChangeSetIdNil sets the value for ChangeSetId to be an explicit nil
-
-### UnsetChangeSetId
-`func (o *AuditLogItemModel) UnsetChangeSetId()`
-
-UnsetChangeSetId ensures that no value is present for ChangeSetId, not even an explicit nil
 ### GetTruncated
 
 `func (o *AuditLogItemModel) GetTruncated() bool`
@@ -144,6 +114,26 @@ and a boolean to check if the value has been set.
 `func (o *AuditLogItemModel) SetTruncated(v bool)`
 
 SetTruncated sets Truncated field to given value.
+
+
+### GetModelVersion
+
+`func (o *AuditLogItemModel) GetModelVersion() int32`
+
+GetModelVersion returns the ModelVersion field if non-nil, zero value otherwise.
+
+### GetModelVersionOk
+
+`func (o *AuditLogItemModel) GetModelVersionOk() (*int32, bool)`
+
+GetModelVersionOk returns a tuple with the ModelVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetModelVersion
+
+`func (o *AuditLogItemModel) SetModelVersion(v int32)`
+
+SetModelVersion sets ModelVersion field to given value.
 
 
 ### GetAuditLogType
@@ -166,16 +156,6 @@ and a boolean to check if the value has been set.
 SetAuditLogType sets AuditLogType field to given value.
 
 
-### SetAuditLogTypeNil
-
-`func (o *AuditLogItemModel) SetAuditLogTypeNil(b bool)`
-
- SetAuditLogTypeNil sets the value for AuditLogType to be an explicit nil
-
-### UnsetAuditLogType
-`func (o *AuditLogItemModel) UnsetAuditLogType()`
-
-UnsetAuditLogType ensures that no value is present for AuditLogType, not even an explicit nil
 ### GetUserEmail
 
 `func (o *AuditLogItemModel) GetUserEmail() string`
@@ -226,16 +206,6 @@ and a boolean to check if the value has been set.
 SetUserName sets UserName field to given value.
 
 
-### SetUserNameNil
-
-`func (o *AuditLogItemModel) SetUserNameNil(b bool)`
-
- SetUserNameNil sets the value for UserName to be an explicit nil
-
-### UnsetUserName
-`func (o *AuditLogItemModel) UnsetUserName()`
-
-UnsetUserName ensures that no value is present for UserName, not even an explicit nil
 ### GetWhere
 
 `func (o *AuditLogItemModel) GetWhere() string`
@@ -256,16 +226,6 @@ and a boolean to check if the value has been set.
 SetWhere sets Where field to given value.
 
 
-### SetWhereNil
-
-`func (o *AuditLogItemModel) SetWhereNil(b bool)`
-
- SetWhereNil sets the value for Where to be an explicit nil
-
-### UnsetWhere
-`func (o *AuditLogItemModel) UnsetWhere()`
-
-UnsetWhere ensures that no value is present for Where, not even an explicit nil
 ### GetWhy
 
 `func (o *AuditLogItemModel) GetWhy() string`
@@ -316,16 +276,6 @@ and a boolean to check if the value has been set.
 SetActionTarget sets ActionTarget field to given value.
 
 
-### SetActionTargetNil
-
-`func (o *AuditLogItemModel) SetActionTargetNil(b bool)`
-
- SetActionTargetNil sets the value for ActionTarget to be an explicit nil
-
-### UnsetActionTarget
-`func (o *AuditLogItemModel) UnsetActionTarget()`
-
-UnsetActionTarget ensures that no value is present for ActionTarget, not even an explicit nil
 ### GetDetails
 
 `func (o *AuditLogItemModel) GetDetails() string`
@@ -346,16 +296,6 @@ and a boolean to check if the value has been set.
 SetDetails sets Details field to given value.
 
 
-### SetDetailsNil
-
-`func (o *AuditLogItemModel) SetDetailsNil(b bool)`
-
- SetDetailsNil sets the value for Details to be an explicit nil
-
-### UnsetDetails
-`func (o *AuditLogItemModel) UnsetDetails()`
-
-UnsetDetails ensures that no value is present for Details, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
