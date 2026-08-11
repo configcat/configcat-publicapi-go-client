@@ -160,7 +160,7 @@ Name | Type | Description  | Notes
 
 ## PostSettingValuesV2
 
-> ConfigSettingFormulasModel PostSettingValuesV2(ctx, configId, environmentId).UpdateEvaluationFormulasModel(updateEvaluationFormulasModel).Reason(reason).BypassApproval(bypassApproval).Execute()
+> ConfigSettingFormulasModel PostSettingValuesV2(ctx, configId, environmentId).UpdateEvaluationFormulasModel(updateEvaluationFormulasModel).Reason(reason).BypassApproval(bypassApproval).LatestVersionId(latestVersionId).Execute()
 
 Post values
 
@@ -184,10 +184,11 @@ func main() {
 	updateEvaluationFormulasModel := *openapiclient.NewUpdateEvaluationFormulasModel() // UpdateEvaluationFormulasModel | 
 	reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
 	bypassApproval := true // bool | Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission. (optional)
+	latestVersionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Optional. The version identifier of the last change made to the Feature Flag or Setting in the Environment. It can be used to make sure concurrent updates are not overwriting each other. If provided and the version identifier does not match the current version, the update will be rejected with a 409 Conflict response. The latest version id can be acquired from the `LastVersionId` property of the response models. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FeatureFlagSettingValuesV2API.PostSettingValuesV2(context.Background(), configId, environmentId).UpdateEvaluationFormulasModel(updateEvaluationFormulasModel).Reason(reason).BypassApproval(bypassApproval).Execute()
+	resp, r, err := apiClient.FeatureFlagSettingValuesV2API.PostSettingValuesV2(context.Background(), configId, environmentId).UpdateEvaluationFormulasModel(updateEvaluationFormulasModel).Reason(reason).BypassApproval(bypassApproval).LatestVersionId(latestVersionId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesV2API.PostSettingValuesV2``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -218,6 +219,7 @@ Name | Type | Description  | Notes
  **updateEvaluationFormulasModel** | [**UpdateEvaluationFormulasModel**](UpdateEvaluationFormulasModel.md) |  | 
  **reason** | **string** | The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
  **bypassApproval** | **bool** | Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission. | 
+ **latestVersionId** | **string** | Optional. The version identifier of the last change made to the Feature Flag or Setting in the Environment. It can be used to make sure concurrent updates are not overwriting each other. If provided and the version identifier does not match the current version, the update will be rejected with a 409 Conflict response. The latest version id can be acquired from the &#x60;LastVersionId&#x60; property of the response models. | 
 
 ### Return type
 
@@ -239,7 +241,7 @@ Name | Type | Description  | Notes
 
 ## ReplaceSettingValueV2
 
-> SettingFormulaModel ReplaceSettingValueV2(ctx, environmentId, settingId).UpdateEvaluationFormulaModel(updateEvaluationFormulaModel).Reason(reason).BypassApproval(bypassApproval).Execute()
+> SettingFormulaModel ReplaceSettingValueV2(ctx, environmentId, settingId).UpdateEvaluationFormulaModel(updateEvaluationFormulaModel).Reason(reason).BypassApproval(bypassApproval).LatestVersionId(latestVersionId).Execute()
 
 Replace value
 
@@ -263,10 +265,11 @@ func main() {
 	updateEvaluationFormulaModel := *openapiclient.NewUpdateEvaluationFormulaModel(*openapiclient.NewUpdateValueModel()) // UpdateEvaluationFormulaModel | 
 	reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
 	bypassApproval := true // bool | Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission. (optional)
+	latestVersionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Optional. The version identifier of the last change made to the Feature Flag or Setting in the Environment. It can be used to make sure concurrent updates are not overwriting each other. If provided and the version identifier does not match the current version, the update will be rejected with a 409 Conflict response. The latest version id can be acquired from the `LastVersionId` property of the response models. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FeatureFlagSettingValuesV2API.ReplaceSettingValueV2(context.Background(), environmentId, settingId).UpdateEvaluationFormulaModel(updateEvaluationFormulaModel).Reason(reason).BypassApproval(bypassApproval).Execute()
+	resp, r, err := apiClient.FeatureFlagSettingValuesV2API.ReplaceSettingValueV2(context.Background(), environmentId, settingId).UpdateEvaluationFormulaModel(updateEvaluationFormulaModel).Reason(reason).BypassApproval(bypassApproval).LatestVersionId(latestVersionId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesV2API.ReplaceSettingValueV2``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -297,6 +300,7 @@ Name | Type | Description  | Notes
  **updateEvaluationFormulaModel** | [**UpdateEvaluationFormulaModel**](UpdateEvaluationFormulaModel.md) |  | 
  **reason** | **string** | The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
  **bypassApproval** | **bool** | Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission. | 
+ **latestVersionId** | **string** | Optional. The version identifier of the last change made to the Feature Flag or Setting in the Environment. It can be used to make sure concurrent updates are not overwriting each other. If provided and the version identifier does not match the current version, the update will be rejected with a 409 Conflict response. The latest version id can be acquired from the &#x60;LastVersionId&#x60; property of the response models. | 
 
 ### Return type
 
@@ -318,7 +322,7 @@ Name | Type | Description  | Notes
 
 ## UpdateSettingValueV2
 
-> SettingFormulaModel UpdateSettingValueV2(ctx, environmentId, settingId).JsonPatchOperation(jsonPatchOperation).Reason(reason).BypassApproval(bypassApproval).Execute()
+> SettingFormulaModel UpdateSettingValueV2(ctx, environmentId, settingId).JsonPatchOperation(jsonPatchOperation).Reason(reason).BypassApproval(bypassApproval).LatestVersionId(latestVersionId).Execute()
 
 Update value
 
@@ -342,10 +346,11 @@ func main() {
 	jsonPatchOperation := []openapiclient.JsonPatchOperation{*openapiclient.NewJsonPatchOperation(openapiclient.OperationType("unknown"), "Path_example")} // []JsonPatchOperation | 
 	reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
 	bypassApproval := true // bool | Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission. (optional)
+	latestVersionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Optional. The version identifier of the last change made to the Feature Flag or Setting in the Environment. It can be used to make sure concurrent updates are not overwriting each other. If provided and the version identifier does not match the current version, the update will be rejected with a 409 Conflict response. The latest version id can be acquired from the `LastVersionId` property of the response models. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FeatureFlagSettingValuesV2API.UpdateSettingValueV2(context.Background(), environmentId, settingId).JsonPatchOperation(jsonPatchOperation).Reason(reason).BypassApproval(bypassApproval).Execute()
+	resp, r, err := apiClient.FeatureFlagSettingValuesV2API.UpdateSettingValueV2(context.Background(), environmentId, settingId).JsonPatchOperation(jsonPatchOperation).Reason(reason).BypassApproval(bypassApproval).LatestVersionId(latestVersionId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesV2API.UpdateSettingValueV2``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -376,6 +381,7 @@ Name | Type | Description  | Notes
  **jsonPatchOperation** | [**[]JsonPatchOperation**](JsonPatchOperation.md) |  | 
  **reason** | **string** | The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
  **bypassApproval** | **bool** | Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission. | 
+ **latestVersionId** | **string** | Optional. The version identifier of the last change made to the Feature Flag or Setting in the Environment. It can be used to make sure concurrent updates are not overwriting each other. If provided and the version identifier does not match the current version, the update will be rejected with a 409 Conflict response. The latest version id can be acquired from the &#x60;LastVersionId&#x60; property of the response models. | 
 
 ### Return type
 

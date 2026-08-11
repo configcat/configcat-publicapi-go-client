@@ -22,6 +22,7 @@ var _ MappedNullable = &SettingFormulaModel{}
 
 // SettingFormulaModel struct for SettingFormulaModel
 type SettingFormulaModel struct {
+	// The version identifier of the last change made to the Feature Flag or Setting in the Environment. It can be used to make sure concurrent updates are not overwriting each other. If the version identifier does not match the current version, the update will be rejected with a 409 Conflict response.
 	LastVersionId string `json:"lastVersionId"`
 	DefaultValue ValueModel `json:"defaultValue"`
 	// The targeting rules of the Feature Flag or Setting.
@@ -45,8 +46,15 @@ type SettingFormulaModel struct {
 	ChangeRequestCount int32 `json:"changeRequestCount"`
 	Config ConfigModel `json:"config"`
 	Environment EnvironmentModel `json:"environment"`
+	// Indicates whether you have Read-only access to the Environment.
 	ReadOnly bool `json:"readOnly"`
 	FeatureFlagLimitations FeatureFlagLimitations `json:"featureFlagLimitations"`
+	// Indicates that a mandatory approval is required for saving and publishing.
+	ApproveRequired bool `json:"approveRequired"`
+	// Indicates whether the user can bypass the approval flow.
+	CanBypassApproval bool `json:"canBypassApproval"`
+	// Indicates that a mandatory note required for saving and publishing.
+	ReasonRequired bool `json:"reasonRequired"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -56,7 +64,7 @@ type _SettingFormulaModel SettingFormulaModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targetingRules []TargetingRuleModel, setting SettingDataV2Model, updatedAt NullableTime, percentageEvaluationAttribute NullableString, lastUpdaterUserEmail NullableString, lastUpdaterUserFullName NullableString, integrationLinks []IntegrationLinkModel, settingTags []SettingTagModel, settingIdsWherePrerequisite []int32, changeRequestCount int32, config ConfigModel, environment EnvironmentModel, readOnly bool, featureFlagLimitations FeatureFlagLimitations) *SettingFormulaModel {
+func NewSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targetingRules []TargetingRuleModel, setting SettingDataV2Model, updatedAt NullableTime, percentageEvaluationAttribute NullableString, lastUpdaterUserEmail NullableString, lastUpdaterUserFullName NullableString, integrationLinks []IntegrationLinkModel, settingTags []SettingTagModel, settingIdsWherePrerequisite []int32, changeRequestCount int32, config ConfigModel, environment EnvironmentModel, readOnly bool, featureFlagLimitations FeatureFlagLimitations, approveRequired bool, canBypassApproval bool, reasonRequired bool) *SettingFormulaModel {
 	this := SettingFormulaModel{}
 	this.LastVersionId = lastVersionId
 	this.DefaultValue = defaultValue
@@ -74,6 +82,9 @@ func NewSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targe
 	this.Environment = environment
 	this.ReadOnly = readOnly
 	this.FeatureFlagLimitations = featureFlagLimitations
+	this.ApproveRequired = approveRequired
+	this.CanBypassApproval = canBypassApproval
+	this.ReasonRequired = reasonRequired
 	return &this
 }
 
@@ -477,6 +488,78 @@ func (o *SettingFormulaModel) SetFeatureFlagLimitations(v FeatureFlagLimitations
 	o.FeatureFlagLimitations = v
 }
 
+// GetApproveRequired returns the ApproveRequired field value
+func (o *SettingFormulaModel) GetApproveRequired() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.ApproveRequired
+}
+
+// GetApproveRequiredOk returns a tuple with the ApproveRequired field value
+// and a boolean to check if the value has been set.
+func (o *SettingFormulaModel) GetApproveRequiredOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ApproveRequired, true
+}
+
+// SetApproveRequired sets field value
+func (o *SettingFormulaModel) SetApproveRequired(v bool) {
+	o.ApproveRequired = v
+}
+
+// GetCanBypassApproval returns the CanBypassApproval field value
+func (o *SettingFormulaModel) GetCanBypassApproval() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.CanBypassApproval
+}
+
+// GetCanBypassApprovalOk returns a tuple with the CanBypassApproval field value
+// and a boolean to check if the value has been set.
+func (o *SettingFormulaModel) GetCanBypassApprovalOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CanBypassApproval, true
+}
+
+// SetCanBypassApproval sets field value
+func (o *SettingFormulaModel) SetCanBypassApproval(v bool) {
+	o.CanBypassApproval = v
+}
+
+// GetReasonRequired returns the ReasonRequired field value
+func (o *SettingFormulaModel) GetReasonRequired() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.ReasonRequired
+}
+
+// GetReasonRequiredOk returns a tuple with the ReasonRequired field value
+// and a boolean to check if the value has been set.
+func (o *SettingFormulaModel) GetReasonRequiredOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ReasonRequired, true
+}
+
+// SetReasonRequired sets field value
+func (o *SettingFormulaModel) SetReasonRequired(v bool) {
+	o.ReasonRequired = v
+}
+
 func (o SettingFormulaModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -503,6 +586,9 @@ func (o SettingFormulaModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["environment"] = o.Environment
 	toSerialize["readOnly"] = o.ReadOnly
 	toSerialize["featureFlagLimitations"] = o.FeatureFlagLimitations
+	toSerialize["approveRequired"] = o.ApproveRequired
+	toSerialize["canBypassApproval"] = o.CanBypassApproval
+	toSerialize["reasonRequired"] = o.ReasonRequired
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -532,6 +618,9 @@ func (o *SettingFormulaModel) UnmarshalJSON(data []byte) (err error) {
 		"environment",
 		"readOnly",
 		"featureFlagLimitations",
+		"approveRequired",
+		"canBypassApproval",
+		"reasonRequired",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -577,6 +666,9 @@ func (o *SettingFormulaModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "environment")
 		delete(additionalProperties, "readOnly")
 		delete(additionalProperties, "featureFlagLimitations")
+		delete(additionalProperties, "approveRequired")
+		delete(additionalProperties, "canBypassApproval")
+		delete(additionalProperties, "reasonRequired")
 		o.AdditionalProperties = additionalProperties
 	}
 

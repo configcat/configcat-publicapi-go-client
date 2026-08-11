@@ -61,6 +61,15 @@ tags:
     You also have to specify in which Environment you want to change the served value configuration by its
     `environmentId` which can be obtained from the [List Environments](#operation/get-environments) endpoint.
   name: Feature Flag & Setting values V2
+- description: |-
+    Propose, review, and apply changes to Settings in a controlled workflow.
+
+    A _change request_ is a set of changes to Settings that you prepare without publishing them right away.
+    You can propose changes for later manual publishing, or schedule it to be applied automatically at a specific time.
+    This supports the four-eyes principle, because another person can review and approve the change before it reaches production.
+
+    **Beta feature:** Approval Flow and Scheduled Changes are in closed beta. You can join the beta by contacting support. We are collecting feedback from real-world use to improve the experience.
+  name: Change Requests (Approval flow & Scheduled changes) - Beta
 - description: "With these endpoints you can control how your existing Feature Flags\
     \ and Settings should serve their values. \nYou can turn Feature Flags on or off,\
     \ update Setting values and also add, remove or change the order of Percentage\
@@ -172,6 +181,80 @@ tags:
     <a href="https://configcat.com/docs/advanced/proxy/proxy-overview/#1-automatic-configuration-with-proxy-profiles" target="_blank" rel="noopener noreferrer">Here</a> you can read more about Proxy Profiles.
   name: Proxy Profiles
 paths:
+  /v2/change-requests/{changeRequestId}:
+    get:
+      description: Returns the details of a specific Change Request.
+      operationId: get-change-request
+      parameters:
+      - description: The identifier of the Change Request.
+        explode: false
+        in: path
+        name: changeRequestId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChangeRequestModel"
+          description: ""
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Get Change Request
+      tags:
+      - Change Requests (Approval flow & Scheduled changes) - Beta
+    put:
+      description: "Updates the metadata of a Change Request, such as title, note,\
+        \ schedule, etc."
+      operationId: update-change-request
+      parameters:
+      - description: The identifier of the Change Request.
+        explode: false
+        in: path
+        name: changeRequestId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateChangeRequestModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateChangeRequestModel"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateChangeRequestModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChangeRequestModel"
+          description: When the update was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Update Change Request
+      tags:
+      - Change Requests (Approval flow & Scheduled changes) - Beta
   /v1/proxy-profiles/{proxyProfileId}:
     delete:
       description: This endpoint removes a Proxy Profile identified by the `proxyProfileId`
@@ -431,6 +514,123 @@ paths:
       summary: Replace Proxy Profile
       tags:
       - Proxy Profiles
+  /v2/products/{productId}/change-requests:
+    get:
+      description: Returns Change Requests of a Product with optional filtering and
+        pagination.
+      operationId: get-change-requests
+      parameters:
+      - description: The identifier of the Product.
+        explode: false
+        in: path
+        name: productId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: Filter Change Requests by Config identifier.
+        explode: true
+        in: query
+        name: configId
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: Filter Change Requests by Environment identifier.
+        explode: true
+        in: query
+        name: environmentId
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      - description: Filter Change Requests by Setting identifier.
+        explode: true
+        in: query
+        name: settingId
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      - description: Filter Change Requests by status values.
+        explode: true
+        in: query
+        name: changeRequestStatusFilter
+        required: false
+        schema:
+          items:
+            $ref: "#/components/schemas/ChangeRequestStatus"
+          type: array
+        style: form
+      - description: Filter Change Requests by schedule state.
+        explode: true
+        in: query
+        name: scheduleFilter
+        required: false
+        schema:
+          $ref: "#/components/schemas/ChangeRequestScheduleFilter"
+        style: form
+      - description: Filter Change Requests by approval requirement.
+        explode: true
+        in: query
+        name: approveRequiredFilter
+        required: false
+        schema:
+          $ref: "#/components/schemas/ChangeRequestApproveRequiredFilter"
+        style: form
+      - description: Filter Change Requests by whether they need attention.
+        explode: true
+        in: query
+        name: needsAttentionFilter
+        required: false
+        schema:
+          $ref: "#/components/schemas/NeedsAttentionFilter"
+        style: form
+      - description: "Page number (min: 1)."
+        explode: true
+        in: query
+        name: pageNumber
+        required: false
+        schema:
+          default: 1
+          format: int32
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+        style: form
+      - description: "Page size (min: 1, max: 100)."
+        explode: true
+        in: query
+        name: pageSize
+        required: false
+        schema:
+          default: 25
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChangeRequestsModel"
+          description: ""
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: List Change Requests
+      tags:
+      - Change Requests (Approval flow & Scheduled changes) - Beta
   /v1/organizations:
     get:
       description: This endpoint returns the list of the Organizations that belongs
@@ -2690,6 +2890,99 @@ paths:
       summary: Update Product Preferences
       tags:
       - Products
+  /v2/change-requests/{changeRequestId}/proposed-changes:
+    get:
+      description: Returns the proposed changes to the Settings included in a Change
+        Request.
+      operationId: get-change-request-proposed-changes
+      parameters:
+      - description: The identifier of the Change Request.
+        explode: false
+        in: path
+        name: changeRequestId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: The optional identifier of the Setting.
+        explode: true
+        in: query
+        name: settingId
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChangeRequestProposedChangesModel"
+          description: ""
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Get Settings included in Change Request
+      tags:
+      - Change Requests (Approval flow & Scheduled changes) - Beta
+    put:
+      description: Updates the proposed changes to the Settings included in a Change
+        Request.
+      operationId: update-change-request-proposed-changes
+      parameters:
+      - description: The identifier of the Change Request.
+        explode: false
+        in: path
+        name: changeRequestId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: The optional identifier of the Setting.
+        explode: true
+        in: query
+        name: settingId
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateChangeRequestProposedChangesModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateChangeRequestProposedChangesModel"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateChangeRequestProposedChangesModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChangeRequestModel"
+          description: When the update was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Update Settings included in Change Request
+      tags:
+      - Change Requests (Approval flow & Scheduled changes) - Beta
   /v1/segments/{segmentId}:
     delete:
       description: This endpoint removes a Segment identified by the `segmentId` parameter.
@@ -4059,6 +4352,20 @@ paths:
         schema:
           type: boolean
         style: form
+      - description: "Optional. The version identifier of the last change made to\
+          \ the Feature Flag or Setting in the Environment. It can be used to make\
+          \ sure concurrent updates are not overwriting each other. If provided and\
+          \ the version identifier does not match the current version, the update\
+          \ will be rejected with a 409 Conflict response. The latest version id can\
+          \ be acquired from the `LastVersionId` property of the response models."
+        explode: true
+        in: query
+        name: latestVersionId
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
       - description: The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)
         explode: false
         in: header
@@ -4493,6 +4800,20 @@ paths:
         schema:
           type: boolean
         style: form
+      - description: "Optional. The version identifier of the last change made to\
+          \ the Feature Flag or Setting in the Environment. It can be used to make\
+          \ sure concurrent updates are not overwriting each other. If provided and\
+          \ the version identifier does not match the current version, the update\
+          \ will be rejected with a 409 Conflict response. The latest version id can\
+          \ be acquired from the `LastVersionId` property of the response models."
+        explode: true
+        in: query
+        name: latestVersionId
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
       - description: The ConfigCat SDK Key. (https://app.configcat.com/sdkkey)
         explode: false
         in: header
@@ -4775,6 +5096,20 @@ paths:
         required: false
         schema:
           type: boolean
+        style: form
+      - description: "Optional. The version identifier of the last change made to\
+          \ the Feature Flag or Setting in the Environment. It can be used to make\
+          \ sure concurrent updates are not overwriting each other. If provided and\
+          \ the version identifier does not match the current version, the update\
+          \ will be rejected with a 409 Conflict response. The latest version id can\
+          \ be acquired from the `LastVersionId` property of the response models."
+        explode: true
+        in: query
+        name: latestVersionId
+        required: false
+        schema:
+          format: uuid
+          type: string
         style: form
       requestBody:
         content:
@@ -5212,6 +5547,20 @@ paths:
         schema:
           type: boolean
         style: form
+      - description: "Optional. The version identifier of the last change made to\
+          \ the Feature Flag or Setting in the Environment. It can be used to make\
+          \ sure concurrent updates are not overwriting each other. If provided and\
+          \ the version identifier does not match the current version, the update\
+          \ will be rejected with a 409 Conflict response. The latest version id can\
+          \ be acquired from the `LastVersionId` property of the response models."
+        explode: true
+        in: query
+        name: latestVersionId
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
       requestBody:
         content:
           application/json:
@@ -5570,6 +5919,20 @@ paths:
         required: false
         schema:
           type: boolean
+        style: form
+      - description: "Optional. The version identifier of the last change made to\
+          \ the Feature Flag or Setting in the Environment. It can be used to make\
+          \ sure concurrent updates are not overwriting each other. If provided and\
+          \ the version identifier does not match the current version, the update\
+          \ will be rejected with a 409 Conflict response. The latest version id can\
+          \ be acquired from the `LastVersionId` property of the response models."
+        explode: true
+        in: query
+        name: latestVersionId
+        required: false
+        schema:
+          format: uuid
+          type: string
         style: form
       requestBody:
         content:
@@ -5940,6 +6303,49 @@ paths:
       summary: Get selected SDK keys
       tags:
       - Proxy Profiles
+  /v2/change-requests/{changeRequestId}/comments:
+    post:
+      description: Adds a new comment to the Change Request.
+      operationId: add-change-request-comment
+      parameters:
+      - description: The identifier of the Change Request.
+        explode: false
+        in: path
+        name: changeRequestId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddChangeRequestCommentModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/AddChangeRequestCommentModel"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/AddChangeRequestCommentModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChangeRequestCommentModel"
+          description: When adding the comment was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Add Comment
+      tags:
+      - Change Requests (Approval flow & Scheduled changes) - Beta
   /v1/environments/{environmentId}/settings/{settingId}/integrationLinks/{integrationLinkType}/{key}:
     delete:
       description: ""
@@ -6119,6 +6525,131 @@ paths:
             rate limits.
       tags:
       - Integration links
+  /v2/change-requests/{changeRequestId}/apply:
+    post:
+      description: Applies the Change Request. The proposed changes will be applied
+        and published immediately.
+      operationId: apply-change-request
+      parameters:
+      - description: The identifier of the Change Request.
+        explode: false
+        in: path
+        name: changeRequestId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChangeRequestModel"
+          description: When applying the Change Request was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Apply Change Request
+      tags:
+      - Change Requests (Approval flow & Scheduled changes) - Beta
+  /v2/change-requests/{changeRequestId}/approve:
+    post:
+      description: Adds your approval to the Change Request.
+      operationId: approve-change-request
+      parameters:
+      - description: The identifier of the Change Request.
+        explode: false
+        in: path
+        name: changeRequestId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChangeRequestModel"
+          description: When the approval was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Approve Change Request
+      tags:
+      - Change Requests (Approval flow & Scheduled changes) - Beta
+  /v2/change-requests/{changeRequestId}/claim-ownership:
+    post:
+      description: Claims ownership of the Change Request.
+      operationId: claim-change-request-ownership
+      parameters:
+      - description: The identifier of the Change Request.
+        explode: false
+        in: path
+        name: changeRequestId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChangeRequestModel"
+          description: When claiming ownership was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Claim Ownership
+      tags:
+      - Change Requests (Approval flow & Scheduled changes) - Beta
+  /v2/change-requests/{changeRequestId}/close:
+    post:
+      description: Closes the Change Request without applying it.
+      operationId: close-change-request
+      parameters:
+      - description: The identifier of the Change Request.
+        explode: false
+        in: path
+        name: changeRequestId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChangeRequestModel"
+          description: When closing the Change Request was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Close Change Request
+      tags:
+      - Change Requests (Approval flow & Scheduled changes) - Beta
   /v1/jira/connect:
     post:
       operationId: jira-connect
@@ -6141,6 +6672,58 @@ paths:
             rate limits.
       tags:
       - Integration links
+  /v2/configs/{configId}/environments/{environmentId}/change-requests:
+    post:
+      description: Creates a new Change Request for the specified Config and Environment.
+      operationId: create-change-request
+      parameters:
+      - description: The identifier of the Config.
+        explode: false
+        in: path
+        name: configId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The identifier of the Environment.
+        explode: false
+        in: path
+        name: environmentId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateChangeRequestModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/CreateChangeRequestModel"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/CreateChangeRequestModel"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChangeRequestModel"
+          description: When the creation was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Create Change Request
+      tags:
+      - Change Requests (Approval flow & Scheduled changes) - Beta
   /v1/organizations/{organizationId}/products:
     post:
       description: "This endpoint creates a new Product in a specified Organization\
@@ -6387,6 +6970,90 @@ paths:
       summary: Invite Member
       tags:
       - Members
+  /v2/change-requests/{changeRequestId}/remove-approval:
+    post:
+      description: Removes your existing approval from the Change Request.
+      operationId: remove-change-request-approval
+      parameters:
+      - description: The identifier of the Change Request.
+        explode: false
+        in: path
+        name: changeRequestId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChangeRequestModel"
+          description: When removing the approval was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Remove Approval
+      tags:
+      - Change Requests (Approval flow & Scheduled changes) - Beta
+  /v2/change-requests/{changeRequestId}/proposed-changes/{settingId}/resolve-conflicts:
+    post:
+      description: Updates the proposed changes to a Setting included in the Change
+        Request to resolve conflicts caused by concurrently published changes.
+      operationId: resolve-change-request-setting-conflicts
+      parameters:
+      - description: The identifier of the Change Request.
+        explode: false
+        in: path
+        name: changeRequestId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: The identifier of the Setting.
+        explode: false
+        in: path
+        name: settingId
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ResolveChangeRequestSettingConflictsModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/ResolveChangeRequestSettingConflictsModel"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/ResolveChangeRequestSettingConflictsModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChangeRequestModel"
+          description: When the conflict resolution was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Resolve Setting Conflicts
+      tags:
+      - Change Requests (Approval flow & Scheduled changes) - Beta
   /v1/code-references:
     post:
       description: ""
@@ -6546,6 +7213,75 @@ paths:
       summary: Update Member Permissions
       tags:
       - Members
+  /v2/change-request-comments/{commentId}:
+    delete:
+      description: Deletes a Change Request comment.
+      operationId: delete-change-request-comment
+      parameters:
+      - description: The identifier of the Change Request comment.
+        explode: false
+        in: path
+        name: commentId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: When deleting the comment was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Delete Comment
+      tags:
+      - Change Requests (Approval flow & Scheduled changes) - Beta
+    put:
+      description: Updates an existing Change Request comment.
+      operationId: update-change-request-comment
+      parameters:
+      - description: The identifier of the Change Request comment.
+        explode: false
+        in: path
+        name: commentId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateChangeRequestCommentModel"
+          text/json:
+            schema:
+              $ref: "#/components/schemas/UpdateChangeRequestCommentModel"
+          application/*+json:
+            schema:
+              $ref: "#/components/schemas/UpdateChangeRequestCommentModel"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChangeRequestCommentModel"
+          description: When updating the comment was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Update Comment
+      tags:
+      - Change Requests (Approval flow & Scheduled changes) - Beta
   /v1/invitations/{invitationId}:
     delete:
       description: This endpoint removes an Invitation identified by the `invitationId`
@@ -6610,6 +7346,46 @@ paths:
       summary: Delete Member from Product
       tags:
       - Members
+  /v2/change-requests/{changeRequestId}/proposed-changes/{settingId}:
+    delete:
+      description: Removes a setting from a Change Request.
+      operationId: delete-change-request-proposed-change
+      parameters:
+      - description: The identifier of the Change Request.
+        explode: false
+        in: path
+        name: changeRequestId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - description: The identifier of the Setting.
+        explode: false
+        in: path
+        name: settingId
+        required: true
+        schema:
+          format: int32
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChangeRequestModel"
+          description: When the delete was successful.
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Delete Setting from Change Request
+      tags:
+      - Change Requests (Approval flow & Scheduled changes) - Beta
 components:
   schemas:
     AccessType:
@@ -6619,6 +7395,17 @@ components:
       - full
       - custom
       type: string
+    AddChangeRequestCommentModel:
+      example:
+        body: body
+      properties:
+        body:
+          description: The comment body.
+          maxLength: 5000
+          type: string
+      required:
+      - body
+      type: object
     AddOrUpdateIntegrationLinkModel:
       example:
         description: description
@@ -6667,7 +7454,7 @@ components:
       enum:
       - cannotApprove
       - canApproveOthers
-      - canBypassApproves
+      - canBypassApproval
       - custom
       type: string
     ApproveRequiredEnvironmentModel:
@@ -6793,6 +7580,317 @@ components:
       - data
       - paging
       type: object
+    AuditLogSettingValueV2EvaluationFormula:
+      description: A complete evaluation formula.
+      example:
+        defaultValue:
+          boolValue: true
+          stringValue: stringValue
+          intValue: 1
+          doubleValue: 5.962133916683182
+          predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        defaultValuePredefinedVariationName: defaultValuePredefinedVariationName
+        targetingRules:
+        - value: ""
+          valuePredefinedVariationName: valuePredefinedVariationName
+          conditions:
+          - conditionType: userCondition
+            comparisonAttribute: comparisonAttribute
+            userComparator: ""
+            comparisonValue: ""
+            segmentComparator: ""
+            segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            segmentName: segmentName
+            prerequisiteComparator: ""
+            prerequisiteSettingId: 5
+            prerequisiteSettingKey: prerequisiteSettingKey
+            prerequisiteComparisonValue: ""
+            prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+          - conditionType: userCondition
+            comparisonAttribute: comparisonAttribute
+            userComparator: ""
+            comparisonValue: ""
+            segmentComparator: ""
+            segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            segmentName: segmentName
+            prerequisiteComparator: ""
+            prerequisiteSettingId: 5
+            prerequisiteSettingKey: prerequisiteSettingKey
+            prerequisiteComparisonValue: ""
+            prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+          percentageOptions:
+          - percentage: 2
+            value:
+              boolValue: true
+              stringValue: stringValue
+              intValue: 1
+              doubleValue: 5.962133916683182
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            valuePredefinedVariationName: valuePredefinedVariationName
+          - percentage: 2
+            value:
+              boolValue: true
+              stringValue: stringValue
+              intValue: 1
+              doubleValue: 5.962133916683182
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            valuePredefinedVariationName: valuePredefinedVariationName
+        - value: ""
+          valuePredefinedVariationName: valuePredefinedVariationName
+          conditions:
+          - conditionType: userCondition
+            comparisonAttribute: comparisonAttribute
+            userComparator: ""
+            comparisonValue: ""
+            segmentComparator: ""
+            segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            segmentName: segmentName
+            prerequisiteComparator: ""
+            prerequisiteSettingId: 5
+            prerequisiteSettingKey: prerequisiteSettingKey
+            prerequisiteComparisonValue: ""
+            prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+          - conditionType: userCondition
+            comparisonAttribute: comparisonAttribute
+            userComparator: ""
+            comparisonValue: ""
+            segmentComparator: ""
+            segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            segmentName: segmentName
+            prerequisiteComparator: ""
+            prerequisiteSettingId: 5
+            prerequisiteSettingKey: prerequisiteSettingKey
+            prerequisiteComparisonValue: ""
+            prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+          percentageOptions:
+          - percentage: 2
+            value:
+              boolValue: true
+              stringValue: stringValue
+              intValue: 1
+              doubleValue: 5.962133916683182
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            valuePredefinedVariationName: valuePredefinedVariationName
+          - percentage: 2
+            value:
+              boolValue: true
+              stringValue: stringValue
+              intValue: 1
+              doubleValue: 5.962133916683182
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            valuePredefinedVariationName: valuePredefinedVariationName
+        percentageEvaluationAttribute: percentageEvaluationAttribute
+      properties:
+        defaultValue:
+          $ref: "#/components/schemas/ValueModel"
+        defaultValuePredefinedVariationName:
+          description: Optional name of the predefined variation for the default value.
+          nullable: true
+          type: string
+        targetingRules:
+          description: List of targeting rules that determine when different values
+            should be returned.
+          items:
+            $ref: "#/components/schemas/AuditLogSettingValueV2EvaluationFormulaTargetingRuleModel"
+          type: array
+        percentageEvaluationAttribute:
+          description: Optional name of the user attribute for percentage-based user
+            bucketing (for A/B testing).
+          nullable: true
+          type: string
+      required:
+      - defaultValue
+      - defaultValuePredefinedVariationName
+      - percentageEvaluationAttribute
+      - targetingRules
+      type: object
+    AuditLogSettingValueV2EvaluationFormulaConditionModel:
+      description: |-
+        A condition that needs to be evaluated to determine if a targeting rule applies to a user.
+        Conditions can be based on user attributes, segments, or prerequisite settings.
+      example:
+        conditionType: userCondition
+        comparisonAttribute: comparisonAttribute
+        userComparator: ""
+        comparisonValue: ""
+        segmentComparator: ""
+        segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        segmentName: segmentName
+        prerequisiteComparator: ""
+        prerequisiteSettingId: 5
+        prerequisiteSettingKey: prerequisiteSettingKey
+        prerequisiteComparisonValue: ""
+        prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+      properties:
+        conditionType:
+          $ref: "#/components/schemas/ConditionType"
+        comparisonAttribute:
+          description: The name of the user attribute to compare. (For User Conditions.)
+          nullable: true
+          type: string
+        userComparator:
+          allOf:
+          - $ref: "#/components/schemas/UserComparator"
+          nullable: true
+        comparisonValue:
+          allOf:
+          - $ref: "#/components/schemas/ComparisonValueModel"
+          nullable: true
+        segmentComparator:
+          allOf:
+          - $ref: "#/components/schemas/SegmentComparator"
+          nullable: true
+        segmentId:
+          description: The ID of the segment referenced in this condition. (For Segment
+            Conditions.)
+          format: uuid
+          nullable: true
+          type: string
+        segmentName:
+          description: The name of the segment referenced in this condition. (For
+            Segment Conditions.)
+          nullable: true
+          type: string
+        prerequisiteComparator:
+          allOf:
+          - $ref: "#/components/schemas/PrerequisiteComparator"
+          nullable: true
+        prerequisiteSettingId:
+          description: The ID of the prerequisite setting referenced. (For Flag Conditions.)
+          format: int32
+          nullable: true
+          type: integer
+        prerequisiteSettingKey:
+          description: The key identifier of the prerequisite setting. (For Flag Conditions.)
+          nullable: true
+          type: string
+        prerequisiteComparisonValue:
+          allOf:
+          - $ref: "#/components/schemas/ValueModel"
+          nullable: true
+        prerequisiteComparisonValuePredefinedVariationName:
+          description: Optional name of the predefined variation for the prerequisite
+            comparison value. (For Flag Conditions.)
+          nullable: true
+          type: string
+      required:
+      - comparisonAttribute
+      - comparisonValue
+      - conditionType
+      - prerequisiteComparator
+      - prerequisiteComparisonValue
+      - prerequisiteComparisonValuePredefinedVariationName
+      - prerequisiteSettingId
+      - prerequisiteSettingKey
+      - segmentComparator
+      - segmentId
+      - segmentName
+      - userComparator
+      type: object
+    AuditLogSettingValueV2EvaluationFormulaPercentageOptionModel:
+      description: "A percentage option for percentage-based user bucketing (for A/B\
+        \ testing), specifying a percentage range and the value to return."
+      example:
+        percentage: 2
+        value:
+          boolValue: true
+          stringValue: stringValue
+          intValue: 1
+          doubleValue: 5.962133916683182
+          predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        valuePredefinedVariationName: valuePredefinedVariationName
+      properties:
+        percentage:
+          description: The percentage of users (0-100) who should receive the value.
+          format: int32
+          type: integer
+        value:
+          $ref: "#/components/schemas/ValueModel"
+        valuePredefinedVariationName:
+          description: Optional name of the predefined variation for this percentage
+            option.
+          nullable: true
+          type: string
+      required:
+      - percentage
+      - value
+      - valuePredefinedVariationName
+      type: object
+    AuditLogSettingValueV2EvaluationFormulaTargetingRuleModel:
+      description: A targeting rule that specifies conditions and value(s) to return
+        when those conditions are met.
+      example:
+        value: ""
+        valuePredefinedVariationName: valuePredefinedVariationName
+        conditions:
+        - conditionType: userCondition
+          comparisonAttribute: comparisonAttribute
+          userComparator: ""
+          comparisonValue: ""
+          segmentComparator: ""
+          segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          segmentName: segmentName
+          prerequisiteComparator: ""
+          prerequisiteSettingId: 5
+          prerequisiteSettingKey: prerequisiteSettingKey
+          prerequisiteComparisonValue: ""
+          prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+        - conditionType: userCondition
+          comparisonAttribute: comparisonAttribute
+          userComparator: ""
+          comparisonValue: ""
+          segmentComparator: ""
+          segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          segmentName: segmentName
+          prerequisiteComparator: ""
+          prerequisiteSettingId: 5
+          prerequisiteSettingKey: prerequisiteSettingKey
+          prerequisiteComparisonValue: ""
+          prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+        percentageOptions:
+        - percentage: 2
+          value:
+            boolValue: true
+            stringValue: stringValue
+            intValue: 1
+            doubleValue: 5.962133916683182
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          valuePredefinedVariationName: valuePredefinedVariationName
+        - percentage: 2
+          value:
+            boolValue: true
+            stringValue: stringValue
+            intValue: 1
+            doubleValue: 5.962133916683182
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          valuePredefinedVariationName: valuePredefinedVariationName
+      properties:
+        value:
+          allOf:
+          - $ref: "#/components/schemas/ValueModel"
+          nullable: true
+        valuePredefinedVariationName:
+          description: Optional name of the predefined variation for the value.
+          nullable: true
+          type: string
+        conditions:
+          description: List of conditions that must be satisfied for this targeting
+            rule to apply.
+          items:
+            $ref: "#/components/schemas/AuditLogSettingValueV2EvaluationFormulaConditionModel"
+          type: array
+        percentageOptions:
+          description: List of percentage options when percentage-based user bucketing
+            (for A/B testing) is used in the targeting rule.
+          items:
+            $ref: "#/components/schemas/AuditLogSettingValueV2EvaluationFormulaPercentageOptionModel"
+          type: array
+      required:
+      - conditions
+      - percentageOptions
+      - value
+      - valuePredefinedVariationName
+      type: object
     AuditLogType:
       enum:
       - productCreated
@@ -6911,7 +8009,1591 @@ components:
       - changeRequestCommentDeleted
       - changeRequestSettingDeleted
       - changeRequestNeedsAttentionFixed
+      - changeRequestOwnershipClaimed
       type: string
+    ChangeRequestActivityModel:
+      description: Model representing an activity/event in a Change Request's history.
+      example:
+        changeRequestActivityId: 3
+        changeRequestActivityType: applyFailed
+        date: 2000-01-23T04:56:07.000+00:00
+        userId: userId
+        userFullName: userFullName
+        userEmail: userEmail
+        details: details
+        error: error
+      properties:
+        changeRequestActivityId:
+          description: Identifier of the Change Request activity.
+          format: int64
+          type: integer
+        changeRequestActivityType:
+          $ref: "#/components/schemas/ChangeRequestActivityType"
+        date:
+          description: The UTC date and time when the activity occurred.
+          format: date-time
+          type: string
+        userId:
+          description: Identifier of the user who triggered the activity.
+          nullable: true
+          type: string
+        userFullName:
+          description: Full name of the user who triggered the activity.
+          type: string
+        userEmail:
+          description: Email of the user who triggered the activity.
+          nullable: true
+          type: string
+        details:
+          description: Detailed description of the activity.
+          type: string
+        error:
+          description: Optional error message if the activity failed.
+          nullable: true
+          type: string
+      required:
+      - changeRequestActivityId
+      - changeRequestActivityType
+      - date
+      - details
+      - error
+      - userEmail
+      - userFullName
+      - userId
+      type: object
+    ChangeRequestActivityType:
+      description: The type of activity recorded on a Change Request.
+      enum:
+      - applyFailed
+      - scheduledApplyFailed
+      - proposedChangesUpdated
+      - conflictsResolved
+      - reasonChanged
+      - applyAtChanged
+      - bypassApprovalEnabled
+      - bypassApprovalDisabled
+      - created
+      - ownershipClaimed
+      - settingDeletedFromChangeRequest
+      type: string
+    ChangeRequestApprovalModel:
+      description: Model representing an approval on a Change Request.
+      example:
+        changeRequestApprovalId: 9
+        userEmail: userEmail
+        userFullName: userFullName
+        approvedAt: 2000-01-23T04:56:07.000+00:00
+        dismissedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        changeRequestApprovalId:
+          description: Identifier of the Change Request approval.
+          format: int64
+          type: integer
+        userEmail:
+          description: Email of the user who approved the Change Request.
+          type: string
+        userFullName:
+          description: Full name of the user who approved the Change Request.
+          type: string
+        approvedAt:
+          description: The UTC date and time when the Change Request was approved.
+          format: date-time
+          type: string
+        dismissedAt:
+          description: Optional UTC date and time when the approval was dismissed.
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - approvedAt
+      - changeRequestApprovalId
+      - dismissedAt
+      - userEmail
+      - userFullName
+      type: object
+    ChangeRequestApproveRequiredFilter:
+      description: Filters Change Requests by whether approval is required.
+      enum:
+      - approveNotRequired
+      - approveRequired
+      type: string
+    ChangeRequestCommentModel:
+      description: Model representing a comment on a Change Request.
+      example:
+        changeRequestCommentId: 7
+        body: body
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        userEmail: userEmail
+        userFullName: userFullName
+        editedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        changeRequestCommentId:
+          description: Identifier of the Change Request comment.
+          format: int64
+          type: integer
+        body:
+          description: Body content of the comment.
+          type: string
+        createdAt:
+          description: The UTC date and time when the comment was created.
+          format: date-time
+          type: string
+        userEmail:
+          description: Email of the user who created the comment.
+          type: string
+        userFullName:
+          description: Full name of the user who created the comment.
+          type: string
+        editedAt:
+          description: Optional UTC date and time when the comment was last edited.
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - body
+      - changeRequestCommentId
+      - createdAt
+      - editedAt
+      - userEmail
+      - userFullName
+      type: object
+    ChangeRequestIssueModel:
+      description: Model representing an issue encountered with a Change Request.
+      example:
+        changeRequestIssueId: 2
+        issueType: noOwner
+        issueDetails: issueDetails
+        issueDetectedAt: 2000-01-23T04:56:07.000+00:00
+        issueFixedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        changeRequestIssueId:
+          description: Identifier of the Change Request issue.
+          format: int64
+          type: integer
+        issueType:
+          $ref: "#/components/schemas/ChangeRequestIssueType"
+        issueDetails:
+          description: Description of the issue.
+          type: string
+        issueDetectedAt:
+          description: The UTC date and time when the issue was detected.
+          format: date-time
+          type: string
+        issueFixedAt:
+          description: Optional UTC date and time when the issue was fixed.
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - changeRequestIssueId
+      - issueDetails
+      - issueDetectedAt
+      - issueFixedAt
+      - issueType
+      type: object
+    ChangeRequestIssueType:
+      description: The type of issue encountered with a Change Request.
+      enum:
+      - noOwner
+      - ownerPermissionIssue
+      - reasonRequired
+      - settingConflict
+      - circularDependency
+      type: string
+    ChangeRequestModel:
+      description: "Detailed Change Request model with all information including proposed\
+        \ changes, comments, and approvals."
+      example:
+        changeRequestId: 0
+        configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        changeRequestStatus: open
+        needsAttention: true
+        title: title
+        reason: reason
+        applyAt: 2000-01-23T04:56:07.000+00:00
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        creatorUserEmail: creatorUserEmail
+        creatorUserFullName: creatorUserFullName
+        creatorUserId: creatorUserId
+        settingValues:
+        - settingId: 6
+          settingKey: settingKey
+          settingName: settingName
+          settingHint: settingHint
+          settingType: boolean
+          hasConflict: true
+          originalEvaluationFormula:
+            defaultValue:
+              boolValue: true
+              stringValue: stringValue
+              intValue: 1
+              doubleValue: 5.962133916683182
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            defaultValuePredefinedVariationName: defaultValuePredefinedVariationName
+            targetingRules:
+            - value: ""
+              valuePredefinedVariationName: valuePredefinedVariationName
+              conditions:
+              - conditionType: userCondition
+                comparisonAttribute: comparisonAttribute
+                userComparator: ""
+                comparisonValue: ""
+                segmentComparator: ""
+                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                segmentName: segmentName
+                prerequisiteComparator: ""
+                prerequisiteSettingId: 5
+                prerequisiteSettingKey: prerequisiteSettingKey
+                prerequisiteComparisonValue: ""
+                prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+              - conditionType: userCondition
+                comparisonAttribute: comparisonAttribute
+                userComparator: ""
+                comparisonValue: ""
+                segmentComparator: ""
+                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                segmentName: segmentName
+                prerequisiteComparator: ""
+                prerequisiteSettingId: 5
+                prerequisiteSettingKey: prerequisiteSettingKey
+                prerequisiteComparisonValue: ""
+                prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+              percentageOptions:
+              - percentage: 2
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 1
+                  doubleValue: 5.962133916683182
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                valuePredefinedVariationName: valuePredefinedVariationName
+              - percentage: 2
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 1
+                  doubleValue: 5.962133916683182
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                valuePredefinedVariationName: valuePredefinedVariationName
+            - value: ""
+              valuePredefinedVariationName: valuePredefinedVariationName
+              conditions:
+              - conditionType: userCondition
+                comparisonAttribute: comparisonAttribute
+                userComparator: ""
+                comparisonValue: ""
+                segmentComparator: ""
+                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                segmentName: segmentName
+                prerequisiteComparator: ""
+                prerequisiteSettingId: 5
+                prerequisiteSettingKey: prerequisiteSettingKey
+                prerequisiteComparisonValue: ""
+                prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+              - conditionType: userCondition
+                comparisonAttribute: comparisonAttribute
+                userComparator: ""
+                comparisonValue: ""
+                segmentComparator: ""
+                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                segmentName: segmentName
+                prerequisiteComparator: ""
+                prerequisiteSettingId: 5
+                prerequisiteSettingKey: prerequisiteSettingKey
+                prerequisiteComparisonValue: ""
+                prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+              percentageOptions:
+              - percentage: 2
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 1
+                  doubleValue: 5.962133916683182
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                valuePredefinedVariationName: valuePredefinedVariationName
+              - percentage: 2
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 1
+                  doubleValue: 5.962133916683182
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                valuePredefinedVariationName: valuePredefinedVariationName
+            percentageEvaluationAttribute: percentageEvaluationAttribute
+          proposedEvaluationFormula:
+            defaultValue:
+              boolValue: true
+              stringValue: stringValue
+              intValue: 1
+              doubleValue: 5.962133916683182
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            defaultValuePredefinedVariationName: defaultValuePredefinedVariationName
+            targetingRules:
+            - value: ""
+              valuePredefinedVariationName: valuePredefinedVariationName
+              conditions:
+              - conditionType: userCondition
+                comparisonAttribute: comparisonAttribute
+                userComparator: ""
+                comparisonValue: ""
+                segmentComparator: ""
+                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                segmentName: segmentName
+                prerequisiteComparator: ""
+                prerequisiteSettingId: 5
+                prerequisiteSettingKey: prerequisiteSettingKey
+                prerequisiteComparisonValue: ""
+                prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+              - conditionType: userCondition
+                comparisonAttribute: comparisonAttribute
+                userComparator: ""
+                comparisonValue: ""
+                segmentComparator: ""
+                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                segmentName: segmentName
+                prerequisiteComparator: ""
+                prerequisiteSettingId: 5
+                prerequisiteSettingKey: prerequisiteSettingKey
+                prerequisiteComparisonValue: ""
+                prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+              percentageOptions:
+              - percentage: 2
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 1
+                  doubleValue: 5.962133916683182
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                valuePredefinedVariationName: valuePredefinedVariationName
+              - percentage: 2
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 1
+                  doubleValue: 5.962133916683182
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                valuePredefinedVariationName: valuePredefinedVariationName
+            - value: ""
+              valuePredefinedVariationName: valuePredefinedVariationName
+              conditions:
+              - conditionType: userCondition
+                comparisonAttribute: comparisonAttribute
+                userComparator: ""
+                comparisonValue: ""
+                segmentComparator: ""
+                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                segmentName: segmentName
+                prerequisiteComparator: ""
+                prerequisiteSettingId: 5
+                prerequisiteSettingKey: prerequisiteSettingKey
+                prerequisiteComparisonValue: ""
+                prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+              - conditionType: userCondition
+                comparisonAttribute: comparisonAttribute
+                userComparator: ""
+                comparisonValue: ""
+                segmentComparator: ""
+                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                segmentName: segmentName
+                prerequisiteComparator: ""
+                prerequisiteSettingId: 5
+                prerequisiteSettingKey: prerequisiteSettingKey
+                prerequisiteComparisonValue: ""
+                prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+              percentageOptions:
+              - percentage: 2
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 1
+                  doubleValue: 5.962133916683182
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                valuePredefinedVariationName: valuePredefinedVariationName
+              - percentage: 2
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 1
+                  doubleValue: 5.962133916683182
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                valuePredefinedVariationName: valuePredefinedVariationName
+            percentageEvaluationAttribute: percentageEvaluationAttribute
+        - settingId: 6
+          settingKey: settingKey
+          settingName: settingName
+          settingHint: settingHint
+          settingType: boolean
+          hasConflict: true
+          originalEvaluationFormula:
+            defaultValue:
+              boolValue: true
+              stringValue: stringValue
+              intValue: 1
+              doubleValue: 5.962133916683182
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            defaultValuePredefinedVariationName: defaultValuePredefinedVariationName
+            targetingRules:
+            - value: ""
+              valuePredefinedVariationName: valuePredefinedVariationName
+              conditions:
+              - conditionType: userCondition
+                comparisonAttribute: comparisonAttribute
+                userComparator: ""
+                comparisonValue: ""
+                segmentComparator: ""
+                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                segmentName: segmentName
+                prerequisiteComparator: ""
+                prerequisiteSettingId: 5
+                prerequisiteSettingKey: prerequisiteSettingKey
+                prerequisiteComparisonValue: ""
+                prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+              - conditionType: userCondition
+                comparisonAttribute: comparisonAttribute
+                userComparator: ""
+                comparisonValue: ""
+                segmentComparator: ""
+                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                segmentName: segmentName
+                prerequisiteComparator: ""
+                prerequisiteSettingId: 5
+                prerequisiteSettingKey: prerequisiteSettingKey
+                prerequisiteComparisonValue: ""
+                prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+              percentageOptions:
+              - percentage: 2
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 1
+                  doubleValue: 5.962133916683182
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                valuePredefinedVariationName: valuePredefinedVariationName
+              - percentage: 2
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 1
+                  doubleValue: 5.962133916683182
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                valuePredefinedVariationName: valuePredefinedVariationName
+            - value: ""
+              valuePredefinedVariationName: valuePredefinedVariationName
+              conditions:
+              - conditionType: userCondition
+                comparisonAttribute: comparisonAttribute
+                userComparator: ""
+                comparisonValue: ""
+                segmentComparator: ""
+                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                segmentName: segmentName
+                prerequisiteComparator: ""
+                prerequisiteSettingId: 5
+                prerequisiteSettingKey: prerequisiteSettingKey
+                prerequisiteComparisonValue: ""
+                prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+              - conditionType: userCondition
+                comparisonAttribute: comparisonAttribute
+                userComparator: ""
+                comparisonValue: ""
+                segmentComparator: ""
+                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                segmentName: segmentName
+                prerequisiteComparator: ""
+                prerequisiteSettingId: 5
+                prerequisiteSettingKey: prerequisiteSettingKey
+                prerequisiteComparisonValue: ""
+                prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+              percentageOptions:
+              - percentage: 2
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 1
+                  doubleValue: 5.962133916683182
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                valuePredefinedVariationName: valuePredefinedVariationName
+              - percentage: 2
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 1
+                  doubleValue: 5.962133916683182
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                valuePredefinedVariationName: valuePredefinedVariationName
+            percentageEvaluationAttribute: percentageEvaluationAttribute
+          proposedEvaluationFormula:
+            defaultValue:
+              boolValue: true
+              stringValue: stringValue
+              intValue: 1
+              doubleValue: 5.962133916683182
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            defaultValuePredefinedVariationName: defaultValuePredefinedVariationName
+            targetingRules:
+            - value: ""
+              valuePredefinedVariationName: valuePredefinedVariationName
+              conditions:
+              - conditionType: userCondition
+                comparisonAttribute: comparisonAttribute
+                userComparator: ""
+                comparisonValue: ""
+                segmentComparator: ""
+                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                segmentName: segmentName
+                prerequisiteComparator: ""
+                prerequisiteSettingId: 5
+                prerequisiteSettingKey: prerequisiteSettingKey
+                prerequisiteComparisonValue: ""
+                prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+              - conditionType: userCondition
+                comparisonAttribute: comparisonAttribute
+                userComparator: ""
+                comparisonValue: ""
+                segmentComparator: ""
+                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                segmentName: segmentName
+                prerequisiteComparator: ""
+                prerequisiteSettingId: 5
+                prerequisiteSettingKey: prerequisiteSettingKey
+                prerequisiteComparisonValue: ""
+                prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+              percentageOptions:
+              - percentage: 2
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 1
+                  doubleValue: 5.962133916683182
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                valuePredefinedVariationName: valuePredefinedVariationName
+              - percentage: 2
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 1
+                  doubleValue: 5.962133916683182
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                valuePredefinedVariationName: valuePredefinedVariationName
+            - value: ""
+              valuePredefinedVariationName: valuePredefinedVariationName
+              conditions:
+              - conditionType: userCondition
+                comparisonAttribute: comparisonAttribute
+                userComparator: ""
+                comparisonValue: ""
+                segmentComparator: ""
+                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                segmentName: segmentName
+                prerequisiteComparator: ""
+                prerequisiteSettingId: 5
+                prerequisiteSettingKey: prerequisiteSettingKey
+                prerequisiteComparisonValue: ""
+                prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+              - conditionType: userCondition
+                comparisonAttribute: comparisonAttribute
+                userComparator: ""
+                comparisonValue: ""
+                segmentComparator: ""
+                segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                segmentName: segmentName
+                prerequisiteComparator: ""
+                prerequisiteSettingId: 5
+                prerequisiteSettingKey: prerequisiteSettingKey
+                prerequisiteComparisonValue: ""
+                prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+              percentageOptions:
+              - percentage: 2
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 1
+                  doubleValue: 5.962133916683182
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                valuePredefinedVariationName: valuePredefinedVariationName
+              - percentage: 2
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 1
+                  doubleValue: 5.962133916683182
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+                valuePredefinedVariationName: valuePredefinedVariationName
+            percentageEvaluationAttribute: percentageEvaluationAttribute
+        comments:
+        - changeRequestCommentId: 7
+          body: body
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          userEmail: userEmail
+          userFullName: userFullName
+          editedAt: 2000-01-23T04:56:07.000+00:00
+        - changeRequestCommentId: 7
+          body: body
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          userEmail: userEmail
+          userFullName: userFullName
+          editedAt: 2000-01-23T04:56:07.000+00:00
+        approved: true
+        approvals:
+        - changeRequestApprovalId: 9
+          userEmail: userEmail
+          userFullName: userFullName
+          approvedAt: 2000-01-23T04:56:07.000+00:00
+          dismissedAt: 2000-01-23T04:56:07.000+00:00
+        - changeRequestApprovalId: 9
+          userEmail: userEmail
+          userFullName: userFullName
+          approvedAt: 2000-01-23T04:56:07.000+00:00
+          dismissedAt: 2000-01-23T04:56:07.000+00:00
+        activities:
+        - changeRequestActivityId: 3
+          changeRequestActivityType: applyFailed
+          date: 2000-01-23T04:56:07.000+00:00
+          userId: userId
+          userFullName: userFullName
+          userEmail: userEmail
+          details: details
+          error: error
+        - changeRequestActivityId: 3
+          changeRequestActivityType: applyFailed
+          date: 2000-01-23T04:56:07.000+00:00
+          userId: userId
+          userFullName: userFullName
+          userEmail: userEmail
+          details: details
+          error: error
+        changeRequestIssues:
+        - changeRequestIssueId: 2
+          issueType: noOwner
+          issueDetails: issueDetails
+          issueDetectedAt: 2000-01-23T04:56:07.000+00:00
+          issueFixedAt: 2000-01-23T04:56:07.000+00:00
+        - changeRequestIssueId: 2
+          issueType: noOwner
+          issueDetails: issueDetails
+          issueDetectedAt: 2000-01-23T04:56:07.000+00:00
+          issueFixedAt: 2000-01-23T04:56:07.000+00:00
+        appliedAt: 2000-01-23T04:56:07.000+00:00
+        appliedByUserId: appliedByUserId
+        appliedByUserEmail: appliedByUserEmail
+        appliedByUserFullName: appliedByUserFullName
+        closedAt: 2000-01-23T04:56:07.000+00:00
+        closedByUserId: closedByUserId
+        closedByUserEmail: closedByUserEmail
+        closedByUserFullName: closedByUserFullName
+        bypassApproval: true
+      properties:
+        changeRequestId:
+          description: Identifier of the Change Request.
+          format: int64
+          type: integer
+        configId:
+          description: Identifier of the Config.
+          format: uuid
+          type: string
+        environmentId:
+          description: Identifier of the Environment.
+          format: uuid
+          type: string
+        changeRequestStatus:
+          $ref: "#/components/schemas/ChangeRequestStatus"
+        needsAttention:
+          description: Indicates whether the Change Request needs attention.
+          type: boolean
+        title:
+          description: Title of the Change Request.
+          type: string
+        reason:
+          description: Optional notes describing the purpose of the Change Request.
+          nullable: true
+          type: string
+        applyAt:
+          description: Optional UTC date and time when the Change Request should be
+            applied automatically.
+          format: date-time
+          nullable: true
+          type: string
+        createdAt:
+          description: The UTC date and time when the Change Request was created.
+          format: date-time
+          type: string
+        creatorUserEmail:
+          description: Email of the user who created the Change Request.
+          type: string
+        creatorUserFullName:
+          description: Full name of the user who created the Change Request.
+          type: string
+        creatorUserId:
+          description: Identifier of the creator user.
+          nullable: true
+          type: string
+        settingValues:
+          description: List of proposed setting values in the Change Request.
+          items:
+            $ref: "#/components/schemas/ChangeRequestProposedChangeModel"
+          type: array
+        comments:
+          description: List of comments on the Change Request.
+          items:
+            $ref: "#/components/schemas/ChangeRequestCommentModel"
+          type: array
+        approved:
+          description: Indicates whether the Change Request has been approved.
+          type: boolean
+        approvals:
+          description: List of approvals for the Change Request.
+          items:
+            $ref: "#/components/schemas/ChangeRequestApprovalModel"
+          type: array
+        activities:
+          description: List of activities (history) on the Change Request.
+          items:
+            $ref: "#/components/schemas/ChangeRequestActivityModel"
+          type: array
+        changeRequestIssues:
+          description: List of issues encountered with the Change Request.
+          items:
+            $ref: "#/components/schemas/ChangeRequestIssueModel"
+          type: array
+        appliedAt:
+          description: Optional UTC date and time when the Change Request was applied.
+          format: date-time
+          nullable: true
+          type: string
+        appliedByUserId:
+          description: Identifier of the user who applied the Change Request.
+          nullable: true
+          type: string
+        appliedByUserEmail:
+          description: Email of the user who applied the Change Request.
+          nullable: true
+          type: string
+        appliedByUserFullName:
+          description: Full name of the user who applied the Change Request.
+          nullable: true
+          type: string
+        closedAt:
+          description: Optional UTC date and time when the Change Request was closed.
+          format: date-time
+          nullable: true
+          type: string
+        closedByUserId:
+          description: Identifier of the user who closed the Change Request.
+          nullable: true
+          type: string
+        closedByUserEmail:
+          description: Email of the user who closed the Change Request.
+          nullable: true
+          type: string
+        closedByUserFullName:
+          description: Full name of the user who closed the Change Request.
+          nullable: true
+          type: string
+        bypassApproval:
+          description: Indicates whether approval flow is bypassed.
+          type: boolean
+      required:
+      - activities
+      - appliedAt
+      - appliedByUserEmail
+      - appliedByUserFullName
+      - appliedByUserId
+      - applyAt
+      - approvals
+      - approved
+      - bypassApproval
+      - changeRequestId
+      - changeRequestIssues
+      - changeRequestStatus
+      - closedAt
+      - closedByUserEmail
+      - closedByUserFullName
+      - closedByUserId
+      - comments
+      - configId
+      - createdAt
+      - creatorUserEmail
+      - creatorUserFullName
+      - creatorUserId
+      - environmentId
+      - needsAttention
+      - reason
+      - settingValues
+      - title
+      type: object
+    ChangeRequestProposedChangeModel:
+      description: Model representing proposed changes to a Setting included in a
+        Change Request.
+      example:
+        settingId: 6
+        settingKey: settingKey
+        settingName: settingName
+        settingHint: settingHint
+        settingType: boolean
+        hasConflict: true
+        originalEvaluationFormula:
+          defaultValue:
+            boolValue: true
+            stringValue: stringValue
+            intValue: 1
+            doubleValue: 5.962133916683182
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          defaultValuePredefinedVariationName: defaultValuePredefinedVariationName
+          targetingRules:
+          - value: ""
+            valuePredefinedVariationName: valuePredefinedVariationName
+            conditions:
+            - conditionType: userCondition
+              comparisonAttribute: comparisonAttribute
+              userComparator: ""
+              comparisonValue: ""
+              segmentComparator: ""
+              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              segmentName: segmentName
+              prerequisiteComparator: ""
+              prerequisiteSettingId: 5
+              prerequisiteSettingKey: prerequisiteSettingKey
+              prerequisiteComparisonValue: ""
+              prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+            - conditionType: userCondition
+              comparisonAttribute: comparisonAttribute
+              userComparator: ""
+              comparisonValue: ""
+              segmentComparator: ""
+              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              segmentName: segmentName
+              prerequisiteComparator: ""
+              prerequisiteSettingId: 5
+              prerequisiteSettingKey: prerequisiteSettingKey
+              prerequisiteComparisonValue: ""
+              prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+            percentageOptions:
+            - percentage: 2
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              valuePredefinedVariationName: valuePredefinedVariationName
+            - percentage: 2
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              valuePredefinedVariationName: valuePredefinedVariationName
+          - value: ""
+            valuePredefinedVariationName: valuePredefinedVariationName
+            conditions:
+            - conditionType: userCondition
+              comparisonAttribute: comparisonAttribute
+              userComparator: ""
+              comparisonValue: ""
+              segmentComparator: ""
+              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              segmentName: segmentName
+              prerequisiteComparator: ""
+              prerequisiteSettingId: 5
+              prerequisiteSettingKey: prerequisiteSettingKey
+              prerequisiteComparisonValue: ""
+              prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+            - conditionType: userCondition
+              comparisonAttribute: comparisonAttribute
+              userComparator: ""
+              comparisonValue: ""
+              segmentComparator: ""
+              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              segmentName: segmentName
+              prerequisiteComparator: ""
+              prerequisiteSettingId: 5
+              prerequisiteSettingKey: prerequisiteSettingKey
+              prerequisiteComparisonValue: ""
+              prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+            percentageOptions:
+            - percentage: 2
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              valuePredefinedVariationName: valuePredefinedVariationName
+            - percentage: 2
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              valuePredefinedVariationName: valuePredefinedVariationName
+          percentageEvaluationAttribute: percentageEvaluationAttribute
+        proposedEvaluationFormula:
+          defaultValue:
+            boolValue: true
+            stringValue: stringValue
+            intValue: 1
+            doubleValue: 5.962133916683182
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          defaultValuePredefinedVariationName: defaultValuePredefinedVariationName
+          targetingRules:
+          - value: ""
+            valuePredefinedVariationName: valuePredefinedVariationName
+            conditions:
+            - conditionType: userCondition
+              comparisonAttribute: comparisonAttribute
+              userComparator: ""
+              comparisonValue: ""
+              segmentComparator: ""
+              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              segmentName: segmentName
+              prerequisiteComparator: ""
+              prerequisiteSettingId: 5
+              prerequisiteSettingKey: prerequisiteSettingKey
+              prerequisiteComparisonValue: ""
+              prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+            - conditionType: userCondition
+              comparisonAttribute: comparisonAttribute
+              userComparator: ""
+              comparisonValue: ""
+              segmentComparator: ""
+              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              segmentName: segmentName
+              prerequisiteComparator: ""
+              prerequisiteSettingId: 5
+              prerequisiteSettingKey: prerequisiteSettingKey
+              prerequisiteComparisonValue: ""
+              prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+            percentageOptions:
+            - percentage: 2
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              valuePredefinedVariationName: valuePredefinedVariationName
+            - percentage: 2
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              valuePredefinedVariationName: valuePredefinedVariationName
+          - value: ""
+            valuePredefinedVariationName: valuePredefinedVariationName
+            conditions:
+            - conditionType: userCondition
+              comparisonAttribute: comparisonAttribute
+              userComparator: ""
+              comparisonValue: ""
+              segmentComparator: ""
+              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              segmentName: segmentName
+              prerequisiteComparator: ""
+              prerequisiteSettingId: 5
+              prerequisiteSettingKey: prerequisiteSettingKey
+              prerequisiteComparisonValue: ""
+              prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+            - conditionType: userCondition
+              comparisonAttribute: comparisonAttribute
+              userComparator: ""
+              comparisonValue: ""
+              segmentComparator: ""
+              segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              segmentName: segmentName
+              prerequisiteComparator: ""
+              prerequisiteSettingId: 5
+              prerequisiteSettingKey: prerequisiteSettingKey
+              prerequisiteComparisonValue: ""
+              prerequisiteComparisonValuePredefinedVariationName: prerequisiteComparisonValuePredefinedVariationName
+            percentageOptions:
+            - percentage: 2
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              valuePredefinedVariationName: valuePredefinedVariationName
+            - percentage: 2
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              valuePredefinedVariationName: valuePredefinedVariationName
+          percentageEvaluationAttribute: percentageEvaluationAttribute
+      properties:
+        settingId:
+          description: Identifier of the Setting to change.
+          format: int32
+          type: integer
+        settingKey:
+          description: Key identifier of the Setting.
+          type: string
+        settingName:
+          description: Display name of the Setting.
+          type: string
+        settingHint:
+          description: Optional hint or description for the Setting.
+          nullable: true
+          type: string
+        settingType:
+          $ref: "#/components/schemas/SettingType"
+        hasConflict:
+          description: Indicates whether the proposed changes to the Setting are in
+            conflict with concurrently published changes.
+          type: boolean
+        originalEvaluationFormula:
+          $ref: "#/components/schemas/AuditLogSettingValueV2EvaluationFormula"
+        proposedEvaluationFormula:
+          $ref: "#/components/schemas/AuditLogSettingValueV2EvaluationFormula"
+      required:
+      - hasConflict
+      - originalEvaluationFormula
+      - proposedEvaluationFormula
+      - settingHint
+      - settingId
+      - settingKey
+      - settingName
+      - settingType
+      type: object
+    ChangeRequestProposedChangesModel:
+      description: Model containing setting formulas for a Change Request with feature
+        flag limitations.
+      example:
+        featureFlagLimitations:
+          maxPercentageOptionCount: 0
+          maxTargetingRuleCount: 6
+          maxComparisonValueLength: 1
+          maxComparisonValueListLength: 5
+          maxComparisonValueListItemLength: 5
+          maxStringFlagValueLength: 2
+          maxConditionPerTargetingRuleCount: 7
+        proposedChanges:
+        - lastVersionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          defaultValue:
+            boolValue: true
+            stringValue: stringValue
+            intValue: 1
+            doubleValue: 5.962133916683182
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          targetingRules:
+          - conditions:
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            percentageOptions:
+            - percentage: 9
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - percentage: 9
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            value: ""
+          - conditions:
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            percentageOptions:
+            - percentage: 9
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - percentage: 9
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            value: ""
+          setting:
+            settingId: 3
+            key: key
+            name: name
+            hint: hint
+            settingType: boolean
+            isJson: true
+            order: 2
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            creatorEmail: creatorEmail
+            creatorFullName: creatorFullName
+            predefinedVariations:
+            - value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+              name: name
+              hint: hint
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+              name: name
+              hint: hint
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            isWatching: true
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          percentageEvaluationAttribute: percentageEvaluationAttribute
+          lastUpdaterUserEmail: lastUpdaterUserEmail
+          lastUpdaterUserFullName: lastUpdaterUserFullName
+          integrationLinks:
+          - key: key
+            description: description
+            integrationLinkType: trello
+            url: url
+          - key: key
+            description: description
+            integrationLinkType: trello
+            url: url
+          settingTags:
+          - settingTagId: 4
+            tagId: 7
+            name: name
+            color: color
+          - settingTagId: 4
+            tagId: 7
+            name: name
+            color: color
+          settingIdsWherePrerequisite:
+          - 1
+          - 1
+          changeRequestCount: 1
+        - lastVersionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          defaultValue:
+            boolValue: true
+            stringValue: stringValue
+            intValue: 1
+            doubleValue: 5.962133916683182
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          targetingRules:
+          - conditions:
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            percentageOptions:
+            - percentage: 9
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - percentage: 9
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            value: ""
+          - conditions:
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            percentageOptions:
+            - percentage: 9
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - percentage: 9
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            value: ""
+          setting:
+            settingId: 3
+            key: key
+            name: name
+            hint: hint
+            settingType: boolean
+            isJson: true
+            order: 2
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            creatorEmail: creatorEmail
+            creatorFullName: creatorFullName
+            predefinedVariations:
+            - value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+              name: name
+              hint: hint
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 1
+                doubleValue: 5.962133916683182
+              name: name
+              hint: hint
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            isWatching: true
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+          percentageEvaluationAttribute: percentageEvaluationAttribute
+          lastUpdaterUserEmail: lastUpdaterUserEmail
+          lastUpdaterUserFullName: lastUpdaterUserFullName
+          integrationLinks:
+          - key: key
+            description: description
+            integrationLinkType: trello
+            url: url
+          - key: key
+            description: description
+            integrationLinkType: trello
+            url: url
+          settingTags:
+          - settingTagId: 4
+            tagId: 7
+            name: name
+            color: color
+          - settingTagId: 4
+            tagId: 7
+            name: name
+            color: color
+          settingIdsWherePrerequisite:
+          - 1
+          - 1
+          changeRequestCount: 1
+      properties:
+        featureFlagLimitations:
+          $ref: "#/components/schemas/FeatureFlagLimitations"
+        proposedChanges:
+          description: Collection of evaluation formulas for each Setting included
+            in the Change Request.
+          items:
+            $ref: "#/components/schemas/ConfigSettingFormulaModel"
+          type: array
+      required:
+      - featureFlagLimitations
+      - proposedChanges
+      type: object
+    ChangeRequestScheduleFilter:
+      description: Filters Change Requests by whether they are scheduled.
+      enum:
+      - nonScheduled
+      - scheduled
+      type: string
+    ChangeRequestStatus:
+      description: The lifecycle status of a Change Request.
+      enum:
+      - open
+      - applied
+      - closed
+      type: string
+    ChangeRequestSummaryModel:
+      description: Summary of a Change Request with essential information for list
+        views.
+      example:
+        changeRequestId: 0
+        changeRequestStatus: open
+        needsAttention: true
+        title: title
+        reason: reason
+        applyAt: 2000-01-23T04:56:07.000+00:00
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        creatorUserEmail: creatorUserEmail
+        creatorUserFullName: creatorUserFullName
+        creatorUserId: creatorUserId
+        affectedSettingKeys:
+        - affectedSettingKeys
+        - affectedSettingKeys
+        commentCount: 6
+        approved: true
+        conflictCount: 1
+        bypassApproval: true
+        appliedAt: 2000-01-23T04:56:07.000+00:00
+        appliedByUserId: appliedByUserId
+        appliedByUserEmail: appliedByUserEmail
+        appliedByUserFullName: appliedByUserFullName
+        closedAt: 2000-01-23T04:56:07.000+00:00
+        closedByUserId: closedByUserId
+        closedByUserEmail: closedByUserEmail
+        closedByUserFullName: closedByUserFullName
+      properties:
+        changeRequestId:
+          description: Identifier of the Change Request.
+          format: int64
+          type: integer
+        changeRequestStatus:
+          $ref: "#/components/schemas/ChangeRequestStatus"
+        needsAttention:
+          description: Indicates whether the Change Request needs attention.
+          type: boolean
+        title:
+          description: Title of the Change Request.
+          type: string
+        reason:
+          description: Optional notes describing the purpose of the Change Request.
+          nullable: true
+          type: string
+        applyAt:
+          description: Optional UTC date and time when the Change Request should be
+            applied automatically.
+          format: date-time
+          nullable: true
+          type: string
+        createdAt:
+          description: The UTC date and time when the Change Request was created.
+          format: date-time
+          type: string
+        creatorUserEmail:
+          description: Email of the user who created the Change Request.
+          type: string
+        creatorUserFullName:
+          description: Full name of the user who created the Change Request.
+          type: string
+        creatorUserId:
+          description: Identifier of the creator user.
+          nullable: true
+          type: string
+        affectedSettingKeys:
+          description: List of the keys of Settings affected by this Change Request.
+          items:
+            type: string
+          type: array
+        commentCount:
+          description: Number of comments on the Change Request.
+          format: int32
+          type: integer
+        approved:
+          description: Indicates whether the Change Request has been approved.
+          type: boolean
+        conflictCount:
+          description: Number of conflicting settings in the Change Request.
+          format: int32
+          type: integer
+        bypassApproval:
+          description: Indicates whether approval flow is bypassed.
+          type: boolean
+        appliedAt:
+          description: Optional UTC date and time when the Change Request was applied.
+          format: date-time
+          nullable: true
+          type: string
+        appliedByUserId:
+          description: Identifier of the user who applied the Change Request.
+          nullable: true
+          type: string
+        appliedByUserEmail:
+          description: Email of the user who applied the Change Request.
+          nullable: true
+          type: string
+        appliedByUserFullName:
+          description: Full name of the user who applied the Change Request.
+          nullable: true
+          type: string
+        closedAt:
+          description: Optional UTC date and time when the Change Request was closed.
+          format: date-time
+          nullable: true
+          type: string
+        closedByUserId:
+          description: Identifier of the user who closed the Change Request.
+          nullable: true
+          type: string
+        closedByUserEmail:
+          description: Email of the user who closed the Change Request.
+          nullable: true
+          type: string
+        closedByUserFullName:
+          description: Full name of the user who closed the Change Request.
+          nullable: true
+          type: string
+      required:
+      - affectedSettingKeys
+      - appliedAt
+      - appliedByUserEmail
+      - appliedByUserFullName
+      - appliedByUserId
+      - applyAt
+      - approved
+      - bypassApproval
+      - changeRequestId
+      - changeRequestStatus
+      - closedAt
+      - closedByUserEmail
+      - closedByUserFullName
+      - closedByUserId
+      - commentCount
+      - conflictCount
+      - createdAt
+      - creatorUserEmail
+      - creatorUserFullName
+      - creatorUserId
+      - needsAttention
+      - reason
+      - title
+      type: object
+    ChangeRequestSummaryModelPagedList:
+      example:
+        paging: ""
+        data:
+        - changeRequestId: 0
+          changeRequestStatus: open
+          needsAttention: true
+          title: title
+          reason: reason
+          applyAt: 2000-01-23T04:56:07.000+00:00
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          creatorUserEmail: creatorUserEmail
+          creatorUserFullName: creatorUserFullName
+          creatorUserId: creatorUserId
+          affectedSettingKeys:
+          - affectedSettingKeys
+          - affectedSettingKeys
+          commentCount: 6
+          approved: true
+          conflictCount: 1
+          bypassApproval: true
+          appliedAt: 2000-01-23T04:56:07.000+00:00
+          appliedByUserId: appliedByUserId
+          appliedByUserEmail: appliedByUserEmail
+          appliedByUserFullName: appliedByUserFullName
+          closedAt: 2000-01-23T04:56:07.000+00:00
+          closedByUserId: closedByUserId
+          closedByUserEmail: closedByUserEmail
+          closedByUserFullName: closedByUserFullName
+        - changeRequestId: 0
+          changeRequestStatus: open
+          needsAttention: true
+          title: title
+          reason: reason
+          applyAt: 2000-01-23T04:56:07.000+00:00
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          creatorUserEmail: creatorUserEmail
+          creatorUserFullName: creatorUserFullName
+          creatorUserId: creatorUserId
+          affectedSettingKeys:
+          - affectedSettingKeys
+          - affectedSettingKeys
+          commentCount: 6
+          approved: true
+          conflictCount: 1
+          bypassApproval: true
+          appliedAt: 2000-01-23T04:56:07.000+00:00
+          appliedByUserId: appliedByUserId
+          appliedByUserEmail: appliedByUserEmail
+          appliedByUserFullName: appliedByUserFullName
+          closedAt: 2000-01-23T04:56:07.000+00:00
+          closedByUserId: closedByUserId
+          closedByUserEmail: closedByUserEmail
+          closedByUserFullName: closedByUserFullName
+      properties:
+        paging:
+          allOf:
+          - $ref: "#/components/schemas/PagingResponseInfo"
+          nullable: true
+        data:
+          items:
+            $ref: "#/components/schemas/ChangeRequestSummaryModel"
+          nullable: true
+          type: array
+      required:
+      - data
+      - paging
+      type: object
+    ChangeRequestsModel:
+      description: Wrapper model for a paginated list of Change Requests.
+      example:
+        changeRequests:
+          paging: ""
+          data:
+          - changeRequestId: 0
+            changeRequestStatus: open
+            needsAttention: true
+            title: title
+            reason: reason
+            applyAt: 2000-01-23T04:56:07.000+00:00
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            creatorUserEmail: creatorUserEmail
+            creatorUserFullName: creatorUserFullName
+            creatorUserId: creatorUserId
+            affectedSettingKeys:
+            - affectedSettingKeys
+            - affectedSettingKeys
+            commentCount: 6
+            approved: true
+            conflictCount: 1
+            bypassApproval: true
+            appliedAt: 2000-01-23T04:56:07.000+00:00
+            appliedByUserId: appliedByUserId
+            appliedByUserEmail: appliedByUserEmail
+            appliedByUserFullName: appliedByUserFullName
+            closedAt: 2000-01-23T04:56:07.000+00:00
+            closedByUserId: closedByUserId
+            closedByUserEmail: closedByUserEmail
+            closedByUserFullName: closedByUserFullName
+          - changeRequestId: 0
+            changeRequestStatus: open
+            needsAttention: true
+            title: title
+            reason: reason
+            applyAt: 2000-01-23T04:56:07.000+00:00
+            createdAt: 2000-01-23T04:56:07.000+00:00
+            creatorUserEmail: creatorUserEmail
+            creatorUserFullName: creatorUserFullName
+            creatorUserId: creatorUserId
+            affectedSettingKeys:
+            - affectedSettingKeys
+            - affectedSettingKeys
+            commentCount: 6
+            approved: true
+            conflictCount: 1
+            bypassApproval: true
+            appliedAt: 2000-01-23T04:56:07.000+00:00
+            appliedByUserId: appliedByUserId
+            appliedByUserEmail: appliedByUserEmail
+            appliedByUserFullName: appliedByUserFullName
+            closedAt: 2000-01-23T04:56:07.000+00:00
+            closedByUserId: closedByUserId
+            closedByUserEmail: closedByUserEmail
+            closedByUserFullName: closedByUserFullName
+      properties:
+        changeRequests:
+          $ref: "#/components/schemas/ChangeRequestSummaryModelPagedList"
+      required:
+      - changeRequests
+      type: object
     CodeReferenceModel:
       example:
         branch: branch
@@ -7187,6 +9869,12 @@ components:
       - segmentCondition
       - userCondition
       type: object
+    ConditionType:
+      enum:
+      - userCondition
+      - segmentCondition
+      - prerequisiteFlagCondition
+      type: string
     ConfigModel:
       description: Details of the Config.
       example:
@@ -7245,8 +9933,8 @@ components:
         defaultValue:
           boolValue: true
           stringValue: stringValue
-          intValue: 0
-          doubleValue: 6.027456183070403
+          intValue: 1
+          doubleValue: 5.962133916683182
           predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         targetingRules:
         - conditions:
@@ -7257,19 +9945,19 @@ components:
             segmentCondition: ""
             prerequisiteFlagCondition: ""
           percentageOptions:
-          - percentage: 1
+          - percentage: 9
             value:
               boolValue: true
               stringValue: stringValue
-              intValue: 0
-              doubleValue: 6.027456183070403
+              intValue: 1
+              doubleValue: 5.962133916683182
               predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - percentage: 1
+          - percentage: 9
             value:
               boolValue: true
               stringValue: stringValue
-              intValue: 0
-              doubleValue: 6.027456183070403
+              intValue: 1
+              doubleValue: 5.962133916683182
               predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           value: ""
         - conditions:
@@ -7280,29 +9968,29 @@ components:
             segmentCondition: ""
             prerequisiteFlagCondition: ""
           percentageOptions:
-          - percentage: 1
+          - percentage: 9
             value:
               boolValue: true
               stringValue: stringValue
-              intValue: 0
-              doubleValue: 6.027456183070403
+              intValue: 1
+              doubleValue: 5.962133916683182
               predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - percentage: 1
+          - percentage: 9
             value:
               boolValue: true
               stringValue: stringValue
-              intValue: 0
-              doubleValue: 6.027456183070403
+              intValue: 1
+              doubleValue: 5.962133916683182
               predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           value: ""
         setting:
-          settingId: 5
+          settingId: 3
           key: key
           name: name
           hint: hint
           settingType: boolean
           isJson: true
-          order: 5
+          order: 2
           createdAt: 2000-01-23T04:56:07.000+00:00
           creatorEmail: creatorEmail
           creatorFullName: creatorFullName
@@ -7338,20 +10026,25 @@ components:
           integrationLinkType: trello
           url: url
         settingTags:
-        - settingTagId: 0
-          tagId: 6
+        - settingTagId: 4
+          tagId: 7
           name: name
           color: color
-        - settingTagId: 0
-          tagId: 6
+        - settingTagId: 4
+          tagId: 7
           name: name
           color: color
         settingIdsWherePrerequisite:
-        - 0
-        - 0
-        changeRequestCount: 6
+        - 1
+        - 1
+        changeRequestCount: 1
       properties:
         lastVersionId:
+          description: "The version identifier of the last change made to the Feature\
+            \ Flag or Setting in the Environment. It can be used to make sure concurrent\
+            \ updates are not overwriting each other. If the version identifier does\
+            \ not match the current version, the update will be rejected with a 409\
+            \ Conflict response."
           format: uuid
           type: string
         defaultValue:
@@ -7460,8 +10153,8 @@ components:
           defaultValue:
             boolValue: true
             stringValue: stringValue
-            intValue: 0
-            doubleValue: 6.027456183070403
+            intValue: 1
+            doubleValue: 5.962133916683182
             predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           targetingRules:
           - conditions:
@@ -7472,19 +10165,19 @@ components:
               segmentCondition: ""
               prerequisiteFlagCondition: ""
             percentageOptions:
-            - percentage: 1
+            - percentage: 9
               value:
                 boolValue: true
                 stringValue: stringValue
-                intValue: 0
-                doubleValue: 6.027456183070403
+                intValue: 1
+                doubleValue: 5.962133916683182
                 predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            - percentage: 1
+            - percentage: 9
               value:
                 boolValue: true
                 stringValue: stringValue
-                intValue: 0
-                doubleValue: 6.027456183070403
+                intValue: 1
+                doubleValue: 5.962133916683182
                 predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             value: ""
           - conditions:
@@ -7495,29 +10188,29 @@ components:
               segmentCondition: ""
               prerequisiteFlagCondition: ""
             percentageOptions:
-            - percentage: 1
+            - percentage: 9
               value:
                 boolValue: true
                 stringValue: stringValue
-                intValue: 0
-                doubleValue: 6.027456183070403
+                intValue: 1
+                doubleValue: 5.962133916683182
                 predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            - percentage: 1
+            - percentage: 9
               value:
                 boolValue: true
                 stringValue: stringValue
-                intValue: 0
-                doubleValue: 6.027456183070403
+                intValue: 1
+                doubleValue: 5.962133916683182
                 predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             value: ""
           setting:
-            settingId: 5
+            settingId: 3
             key: key
             name: name
             hint: hint
             settingType: boolean
             isJson: true
-            order: 5
+            order: 2
             createdAt: 2000-01-23T04:56:07.000+00:00
             creatorEmail: creatorEmail
             creatorFullName: creatorFullName
@@ -7553,24 +10246,24 @@ components:
             integrationLinkType: trello
             url: url
           settingTags:
-          - settingTagId: 0
-            tagId: 6
+          - settingTagId: 4
+            tagId: 7
             name: name
             color: color
-          - settingTagId: 0
-            tagId: 6
+          - settingTagId: 4
+            tagId: 7
             name: name
             color: color
           settingIdsWherePrerequisite:
-          - 0
-          - 0
-          changeRequestCount: 6
+          - 1
+          - 1
+          changeRequestCount: 1
         - lastVersionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           defaultValue:
             boolValue: true
             stringValue: stringValue
-            intValue: 0
-            doubleValue: 6.027456183070403
+            intValue: 1
+            doubleValue: 5.962133916683182
             predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           targetingRules:
           - conditions:
@@ -7581,19 +10274,19 @@ components:
               segmentCondition: ""
               prerequisiteFlagCondition: ""
             percentageOptions:
-            - percentage: 1
+            - percentage: 9
               value:
                 boolValue: true
                 stringValue: stringValue
-                intValue: 0
-                doubleValue: 6.027456183070403
+                intValue: 1
+                doubleValue: 5.962133916683182
                 predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            - percentage: 1
+            - percentage: 9
               value:
                 boolValue: true
                 stringValue: stringValue
-                intValue: 0
-                doubleValue: 6.027456183070403
+                intValue: 1
+                doubleValue: 5.962133916683182
                 predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             value: ""
           - conditions:
@@ -7604,29 +10297,29 @@ components:
               segmentCondition: ""
               prerequisiteFlagCondition: ""
             percentageOptions:
-            - percentage: 1
+            - percentage: 9
               value:
                 boolValue: true
                 stringValue: stringValue
-                intValue: 0
-                doubleValue: 6.027456183070403
+                intValue: 1
+                doubleValue: 5.962133916683182
                 predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-            - percentage: 1
+            - percentage: 9
               value:
                 boolValue: true
                 stringValue: stringValue
-                intValue: 0
-                doubleValue: 6.027456183070403
+                intValue: 1
+                doubleValue: 5.962133916683182
                 predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
             value: ""
           setting:
-            settingId: 5
+            settingId: 3
             key: key
             name: name
             hint: hint
             settingType: boolean
             isJson: true
-            order: 5
+            order: 2
             createdAt: 2000-01-23T04:56:07.000+00:00
             creatorEmail: creatorEmail
             creatorFullName: creatorFullName
@@ -7662,32 +10355,36 @@ components:
             integrationLinkType: trello
             url: url
           settingTags:
-          - settingTagId: 0
-            tagId: 6
+          - settingTagId: 4
+            tagId: 7
             name: name
             color: color
-          - settingTagId: 0
-            tagId: 6
+          - settingTagId: 4
+            tagId: 7
             name: name
             color: color
           settingIdsWherePrerequisite:
-          - 0
-          - 0
-          changeRequestCount: 6
+          - 1
+          - 1
+          changeRequestCount: 1
         featureFlagLimitations:
-          maxPercentageOptionCount: 5
-          maxTargetingRuleCount: 5
-          maxComparisonValueLength: 2
-          maxComparisonValueListLength: 7
-          maxComparisonValueListItemLength: 9
-          maxStringFlagValueLength: 3
-          maxConditionPerTargetingRuleCount: 2
+          maxPercentageOptionCount: 0
+          maxTargetingRuleCount: 6
+          maxComparisonValueLength: 1
+          maxComparisonValueListLength: 5
+          maxComparisonValueListItemLength: 5
+          maxStringFlagValueLength: 2
+          maxConditionPerTargetingRuleCount: 7
+        approveRequired: true
+        canBypassApproval: true
+        reasonRequired: true
       properties:
         config:
           $ref: "#/components/schemas/ConfigModel"
         environment:
           $ref: "#/components/schemas/EnvironmentModel"
         readOnly:
+          description: Indicates whether you have Read-only access to the Environment.
           type: boolean
         settingFormulas:
           description: Evaluation descriptors of each updated Feature Flag and Setting.
@@ -7696,11 +10393,25 @@ components:
           type: array
         featureFlagLimitations:
           $ref: "#/components/schemas/FeatureFlagLimitations"
+        approveRequired:
+          description: Indicates that a mandatory approval is required for saving
+            and publishing.
+          type: boolean
+        canBypassApproval:
+          description: Indicates whether the user can bypass the approval flow.
+          type: boolean
+        reasonRequired:
+          description: Indicates that a mandatory note is required for saving and
+            publishing.
+          type: boolean
       required:
+      - approveRequired
+      - canBypassApproval
       - config
       - environment
       - featureFlagLimitations
       - readOnly
+      - reasonRequired
       - settingFormulas
       type: object
     ConfigSettingValueModel:
@@ -7730,12 +10441,12 @@ components:
           integrationLinkType: trello
           url: url
         settingTags:
-        - settingTagId: 0
-          tagId: 6
+        - settingTagId: 4
+          tagId: 7
           name: name
           color: color
-        - settingTagId: 0
-          tagId: 6
+        - settingTagId: 4
+          tagId: 7
           name: name
           color: color
         rolloutRules:
@@ -7752,9 +10463,9 @@ components:
           segmentComparator: ""
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         rolloutPercentageItems:
-        - percentage: 1
+        - percentage: 0
           value: ""
-        - percentage: 1
+        - percentage: 0
           value: ""
         value: ""
       properties:
@@ -7875,12 +10586,12 @@ components:
             integrationLinkType: trello
             url: url
           settingTags:
-          - settingTagId: 0
-            tagId: 6
+          - settingTagId: 4
+            tagId: 7
             name: name
             color: color
-          - settingTagId: 0
-            tagId: 6
+          - settingTagId: 4
+            tagId: 7
             name: name
             color: color
           rolloutRules:
@@ -7897,9 +10608,9 @@ components:
             segmentComparator: ""
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           rolloutPercentageItems:
-          - percentage: 1
+          - percentage: 0
             value: ""
-          - percentage: 1
+          - percentage: 0
             value: ""
           value: ""
         - setting:
@@ -7927,12 +10638,12 @@ components:
             integrationLinkType: trello
             url: url
           settingTags:
-          - settingTagId: 0
-            tagId: 6
+          - settingTagId: 4
+            tagId: 7
             name: name
             color: color
-          - settingTagId: 0
-            tagId: 6
+          - settingTagId: 4
+            tagId: 7
             name: name
             color: color
           rolloutRules:
@@ -7949,19 +10660,19 @@ components:
             segmentComparator: ""
             segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           rolloutPercentageItems:
-          - percentage: 1
+          - percentage: 0
             value: ""
-          - percentage: 1
+          - percentage: 0
             value: ""
           value: ""
         featureFlagLimitations:
-          maxPercentageOptionCount: 5
-          maxTargetingRuleCount: 5
-          maxComparisonValueLength: 2
-          maxComparisonValueListLength: 7
-          maxComparisonValueListItemLength: 9
-          maxStringFlagValueLength: 3
-          maxConditionPerTargetingRuleCount: 2
+          maxPercentageOptionCount: 0
+          maxTargetingRuleCount: 6
+          maxComparisonValueLength: 1
+          maxComparisonValueListLength: 5
+          maxComparisonValueListItemLength: 5
+          maxStringFlagValueLength: 2
+          maxConditionPerTargetingRuleCount: 7
       properties:
         config:
           $ref: "#/components/schemas/ConfigModel"
@@ -8018,6 +10729,223 @@ components:
       required:
       - sdkPollInterval
       - webhookNotification
+      type: object
+    CreateChangeRequestModel:
+      example:
+        title: title
+        reason: reason
+        applyAt: 2000-01-23T04:56:07.000+00:00
+        bypassApproval: true
+        proposedChanges:
+        - proposedChange:
+            defaultValue:
+              boolValue: true
+              stringValue: stringValue
+              intValue: 0
+              doubleValue: 6.027456183070403
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            targetingRules:
+            - conditions:
+              - userCondition: ""
+                segmentCondition: ""
+                prerequisiteFlagCondition: ""
+              - userCondition: ""
+                segmentCondition: ""
+                prerequisiteFlagCondition: ""
+              percentageOptions:
+              - percentage: 1
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 0
+                  doubleValue: 6.027456183070403
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - percentage: 1
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 0
+                  doubleValue: 6.027456183070403
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              value: ""
+            - conditions:
+              - userCondition: ""
+                segmentCondition: ""
+                prerequisiteFlagCondition: ""
+              - userCondition: ""
+                segmentCondition: ""
+                prerequisiteFlagCondition: ""
+              percentageOptions:
+              - percentage: 1
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 0
+                  doubleValue: 6.027456183070403
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - percentage: 1
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 0
+                  doubleValue: 6.027456183070403
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              value: ""
+            percentageEvaluationAttribute: percentageEvaluationAttribute
+            settingId: 5
+            latestVersionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - proposedChange:
+            defaultValue:
+              boolValue: true
+              stringValue: stringValue
+              intValue: 0
+              doubleValue: 6.027456183070403
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            targetingRules:
+            - conditions:
+              - userCondition: ""
+                segmentCondition: ""
+                prerequisiteFlagCondition: ""
+              - userCondition: ""
+                segmentCondition: ""
+                prerequisiteFlagCondition: ""
+              percentageOptions:
+              - percentage: 1
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 0
+                  doubleValue: 6.027456183070403
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - percentage: 1
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 0
+                  doubleValue: 6.027456183070403
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              value: ""
+            - conditions:
+              - userCondition: ""
+                segmentCondition: ""
+                prerequisiteFlagCondition: ""
+              - userCondition: ""
+                segmentCondition: ""
+                prerequisiteFlagCondition: ""
+              percentageOptions:
+              - percentage: 1
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 0
+                  doubleValue: 6.027456183070403
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              - percentage: 1
+                value:
+                  boolValue: true
+                  stringValue: stringValue
+                  intValue: 0
+                  doubleValue: 6.027456183070403
+                  predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+              value: ""
+            percentageEvaluationAttribute: percentageEvaluationAttribute
+            settingId: 5
+            latestVersionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        title:
+          description: The title of the Change Request.
+          maxLength: 255
+          type: string
+        reason:
+          description: The optional notes describing the purpose of the Change Request.
+            This will appear in the Audit Log (in the Notes section when you expand
+            the corresponding entry) upon applying the change request.
+          maxLength: 1000
+          nullable: true
+          type: string
+        applyAt:
+          description: The optional UTC date and time when the scheduled Change Request
+            should be applied automatically.
+          format: date-time
+          nullable: true
+          type: string
+        bypassApproval:
+          description: "When true, bypasses required approval checks for scheduled\
+            \ changes."
+          type: boolean
+        proposedChanges:
+          description: The list of models describing the proposed changes to the Settings
+            included in the new Change Request.
+          items:
+            $ref: "#/components/schemas/CreateChangeRequestProposedChangeModel"
+          type: array
+      required:
+      - title
+      type: object
+    CreateChangeRequestProposedChangeModel:
+      example:
+        proposedChange:
+          defaultValue:
+            boolValue: true
+            stringValue: stringValue
+            intValue: 0
+            doubleValue: 6.027456183070403
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          targetingRules:
+          - conditions:
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            percentageOptions:
+            - percentage: 1
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 0
+                doubleValue: 6.027456183070403
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - percentage: 1
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 0
+                doubleValue: 6.027456183070403
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            value: ""
+          - conditions:
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            percentageOptions:
+            - percentage: 1
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 0
+                doubleValue: 6.027456183070403
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - percentage: 1
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 0
+                doubleValue: 6.027456183070403
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            value: ""
+          percentageEvaluationAttribute: percentageEvaluationAttribute
+          settingId: 5
+          latestVersionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        proposedChange:
+          $ref: "#/components/schemas/UpdateEvaluationFormulaWithLatestVersionModel"
+      required:
+      - proposedChange
       type: object
     CreateConfigRequest:
       example:
@@ -8680,7 +11608,7 @@ components:
       enum:
       - cannotApprove
       - canApproveOthers
-      - canBypassApproves
+      - canBypassApproval
       type: string
     EnvironmentModel:
       description: Details of the Environment.
@@ -8754,13 +11682,13 @@ components:
       description: Subscription limitations regarding Feature flag or Setting values
         and targeting.
       example:
-        maxPercentageOptionCount: 5
-        maxTargetingRuleCount: 5
-        maxComparisonValueLength: 2
-        maxComparisonValueListLength: 7
-        maxComparisonValueListItemLength: 9
-        maxStringFlagValueLength: 3
-        maxConditionPerTargetingRuleCount: 2
+        maxPercentageOptionCount: 0
+        maxTargetingRuleCount: 6
+        maxComparisonValueLength: 1
+        maxComparisonValueListLength: 5
+        maxComparisonValueListItemLength: 5
+        maxStringFlagValueLength: 2
+        maxConditionPerTargetingRuleCount: 7
       properties:
         maxPercentageOptionCount:
           description: Maximum number of percentage options a Feature Flag or Setting
@@ -9428,6 +12356,12 @@ components:
       - name
       - parameters
       type: object
+    NeedsAttentionFilter:
+      description: Filters Change Requests by whether they need attention.
+      enum:
+      - notNeedsAttention
+      - needsAttention
+      type: string
     OperationType:
       enum:
       - unknown
@@ -9794,12 +12728,12 @@ components:
       type: object
     PercentageOptionModel:
       example:
-        percentage: 1
+        percentage: 9
         value:
           boolValue: true
           stringValue: stringValue
-          intValue: 0
-          doubleValue: 6.027456183070403
+          intValue: 1
+          doubleValue: 5.962133916683182
           predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         percentage:
@@ -10998,9 +13932,74 @@ components:
       required:
       - name
       type: object
+    ResolveChangeRequestSettingConflictsModel:
+      example:
+        proposedChange:
+          defaultValue:
+            boolValue: true
+            stringValue: stringValue
+            intValue: 0
+            doubleValue: 6.027456183070403
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          targetingRules:
+          - conditions:
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            percentageOptions:
+            - percentage: 1
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 0
+                doubleValue: 6.027456183070403
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - percentage: 1
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 0
+                doubleValue: 6.027456183070403
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            value: ""
+          - conditions:
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            percentageOptions:
+            - percentage: 1
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 0
+                doubleValue: 6.027456183070403
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - percentage: 1
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 0
+                doubleValue: 6.027456183070403
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            value: ""
+          percentageEvaluationAttribute: percentageEvaluationAttribute
+          settingId: 5
+          latestVersionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        proposedChange:
+          $ref: "#/components/schemas/UpdateEvaluationFormulaWithLatestVersionModel"
+      required:
+      - proposedChange
+      type: object
     RolloutPercentageItemModel:
       example:
-        percentage: 1
+        percentage: 0
         value: ""
       properties:
         percentage:
@@ -11364,13 +14363,13 @@ components:
     SettingDataV2Model:
       description: Metadata of a Feature Flag or Setting.
       example:
-        settingId: 5
+        settingId: 3
         key: key
         name: name
         hint: hint
         settingType: boolean
         isJson: true
-        order: 5
+        order: 2
         createdAt: 2000-01-23T04:56:07.000+00:00
         creatorEmail: creatorEmail
         creatorFullName: creatorFullName
@@ -11458,8 +14457,8 @@ components:
         defaultValue:
           boolValue: true
           stringValue: stringValue
-          intValue: 0
-          doubleValue: 6.027456183070403
+          intValue: 1
+          doubleValue: 5.962133916683182
           predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         targetingRules:
         - conditions:
@@ -11470,19 +14469,19 @@ components:
             segmentCondition: ""
             prerequisiteFlagCondition: ""
           percentageOptions:
-          - percentage: 1
+          - percentage: 9
             value:
               boolValue: true
               stringValue: stringValue
-              intValue: 0
-              doubleValue: 6.027456183070403
+              intValue: 1
+              doubleValue: 5.962133916683182
               predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - percentage: 1
+          - percentage: 9
             value:
               boolValue: true
               stringValue: stringValue
-              intValue: 0
-              doubleValue: 6.027456183070403
+              intValue: 1
+              doubleValue: 5.962133916683182
               predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           value: ""
         - conditions:
@@ -11493,29 +14492,29 @@ components:
             segmentCondition: ""
             prerequisiteFlagCondition: ""
           percentageOptions:
-          - percentage: 1
+          - percentage: 9
             value:
               boolValue: true
               stringValue: stringValue
-              intValue: 0
-              doubleValue: 6.027456183070403
+              intValue: 1
+              doubleValue: 5.962133916683182
               predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          - percentage: 1
+          - percentage: 9
             value:
               boolValue: true
               stringValue: stringValue
-              intValue: 0
-              doubleValue: 6.027456183070403
+              intValue: 1
+              doubleValue: 5.962133916683182
               predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
           value: ""
         setting:
-          settingId: 5
+          settingId: 3
           key: key
           name: name
           hint: hint
           settingType: boolean
           isJson: true
-          order: 5
+          order: 2
           createdAt: 2000-01-23T04:56:07.000+00:00
           creatorEmail: creatorEmail
           creatorFullName: creatorFullName
@@ -11551,18 +14550,18 @@ components:
           integrationLinkType: trello
           url: url
         settingTags:
-        - settingTagId: 0
-          tagId: 6
+        - settingTagId: 4
+          tagId: 7
           name: name
           color: color
-        - settingTagId: 0
-          tagId: 6
+        - settingTagId: 4
+          tagId: 7
           name: name
           color: color
         settingIdsWherePrerequisite:
-        - 2
-        - 2
-        changeRequestCount: 7
+        - 0
+        - 0
+        changeRequestCount: 6
         config:
           product:
             organization:
@@ -11600,15 +14599,23 @@ components:
           approveRequired: true
         readOnly: true
         featureFlagLimitations:
-          maxPercentageOptionCount: 5
-          maxTargetingRuleCount: 5
-          maxComparisonValueLength: 2
-          maxComparisonValueListLength: 7
-          maxComparisonValueListItemLength: 9
-          maxStringFlagValueLength: 3
-          maxConditionPerTargetingRuleCount: 2
+          maxPercentageOptionCount: 0
+          maxTargetingRuleCount: 6
+          maxComparisonValueLength: 1
+          maxComparisonValueListLength: 5
+          maxComparisonValueListItemLength: 5
+          maxStringFlagValueLength: 2
+          maxConditionPerTargetingRuleCount: 7
+        approveRequired: true
+        canBypassApproval: true
+        reasonRequired: true
       properties:
         lastVersionId:
+          description: "The version identifier of the last change made to the Feature\
+            \ Flag or Setting in the Environment. It can be used to make sure concurrent\
+            \ updates are not overwriting each other. If the version identifier does\
+            \ not match the current version, the update will be rejected with a 409\
+            \ Conflict response."
           format: uuid
           type: string
         defaultValue:
@@ -11665,10 +14672,23 @@ components:
         environment:
           $ref: "#/components/schemas/EnvironmentModel"
         readOnly:
+          description: Indicates whether you have Read-only access to the Environment.
           type: boolean
         featureFlagLimitations:
           $ref: "#/components/schemas/FeatureFlagLimitations"
+        approveRequired:
+          description: Indicates that a mandatory approval is required for saving
+            and publishing.
+          type: boolean
+        canBypassApproval:
+          description: Indicates whether the user can bypass the approval flow.
+          type: boolean
+        reasonRequired:
+          description: Indicates that a mandatory note required for saving and publishing.
+          type: boolean
       required:
+      - approveRequired
+      - canBypassApproval
       - changeRequestCount
       - config
       - defaultValue
@@ -11680,6 +14700,7 @@ components:
       - lastVersionId
       - percentageEvaluationAttribute
       - readOnly
+      - reasonRequired
       - setting
       - settingIdsWherePrerequisite
       - settingTags
@@ -11805,8 +14826,8 @@ components:
       type: object
     SettingTagModel:
       example:
-        settingTagId: 0
-        tagId: 6
+        settingTagId: 4
+        tagId: 7
         name: name
         color: color
       properties:
@@ -11862,12 +14883,12 @@ components:
           integrationLinkType: trello
           url: url
         settingTags:
-        - settingTagId: 0
-          tagId: 6
+        - settingTagId: 4
+          tagId: 7
           name: name
           color: color
-        - settingTagId: 0
-          tagId: 6
+        - settingTagId: 4
+          tagId: 7
           name: name
           color: color
         rolloutRules:
@@ -11884,9 +14905,9 @@ components:
           segmentComparator: ""
           segmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         rolloutPercentageItems:
-        - percentage: 1
+        - percentage: 0
           value: ""
-        - percentage: 1
+        - percentage: 0
           value: ""
         value: ""
         config:
@@ -11925,13 +14946,13 @@ components:
           reasonRequired: true
           approveRequired: true
         featureFlagLimitations:
-          maxPercentageOptionCount: 5
-          maxTargetingRuleCount: 5
-          maxComparisonValueLength: 2
-          maxComparisonValueListLength: 7
-          maxComparisonValueListItemLength: 9
-          maxStringFlagValueLength: 3
-          maxConditionPerTargetingRuleCount: 2
+          maxPercentageOptionCount: 0
+          maxTargetingRuleCount: 6
+          maxComparisonValueLength: 1
+          maxComparisonValueListLength: 5
+          maxComparisonValueListItemLength: 5
+          maxStringFlagValueLength: 2
+          maxConditionPerTargetingRuleCount: 7
         readOnly: true
       properties:
         setting:
@@ -12348,19 +15369,19 @@ components:
           segmentCondition: ""
           prerequisiteFlagCondition: ""
         percentageOptions:
-        - percentage: 1
+        - percentage: 9
           value:
             boolValue: true
             stringValue: stringValue
-            intValue: 0
-            doubleValue: 6.027456183070403
+            intValue: 1
+            doubleValue: 5.962133916683182
             predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        - percentage: 1
+        - percentage: 9
           value:
             boolValue: true
             stringValue: stringValue
-            intValue: 0
-            doubleValue: 6.027456183070403
+            intValue: 1
+            doubleValue: 5.962133916683182
             predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
         value: ""
       properties:
@@ -12401,6 +15422,173 @@ components:
         approveRequired:
           description: Indicates that a mandatory approval is required in this Environment
             before changes are applied.
+          type: boolean
+      type: object
+    UpdateChangeRequestCommentModel:
+      example:
+        body: body
+      properties:
+        body:
+          description: The updated comment body.
+          maxLength: 5000
+          type: string
+      required:
+      - body
+      type: object
+    UpdateChangeRequestModel:
+      example:
+        title: title
+        reason: reason
+        applyAt: 2000-01-23T04:56:07.000+00:00
+        bypassApproval: true
+      properties:
+        title:
+          description: The updated title of the Change Request.
+          maxLength: 255
+          type: string
+        reason:
+          description: The updated optional notes describing the purpose of the Change
+            Request.
+          maxLength: 1000
+          nullable: true
+          type: string
+        applyAt:
+          description: The updated optional UTC date and time when the Change Request
+            should be applied automatically.
+          format: date-time
+          nullable: true
+          type: string
+        bypassApproval:
+          description: The updated bypass-approval flag for scheduled changes.
+          nullable: true
+          type: boolean
+      required:
+      - title
+      type: object
+    UpdateChangeRequestProposedChangesModel:
+      example:
+        proposedChanges:
+        - defaultValue:
+            boolValue: true
+            stringValue: stringValue
+            intValue: 0
+            doubleValue: 6.027456183070403
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          targetingRules:
+          - conditions:
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            percentageOptions:
+            - percentage: 1
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 0
+                doubleValue: 6.027456183070403
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - percentage: 1
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 0
+                doubleValue: 6.027456183070403
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            value: ""
+          - conditions:
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            percentageOptions:
+            - percentage: 1
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 0
+                doubleValue: 6.027456183070403
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - percentage: 1
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 0
+                doubleValue: 6.027456183070403
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            value: ""
+          percentageEvaluationAttribute: percentageEvaluationAttribute
+          settingId: 5
+          latestVersionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - defaultValue:
+            boolValue: true
+            stringValue: stringValue
+            intValue: 0
+            doubleValue: 6.027456183070403
+            predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          targetingRules:
+          - conditions:
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            percentageOptions:
+            - percentage: 1
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 0
+                doubleValue: 6.027456183070403
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - percentage: 1
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 0
+                doubleValue: 6.027456183070403
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            value: ""
+          - conditions:
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            - userCondition: ""
+              segmentCondition: ""
+              prerequisiteFlagCondition: ""
+            percentageOptions:
+            - percentage: 1
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 0
+                doubleValue: 6.027456183070403
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            - percentage: 1
+              value:
+                boolValue: true
+                stringValue: stringValue
+                intValue: 0
+                doubleValue: 6.027456183070403
+                predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+            value: ""
+          percentageEvaluationAttribute: percentageEvaluationAttribute
+          settingId: 5
+          latestVersionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        forced: true
+      properties:
+        proposedChanges:
+          description: The setting values to update on the Change Request.
+          items:
+            $ref: "#/components/schemas/UpdateEvaluationFormulaWithLatestVersionModel"
+          type: array
+        forced:
+          description: "When true, skips conflict (LatestVersionId) checking."
           type: boolean
       type: object
     UpdateComparisonValueListModel:
@@ -12664,6 +15852,96 @@ components:
           description: The identifier of the feature flag or setting.
           format: int32
           type: integer
+      required:
+      - defaultValue
+      type: object
+    UpdateEvaluationFormulaWithLatestVersionModel:
+      example:
+        defaultValue:
+          boolValue: true
+          stringValue: stringValue
+          intValue: 0
+          doubleValue: 6.027456183070403
+          predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        targetingRules:
+        - conditions:
+          - userCondition: ""
+            segmentCondition: ""
+            prerequisiteFlagCondition: ""
+          - userCondition: ""
+            segmentCondition: ""
+            prerequisiteFlagCondition: ""
+          percentageOptions:
+          - percentage: 1
+            value:
+              boolValue: true
+              stringValue: stringValue
+              intValue: 0
+              doubleValue: 6.027456183070403
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - percentage: 1
+            value:
+              boolValue: true
+              stringValue: stringValue
+              intValue: 0
+              doubleValue: 6.027456183070403
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          value: ""
+        - conditions:
+          - userCondition: ""
+            segmentCondition: ""
+            prerequisiteFlagCondition: ""
+          - userCondition: ""
+            segmentCondition: ""
+            prerequisiteFlagCondition: ""
+          percentageOptions:
+          - percentage: 1
+            value:
+              boolValue: true
+              stringValue: stringValue
+              intValue: 0
+              doubleValue: 6.027456183070403
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          - percentage: 1
+            value:
+              boolValue: true
+              stringValue: stringValue
+              intValue: 0
+              doubleValue: 6.027456183070403
+              predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          value: ""
+        percentageEvaluationAttribute: percentageEvaluationAttribute
+        settingId: 5
+        latestVersionId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        defaultValue:
+          $ref: "#/components/schemas/UpdateValueModel"
+        targetingRules:
+          description: The targeting rules of the Feature Flag or Setting.
+          items:
+            $ref: "#/components/schemas/UpdateTargetingRuleModel"
+          nullable: true
+          type: array
+        percentageEvaluationAttribute:
+          description: "The user attribute used for percentage evaluation. If not\
+            \ set, it defaults to the `Identifier` user object attribute."
+          maxLength: 1000
+          nullable: true
+          type: string
+        settingId:
+          description: The identifier of the feature flag or setting.
+          format: int32
+          type: integer
+        latestVersionId:
+          description: "The version identifier of the last change made to the Feature\
+            \ Flag or Setting in the Environment. It can be used to make sure concurrent\
+            \ updates are not overwriting each other. If provided and the version\
+            \ identifier does not match the current version, the update will be rejected\
+            \ with a 409 Conflict response. The latest version id can be acquired\
+            \ from the `LastVersionId` property of the response models."
+          format: uuid
+          nullable: true
+          type: string
       required:
       - defaultValue
       type: object
@@ -13704,8 +16982,8 @@ components:
       example:
         boolValue: true
         stringValue: stringValue
-        intValue: 0
-        doubleValue: 6.027456183070403
+        intValue: 1
+        doubleValue: 5.962133916683182
         predefinedVariationId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
       properties:
         boolValue:
@@ -13959,6 +17237,7 @@ x-tagGroups:
   tags:
   - Feature Flag & Setting values using SDK Key V2
   - Feature Flag & Setting values V2
+  - Change Requests (Approval flow & Scheduled changes) - Beta
 - name: Feature Flag values (legacy)
   tags:
   - Feature Flag & Setting values using SDK Key

@@ -23,10 +23,17 @@ var _ MappedNullable = &ConfigSettingFormulasModel{}
 type ConfigSettingFormulasModel struct {
 	Config ConfigModel `json:"config"`
 	Environment EnvironmentModel `json:"environment"`
+	// Indicates whether you have Read-only access to the Environment.
 	ReadOnly bool `json:"readOnly"`
 	// Evaluation descriptors of each updated Feature Flag and Setting.
 	SettingFormulas []ConfigSettingFormulaModel `json:"settingFormulas"`
 	FeatureFlagLimitations FeatureFlagLimitations `json:"featureFlagLimitations"`
+	// Indicates that a mandatory approval is required for saving and publishing.
+	ApproveRequired bool `json:"approveRequired"`
+	// Indicates whether the user can bypass the approval flow.
+	CanBypassApproval bool `json:"canBypassApproval"`
+	// Indicates that a mandatory note is required for saving and publishing.
+	ReasonRequired bool `json:"reasonRequired"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -36,13 +43,16 @@ type _ConfigSettingFormulasModel ConfigSettingFormulasModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewConfigSettingFormulasModel(config ConfigModel, environment EnvironmentModel, readOnly bool, settingFormulas []ConfigSettingFormulaModel, featureFlagLimitations FeatureFlagLimitations) *ConfigSettingFormulasModel {
+func NewConfigSettingFormulasModel(config ConfigModel, environment EnvironmentModel, readOnly bool, settingFormulas []ConfigSettingFormulaModel, featureFlagLimitations FeatureFlagLimitations, approveRequired bool, canBypassApproval bool, reasonRequired bool) *ConfigSettingFormulasModel {
 	this := ConfigSettingFormulasModel{}
 	this.Config = config
 	this.Environment = environment
 	this.ReadOnly = readOnly
 	this.SettingFormulas = settingFormulas
 	this.FeatureFlagLimitations = featureFlagLimitations
+	this.ApproveRequired = approveRequired
+	this.CanBypassApproval = canBypassApproval
+	this.ReasonRequired = reasonRequired
 	return &this
 }
 
@@ -174,6 +184,78 @@ func (o *ConfigSettingFormulasModel) SetFeatureFlagLimitations(v FeatureFlagLimi
 	o.FeatureFlagLimitations = v
 }
 
+// GetApproveRequired returns the ApproveRequired field value
+func (o *ConfigSettingFormulasModel) GetApproveRequired() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.ApproveRequired
+}
+
+// GetApproveRequiredOk returns a tuple with the ApproveRequired field value
+// and a boolean to check if the value has been set.
+func (o *ConfigSettingFormulasModel) GetApproveRequiredOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ApproveRequired, true
+}
+
+// SetApproveRequired sets field value
+func (o *ConfigSettingFormulasModel) SetApproveRequired(v bool) {
+	o.ApproveRequired = v
+}
+
+// GetCanBypassApproval returns the CanBypassApproval field value
+func (o *ConfigSettingFormulasModel) GetCanBypassApproval() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.CanBypassApproval
+}
+
+// GetCanBypassApprovalOk returns a tuple with the CanBypassApproval field value
+// and a boolean to check if the value has been set.
+func (o *ConfigSettingFormulasModel) GetCanBypassApprovalOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CanBypassApproval, true
+}
+
+// SetCanBypassApproval sets field value
+func (o *ConfigSettingFormulasModel) SetCanBypassApproval(v bool) {
+	o.CanBypassApproval = v
+}
+
+// GetReasonRequired returns the ReasonRequired field value
+func (o *ConfigSettingFormulasModel) GetReasonRequired() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.ReasonRequired
+}
+
+// GetReasonRequiredOk returns a tuple with the ReasonRequired field value
+// and a boolean to check if the value has been set.
+func (o *ConfigSettingFormulasModel) GetReasonRequiredOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.ReasonRequired, true
+}
+
+// SetReasonRequired sets field value
+func (o *ConfigSettingFormulasModel) SetReasonRequired(v bool) {
+	o.ReasonRequired = v
+}
+
 func (o ConfigSettingFormulasModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -189,6 +271,9 @@ func (o ConfigSettingFormulasModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["readOnly"] = o.ReadOnly
 	toSerialize["settingFormulas"] = o.SettingFormulas
 	toSerialize["featureFlagLimitations"] = o.FeatureFlagLimitations
+	toSerialize["approveRequired"] = o.ApproveRequired
+	toSerialize["canBypassApproval"] = o.CanBypassApproval
+	toSerialize["reasonRequired"] = o.ReasonRequired
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -207,6 +292,9 @@ func (o *ConfigSettingFormulasModel) UnmarshalJSON(data []byte) (err error) {
 		"readOnly",
 		"settingFormulas",
 		"featureFlagLimitations",
+		"approveRequired",
+		"canBypassApproval",
+		"reasonRequired",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -241,6 +329,9 @@ func (o *ConfigSettingFormulasModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "readOnly")
 		delete(additionalProperties, "settingFormulas")
 		delete(additionalProperties, "featureFlagLimitations")
+		delete(additionalProperties, "approveRequired")
+		delete(additionalProperties, "canBypassApproval")
+		delete(additionalProperties, "reasonRequired")
 		o.AdditionalProperties = additionalProperties
 	}
 

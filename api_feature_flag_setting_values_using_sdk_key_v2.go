@@ -156,6 +156,7 @@ type FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Reques
 	updateEvaluationFormulaModel *UpdateEvaluationFormulaModel
 	reason *string
 	bypassApproval *bool
+	latestVersionId *string
 	xCONFIGCATSDKKEY *string
 }
 
@@ -173,6 +174,12 @@ func (r FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Req
 // Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission.
 func (r FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request) BypassApproval(bypassApproval bool) FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request {
 	r.bypassApproval = &bypassApproval
+	return r
+}
+
+// Optional. The version identifier of the last change made to the Feature Flag or Setting in the Environment. It can be used to make sure concurrent updates are not overwriting each other. If provided and the version identifier does not match the current version, the update will be rejected with a 409 Conflict response. The latest version id can be acquired from the &#x60;LastVersionId&#x60; property of the response models.
+func (r FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request) LatestVersionId(latestVersionId string) FeatureFlagSettingValuesUsingSDKKeyV2APIReplaceSettingValueBySdkkeyV2Request {
+	r.latestVersionId = &latestVersionId
 	return r
 }
 
@@ -286,6 +293,9 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyV2APIService) ReplaceSettingValueByS
 	if r.bypassApproval != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "bypassApproval", r.bypassApproval, "form", "")
 	}
+	if r.latestVersionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "latestVersionId", r.latestVersionId, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}
 
@@ -352,6 +362,7 @@ type FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request
 	jsonPatchOperation *[]JsonPatchOperation
 	reason *string
 	bypassApproval *bool
+	latestVersionId *string
 	xCONFIGCATSDKKEY *string
 }
 
@@ -369,6 +380,12 @@ func (r FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Requ
 // Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission.
 func (r FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request) BypassApproval(bypassApproval bool) FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request {
 	r.bypassApproval = &bypassApproval
+	return r
+}
+
+// Optional. The version identifier of the last change made to the Feature Flag or Setting in the Environment. It can be used to make sure concurrent updates are not overwriting each other. If provided and the version identifier does not match the current version, the update will be rejected with a 409 Conflict response. The latest version id can be acquired from the &#x60;LastVersionId&#x60; property of the response models.
+func (r FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request) LatestVersionId(latestVersionId string) FeatureFlagSettingValuesUsingSDKKeyV2APIUpdateSettingValueBySdkkeyV2Request {
+	r.latestVersionId = &latestVersionId
 	return r
 }
 
@@ -503,6 +520,9 @@ func (a *FeatureFlagSettingValuesUsingSDKKeyV2APIService) UpdateSettingValueBySd
 	}
 	if r.bypassApproval != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "bypassApproval", r.bypassApproval, "form", "")
+	}
+	if r.latestVersionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "latestVersionId", r.latestVersionId, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}

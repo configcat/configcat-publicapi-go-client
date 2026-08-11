@@ -235,6 +235,8 @@
 
 * `CHANGE_REQUEST_NEEDS_ATTENTION_FIXED` (value: `"changeRequestNeedsAttentionFixed"`)
 
+* `CHANGE_REQUEST_OWNERSHIP_CLAIMED` (value: `"changeRequestOwnershipClaimed"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

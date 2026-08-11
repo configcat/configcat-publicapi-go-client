@@ -7,7 +7,7 @@
 
 * `CAN_APPROVE_OTHERS` (value: `"canApproveOthers"`)
 
-* `CAN_BYPASS_APPROVES` (value: `"canBypassApproves"`)
+* `CAN_BYPASS_APPROVAL` (value: `"canBypassApproval"`)
 
 * `CUSTOM` (value: `"custom"`)
 
