@@ -137,6 +137,7 @@ const (
 	AUDITLOGTYPE_CHANGE_REQUEST_COMMENT_DELETED AuditLogType = "changeRequestCommentDeleted"
 	AUDITLOGTYPE_CHANGE_REQUEST_SETTING_DELETED AuditLogType = "changeRequestSettingDeleted"
 	AUDITLOGTYPE_CHANGE_REQUEST_NEEDS_ATTENTION_FIXED AuditLogType = "changeRequestNeedsAttentionFixed"
+	AUDITLOGTYPE_CHANGE_REQUEST_OWNERSHIP_CLAIMED AuditLogType = "changeRequestOwnershipClaimed"
 )
 
 // All allowed values of AuditLogType enum
@@ -257,6 +258,7 @@ var AllowedAuditLogTypeEnumValues = []AuditLogType{
 	"changeRequestCommentDeleted",
 	"changeRequestSettingDeleted",
 	"changeRequestNeedsAttentionFixed",
+	"changeRequestOwnershipClaimed",
 }
 
 func (v *AuditLogType) UnmarshalJSON(src []byte) error {

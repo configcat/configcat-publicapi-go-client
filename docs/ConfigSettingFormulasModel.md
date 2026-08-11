@@ -6,15 +6,18 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Config** | [**ConfigModel**](ConfigModel.md) |  | 
 **Environment** | [**EnvironmentModel**](EnvironmentModel.md) |  | 
-**ReadOnly** | **bool** |  | 
+**ReadOnly** | **bool** | Indicates whether you have Read-only access to the Environment. | 
 **SettingFormulas** | [**[]ConfigSettingFormulaModel**](ConfigSettingFormulaModel.md) | Evaluation descriptors of each updated Feature Flag and Setting. | 
 **FeatureFlagLimitations** | [**FeatureFlagLimitations**](FeatureFlagLimitations.md) |  | 
+**ApproveRequired** | **bool** | Indicates that a mandatory approval is required for saving and publishing. | 
+**CanBypassApproval** | **bool** | Indicates whether the user can bypass the approval flow. | 
+**ReasonRequired** | **bool** | Indicates that a mandatory note is required for saving and publishing. | 
 
 ## Methods
 
 ### NewConfigSettingFormulasModel
 
-`func NewConfigSettingFormulasModel(config ConfigModel, environment EnvironmentModel, readOnly bool, settingFormulas []ConfigSettingFormulaModel, featureFlagLimitations FeatureFlagLimitations, ) *ConfigSettingFormulasModel`
+`func NewConfigSettingFormulasModel(config ConfigModel, environment EnvironmentModel, readOnly bool, settingFormulas []ConfigSettingFormulaModel, featureFlagLimitations FeatureFlagLimitations, approveRequired bool, canBypassApproval bool, reasonRequired bool, ) *ConfigSettingFormulasModel`
 
 NewConfigSettingFormulasModel instantiates a new ConfigSettingFormulasModel object
 This constructor will assign default values to properties that have it defined,
@@ -127,6 +130,66 @@ and a boolean to check if the value has been set.
 `func (o *ConfigSettingFormulasModel) SetFeatureFlagLimitations(v FeatureFlagLimitations)`
 
 SetFeatureFlagLimitations sets FeatureFlagLimitations field to given value.
+
+
+### GetApproveRequired
+
+`func (o *ConfigSettingFormulasModel) GetApproveRequired() bool`
+
+GetApproveRequired returns the ApproveRequired field if non-nil, zero value otherwise.
+
+### GetApproveRequiredOk
+
+`func (o *ConfigSettingFormulasModel) GetApproveRequiredOk() (*bool, bool)`
+
+GetApproveRequiredOk returns a tuple with the ApproveRequired field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApproveRequired
+
+`func (o *ConfigSettingFormulasModel) SetApproveRequired(v bool)`
+
+SetApproveRequired sets ApproveRequired field to given value.
+
+
+### GetCanBypassApproval
+
+`func (o *ConfigSettingFormulasModel) GetCanBypassApproval() bool`
+
+GetCanBypassApproval returns the CanBypassApproval field if non-nil, zero value otherwise.
+
+### GetCanBypassApprovalOk
+
+`func (o *ConfigSettingFormulasModel) GetCanBypassApprovalOk() (*bool, bool)`
+
+GetCanBypassApprovalOk returns a tuple with the CanBypassApproval field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanBypassApproval
+
+`func (o *ConfigSettingFormulasModel) SetCanBypassApproval(v bool)`
+
+SetCanBypassApproval sets CanBypassApproval field to given value.
+
+
+### GetReasonRequired
+
+`func (o *ConfigSettingFormulasModel) GetReasonRequired() bool`
+
+GetReasonRequired returns the ReasonRequired field if non-nil, zero value otherwise.
+
+### GetReasonRequiredOk
+
+`func (o *ConfigSettingFormulasModel) GetReasonRequiredOk() (*bool, bool)`
+
+GetReasonRequiredOk returns a tuple with the ReasonRequired field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReasonRequired
+
+`func (o *ConfigSettingFormulasModel) SetReasonRequired(v bool)`
+
+SetReasonRequired sets ReasonRequired field to given value.
 
 
 

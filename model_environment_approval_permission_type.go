@@ -23,14 +23,14 @@ type EnvironmentApprovalPermissionType string
 const (
 	ENVIRONMENTAPPROVALPERMISSIONTYPE_CANNOT_APPROVE EnvironmentApprovalPermissionType = "cannotApprove"
 	ENVIRONMENTAPPROVALPERMISSIONTYPE_CAN_APPROVE_OTHERS EnvironmentApprovalPermissionType = "canApproveOthers"
-	ENVIRONMENTAPPROVALPERMISSIONTYPE_CAN_BYPASS_APPROVES EnvironmentApprovalPermissionType = "canBypassApproves"
+	ENVIRONMENTAPPROVALPERMISSIONTYPE_CAN_BYPASS_APPROVAL EnvironmentApprovalPermissionType = "canBypassApproval"
 )
 
 // All allowed values of EnvironmentApprovalPermissionType enum
 var AllowedEnvironmentApprovalPermissionTypeEnumValues = []EnvironmentApprovalPermissionType{
 	"cannotApprove",
 	"canApproveOthers",
-	"canBypassApproves",
+	"canBypassApproval",
 }
 
 func (v *EnvironmentApprovalPermissionType) UnmarshalJSON(src []byte) error {

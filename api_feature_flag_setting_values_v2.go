@@ -270,6 +270,7 @@ type FeatureFlagSettingValuesV2APIPostSettingValuesV2Request struct {
 	updateEvaluationFormulasModel *UpdateEvaluationFormulasModel
 	reason *string
 	bypassApproval *bool
+	latestVersionId *string
 }
 
 func (r FeatureFlagSettingValuesV2APIPostSettingValuesV2Request) UpdateEvaluationFormulasModel(updateEvaluationFormulasModel UpdateEvaluationFormulasModel) FeatureFlagSettingValuesV2APIPostSettingValuesV2Request {
@@ -286,6 +287,12 @@ func (r FeatureFlagSettingValuesV2APIPostSettingValuesV2Request) Reason(reason s
 // Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission.
 func (r FeatureFlagSettingValuesV2APIPostSettingValuesV2Request) BypassApproval(bypassApproval bool) FeatureFlagSettingValuesV2APIPostSettingValuesV2Request {
 	r.bypassApproval = &bypassApproval
+	return r
+}
+
+// Optional. The version identifier of the last change made to the Feature Flag or Setting in the Environment. It can be used to make sure concurrent updates are not overwriting each other. If provided and the version identifier does not match the current version, the update will be rejected with a 409 Conflict response. The latest version id can be acquired from the &#x60;LastVersionId&#x60; property of the response models.
+func (r FeatureFlagSettingValuesV2APIPostSettingValuesV2Request) LatestVersionId(latestVersionId string) FeatureFlagSettingValuesV2APIPostSettingValuesV2Request {
+	r.latestVersionId = &latestVersionId
 	return r
 }
 
@@ -414,6 +421,9 @@ func (a *FeatureFlagSettingValuesV2APIService) PostSettingValuesV2Execute(r Feat
 	if r.bypassApproval != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "bypassApproval", r.bypassApproval, "form", "")
 	}
+	if r.latestVersionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "latestVersionId", r.latestVersionId, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}
 
@@ -478,6 +488,7 @@ type FeatureFlagSettingValuesV2APIReplaceSettingValueV2Request struct {
 	updateEvaluationFormulaModel *UpdateEvaluationFormulaModel
 	reason *string
 	bypassApproval *bool
+	latestVersionId *string
 }
 
 func (r FeatureFlagSettingValuesV2APIReplaceSettingValueV2Request) UpdateEvaluationFormulaModel(updateEvaluationFormulaModel UpdateEvaluationFormulaModel) FeatureFlagSettingValuesV2APIReplaceSettingValueV2Request {
@@ -494,6 +505,12 @@ func (r FeatureFlagSettingValuesV2APIReplaceSettingValueV2Request) Reason(reason
 // Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission.
 func (r FeatureFlagSettingValuesV2APIReplaceSettingValueV2Request) BypassApproval(bypassApproval bool) FeatureFlagSettingValuesV2APIReplaceSettingValueV2Request {
 	r.bypassApproval = &bypassApproval
+	return r
+}
+
+// Optional. The version identifier of the last change made to the Feature Flag or Setting in the Environment. It can be used to make sure concurrent updates are not overwriting each other. If provided and the version identifier does not match the current version, the update will be rejected with a 409 Conflict response. The latest version id can be acquired from the &#x60;LastVersionId&#x60; property of the response models.
+func (r FeatureFlagSettingValuesV2APIReplaceSettingValueV2Request) LatestVersionId(latestVersionId string) FeatureFlagSettingValuesV2APIReplaceSettingValueV2Request {
+	r.latestVersionId = &latestVersionId
 	return r
 }
 
@@ -604,6 +621,9 @@ func (a *FeatureFlagSettingValuesV2APIService) ReplaceSettingValueV2Execute(r Fe
 	if r.bypassApproval != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "bypassApproval", r.bypassApproval, "form", "")
 	}
+	if r.latestVersionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "latestVersionId", r.latestVersionId, "form", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}
 
@@ -668,6 +688,7 @@ type FeatureFlagSettingValuesV2APIUpdateSettingValueV2Request struct {
 	jsonPatchOperation *[]JsonPatchOperation
 	reason *string
 	bypassApproval *bool
+	latestVersionId *string
 }
 
 func (r FeatureFlagSettingValuesV2APIUpdateSettingValueV2Request) JsonPatchOperation(jsonPatchOperation []JsonPatchOperation) FeatureFlagSettingValuesV2APIUpdateSettingValueV2Request {
@@ -684,6 +705,12 @@ func (r FeatureFlagSettingValuesV2APIUpdateSettingValueV2Request) Reason(reason 
 // Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission.
 func (r FeatureFlagSettingValuesV2APIUpdateSettingValueV2Request) BypassApproval(bypassApproval bool) FeatureFlagSettingValuesV2APIUpdateSettingValueV2Request {
 	r.bypassApproval = &bypassApproval
+	return r
+}
+
+// Optional. The version identifier of the last change made to the Feature Flag or Setting in the Environment. It can be used to make sure concurrent updates are not overwriting each other. If provided and the version identifier does not match the current version, the update will be rejected with a 409 Conflict response. The latest version id can be acquired from the &#x60;LastVersionId&#x60; property of the response models.
+func (r FeatureFlagSettingValuesV2APIUpdateSettingValueV2Request) LatestVersionId(latestVersionId string) FeatureFlagSettingValuesV2APIUpdateSettingValueV2Request {
+	r.latestVersionId = &latestVersionId
 	return r
 }
 
@@ -815,6 +842,9 @@ func (a *FeatureFlagSettingValuesV2APIService) UpdateSettingValueV2Execute(r Fea
 	}
 	if r.bypassApproval != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "bypassApproval", r.bypassApproval, "form", "")
+	}
+	if r.latestVersionId != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "latestVersionId", r.latestVersionId, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json", "text/json", "application/*+json"}

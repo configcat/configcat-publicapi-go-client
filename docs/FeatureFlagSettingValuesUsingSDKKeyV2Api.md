@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 ## ReplaceSettingValueBySdkkeyV2
 
-> SettingFormulaModel ReplaceSettingValueBySdkkeyV2(ctx, settingKeyOrId).UpdateEvaluationFormulaModel(updateEvaluationFormulaModel).Reason(reason).BypassApproval(bypassApproval).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
+> SettingFormulaModel ReplaceSettingValueBySdkkeyV2(ctx, settingKeyOrId).UpdateEvaluationFormulaModel(updateEvaluationFormulaModel).Reason(reason).BypassApproval(bypassApproval).LatestVersionId(latestVersionId).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
 
 Replace value
 
@@ -107,11 +107,12 @@ func main() {
 	updateEvaluationFormulaModel := *openapiclient.NewUpdateEvaluationFormulaModel(*openapiclient.NewUpdateValueModel()) // UpdateEvaluationFormulaModel | 
 	reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
 	bypassApproval := true // bool | Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission. (optional)
+	latestVersionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Optional. The version identifier of the last change made to the Feature Flag or Setting in the Environment. It can be used to make sure concurrent updates are not overwriting each other. If provided and the version identifier does not match the current version, the update will be rejected with a 409 Conflict response. The latest version id can be acquired from the `LastVersionId` property of the response models. (optional)
 	xCONFIGCATSDKKEY := "xCONFIGCATSDKKEY_example" // string | The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyV2API.ReplaceSettingValueBySdkkeyV2(context.Background(), settingKeyOrId).UpdateEvaluationFormulaModel(updateEvaluationFormulaModel).Reason(reason).BypassApproval(bypassApproval).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
+	resp, r, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyV2API.ReplaceSettingValueBySdkkeyV2(context.Background(), settingKeyOrId).UpdateEvaluationFormulaModel(updateEvaluationFormulaModel).Reason(reason).BypassApproval(bypassApproval).LatestVersionId(latestVersionId).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesUsingSDKKeyV2API.ReplaceSettingValueBySdkkeyV2``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -140,6 +141,7 @@ Name | Type | Description  | Notes
  **updateEvaluationFormulaModel** | [**UpdateEvaluationFormulaModel**](UpdateEvaluationFormulaModel.md) |  | 
  **reason** | **string** | The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
  **bypassApproval** | **bool** | Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission. | 
+ **latestVersionId** | **string** | Optional. The version identifier of the last change made to the Feature Flag or Setting in the Environment. It can be used to make sure concurrent updates are not overwriting each other. If provided and the version identifier does not match the current version, the update will be rejected with a 409 Conflict response. The latest version id can be acquired from the &#x60;LastVersionId&#x60; property of the response models. | 
  **xCONFIGCATSDKKEY** | **string** | The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) | 
 
 ### Return type
@@ -162,7 +164,7 @@ Name | Type | Description  | Notes
 
 ## UpdateSettingValueBySdkkeyV2
 
-> SettingFormulaModel UpdateSettingValueBySdkkeyV2(ctx, settingKeyOrId).JsonPatchOperation(jsonPatchOperation).Reason(reason).BypassApproval(bypassApproval).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
+> SettingFormulaModel UpdateSettingValueBySdkkeyV2(ctx, settingKeyOrId).JsonPatchOperation(jsonPatchOperation).Reason(reason).BypassApproval(bypassApproval).LatestVersionId(latestVersionId).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
 
 Update value
 
@@ -185,11 +187,12 @@ func main() {
 	jsonPatchOperation := []openapiclient.JsonPatchOperation{*openapiclient.NewJsonPatchOperation(openapiclient.OperationType("unknown"), "Path_example")} // []JsonPatchOperation | 
 	reason := "reason_example" // string | The reason note for the Audit Log if the Product's \"Config changes require a reason\" preference is turned on. (optional)
 	bypassApproval := true // bool | Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission. (optional)
+	latestVersionId := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | Optional. The version identifier of the last change made to the Feature Flag or Setting in the Environment. It can be used to make sure concurrent updates are not overwriting each other. If provided and the version identifier does not match the current version, the update will be rejected with a 409 Conflict response. The latest version id can be acquired from the `LastVersionId` property of the response models. (optional)
 	xCONFIGCATSDKKEY := "xCONFIGCATSDKKEY_example" // string | The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyV2API.UpdateSettingValueBySdkkeyV2(context.Background(), settingKeyOrId).JsonPatchOperation(jsonPatchOperation).Reason(reason).BypassApproval(bypassApproval).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
+	resp, r, err := apiClient.FeatureFlagSettingValuesUsingSDKKeyV2API.UpdateSettingValueBySdkkeyV2(context.Background(), settingKeyOrId).JsonPatchOperation(jsonPatchOperation).Reason(reason).BypassApproval(bypassApproval).LatestVersionId(latestVersionId).XCONFIGCATSDKKEY(xCONFIGCATSDKKEY).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FeatureFlagSettingValuesUsingSDKKeyV2API.UpdateSettingValueBySdkkeyV2``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -218,6 +221,7 @@ Name | Type | Description  | Notes
  **jsonPatchOperation** | [**[]JsonPatchOperation**](JsonPatchOperation.md) |  | 
  **reason** | **string** | The reason note for the Audit Log if the Product&#39;s \&quot;Config changes require a reason\&quot; preference is turned on. | 
  **bypassApproval** | **bool** | Whether to bypass the approval process and directly apply the change. This is only applicable for users with bypass approval permission. | 
+ **latestVersionId** | **string** | Optional. The version identifier of the last change made to the Feature Flag or Setting in the Environment. It can be used to make sure concurrent updates are not overwriting each other. If provided and the version identifier does not match the current version, the update will be rejected with a 409 Conflict response. The latest version id can be acquired from the &#x60;LastVersionId&#x60; property of the response models. | 
  **xCONFIGCATSDKKEY** | **string** | The ConfigCat SDK Key. (https://app.configcat.com/sdkkey) | 
 
 ### Return type

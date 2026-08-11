@@ -52,6 +52,8 @@ type APIClient struct {
 
 	AuditLogsAPI *AuditLogsAPIService
 
+	ChangeRequestsApprovalFlowScheduledChangesBetaAPI *ChangeRequestsApprovalFlowScheduledChangesBetaAPIService
+
 	CodeReferencesAPI *CodeReferencesAPIService
 
 	ConfigsAPI *ConfigsAPIService
@@ -112,6 +114,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.AuditLogsAPI = (*AuditLogsAPIService)(&c.common)
+	c.ChangeRequestsApprovalFlowScheduledChangesBetaAPI = (*ChangeRequestsApprovalFlowScheduledChangesBetaAPIService)(&c.common)
 	c.CodeReferencesAPI = (*CodeReferencesAPIService)(&c.common)
 	c.ConfigsAPI = (*ConfigsAPIService)(&c.common)
 	c.EnvironmentsAPI = (*EnvironmentsAPIService)(&c.common)

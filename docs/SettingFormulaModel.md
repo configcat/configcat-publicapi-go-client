@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**LastVersionId** | **string** |  | 
+**LastVersionId** | **string** | The version identifier of the last change made to the Feature Flag or Setting in the Environment. It can be used to make sure concurrent updates are not overwriting each other. If the version identifier does not match the current version, the update will be rejected with a 409 Conflict response. | 
 **DefaultValue** | [**ValueModel**](ValueModel.md) |  | 
 **TargetingRules** | [**[]TargetingRuleModel**](TargetingRuleModel.md) | The targeting rules of the Feature Flag or Setting. | 
 **Setting** | [**SettingDataV2Model**](SettingDataV2Model.md) |  | 
@@ -18,14 +18,17 @@ Name | Type | Description | Notes
 **ChangeRequestCount** | **int32** | The number of change requests for the Feature Flag or Setting. | 
 **Config** | [**ConfigModel**](ConfigModel.md) |  | 
 **Environment** | [**EnvironmentModel**](EnvironmentModel.md) |  | 
-**ReadOnly** | **bool** |  | 
+**ReadOnly** | **bool** | Indicates whether you have Read-only access to the Environment. | 
 **FeatureFlagLimitations** | [**FeatureFlagLimitations**](FeatureFlagLimitations.md) |  | 
+**ApproveRequired** | **bool** | Indicates that a mandatory approval is required for saving and publishing. | 
+**CanBypassApproval** | **bool** | Indicates whether the user can bypass the approval flow. | 
+**ReasonRequired** | **bool** | Indicates that a mandatory note required for saving and publishing. | 
 
 ## Methods
 
 ### NewSettingFormulaModel
 
-`func NewSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targetingRules []TargetingRuleModel, setting SettingDataV2Model, updatedAt NullableTime, percentageEvaluationAttribute NullableString, lastUpdaterUserEmail NullableString, lastUpdaterUserFullName NullableString, integrationLinks []IntegrationLinkModel, settingTags []SettingTagModel, settingIdsWherePrerequisite []int32, changeRequestCount int32, config ConfigModel, environment EnvironmentModel, readOnly bool, featureFlagLimitations FeatureFlagLimitations, ) *SettingFormulaModel`
+`func NewSettingFormulaModel(lastVersionId string, defaultValue ValueModel, targetingRules []TargetingRuleModel, setting SettingDataV2Model, updatedAt NullableTime, percentageEvaluationAttribute NullableString, lastUpdaterUserEmail NullableString, lastUpdaterUserFullName NullableString, integrationLinks []IntegrationLinkModel, settingTags []SettingTagModel, settingIdsWherePrerequisite []int32, changeRequestCount int32, config ConfigModel, environment EnvironmentModel, readOnly bool, featureFlagLimitations FeatureFlagLimitations, approveRequired bool, canBypassApproval bool, reasonRequired bool, ) *SettingFormulaModel`
 
 NewSettingFormulaModel instantiates a new SettingFormulaModel object
 This constructor will assign default values to properties that have it defined,
@@ -398,6 +401,66 @@ and a boolean to check if the value has been set.
 `func (o *SettingFormulaModel) SetFeatureFlagLimitations(v FeatureFlagLimitations)`
 
 SetFeatureFlagLimitations sets FeatureFlagLimitations field to given value.
+
+
+### GetApproveRequired
+
+`func (o *SettingFormulaModel) GetApproveRequired() bool`
+
+GetApproveRequired returns the ApproveRequired field if non-nil, zero value otherwise.
+
+### GetApproveRequiredOk
+
+`func (o *SettingFormulaModel) GetApproveRequiredOk() (*bool, bool)`
+
+GetApproveRequiredOk returns a tuple with the ApproveRequired field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApproveRequired
+
+`func (o *SettingFormulaModel) SetApproveRequired(v bool)`
+
+SetApproveRequired sets ApproveRequired field to given value.
+
+
+### GetCanBypassApproval
+
+`func (o *SettingFormulaModel) GetCanBypassApproval() bool`
+
+GetCanBypassApproval returns the CanBypassApproval field if non-nil, zero value otherwise.
+
+### GetCanBypassApprovalOk
+
+`func (o *SettingFormulaModel) GetCanBypassApprovalOk() (*bool, bool)`
+
+GetCanBypassApprovalOk returns a tuple with the CanBypassApproval field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanBypassApproval
+
+`func (o *SettingFormulaModel) SetCanBypassApproval(v bool)`
+
+SetCanBypassApproval sets CanBypassApproval field to given value.
+
+
+### GetReasonRequired
+
+`func (o *SettingFormulaModel) GetReasonRequired() bool`
+
+GetReasonRequired returns the ReasonRequired field if non-nil, zero value otherwise.
+
+### GetReasonRequiredOk
+
+`func (o *SettingFormulaModel) GetReasonRequiredOk() (*bool, bool)`
+
+GetReasonRequiredOk returns a tuple with the ReasonRequired field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReasonRequired
+
+`func (o *SettingFormulaModel) SetReasonRequired(v bool)`
+
+SetReasonRequired sets ReasonRequired field to given value.
 
 
 

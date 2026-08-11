@@ -23,7 +23,7 @@ type ApprovalPermissionType string
 const (
 	APPROVALPERMISSIONTYPE_CANNOT_APPROVE ApprovalPermissionType = "cannotApprove"
 	APPROVALPERMISSIONTYPE_CAN_APPROVE_OTHERS ApprovalPermissionType = "canApproveOthers"
-	APPROVALPERMISSIONTYPE_CAN_BYPASS_APPROVES ApprovalPermissionType = "canBypassApproves"
+	APPROVALPERMISSIONTYPE_CAN_BYPASS_APPROVAL ApprovalPermissionType = "canBypassApproval"
 	APPROVALPERMISSIONTYPE_CUSTOM ApprovalPermissionType = "custom"
 )
 
@@ -31,7 +31,7 @@ const (
 var AllowedApprovalPermissionTypeEnumValues = []ApprovalPermissionType{
 	"cannotApprove",
 	"canApproveOthers",
-	"canBypassApproves",
+	"canBypassApproval",
 	"custom",
 }
 
