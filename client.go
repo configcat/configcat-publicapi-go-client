@@ -52,7 +52,7 @@ type APIClient struct {
 
 	AuditLogsAPI *AuditLogsAPIService
 
-	ChangeRequestsApprovalFlowScheduledChangesBetaAPI *ChangeRequestsApprovalFlowScheduledChangesBetaAPIService
+	ChangeRequestsApprovalFlowScheduledChangesAPI *ChangeRequestsApprovalFlowScheduledChangesAPIService
 
 	CodeReferencesAPI *CodeReferencesAPIService
 
@@ -92,6 +92,8 @@ type APIClient struct {
 
 	TagsAPI *TagsAPIService
 
+	UsageQuotaAPI *UsageQuotaAPIService
+
 	WebhooksAPI *WebhooksAPIService
 
 	ZombieStaleFlagsAPI *ZombieStaleFlagsAPIService
@@ -114,7 +116,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.AuditLogsAPI = (*AuditLogsAPIService)(&c.common)
-	c.ChangeRequestsApprovalFlowScheduledChangesBetaAPI = (*ChangeRequestsApprovalFlowScheduledChangesBetaAPIService)(&c.common)
+	c.ChangeRequestsApprovalFlowScheduledChangesAPI = (*ChangeRequestsApprovalFlowScheduledChangesAPIService)(&c.common)
 	c.CodeReferencesAPI = (*CodeReferencesAPIService)(&c.common)
 	c.ConfigsAPI = (*ConfigsAPIService)(&c.common)
 	c.EnvironmentsAPI = (*EnvironmentsAPIService)(&c.common)
@@ -134,6 +136,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.SDKKeysAPI = (*SDKKeysAPIService)(&c.common)
 	c.SegmentsAPI = (*SegmentsAPIService)(&c.common)
 	c.TagsAPI = (*TagsAPIService)(&c.common)
+	c.UsageQuotaAPI = (*UsageQuotaAPIService)(&c.common)
 	c.WebhooksAPI = (*WebhooksAPIService)(&c.common)
 	c.ZombieStaleFlagsAPI = (*ZombieStaleFlagsAPIService)(&c.common)
 

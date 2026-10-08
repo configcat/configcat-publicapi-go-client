@@ -30,6 +30,8 @@ type ChangeRequestProposedChangeModel struct {
 	// Optional hint or description for the Setting.
 	SettingHint NullableString `json:"settingHint"`
 	SettingType SettingType `json:"settingType"`
+	// Indicates whether this setting should validate string values as JSON values.
+	IsJson bool `json:"isJson"`
 	// Indicates whether the proposed changes to the Setting are in conflict with concurrently published changes.
 	HasConflict bool `json:"hasConflict"`
 	OriginalEvaluationFormula AuditLogSettingValueV2EvaluationFormula `json:"originalEvaluationFormula"`
@@ -43,13 +45,14 @@ type _ChangeRequestProposedChangeModel ChangeRequestProposedChangeModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewChangeRequestProposedChangeModel(settingId int32, settingKey string, settingName string, settingHint NullableString, settingType SettingType, hasConflict bool, originalEvaluationFormula AuditLogSettingValueV2EvaluationFormula, proposedEvaluationFormula AuditLogSettingValueV2EvaluationFormula) *ChangeRequestProposedChangeModel {
+func NewChangeRequestProposedChangeModel(settingId int32, settingKey string, settingName string, settingHint NullableString, settingType SettingType, isJson bool, hasConflict bool, originalEvaluationFormula AuditLogSettingValueV2EvaluationFormula, proposedEvaluationFormula AuditLogSettingValueV2EvaluationFormula) *ChangeRequestProposedChangeModel {
 	this := ChangeRequestProposedChangeModel{}
 	this.SettingId = settingId
 	this.SettingKey = settingKey
 	this.SettingName = settingName
 	this.SettingHint = settingHint
 	this.SettingType = settingType
+	this.IsJson = isJson
 	this.HasConflict = hasConflict
 	this.OriginalEvaluationFormula = originalEvaluationFormula
 	this.ProposedEvaluationFormula = proposedEvaluationFormula
@@ -186,6 +189,30 @@ func (o *ChangeRequestProposedChangeModel) SetSettingType(v SettingType) {
 	o.SettingType = v
 }
 
+// GetIsJson returns the IsJson field value
+func (o *ChangeRequestProposedChangeModel) GetIsJson() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.IsJson
+}
+
+// GetIsJsonOk returns a tuple with the IsJson field value
+// and a boolean to check if the value has been set.
+func (o *ChangeRequestProposedChangeModel) GetIsJsonOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.IsJson, true
+}
+
+// SetIsJson sets field value
+func (o *ChangeRequestProposedChangeModel) SetIsJson(v bool) {
+	o.IsJson = v
+}
+
 // GetHasConflict returns the HasConflict field value
 func (o *ChangeRequestProposedChangeModel) GetHasConflict() bool {
 	if o == nil {
@@ -273,6 +300,7 @@ func (o ChangeRequestProposedChangeModel) ToMap() (map[string]interface{}, error
 	toSerialize["settingName"] = o.SettingName
 	toSerialize["settingHint"] = o.SettingHint.Get()
 	toSerialize["settingType"] = o.SettingType
+	toSerialize["isJson"] = o.IsJson
 	toSerialize["hasConflict"] = o.HasConflict
 	toSerialize["originalEvaluationFormula"] = o.OriginalEvaluationFormula
 	toSerialize["proposedEvaluationFormula"] = o.ProposedEvaluationFormula
@@ -294,6 +322,7 @@ func (o *ChangeRequestProposedChangeModel) UnmarshalJSON(data []byte) (err error
 		"settingName",
 		"settingHint",
 		"settingType",
+		"isJson",
 		"hasConflict",
 		"originalEvaluationFormula",
 		"proposedEvaluationFormula",
@@ -331,6 +360,7 @@ func (o *ChangeRequestProposedChangeModel) UnmarshalJSON(data []byte) (err error
 		delete(additionalProperties, "settingName")
 		delete(additionalProperties, "settingHint")
 		delete(additionalProperties, "settingType")
+		delete(additionalProperties, "isJson")
 		delete(additionalProperties, "hasConflict")
 		delete(additionalProperties, "originalEvaluationFormula")
 		delete(additionalProperties, "proposedEvaluationFormula")

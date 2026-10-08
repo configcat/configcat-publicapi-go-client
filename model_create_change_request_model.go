@@ -30,6 +30,8 @@ type CreateChangeRequestModel struct {
 	ApplyAt NullableTime `json:"applyAt,omitempty"`
 	// When true, bypasses required approval checks for scheduled changes.
 	BypassApproval *bool `json:"bypassApproval,omitempty"`
+	// When true, email notifications are sent to team members with approval permission about this Change Request.
+	SendNotificationsToApprovers *bool `json:"sendNotificationsToApprovers,omitempty"`
 	// The list of models describing the proposed changes to the Settings included in the new Change Request.
 	ProposedChanges []CreateChangeRequestProposedChangeModel `json:"proposedChanges,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -195,6 +197,38 @@ func (o *CreateChangeRequestModel) SetBypassApproval(v bool) {
 	o.BypassApproval = &v
 }
 
+// GetSendNotificationsToApprovers returns the SendNotificationsToApprovers field value if set, zero value otherwise.
+func (o *CreateChangeRequestModel) GetSendNotificationsToApprovers() bool {
+	if o == nil || IsNil(o.SendNotificationsToApprovers) {
+		var ret bool
+		return ret
+	}
+	return *o.SendNotificationsToApprovers
+}
+
+// GetSendNotificationsToApproversOk returns a tuple with the SendNotificationsToApprovers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateChangeRequestModel) GetSendNotificationsToApproversOk() (*bool, bool) {
+	if o == nil || IsNil(o.SendNotificationsToApprovers) {
+		return nil, false
+	}
+	return o.SendNotificationsToApprovers, true
+}
+
+// HasSendNotificationsToApprovers returns a boolean if a field has been set.
+func (o *CreateChangeRequestModel) HasSendNotificationsToApprovers() bool {
+	if o != nil && !IsNil(o.SendNotificationsToApprovers) {
+		return true
+	}
+
+	return false
+}
+
+// SetSendNotificationsToApprovers gets a reference to the given bool and assigns it to the SendNotificationsToApprovers field.
+func (o *CreateChangeRequestModel) SetSendNotificationsToApprovers(v bool) {
+	o.SendNotificationsToApprovers = &v
+}
+
 // GetProposedChanges returns the ProposedChanges field value if set, zero value otherwise.
 func (o *CreateChangeRequestModel) GetProposedChanges() []CreateChangeRequestProposedChangeModel {
 	if o == nil || IsNil(o.ProposedChanges) {
@@ -247,6 +281,9 @@ func (o CreateChangeRequestModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.BypassApproval) {
 		toSerialize["bypassApproval"] = o.BypassApproval
 	}
+	if !IsNil(o.SendNotificationsToApprovers) {
+		toSerialize["sendNotificationsToApprovers"] = o.SendNotificationsToApprovers
+	}
 	if !IsNil(o.ProposedChanges) {
 		toSerialize["proposedChanges"] = o.ProposedChanges
 	}
@@ -297,6 +334,7 @@ func (o *CreateChangeRequestModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "reason")
 		delete(additionalProperties, "applyAt")
 		delete(additionalProperties, "bypassApproval")
+		delete(additionalProperties, "sendNotificationsToApprovers")
 		delete(additionalProperties, "proposedChanges")
 		o.AdditionalProperties = additionalProperties
 	}

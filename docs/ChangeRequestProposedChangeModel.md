@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **SettingName** | **string** | Display name of the Setting. | 
 **SettingHint** | **NullableString** | Optional hint or description for the Setting. | 
 **SettingType** | [**SettingType**](SettingType.md) |  | 
+**IsJson** | **bool** | Indicates whether this setting should validate string values as JSON values. | 
 **HasConflict** | **bool** | Indicates whether the proposed changes to the Setting are in conflict with concurrently published changes. | 
 **OriginalEvaluationFormula** | [**AuditLogSettingValueV2EvaluationFormula**](AuditLogSettingValueV2EvaluationFormula.md) |  | 
 **ProposedEvaluationFormula** | [**AuditLogSettingValueV2EvaluationFormula**](AuditLogSettingValueV2EvaluationFormula.md) |  | 
@@ -17,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewChangeRequestProposedChangeModel
 
-`func NewChangeRequestProposedChangeModel(settingId int32, settingKey string, settingName string, settingHint NullableString, settingType SettingType, hasConflict bool, originalEvaluationFormula AuditLogSettingValueV2EvaluationFormula, proposedEvaluationFormula AuditLogSettingValueV2EvaluationFormula, ) *ChangeRequestProposedChangeModel`
+`func NewChangeRequestProposedChangeModel(settingId int32, settingKey string, settingName string, settingHint NullableString, settingType SettingType, isJson bool, hasConflict bool, originalEvaluationFormula AuditLogSettingValueV2EvaluationFormula, proposedEvaluationFormula AuditLogSettingValueV2EvaluationFormula, ) *ChangeRequestProposedChangeModel`
 
 NewChangeRequestProposedChangeModel instantiates a new ChangeRequestProposedChangeModel object
 This constructor will assign default values to properties that have it defined,
@@ -140,6 +141,26 @@ and a boolean to check if the value has been set.
 `func (o *ChangeRequestProposedChangeModel) SetSettingType(v SettingType)`
 
 SetSettingType sets SettingType field to given value.
+
+
+### GetIsJson
+
+`func (o *ChangeRequestProposedChangeModel) GetIsJson() bool`
+
+GetIsJson returns the IsJson field if non-nil, zero value otherwise.
+
+### GetIsJsonOk
+
+`func (o *ChangeRequestProposedChangeModel) GetIsJsonOk() (*bool, bool)`
+
+GetIsJsonOk returns a tuple with the IsJson field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsJson
+
+`func (o *ChangeRequestProposedChangeModel) SetIsJson(v bool)`
+
+SetIsJson sets IsJson field to given value.
 
 
 ### GetHasConflict

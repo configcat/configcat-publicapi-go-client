@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Reason** | Pointer to **NullableString** | The updated optional notes describing the purpose of the Change Request. | [optional] 
 **ApplyAt** | Pointer to **NullableTime** | The updated optional UTC date and time when the Change Request should be applied automatically. | [optional] 
 **BypassApproval** | Pointer to **NullableBool** | The updated bypass-approval flag for scheduled changes. | [optional] 
+**SendNotificationsToApprovers** | Pointer to **NullableBool** | The updated flag for whether email notifications should be sent to team members with approval permission about this Change Request. | [optional] 
 
 ## Methods
 
@@ -153,6 +154,41 @@ HasBypassApproval returns a boolean if a field has been set.
 `func (o *UpdateChangeRequestModel) UnsetBypassApproval()`
 
 UnsetBypassApproval ensures that no value is present for BypassApproval, not even an explicit nil
+### GetSendNotificationsToApprovers
+
+`func (o *UpdateChangeRequestModel) GetSendNotificationsToApprovers() bool`
+
+GetSendNotificationsToApprovers returns the SendNotificationsToApprovers field if non-nil, zero value otherwise.
+
+### GetSendNotificationsToApproversOk
+
+`func (o *UpdateChangeRequestModel) GetSendNotificationsToApproversOk() (*bool, bool)`
+
+GetSendNotificationsToApproversOk returns a tuple with the SendNotificationsToApprovers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSendNotificationsToApprovers
+
+`func (o *UpdateChangeRequestModel) SetSendNotificationsToApprovers(v bool)`
+
+SetSendNotificationsToApprovers sets SendNotificationsToApprovers field to given value.
+
+### HasSendNotificationsToApprovers
+
+`func (o *UpdateChangeRequestModel) HasSendNotificationsToApprovers() bool`
+
+HasSendNotificationsToApprovers returns a boolean if a field has been set.
+
+### SetSendNotificationsToApproversNil
+
+`func (o *UpdateChangeRequestModel) SetSendNotificationsToApproversNil(b bool)`
+
+ SetSendNotificationsToApproversNil sets the value for SendNotificationsToApprovers to be an explicit nil
+
+### UnsetSendNotificationsToApprovers
+`func (o *UpdateChangeRequestModel) UnsetSendNotificationsToApprovers()`
+
+UnsetSendNotificationsToApprovers ensures that no value is present for SendNotificationsToApprovers, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

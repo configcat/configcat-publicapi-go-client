@@ -33,6 +33,7 @@ type SettingModel struct {
 	// The order of the Feature Flag or Setting represented on the ConfigCat Dashboard.
 	Order int32 `json:"order"`
 	SettingType SettingType `json:"settingType"`
+	// Indicates whether this setting should validate string values as JSON values.
 	IsJson bool `json:"isJson"`
 	// Identifier of the Feature Flag's Config.
 	ConfigId string `json:"configId"`

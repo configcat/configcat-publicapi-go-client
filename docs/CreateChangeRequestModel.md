@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Reason** | Pointer to **NullableString** | The optional notes describing the purpose of the Change Request. This will appear in the Audit Log (in the Notes section when you expand the corresponding entry) upon applying the change request. | [optional] 
 **ApplyAt** | Pointer to **NullableTime** | The optional UTC date and time when the scheduled Change Request should be applied automatically. | [optional] 
 **BypassApproval** | Pointer to **bool** | When true, bypasses required approval checks for scheduled changes. | [optional] 
+**SendNotificationsToApprovers** | Pointer to **bool** | When true, email notifications are sent to team members with approval permission about this Change Request. | [optional] 
 **ProposedChanges** | Pointer to [**[]CreateChangeRequestProposedChangeModel**](CreateChangeRequestProposedChangeModel.md) | The list of models describing the proposed changes to the Settings included in the new Change Request. | [optional] 
 
 ## Methods
@@ -143,6 +144,31 @@ SetBypassApproval sets BypassApproval field to given value.
 `func (o *CreateChangeRequestModel) HasBypassApproval() bool`
 
 HasBypassApproval returns a boolean if a field has been set.
+
+### GetSendNotificationsToApprovers
+
+`func (o *CreateChangeRequestModel) GetSendNotificationsToApprovers() bool`
+
+GetSendNotificationsToApprovers returns the SendNotificationsToApprovers field if non-nil, zero value otherwise.
+
+### GetSendNotificationsToApproversOk
+
+`func (o *CreateChangeRequestModel) GetSendNotificationsToApproversOk() (*bool, bool)`
+
+GetSendNotificationsToApproversOk returns a tuple with the SendNotificationsToApprovers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSendNotificationsToApprovers
+
+`func (o *CreateChangeRequestModel) SetSendNotificationsToApprovers(v bool)`
+
+SetSendNotificationsToApprovers sets SendNotificationsToApprovers field to given value.
+
+### HasSendNotificationsToApprovers
+
+`func (o *CreateChangeRequestModel) HasSendNotificationsToApprovers() bool`
+
+HasSendNotificationsToApprovers returns a boolean if a field has been set.
 
 ### GetProposedChanges
 

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Hint** | **NullableString** | Description of the Feature Flag or Setting. | 
 **Order** | **int32** | The order of the Feature Flag or Setting represented on the ConfigCat Dashboard. | 
 **SettingType** | [**SettingType**](SettingType.md) |  | 
-**IsJson** | **bool** |  | 
+**IsJson** | **bool** | Indicates whether this setting should validate string values as JSON values. | 
 **ConfigId** | **string** | Identifier of the Feature Flag&#39;s Config. | 
 **ConfigName** | **string** | Name of the Feature Flag&#39;s Config. | 
 **CreatedAt** | **NullableTime** | The creation time of the Feature Flag or Setting. | 

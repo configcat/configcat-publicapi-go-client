@@ -30,6 +30,8 @@ type UpdateChangeRequestModel struct {
 	ApplyAt NullableTime `json:"applyAt,omitempty"`
 	// The updated bypass-approval flag for scheduled changes.
 	BypassApproval NullableBool `json:"bypassApproval,omitempty"`
+	// The updated flag for whether email notifications should be sent to team members with approval permission about this Change Request.
+	SendNotificationsToApprovers NullableBool `json:"sendNotificationsToApprovers,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -203,6 +205,48 @@ func (o *UpdateChangeRequestModel) UnsetBypassApproval() {
 	o.BypassApproval.Unset()
 }
 
+// GetSendNotificationsToApprovers returns the SendNotificationsToApprovers field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdateChangeRequestModel) GetSendNotificationsToApprovers() bool {
+	if o == nil || IsNil(o.SendNotificationsToApprovers.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.SendNotificationsToApprovers.Get()
+}
+
+// GetSendNotificationsToApproversOk returns a tuple with the SendNotificationsToApprovers field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdateChangeRequestModel) GetSendNotificationsToApproversOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.SendNotificationsToApprovers.Get(), o.SendNotificationsToApprovers.IsSet()
+}
+
+// HasSendNotificationsToApprovers returns a boolean if a field has been set.
+func (o *UpdateChangeRequestModel) HasSendNotificationsToApprovers() bool {
+	if o != nil && o.SendNotificationsToApprovers.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSendNotificationsToApprovers gets a reference to the given NullableBool and assigns it to the SendNotificationsToApprovers field.
+func (o *UpdateChangeRequestModel) SetSendNotificationsToApprovers(v bool) {
+	o.SendNotificationsToApprovers.Set(&v)
+}
+// SetSendNotificationsToApproversNil sets the value for SendNotificationsToApprovers to be an explicit nil
+func (o *UpdateChangeRequestModel) SetSendNotificationsToApproversNil() {
+	o.SendNotificationsToApprovers.Set(nil)
+}
+
+// UnsetSendNotificationsToApprovers ensures that no value is present for SendNotificationsToApprovers, not even an explicit nil
+func (o *UpdateChangeRequestModel) UnsetSendNotificationsToApprovers() {
+	o.SendNotificationsToApprovers.Unset()
+}
+
 func (o UpdateChangeRequestModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -222,6 +266,9 @@ func (o UpdateChangeRequestModel) ToMap() (map[string]interface{}, error) {
 	}
 	if o.BypassApproval.IsSet() {
 		toSerialize["bypassApproval"] = o.BypassApproval.Get()
+	}
+	if o.SendNotificationsToApprovers.IsSet() {
+		toSerialize["sendNotificationsToApprovers"] = o.SendNotificationsToApprovers.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -270,6 +317,7 @@ func (o *UpdateChangeRequestModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "reason")
 		delete(additionalProperties, "applyAt")
 		delete(additionalProperties, "bypassApproval")
+		delete(additionalProperties, "sendNotificationsToApprovers")
 		o.AdditionalProperties = additionalProperties
 	}
 
