@@ -27,12 +27,13 @@ Name | Type | Description | Notes
 **ClosedByUserId** | **NullableString** | Identifier of the user who closed the Change Request. | 
 **ClosedByUserEmail** | **NullableString** | Email of the user who closed the Change Request. | 
 **ClosedByUserFullName** | **NullableString** | Full name of the user who closed the Change Request. | 
+**SendNotificationsToApprovers** | **bool** | When true, email notifications are sent to team members with approval permission about this Change Request. | 
 
 ## Methods
 
 ### NewChangeRequestSummaryModel
 
-`func NewChangeRequestSummaryModel(changeRequestId int64, changeRequestStatus ChangeRequestStatus, needsAttention bool, title string, reason NullableString, applyAt NullableTime, createdAt time.Time, creatorUserEmail string, creatorUserFullName string, creatorUserId NullableString, affectedSettingKeys []string, commentCount int32, approved bool, conflictCount int32, bypassApproval bool, appliedAt NullableTime, appliedByUserId NullableString, appliedByUserEmail NullableString, appliedByUserFullName NullableString, closedAt NullableTime, closedByUserId NullableString, closedByUserEmail NullableString, closedByUserFullName NullableString, ) *ChangeRequestSummaryModel`
+`func NewChangeRequestSummaryModel(changeRequestId int64, changeRequestStatus ChangeRequestStatus, needsAttention bool, title string, reason NullableString, applyAt NullableTime, createdAt time.Time, creatorUserEmail string, creatorUserFullName string, creatorUserId NullableString, affectedSettingKeys []string, commentCount int32, approved bool, conflictCount int32, bypassApproval bool, appliedAt NullableTime, appliedByUserId NullableString, appliedByUserEmail NullableString, appliedByUserFullName NullableString, closedAt NullableTime, closedByUserId NullableString, closedByUserEmail NullableString, closedByUserFullName NullableString, sendNotificationsToApprovers bool, ) *ChangeRequestSummaryModel`
 
 NewChangeRequestSummaryModel instantiates a new ChangeRequestSummaryModel object
 This constructor will assign default values to properties that have it defined,
@@ -617,6 +618,26 @@ SetClosedByUserFullName sets ClosedByUserFullName field to given value.
 `func (o *ChangeRequestSummaryModel) UnsetClosedByUserFullName()`
 
 UnsetClosedByUserFullName ensures that no value is present for ClosedByUserFullName, not even an explicit nil
+### GetSendNotificationsToApprovers
+
+`func (o *ChangeRequestSummaryModel) GetSendNotificationsToApprovers() bool`
+
+GetSendNotificationsToApprovers returns the SendNotificationsToApprovers field if non-nil, zero value otherwise.
+
+### GetSendNotificationsToApproversOk
+
+`func (o *ChangeRequestSummaryModel) GetSendNotificationsToApproversOk() (*bool, bool)`
+
+GetSendNotificationsToApproversOk returns a tuple with the SendNotificationsToApprovers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSendNotificationsToApprovers
+
+`func (o *ChangeRequestSummaryModel) SetSendNotificationsToApprovers(v bool)`
+
+SetSendNotificationsToApprovers sets SendNotificationsToApprovers field to given value.
+
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

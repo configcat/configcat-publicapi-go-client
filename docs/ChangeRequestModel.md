@@ -31,12 +31,13 @@ Name | Type | Description | Notes
 **ClosedByUserEmail** | **NullableString** | Email of the user who closed the Change Request. | 
 **ClosedByUserFullName** | **NullableString** | Full name of the user who closed the Change Request. | 
 **BypassApproval** | **bool** | Indicates whether approval flow is bypassed. | 
+**SendNotificationsToApprovers** | **bool** | When true, email notifications are sent to team members with approval permission about this Change Request. | 
 
 ## Methods
 
 ### NewChangeRequestModel
 
-`func NewChangeRequestModel(changeRequestId int64, configId string, environmentId string, changeRequestStatus ChangeRequestStatus, needsAttention bool, title string, reason NullableString, applyAt NullableTime, createdAt time.Time, creatorUserEmail string, creatorUserFullName string, creatorUserId NullableString, settingValues []ChangeRequestProposedChangeModel, comments []ChangeRequestCommentModel, approved bool, approvals []ChangeRequestApprovalModel, activities []ChangeRequestActivityModel, changeRequestIssues []ChangeRequestIssueModel, appliedAt NullableTime, appliedByUserId NullableString, appliedByUserEmail NullableString, appliedByUserFullName NullableString, closedAt NullableTime, closedByUserId NullableString, closedByUserEmail NullableString, closedByUserFullName NullableString, bypassApproval bool, ) *ChangeRequestModel`
+`func NewChangeRequestModel(changeRequestId int64, configId string, environmentId string, changeRequestStatus ChangeRequestStatus, needsAttention bool, title string, reason NullableString, applyAt NullableTime, createdAt time.Time, creatorUserEmail string, creatorUserFullName string, creatorUserId NullableString, settingValues []ChangeRequestProposedChangeModel, comments []ChangeRequestCommentModel, approved bool, approvals []ChangeRequestApprovalModel, activities []ChangeRequestActivityModel, changeRequestIssues []ChangeRequestIssueModel, appliedAt NullableTime, appliedByUserId NullableString, appliedByUserEmail NullableString, appliedByUserFullName NullableString, closedAt NullableTime, closedByUserId NullableString, closedByUserEmail NullableString, closedByUserFullName NullableString, bypassApproval bool, sendNotificationsToApprovers bool, ) *ChangeRequestModel`
 
 NewChangeRequestModel instantiates a new ChangeRequestModel object
 This constructor will assign default values to properties that have it defined,
@@ -699,6 +700,26 @@ and a boolean to check if the value has been set.
 `func (o *ChangeRequestModel) SetBypassApproval(v bool)`
 
 SetBypassApproval sets BypassApproval field to given value.
+
+
+### GetSendNotificationsToApprovers
+
+`func (o *ChangeRequestModel) GetSendNotificationsToApprovers() bool`
+
+GetSendNotificationsToApprovers returns the SendNotificationsToApprovers field if non-nil, zero value otherwise.
+
+### GetSendNotificationsToApproversOk
+
+`func (o *ChangeRequestModel) GetSendNotificationsToApproversOk() (*bool, bool)`
+
+GetSendNotificationsToApproversOk returns a tuple with the SendNotificationsToApprovers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSendNotificationsToApprovers
+
+`func (o *ChangeRequestModel) SetSendNotificationsToApprovers(v bool)`
+
+SetSendNotificationsToApprovers sets SendNotificationsToApprovers field to given value.
 
 
 

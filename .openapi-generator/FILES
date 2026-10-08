@@ -3,7 +3,7 @@
 README.md
 api/openapi.yaml
 api_audit_logs.go
-api_change_requests_approval_flow_scheduled_changes_beta.go
+api_change_requests_approval_flow_scheduled_changes.go
 api_code_references.go
 api_configs.go
 api_environments.go
@@ -23,6 +23,7 @@ api_proxy_profiles.go
 api_sdk_keys.go
 api_segments.go
 api_tags.go
+api_usage_quota.go
 api_webhooks.go
 api_zombie_stale_flags.go
 client.go
@@ -55,7 +56,7 @@ docs/ChangeRequestScheduleFilter.md
 docs/ChangeRequestStatus.md
 docs/ChangeRequestSummaryModel.md
 docs/ChangeRequestSummaryModelPagedList.md
-docs/ChangeRequestsApprovalFlowScheduledChangesBetaAPI.md
+docs/ChangeRequestsApprovalFlowScheduledChangesAPI.md
 docs/ChangeRequestsModel.md
 docs/CodeReferenceModel.md
 docs/CodeReferenceRequest.md
@@ -92,6 +93,7 @@ docs/CreateTagModel.md
 docs/DeleteIntegrationLinkModel.md
 docs/DeleteRepositoryReportsRequest.md
 docs/DeletedSettingModel.md
+docs/DetailedStatisticV2Model.md
 docs/EnvironmentAccessType.md
 docs/EnvironmentApprovalPermissionType.md
 docs/EnvironmentModel.md
@@ -131,6 +133,7 @@ docs/OrganizationLimitations.md
 docs/OrganizationMemberModel.md
 docs/OrganizationMembersModel.md
 docs/OrganizationModel.md
+docs/OrganizationMonthlyStatisticV2Model.md
 docs/OrganizationPermissionGroupModel.md
 docs/OrganizationPermissionModel.md
 docs/OrganizationProductModel.md
@@ -153,6 +156,7 @@ docs/PreferencesModel.md
 docs/PrerequisiteComparator.md
 docs/PrerequisiteFlagConditionModel.md
 docs/ProductModel.md
+docs/ProductMonthlyStatisticV2Model.md
 docs/ProductsAPI.md
 docs/ProxyProfileListModel.md
 docs/ProxyProfileModel.md
@@ -197,6 +201,7 @@ docs/StaleFlagSettingModel.md
 docs/StaleFlagSettingTagModel.md
 docs/StaleFlagSettingValueModel.md
 docs/StaleFlagStaleInEnvironmentsType.md
+docs/StatisticsV2Model.md
 docs/TagModel.md
 docs/TagsAPI.md
 docs/TargetingRuleModel.md
@@ -235,6 +240,7 @@ docs/UpdateTagModel.md
 docs/UpdateTargetingRuleModel.md
 docs/UpdateUserConditionModel.md
 docs/UpdateValueModel.md
+docs/UsageQuotaAPI.md
 docs/UserComparator.md
 docs/UserConditionModel.md
 docs/UserModel.md
@@ -314,6 +320,7 @@ model_create_tag_model.go
 model_delete_integration_link_model.go
 model_delete_repository_reports_request.go
 model_deleted_setting_model.go
+model_detailed_statistic_v2_model.go
 model_environment_access_type.go
 model_environment_approval_permission_type.go
 model_environment_model.go
@@ -343,6 +350,7 @@ model_organization_limitations.go
 model_organization_member_model.go
 model_organization_members_model.go
 model_organization_model.go
+model_organization_monthly_statistic_v2_model.go
 model_organization_permission_group_model.go
 model_organization_permission_model.go
 model_organization_product_model.go
@@ -363,6 +371,7 @@ model_preferences_model.go
 model_prerequisite_comparator.go
 model_prerequisite_flag_condition_model.go
 model_product_model.go
+model_product_monthly_statistic_v2_model.go
 model_proxy_profile_list_model.go
 model_proxy_profile_model.go
 model_proxy_profile_sdk_key_item.go
@@ -403,6 +412,7 @@ model_stale_flag_setting_model.go
 model_stale_flag_setting_tag_model.go
 model_stale_flag_setting_value_model.go
 model_stale_flag_stale_in_environments_type.go
+model_statistics_v2_model.go
 model_tag_model.go
 model_targeting_rule_model.go
 model_update_approve_required_environment_model.go
@@ -454,5 +464,6 @@ model_webhook_notification.go
 model_webhook_response_model.go
 model_webhook_signing_keys_model.go
 response.go
-test/api_change_requests_approval_flow_scheduled_changes_beta_test.go
+test/api_change_requests_approval_flow_scheduled_changes_test.go
+test/api_usage_quota_test.go
 utils.go

@@ -67,9 +67,7 @@ tags:
     A _change request_ is a set of changes to Settings that you prepare without publishing them right away.
     You can propose changes for later manual publishing, or schedule it to be applied automatically at a specific time.
     This supports the four-eyes principle, because another person can review and approve the change before it reaches production.
-
-    **Beta feature:** Approval Flow and Scheduled Changes are in closed beta. You can join the beta by contacting support. We are collecting feedback from real-world use to improve the experience.
-  name: Change Requests (Approval flow & Scheduled changes) - Beta
+  name: Change Requests (Approval flow & Scheduled changes)
 - description: "With these endpoints you can control how your existing Feature Flags\
     \ and Settings should serve their values. \nYou can turn Feature Flags on or off,\
     \ update Setting values and also add, remove or change the order of Percentage\
@@ -180,6 +178,8 @@ tags:
 
     <a href="https://configcat.com/docs/advanced/proxy/proxy-overview/#1-automatic-configuration-with-proxy-profiles" target="_blank" rel="noopener noreferrer">Here</a> you can read more about Proxy Profiles.
   name: Proxy Profiles
+- description: With this endpoint you can query your Organization's Usage&Quota.
+  name: Usage&Quota
 paths:
   /v2/change-requests/{changeRequestId}:
     get:
@@ -211,7 +211,7 @@ paths:
             rate limits.
       summary: Get Change Request
       tags:
-      - Change Requests (Approval flow & Scheduled changes) - Beta
+      - Change Requests (Approval flow & Scheduled changes)
     put:
       description: "Updates the metadata of a Change Request, such as title, note,\
         \ schedule, etc."
@@ -254,7 +254,7 @@ paths:
             rate limits.
       summary: Update Change Request
       tags:
-      - Change Requests (Approval flow & Scheduled changes) - Beta
+      - Change Requests (Approval flow & Scheduled changes)
   /v1/proxy-profiles/{proxyProfileId}:
     delete:
       description: This endpoint removes a Proxy Profile identified by the `proxyProfileId`
@@ -630,7 +630,7 @@ paths:
             rate limits.
       summary: List Change Requests
       tags:
-      - Change Requests (Approval flow & Scheduled changes) - Beta
+      - Change Requests (Approval flow & Scheduled changes)
   /v1/organizations:
     get:
       description: This endpoint returns the list of the Organizations that belongs
@@ -2930,7 +2930,7 @@ paths:
             rate limits.
       summary: Get Settings included in Change Request
       tags:
-      - Change Requests (Approval flow & Scheduled changes) - Beta
+      - Change Requests (Approval flow & Scheduled changes)
     put:
       description: Updates the proposed changes to the Settings included in a Change
         Request.
@@ -2982,7 +2982,7 @@ paths:
             rate limits.
       summary: Update Settings included in Change Request
       tags:
-      - Change Requests (Approval flow & Scheduled changes) - Beta
+      - Change Requests (Approval flow & Scheduled changes)
   /v1/segments/{segmentId}:
     delete:
       description: This endpoint removes a Segment identified by the `segmentId` parameter.
@@ -6065,6 +6065,49 @@ paths:
       summary: Update Tag
       tags:
       - Tags
+  /v1/organizations/{organizationId}/usage-and-quota:
+    get:
+      description: |-
+        This endpoint returns the current usage and quota information for an Organization. You can optionally filter the result by Product using the `productId` query parameter.
+
+        The response includes monthly aggregate values, detailed request statistics, and quota limits used to monitor consumption and over-limit conditions.
+      operationId: get-organization-usage-and-quota
+      parameters:
+      - description: The identifier of the Organization.
+        explode: false
+        in: path
+        name: organizationId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      - description: The identifier of the Product to filter statistics for.
+        explode: true
+        in: query
+        name: productId
+        required: false
+        schema:
+          format: uuid
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatisticsV2Model"
+          description: ""
+        "400":
+          description: Bad request.
+        "404":
+          description: Not found.
+        "429":
+          description: Too many requests. In case of the request rate exceeds the
+            rate limits.
+      summary: Get usage and quota
+      tags:
+      - Usage&Quota
   /v1/webhooks/{webhookId}:
     delete:
       description: This endpoint removes a Webhook identified by the `webhookId` parameter.
@@ -6345,7 +6388,7 @@ paths:
             rate limits.
       summary: Add Comment
       tags:
-      - Change Requests (Approval flow & Scheduled changes) - Beta
+      - Change Requests (Approval flow & Scheduled changes)
   /v1/environments/{environmentId}/settings/{settingId}/integrationLinks/{integrationLinkType}/{key}:
     delete:
       description: ""
@@ -6556,7 +6599,7 @@ paths:
             rate limits.
       summary: Apply Change Request
       tags:
-      - Change Requests (Approval flow & Scheduled changes) - Beta
+      - Change Requests (Approval flow & Scheduled changes)
   /v2/change-requests/{changeRequestId}/approve:
     post:
       description: Adds your approval to the Change Request.
@@ -6587,7 +6630,7 @@ paths:
             rate limits.
       summary: Approve Change Request
       tags:
-      - Change Requests (Approval flow & Scheduled changes) - Beta
+      - Change Requests (Approval flow & Scheduled changes)
   /v2/change-requests/{changeRequestId}/claim-ownership:
     post:
       description: Claims ownership of the Change Request.
@@ -6618,7 +6661,7 @@ paths:
             rate limits.
       summary: Claim Ownership
       tags:
-      - Change Requests (Approval flow & Scheduled changes) - Beta
+      - Change Requests (Approval flow & Scheduled changes)
   /v2/change-requests/{changeRequestId}/close:
     post:
       description: Closes the Change Request without applying it.
@@ -6649,7 +6692,7 @@ paths:
             rate limits.
       summary: Close Change Request
       tags:
-      - Change Requests (Approval flow & Scheduled changes) - Beta
+      - Change Requests (Approval flow & Scheduled changes)
   /v1/jira/connect:
     post:
       operationId: jira-connect
@@ -6723,7 +6766,7 @@ paths:
             rate limits.
       summary: Create Change Request
       tags:
-      - Change Requests (Approval flow & Scheduled changes) - Beta
+      - Change Requests (Approval flow & Scheduled changes)
   /v1/organizations/{organizationId}/products:
     post:
       description: "This endpoint creates a new Product in a specified Organization\
@@ -7000,7 +7043,7 @@ paths:
             rate limits.
       summary: Remove Approval
       tags:
-      - Change Requests (Approval flow & Scheduled changes) - Beta
+      - Change Requests (Approval flow & Scheduled changes)
   /v2/change-requests/{changeRequestId}/proposed-changes/{settingId}/resolve-conflicts:
     post:
       description: Updates the proposed changes to a Setting included in the Change
@@ -7053,7 +7096,7 @@ paths:
             rate limits.
       summary: Resolve Setting Conflicts
       tags:
-      - Change Requests (Approval flow & Scheduled changes) - Beta
+      - Change Requests (Approval flow & Scheduled changes)
   /v1/code-references:
     post:
       description: ""
@@ -7239,7 +7282,7 @@ paths:
             rate limits.
       summary: Delete Comment
       tags:
-      - Change Requests (Approval flow & Scheduled changes) - Beta
+      - Change Requests (Approval flow & Scheduled changes)
     put:
       description: Updates an existing Change Request comment.
       operationId: update-change-request-comment
@@ -7281,7 +7324,7 @@ paths:
             rate limits.
       summary: Update Comment
       tags:
-      - Change Requests (Approval flow & Scheduled changes) - Beta
+      - Change Requests (Approval flow & Scheduled changes)
   /v1/invitations/{invitationId}:
     delete:
       description: This endpoint removes an Invitation identified by the `invitationId`
@@ -7385,7 +7428,7 @@ paths:
             rate limits.
       summary: Delete Setting from Change Request
       tags:
-      - Change Requests (Approval flow & Scheduled changes) - Beta
+      - Change Requests (Approval flow & Scheduled changes)
 components:
   schemas:
     AccessType:
@@ -8222,6 +8265,7 @@ components:
           settingName: settingName
           settingHint: settingHint
           settingType: boolean
+          isJson: true
           hasConflict: true
           originalEvaluationFormula:
             defaultValue:
@@ -8424,6 +8468,7 @@ components:
           settingName: settingName
           settingHint: settingHint
           settingType: boolean
+          isJson: true
           hasConflict: true
           originalEvaluationFormula:
             defaultValue:
@@ -8683,6 +8728,7 @@ components:
         closedByUserEmail: closedByUserEmail
         closedByUserFullName: closedByUserFullName
         bypassApproval: true
+        sendNotificationsToApprovers: true
       properties:
         changeRequestId:
           description: Identifier of the Change Request.
@@ -8793,6 +8839,10 @@ components:
         bypassApproval:
           description: Indicates whether approval flow is bypassed.
           type: boolean
+        sendNotificationsToApprovers:
+          description: "When true, email notifications are sent to team members with\
+            \ approval permission about this Change Request."
+          type: boolean
       required:
       - activities
       - appliedAt
@@ -8819,6 +8869,7 @@ components:
       - environmentId
       - needsAttention
       - reason
+      - sendNotificationsToApprovers
       - settingValues
       - title
       type: object
@@ -8831,6 +8882,7 @@ components:
         settingName: settingName
         settingHint: settingHint
         settingType: boolean
+        isJson: true
         hasConflict: true
         originalEvaluationFormula:
           defaultValue:
@@ -9045,6 +9097,10 @@ components:
           type: string
         settingType:
           $ref: "#/components/schemas/SettingType"
+        isJson:
+          description: Indicates whether this setting should validate string values
+            as JSON values.
+          type: boolean
         hasConflict:
           description: Indicates whether the proposed changes to the Setting are in
             conflict with concurrently published changes.
@@ -9055,6 +9111,7 @@ components:
           $ref: "#/components/schemas/AuditLogSettingValueV2EvaluationFormula"
       required:
       - hasConflict
+      - isJson
       - originalEvaluationFormula
       - proposedEvaluationFormula
       - settingHint
@@ -9349,6 +9406,7 @@ components:
         closedByUserId: closedByUserId
         closedByUserEmail: closedByUserEmail
         closedByUserFullName: closedByUserFullName
+        sendNotificationsToApprovers: true
       properties:
         changeRequestId:
           description: Identifier of the Change Request.
@@ -9439,6 +9497,10 @@ components:
           description: Full name of the user who closed the Change Request.
           nullable: true
           type: string
+        sendNotificationsToApprovers:
+          description: "When true, email notifications are sent to team members with\
+            \ approval permission about this Change Request."
+          type: boolean
       required:
       - affectedSettingKeys
       - appliedAt
@@ -9462,6 +9524,7 @@ components:
       - creatorUserId
       - needsAttention
       - reason
+      - sendNotificationsToApprovers
       - title
       type: object
     ChangeRequestSummaryModelPagedList:
@@ -9493,6 +9556,7 @@ components:
           closedByUserId: closedByUserId
           closedByUserEmail: closedByUserEmail
           closedByUserFullName: closedByUserFullName
+          sendNotificationsToApprovers: true
         - changeRequestId: 0
           changeRequestStatus: open
           needsAttention: true
@@ -9518,6 +9582,7 @@ components:
           closedByUserId: closedByUserId
           closedByUserEmail: closedByUserEmail
           closedByUserFullName: closedByUserFullName
+          sendNotificationsToApprovers: true
       properties:
         paging:
           allOf:
@@ -9563,6 +9628,7 @@ components:
             closedByUserId: closedByUserId
             closedByUserEmail: closedByUserEmail
             closedByUserFullName: closedByUserFullName
+            sendNotificationsToApprovers: true
           - changeRequestId: 0
             changeRequestStatus: open
             needsAttention: true
@@ -9588,6 +9654,7 @@ components:
             closedByUserId: closedByUserId
             closedByUserEmail: closedByUserEmail
             closedByUserFullName: closedByUserFullName
+            sendNotificationsToApprovers: true
       properties:
         changeRequests:
           $ref: "#/components/schemas/ChangeRequestSummaryModelPagedList"
@@ -10736,6 +10803,7 @@ components:
         reason: reason
         applyAt: 2000-01-23T04:56:07.000+00:00
         bypassApproval: true
+        sendNotificationsToApprovers: true
         proposedChanges:
         - proposedChange:
             defaultValue:
@@ -10872,6 +10940,10 @@ components:
         bypassApproval:
           description: "When true, bypasses required approval checks for scheduled\
             \ changes."
+          type: boolean
+        sendNotificationsToApprovers:
+          description: "When true, email notifications are sent to team members with\
+            \ approval permission about this Change Request."
           type: boolean
         proposedChanges:
           description: The list of models describing the proposed changes to the Settings
@@ -11595,6 +11667,76 @@ components:
       - key
       - name
       - settingType
+      type: object
+    DetailedStatisticV2Model:
+      description: Represents the detailed request and traffic usage for a single
+        Config/Environment entry.
+      example:
+        date: 2000-01-23T04:56:07.000+00:00
+        productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        productName: productName
+        configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        configName: configName
+        environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        environmentName: environmentName
+        sdk: sdk
+        sdkKey: sdkKey
+        requestCount: 2
+        responseKiloBytes: 4.145608029883936
+      properties:
+        date:
+          description: The date for which the usage was recorded.
+          format: date-time
+          type: string
+        productId:
+          description: The identifier of the Product associated with the usage.
+          format: uuid
+          type: string
+        productName:
+          description: The name of the Product associated with the usage.
+          type: string
+        configId:
+          description: The identifier of the Config associated with the usage.
+          format: uuid
+          type: string
+        configName:
+          description: The name of the Config associated with the usage.
+          type: string
+        environmentId:
+          description: "The identifier of the Environment associated with the usage,\
+            \ if available."
+          format: uuid
+          nullable: true
+          type: string
+        environmentName:
+          description: The name of the Environment associated with the usage.
+          type: string
+        sdk:
+          description: The SDK type that generated the usage.
+          type: string
+        sdkKey:
+          description: The SDK key used for the request.
+          type: string
+        requestCount:
+          description: The number of requests recorded for the entry.
+          format: int64
+          type: integer
+        responseKiloBytes:
+          description: The total response payload size in kilobytes for the entry.
+          format: double
+          type: number
+      required:
+      - configId
+      - configName
+      - date
+      - environmentId
+      - environmentName
+      - productId
+      - productName
+      - requestCount
+      - responseKiloBytes
+      - sdk
+      - sdkKey
       type: object
     EnvironmentAccessType:
       description: Represent the environment specific Feature Management permission.
@@ -12646,6 +12788,58 @@ components:
       - name
       - organizationId
       type: object
+    OrganizationMonthlyStatisticV2Model:
+      description: Represents the aggregated monthly usage statistics for an Organization.
+      example:
+        date: 2000-01-23T04:56:07.000+00:00
+        millionRequestCount: 1.4658129805029452
+        responseMegaBytes: 5.962133916683182
+        overLimit: true
+        overNetworkTrafficLimit: true
+        millionRequestLimitPerMonth: 5
+        networkTrafficGigaByteLimitPerMonth: 2
+        publicApiCallCount: 7
+      properties:
+        date:
+          description: The date for which the aggregate statistics are reported.
+          format: date-time
+          type: string
+        millionRequestCount:
+          description: The total request volume in millions for the period.
+          format: double
+          type: number
+        responseMegaBytes:
+          description: The total network traffic in megabytes for the period.
+          format: double
+          type: number
+        overLimit:
+          description: Indicates whether the request quota was exceeded.
+          type: boolean
+        overNetworkTrafficLimit:
+          description: Indicates whether the network traffic quota was exceeded.
+          type: boolean
+        millionRequestLimitPerMonth:
+          description: The monthly request quota limit in millions.
+          format: int32
+          type: integer
+        networkTrafficGigaByteLimitPerMonth:
+          description: The monthly network traffic quota limit in gigabytes.
+          format: int32
+          type: integer
+        publicApiCallCount:
+          description: The number of Public API calls recorded for the period.
+          format: int64
+          type: integer
+      required:
+      - date
+      - millionRequestCount
+      - millionRequestLimitPerMonth
+      - networkTrafficGigaByteLimitPerMonth
+      - overLimit
+      - overNetworkTrafficLimit
+      - publicApiCallCount
+      - responseMegaBytes
+      type: object
     OrganizationPermissionGroupModel:
       description: Describes the Member's Permission Group within a Product.
       example:
@@ -13461,6 +13655,36 @@ components:
       - organization
       - productId
       - reasonRequired
+      type: object
+    ProductMonthlyStatisticV2Model:
+      description: Represents the aggregated monthly usage statistics for a Product.
+      example:
+        productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        date: 2000-01-23T04:56:07.000+00:00
+        millionRequestCount: 9.301444243932576
+        responseMegaBytes: 3.616076749251911
+      properties:
+        productId:
+          description: The identifier of the Product associated with the statistics.
+          format: uuid
+          type: string
+        date:
+          description: The date for which the statistics are reported.
+          format: date-time
+          type: string
+        millionRequestCount:
+          description: The total request volume in millions for the Product.
+          format: double
+          type: number
+        responseMegaBytes:
+          description: The total network traffic in megabytes for the Product.
+          format: double
+          type: number
+      required:
+      - date
+      - millionRequestCount
+      - productId
+      - responseMegaBytes
       type: object
     ProxyProfileListModel:
       example:
@@ -14787,6 +15011,8 @@ components:
         settingType:
           $ref: "#/components/schemas/SettingType"
         isJson:
+          description: Indicates whether this setting should validate string values
+            as JSON values.
           type: boolean
         configId:
           description: Identifier of the Feature Flag's Config.
@@ -15324,6 +15550,96 @@ components:
       - staleInAnyEnvironments
       - staleInAllEnvironments
       type: string
+    StatisticsV2Model:
+      description: Represents the monthly usage and quota statistics for an Organization.
+      example:
+        hasConnectedApplication: true
+        millionRequestLimitPerMonth: 0
+        networkTrafficGigaByteLimitPerMonth: 6
+        organizationStatistics:
+        - date: 2000-01-23T04:56:07.000+00:00
+          millionRequestCount: 1.4658129805029452
+          responseMegaBytes: 5.962133916683182
+          overLimit: true
+          overNetworkTrafficLimit: true
+          millionRequestLimitPerMonth: 5
+          networkTrafficGigaByteLimitPerMonth: 2
+          publicApiCallCount: 7
+        - date: 2000-01-23T04:56:07.000+00:00
+          millionRequestCount: 1.4658129805029452
+          responseMegaBytes: 5.962133916683182
+          overLimit: true
+          overNetworkTrafficLimit: true
+          millionRequestLimitPerMonth: 5
+          networkTrafficGigaByteLimitPerMonth: 2
+          publicApiCallCount: 7
+        productStatistics:
+        - productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          date: 2000-01-23T04:56:07.000+00:00
+          millionRequestCount: 9.301444243932576
+          responseMegaBytes: 3.616076749251911
+        - productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          date: 2000-01-23T04:56:07.000+00:00
+          millionRequestCount: 9.301444243932576
+          responseMegaBytes: 3.616076749251911
+        detailedStatistics:
+        - date: 2000-01-23T04:56:07.000+00:00
+          productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          productName: productName
+          configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          configName: configName
+          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          environmentName: environmentName
+          sdk: sdk
+          sdkKey: sdkKey
+          requestCount: 2
+          responseKiloBytes: 4.145608029883936
+        - date: 2000-01-23T04:56:07.000+00:00
+          productId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          productName: productName
+          configId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          configName: configName
+          environmentId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          environmentName: environmentName
+          sdk: sdk
+          sdkKey: sdkKey
+          requestCount: 2
+          responseKiloBytes: 4.145608029883936
+      properties:
+        hasConnectedApplication:
+          description: Indicates whether the Organization has a connected application.
+          type: boolean
+        millionRequestLimitPerMonth:
+          description: The monthly request quota limit in millions.
+          format: int32
+          type: integer
+        networkTrafficGigaByteLimitPerMonth:
+          description: The monthly network traffic quota limit in gigabytes.
+          format: int32
+          type: integer
+        organizationStatistics:
+          description: The aggregated monthly statistics for the Organization.
+          items:
+            $ref: "#/components/schemas/OrganizationMonthlyStatisticV2Model"
+          type: array
+        productStatistics:
+          description: The aggregated monthly statistics for Products within the scope.
+          items:
+            $ref: "#/components/schemas/ProductMonthlyStatisticV2Model"
+          type: array
+        detailedStatistics:
+          description: "The detailed per-day, per-Config, per-Environment usage statistics."
+          items:
+            $ref: "#/components/schemas/DetailedStatisticV2Model"
+          type: array
+      required:
+      - detailedStatistics
+      - hasConnectedApplication
+      - millionRequestLimitPerMonth
+      - networkTrafficGigaByteLimitPerMonth
+      - organizationStatistics
+      - productStatistics
+      type: object
     TagModel:
       example:
         product:
@@ -15441,6 +15757,7 @@ components:
         reason: reason
         applyAt: 2000-01-23T04:56:07.000+00:00
         bypassApproval: true
+        sendNotificationsToApprovers: true
       properties:
         title:
           description: The updated title of the Change Request.
@@ -15460,6 +15777,11 @@ components:
           type: string
         bypassApproval:
           description: The updated bypass-approval flag for scheduled changes.
+          nullable: true
+          type: boolean
+        sendNotificationsToApprovers:
+          description: The updated flag for whether email notifications should be
+            sent to team members with approval permission about this Change Request.
           nullable: true
           type: boolean
       required:
@@ -17237,7 +17559,7 @@ x-tagGroups:
   tags:
   - Feature Flag & Setting values using SDK Key V2
   - Feature Flag & Setting values V2
-  - Change Requests (Approval flow & Scheduled changes) - Beta
+  - Change Requests (Approval flow & Scheduled changes)
 - name: Feature Flag values (legacy)
   tags:
   - Feature Flag & Setting values using SDK Key
@@ -17266,4 +17588,5 @@ x-tagGroups:
   tags:
   - Audit logs
   - Zombie (stale) flags
+  - Usage&Quota
   - Me

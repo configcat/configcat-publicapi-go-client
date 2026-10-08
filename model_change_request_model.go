@@ -75,6 +75,8 @@ type ChangeRequestModel struct {
 	ClosedByUserFullName NullableString `json:"closedByUserFullName"`
 	// Indicates whether approval flow is bypassed.
 	BypassApproval bool `json:"bypassApproval"`
+	// When true, email notifications are sent to team members with approval permission about this Change Request.
+	SendNotificationsToApprovers bool `json:"sendNotificationsToApprovers"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -84,7 +86,7 @@ type _ChangeRequestModel ChangeRequestModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewChangeRequestModel(changeRequestId int64, configId string, environmentId string, changeRequestStatus ChangeRequestStatus, needsAttention bool, title string, reason NullableString, applyAt NullableTime, createdAt time.Time, creatorUserEmail string, creatorUserFullName string, creatorUserId NullableString, settingValues []ChangeRequestProposedChangeModel, comments []ChangeRequestCommentModel, approved bool, approvals []ChangeRequestApprovalModel, activities []ChangeRequestActivityModel, changeRequestIssues []ChangeRequestIssueModel, appliedAt NullableTime, appliedByUserId NullableString, appliedByUserEmail NullableString, appliedByUserFullName NullableString, closedAt NullableTime, closedByUserId NullableString, closedByUserEmail NullableString, closedByUserFullName NullableString, bypassApproval bool) *ChangeRequestModel {
+func NewChangeRequestModel(changeRequestId int64, configId string, environmentId string, changeRequestStatus ChangeRequestStatus, needsAttention bool, title string, reason NullableString, applyAt NullableTime, createdAt time.Time, creatorUserEmail string, creatorUserFullName string, creatorUserId NullableString, settingValues []ChangeRequestProposedChangeModel, comments []ChangeRequestCommentModel, approved bool, approvals []ChangeRequestApprovalModel, activities []ChangeRequestActivityModel, changeRequestIssues []ChangeRequestIssueModel, appliedAt NullableTime, appliedByUserId NullableString, appliedByUserEmail NullableString, appliedByUserFullName NullableString, closedAt NullableTime, closedByUserId NullableString, closedByUserEmail NullableString, closedByUserFullName NullableString, bypassApproval bool, sendNotificationsToApprovers bool) *ChangeRequestModel {
 	this := ChangeRequestModel{}
 	this.ChangeRequestId = changeRequestId
 	this.ConfigId = configId
@@ -113,6 +115,7 @@ func NewChangeRequestModel(changeRequestId int64, configId string, environmentId
 	this.ClosedByUserEmail = closedByUserEmail
 	this.ClosedByUserFullName = closedByUserFullName
 	this.BypassApproval = bypassApproval
+	this.SendNotificationsToApprovers = sendNotificationsToApprovers
 	return &this
 }
 
@@ -794,6 +797,30 @@ func (o *ChangeRequestModel) SetBypassApproval(v bool) {
 	o.BypassApproval = v
 }
 
+// GetSendNotificationsToApprovers returns the SendNotificationsToApprovers field value
+func (o *ChangeRequestModel) GetSendNotificationsToApprovers() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.SendNotificationsToApprovers
+}
+
+// GetSendNotificationsToApproversOk returns a tuple with the SendNotificationsToApprovers field value
+// and a boolean to check if the value has been set.
+func (o *ChangeRequestModel) GetSendNotificationsToApproversOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.SendNotificationsToApprovers, true
+}
+
+// SetSendNotificationsToApprovers sets field value
+func (o *ChangeRequestModel) SetSendNotificationsToApprovers(v bool) {
+	o.SendNotificationsToApprovers = v
+}
+
 func (o ChangeRequestModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -831,6 +858,7 @@ func (o ChangeRequestModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["closedByUserEmail"] = o.ClosedByUserEmail.Get()
 	toSerialize["closedByUserFullName"] = o.ClosedByUserFullName.Get()
 	toSerialize["bypassApproval"] = o.BypassApproval
+	toSerialize["sendNotificationsToApprovers"] = o.SendNotificationsToApprovers
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -871,6 +899,7 @@ func (o *ChangeRequestModel) UnmarshalJSON(data []byte) (err error) {
 		"closedByUserEmail",
 		"closedByUserFullName",
 		"bypassApproval",
+		"sendNotificationsToApprovers",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -927,6 +956,7 @@ func (o *ChangeRequestModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "closedByUserEmail")
 		delete(additionalProperties, "closedByUserFullName")
 		delete(additionalProperties, "bypassApproval")
+		delete(additionalProperties, "sendNotificationsToApprovers")
 		o.AdditionalProperties = additionalProperties
 	}
 
